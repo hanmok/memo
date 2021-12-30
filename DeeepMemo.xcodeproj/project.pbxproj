@@ -9,19 +9,88 @@
 /* Begin PBXBuildFile section */
 		9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
 		9A0474A627715D1400571D66 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
-		9A0474A727715D1400571D66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* ContentView.swift */; };
-		9A0474A827715D1400571D66 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* ContentView.swift */; };
+		9A0474A727715D1400571D66 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* MainView.swift */; };
+		9A0474A827715D1400571D66 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* MainView.swift */; };
 		9A0474A927715D1400571D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A04749727715D1300571D66 /* Assets.xcassets */; };
 		9A0474AA27715D1400571D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A04749727715D1300571D66 /* Assets.xcassets */; };
+		9A0474B427715FB200571D66 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474B327715FB200571D66 /* MainTabView.swift */; };
+		9A0474B527715FB200571D66 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474B327715FB200571D66 /* MainTabView.swift */; };
+		9A0474B727716BD300571D66 /* MemoStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474B627716BD300571D66 /* MemoStruct.swift */; };
+		9A0474B827716BD300571D66 /* MemoStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474B627716BD300571D66 /* MemoStruct.swift */; };
+		9A0474BD27716E0000571D66 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474BC27716E0000571D66 /* FolderView.swift */; };
+		9A0474BE27716E0000571D66 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474BC27716E0000571D66 /* FolderView.swift */; };
+		9A0474C02771709D00571D66 /* OverallMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A0474BF2771709D00571D66 /* OverallMemo */; };
+		9A0474C12771709D00571D66 /* OverallMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A0474BF2771709D00571D66 /* OverallMemo */; };
+		9A0474C32771740400571D66 /* NavigationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474C22771740400571D66 /* NavigationText.swift */; };
+		9A0474C42771740400571D66 /* NavigationText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474C22771740400571D66 /* NavigationText.swift */; };
+		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
+		9A895824277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
+		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
+		9A89582827717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
+		9A89582A27719E1800E7B773 /* SubFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582927719E1800E7B773 /* SubFolderList.swift */; };
+		9A89582B27719E1800E7B773 /* SubFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582927719E1800E7B773 /* SubFolderList.swift */; };
+		9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582C2771BE1000E7B773 /* MemoView.swift */; };
+		9A89582E2771BE1000E7B773 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582C2771BE1000E7B773 /* MemoView.swift */; };
+		9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7512772C17500057A84 /* CustomTextEditor.swift */; };
+		9A98E7532772C17500057A84 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7512772C17500057A84 /* CustomTextEditor.swift */; };
+		9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7542772D28C00057A84 /* ChangeableImage.swift */; };
+		9A98E7562772D28C00057A84 /* ChangeableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7542772D28C00057A84 /* ChangeableImage.swift */; };
+		9A98E7582773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
+		9A98E7592773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
+		9AD6EEBE277AC9F700866456 /* SubFolderToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */; };
+		9AD6EEBF277AC9F700866456 /* SubFolderToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */; };
+		9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
+		9AD6EEC2277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
+		9AD6EEC4277C2C8A00866456 /* MemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */; };
+		9AD6EEC5277C2C8A00866456 /* MemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */; };
+		9AD6EEC7277C36AF00866456 /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */; };
+		9AD6EEC8277C36AF00866456 /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */; };
+		9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC9277C3E3E00866456 /* Extensions.swift */; };
+		9AD6EECB277C3E3E00866456 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC9277C3E3E00866456 /* Extensions.swift */; };
+		9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF10277D9DF100866456 /* MemoList.swift */; };
+		9AD6EF12277D9DF100866456 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF10277D9DF100866456 /* MemoList.swift */; };
+		9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF15277DA78800866456 /* PopUpButtonView.swift */; };
+		9AD6EF17277DA78800866456 /* PopUpButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF15277DA78800866456 /* PopUpButtonView.swift */; };
+		9AD6EF19277DB5DE00866456 /* CollapsibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF18277DB5DE00866456 /* CollapsibleView.swift */; };
+		9AD6EF1A277DB5DE00866456 /* CollapsibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF18277DB5DE00866456 /* CollapsibleView.swift */; };
+		9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */; };
+		9AD6EF1D277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */; };
+		9AD6EF20277DC1AD00866456 /* TestLazyAndScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1F277DC1AD00866456 /* TestLazyAndScrollView.swift */; };
+		9AD6EF21277DC1AD00866456 /* TestLazyAndScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1F277DC1AD00866456 /* TestLazyAndScrollView.swift */; };
+		9AD6EF23277DCDFF00866456 /* SubFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF22277DCDFF00866456 /* SubFolderView.swift */; };
+		9AD6EF24277DCDFF00866456 /* SubFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF22277DCDFF00866456 /* SubFolderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9A04749527715D1200571D66 /* DeeepMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeepMemoApp.swift; sourceTree = "<group>"; };
-		9A04749627715D1200571D66 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9A04749627715D1200571D66 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9A04749727715D1300571D66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A04749C27715D1300571D66 /* DeeepMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeeepMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0474A227715D1400571D66 /* DeeepMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeeepMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0474A427715D1400571D66 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		9A0474B327715FB200571D66 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		9A0474B627716BD300571D66 /* MemoStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStruct.swift; sourceTree = "<group>"; };
+		9A0474BC27716E0000571D66 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
+		9A0474BF2771709D00571D66 /* OverallMemo */ = {isa = PBXFileReference; lastKnownFileType = text; path = OverallMemo; sourceTree = "<group>"; };
+		9A0474C22771740400571D66 /* NavigationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationText.swift; sourceTree = "<group>"; };
+		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
+		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
+		9A89582927719E1800E7B773 /* SubFolderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderList.swift; sourceTree = "<group>"; };
+		9A89582C2771BE1000E7B773 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
+		9A98E7512772C17500057A84 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
+		9A98E7542772D28C00057A84 /* ChangeableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableImage.swift; sourceTree = "<group>"; };
+		9A98E7572773021200057A84 /* ModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
+		9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderToolBarView.swift; sourceTree = "<group>"; };
+		9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarView.swift; sourceTree = "<group>"; };
+		9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBoxView.swift; sourceTree = "<group>"; };
+		9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
+		9AD6EEC9277C3E3E00866456 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9AD6EF10277D9DF100866456 /* MemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList.swift; sourceTree = "<group>"; };
+		9AD6EF15277DA78800866456 /* PopUpButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonView.swift; sourceTree = "<group>"; };
+		9AD6EF18277DB5DE00866456 /* CollapsibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleView.swift; sourceTree = "<group>"; };
+		9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleFolderList.swift; sourceTree = "<group>"; };
+		9AD6EF1F277DC1AD00866456 /* TestLazyAndScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLazyAndScrollView.swift; sourceTree = "<group>"; };
+		9AD6EF22277DCDFF00866456 /* SubFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +114,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */,
 				9A04749427715D1200571D66 /* Shared */,
 				9A0474A327715D1400571D66 /* macOS */,
 				9A04749D27715D1300571D66 /* Products */,
@@ -55,7 +125,10 @@
 			isa = PBXGroup;
 			children = (
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
-				9A04749627715D1200571D66 /* ContentView.swift */,
+				9A0474BF2771709D00571D66 /* OverallMemo */,
+				9A0474BA27716DCB00571D66 /* Models */,
+				9A0474B927716DBC00571D66 /* Views */,
+				9A89582527717EAC00E7B773 /* Utils */,
 				9A04749727715D1300571D66 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -76,6 +149,81 @@
 				9A0474A427715D1400571D66 /* macOS.entitlements */,
 			);
 			path = macOS;
+			sourceTree = "<group>";
+		};
+		9A0474B927716DBC00571D66 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9A04749627715D1200571D66 /* MainView.swift */,
+				9A0474BC27716E0000571D66 /* FolderView.swift */,
+				9A89582C2771BE1000E7B773 /* MemoView.swift */,
+				9A0474BB27716DD200571D66 /* Subviews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9A0474BA27716DCB00571D66 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9A0474B627716BD300571D66 /* MemoStruct.swift */,
+				9A98E7572773021200057A84 /* ModelTest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9A0474BB27716DD200571D66 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				9AD6EF14277D9EE800866456 /* Folder */,
+				9AD6EF13277D9EE200866456 /* Memo */,
+				9A98E7542772D28C00057A84 /* ChangeableImage.swift */,
+				9A0474B327715FB200571D66 /* MainTabView.swift */,
+				9A0474C22771740400571D66 /* NavigationText.swift */,
+				9A895822277179E100E7B773 /* PlusImage.swift */,
+				9A98E7512772C17500057A84 /* CustomTextEditor.swift */,
+				9AD6EF15277DA78800866456 /* PopUpButtonView.swift */,
+				9AD6EF18277DB5DE00866456 /* CollapsibleView.swift */,
+				9AD6EF1E277DC19800866456 /* Testing */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		9A89582527717EAC00E7B773 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9AD6EEC9277C3E3E00866456 /* Extensions.swift */,
+				9A89582627717EB500E7B773 /* Sizes.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9AD6EF13277D9EE200866456 /* Memo */ = {
+			isa = PBXGroup;
+			children = (
+				9AD6EF10277D9DF100866456 /* MemoList.swift */,
+				9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */,
+				9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
+		9AD6EF14277D9EE800866456 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				9A89582927719E1800E7B773 /* SubFolderList.swift */,
+				9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */,
+				9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */,
+				9AD6EF22277DCDFF00866456 /* SubFolderView.swift */,
+			);
+			name = Folder;
+			sourceTree = "<group>";
+		};
+		9AD6EF1E277DC19800866456 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				9AD6EF1F277DC1AD00866456 /* TestLazyAndScrollView.swift */,
+			);
+			path = Testing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +305,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0474C02771709D00571D66 /* OverallMemo in Resources */,
 				9A0474A927715D1400571D66 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A0474C12771709D00571D66 /* OverallMemo in Resources */,
 				9A0474AA27715D1400571D66 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,8 +326,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A0474A727715D1400571D66 /* ContentView.swift in Sources */,
+				9AD6EF19277DB5DE00866456 /* CollapsibleView.swift in Sources */,
+				9A98E7582773021200057A84 /* ModelTest.swift in Sources */,
+				9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */,
+				9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */,
+				9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */,
+				9AD6EF20277DC1AD00866456 /* TestLazyAndScrollView.swift in Sources */,
+				9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */,
+				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
+				9A0474C32771740400571D66 /* NavigationText.swift in Sources */,
+				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
+				9AD6EEBE277AC9F700866456 /* SubFolderToolBarView.swift in Sources */,
+				9A89582A27719E1800E7B773 /* SubFolderList.swift in Sources */,
+				9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */,
+				9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */,
 				9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */,
+				9AD6EF23277DCDFF00866456 /* SubFolderView.swift in Sources */,
+				9AD6EEC7277C36AF00866456 /* MemoViewModel.swift in Sources */,
+				9A89582727717EB500E7B773 /* Sizes.swift in Sources */,
+				9A0474B727716BD300571D66 /* MemoStruct.swift in Sources */,
+				9A895823277179E100E7B773 /* PlusImage.swift in Sources */,
+				9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */,
+				9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */,
+				9AD6EEC4277C2C8A00866456 /* MemoBoxView.swift in Sources */,
+				9A0474B427715FB200571D66 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +357,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A0474A827715D1400571D66 /* ContentView.swift in Sources */,
+				9AD6EF1A277DB5DE00866456 /* CollapsibleView.swift in Sources */,
+				9A98E7592773021200057A84 /* ModelTest.swift in Sources */,
+				9AD6EF12277D9DF100866456 /* MemoList.swift in Sources */,
+				9AD6EECB277C3E3E00866456 /* Extensions.swift in Sources */,
+				9AD6EF17277DA78800866456 /* PopUpButtonView.swift in Sources */,
+				9AD6EF21277DC1AD00866456 /* TestLazyAndScrollView.swift in Sources */,
+				9A89582E2771BE1000E7B773 /* MemoView.swift in Sources */,
+				9A0474BE27716E0000571D66 /* FolderView.swift in Sources */,
+				9A0474C42771740400571D66 /* NavigationText.swift in Sources */,
+				9A0474A827715D1400571D66 /* MainView.swift in Sources */,
+				9AD6EEBF277AC9F700866456 /* SubFolderToolBarView.swift in Sources */,
+				9A89582B27719E1800E7B773 /* SubFolderList.swift in Sources */,
+				9A98E7562772D28C00057A84 /* ChangeableImage.swift in Sources */,
+				9AD6EEC2277AD3EA00866456 /* MemosToolBarView.swift in Sources */,
 				9A0474A627715D1400571D66 /* DeeepMemoApp.swift in Sources */,
+				9AD6EF24277DCDFF00866456 /* SubFolderView.swift in Sources */,
+				9AD6EEC8277C36AF00866456 /* MemoViewModel.swift in Sources */,
+				9A89582827717EB500E7B773 /* Sizes.swift in Sources */,
+				9A0474B827716BD300571D66 /* MemoStruct.swift in Sources */,
+				9A895824277179E100E7B773 /* PlusImage.swift in Sources */,
+				9AD6EF1D277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */,
+				9A98E7532772C17500057A84 /* CustomTextEditor.swift in Sources */,
+				9AD6EEC5277C2C8A00866456 /* MemoBoxView.swift in Sources */,
+				9A0474B527715FB200571D66 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

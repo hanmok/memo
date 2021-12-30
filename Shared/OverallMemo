@@ -1,0 +1,207 @@
+
+//                .position(x: <#T##CoreGraphics.CGFloat#>, y: <#T##CoreGraphics.CGFloat#>)
+
+ padding around All Contents: 20
+
+
+
+Anchor 는, overlay 로 해결할 수 있지 않을까?
+Good Idea ~~
+
+만약, 내부에 Memo 가 없으면, SubFolder 만으로 모든 View 를 채워주자.
+
+그런데... SubFolder 만드는 버튼이 별로 직관적이지 않은 것 같아..
+
+Navigation 에 있는 수정 버튼도 별론데..이거.. 어떻게하지.. ?
+
+더보기 버튼 하나로 수정할까?
+
+색의 구분을 없애버리면, 안됨.. Navigation 이 명확하게 분리하고 있기때문에...
+
+흐음.. + 버튼을, 저 아래로 빼버릴까 ? navigation bar 중앙에 걸치게끔
+
+
+중요한거는, 현재 폴더를 수정하는 버튼과,
+현재 폴더 내부에 있는 Subfolder 를 수정하는 버튼이 따로 있다는것.
+기능은 하나..
+
+만약 아래 메모 + 버튼을 네비게이션쪽으로 넣으면, Subfolder 와 Memo 를 생성하는 버튼이 헷갈리게됨. 반대로, 하나로 만들면 메모를 생성할 때 두번 눌러야함. 흠... 어떻게 하지??
+하나의 폴더 내에 Subfolder 와 memo 중 하나만 추가하게 하도록? 별론데ㅋ
+
+스와이프?
+
+아니면, 음..
+근데 어떠한 경우에도 저 연필모양은 여기있으면 안됨 ㅋㅋㅋㅋㅋ
+
+현재 폴더 제거는 어떻게 하지 ?? 으음....!!!!!
+pencil 대신, Folder 관련한 Button 을 넣을까 ?
+그럼 맨 아래 + 버튼과 약간 혼동되서 걱정인데...
+
+같은 Folder ! 니까, 현재 Folder 또는 Subfolder 모두 포함할 수 있지 않을까 ??
+그렇게되면 그런데.. Subfolder 를 추가하는 과정이 약간 번거로워질 것 같은데..?
+
+으음... Folder 를
+
+
+음.. 메모 추가는 정중앙 아래에 ???
+
+//////////////////////////////////////
+1. 폴더 수정 버튼을 눌렀을 때 Action
+1.1 - 현재 위치한 폴더 이름, 색상 수정
+1.2 - 현재 위치한 폴더 제거
+1.3 - Subfolder 생성
+1.4 - Subfolder 정렬 ( 시간순, 이름순, 사용자 정의)
+1.5 - Subfolder 제거
+//////////////////////////////////////
+
+
+메모.. 에 관한 편집은 어디에서 시켜줘야하지??
+doc.fill.badge.plus
+doc.badge.gearshape.fill 등을 추가시켜줄까 ??
+
+///////////////////////////
+MainTabBar 에 들어갈 항목들 ??
+굳이.. 어떤 Tab 이 필요한가 ....??
+오히려 너무 복잡해질 것 같은데...
+
+
+음.. 전체를 뒤져보는 기능도 있으면 좋을 것 같아.
+예를들어, 예전에 어떤 메모를 했는데 어디있는지 찾지 못할 경우...
+
+
+또 필요한 기능.
+
+
+
+
+
+/////////////////////
+수정사항
+1. NavigationBar 현재 지나치게 큼
+2. MainTabBar 용도는 ..?? 딱히 필요없어보이는데 ?? 나중에 확장할 때 Todo 나 그런것들 더해주지 않을까 ?
+{
+    우선 없앰. (나중 추가사항이라 현재는 메인 기능에 집중.)
+}
+3.
+
+
+
+/////////////////////
+추가할 것들
+1. pin
+2. 모든 Subfolder 펼쳐보기.
+
+모든 Subfolders, Memos 를 한눈에 볼 수 있도록 tree 형태로 View 를 변형시킬 수도 있으면 좋겠다..
+Search Button 누를 때 화면 다르게 만들어주면 될 것 같음.
+
+3. 폴더 편집 버튼 누를 때 Action
+3.1 현재 폴더 이름 변경
+3.2 현재 폴더 제거
+3.3 서브 폴더 생성
+3.4 서브 폴더 이름 변경
+3.5 서브 폴더 제거
+
+4. Search 버튼 누를 때 Action
+4.1 Subfolder 펼쳐서 찾아보기
+4.2 해당 검색 글자 포함한 것 (폴더명, or 메모 제목, 내용)찾아보기
+4.3
+
+5. 폴더 내에 메모가 없을 경우 새로운 레이아웃 적욤.
+6. 메모 2열 종대
+{
+    버튼 내에 Text 형식으로 포함, 클릭 시 MemoView 로 정보 전달하며 Navigate.
+    ScrollView, LazyVStack, DynamicHeight 사용하면 될 것 같음.
+    LimitLine 필요.
+}
+{
+    이거 홀짝으로 배열하면, 안됨. 최종적으로 봤을 때 길이가 비슷비슷 해야해.
+    그렇게 하기 위해서는.. ?? 계속해서 계산을 해주어야함. How ??
+    아직 모르겠음. 일일이 계산해서 Memo 또는 Folder 데이터에 넣어주는건 좋은 방법이 아닐걸 ??
+    어떠한 한 지점에서, 만약 왼쪽이 더 길다고 할 때 오른쪽에 추가하는 방식.
+    위에서부터 최근 일자임. 이건 불변. 좌우는 달라질 수 있는거지.
+}
+7. Google Keep 과 너무.. 똑같아지는거 아냐 ..??? 이게 약간 걱정이네...
+
+8. 텍스트에, 색상 또는 폰트 크기를 조절할 수 있게 해보는건 어때 ? + 이미지를 글 중간중간에 넣기 ??????
+{
+ 아주 좋은 생각이긴 해. 일단 완성한 후에 다시 고려해보자.
+}
+
+9. 2열 종대로 쭉 제목 + 컨텐츠(메모 글) 일부를 나열하는 것 대신,
+메모 제목 + 내용 에 Overview 를 하나 추가해서
+제목과 Overview 만 미리보기로 제공하는건 어떨까? 컨텐츠는 가린채로
+ 좋음. 굿
+
+
+
+// 음 .. 더 해야할 것들 ??
+// 모든 데이터 처리가 안된 상황.
+// Subfolder 둘러보기 미구현.
+// Text Editor 에서 드래그시 focus 없애야함.
+// 폴더 생성화면
+// 각 버튼 눌렀을 때 Action
+// 연결해야함.
+// 각 화면을 연결하는 작업을 해야해
+
+
+// 이 앱을,, 이런저런 용도로 사용할까 ? 아니면 메모로만 사용할까?
+// 일단 메모로만 사용하는게 맞음.
+// 확장은 나중에
+
+// 폴더 새로 만드는 화면은 ??
+// 음.. 메모들이 생겨났을 때 화면은 ?? 레이아웃을 .. 어떻게 해야하냐?...
+// 1열 , 2열, 3열 중 선택하게 할 수 있을까 ?
+
+// 일단, 2열을 기준으로 만들어본다.
+// 각각은 버튼이 되어야하나..? Button + Navigation
+// 메모를 처음 생성할 때 vs 이미 생성된 메모에 들어갈 때
+// StateObject ? 이부분부터는 다시 공부를 해야겠다.
+
+큰 그림을 그려보자.
+이 앱의 이름은 Produck.
+Main Tab bar 로는 , 캘린더, Todo, Clock, Calculator 를 넣자.
+각 Main Tab bar 내에서 또 여러개의 Category 를 생성하자.
+그리고, 이 버전은 Mac, iPad 에서도 사용가능하도록 만들기.
+CoreData, Cloud 를 이용해서 만들자.
+
+
+
+
+
+
+
+
+Since views are value types, captures happen using copes rather than references.
+
+
+Declarative: You don’t implement the user interface — you declare it.
+
+Functional: Given the same state, the rendered UI is always the same. In other words, the UI is a function of the state.
+
+Reactive: When the state changes, SwiftUI automatically updates the UI.
+
+Subfolder 있는 경우, 없는 경우 나눠야함.
+
+BackgroundColor.. 좀 이상함
+Memo 를 한번 추가해보아야하는데..
+
+
+
+
+https://stackoverflow.com/questions/59290978/swiftui-viewmodel-update
+
+
+
+FolderView..
+어떻게 고치지 ?
+
+
+HasCollapsed variable .. 을 어떻게 고치지??
+데이터를 항상 같게 해야하는데.. 스스로에게 값을 준다 ? ??????
+AppStorage ?
+이건 뭐 어떻게 해야하는거지...
+춥다..
+
+Overview 는 어떻게 처리할거야 ?
+
+

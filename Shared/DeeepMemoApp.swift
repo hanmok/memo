@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct DeeepMemoApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                FolderView(folder: deeperFolder)
+            }
+//            TestLazyAndScrollView()
+//            TestView()
+//PopUpButtonView()
         }
     }
 }
