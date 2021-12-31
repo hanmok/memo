@@ -22,11 +22,16 @@ struct MemoList: View {
                 Section {
                     if memos != nil {
                         ForEach(memos!) { memo in
-                            NavigationLink(destination: MemoView(mvm: MemoViewModel(memo: memo))) {
-                                
+                            NavigationLink(
+                                destination: MemoView(
+                                    mvm: MemoViewModel(memo: memo))) {
+
                                 MemoBoxView(memo: memo)
                             }
                             .padding(.vertical, 6)
+                            
+//                            NavigationLink(destination: MemoView(mvm: MemoViewModel(memo: memo)), label: MemoBoxView(memo:memo))
+//                            NavigationLink(destion)
                         }
                     }
                 }

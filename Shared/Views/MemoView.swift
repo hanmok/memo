@@ -23,7 +23,11 @@ struct MemoView: View {
     
     init(mvm: MemoViewModel) {
         self.memoViewModel = mvm
+//        self.myTitle = mvm.currentMemo!.title
     }
+//    init(mvm: MemoViewModel) {
+//        self.myTitle = mvm.currentMemo!.title
+//    }
     
     @State var isPinned: Bool = false
     func navigateBack() {
@@ -65,11 +69,13 @@ struct MemoView: View {
         
     }
     
-    
-    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
+    @State var myTitle: String = ""
+//    @Binding var myTitle: String
+//    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
     // MVVM
     //    @State var myText: String = "initial text editor"
     @State var myText: String = ""
+//    @Binding var myText: String
     
     //    @Binding var memo: Memo
     

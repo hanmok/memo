@@ -8,20 +8,27 @@
 import SwiftUI
 
 struct FolderView: View {
-    @State var memoSelected = false
+    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    
+
+//    @AppStorage("hasCollapsed") var hasCollapsed = false
+
+    @State var memoSelected = false
+    @State var searchKeyword = ""
+    @State var pinnedFolder: Bool = false
     var folder: Folder
     
-    @AppStorage("hasCollapsed") var hasCollapsed = false
     
-    @State var searchKeyword = ""
+
     func plusButtonPressed() {
         
     }
     func search() {
         
+    }
+    
+    func pinThisFolder() {
+        pinnedFolder.toggle()
     }
     
     func editFolder() {
@@ -49,20 +56,26 @@ struct FolderView: View {
     
     var body: some View {
 
-        VStack { // make subfolders attached to NavigationBar
+        VStack(spacing: 0) { // make subfolders attached to NavigationBar
             
-//            SubFolderList(folder: folder)
-//            CollapsibleFolderList(folder: folder)
-//
-//            MemoList(folder: folder)
-//                .padding(.horizontal, Sizes.overallPadding)
-            
-            CollapsibleFolderList(hasCollapsed: hasCollapsed, folder: folder)
-//                .padding(.horizontal, Sizes.overallPadding)
+//            CollapsibleFolderList(hasCollapsed: hasCollapsed, folder: folder)
+            CollapsibleFolderList(folder: folder) // 왜.. 얘는...
+                .padding()
+            SubFolderToolBarView()
+                .opacity(0.8)
+                .cornerRadius(10)
+                .padding(.horizontal, Sizes.overallPadding)
+            // um.. this is wrong..
+            MemoList(folder: folder)
+                .padding(.horizontal, Sizes.overallPadding)
+                .background(.green)
 //            Spacer()
         } // end of main VStack
-//        .searchable(text: $searchKeyword)
+
         .navigationBarTitle(folder.title)
+        .navigationBarItems(trailing: Button(action: pinThisFolder, label: {
+            ChangeableImage(imageSystemName: pinnedFolder ? "pin.fill" : "pin", width: 24, height: 24)
+        }))
         .onAppear(perform: {
             print("FolderView has appeared, folder: \(folder)")
         })
@@ -87,8 +100,6 @@ struct FolderView: View {
                 }
             }
         }
-//        .background(.clear)
-//        .background(Color(.sRGB, white: 255.0/242.0, opacity: 0))
     }
 }
 
@@ -96,13 +107,8 @@ struct FolderView: View {
 // Folder Name with.. a little Space
 struct FolderView_Previews: PreviewProvider {
     
-    //
-    
     static var previews: some View {
-        //        FolderView(folder: folder8, title: "My Folder Name", color: Color(UIColor(red: 0, green: 0, blue: 255, alpha: 0.6)), numOfSubfolders: 3)
-        //        FolderView(folder: folder8, title: "My Folder Name", color: Color(UIColor(red: 0, green: 0, blue: 255, alpha: 0.6)))
         FolderView(folder: folder8)
-        
     }
 }
 

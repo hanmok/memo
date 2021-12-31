@@ -11,8 +11,8 @@ struct ChangeableImage: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var imageSystemName: String
-    var width: CGFloat
-    var height: CGFloat
+    var width: CGFloat = 20
+    var height: CGFloat = 20
     var body: some View {
 
         Image(systemName: imageSystemName)
@@ -29,3 +29,12 @@ struct ChangeableImage: View {
 //    }
 //}
 
+extension Image {
+    func setupAdditional(scheme: ColorScheme, size: CGFloat = 20) -> some View {
+        self
+            .resizable()
+            .aspectRatio( contentMode: .fit)
+            .tint(scheme == .dark ? .white : .black)
+            .frame(width: size , height: size)
+    }
+}

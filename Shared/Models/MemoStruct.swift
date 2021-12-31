@@ -37,6 +37,10 @@ struct Folder: Hashable  {
     var modifiedAt: Date = Date()
     
     var pinnedIndex: Int?
+    
+    var hasSubfolder: Bool {
+        subFolders != nil
+    }
 }
 
 extension Folder : Identifiable { }
@@ -123,7 +127,19 @@ let deeperFolder: Folder = Folder(
             
             Folder(parentFolderId: UUID(),
                    subFolders: folder0.subFolders,
-                   title: "deeper one-three")
+                   title: "deeper one-three"),
+            
+            Folder(parentFolderId: UUID(),
+                   subFolders: folder8.subFolders,
+                   title: "deeper one-four"),
+                   
+            Folder(parentFolderId: UUID(),
+                   subFolders: folder2.subFolders,
+                   title: "deeper one-five"),
+            
+            Folder(parentFolderId: UUID(),
+                   subFolders: folder0.subFolders,
+                   title: "deeper one-six")
         ],
     // overview 가 있을 때 contents 는 보이지 않음.
     // title: one line,

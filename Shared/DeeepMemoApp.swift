@@ -10,11 +10,17 @@ import SwiftUI
 @main
 struct DeeepMemoApp: App {
     
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                FolderView(folder: deeperFolder)
-            }
+//            NavigationView {
+//                FolderView(folder: deeperFolder)
+////                    .environmentObject(colorScheme)
+//            }
+//            CollapsibleMind(type: .folder, folder: deeperFolder)
+            CollapsibleMind(folder: deeperFolder)
+//            CollapsibleView()
 //            TestLazyAndScrollView()
 //            TestView()
 //PopUpButtonView()

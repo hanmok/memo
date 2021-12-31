@@ -18,7 +18,6 @@ struct SubFolderView: View {
                     Text(subfolder.title)
                 })
         }
-        
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 5)
         .frame(maxWidth: .infinity, maxHeight: 30)
