@@ -72,6 +72,7 @@ struct FolderView: View {
 //            Spacer()
         } // end of main VStack
 
+
         .navigationBarTitle(folder.title)
         .navigationBarItems(trailing: Button(action: pinThisFolder, label: {
             ChangeableImage(imageSystemName: pinnedFolder ? "pin.fill" : "pin", width: 24, height: 24)

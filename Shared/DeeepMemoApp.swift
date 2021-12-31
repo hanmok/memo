@@ -16,10 +16,11 @@ struct DeeepMemoApp: App {
         WindowGroup {
 //            NavigationView {
 //                FolderView(folder: deeperFolder)
-////                    .environmentObject(colorScheme)
+//////                    .environmentObject(colorScheme)
 //            }
+            MindMapView(homeFolder: deeperFolder)
 //            CollapsibleMind(type: .folder, folder: deeperFolder)
-            CollapsibleMind(folder: deeperFolder)
+//            CollapsibleMind(folder: deeperFolder)
 //            CollapsibleView()
 //            TestLazyAndScrollView()
 //            TestView()

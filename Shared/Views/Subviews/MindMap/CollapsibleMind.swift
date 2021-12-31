@@ -82,7 +82,9 @@ struct CollapsibleMind: View, FolderNode {
                         Image(systemName: collapsed ?  "plus.circle" : "minus.circle")
                             .setupAdditional(scheme: colorScheme)
                         } else {
-                            EmptyView()
+                            Image(systemName: "")
+                                .setupAdditional(scheme: colorScheme)
+                                
                         }
                     }.padding(.leading, Sizes.overallPadding)
 
@@ -110,13 +112,16 @@ struct CollapsibleMind: View, FolderNode {
                             }
                         }
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: collapsed ? 0 : .infinity)
+//                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: collapsed ? 0 : .infinity)
                     .animation(.easeOut, value: collapsed)
                     .transition(.slide)
                 }
             }
-            .frame(maxHeight: .infinity)
-        }
+//            .frame(maxHeight: .infinity)
+            .background(.yellow)
+            Spacer()
+        } // end of HStack
+
         .onAppear {
             print("this view has appeared")
         }

@@ -57,7 +57,8 @@ struct CollapsibleFolderList: View {
                     }
                 }
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight:  subfoldersHeight + 30)
+//            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight:  subfoldersHeight + 30)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight:  .infinity)
             .background(.gray)
             // end of Contents
         }

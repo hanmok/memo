@@ -17,7 +17,12 @@ struct MindMapView: View {
 //        }
 //        ScrollView {
 //        CollapsibleMind(folder: homeFolder, shouldNavigate: $shouldNavigate)
-            CollapsibleMind(folder: homeFolder)
+        ScrollView {
+            LazyVStack {
+                CollapsibleMind(folder: homeFolder)
+            }
+        } // 됐당...!!!!!
+//            .frame(height: 5000)
 //        }
         // everyFolder has collapsible view.
         
