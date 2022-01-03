@@ -28,7 +28,6 @@ struct MindNodeView: View {
                 }
             }
         }
-        
     }
 }
 

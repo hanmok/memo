@@ -11,21 +11,18 @@ struct HorCollapsibleMind: View, FolderNode {
     // navigation은, 밖에서 (으로) 전달해주어야 할 것 같은데 ??
     //
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    //    @State var content: () -> Content
-    //    @State var content: Content
-    //    var type: MindType
-    //    var folder: Folder?
+    @ObservedObject var expansion: ExpandingClass
     var folder: Folder
-    //    var project: Project?
     
-    //    @State private var navigationSelected: Bool = false
-    //    @Binding var shouldNavigate: Bool
     @State private var collapsed: Bool = true
     /// level of Depth
-    /// Discussion: pass it using (varName + 1).
     
     private let collapsedLevel: Int = 0
+    
+    
+    var shouldExpandOverall: Bool {
+        return !collapsed || expansion.shouldExpand
+    }
     
     func moveToFolderView() {
         //        self.shouldNavigate.toggle()
@@ -33,6 +30,10 @@ struct HorCollapsibleMind: View, FolderNode {
     }
     func toggleCollapsed() {
         self.collapsed.toggle()
+        if self.expansion.shouldExpand {
+            self.expansion.shouldExpand = false
+        }
+        
     }
     
     var subfolders: [Folder]? {
@@ -50,61 +51,74 @@ struct HorCollapsibleMind: View, FolderNode {
     
     var body: some View {
         //        NavigationView {
-//        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-//                VStack(alignment: .leading) {
+        //        VStack(alignment: .leading) {
+        HStack(alignment: .top) {
+            
+            Button(action: toggleCollapsed) {
+                if folder.hasSubfolder {
+                    Image(systemName: !shouldExpandOverall ? "plus.circle" : "minus.circle")
+                        .setupAdditional(scheme: colorScheme)
+                } else {
+                    Image(systemName: "")
+                        .setupAdditional(scheme: colorScheme)
                     
-                    // First Element in VStack.
-                    // Collapsing Button and Title.
-//                    HStack {
-                        // Collapsing Button
-                        Button(action: toggleCollapsed) {
-                            if folder.hasSubfolder {
-                                Image(systemName: collapsed ? "plus.circle" : "minus.circle")
-                                    .setupAdditional(scheme: colorScheme)
-                            } else {
-                                Image(systemName: "")
-                                    .setupAdditional(scheme: colorScheme)
-                                
-                            }
-                        }
-                        .padding(.leading, Sizes.overallPadding)
+                }
+            }
+            .padding(.leading, Sizes.overallPadding)
+            
+            // Title, Not working properly yet.
+            Button(action: moveToFolderView) {
+                Text(folder.title)
+                    .adjustTintColor(scheme: colorScheme)
+                if numOfSubfolders != "" {
+                    Text("(\(numOfSubfolders))")
+                        .adjustTintColor(scheme: colorScheme)
+                }
+            }
+            
+//            if subfolders != nil && !collapsed{
+            if subfolders != nil && shouldExpandOverall{
+                VStack(spacing: 0) {
+                    ForEach(subfolders!) {subfolder in
                         
-                        // Title, Not working properly yet.
-                        Button(action: moveToFolderView) {
-                            Text(folder.title)
-                                .adjustTintColor(scheme: colorScheme)
-                            if numOfSubfolders != "" {
-                                Text("(\(numOfSubfolders))")
-                                    .adjustTintColor(scheme: colorScheme)
-                            }
-                        }
-//                    }
-                
-                if subfolders != nil && !collapsed{
-                        VStack(spacing: 0) {
-                            ForEach(subfolders!) {subfolder in
-                                
-//                                CollapsibleMind(folder: subfolder)
-                                HorCollapsibleMind(folder: subfolder)
-                                    .padding(.bottom, 20)
-                            }
-                        }
-
-                    .animation(.easeOut, value: collapsed)
-                    .transition(.slide)
-                } // end of second Element in VStack (HStack)
-                Spacer()
-            } // end of HStack
-//            Spacer()
-//        } // end of top VStack
+                        //                                CollapsibleMind(folder: subfolder)
+//                        HorCollapsibleMind(expansion: expansion, folder: subfolder)
+//                        HorCollapsibleMind(folder: subfolder, expansion: expansion)
+                        HorCollapsibleMind(expansion: expansion, folder: subfolder)
+                            
+                            .padding(.bottom, 20)
+                    }
+                }
+//                .animation(.easeOut, value: collapsed)
+                .animation(.easeOut, value: shouldExpandOverall)
+                .transition(.slide)
+            } // end of second Element in VStack (HStack)
+            Spacer()
+        }
+        .onAppear {
+            if expansion.shouldExpand {
+                collapsed = false
+            }
+            print("collapsed: \(collapsed)")
+            print("expand: \(expansion.shouldExpand)")
+            print("shouldExpandOverall : \(shouldExpandOverall)")
+            
+        }
+        .onDisappear {
+            print("collapsed: \(collapsed)")
+            print("expand: \(expansion.shouldExpand)")
+            print("shouldExpandOverall : \(shouldExpandOverall)")
+        }
+        // end of HStack
+        //            Spacer()
+        //        } // end of top VStack
         
     }
 }
 
 
-struct HorCollapsibleMind_Previews: PreviewProvider {
-    static var previews: some View {
-        HorCollapsibleMind(folder: deeperFolder)
-    }
-}
+//struct HorCollapsibleMind_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HorCollapsibleMind(folder: deeperFolder)
+//    }
+//}
