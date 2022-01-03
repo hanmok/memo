@@ -52,14 +52,11 @@ struct HorCollapsibleMind: View, FolderNode {
         //        NavigationView {
 //        VStack(alignment: .leading) {
             HStack(alignment: .top) {
-                VStack(alignment: .leading) {
+//                VStack(alignment: .leading) {
                     
-                    // First Element in VStack
-                    HStack {
-                        // add Indentation to the left to indicate depth for both folder and project
-                        ForEach((0 ..< collapsedLevel), id: \.self) {_ in
-                            Text("\t")
-                        }
+                    // First Element in VStack.
+                    // Collapsing Button and Title.
+//                    HStack {
                         // Collapsing Button
                         Button(action: toggleCollapsed) {
                             if folder.hasSubfolder {
@@ -82,25 +79,22 @@ struct HorCollapsibleMind: View, FolderNode {
                                     .adjustTintColor(scheme: colorScheme)
                             }
                         }
-                    }
-                }
+//                    }
+                
                 if subfolders != nil && !collapsed{
-                    HStack {
-                        ForEach((0 ..< collapsedLevel + 1), id: \.self) {_ in
-                            Text("\t")
-                        }
-                        
                         VStack(spacing: 0) {
                             ForEach(subfolders!) {subfolder in
                                 
-                                CollapsibleMind(folder: subfolder)
-                                    .padding(.bottom, 5)
+//                                CollapsibleMind(folder: subfolder)
+                                HorCollapsibleMind(folder: subfolder)
+                                    .padding(.bottom, 20)
                             }
                         }
-                    }
+
                     .animation(.easeOut, value: collapsed)
                     .transition(.slide)
                 } // end of second Element in VStack (HStack)
+                Spacer()
             } // end of HStack
 //            Spacer()
 //        } // end of top VStack

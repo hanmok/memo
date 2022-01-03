@@ -12,10 +12,7 @@ struct MindMapView: View {
     @State private var shouldNavigate: Bool = false
     var body: some View {
         ScrollView([.horizontal, .vertical]) {
-            LazyVStack {
-                CollapsibleMind(folder: homeFolder)
-//                HorCollapsibleMind(folder: homeFolder)
-            }
+                HorCollapsibleMind(folder: homeFolder)
         }
     }
 }

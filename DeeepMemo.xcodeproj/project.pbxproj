@@ -126,8 +126,6 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
-				9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind.swift */,
-				9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */,
 				9A04749427715D1200571D66 /* Shared */,
 				9A0474A327715D1400571D66 /* macOS */,
 				9A04749D27715D1300571D66 /* Products */,
@@ -139,6 +137,7 @@
 			children = (
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A0474BF2771709D00571D66 /* OverallMemo */,
+				9AC5D0F32782C59C007EAA28 /* ViewModels */,
 				9A0474BA27716DCB00571D66 /* Models */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A89582527717EAC00E7B773 /* Utils */,
@@ -212,6 +211,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		9AC5D0F32782C59C007EAA28 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		9AD6EF13277D9EE200866456 /* Memo */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				9AD6EF2C277EDCC500866456 /* CollapsibleMind.swift */,
+				9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind.swift */,
 				9AD6EF29277EC65300866456 /* MindNodeView.swift */,
 			);
 			path = MindMap;
