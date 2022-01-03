@@ -29,12 +29,4 @@ struct ChangeableImage: View {
 //    }
 //}
 
-extension Image {
-    func setupAdditional(scheme: ColorScheme, size: CGFloat = 20) -> some View {
-        self
-            .resizable()
-            .aspectRatio( contentMode: .fit)
-            .tint(scheme == .dark ? .white : .black)
-            .frame(width: size , height: size)
-    }
-}
+

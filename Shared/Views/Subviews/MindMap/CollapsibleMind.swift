@@ -62,15 +62,8 @@ struct CollapsibleMind: View, FolderNode {
 //        NavigationView {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
-//                NavigationView {
-//                NavigationLink(
-//                  destination: FolderView(folder: folder),
-//                  // 1
-//                  isActive: $shouldNavigate
-//                  // 2
-//                ) { }
-//                }
                 
+                // First Element in VStack
                 HStack {
                     // add Indentation to the left to indicate depth for both folder and project
                     ForEach((0 ..< collapsedLevel), id: \.self) {_ in
@@ -79,64 +72,62 @@ struct CollapsibleMind: View, FolderNode {
                     // Collapsing Button
                     Button(action: toggleCollapsed) {
                         if folder.hasSubfolder {
-                        Image(systemName: collapsed ?  "plus.circle" : "minus.circle")
+                        Image(systemName: collapsed ? "plus.circle" : "minus.circle")
                             .setupAdditional(scheme: colorScheme)
                         } else {
                             Image(systemName: "")
                                 .setupAdditional(scheme: colorScheme)
                                 
                         }
-                    }.padding(.leading, Sizes.overallPadding)
+                    }
+                    .padding(.leading, Sizes.overallPadding)
 
-                    // Title
+                    // Title, Not working properly yet.
                     Button(action: moveToFolderView) {
                         Text(folder.title)
+                            .adjustTintColor(scheme: colorScheme)
                         if numOfSubfolders != "" {
-                            Text("   (\(numOfSubfolders))")
+                            Text("(\(numOfSubfolders))")
+                                .adjustTintColor(scheme: colorScheme)
                         }
                     }
-                    
                 }
-                .padding(.bottom, Sizes.minimalSpacing)
+//                .padding(.bottom, Sizes.minimalSpacing)
                 
+                // Second Element in VStack
+                if subfolders != nil && !collapsed{
                 HStack {
                     ForEach((0 ..< collapsedLevel + 1), id: \.self) {_ in
                         Text("\t")
                     }
 
                     VStack(spacing: 0) {
-                        if subfolders != nil && !collapsed{
+//                        if subfolders != nil && !collapsed{
                             ForEach(subfolders!) {subfolder in
 
                                 CollapsibleMind(folder: subfolder)
+                                    .padding(.vertical, 5)
                             }
                         }
                     }
-//                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: collapsed ? 0 : .infinity)
                     .animation(.easeOut, value: collapsed)
                     .transition(.slide)
-                }
-            }
-//            .frame(maxHeight: .infinity)
+                } // end of second Element in VStack (HStack)
+                Spacer()
+            } // end of VStack
             .background(.yellow)
             Spacer()
-        } // end of HStack
 
+        } // end of HStack
         .onAppear {
             print("this view has appeared")
         }
     }
-        
 }
 
 struct CollapsibleMind_Previews: PreviewProvider {
     static var previews: some View {
-//        CollapsibleMind(content: {
-//            EmptyView()
-//        }, type: .folder)
-//        CollapsibleMind(type: .folder, folder: deeperFolder)
         CollapsibleMind( folder: deeperFolder)
-//        CollapsibleMind(content: EmptyView())
     }
 }
 

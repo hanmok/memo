@@ -60,7 +60,7 @@ struct FolderView: View {
             
 //            CollapsibleFolderList(hasCollapsed: hasCollapsed, folder: folder)
             CollapsibleFolderList(folder: folder) // 왜.. 얘는...
-                .padding()
+                .padding([.horizontal, .top], 10)
             SubFolderToolBarView()
                 .opacity(0.8)
                 .cornerRadius(10)

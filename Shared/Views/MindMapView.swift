@@ -11,22 +11,12 @@ struct MindMapView: View {
     var homeFolder: Folder
     @State private var shouldNavigate: Bool = false
     var body: some View {
-//        NavigationView {
-//            CollapsibleMind(folder: homeFolder, shouldNavigate: $shouldNavigate)
-//            NavigationLink(isActive: $shouldNavigate, destination: FolderView(folder: <#T##Folder#>), label: <#T##() -> _#>)
-//        }
-//        ScrollView {
-//        CollapsibleMind(folder: homeFolder, shouldNavigate: $shouldNavigate)
-        ScrollView {
+        ScrollView([.horizontal, .vertical]) {
             LazyVStack {
                 CollapsibleMind(folder: homeFolder)
+//                HorCollapsibleMind(folder: homeFolder)
             }
-        } // 됐당...!!!!!
-//            .frame(height: 5000)
-//        }
-        // everyFolder has collapsible view.
-        
-        
+        }
     }
 }
 

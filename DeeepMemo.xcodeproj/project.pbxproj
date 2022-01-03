@@ -37,6 +37,8 @@
 		9A98E7562772D28C00057A84 /* ChangeableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7542772D28C00057A84 /* ChangeableImage.swift */; };
 		9A98E7582773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
 		9A98E7592773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
+		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind.swift */; };
+		9AC5D0F22782BBEB007EAA28 /* HorCollapsibleMind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind.swift */; };
 		9AD6EEBE277AC9F700866456 /* SubFolderToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */; };
 		9AD6EEBF277AC9F700866456 /* SubFolderToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */; };
 		9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
@@ -86,6 +88,7 @@
 		9A98E7512772C17500057A84 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		9A98E7542772D28C00057A84 /* ChangeableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableImage.swift; sourceTree = "<group>"; };
 		9A98E7572773021200057A84 /* ModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
+		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind.swift; sourceTree = "<group>"; };
 		9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderToolBarView.swift; sourceTree = "<group>"; };
 		9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarView.swift; sourceTree = "<group>"; };
 		9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBoxView.swift; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind.swift */,
 				9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */,
 				9A04749427715D1200571D66 /* Shared */,
 				9A0474A327715D1400571D66 /* macOS */,
@@ -372,6 +376,7 @@
 				9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */,
 				9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */,
 				9AD6EEC4277C2C8A00866456 /* MemoBoxView.swift in Sources */,
+				9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind.swift in Sources */,
 				9A0474B427715FB200571D66 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +411,7 @@
 				9A98E7532772C17500057A84 /* CustomTextEditor.swift in Sources */,
 				9AD6EF27277EC5CF00866456 /* MindMapView.swift in Sources */,
 				9AD6EEC5277C2C8A00866456 /* MemoBoxView.swift in Sources */,
+				9AC5D0F22782BBEB007EAA28 /* HorCollapsibleMind.swift in Sources */,
 				9A0474B527715FB200571D66 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
