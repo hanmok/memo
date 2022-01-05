@@ -24,8 +24,8 @@ struct SubFolderView: View {
     }
 }
 
-struct SubFolderView_Previews: PreviewProvider {
-    static var previews: some View {
-        SubFolderView(subfolder: folder2)
-    }
-}
+//struct SubFolderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SubFolderView(subfolder: folder2)
+//    }
+//}

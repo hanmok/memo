@@ -1,0 +1,17 @@
+
+let oldMemos = self.memos.sorted()
+
+ You can sort any sequence of elements that conform to the Comparable protocol by calling this method. Elements are sorted in ascending order.
+
+
+
+extension Memo: Comparable {
+    public static func < (lhs: Memo, rhs: Memo) -> Bool {
+        lhs.order < rhs.order
+    }
+}
+
+
+
+
+

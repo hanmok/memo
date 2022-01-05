@@ -1,0 +1,93 @@
+
+NSPredicate:
+
+class NSPredicate : NSObject
+
+A definition of logical conditions
+for constraining a search
+for a fetch or for in-memory filtering.
+
+
+Predicates represent logical conditions, which you can use to filter collections of objects. Although it’s common to create predicates directly from instances of NSComparisonPredicate, NSCompoundPredicate, and NSExpression, you often create predicates from a format string that the class methods parse on NSPredicate. Examples of predicate format strings include:
+
+
+
+
+NSFetchRequest:
+
+class NSFetchRequest<ResultType> : NSPersistentStoreRequest where ResultType : NSFetchRequestResult
+
+A description of search criteria
+used to retrieve data from a persistent store
+
+
+
+An instance of NSFetchRequest collects the criteria needed to select and optionally to sort a group of managed objects held in a persistent store. (See NSPersistentStore and NSManagedObject.)
+
+A fetch request must contain an entity description (an instance of NSEntityDescription) or an entity name that specifies which entity to search. It frequently also contains:
+
+let request = NSFetchRequest<Folder>(entityName: "Folder")
+
+(entityName: ) :
+Initializes a fetch request configured with a given entity name
+
+
+NSSortDescriptior:
+
+An immutable description of how to order a collection of objects according to a property common to all the objects.
+
+
+context.delete(_ object: NSManagedObject) :
+
+Specifies an object that should be removed from it persistent store when changes are committed.
+
+
+
+
+NSManagedObjectContext :
+
+class NSManagedObjectContext: NSObject
+
+An object space to manipulate and track changes to managed objects.
+
+A context consists of a group of related model objects that represent an internally consistent view of one or more persistent stores.
+Changes to managed objects remain in memory in the associated context until Core Data saves that context to one or more persistent stores.
+A single managed object instance exists in one and only one context, but multiple copies of an object can exist in different contexts.
+Therefore, an object is unique to a particular context.
+
+
+
+
+init(context: NSManagedObjectContext) -> NSManagedObject :
+Initializes a managed object subclass and inserts it into the specified managed object context.
+
+
+
+fetch(_ request: NSFetchRequest<NSFetchRequestResult>) throws -> [NSFetchRequestResult] :
+
+Returns an array of items of the specified type that meet the fetch request's criteria
+
+.max(by: )
+: returns maximum element
+
+awakeFromInsert() :
+Provides an opportunity to add code into the life cycle of the managed object when initially creating it.
+
+
+setPrimitiveValue(_ value: Any?, forKey key: String) :
+Sets the valud of a given property in the managed object's private internal storage.
+
+
+NSPersistentCloudKitContainer :
+A container that encapsulates the Core Data stack in your app, and mirrors select persistent stores to a CloudKit pricate database.
+
+
+viewContext :
+The main queue’s managed object context.
+
+NSFetchRequestResult :
+An abstract protocol used with parameterized fetch requests.
+
+
+NSBatchDeleteRequest:
+A request that deletes objects in the SQLite persistent store without loading them into memory.

@@ -19,6 +19,13 @@ struct HorCollapsibleMind: View, FolderNode {
     
     private let collapsedLevel: Int = 0
     
+    var subfolders: [Folder] {
+        var folders: [Folder] = []
+        for eachFolder in folder.subfolders {
+            folders.append(eachFolder)
+        }
+        return folders
+    }
     
     var shouldExpandOverall: Bool {
         return !collapsed || expansion.shouldExpand
@@ -36,14 +43,14 @@ struct HorCollapsibleMind: View, FolderNode {
         
     }
     
-    var subfolders: [Folder]? {
-        folder.hasSubfolder ? folder.subFolders : nil
-    }
+//    var subfolders: [Folder]? {
+//        folder.hasSubfolder ? folder.subFolders : nil
+//    }
     
     var numOfSubfolders: String{
         
-        if folder.hasSubfolder{
-            return "\(folder.subFolders!.count)"
+        if folder.subfolders.count != 0{
+            return "\(folder.subfolders.count)"
         }
         
         return ""
@@ -55,7 +62,7 @@ struct HorCollapsibleMind: View, FolderNode {
         HStack(alignment: .top) {
             
             Button(action: toggleCollapsed) {
-                if folder.hasSubfolder {
+                if folder.subfolders.count != 0 {
                     Image(systemName: !shouldExpandOverall ? "plus.circle" : "minus.circle")
                         .setupAdditional(scheme: colorScheme)
                 } else {
@@ -77,9 +84,10 @@ struct HorCollapsibleMind: View, FolderNode {
             }
             
 //            if subfolders != nil && !collapsed{
-            if subfolders != nil && shouldExpandOverall{
+//            if subfolders != nil && shouldExpandOverall{
+            if folder.subfolders.count != 0 && shouldExpandOverall {
                 VStack(spacing: 0) {
-                    ForEach(subfolders!) {subfolder in
+                    ForEach(subfolders) {subfolder in
                         
                         //                                CollapsibleMind(folder: subfolder)
 //                        HorCollapsibleMind(expansion: expansion, folder: subfolder)

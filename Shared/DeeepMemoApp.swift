@@ -9,27 +9,48 @@ import SwiftUI
 
 @main
 struct DeeepMemoApp: App {
-//    init() {
-//        <#code#>
-//    }
-    
-    
+
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-//    @StateObject var expansion : ExpandingClass
+    
+    let persistenceController = PersistenceController.shared
+    @Environment(\.scenePhase) var scenePhase
+    
+//    @Environment var nav: NavigationStateManager
     var body: some Scene {
         WindowGroup {
 //            NavigationView {
 //                FolderView(folder: deeperFolder)
 //////                    .environmentObject(colorScheme)
 //            }
-//            MindMapView(expansion: expansion, homeFolder: deeperFolder)
-            MindMapView(homeFolder: deeperFolder)
-//            CollapsibleMind(type: .folder, folder: deeperFolder)
-//            CollapsibleMind(folder: deeperFolder)
-//            CollapsibleView()
-//            TestLazyAndScrollView()
-//            TestView()
-//PopUpButtonView()
+            testView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }
+        .onChange(of: scenePhase) { newScenePhase in
+            switch newScenePhase {
+            case .background :
+                print("Scene is in background")
+                try? persistenceController.container.viewContext.save()
+            case .inactive:
+                print("Scene is in inactive")
+            case .active:
+                print("Scene is in active")
+            @unknown default:
+                print("Scene is in default")
+            }
         }
     }
 }
+
+
+
+//class AppDelegate: NSObject, UIApplicationDelegate {
+//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+//        print("Finished launching!")
+//        return true
+//    }
+//    func applicationDidFinishLaunching(_ application: UIApplication) {
+//        <#code#>
+//    }
+//
+//
+//}

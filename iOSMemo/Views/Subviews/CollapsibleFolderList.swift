@@ -14,18 +14,24 @@ struct CollapsibleFolderList: View {
     
     var folder: Folder
     var subfolders: [Folder] {
-        return folder.subFolders!
+//        return folder.subfolders
+        var folders:[Folder] = []
+        for eachFolder in folder.subfolders {
+//            folders.append(contentsOf: eachFolder)
+            folders.append(eachFolder)
+        }
+        return folders
     }
 
     var subfoldersHeight: CGFloat {
-        if folder.subFolders != nil {
-            return CGFloat(folder.subFolders!.count * 20)
+        if folder.subfolders.count != 0 {
+            return CGFloat(folder.subfolders.count * 20)
         } else { return 0 }
     }
     
     var firstFolderName: String {
-        if folder.subFolders != nil {
-            return folder.subFolders!.first!.title
+        if folder.subfolders.count != 0 {
+            return folder.subfolders.first!.title
         } else {
             return "there's no any subfolder in current folder"
         }
@@ -34,7 +40,8 @@ struct CollapsibleFolderList: View {
 //    @State private var collapsed: Bool = true
     
     func navigateToFirstFolder() {
-        if folder.subFolders != nil {
+//        if folder.subFolders != nil {
+        if folder.subfolders.count != 0 {
             // navigate
         }
     }
@@ -67,9 +74,9 @@ struct CollapsibleFolderList: View {
     }
 }
 
-struct CollapsibleFolderList_Previews: PreviewProvider {
-    static var previews: some View {
-//        CollapsibleFolderList(hasCollapsed: false, folder: deeperFolder)
-        CollapsibleFolderList( folder: deeperFolder)
-    }
-}
+//struct CollapsibleFolderList_Previews: PreviewProvider {
+//    static var previews: some View {
+////        CollapsibleFolderList(hasCollapsed: false, folder: deeperFolder)
+//        CollapsibleFolderList( folder: deeperFolder)
+//    }
+//}

@@ -24,32 +24,36 @@ struct SubFolderList: View {
         }.frame(height: 36)
     }
     
-    var subfolders: [Folder]? {
-        if let validSubFolders = folder.subFolders {
-            return validSubFolders
-        } else {
-            return nil
+    var subfolders: [Folder] {
+        var folders: [Folder] = []
+        for eachFolder in folder.subfolders {
+            folders.append(eachFolder)
         }
+        return folders
     }
     
     var memos: [Memo]? {
-        if let validMemos = folder.memos {
-            return validMemos
-        } else {
-            return nil
-        }
-    }
-    var memoViewModels: [MemoViewModel]? {
-        if let validMemos = folder.memos {
-            var viewModels : [MemoViewModel] = []
-            for eachMemo in validMemos {
-                viewModels.append(MemoViewModel(memo: eachMemo))
+        if folder.memos.count != 0 {
+            var memos: [Memo] = []
+            for eachMemo in folder.memos {
+                memos.append(eachMemo)
             }
-            return viewModels
+            return memos
         } else {
             return nil
         }
     }
+//    var memoViewModels: [MemoViewModel]? {
+//        if let validMemos = folder.memos {
+//            var viewModels : [MemoViewModel] = []
+//            for eachMemo in validMemos {
+//                viewModels.append(MemoViewModel(memo: eachMemo))
+//            }
+//            return viewModels
+//        } else {
+//            return nil
+//        }
+//    }
     
     // Too Long to use ;;;
 //    func convertModelToViewModel(memo: Memo) -> MemoViewModel {
@@ -61,8 +65,8 @@ struct SubFolderList: View {
             // List of Subfolders
             List {
                 Section {
-                    if subfolders != nil {
-                        ForEach(subfolders!) { subfolder in
+
+                        ForEach(subfolders) { subfolder in
                             ZStack(alignment: .leading) {
                                 NavigationLink(
                                     destination: FolderView(folder: subfolder)
@@ -72,7 +76,6 @@ struct SubFolderList: View {
                                 Text(subfolder.title)
                             }
                         }
-                    }
                 } footer: {
                     SubFolderToolBarView()
                 }
@@ -150,9 +153,9 @@ struct SubFolderList: View {
 //    .font(.title2)
 //    .frame(maxWidth: .infinity, alignment: .leading)
 
-struct SubFolderContainer_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        SubFolderList(folder: folder2)
-    }
-}
+//struct SubFolderContainer_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//        SubFolderList(folder: folder2)
+//    }
+//}

@@ -12,12 +12,13 @@ struct MemoBoxView: View {
     
     var memo: Memo // has title, contents, overView(optional)
     
-    var overview: String? {
-        if  memo.overView != ""{
-            return memo.overView
-        }
-        return nil
-    }
+//    var overview: String? {
+//        if  memo.overView != ""{
+//            return memo.overView
+//        }
+//        return nil
+//    }
+    
     
     var title: String? {
         if memo.title != "" {
@@ -50,8 +51,8 @@ struct MemoBoxView: View {
                     .padding(5)
                 
             }
-            if overview != nil {
-                Text(overview!)
+            if memo.overview != "" {
+                Text(memo.overview)
                     .font(.headline)
                     .foregroundColor(.primary)
                     .lineLimit(2)
@@ -77,15 +78,15 @@ struct MemoBoxView: View {
     }
 }
 
-struct MemoBoxView_Previews: PreviewProvider {
-    
-    static let overViewSampleMemo = Memo( title: "Memo Sample", overView: "hello", contents: "sample contents", modifiedAt: Date())
-    
-    //    static let sampleMemo = Memo( title: "Memo Sample", contents: "sample contents", modifiedAt: Date())
-    static let sampleMemo = Memo(title: "Memo Sample", overView: "sample overView", contents: "sample contents")
-    
-    static var previews: some View {
-        MemoBoxView(memo:sampleMemo)
-            .previewLayout(.sizeThatFits)
-    }
-}
+//struct MemoBoxView_Previews: PreviewProvider {
+//
+////    static let overViewSampleMemo = Memo( title: "Memo Sample", overView: "hello", contents: "sample contents", modifiedAt: Date())
+//
+//    //    static let sampleMemo = Memo( title: "Memo Sample", contents: "sample contents", modifiedAt: Date())
+////    static let sampleMemo = Memo(title: "Memo Sample", overView: "sample overView", contents: "sample contents")
+//
+//    static var previews: some View {
+//        MemoBoxView(memo:sampleMemo)
+//            .previewLayout(.sizeThatFits)
+//    }
+//}

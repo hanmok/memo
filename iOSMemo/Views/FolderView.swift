@@ -6,8 +6,18 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct FolderView: View {
+    
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
+    // need all the Folders for home View .
+    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var folders: FetchedResults<Folder>
+    
+    // should it be not optional.. ?? if then homeFolder should be provided.
+    
+    @ObservedObject var selectedFolder: Folder
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
@@ -35,21 +45,20 @@ struct FolderView: View {
         
     }
     
-    func getSubfolderListSize(_ input: Folder)-> CGFloat {
-        if let numOfSubfolders = input.subFolders?.count {
-            let maxCount = min(5, numOfSubfolders)
-            return CGFloat(maxCount * 36)
-        }
-        return 36
-    }
+//    func getSubfolderListSize(_ input: Folder)-> CGFloat {
+//        if let numOfSubfolders = input.subFolders?.count {
+//            let maxCount = min(5, numOfSubfolders)
+//            return CGFloat(maxCount * 36)
+//        }
+//        return 36
+//    }
     
-    var subfolders: [Folder]? {
-        //        return folder.subFolders
-        if let validSubFolders = folder.subFolders {
-            return validSubFolders
-        } else {
-            return nil
+    var subfolders: [Folder] {
+        var folders: [Folder] = []
+        for eachFolder in folder.subfolders {
+            folders.append(eachFolder)
         }
+        return folders
     }
     
 //    func navigateBack() { }
@@ -106,12 +115,14 @@ struct FolderView: View {
 
 
 // Folder Name with.. a little Space
-struct FolderView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        FolderView(folder: folder8)
-    }
-}
+//struct FolderView_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        FolderView(folder: folder8)
+//    }
+//}
+//
+
 
 
 

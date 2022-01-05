@@ -13,21 +13,15 @@ struct MemoView: View {
     //    @Environment(\.colorScheme)
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
+    @ObservedObject var memo: Memo
+    
     //    @Binding var memo: MemoViewModel.currentMemo
-    @ObservedObject var memoViewModel: MemoViewModel
+//    @ObservedObject var memoViewModel: MemoViewModel
     
     enum Field: Hashable {
         case title
         case contents
     }
-    
-    init(mvm: MemoViewModel) {
-        self.memoViewModel = mvm
-//        self.myTitle = mvm.currentMemo!.title
-    }
-//    init(mvm: MemoViewModel) {
-//        self.myTitle = mvm.currentMemo!.title
-//    }
     
     @State var isPinned: Bool = false
     func navigateBack() {

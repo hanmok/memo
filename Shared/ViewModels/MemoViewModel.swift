@@ -18,4 +18,8 @@ class MemoViewModel: ObservableObject {
     
 }
 
+
+
 //extension MemoViewModel
+// ManagedObjects conform to ObservableObjects.
+

@@ -10,13 +10,15 @@ import SwiftUI
 struct MindNodeView: View {
     var folder: Folder
     var subfolders: [Folder] {
-//        if hasSubFolder {
-            return folder.subFolders!
-//        }
+        var folders: [Folder] = []
+        for eachFolder in folder.subfolders {
+            folders.append(eachFolder)
+        }
+        return folders
     }
     
     var hasSubFolder: Bool {
-        return folder.subFolders != nil
+        return folder.subfolders.count != 0
     }
     
     var body: some View {
@@ -31,8 +33,8 @@ struct MindNodeView: View {
     }
 }
 
-struct MindNodeView_Previews: PreviewProvider {
-    static var previews: some View {
-        MindNodeView(folder: deeperFolder)
-    }
-}
+//struct MindNodeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MindNodeView(folder: deeperFolder)
+//    }
+//}

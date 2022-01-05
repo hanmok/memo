@@ -29,6 +29,14 @@ struct CollapsibleMind: View, FolderNode {
     var folder: Folder
 //    var project: Project?
 
+    var subfolders: [Folder] {
+        var folders: [Folder] = []
+        for eachFolder in folder.subfolders {
+            folders.append(eachFolder)
+        }
+        return folders
+    }
+    
 //    @State private var navigationSelected: Bool = false
 //    @Binding var shouldNavigate: Bool
     @State private var collapsed: Bool = true
@@ -45,14 +53,15 @@ struct CollapsibleMind: View, FolderNode {
         self.collapsed.toggle()
     }
 
-    var subfolders: [Folder]? {
-        folder.hasSubfolder ? folder.subFolders : nil
-    }
+//    var subfolders: [Folder]? {
+//        folder.subfolders ? folder.subfolders : nil
+//    }
+    
 
     var numOfSubfolders: String{
 
-        if folder.hasSubfolder{
-            return "\(folder.subFolders!.count)"
+        if folder.subfolders.count != 0 {
+            return "\(folder.subfolders.count)"
         }
 
         return ""
@@ -71,7 +80,7 @@ struct CollapsibleMind: View, FolderNode {
                     }
                     // Collapsing Button
                     Button(action: toggleCollapsed) {
-                        if folder.hasSubfolder {
+                        if folder.subfolders.count != 0 {
                         Image(systemName: collapsed ? "plus.circle" : "minus.circle")
                             .setupAdditional(scheme: colorScheme)
                         } else {
@@ -95,7 +104,8 @@ struct CollapsibleMind: View, FolderNode {
 //                .padding(.bottom, Sizes.minimalSpacing)
 
                 // Second Element in VStack
-                if subfolders != nil && !collapsed{
+//                if subfolders != nil && !collapsed{
+                if folder.subfolders.count != 0 && !collapsed{
                 HStack {
                     ForEach((0 ..< collapsedLevel + 1), id: \.self) {_ in
                         Text("\t")
@@ -103,7 +113,7 @@ struct CollapsibleMind: View, FolderNode {
 
                     VStack(spacing: 0) {
 //                        if subfolders != nil && !collapsed{
-                            ForEach(subfolders!) {subfolder in
+                        ForEach(subfolders) {subfolder in
 
                                 CollapsibleMind(folder: subfolder)
                                     .padding(.bottom, 10)
@@ -125,11 +135,11 @@ struct CollapsibleMind: View, FolderNode {
     }
 }
 
-struct CollapsibleMind_Previews: PreviewProvider {
-    static var previews: some View {
-        CollapsibleMind( folder: deeperFolder)
-    }
-}
+//struct CollapsibleMind_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CollapsibleMind( folder: deeperFolder)
+//    }
+//}
 
 
 struct Project {
