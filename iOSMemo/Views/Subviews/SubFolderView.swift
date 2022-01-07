@@ -10,10 +10,11 @@ import SwiftUI
 struct SubFolderView: View {
     var subfolder: Folder
     
+    @ObservedObject var folder: Folder
     var body: some View {
         HStack {
             NavigationLink(
-                destination: FolderView(folder: subfolder),
+                destination: FolderView(selectedFolder: folder, folder: subfolder),
                 label: {
                     Text(subfolder.title)
                 })

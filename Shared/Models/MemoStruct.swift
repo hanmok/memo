@@ -170,3 +170,5 @@ import SwiftUI
 //]
 
 
+
+//let emptyFolder = Folder(title: "testFolder", context: <#T##NSManagedObjectContext#>)

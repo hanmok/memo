@@ -10,21 +10,28 @@ import SwiftUI
 @main
 struct DeeepMemoApp: App {
 
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+//    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
     
-//    @Environment var nav: NavigationStateManager
     var body: some Scene {
         WindowGroup {
 //            NavigationView {
 //                FolderView(folder: deeperFolder)
 //////                    .environmentObject(colorScheme)
 //            }
-            testView()
+//            testView()
+//            HomeView()
+//            EmptyView()
+            HomeView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(NavigationStateManager())
+                .onAppear {
+//                    if persistenceController.container.viewConte
+                }
         }
+        
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {
             case .background :
@@ -42,15 +49,3 @@ struct DeeepMemoApp: App {
 }
 
 
-
-//class AppDelegate: NSObject, UIApplicationDelegate {
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//        print("Finished launching!")
-//        return true
-//    }
-//    func applicationDidFinishLaunching(_ application: UIApplication) {
-//        <#code#>
-//    }
-//
-//
-//}

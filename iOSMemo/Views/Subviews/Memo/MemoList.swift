@@ -9,18 +9,6 @@ import SwiftUI
 
 struct MemoList: View {
     
-//    var folder: Folder
-    
-//    var memos: [Memo] {
-//        var memos: [Memo] = []
-//        for eachMemo in folder!.memos {
-//            memos.append(eachMemo)
-//        }
-//        return memos
-//    }
-    
-//    @FetchRequest(fetchRequest: Memo.fetch(<#T##predicate: NSPredicate##NSPredicate#>))
-    
     init(folder: Folder?, selectedMemo: Binding<Memo?>) {
         self._selectedMemo = selectedMemo
         

@@ -51,6 +51,12 @@
 		9AC5D21427857993007EAA28 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21227857993007EAA28 /* testView.swift */; };
 		9AC5D2162785B63F007EAA28 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2152785B63F007EAA28 /* File.swift */; };
 		9AC5D2172785B63F007EAA28 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2152785B63F007EAA28 /* File.swift */; };
+		9AC5D2192786F773007EAA28 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2182786F773007EAA28 /* HomeView.swift */; };
+		9AC5D21A2786F773007EAA28 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2182786F773007EAA28 /* HomeView.swift */; };
+		9AC5D21C2786F815007EAA28 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21B2786F815007EAA28 /* ProjectView.swift */; };
+		9AC5D21D2786F815007EAA28 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21B2786F815007EAA28 /* ProjectView.swift */; };
+		9AC5D21F2786F823007EAA28 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21E2786F823007EAA28 /* TodoView.swift */; };
+		9AC5D2202786F823007EAA28 /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21E2786F823007EAA28 /* TodoView.swift */; };
 		9AD6EEBE277AC9F700866456 /* SubFolderToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */; };
 		9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
 		9AD6EEC4277C2C8A00866456 /* MemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */; };
@@ -123,6 +129,9 @@
 		9AC5D20E27857328007EAA28 /* FolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewModel.swift; sourceTree = "<group>"; };
 		9AC5D21227857993007EAA28 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		9AC5D2152785B63F007EAA28 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = File.swift; path = Shared/File.swift; sourceTree = "<group>"; };
+		9AC5D2182786F773007EAA28 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		9AC5D21B2786F815007EAA28 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		9AC5D21E2786F823007EAA28 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		9AD6EEBD277AC9F700866456 /* SubFolderToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderToolBarView.swift; sourceTree = "<group>"; };
 		9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarView.swift; sourceTree = "<group>"; };
 		9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBoxView.swift; sourceTree = "<group>"; };
@@ -216,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				9A04749627715D1200571D66 /* MainView.swift */,
+				9AC5D2182786F773007EAA28 /* HomeView.swift */,
 				9A0474BC27716E0000571D66 /* FolderView.swift */,
 				9A89582C2771BE1000E7B773 /* MemoView.swift */,
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
@@ -242,6 +252,8 @@
 				9A98E7542772D28C00057A84 /* ChangeableImage.swift */,
 				9AD6EF28277EC64A00866456 /* MindMap */,
 				9A0474B327715FB200571D66 /* MainTabView.swift */,
+				9AC5D21B2786F815007EAA28 /* ProjectView.swift */,
+				9AC5D21E2786F823007EAA28 /* TodoView.swift */,
 				9A0474C22771740400571D66 /* NavigationText.swift */,
 				9A895822277179E100E7B773 /* PlusImage.swift */,
 				9A98E7512772C17500057A84 /* CustomTextEditor.swift */,
@@ -513,6 +525,7 @@
 				9AC5D2162785B63F007EAA28 /* File.swift in Sources */,
 				9AC5D20127855C0A007EAA28 /* Persistence.swift in Sources */,
 				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
+				9AC5D2192786F773007EAA28 /* HomeView.swift in Sources */,
 				9A0474C32771740400571D66 /* NavigationText.swift in Sources */,
 				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
 				9AC5D21327857993007EAA28 /* testView.swift in Sources */,
@@ -529,6 +542,7 @@
 				9A89582727717EB500E7B773 /* Sizes.swift in Sources */,
 				9AC5D1FF278558AC007EAA28 /* NSPredicate+helper.swift in Sources */,
 				9AC5D1292784092F007EAA28 /* Folder+helper.swift in Sources */,
+				9AC5D21F2786F823007EAA28 /* TodoView.swift in Sources */,
 				9A0474B727716BD300571D66 /* MemoStruct.swift in Sources */,
 				9A895823277179E100E7B773 /* PlusImage.swift in Sources */,
 				9AC5D20627856E2D007EAA28 /* tempFolder.swift in Sources */,
@@ -539,6 +553,7 @@
 				9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind.swift in Sources */,
 				9A0474B427715FB200571D66 /* MainTabView.swift in Sources */,
 				9AC5D10C27840554007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
+				9AC5D21C2786F815007EAA28 /* ProjectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,9 +571,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AC5D1E527854266007EAA28 /* ContentView.swift in Sources */,
+				9AC5D21D2786F815007EAA28 /* ProjectView.swift in Sources */,
 				9AC5D20D27857157007EAA28 /* tempFolder.swift in Sources */,
 				9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */,
+				9AC5D21A2786F773007EAA28 /* HomeView.swift in Sources */,
 				9AC5D1EF27854267007EAA28 /* macOSMemo.xcdatamodeld in Sources */,
+				9AC5D2202786F823007EAA28 /* TodoView.swift in Sources */,
 				9AC5D21427857993007EAA28 /* testView.swift in Sources */,
 				9AC5D1F827854405007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
 				9AC5D21027857328007EAA28 /* FolderViewModel.swift in Sources */,

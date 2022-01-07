@@ -52,7 +52,7 @@ struct CollapsibleFolderList: View {
             ScrollView {
                 VStack {
                     ForEach(subfolders) { subfolder in
-                        NavigationLink(destination: FolderView(folder: subfolder)) {
+                        NavigationLink(destination: FolderView(currentFolder: <#T##Folder#>)) {
                             Text(subfolder.title)
                                 .tint(.primary)
                             Spacer()

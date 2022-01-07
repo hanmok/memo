@@ -17,16 +17,22 @@ struct FolderView: View {
     
     // should it be not optional.. ?? if then homeFolder should be provided.
     
-    @ObservedObject var selectedFolder: Folder
+//    @ObservedObject var selectedFolder: Folder
+//    @ObservedObject var currentFolder: Folder
+//    @EnvironmentObject var currentFolder: Folder
+    let currentFolder : Folder
+    
+    
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
+    @EnvironmentObject var nav: NavigationStateManager
 //    @AppStorage("hasCollapsed") var hasCollapsed = false
 
     @State var memoSelected = false
     @State var searchKeyword = ""
     @State var pinnedFolder: Bool = false
-    var folder: Folder
+//    var folder: Folder
     
     
 
@@ -55,7 +61,7 @@ struct FolderView: View {
     
     var subfolders: [Folder] {
         var folders: [Folder] = []
-        for eachFolder in folder.subfolders {
+        for eachFolder in currentFolder.subfolders {
             folders.append(eachFolder)
         }
         return folders
@@ -68,26 +74,26 @@ struct FolderView: View {
         VStack(spacing: 0) { // make subfolders attached to NavigationBar
             
 //            CollapsibleFolderList(hasCollapsed: hasCollapsed, folder: folder)
-            CollapsibleFolderList(folder: folder) // 왜.. 얘는...
+            CollapsibleFolderList(folder: currentFolder) // 왜.. 얘는...
                 .padding([.horizontal, .top], 10)
             SubFolderToolBarView()
                 .opacity(0.8)
                 .cornerRadius(10)
                 .padding(.horizontal, Sizes.overallPadding)
             // um.. this is wrong..
-            MemoList(folder: folder)
+            MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
                 .padding(.horizontal, Sizes.overallPadding)
                 .background(.green)
 //            Spacer()
         } // end of main VStack
 
 
-        .navigationBarTitle(folder.title)
+        .navigationBarTitle(currentFolder.title)
         .navigationBarItems(trailing: Button(action: pinThisFolder, label: {
             ChangeableImage(imageSystemName: pinnedFolder ? "pin.fill" : "pin", width: 24, height: 24)
         }))
         .onAppear(perform: {
-            print("FolderView has appeared, folder: \(folder)")
+            print("FolderView has appeared, folder: \(currentFolder.title)")
         })
         
         // MainTabBar, + Icon to add memos
