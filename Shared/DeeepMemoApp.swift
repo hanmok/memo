@@ -10,7 +10,6 @@ import SwiftUI
 @main
 struct DeeepMemoApp: App {
 
-//    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
@@ -21,15 +20,9 @@ struct DeeepMemoApp: App {
 //                FolderView(folder: deeperFolder)
 //////                    .environmentObject(colorScheme)
 //            }
-//            testView()
-//            HomeView()
-//            EmptyView()
-            HomeView()
+            HomeView() // new Folder should be provided
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .environmentObject(NavigationStateManager())
-                .onAppear {
-//                    if persistenceController.container.viewConte
-                }
         }
         
         .onChange(of: scenePhase) { newScenePhase in

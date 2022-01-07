@@ -8,37 +8,28 @@
 import SwiftUI
 import CoreData
 
+// FolderView should get a Valid Folder.
 struct FolderView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    // need all the Folders for home View .
-    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var folders: FetchedResults<Folder>
-    
-    // should it be not optional.. ?? if then homeFolder should be provided.
-    
-//    @ObservedObject var selectedFolder: Folder
-//    @ObservedObject var currentFolder: Folder
-//    @EnvironmentObject var currentFolder: Folder
+
+    // this one maybe needed to homeView
+//    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var folders: FetchedResults<Folder>
+        
     let currentFolder : Folder
     
-    
-    
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-
     @EnvironmentObject var nav: NavigationStateManager
-//    @AppStorage("hasCollapsed") var hasCollapsed = false
 
-    @State var memoSelected = false
-    @State var searchKeyword = ""
+    @State var memoSelected = false // use it to switch plus button into toolbar
+    
+//    @State var searchKeyword = "" // implement it later.
     @State var pinnedFolder: Bool = false
-//    var folder: Folder
+    
+    @State var plusButtonPressed: Bool = false
+    // if changed, present sheet
     
     
-
-    func plusButtonPressed() {
-        
-    }
     func search() {
         
     }
@@ -67,33 +58,33 @@ struct FolderView: View {
         return folders
     }
     
-//    func navigateBack() { }
     
     var body: some View {
-
-        VStack(spacing: 0) { // make subfolders attached to NavigationBar
-            
-//            CollapsibleFolderList(hasCollapsed: hasCollapsed, folder: folder)
-            CollapsibleFolderList(folder: currentFolder) // 왜.. 얘는...
-                .padding([.horizontal, .top], 10)
-            SubFolderToolBarView()
-                .opacity(0.8)
-                .cornerRadius(10)
-                .padding(.horizontal, Sizes.overallPadding)
-            // um.. this is wrong..
-            MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
-                .padding(.horizontal, Sizes.overallPadding)
-                .background(.green)
-//            Spacer()
-        } // end of main VStack
-
-
+        ScrollView(.vertical) {
+            VStack(spacing: 0) { // make subfolders attached to NavigationBar
+                
+                //            CollapsibleFolderList(hasCollapsed: hasCollapsed, folder: folder)
+                CollapsibleFolderList(folder: currentFolder) // need to change ..
+                    .padding([.horizontal, .top], 10)
+                SubFolderToolBarView()
+                    .opacity(0.8)
+                    .cornerRadius(10)
+                    .padding(.horizontal, Sizes.overallPadding)
+                // um.. this is wrong..
+                MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
+                    .padding(.horizontal, Sizes.overallPadding)
+                    .background(.green)
+            } // end of main VStack
+        }
         .navigationBarTitle(currentFolder.title)
         .navigationBarItems(trailing: Button(action: pinThisFolder, label: {
             ChangeableImage(imageSystemName: pinnedFolder ? "pin.fill" : "pin", width: 24, height: 24)
         }))
         .onAppear(perform: {
             print("FolderView has appeared, folder: \(currentFolder.title)")
+        })
+        .sheet(isPresented: $plusButtonPressed, content: {
+                MemoView(memo: Memo(title: "", context: context))
         })
         
         // MainTabBar, + Icon to add memos
@@ -105,11 +96,13 @@ struct FolderView: View {
                     Spacer()
                     
                     if !memoSelected {
-                        Button(action: plusButtonPressed) {
+                        Button(action: {
+                            plusButtonPressed.toggle()
+                        }) {
                             PlusImage()
                                 .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
                         }
-                    } else {
+                    } else { // if some memos are selected
                         MemosToolBarView()
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
                     }

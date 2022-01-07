@@ -14,10 +14,8 @@ struct CollapsibleFolderList: View {
     
     var folder: Folder
     var subfolders: [Folder] {
-//        return folder.subfolders
         var folders:[Folder] = []
         for eachFolder in folder.subfolders {
-//            folders.append(contentsOf: eachFolder)
             folders.append(eachFolder)
         }
         return folders

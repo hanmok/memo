@@ -18,6 +18,7 @@ extension Folder {
         let result = try? context.fetch(request)
         let maxFolder = result?.max(by: {$0.order < $1.order })
         self.order = ( maxFolder?.order ?? 0 ) + 1
+        try? context.save()
     }
     
     public override func awakeFromInsert() {
@@ -86,6 +87,8 @@ extension Folder {
             subfolder.order = (oldFolders.last?.order ?? 0) + 1
         }
         subfolder.parent = self
+        try? subfolder.managedObjectContext?.save()
+        
     }
     
     static func fetch(_ predicate: NSPredicate)-> NSFetchRequest<Folder> {
@@ -107,6 +110,7 @@ extension Folder {
     static func delete(_ folder: Folder) {
         if let context = folder.managedObjectContext {
             context.delete(folder)
+            try? context.save()
         }
     }
     
@@ -119,7 +123,7 @@ extension Folder {
         parent.add(subfolder: child1)
         parent.add(subfolder: child2)
         child2.add(subfolder: child3)
-        
+        try? context.save()
         return parent
     }
 }
@@ -140,11 +144,27 @@ extension Folder : Comparable {
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
         lhs.order < rhs.order
     }
-    
-    
 }
 
+extension Folder {
+    static func createHomeFolder(context: NSManagedObjectContext) -> Folder {
+        let home = Folder(title: "Home Folder", context: context)
+        try? context.save()
+        return home
+    }
+}
 
+extension Folder {
+    func getFolderInfo() {
+        print("myFolderFlag")
+        print("Folder.uuid: \(self.uuid)")
+        print("Folder.title: \(self.title)")
+        print("Folder.creationDate: \(self.creationDate)")
+//        print("Folder.contents: \(self.contents)")
+//        print("Folder.modificationDate: \(self.modificationDate)")
+//        print("Folder.overview: \(self.overview)")
+    }
+}
 /*
 var subfolders: [Folder] {
     var folders: [Folder] = []
@@ -155,3 +175,8 @@ var subfolders: [Folder] {
 }
 */
 
+extension NSManagedObjectContext {
+    func saveCD() { // save to coreData
+        try? self.save()
+    }
+}

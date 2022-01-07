@@ -59,6 +59,7 @@ extension Memo {
     static func delete(_ memo: Memo) {
         if let context = memo.managedObjectContext {
             context.delete(memo)
+            try? context.save()
         }
     }
     
@@ -89,6 +90,7 @@ extension Memo {
     func createSampleData() {
         
     }
+    
     func removeAll() {
         
     }

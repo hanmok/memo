@@ -14,13 +14,14 @@ struct testView: View {
     
     var memo: Memo?
     var folder: Folder?
-    
+    // initializer..
     func addMemo() {
         let memo = Memo(title: "old", context: context)
-        memo.title = "new"
-        memo.modificationDate = Date(timeIntervalSinceNow: 100)
         
-        memo.getMemoInfo()
+//        memo.title = "new"
+//        memo.modificationDate = Date(timeIntervalSinceNow: 100)
+//
+//        memo.getMemoInfo()
         print("added!")
     }
     func deleteMemo() {
@@ -29,6 +30,7 @@ struct testView: View {
         Memo.delete(fetchedMemo)
         print("deleted!")
     }
+    // 데이터가 일단.. 잘 안되네 ..  작동이 안됨.
     // 이름이 ViewModel 이어야 하는게 중요한게 아니야.
     // 이미 context 각 Folder, Memo 가 ObservableObject 야.
     // 그리고, context 에 접근하면 모든 Folder, Memo 에 접근 가능해.
@@ -53,12 +55,20 @@ struct testView: View {
         let request = Memo.fetch(.all)
         let fetchedMemo = (try! context.fetch(request).first)!
         fetchedMemo.title = "this is my new modified title !"
+        try? context.save()
         fetchedMemo.getMemoInfo()
         print("updateMemo complete!")
     }
+    
     func addFolder() {
+//        Folder.createHomeFolder(context: context)
         
+//        let _ = Folder(title: "my home folder", context: context)
+//        try? context.save()
+        Folder.createHomeFolder(context: context)
+        print("add Folder!")
     }
+    
     func updateFolder() {
         
     }
@@ -67,13 +77,21 @@ struct testView: View {
         
     }
     func getFolders() {
+        let request = Folder.fetch(.all)
         
+        let fetchedFolders = try! context.fetch(request)
+        print("fetched count: \(fetchedFolders.count)")
+        for folder in fetchedFolders {
+            folder.getFolderInfo()
+        }
+        print("fetched!")
     }
     
     var body: some View {
         HStack {
-            VStack {
+            VStack(spacing: 20) {
                 Text("Test for Memos")
+                Spacer(minLength: 30)
                 Button(action: fetchMemos) {
                     Text("get memos")
                 }
@@ -89,8 +107,14 @@ struct testView: View {
                 }
                 
             }
-            VStack {
+            Spacer()
+            VStack(spacing: 20) {
                 Text("Test for Folders")
+                Spacer(minLength: 30)
+                Button(action: getFolders) {
+                    Text("get Folders")
+                }
+                
                 Button(action: addFolder) {
                     Text("add folder")
                 }
@@ -100,9 +124,7 @@ struct testView: View {
                 Button(action: deleteFolder) {
                     Text("delete folder")
                 }
-                Button(action: getFolders) {
-                    Text("get Folders")
-                }
+
             }
         }
     }
