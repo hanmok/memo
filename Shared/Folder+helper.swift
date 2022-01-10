@@ -160,11 +160,16 @@ extension Folder {
         print("Folder.uuid: \(self.uuid)")
         print("Folder.title: \(self.title)")
         print("Folder.creationDate: \(self.creationDate)")
-//        print("Folder.contents: \(self.contents)")
-//        print("Folder.modificationDate: \(self.modificationDate)")
-//        print("Folder.overview: \(self.overview)")
+        
+        for eachFolder in self.subfolders {
+            print(eachFolder.title)
+        }
+        print("number of subfolders: \(self.subfolders.count)")
+        print("parent: \(self.parent?.title)")
+
     }
 }
+
 /*
 var subfolders: [Folder] {
     var folders: [Folder] = []
@@ -176,7 +181,7 @@ var subfolders: [Folder] {
 */
 
 extension NSManagedObjectContext {
-    func saveCD() { // save to coreData
+    func saveCoreData() { // save to coreData
         try? self.save()
     }
 }

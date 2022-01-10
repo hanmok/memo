@@ -26,6 +26,7 @@ struct SubFolderPageView: View {
                     }
             }
         }
+        .background(Color.blue)
         // Tool bar on the top
         .overlay {
             HStack {
@@ -38,6 +39,8 @@ struct SubFolderPageView: View {
             }
 
         }
+
+        
     }
 }
 

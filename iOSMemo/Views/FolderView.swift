@@ -54,17 +54,21 @@ struct FolderView: View {
         
         ScrollView(.vertical) {
             VStack(spacing: 0) {
+                Text(currentFolder.title)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title)
+                    .padding([.bottom, .leading], 30)
                 // Size of SubFolderPageView : undefined.
                 SubFolderPageView(folder: currentFolder)
-                
+                    
                 MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
                     .padding(.horizontal, Sizes.overallPadding)
                     .background(.green)
             } // end of main VStack
         }
         
-        .navigationBarTitle(currentFolder.title)
-        .navigationTitle("hi")
+//        .navigationBarTitle(currentFolder.title)
+//        .navigationTitle("hi")
         .navigationBarItems(trailing: Button(action: pinThisFolder, label: {
             ChangeableImage(imageSystemName: pinnedFolder ? "pin.fill" : "pin", width: 24, height: 24)
         }))
@@ -72,9 +76,9 @@ struct FolderView: View {
         .onAppear(perform: {
             print("FolderView has appeared, folder: \(currentFolder.title)")
         })
-        .sheet(isPresented: $plusButtonPressed, content: {
-                MemoView(memo: Memo(title: "", context: context))
-        })
+//        .sheet(isPresented: $plusButtonPressed, content: {
+//                MemoView(memo: Memo(title: "", context: context))
+//        })
         
         // MainTabBar, + Icon to add memos
         .overlay {

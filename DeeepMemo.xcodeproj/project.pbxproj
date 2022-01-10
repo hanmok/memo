@@ -46,8 +46,8 @@
 		9AC5D20D27857157007EAA28 /* tempFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D20527856E2D007EAA28 /* tempFolder.swift */; };
 		9AC5D20F27857328007EAA28 /* FolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D20E27857328007EAA28 /* FolderViewModel.swift */; };
 		9AC5D21027857328007EAA28 /* FolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D20E27857328007EAA28 /* FolderViewModel.swift */; };
-		9AC5D21327857993007EAA28 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21227857993007EAA28 /* testView.swift */; };
-		9AC5D21427857993007EAA28 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21227857993007EAA28 /* testView.swift */; };
+		9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21227857993007EAA28 /* CoreDataTestView.swift */; };
+		9AC5D21427857993007EAA28 /* CoreDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21227857993007EAA28 /* CoreDataTestView.swift */; };
 		9AC5D2192786F773007EAA28 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2182786F773007EAA28 /* HomeView.swift */; };
 		9AC5D21A2786F773007EAA28 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2182786F773007EAA28 /* HomeView.swift */; };
 		9AC5D21C2786F815007EAA28 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21B2786F815007EAA28 /* ProjectView.swift */; };
@@ -62,6 +62,8 @@
 		9AC5D22C278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D22A278BCD54007EAA28 /* SubFoldersToolView.swift */; };
 		9AC5D22E278BD8C6007EAA28 /* CurrentTodoLists in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */; };
 		9AC5D22F278BD8C6007EAA28 /* CurrentTodoLists in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */; };
+		9AC5D231278BE711007EAA28 /* SubFoldersTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D230278BE711007EAA28 /* SubFoldersTestView.swift */; };
+		9AC5D232278BE711007EAA28 /* SubFoldersTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D230278BE711007EAA28 /* SubFoldersTestView.swift */; };
 		9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
 		9AD6EEC4277C2C8A00866456 /* MemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */; };
 		9AD6EEC7277C36AF00866456 /* MemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */; };
@@ -129,7 +131,7 @@
 		9AC5D20827856E7D007EAA28 /* FolderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderTests.swift; sourceTree = "<group>"; };
 		9AC5D20B27856F2F007EAA28 /* MemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTests.swift; sourceTree = "<group>"; };
 		9AC5D20E27857328007EAA28 /* FolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewModel.swift; sourceTree = "<group>"; };
-		9AC5D21227857993007EAA28 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
+		9AC5D21227857993007EAA28 /* CoreDataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTestView.swift; sourceTree = "<group>"; };
 		9AC5D2182786F773007EAA28 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		9AC5D21B2786F815007EAA28 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		9AC5D21E2786F823007EAA28 /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		9AC5D227278BC946007EAA28 /* NavigationStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStateManager.swift; sourceTree = "<group>"; };
 		9AC5D22A278BCD54007EAA28 /* SubFoldersToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFoldersToolView.swift; sourceTree = "<group>"; };
 		9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */ = {isa = PBXFileReference; lastKnownFileType = text; path = CurrentTodoLists; sourceTree = "<group>"; };
+		9AC5D230278BE711007EAA28 /* SubFoldersTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFoldersTestView.swift; sourceTree = "<group>"; };
 		9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarView.swift; sourceTree = "<group>"; };
 		9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBoxView.swift; sourceTree = "<group>"; };
 		9AD6EEC6277C36AF00866456 /* MemoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewModel.swift; sourceTree = "<group>"; };
@@ -340,7 +343,8 @@
 		9AC5D2112785798A007EAA28 /* Tester */ = {
 			isa = PBXGroup;
 			children = (
-				9AC5D21227857993007EAA28 /* testView.swift */,
+				9AC5D21227857993007EAA28 /* CoreDataTestView.swift */,
+				9AC5D230278BE711007EAA28 /* SubFoldersTestView.swift */,
 			);
 			path = Tester;
 			sourceTree = "<group>";
@@ -536,7 +540,7 @@
 				9A0474C32771740400571D66 /* NavigationText.swift in Sources */,
 				9AC5D228278BC946007EAA28 /* NavigationStateManager.swift in Sources */,
 				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
-				9AC5D21327857993007EAA28 /* testView.swift in Sources */,
+				9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */,
 				9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */,
 				9AC5D12C27840939007EAA28 /* Memo+helper.swift in Sources */,
 				9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */,
@@ -556,6 +560,7 @@
 				9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */,
 				9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */,
 				9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */,
+				9AC5D231278BE711007EAA28 /* SubFoldersTestView.swift in Sources */,
 				9AD6EEC4277C2C8A00866456 /* MemoBoxView.swift in Sources */,
 				9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind.swift in Sources */,
 				9A0474B427715FB200571D66 /* MainTabView.swift in Sources */,
@@ -585,9 +590,10 @@
 				9AC5D21A2786F773007EAA28 /* HomeView.swift in Sources */,
 				9AC5D1EF27854267007EAA28 /* macOSMemo.xcdatamodeld in Sources */,
 				9AC5D2202786F823007EAA28 /* TodoView.swift in Sources */,
-				9AC5D21427857993007EAA28 /* testView.swift in Sources */,
+				9AC5D21427857993007EAA28 /* CoreDataTestView.swift in Sources */,
 				9AC5D1F827854405007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
 				9AC5D21027857328007EAA28 /* FolderViewModel.swift in Sources */,
+				9AC5D232278BE711007EAA28 /* SubFoldersTestView.swift in Sources */,
 				9AC5D229278BC946007EAA28 /* NavigationStateManager.swift in Sources */,
 				9AC5D20227855C0B007EAA28 /* Persistence.swift in Sources */,
 			);

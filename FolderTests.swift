@@ -72,17 +72,13 @@ class FolderTests: XCTestCase {
         let memo1 = Memo(title: "first", context: context)
         let memo2 = Memo(title: "second", context: context)
         
-//        folder.add(note: note1)
         folder.add(memo: memo1)
-//        folder.add(note: note2)
         folder.add(memo: memo2)
         
-        
         XCTAssertTrue(folder.memos.count == 2)
-        
         XCTAssertTrue(folder.memos.sorted().first == memo1)
         XCTAssertTrue(folder.memos.sorted().last == memo2)
-
+        
     }
     
     func testAddMemoAtIndex() {

@@ -40,12 +40,16 @@ struct HomeView: View { // top folder fetch
 //        NavigationView {
 //        navigationTitle(initialFolder.title)
 //        NavigationView {
+//        NavigationView {
             FolderView(
                 currentFolder: initialFolder)
+//            .navigationTitle("hello")
+//            .navigationTitle("hello")
+            
 //        }
-            .onAppear {
-                print("initialFolder.title : \(initialFolder.title)")
-            }
+//            .onAppear {
+//                print("initialFolder.title : \(initialFolder.title)")
+//            }
 //        }
 //        .navigationTitle(initialFolder.title)
     }

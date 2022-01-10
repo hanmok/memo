@@ -15,10 +15,14 @@ struct DeeepMemoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView() // new Folder should be provided
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .environmentObject(NavigationStateManager())
+//                HomeView() // new Folder should be provided
+//            TestView()
+            CoreDataTestView()
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .environmentObject(NavigationStateManager())
         }
+        
+        
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {
             case .background :

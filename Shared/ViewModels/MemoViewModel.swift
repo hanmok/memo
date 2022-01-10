@@ -10,11 +10,17 @@ import SwiftUI
 import Combine
 
 class MemoViewModel: ObservableObject {
-    @Published var currentMemo: Memo?
+    @Published var currentMemo: Memo
     
     init(memo: Memo) {
         currentMemo = memo
     }
+    
+    var title : String {
+        return currentMemo.title
+    }
+    
+    
     
 }
 

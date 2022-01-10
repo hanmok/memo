@@ -137,7 +137,7 @@ if orientation == .right { // place chevron on the right
 }
 */
 
-struct TestView: View {
+struct CollapsingTestView: View {
     var body: some View {
         Collapsible(label: "Hi") {
             ScrollView {

@@ -17,6 +17,7 @@ extension Memo {
         try? context.save()
     }
     
+    // these variables are not optionals.
     var uuid: UUID {
         get { uuid_ ?? UUID() }
         set { uuid_ = newValue }
