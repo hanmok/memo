@@ -48,7 +48,7 @@ struct ChangeMemoVarsTestView: View {
 
 struct ChangeMemoVarsTestView_Previews: PreviewProvider {
     
-    static var sampleMemo = Memo(title: "sample Folder", context: PersistenceController.preview.container.viewContext)
+    static var sampleMemo = Memo(title: "sample Memo",contents: "test contents", context: PersistenceController.preview.container.viewContext)
     
     static var previews: some View {
         ChangeMemoVarsTestView(memo: sampleMemo)

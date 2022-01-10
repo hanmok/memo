@@ -13,7 +13,11 @@ struct MemoView: View {
     //    @Environment(\.colorScheme)
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
+    @Environment(\.managedObjectContext) var context
+    
     @ObservedObject var memo: Memo
+    
+    let parent: Folder
     
     //    @Binding var memo: MemoViewModel.currentMemo
     //    @ObservedObject var memoViewModel: MemoViewModel
@@ -24,6 +28,7 @@ struct MemoView: View {
     }
     
     @State var isPinned: Bool = false
+    
     func navigateBack() {
         // save memo, and move back
         // save
@@ -63,12 +68,32 @@ struct MemoView: View {
         
     }
     
-    @State var myTitle: String = ""
+    func saveChanges() {
+        memo.title = title
+        memo.overview = overview
+        memo.contents = contents
+        context.saveCoreData()
+    }
+    
+    var titlePlaceholder: String {
+        if memo.title == "" {
+            return "Title Placeholder"
+        } else { return memo.title }
+    }
+    
+    var contentsPlaceholder: String {
+        if memo.contents == "" {
+            return "Contents Placeholder"
+        } else { return memo.contents }
+    }
+    
+    @State var title: String = ""
     //    @Binding var myTitle: String
     //    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
     // MVVM
     //    @State var myText: String = "initial text editor"
-    @State var myText: String = ""
+    @State var contents: String = ""
+    @State var overview: String = ""
     //    @Binding var myText: String
     
     //    @Binding var memo: Memo
@@ -80,7 +105,7 @@ struct MemoView: View {
             
             // MARK: - Title
             
-            TextField("Memo Title placeholder", text: $myTitle)
+            TextField(titlePlaceholder, text: $title)
                 .font(.title2)
                 .submitLabel(.continue)
                 .focused($focusState, equals: Field.title)
@@ -95,10 +120,13 @@ struct MemoView: View {
             
             // MARK: - Contents
             
-            CustomTextEditor(placeholder: "Memo contents placeholder", text: $myText)
+            CustomTextEditor(placeholder: contentsPlaceholder, text: $contents)
                 .padding(.horizontal, Sizes.overallPadding)
             
         }
+        .onDisappear(perform: {
+            saveChanges()
+        })
         .navigationBarItems(
             trailing: HStack {
                 
@@ -181,11 +209,12 @@ struct MemoView: View {
 
 struct MemoView_Previews: PreviewProvider {
     
-    static var sampleMemo = Memo(title: "Sample Memo", context: PersistenceController.preview.container.viewContext)
+    static var sampleMemo = Memo(title: "Sample Memo",contents: "sample contents", context: PersistenceController.preview.container.viewContext)
     
+    static var sampleFolder = Folder(title: "Sample Folder", context: PersistenceController.preview.container.viewContext)
     
     static var previews: some View {
-        MemoView(memo: sampleMemo)
+        MemoView(memo: sampleMemo, parent: sampleFolder)
             .preferredColorScheme(.dark)
     }
 }

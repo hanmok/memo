@@ -45,7 +45,7 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         
         for i in 0 ..< 2 {
-            let newMemo = Memo(title: "\(i) memo", context: viewContext)
+            let newMemo = Memo(title: "\(i) memo", contents: "test contents", context: viewContext)
             newMemo.contents = Memo.lorem
             // create Item
             let folder = Folder(title: "\(i) folder", context: viewContext)

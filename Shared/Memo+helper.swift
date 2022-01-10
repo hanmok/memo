@@ -10,10 +10,11 @@ import CoreData
 
 extension Memo {
     
-    convenience init(title: String, context: NSManagedObjectContext) {
+    convenience init(title: String, contents: String, context: NSManagedObjectContext) {
         self.init(context: context)
         self.title = title
         self.creationDate = Date()
+        self.contents = contents
         try? context.save()
     }
     

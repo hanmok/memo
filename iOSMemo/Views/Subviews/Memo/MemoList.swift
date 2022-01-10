@@ -10,7 +10,8 @@ import SwiftUI
 struct MemoList: View {
     
 //    init(folder: Folder?, selectedMemo: Binding<Memo?>) {
-//        self._selectedMemo = selectedMemo
+//    init(folder: Folder?) {
+////        self._selectedMemo = selectedMemo
 //
 //        var predicate = NSPredicate.none
 //
@@ -18,38 +19,55 @@ struct MemoList: View {
 //            predicate = NSPredicate(format: "%K == %@", MemoProperties.folder, folder)
 //        }
 //        self._memos = FetchRequest(fetchRequest: Memo.fetch(predicate))
-//        self.folder = folder
+//        self.folder = folder!
 //    }
     
     // need to specify predicate condition . (currentFolder)
-    @FetchRequest(fetchRequest: Memo.fetch(NSPredicate.all)) private var memos: FetchedResults<Memo>
+//    @FetchRequest(fetchRequest: Memo.fetch(NSPredicate.all)) private var memos: FetchedResults<Memo>
     
+    let memosFromFolderView: [Memo]
     let folder: Folder
+    @State private var something = false
 //    @Binding var selectedMemo: Memo?
     
     var body: some View {
-        ScrollViewReader { proxy in
+        NavigationView {
+//        ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack { // moves scroll Bar to the right
-                    Section {
+//                NavigationView {
+//                LazyVStack { // moves scroll Bar to the right
+//                    Section {
                         
-                        if memos.count != 0 {
-                            ForEach(memos) { memo in
+                        if memosFromFolderView.count != 0 {
+//                            NavigationView {
+                            ForEach(memosFromFolderView, id: \.self) { eachMemo in
+                                
                                 NavigationLink(
-                                    destination: MemoView(memo: memo)
+                                    destination: MemoView(memo: eachMemo, parent: folder)
                                 ) {
-                                    MemoBoxView(memo: memo)
+                                    MemoBoxView(memo: eachMemo)
+                                        .onAppear {
+                                            print("TQmemo: \(eachMemo.title)")
+                                        }
+                                        
                                 }
-                                .padding(.vertical, 6)
+//                                Text(eachMemo.title)
+//                                    .onAppear(perform: {
+//                                        print("TQmemo: \(eachMemo.title)")
+//                                    })
+//                                .padding(.vertical, 6)
                                 
                             }
                         }
-                    }
-                }
+//                    }
+//                }
+//                }
             }
+//            }
         }
+//        }
         .frame(maxWidth: .infinity)
-        .background(.green)
+//        .background(.green)
     }
 }
 

@@ -14,7 +14,7 @@ struct TestLazyAndScrollView: View {
             LazyVStack {
                 Text("hi")
             }
-            .background(.green)
+//            .background(.green)
             Spacer()
         }
 

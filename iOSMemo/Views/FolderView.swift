@@ -50,6 +50,19 @@ struct FolderView: View {
         return folders
     }
     
+    func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
+        var emptyMemo: [Memo] = []
+        for each in set {
+            emptyMemo.append(each)
+        }
+        print("emptymemo: \(emptyMemo)")
+// choose between two
+        emptyMemo.sort(by: { $0.order > $1.order})
+        emptyMemo.sort(by: { $0.order < $1.order})
+        
+        return emptyMemo
+    }
+    
     
     var body: some View {
         
@@ -62,10 +75,10 @@ struct FolderView: View {
                 
                 SubFolderPageView(folder: currentFolder)
                     
-//                MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
-                MemoList(folder: currentFolder)
+//                MemoList(memosFromFolderView: convertSetToArray(set: currentFolder.memos), folder: currentFolder)
+                MemoList2(memosFromFolderView: convertSetToArray(set: currentFolder.memos), folder: currentFolder)
                     .padding(.horizontal, Sizes.overallPadding)
-                    .background(.green)
+//                    .background(.green)
             } // end of main VStack
         }
         

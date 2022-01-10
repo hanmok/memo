@@ -73,6 +73,9 @@ extension Folder {
         }
         memo.folder = self
     }
+    
+    
+    
     // not modified like above to check which one is correct.
     func add(subfolder: Folder, at index: Int64? = nil) {
         let oldFolders = self.subfolders.sorted()
@@ -152,6 +155,51 @@ extension Folder {
         try? context.save()
         return home
     }
+    
+    static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
+        let homeFolder = Folder(title: "Home Folder", context: context)
+        let firstChildFolder = Folder(title: "child1", context: context)
+        let secondChildFolder = Folder(title: "child2", context: context)
+        let thirdChildFolder = Folder(title: "child3", context: context)
+        let fourthChildFolder = Folder(title: "child4", context: context)
+        
+        homeFolder.add(subfolder: firstChildFolder)
+        homeFolder.add(subfolder: secondChildFolder)
+        homeFolder.add(subfolder: thirdChildFolder)
+        homeFolder.add(subfolder: fourthChildFolder)
+        
+        let memo1 = Memo(title: "First Memo", contents: "Memo Contents", context: context)
+        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents", context: context)
+        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents", context: context)
+        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents", context: context)
+        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents", context: context)
+        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents", context: context)
+        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents", context: context)
+        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents", context: context)
+        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents", context: context)
+        
+        firstChildFolder.add(memo: memo1)
+        firstChildFolder.add(memo: memo2)
+        firstChildFolder.add(memo: memo3)
+        firstChildFolder.add(memo: memo4)
+        firstChildFolder.add(memo: memo5)
+        firstChildFolder.add(memo: memo6)
+        firstChildFolder.add(memo: memo7)
+        firstChildFolder.add(memo: memo8)
+        firstChildFolder.add(memo: memo9)
+        
+        homeFolder.add(memo: memo1)
+        homeFolder.add(memo: memo2)
+        homeFolder.add(memo: memo3)
+        homeFolder.add(memo: memo4)
+        homeFolder.add(memo: memo5)
+        homeFolder.add(memo: memo6)
+        homeFolder.add(memo: memo7)
+        homeFolder.add(memo: memo8)
+        homeFolder.add(memo: memo9)
+        
+        return homeFolder
+    }
 }
 
 extension Folder {
@@ -165,7 +213,7 @@ extension Folder {
             print(eachFolder.title)
         }
         print("number of subfolders: \(self.subfolders.count)")
-        print("parent: \(self.parent?.title)")
+        print("parent: \(String(describing: self.parent?.title))")
 
     }
 }

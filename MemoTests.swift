@@ -37,7 +37,7 @@ class MemoTests: XCTestCase {
 //        let context = controller.container.viewContext
         let title = "new"
         
-        let memo = Memo(title: title, context: context)
+        let memo = Memo(title: title, contents: "test contents", context: context)
         memo.getMemoInfo()
 
         XCTAssertTrue(memo.title == title)
@@ -48,7 +48,7 @@ class MemoTests: XCTestCase {
     
     func testUpdateMemo() {
 //        let context = controller.container.viewContext
-        let memo = Memo(title: "old", context: context)
+        let memo = Memo(title: "old", contents: "test contents", context: context)
         memo.title = "new"
         memo.modificationDate = Date(timeIntervalSinceNow: 100)
         memo.getMemoInfo()
@@ -61,7 +61,7 @@ class MemoTests: XCTestCase {
     func testFetchMemos() {
 //        let context = controller.container.viewContext
         
-        let memo = Memo(title: "fetch me", context: context)
+        let memo = Memo(title: "fetch me", contents: "test contents", context: context)
         
         let request = Memo.fetch(.all)
         
@@ -78,7 +78,7 @@ class MemoTests: XCTestCase {
         }
         
         controller.container.viewContext.perform {
-            let memo = Memo(title: "title", context: self.controller.container.viewContext)
+            let memo = Memo(title: "title", contents: "test memo", context: self.controller.container.viewContext)
             XCTAssertNotNil(memo, "memo should be there")
         }
         
@@ -89,7 +89,7 @@ class MemoTests: XCTestCase {
     
     func testDeleteMemo() {
 //        let context = controller.container.viewContext
-        let memo = Memo(title: "memo to delete", context: context)
+        let memo = Memo(title: "memo to delete", contents: "test contents", context: context)
         
         Memo.delete(memo)
         

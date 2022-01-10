@@ -24,20 +24,18 @@ struct CoreDataTestView: View {
     func addMemo() {
         // what's the parent folder ??
         let oneFolder = returnOneFolder()
-        let memo = Memo(title: "\(oneFolder.title)'s \(oneFolder.memos.count) th child", context: context) // save
+        let memo = Memo(title: "\(oneFolder.title)'s \(oneFolder.memos.count) th child", contents: "test contents", context: context) // save
         
         // add to the parent folder,
         // parentFolder: first folder among fetched
         
-
+        
         
         oneFolder.add(memo: memo)
         print("after updating fetchedFolder: \(oneFolder)")
         print("memos of fetchedFolder: \(oneFolder.memos)")
         
         print("added!")
-        
-        
         
     }
     

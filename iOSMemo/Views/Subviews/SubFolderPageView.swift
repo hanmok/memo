@@ -13,32 +13,59 @@ struct SubFolderPageView: View {
     let folder: Folder
     var subfolders: [Folder] {
         let sortedOldFolders = folder.subfolders.sorted()
+        
         return sortedOldFolders
     }
     
     var body: some View {
         // MARK: - SubFolder List
-        ScrollView(.horizontal) {
-            ForEach(subfolders) { subfolder in
-                NavigationLink(
-                    destination: FolderView(currentFolder: folder)) {
-                        FolderLabelView(folder: folder)
-                    }
-                    .padding(.horizontal, Sizes.overallPadding)
-                    .padding(.vertical, Sizes.minimalSpacing)
-            }
-        }
-        .background(Color.blue)
-        // Tool bar on the top
-        .overlay {
+        VStack(spacing: 0) {
             HStack {
                 Spacer()
-                VStack {
-                    SubFoldersToolView()
-                    Spacer()
-                }
+                SubFoldersToolView()
+                
             }
+//            NavigationView{
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(subfolders) { subfolder in
+                            
+                            //
+                            //                    NavigationView {
+                            NavigationLink(
+                                destination: FolderView(currentFolder: subfolder)) {
+                                    FolderLabelView(folder: subfolder)
+                                }
+                            //                    }
+                                .onAppear(perform: {
+                                    print("title of subFolder: \(subfolder.title)")
+                                })
+                            // working fine, but.. navigation does not !!
+                                .onTapGesture {
+                                    print("tapped !! \(subfolder.title)")
+                                }
+                            
+                                .padding(.horizontal, Sizes.overallPadding)
+                            //                        .padding(.vertical, Sizes.minimalSpacing)
+                            //                        .padding(.vertical)
+                                .padding(.top, Sizes.minimalSpacing * 4)
+                        }
+                    }
+                }
+//            }
         }
+        //        .background(Color.blue)
+        // Tool bar on the top
+        //        .overlay {
+        //            HStack {
+        //                Spacer()
+        //                VStack {
+        //                    SubFoldersToolView()
+        //                    Spacer()
+        //                }
+        //            }
+        ////            .background(.yellow)
+        //        }
     }
 }
 
