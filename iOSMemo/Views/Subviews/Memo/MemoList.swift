@@ -27,35 +27,28 @@ struct MemoList: View {
     @Binding var selectedMemo: Memo?
     
     var body: some View {
-        //        List {
-//        ScrollView {
         ScrollViewReader { proxy in
             ScrollView {
-            LazyVStack { // moves scroll Bar to the right
-                Section {
-                    if memos != nil {
-                        ForEach(memos) { memo in
-                            NavigationLink(
-//                                destination: MemoView(
-//                                    mvm: MemoViewModel(memo: memo))
-                                destination: MemoView(memo: <#T##Memo#>)
-                            ) {
-
-                                MemoBoxView(memo: memo)
+                LazyVStack { // moves scroll Bar to the right
+                    Section {
+                        
+                        if memos.count != 0 {
+                            ForEach(memos) { memo in
+                                NavigationLink(
+                                    destination: MemoView(memo: memo)
+                                ) {
+                                    MemoBoxView(memo: memo)
+                                }
+                                .padding(.vertical, 6)
+                                
                             }
-                            .padding(.vertical, 6)
-                            
-//                            NavigationLink(destination: MemoView(mvm: MemoViewModel(memo: memo)), label: MemoBoxView(memo:memo))
-//                            NavigationLink(destion)
                         }
                     }
                 }
             }
         }
-        }
         .frame(maxWidth: .infinity)
         .background(.green)
-        //        }
     }
 }
 

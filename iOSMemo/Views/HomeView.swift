@@ -10,9 +10,9 @@ import CoreData
 
 // received lists from DeeepMemoAPp
 /*
-    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-    .environmentObject(NavigationStateManager())
-*/
+ .environment(\.managedObjectContext, persistenceController.container.viewContext)
+ .environmentObject(NavigationStateManager())
+ */
 
 struct HomeView: View { // top folder fetch
     // previously selected Folder
@@ -20,27 +20,35 @@ struct HomeView: View { // top folder fetch
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
+    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var folders: FetchedResults<Folder>
     // when app launched, set default folderview to home view.
     // if not exist, make one and use.
     var initialFolder: Folder {
         if nav.selectedFolder != nil {
-            let parentFetch = Folder.topFolderFetch()
-            // if exists, only one will be fetched
-            if let parent = try? context.fetch(parentFetch) {
-                if parent.count != 0 {
-                    nav.selectedFolder = parent.first!
-                    return nav.selectedFolder!
-                }
+            
+            if folders.count != 0 {
+                nav.selectedFolder = folders.first!
+                return nav.selectedFolder!
             }
         }
         let homeFolder = Folder.createHomeFolder(context: context)
         nav.selectedFolder = homeFolder
+        return homeFolder
     }
     
     var body: some View {
+//        NavigationView {
+//        navigationTitle(initialFolder.title)
+//        NavigationView {
             FolderView(
                 currentFolder: initialFolder)
-    } // how to make an initial Folder here ??
+//        }
+            .onAppear {
+                print("initialFolder.title : \(initialFolder.title)")
+            }
+//        }
+//        .navigationTitle(initialFolder.title)
+    }
 }
 
 //struct HomeView_Previews: PreviewProvider {
@@ -51,8 +59,8 @@ struct HomeView: View { // top folder fetch
 
 /*
  
-HomeView()
-    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-    .environmentObject(NavigationStateManager())
-
+ HomeView()
+ .environment(\.managedObjectContext, persistenceController.container.viewContext)
+ .environmentObject(NavigationStateManager())
+ 
  */

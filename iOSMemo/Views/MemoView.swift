@@ -16,7 +16,7 @@ struct MemoView: View {
     @ObservedObject var memo: Memo
     
     //    @Binding var memo: MemoViewModel.currentMemo
-//    @ObservedObject var memoViewModel: MemoViewModel
+    //    @ObservedObject var memoViewModel: MemoViewModel
     
     enum Field: Hashable {
         case title
@@ -64,12 +64,12 @@ struct MemoView: View {
     }
     
     @State var myTitle: String = ""
-//    @Binding var myTitle: String
-//    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
+    //    @Binding var myTitle: String
+    //    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
     // MVVM
     //    @State var myText: String = "initial text editor"
     @State var myText: String = ""
-//    @Binding var myText: String
+    //    @Binding var myText: String
     
     //    @Binding var memo: Memo
     
@@ -77,14 +77,14 @@ struct MemoView: View {
         VStack {
             
             // MARK: - Navigation Bar
-          
+            
             // MARK: - Title
             
             TextField("Memo Title placeholder", text: $myTitle)
                 .font(.title2)
                 .submitLabel(.continue)
                 .focused($focusState, equals: Field.title)
-//                .padding(.top, Sizes.largePadding) // 20
+            //                .padding(.top, Sizes.largePadding) // 20
                 .padding(.bottom, Sizes.largePadding)
                 .padding(.horizontal, Sizes.overallPadding)
             
@@ -106,9 +106,9 @@ struct MemoView: View {
                 Button(action: pinMemo) {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: isPinned ? "pin.fill" : "pin", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
-
+                
                 // trash Button
-
+                
                 Button(action: removeMemo) {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: "trash", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
@@ -136,7 +136,6 @@ struct MemoView: View {
                             Text("Relocate memo")
                         } icon: {
                             Image(systemName: "folder")
-
                         }
                     }
                     
@@ -180,16 +179,16 @@ struct MemoView: View {
 }
 
 
-//struct MemoView_Previews: PreviewProvider {
-//    
-//    @State static var sampleMemo = Memo( title: "Memo Sample", contents: "sample contents", modifiedAt: Date())
-//    
-//    
-//    static var previews: some View {
-//        MemoView(memo: $sampleMemo)
-//            .preferredColorScheme(.dark)
-//    }
-//}
+struct MemoView_Previews: PreviewProvider {
+    
+    static var sampleMemo = Memo(title: "Sample Memo", context: PersistenceController.preview.container.viewContext)
+    
+    
+    static var previews: some View {
+        MemoView(memo: sampleMemo)
+            .preferredColorScheme(.dark)
+    }
+}
 
 
 

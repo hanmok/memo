@@ -23,12 +23,11 @@ struct FolderView: View {
 
     @State var memoSelected = false // use it to switch plus button into toolbar
     
-//    @State var searchKeyword = "" // implement it later.
+
     @State var pinnedFolder: Bool = false
     
     @State var plusButtonPressed: Bool = false
     // if changed, present sheet
-    
     
     func search() {
         
@@ -42,14 +41,6 @@ struct FolderView: View {
         
     }
     
-//    func getSubfolderListSize(_ input: Folder)-> CGFloat {
-//        if let numOfSubfolders = input.subFolders?.count {
-//            let maxCount = min(5, numOfSubfolders)
-//            return CGFloat(maxCount * 36)
-//        }
-//        return 36
-//    }
-    
     var subfolders: [Folder] {
         var folders: [Folder] = []
         for eachFolder in currentFolder.subfolders {
@@ -60,26 +51,24 @@ struct FolderView: View {
     
     
     var body: some View {
+        
         ScrollView(.vertical) {
-            VStack(spacing: 0) { // make subfolders attached to NavigationBar
+            VStack(spacing: 0) {
+                // Size of SubFolderPageView : undefined.
+                SubFolderPageView(folder: currentFolder)
                 
-                //            CollapsibleFolderList(hasCollapsed: hasCollapsed, folder: folder)
-                CollapsibleFolderList(folder: currentFolder) // need to change ..
-                    .padding([.horizontal, .top], 10)
-                SubFolderToolBarView()
-                    .opacity(0.8)
-                    .cornerRadius(10)
-                    .padding(.horizontal, Sizes.overallPadding)
-                // um.. this is wrong..
                 MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
                     .padding(.horizontal, Sizes.overallPadding)
                     .background(.green)
             } // end of main VStack
         }
+        
         .navigationBarTitle(currentFolder.title)
+        .navigationTitle("hi")
         .navigationBarItems(trailing: Button(action: pinThisFolder, label: {
             ChangeableImage(imageSystemName: pinnedFolder ? "pin.fill" : "pin", width: 24, height: 24)
         }))
+
         .onAppear(perform: {
             print("FolderView has appeared, folder: \(currentFolder.title)")
         })
@@ -114,12 +103,15 @@ struct FolderView: View {
 
 
 // Folder Name with.. a little Space
-//struct FolderView_Previews: PreviewProvider {
-//    
-//    static var previews: some View {
-//        FolderView(folder: folder8)
-//    }
-//}
+struct FolderView_Previews: PreviewProvider {
+    
+    static var testFolder = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
+    
+    static var previews: some View {
+        
+        FolderView(currentFolder: testFolder)
+    }
+}
 //
 
 
