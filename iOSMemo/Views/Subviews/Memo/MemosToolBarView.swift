@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+// need connection to FolderView.
+// maybe.. onReive necessary.
 struct MemosToolBarView: View {
     let spacingBetweenButtons: CGFloat = 12
     var body: some View {

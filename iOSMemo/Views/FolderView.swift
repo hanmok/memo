@@ -18,11 +18,12 @@ struct FolderView: View {
 //    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var folders: FetchedResults<Folder>
         
     let currentFolder : Folder
+    var selectedMemos: [Memo]? // handle checked memos according to MemoToolBarView's action
     
     @EnvironmentObject var nav: NavigationStateManager
 
     @State var memoSelected = false // use it to switch plus button into toolbar
-    
+
 
     @State var pinnedFolder: Bool = false
     
@@ -58,10 +59,11 @@ struct FolderView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.title)
                     .padding([.bottom, .leading], 30)
-                // Size of SubFolderPageView : undefined.
+                
                 SubFolderPageView(folder: currentFolder)
                     
-                MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
+//                MemoList(folder: currentFolder, selectedMemo: $nav.selectedMemo)
+                MemoList(folder: currentFolder)
                     .padding(.horizontal, Sizes.overallPadding)
                     .background(.green)
             } // end of main VStack
@@ -97,6 +99,7 @@ struct FolderView: View {
                         }
                     } else { // if some memos are selected
                         MemosToolBarView()
+//                            .onReceive(<#T##publisher: Publisher##Publisher#>, perform: <#T##(Publisher.Output) -> Void#>)
                             .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
                     }
                 }

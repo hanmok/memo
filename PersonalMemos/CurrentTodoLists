@@ -2,3 +2,33 @@
 현재 해야할 것들
 1. TestView 통해서, Folder 부터 Test.
 기본 기능부터, 다음 View 에 넘길 때 잘 넘어 가는지. 
+
+
+Data Flows
+
+FolderView -> SubFolderPageView       folder
+FolderView -> MemoList                folder
+FolderView <- MemoToolBarView       action, 이거 State, Binding 으로 할 수 있을 것 같은데 ?? status enum 이용해서.
+
+SubFolderPageView -> FolderView       folder(nav)
+SubFolderPageView -> FolderLabelView  folder
+SubFolderPageView <- SubFoldersToolView  action 이것도 State, Binding 으로 할 수 있을 듯. ??
+
+MemoList -> MemoView                memo(nav)
+MemoList -> MemoBoxView             memo
+
+
+
+additional necessary setups
+SubFolderPageView <- collapsible func
+일단 collapsible 로 하지 말고, 넣기나 하자..
+한줄로 볼 때는 horizontal Scroll,
+전체 볼 때에는 그냥 쭉 내리기. parent 화면이 이미 Vertically Scrollable.
+
+.sheet when create new Folder
+search page.
+
+
+need to make some search Screen..
+
+

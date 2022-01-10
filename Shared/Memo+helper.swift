@@ -38,15 +38,17 @@ extension Memo {
         set { contents_ = newValue}
     }
     
+    var overview: String {
+        get { overview_ ?? "" }
+        set { overview_ = newValue }
+    }
+    
     var modificationDate: Date {
         get { modificationDate_ ?? Date() }
         set { modificationDate_ = newValue }
     }
     
-    var overview: String {
-        get { overview_ ?? "" }
-        set { overview_ = newValue }
-    }
+
     
     
     
@@ -104,6 +106,8 @@ struct MemoProperties {
     static let creationDate = "creationDate_"
     static let title = "title_"
     static let order = "order"
+    static let contents = "contents_"
+    static let overview = "overview_"
     
     static let folder = "folder"
 }

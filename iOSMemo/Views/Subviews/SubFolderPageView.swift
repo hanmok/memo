@@ -24,6 +24,8 @@ struct SubFolderPageView: View {
                     destination: FolderView(currentFolder: folder)) {
                         FolderLabelView(folder: folder)
                     }
+                    .padding(.horizontal, Sizes.overallPadding)
+                    .padding(.vertical, Sizes.minimalSpacing)
             }
         }
         .background(Color.blue)
@@ -35,12 +37,8 @@ struct SubFolderPageView: View {
                     SubFoldersToolView()
                     Spacer()
                 }
-                
             }
-
         }
-
-        
     }
 }
 

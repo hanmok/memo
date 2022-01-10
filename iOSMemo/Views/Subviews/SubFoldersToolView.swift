@@ -11,9 +11,12 @@ import SwiftUI
 
 struct SubFoldersToolView: View {
     
+//    let currentFolder: Folder
+    
     func addFolder() {
         
     }
+    
     func changeFolderName() {
         
     }
@@ -56,8 +59,8 @@ struct SubFoldersToolView: View {
 
 
 
-struct SubFoldersToolView_Previews: PreviewProvider {
-    static var previews: some View {
-        SubFoldersToolView()
-    }
-}
+//struct SubFoldersToolView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SubFoldersToolView()
+//    }
+//}

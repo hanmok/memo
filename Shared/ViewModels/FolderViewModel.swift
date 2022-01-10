@@ -9,9 +9,10 @@ import Foundation
 import Combine
 
 class FolderViewModel: ObservableObject {
-    @Published var currentFolder: Folder?
+    @Published var currentFolder: Folder
     
     init(folder: Folder) {
         currentFolder = folder
     }
+    
 }

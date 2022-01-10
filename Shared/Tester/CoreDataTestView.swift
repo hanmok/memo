@@ -18,6 +18,9 @@ struct CoreDataTestView: View {
     var memo: Memo?
     var folder: Folder?
     // initializer..
+    
+    // MARK: - Memo Handler Functions
+    let request = Memo.fetch(.all)
     func addMemo() {
         // what's the parent folder ??
         let oneFolder = returnOneFolder()
@@ -76,6 +79,16 @@ struct CoreDataTestView: View {
         print("updateMemo complete!")
     }
     
+    func returnOneMemo() -> Memo {
+        
+        let request = Memo.fetch(.all)
+        let fetchedMemo = try! context.fetch(request).first!
+        return fetchedMemo
+    }
+    
+    
+    // MARK: - Folder Handler Functions
+    
     func addFolder() {
         //        Folder.createHomeFolder(context: context)
         
@@ -98,7 +111,7 @@ struct CoreDataTestView: View {
         let request = Folder.fetch(.all)
         if let result = try? context.fetch(request) {
             for r in result {
-                try? context.delete(r)
+                context.delete(r)
             }
         }
         context.saveCoreData()
@@ -161,6 +174,7 @@ struct CoreDataTestView: View {
     var body: some View {
         NavigationView {
             HStack {
+                // MARK: - Memos
                 VStack(spacing: 20) {
                     Text("Test for Memos")
                         .padding(.bottom, 50)
@@ -178,9 +192,11 @@ struct CoreDataTestView: View {
                         Text("delete memo")
                     }
                     
+                    NavigationLink(destination: ChangeMemoVarsTestView(memo: returnOneMemo())) { Text("navigate to TextField")}
+                    
                     Spacer()
                 }
-                
+                // MARK: - Folders
                 VStack(spacing: 20) {
                     Text("Test for Folders")
                         .padding(.bottom, 50)
@@ -204,7 +220,7 @@ struct CoreDataTestView: View {
                         Text("add SubFolders")
                     }
                     
-                    NavigationLink(destination: SubFoldersTestView(folder: returnOneFolder())) {
+                    NavigationLink(destination: ChangeFolderTitleTestView(folder: returnOneFolder())) {
                         Text("navigateToTextField")
                     }
                     

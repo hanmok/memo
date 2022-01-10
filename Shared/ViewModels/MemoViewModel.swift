@@ -16,9 +16,9 @@ class MemoViewModel: ObservableObject {
         currentMemo = memo
     }
     
-    var title : String {
-        return currentMemo.title
-    }
+//    var title : String {
+//        return currentMemo.title
+//    }
     
     
     

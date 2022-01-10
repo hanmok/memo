@@ -9,22 +9,23 @@ import SwiftUI
 
 struct MemoList: View {
     
-    init(folder: Folder?, selectedMemo: Binding<Memo?>) {
-        self._selectedMemo = selectedMemo
-        
-        var predicate = NSPredicate.none
-        
-        if let folder = folder {
-            predicate = NSPredicate(format: "%K == %@", MemoProperties.folder, folder)
-        }
-        self._memos = FetchRequest(fetchRequest: Memo.fetch(predicate))
-        self.folder = folder
-    }
+//    init(folder: Folder?, selectedMemo: Binding<Memo?>) {
+//        self._selectedMemo = selectedMemo
+//
+//        var predicate = NSPredicate.none
+//
+//        if let folder = folder {
+//            predicate = NSPredicate(format: "%K == %@", MemoProperties.folder, folder)
+//        }
+//        self._memos = FetchRequest(fetchRequest: Memo.fetch(predicate))
+//        self.folder = folder
+//    }
     
+    // need to specify predicate condition . (currentFolder)
     @FetchRequest(fetchRequest: Memo.fetch(NSPredicate.all)) private var memos: FetchedResults<Memo>
     
-    let folder: Folder?
-    @Binding var selectedMemo: Memo?
+    let folder: Folder
+//    @Binding var selectedMemo: Memo?
     
     var body: some View {
         ScrollViewReader { proxy in
