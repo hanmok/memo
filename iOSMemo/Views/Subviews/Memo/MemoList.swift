@@ -31,9 +31,9 @@ struct MemoList: View {
 //    @Binding var selectedMemo: Memo?
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
 //        ScrollViewReader { proxy in
-            ScrollView {
+//            ScrollView {
 //                NavigationView {
 //                LazyVStack { // moves scroll Bar to the right
 //                    Section {
@@ -49,24 +49,17 @@ struct MemoList: View {
                                         .onAppear {
                                             print("TQmemo: \(eachMemo.title)")
                                         }
-                                        
                                 }
-//                                Text(eachMemo.title)
-//                                    .onAppear(perform: {
-//                                        print("TQmemo: \(eachMemo.title)")
-//                                    })
-//                                .padding(.vertical, 6)
-                                
                             }
                         }
 //                    }
 //                }
 //                }
-            }
 //            }
-        }
+//            }
 //        }
-        .frame(maxWidth: .infinity)
+//        }
+//        .frame(maxWidth: .infinity)
 //        .background(.green)
     }
 }

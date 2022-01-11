@@ -49,6 +49,10 @@ extension Memo {
         set { modificationDate_ = newValue }
     }
     
+//    var folder: Folder {
+//        get { folder_ ?? folder}
+//    }
+    
 
     
     
@@ -78,7 +82,7 @@ extension Memo: Comparable {
 extension Memo {
     
     func getMemoInfo() {
-        print("myMemoFlag")
+        print("getMemoInfo")
         print("memo.uuid: \(self.uuid)")
         print("memo.title: \(self.title)")
         print("memo.creationDate: \(self.creationDate)")

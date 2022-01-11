@@ -15,4 +15,8 @@ class FolderViewModel: ObservableObject {
         currentFolder = folder
     }
     
+//    @Published var subFolders: [Folder] {
+//        return currentFolder.subfolders
+//    }
+    
 }

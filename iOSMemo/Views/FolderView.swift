@@ -7,26 +7,25 @@
 
 import SwiftUI
 import CoreData
-
+// navigation 이 안되면, test 가 거의.. 불가능해짐.. 왜 안될까 ??
 // FolderView should get a Valid Folder.
 struct FolderView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-
-    // this one maybe needed to homeView
-//    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var folders: FetchedResults<Folder>
-        
-    let currentFolder : Folder
+//    @EnvironmentObject var nav: NavigationStateManager
+    
+    // get nav.selectedFolder from HomeView
+    // updated. 
+    @ObservedObject var currentFolder: Folder
+    
     var selectedMemos: [Memo]? // handle checked memos according to MemoToolBarView's action
     
-    @EnvironmentObject var nav: NavigationStateManager
-
-    @State var memoSelected = false // use it to switch plus button into toolbar
 
 
+    // use it to switch plus button into toolbar
+    @State var memoSelected = false
     @State var pinnedFolder: Bool = false
-    
     @State var plusButtonPressed: Bool = false
     // if changed, present sheet
     
@@ -50,47 +49,81 @@ struct FolderView: View {
         return folders
     }
     
-    func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
-        var emptyMemo: [Memo] = []
-        for each in set {
-            emptyMemo.append(each)
-        }
-        print("emptymemo: \(emptyMemo)")
-// choose between two
-        emptyMemo.sort(by: { $0.order > $1.order})
-        emptyMemo.sort(by: { $0.order < $1.order})
-        
-        return emptyMemo
-    }
-    
     
     var body: some View {
-        
+        NavigationView {
         ScrollView(.vertical) {
             VStack(spacing: 0) {
-                Text(currentFolder.title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.title)
-                    .padding([.bottom, .leading], 30)
+                
+                // test Button
+//                Button {
+//                    let newFolder = Folder(title: "new Folder", context: context)
+//                    currentFolder.add(subfolder: newFolder)
+//                    context.saveCoreData()
+//                    print("folder has added")
+//                    currentFolder.getFolderInfo()
+//                } label: {
+//                    Text("add new SubFolder")
+//                }
+                
+                // test Button 2
+                Button {
+                    print(currentFolder.getFolderInfo())
+                } label: {
+                    Text("print currentFolder Info")
+                }
+
+                
                 
                 SubFolderPageView(folder: currentFolder)
+                    .background(.yellow)
                     
 //                MemoList(memosFromFolderView: convertSetToArray(set: currentFolder.memos), folder: currentFolder)
-                MemoList2(memosFromFolderView: convertSetToArray(set: currentFolder.memos), folder: currentFolder)
-                    .padding(.horizontal, Sizes.overallPadding)
+//                    .background(.blue)
+                
+                if currentFolder.memos.count != 0 {
+//                            NavigationView {
+                    ForEach(currentFolder.memos.sorted(), id: \.self) { eachMemo in
+                        
+                        NavigationLink(
+                            // @ObservedObject var memo
+                            destination: MemoView(memo: eachMemo, parent: currentFolder)
+                        ) {
+                            MemoBoxView(memo: eachMemo)
+                                .onAppear {
+                                    print("TQmemo: \(eachMemo.title)")
+                                }
+                        }
+                    }
+                }
+                
+                
+//                MemoList2(memosFromFolderView: convertSetToArray(set: currentFolder.memos), folder: currentFolder)
+//                    .padding(.horizontal, Sizes.overallPadding)
+//                    .background(.green)
+                
 //                    .background(.green)
             } // end of main VStack
         }
-        
-//        .navigationBarTitle(currentFolder.title)
-//        .navigationTitle("hi")
+
+                    .navigationBarTitle(currentFolder.title)
         .navigationBarItems(trailing: Button(action: pinThisFolder, label: {
             ChangeableImage(imageSystemName: pinnedFolder ? "pin.fill" : "pin", width: 24, height: 24)
         }))
+        }
+
+//        .navigationTitle("hi")
+        
 
         .onAppear(perform: {
             print("FolderView has appeared, folder: \(currentFolder.title)")
         })
+        .onChange(of: currentFolder, perform: { newValue in
+            print("current Folder has changed")
+//            self.currentFolder.memos.sequence.shuffle()
+            self.currentFolder.memos.shuffled()
+        })
+//        .on
 //        .sheet(isPresented: $plusButtonPressed, content: {
 //                MemoView(memo: Memo(title: "", context: context))
 //        })

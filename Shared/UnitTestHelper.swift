@@ -14,7 +14,7 @@ struct UnitTestHelpers {
         
         if let result = try? context.fetch(request) {
             for r in result {
-                try? context.delete(r)
+                context.delete(r)
             }
         }
     }
@@ -24,7 +24,7 @@ struct UnitTestHelpers {
         
         if let result = try? context.fetch(request) {
             for r in result {
-                try? context.delete(r)
+                context.delete(r)
             }
         }
     }

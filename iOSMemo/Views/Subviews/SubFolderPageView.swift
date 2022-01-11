@@ -10,7 +10,8 @@ import SwiftUI
 struct SubFolderPageView: View {
     
     @Environment(\.colorScheme) var colorScheme
-    let folder: Folder
+//    let folder: Folder
+    @ObservedObject var folder: Folder
     var subfolders: [Folder] {
         let sortedOldFolders = folder.subfolders.sorted()
         
@@ -54,6 +55,9 @@ struct SubFolderPageView: View {
                 }
 //            }
         }
+        // scroll to the right when subfolder added
+//        .onReceive(folder, perform: <#T##(Publisher.Output) -> Void#>)
+        
         //        .background(Color.blue)
         // Tool bar on the top
         //        .overlay {

@@ -20,70 +20,65 @@ struct HomeView: View { // top folder fetch
     @State var testChange = false
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var folders: FetchedResults<Folder>
+    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     // when app launched, set default folderview to home view.
     // if not exist, make one and use.
     
-    
 //    var initialFolder: Folder {
-//        if nav.selectedFolder != nil {
 //
-//            if folders.count != 0 {
-//                nav.selectedFolder = folders.first!
-//                return nav.selectedFolder!
-//            }
+//        if nav.selectedFolder != nil {
+//            return nav.selectedFolder!
 //        }
-//        let homeFolder = Folder.createHomeFolder(context: context)
-//        nav.selectedFolder = homeFolder
-//        return homeFolder
+//        // selectedFolder not exist.
+//        let sampleFolder = Folder.returnSampleFolder(context: context)
+//        nav.selectedFolder = sampleFolder
+////        return folder
+//        return sampleFolder
+//    }
+//
+//    var subMemos: [Memo] {
+//        var targetMemo = Set<Memo>()
+//
+//        if nav.selectedFolder != nil {
+//            targetMemo = nav.selectedFolder!.memos
+//
+//        } else {
+//            let folder = Folder.returnSampleFolder(context: context)
+//            targetMemo = folder.memos
+//        }
+//
+//        return convertSetToArray(set: targetMemo)
 //    }
     
-    var initialFolder: Folder {
-        
-        if nav.selectedFolder != nil {
-            return nav.selectedFolder!
-            
-        }
-        
-        let folder = Folder.returnSampleFolder(context: context)
-//        let initialOne = folder.subfolders.first!
-        let initialOne = folder
-        nav.selectedFolder = initialOne
-//        return folder
-        return initialOne
-    }
     
-    var subMemos: [Memo] {
-        var targetMemo = Set<Memo>()
-        
-        if nav.selectedFolder != nil {
-            targetMemo = nav.selectedFolder!.memos
-        } else {
-            
-            let folder = Folder.returnSampleFolder(context: context)
-            targetMemo = folder.memos
-        }
-        
-        return convertSetToArray(set: targetMemo)
-    }
-    
-    
-    
+//    @ViewBuilder
     var body: some View {
-            FolderView(
-                currentFolder: initialFolder)
+        // 1. use nav.selectedFolder
+        // 2. if not exist, set selectedFolder to topFolder
+        // 3. if topFolder not exist, create topFolder and do 2.
+//        FolderView(
+//            currentFolder: initialFolder)
+//        UnitTestHelpers.deletesAll(container: )
+//        UnitTestHelpers.deletesAllMemos(context: context)
+//        UnitTestHelpers.deletesAllFolders(context: context)
         
+        if nav.selectedFolder == nil  {
+            if topFolders.count != 0 {
+                nav.selectedFolder = topFolders.first!
+            } else {
+                // production
+                // nav.selectedFolder = Folder.createHomeFolder(context: context)
+                // test
+                nav.selectedFolder = Folder.returnSampleFolder(context: context)
+            }
+        }
         
-        // NavigationTest
-//        NavigationView {
-//            VStack {
-//                ForEach(subMemos, id: \.self) { memo in
-//                    NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)) {
-//                        Text(memo.title)
-//                    }
-//                }
-//            }
-//        }
+        return FolderView(currentFolder: nav.selectedFolder!)
+            .onAppear {
+//                UnitTestHelpers.deletesAllMemos(context: context)
+//                UnitTestHelpers.deletesAllFolders(context: context)
+                nav.selectedFolder!.getFolderInfo()
+            }
     }
 }
 
@@ -92,14 +87,6 @@ struct HomeView: View { // top folder fetch
 //        HomeView()
 //    }
 //}
-
-/*
- 
- HomeView()
- .environment(\.managedObjectContext, persistenceController.container.viewContext)
- .environmentObject(NavigationStateManager())
- 
- */
 
 
 func convertSetToArray<V: Comparable>(set: Set<V>) -> [V] {

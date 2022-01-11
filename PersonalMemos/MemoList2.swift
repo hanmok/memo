@@ -31,7 +31,7 @@ struct MemoList2: View {
     //    @Binding var selectedMemo: Memo?
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
             
             if memosFromFolderView.count != 0 {
                 //                            NavigationView {
@@ -43,14 +43,14 @@ struct MemoList2: View {
                         MemoBoxView(memo: eachMemo)
                             .background(.yellow)
                             .onAppear {
-                                print("TQmemo: \(eachMemo.title)")
+                                print("from MemoList: \(eachMemo.title)")
                             }
                         
                     }
                     
                 }
             }
-        }
+//        }
 //        .navigationViewStyle(StackNavigationViewStyle())
         
 

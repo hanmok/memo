@@ -32,5 +32,15 @@ extension Image {
     }
 }
 
+func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
+    var emptyMemo: [Memo] = []
+    for each in set {
+        emptyMemo.append(each)
+    }
+    print("emptymemo: \(emptyMemo)")
+    // the sooner the lower
+    emptyMemo.sort(by: { $0.order > $1.order})
+    
+    return emptyMemo
+}
 
-// 그래서.. 이 MindMap 은 어디에 어떻게 놓아... ??

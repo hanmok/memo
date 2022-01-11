@@ -21,6 +21,7 @@ struct DeeepMemoApp: App {
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .environmentObject(NavigationStateManager())
             
+            
         }
         
         
@@ -30,10 +31,12 @@ struct DeeepMemoApp: App {
                 print("Scene is in background")
                 try? persistenceController.container.viewContext.save()
             case .inactive:
+                try? persistenceController.container.viewContext.save()
                 print("Scene is in inactive")
             case .active:
                 print("Scene is in active")
             @unknown default:
+                try? persistenceController.container.viewContext.save()
                 print("Scene is in default")
             }
         }

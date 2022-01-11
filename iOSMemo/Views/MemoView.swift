@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Combine
+
 
 struct MemoView: View {
     
@@ -17,6 +19,12 @@ struct MemoView: View {
     
     @ObservedObject var memo: Memo
     
+    @EnvironmentObject var nav: NavigationStateManager
+    // 업데이트가.. 어떻게 이상한거야 ??
+    // CoreData 를 업데이트 해도 nav 가 업데이트 되지는 않아. 그런 것 같아.
+    // 음.. EnvironmentObject 에서, nav 자체를 업데이트 할 수는 없나?
+    // 할 수 있다고 쳐도, 받는건 Memo Object 로 받아야해
+    // Memo Object 로 받았는데, 왜이러지... ??
     let parent: Folder
     
     //    @Binding var memo: MemoViewModel.currentMemo
@@ -29,50 +37,15 @@ struct MemoView: View {
     
     @State var isPinned: Bool = false
     
-    func navigateBack() {
-        // save memo, and move back
-        // save
-        submit()
-        // move back
-    }
     
-    func pinMemo() {
-        // change it to pin.fill
-        isPinned.toggle()
-        // pin it ( to the very latest )
-    }
-    
-    func removeMemo() {
-        // move it to "trash bin" folder
-    }
-    
-    func submit() {
-        // save all
-    }
-    
-    func moreActions() {
-        
-    }
-    
-    func changeColor() {
-        
-    }
-    
-    func changeBackgroundColor() {
-        
-    }
-    func changeTitleColor() {
-        
-    }
-    func changeContentsColor() {
-        
-    }
-    
+    // navigation.selectedFolder 를 어떻게 업데이트 시켜줄 수는 없을까 ??
     func saveChanges() {
+        print("save changes has triggered")
         memo.title = title
-        memo.overview = overview
         memo.contents = contents
+        memo.overview = overview
         context.saveCoreData()
+        print("nav: \(nav.selectedFolder!.getFolderInfo())")
     }
     
     var titlePlaceholder: String {
@@ -87,25 +60,47 @@ struct MemoView: View {
         } else { return memo.contents }
     }
     
+
+//    init(memo: Memo, parent: Folder) {
+//        title = memo.title
+//        overview = memo.overview
+//        contents = memo.contents
+//    }
+    // should be bindings
+//    @Binding var titleBinded: String
     @State var title: String = ""
+    @State var contents: String = ""
+    @State var overview: String = ""
+    
     //    @Binding var myTitle: String
     //    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
     // MVVM
     //    @State var myText: String = "initial text editor"
-    @State var contents: String = ""
-    @State var overview: String = ""
+    
+    
     //    @Binding var myText: String
     
     //    @Binding var memo: Memo
     
     var body: some View {
-        VStack {
+        
+        let binding = Binding<String>(get: {
+            self.title
+        }, set: {
+            self.title = $0
+            // do whatever you want here
+            memo.title = title
+            saveChanges()
+        })
+        
+        return VStack {
             
             // MARK: - Navigation Bar
             
             // MARK: - Title
             
             TextField(titlePlaceholder, text: $title)
+
                 .font(.title2)
                 .submitLabel(.continue)
                 .focused($focusState, equals: Field.title)
@@ -121,12 +116,20 @@ struct MemoView: View {
             // MARK: - Contents
             
             CustomTextEditor(placeholder: contentsPlaceholder, text: $contents)
+                .onChange(of: memo.contents, perform: { _ in
+                    saveChanges()
+                })
                 .padding(.horizontal, Sizes.overallPadding)
+               
             
         }
-        .onDisappear(perform: {
-            saveChanges()
-        })
+        // triggered after FolderView has appeared
+//        .onDisappear(perform: {
+//            print("memoView has disappeared!")
+//            saveChanges()
+//            print("data saved!")
+//        })
+        
         .navigationBarItems(
             trailing: HStack {
                 
@@ -203,6 +206,47 @@ struct MemoView: View {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: "ellipsis", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
             })
+    }
+    
+    func navigateBack() {
+        // save memo, and move back
+        // save
+        submit()
+        // move back
+    }
+    
+    func pinMemo() {
+        // change it to pin.fill
+        isPinned.toggle()
+        // pin it ( to the very latest )
+        
+        saveChanges()
+    }
+    
+    func removeMemo() {
+        // move it to "trash bin" folder
+    }
+    
+    func submit() {
+        // save all
+    }
+    
+    func moreActions() {
+        
+    }
+    
+    func changeColor() {
+        
+    }
+    
+    func changeBackgroundColor() {
+        
+    }
+    func changeTitleColor() {
+        
+    }
+    func changeContentsColor() {
+        
     }
 }
 

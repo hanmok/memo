@@ -18,7 +18,10 @@ extension Folder {
         let result = try? context.fetch(request)
         let maxFolder = result?.max(by: {$0.order < $1.order })
         self.order = ( maxFolder?.order ?? 0 ) + 1
-        try? context.save()
+        
+        DispatchQueue.global().async {
+            context.saveCoreData()
+        }
     }
     
     public override func awakeFromInsert() {
@@ -168,15 +171,25 @@ extension Folder {
         homeFolder.add(subfolder: thirdChildFolder)
         homeFolder.add(subfolder: fourthChildFolder)
         
-        let memo1 = Memo(title: "First Memo", contents: "Memo Contents", context: context)
-        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents", context: context)
-        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents", context: context)
-        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents", context: context)
-        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents", context: context)
-        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents", context: context)
-        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents", context: context)
-        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents", context: context)
-        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents", context: context)
+        let memo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context)
+        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context)
+        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context)
+        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context)
+        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context)
+        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context)
+        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context)
+        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context)
+        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context)
+        
+        let hmemo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context)
+        let hmemo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context)
+        let hmemo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context)
+        let hmemo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context)
+        let hmemo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context)
+        let hmemo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context)
+        let hmemo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context)
+        let hmemo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context)
+        let hmemo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context)
         
         firstChildFolder.add(memo: memo1)
         firstChildFolder.add(memo: memo2)
@@ -188,15 +201,15 @@ extension Folder {
         firstChildFolder.add(memo: memo8)
         firstChildFolder.add(memo: memo9)
         
-        homeFolder.add(memo: memo1)
-        homeFolder.add(memo: memo2)
-        homeFolder.add(memo: memo3)
-        homeFolder.add(memo: memo4)
-        homeFolder.add(memo: memo5)
-        homeFolder.add(memo: memo6)
-        homeFolder.add(memo: memo7)
-        homeFolder.add(memo: memo8)
-        homeFolder.add(memo: memo9)
+        homeFolder.add(memo: hmemo1)
+        homeFolder.add(memo: hmemo2)
+        homeFolder.add(memo: hmemo3)
+        homeFolder.add(memo: hmemo4)
+        homeFolder.add(memo: hmemo5)
+        homeFolder.add(memo: hmemo6)
+        homeFolder.add(memo: hmemo7)
+        homeFolder.add(memo: hmemo8)
+        homeFolder.add(memo: hmemo9)
         
         return homeFolder
     }
@@ -204,6 +217,7 @@ extension Folder {
 
 extension Folder {
     func getFolderInfo() {
+        print("folderInfo triggered")
         print("myFolderFlag")
         print("Folder.uuid: \(self.uuid)")
         print("Folder.title: \(self.title)")
@@ -214,6 +228,12 @@ extension Folder {
         }
         print("number of subfolders: \(self.subfolders.count)")
         print("parent: \(String(describing: self.parent?.title))")
+        
+        print("number of memos: \(self.memos.count)")
+        for eachMemo in self.memos {
+            print("memo info: ")
+            eachMemo.getMemoInfo()
+        }
 
     }
 }
@@ -230,6 +250,8 @@ var subfolders: [Folder] {
 
 extension NSManagedObjectContext {
     func saveCoreData() { // save to coreData
-        try? self.save()
-    }
+        DispatchQueue.main.async {
+            try? self.save()
+        }
+         }
 }
