@@ -103,6 +103,7 @@
 		9A0474BC27716E0000571D66 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
 		9A0474BF2771709D00571D66 /* OverallMemo */ = {isa = PBXFileReference; lastKnownFileType = text; path = OverallMemo; sourceTree = "<group>"; };
 		9A0474C22771740400571D66 /* NavigationText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationText.swift; sourceTree = "<group>"; };
+		9A3377AF278EC6F000805138 /* SubFolderElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderElementView.swift; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9A89582C2771BE1000E7B773 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
@@ -192,6 +193,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9A3377AF278EC6F000805138 /* SubFolderElementView.swift */,
 				9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */,
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
 				9AC5D227278BC946007EAA28 /* NavigationStateManager.swift */,

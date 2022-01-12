@@ -25,10 +25,18 @@ struct MemoList: View {
     // need to specify predicate condition . (currentFolder)
 //    @FetchRequest(fetchRequest: Memo.fetch(NSPredicate.all)) private var memos: FetchedResults<Memo>
     
-    let memosFromFolderView: [Memo]
-    let folder: Folder
+//    let memosFromFolderView: [Memo]
+//    let folder: Folder
+    
+    @ObservedObject var folder: Folder
     @State private var something = false
 //    @Binding var selectedMemo: Memo?
+    
+    var memos: [Memo] {
+        let sortedOldMemos = folder.memos.sorted()
+        
+        return sortedOldMemos
+    }
     
     var body: some View {
 //        NavigationView {
@@ -38,9 +46,9 @@ struct MemoList: View {
 //                LazyVStack { // moves scroll Bar to the right
 //                    Section {
                         
-                        if memosFromFolderView.count != 0 {
+                        if memos.count != 0 {
 //                            NavigationView {
-                            ForEach(memosFromFolderView, id: \.self) { eachMemo in
+                            ForEach(memos, id: \.self) { eachMemo in
                                 
                                 NavigationLink(
                                     destination: MemoView(memo: eachMemo, parent: folder)

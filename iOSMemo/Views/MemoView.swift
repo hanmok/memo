@@ -124,11 +124,11 @@ struct MemoView: View {
             
         }
         // triggered after FolderView has appeared
-//        .onDisappear(perform: {
-//            print("memoView has disappeared!")
-//            saveChanges()
-//            print("data saved!")
-//        })
+        .onDisappear(perform: {
+            print("memoView has disappeared!")
+            saveChanges()
+            print("data saved!")
+        })
         
         .navigationBarItems(
             trailing: HStack {

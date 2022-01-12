@@ -10,8 +10,9 @@ import SwiftUI
 struct SubFolderPageView: View {
     
     @Environment(\.colorScheme) var colorScheme
-//    let folder: Folder
+    
     @ObservedObject var folder: Folder
+    
     var subfolders: [Folder] {
         let sortedOldFolders = folder.subfolders.sorted()
         
@@ -26,37 +27,31 @@ struct SubFolderPageView: View {
                 SubFoldersToolView()
                 
             }
-//            NavigationView{
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach(subfolders) { subfolder in
-                            
-                            //
-                            //                    NavigationView {
-                            NavigationLink(
-                                destination: FolderView(currentFolder: subfolder)) {
-                                    FolderLabelView(folder: subfolder)
-                                }
-                            //                    }
-                                .onAppear(perform: {
-                                    print("title of subFolder: \(subfolder.title)")
-                                })
-                            // working fine, but.. navigation does not !!
-                                .onTapGesture {
-                                    print("tapped !! \(subfolder.title)")
-                                }
-                            
-                                .padding(.horizontal, Sizes.overallPadding)
-                            //                        .padding(.vertical, Sizes.minimalSpacing)
-                            //                        .padding(.vertical)
-                                .padding(.top, Sizes.minimalSpacing * 4)
-                        }
+            //            NavigationView{
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(subfolders) { subfolder in
+                        
+                        NavigationLink(
+                            destination: FolderView(currentFolder: subfolder)) {
+                                FolderLabelView(folder: subfolder)
+                            }
+                            .onAppear(perform: {
+                                print("title of subFolder: \(subfolder.title)")
+                            })
+                            .onTapGesture {
+                                print("tapped !! \(subfolder.title)")
+                            }
+                        
+                            .padding(.horizontal, Sizes.overallPadding)
+                            .padding(.top, Sizes.minimalSpacing * 4)
                     }
                 }
-//            }
+            }
+            //            }
         }
         // scroll to the right when subfolder added
-//        .onReceive(folder, perform: <#T##(Publisher.Output) -> Void#>)
+        //        .onReceive(folder, perform: <#T##(Publisher.Output) -> Void#>)
         
         //        .background(Color.blue)
         // Tool bar on the top

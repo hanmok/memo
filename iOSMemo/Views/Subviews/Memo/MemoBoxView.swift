@@ -10,7 +10,8 @@ import SwiftUI
 // used only to show.
 struct MemoBoxView: View {
     
-    var memo: Memo // has title, contents, overView(optional)
+//    var memo: Memo // has title, contents, overView(optional)
+    @ObservedObject var memo: Memo
     
 //    var overview: String? {
 //        if  memo.overView != ""{

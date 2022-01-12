@@ -11,7 +11,8 @@ struct FolderLabelView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    let folder: Folder
+    
+    @ObservedObject var folder: Folder
     
     var body: some View {
         VStack {
