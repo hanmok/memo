@@ -11,10 +11,11 @@ struct SubFolderPageView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    @ObservedObject var folder: Folder
+//    @ObservedObject var folder: Folder
+    @EnvironmentObject var currentFolder: Folder
     
     var subfolders: [Folder] {
-        let sortedOldFolders = folder.subfolders.sorted()
+        let sortedOldFolders = currentFolder.subfolders.sorted()
         
         return sortedOldFolders
     }
@@ -28,13 +29,17 @@ struct SubFolderPageView: View {
                 
             }
             //            NavigationView{
+//            GeometryReader { proxy in
             ScrollView(.horizontal) {
+
                 HStack {
                     ForEach(subfolders) { subfolder in
                         
                         NavigationLink(
                             destination: FolderView(currentFolder: subfolder)) {
                                 FolderLabelView(folder: subfolder)
+//                                    .frame(width: proxy.size.width * 0.2)
+                                    
                             }
                             .onAppear(perform: {
                                 print("title of subFolder: \(subfolder.title)")
@@ -47,6 +52,8 @@ struct SubFolderPageView: View {
                             .padding(.top, Sizes.minimalSpacing * 4)
                     }
                 }
+                .padding(.bottom, 10)
+//                }
             }
             //            }
         }
@@ -70,11 +77,13 @@ struct SubFolderPageView: View {
 
 
 struct SubFolderPageView_Previews: PreviewProvider {
-    
+
     static var testFolder  = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
-    
+
     static var previews: some View {
-        SubFolderPageView(folder: testFolder)
+//        SubFolderPageView(folder: testFolder)
+        SubFolderPageView()
+            .environmentObject(testFolder)
     }
 }
 

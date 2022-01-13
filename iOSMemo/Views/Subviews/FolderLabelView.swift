@@ -11,7 +11,6 @@ struct FolderLabelView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    
     @ObservedObject var folder: Folder
     
     var body: some View {
@@ -24,7 +23,9 @@ struct FolderLabelView: View {
 //                .tint(.black)
             Text(folder.title)
                 .font(.body)
-        }
+                .lineLimit(2)
+        } // aspectRatio: width / height
+        .aspectRatio(0.8, contentMode: .fit)
     }
 }
 

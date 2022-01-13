@@ -9,28 +9,18 @@ import SwiftUI
 
 struct MemoList: View {
     
-//    init(folder: Folder?, selectedMemo: Binding<Memo?>) {
-//    init(folder: Folder?) {
-////        self._selectedMemo = selectedMemo
-//
-//        var predicate = NSPredicate.none
-//
-//        if let folder = folder {
-//            predicate = NSPredicate(format: "%K == %@", MemoProperties.folder, folder)
-//        }
-//        self._memos = FetchRequest(fetchRequest: Memo.fetch(predicate))
-//        self.folder = folder!
-//    }
-    
-    // need to specify predicate condition . (currentFolder)
-//    @FetchRequest(fetchRequest: Memo.fetch(NSPredicate.all)) private var memos: FetchedResults<Memo>
-    
-//    let memosFromFolderView: [Memo]
-//    let folder: Folder
-    
     @ObservedObject var folder: Folder
     @State private var something = false
-//    @Binding var selectedMemo: Memo?
+    //    @Binding var selectedMemo: Memo?
+    
+//    var memoColumns: [GridItem] {
+//        [GridItem(.adaptive(minimum: 100, maximum: 150))]
+//    }
+    var memoColumns: [GridItem] {
+        [GridItem(.flexible(minimum: 150, maximum: 200)),
+         GridItem(.flexible(minimum: 150, maximum: 200))
+        ]
+    }
     
     var memos: [Memo] {
         let sortedOldMemos = folder.memos.sorted()
@@ -39,36 +29,42 @@ struct MemoList: View {
     }
     
     var body: some View {
-//        NavigationView {
-//        ScrollViewReader { proxy in
-//            ScrollView {
-//                NavigationView {
-//                LazyVStack { // moves scroll Bar to the right
-//                    Section {
-                        
-                        if memos.count != 0 {
-//                            NavigationView {
-                            ForEach(memos, id: \.self) { eachMemo in
-                                
-                                NavigationLink(
-                                    destination: MemoView(memo: eachMemo, parent: folder)
-                                ) {
-                                    MemoBoxView(memo: eachMemo)
-                                        .onAppear {
-                                            print("TQmemo: \(eachMemo.title)")
-                                        }
-                                }
+        
+        if memos.count != 0 {
+            
+            
+            
+//            ForEach(memos, id: \.self) { eachMemo in
+//
+//                NavigationLink(
+//                    destination: MemoView(memo: eachMemo, parent: folder)
+//                ) {
+//                    MemoBoxView(memo: eachMemo)
+//                        .onAppear {
+//                            print("TQmemo: \(eachMemo.title)")
+//                        }
+//                }
+//            }
+            
+            LazyVGrid(columns: memoColumns) {
+                ForEach(memos, id: \.self) { eachMemo in
+                    
+                    NavigationLink(
+                        destination: MemoView(memo: eachMemo, parent: folder)
+                    ) {
+                        MemoBoxView(memo: eachMemo)
+                            .frame(width: 170, alignment: .topLeading)
+//                            .background(.green)
+                            .onAppear {
+                                print("showed Memo: \(eachMemo.title)")
                             }
-                        }
-//                    }
-//                }
-//                }
-//            }
-//            }
-//        }
-//        }
-//        .frame(maxWidth: .infinity)
-//        .background(.green)
+                    }
+                }
+            }
+            .onAppear {
+                print("\(memos.count) number of memos has appeared")
+            }
+        }
     }
 }
 

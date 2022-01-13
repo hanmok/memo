@@ -11,10 +11,17 @@ import SwiftUI
 
 struct SubFoldersToolView: View {
     
-//    let currentFolder: Folder
+
+    
+    //    @ObservedObject var currentFolder: Folder
+    @EnvironmentObject var currentFolder: Folder
+    @Environment(\.managedObjectContext) var context
+    
+    @State var shouldAddFolder = false
+    @State var newSubFolderName = ""
     
     func addFolder() {
-        
+        shouldAddFolder = true
     }
     
     func changeFolderName() {
@@ -31,29 +38,39 @@ struct SubFoldersToolView: View {
     }
     
     var body: some View {
-        HStack {
-            Button(action: addFolder) {
-                ChangeableImage(imageSystemName: "folder.badge.plus")
+        ZStack {
+            HStack {
+                Button(action: addFolder) {
+                    ChangeableImage(imageSystemName: "folder.badge.plus")
+                }
+                .padding(.horizontal, Sizes.minimalSpacing)
+                Button(action: changeFolderName) {
+                    ChangeableImage(imageSystemName: "pencil")
+                }
+                .padding(.horizontal, Sizes.minimalSpacing)
+                Button(action: changeSort) {
+                    ChangeableImage(imageSystemName: "arrow.up.and.down.circle")
+                    
+                }
+                .padding(.horizontal, Sizes.minimalSpacing)
+                Button(action: deleteFolder) {
+                    ChangeableImage(imageSystemName: "trash")
+                }
+                .padding(.horizontal, Sizes.minimalSpacing)
+                Button(action: expandList) {
+                    ChangeableImage(imageSystemName: "chevron.down")
+                }
+                .padding(.horizontal, Sizes.minimalSpacing)
             }
-            .padding(.horizontal, Sizes.minimalSpacing)
-            Button(action: changeFolderName) {
-                ChangeableImage(imageSystemName: "pencil")
-            }
-            .padding(.horizontal, Sizes.minimalSpacing)
-            Button(action: changeSort) {
-                ChangeableImage(imageSystemName: "arrow.up.and.down.circle")
-                
-            }
-            .padding(.horizontal, Sizes.minimalSpacing)
-            Button(action: deleteFolder) {
-                ChangeableImage(imageSystemName: "trash")
-            }
-            .padding(.horizontal, Sizes.minimalSpacing)
-            Button(action: expandList) {
-                ChangeableImage(imageSystemName: "chevron.down")
-            }
-            .padding(.horizontal, Sizes.minimalSpacing)
+//            TextFieldAlert(
+//                isPresented: $shouldAddFolder,
+//                text: $newSubFolderName) { text in
+//                currentFolder.add(subfolder: currentFolder)
+//            }
         }
+        
+        
+        
     }
 }
 

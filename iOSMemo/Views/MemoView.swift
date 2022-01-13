@@ -9,9 +9,19 @@ import SwiftUI
 import Combine
 
 
+/*
+ Actions
+ 1. 처음 상태는 어떤 것에도 Focus 가 맞추어있지 않은 상태
+ 2. Title TextField : 받아온 memo 의 title 이 검정색으로 보임. 누르면 수정 가능,
+ 모두 지울 시 기존 title gray 색으로 보임. 그대로 저장시 제목은 ""
+ 3. 일단, 저장될 때 title, contents 가 모두 비어있는 경우 삭제하는 것으로 설정.
+ 4. 사용자가 뒤로 가지 않고 앱을 갑자기 꺼버리면.. 그땐 어떻게 저장하지 ??
+ 5. 내용물이 바뀌는 어떤 지점마다 저장을 해야하나? 근데 그러다가 어느순간 title, contents 를 모두 지워버리면 바로 제거 ? ? 그러면 안되는데..
+ */
+
 struct MemoView: View {
     
-    @FocusState var focusState: Field?
+//    @FocusState var focusState: Field?
     //    @Environment(\.colorScheme)
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
@@ -38,12 +48,19 @@ struct MemoView: View {
     @State var isPinned: Bool = false
     
     
-    // navigation.selectedFolder 를 어떻게 업데이트 시켜줄 수는 없을까 ??
+
+    //
     func saveChanges() {
         print("save changes has triggered")
         memo.title = title
+        
         memo.contents = contents
-        memo.overview = overview
+        
+        if memo.title == "" && memo.contents == "" {
+            Memo.delete(memo)
+        }
+        
+//        memo.overview = overview
         context.saveCoreData()
         print("nav: \(nav.selectedFolder!.getFolderInfo())")
     }
@@ -51,7 +68,20 @@ struct MemoView: View {
     var titlePlaceholder: String {
         if memo.title == "" {
             return "Title Placeholder"
-        } else { return memo.title }
+        } else {
+            return memo.title
+        }
+    }
+    // 만약,
+    let initialTitle: String
+    let initialContents: String
+    
+    init(memo: Memo, parent: Folder) {
+        self.memo = memo
+//        self.title = memo.title
+        self.parent = parent
+        self.initialTitle = memo.title
+        self.initialContents = memo.contents
     }
     
     var contentsPlaceholder: String {
@@ -61,16 +91,11 @@ struct MemoView: View {
     }
     
 
-//    init(memo: Memo, parent: Folder) {
-//        title = memo.title
-//        overview = memo.overview
-//        contents = memo.contents
-//    }
     // should be bindings
 //    @Binding var titleBinded: String
     @State var title: String = ""
     @State var contents: String = ""
-    @State var overview: String = ""
+//    @State var overview: String = ""
     
     //    @Binding var myTitle: String
     //    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
@@ -84,14 +109,14 @@ struct MemoView: View {
     
     var body: some View {
         
-        let binding = Binding<String>(get: {
-            self.title
-        }, set: {
-            self.title = $0
-            // do whatever you want here
-            memo.title = title
-            saveChanges()
-        })
+//        let binding = Binding<String>(get: {
+//            self.title
+//        }, set: {
+//            self.title = $0
+//            // do whatever you want here
+//            memo.title = title
+//            saveChanges()
+//        })
         
         return VStack {
             
@@ -99,11 +124,11 @@ struct MemoView: View {
             
             // MARK: - Title
             
-            TextField(titlePlaceholder, text: $title)
-
+            TextField(initialTitle, text: $title)
+                
                 .font(.title2)
                 .submitLabel(.continue)
-                .focused($focusState, equals: Field.title)
+//                .focused($focusState, equals: Field.title)
             //                .padding(.top, Sizes.largePadding) // 20
                 .padding(.bottom, Sizes.largePadding)
                 .padding(.horizontal, Sizes.overallPadding)
@@ -115,14 +140,19 @@ struct MemoView: View {
             
             // MARK: - Contents
             
-            CustomTextEditor(placeholder: contentsPlaceholder, text: $contents)
-                .onChange(of: memo.contents, perform: { _ in
-                    saveChanges()
-                })
+//            CustomTextEditor(placeholder: contentsPlaceholder, text: $contents)
+            TextEditor(text: $contents)
+//                .onChange(of: memo.contents, perform: { _ in
+//                    saveChanges()
+//                })
                 .padding(.horizontal, Sizes.overallPadding)
                
             
         }
+        .onAppear(perform: {
+            title = memo.title
+            contents = memo.contents
+        })
         // triggered after FolderView has appeared
         .onDisappear(perform: {
             print("memoView has disappeared!")
@@ -172,27 +202,17 @@ struct MemoView: View {
                     
                     // Inner Menu, change Color
                     Menu {
+                        
                         Button(action: changeBackgroundColor) {
-                            Label {
-                                Text("Background Color")
-                            } icon: {
-                                Image(systemName: "eyedropper")
-                            }
+                            Text("Background Color")
                         }
                         Button(action: changeContentsColor) {
-                            Label {
-                                Text("Contents Color")
-                            } icon: {
-                                Image(systemName: "eyedropper")
-                            }
+                            Text("Contents Color")
                         }
                         Button(action: changeTitleColor) {
-                            Label {
-                                Text("Title Color")
-                            } icon: {
-                                Image(systemName: "eyedropper")
-                            }
+                            Text("Title Color")
                         }
+                        
                     }label: {
                         Label {
                             Text("Change color")
@@ -220,7 +240,7 @@ struct MemoView: View {
         isPinned.toggle()
         // pin it ( to the very latest )
         
-        saveChanges()
+//        saveChanges()
     }
     
     func removeMemo() {

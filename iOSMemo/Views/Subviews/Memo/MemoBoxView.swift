@@ -75,7 +75,7 @@ struct MemoBoxView: View {
         }
         .frame(width: UIScreen.screenWidth / 2 - 1.5 * Sizes.overallPadding)
         .background(Color(white: 0.8))
-        .cornerRadius(10)
+        .cornerRadius(5)
     }
 }
 

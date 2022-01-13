@@ -8,56 +8,50 @@
 import SwiftUI
 // need connection to FolderView.
 // maybe.. onReive necessary.
-struct MemosToolBarView: View {
+struct MemosToolBarViewTest: View {
     let spacingBetweenButtons: CGFloat = 12
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
-            
+//            VStack(spacing: spacingBetweenButtons) {
                 Button(action: {}) {
                     ChangeableImage(imageSystemName: "pin",width: 20, height: 20)
                 }
-//                .padding(5)
-                .padding([.leading], 25)
-                .padding([.vertical, .trailing], 5)
-                
+                .padding(5)
+//                .background(Color(.sRGB, white: 0.9))
                 .cornerRadius(5)
                 
                 Button(action: {}) {
                     ChangeableImage(imageSystemName: "doc.on.doc",width: 20, height: 20)
                 }
                     .padding(5)
+//                    .background(Color(.sRGB, white: 0.9))                    .cornerRadius(5)
+//            }
             
+//            VStack(spacing: spacingBetweenButtons) {
                 Button(action: {}) {
                     ChangeableImage(imageSystemName: "eyedropper.halffull",width: 20, height: 20)
                 }
                 .padding(5)
+//                .background(Color(.sRGB, white: 0.9))
                 .cornerRadius(5)
 
                 Button(action: {}) {
                     ChangeableImage(imageSystemName: "trash", width: 20, height: 20)
                 }
-//                .padding(5)
-                .padding(.trailing, 25)
-                .padding([.leading, .vertical], 5)
+                .padding(5)
+//                .background(Color(.sRGB, white: 0.9))
                 .cornerRadius(5)
+//            }
         }
-//        .padding([.leading, .trailing], 30)
-        .frame(width: 170, height: 30, alignment: .center)
-        .padding(5)
-        .background(.green)
+        .padding(10)
+//        .background(Color(.sRGB, white: 0.5, opacity: 0.5))
         .cornerRadius(10)
-
-        
-//        .cornerRadius(15)
-
-//        .background(.green)
-        
     }
 }
 
-struct MemosToolBarView_Previews: PreviewProvider {
+struct MemosToolBarViewTest_Previews: PreviewProvider {
     static var previews: some View {
-        MemosToolBarView()
+        MemosToolBarViewTest()
             .previewLayout(.sizeThatFits)
     }
 }
