@@ -44,10 +44,6 @@ struct FolderView: View {
         
     }
     
-//    func pinThisFolder() {
-//        pinnedFolder.toggle()
-//    }
-    
     func editFolder() {
         
     }

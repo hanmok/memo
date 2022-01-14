@@ -21,6 +21,10 @@ struct HomeView: View { // top folder fetch
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
+//    @AppStorage("test") var test = ""
+//    @AppStorage("initialFolder") var initialFolder = Folder(title: "", context: NSManagedObjectContext())
+    
+    
     // when app launched, set default folderview to home view.
     // if not exist, make one and use.
     

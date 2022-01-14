@@ -8,8 +8,23 @@
 import SwiftUI
 
 
+class SelectedMemoViewModel: ObservableObject {
+    
+    @Published var memos = Set<Memo>()
+    
+    @Published var hasSelected = false
+    
+    public var count: Int {
+        memos.count
+    }
+    
+    func add(memo: Memo) {
+        self.memos.update(with: memo)    }
+    
+}
 struct FilteredMemoList: View {
     
+    @EnvironmentObject var memoVM: SelectedMemoViewModel
     var memos: [Memo]
     var title: String
     let parent: Folder
@@ -17,18 +32,28 @@ struct FilteredMemoList: View {
     var body: some View {
         Section {
             ForEach(memos, id: \.self) { memo in
-                NavigationLink(destination: MemoView(memo: memo, parent: parent)) {
-                    MemoBoxView(memo: memo)
-                        .frame(width: 170, alignment: .topLeading)
-                }
+                
+//                if !memoVM.hasSelected {
+                    NavigationLink(destination: MemoView(memo: memo, parent: parent)) {
+                        MemoBoxView(memo: memo)
+                            .frame(width: 170, alignment: .topLeading)
+                    }
+//                    .disabled(memoVM.hasSelected)
+//                }
+//                else {
+//                    MemoBoxView(memo: memo)
+//                        .frame(width: 170, alignment: .topLeading)
+//                }
+                
+                
             }
         } header: {
             HStack {
-            Text(title)
-                .foregroundColor(.gray)
-                .font(.body)
-                .frame(alignment: .topLeading)
-                .padding(.leading, Sizes.overallPadding)
+                Text(title)
+                    .foregroundColor(.gray)
+                    .font(.body)
+                    .frame(alignment: .topLeading)
+                    .padding(.leading, Sizes.overallPadding)
                 Spacer()
             }
         }
@@ -37,8 +62,13 @@ struct FilteredMemoList: View {
 
 struct MemoList: View {
     
+    @Environment(\.managedObjectContext) var context
+    @StateObject var selectedViewModel = SelectedMemoViewModel()
+    
     @ObservedObject var folder: Folder
     @Binding var isAddingMemo: Bool
+    
+    //    @State var selectedMemos: [Memo] = []
     
     //    @Binding var selectedMemo: Memo?
     
@@ -63,7 +93,7 @@ struct MemoList: View {
         return sortedOldMemos.filter {!$0.pinned}
     }
     
-    @State var memoSelected: Bool = false
+    //    @State var memoSelected: Bool = false
     //    @ObservedObject var memos: [Memo]
     
     var memos: [Memo] {
@@ -78,6 +108,7 @@ struct MemoList: View {
             
             ZStack {
                 LazyVGrid(columns: memoColumns) {
+                    
                     //                LazyVGrid
                     //                    ForEach(memos, id: \.self) { eachMemo in
                     //
@@ -88,15 +119,21 @@ struct MemoList: View {
                     //                                .frame(width: 170, alignment: .topLeading)
                     //                        }
                     //                    }
+                    
+                    
                     FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
                     FilteredMemoList(memos: unpinnedMemos, title: "unpinned", parent: folder)
-                } // end of LazyVGrid
+                }
+                .environmentObject(selectedViewModel)
+                // end of LazyVGrid
                 //            .background(.blue)
                 VStack {
                     Spacer()
                     HStack {
                         Spacer()
-                        if !memoSelected {
+                        //                        if !memoSelected {
+                        //                        if selectedMemos.count == 0 {
+                        if selectedViewModel.count == 0 {
                             // show plus button
                             Button(action: {
                                 isAddingMemo = true
@@ -106,7 +143,49 @@ struct MemoList: View {
                                     .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
                             }
                         } else {
-                            MemosToolBarView()
+                            MemosToolBarView(pinnedAction: { selMemos in
+                                // TODO : if all is pinned -> unpin
+                                // else : pin all
+                                
+                                var allPinned = true
+                                for each in selMemos {
+                                    if each.pinned == false {
+                                        allPinned = false
+                                        break
+                                    }
+                                }
+                                
+                                if !allPinned {
+                                    for each in selMemos {
+                                        each.pinned = true
+                                    }
+                                }
+                                context.saveCoreData()
+
+                                
+                            }, cutAction: { selMemos in
+                                // TODO : .sheet(FolderMindMap)
+                                // FullScreen: .sheet 대신, .fullScreenCover
+                                // 쓰면 됨.
+                                // https://www.hackingwithswift.com/quick-start/swiftui/how-to-present-a-full-screen-modal-view-using-fullscreencover
+                                //
+                                
+                            }, copyAction: { selMemos in
+                                // TODO : .sheet(FolderMindMap)
+                                
+                            }, changeColorAcion: {selMemos in
+                                // Change backgroundColor
+                                for eachMemo in selMemos {
+//                                    eachMemo.bgColor = bgColor
+                                }
+                            }, removeAction: { selMemos in
+                                for eachMemo in selMemos {
+                                    selectedViewModel.memos.remove(eachMemo)
+                                    Memo.delete(eachMemo)
+                                }
+                                context.saveCoreData()
+                            }
+                            )
                                 .padding([.trailing], Sizes.largePadding)
                                 .padding(.bottom,Sizes.overallPadding )
                         }

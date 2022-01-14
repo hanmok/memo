@@ -181,6 +181,7 @@ struct MemoView: View {
                 
                 TextEditor(text: $contents)
                     .padding(.horizontal, Sizes.overallPadding)
+                    
                 
             }
             if isShowingMsg {
