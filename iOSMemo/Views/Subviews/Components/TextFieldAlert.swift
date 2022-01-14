@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TextFieldAlert: View {
-  
+    
     let screenSize = UIScreen.main.bounds
     
     @Binding var isPresented: Bool
@@ -18,35 +18,49 @@ struct TextFieldAlert: View {
     var cancelAction: () -> Void = { }
     
     var body: some View {
-        VStack {
-            Text("Enter New FolderName")
-            TextField("", text: $text)
-            
-            HStack {
-                Button {
-                    submitAction(text)
-                } label: {
-                    Text("Done")
-                        .foregroundColor(.black)
+        ZStack{
+            VStack {
+                TextField("Enter New FolderName", text: $text)
+                    .padding(.top, 5)
+                    .background(.white)
+                    .cornerRadius(5)
+                    .padding(.horizontal, Sizes.overallPadding)
+                
+                HStack(spacing: 15) {
+                    Button {
+                        submitAction(text)
+                        isPresented = false
+                    } label: {
+                        Text("Done")
+                            .foregroundColor(.black)
+                            .padding(.horizontal, Sizes.overallPadding)
+                    }
+                    .padding(5)
+                    .background(Color.white)
+                    .cornerRadius(5)
+                    
+                    Button {
+                        cancelAction()
+                        isPresented = false
+                    } label: {
+                        Text("Cancel")
+                            .foregroundColor(.red)
+                            .padding(.horizontal, Sizes.overallPadding)
+                    }
+                    .padding(5)
+                    .background(Color.white)
+                    .cornerRadius(5)
                 }
-                Button {
-                    cancelAction()
-                } label: {
-                    Text("Cancel")
-                        .foregroundColor(.red)
-                }
-
+                .padding(.horizontal, Sizes.overallPadding)
             }
+            .padding(10)
+            .frame(width: screenSize.width * 0.65, height: screenSize.height * 0.15)
+            .background(Color(.sRGB, white: 0.8))
+            .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+            .offset(y: isPresented ? 0 : screenSize.height)
+            .animation(.spring().speed(2), value: isPresented)
+            .shadow(color: .white, radius: 6, x: -9, y: -9)
         }
-        .padding()
-        .frame(width: screenSize.width * 0.7, height: screenSize.height * 0.3)
-        .background(.green)
-//        .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
-        .offset(y: isPresented ? 0 : screenSize.height)
-//        .animation(.spring())
-        .animation(.spring().speed(2), value: isPresented)
-        .shadow(color: .white, radius: 6, x: -9, y: -9)
     }
 }
 

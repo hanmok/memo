@@ -20,6 +20,8 @@
 		9A3377B72790060100805138 /* MemosToolBarViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B62790060100805138 /* MemosToolBarViewTest.swift */; };
 		9A3377B927900BF200805138 /* MemoListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B827900BF200805138 /* MemoListTest.swift */; };
 		9A3377DC2790314900805138 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377DB2790314900805138 /* TextFieldAlert.swift */; };
+		9A3377FD27915C2900805138 /* MemoMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377FC27915C2900805138 /* MemoMsg.swift */; };
+		9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377FC27915C2900805138 /* MemoMsg.swift */; };
 		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
 		9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582C2771BE1000E7B773 /* MemoView.swift */; };
@@ -114,6 +116,7 @@
 		9A3377B62790060100805138 /* MemosToolBarViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarViewTest.swift; sourceTree = "<group>"; };
 		9A3377B827900BF200805138 /* MemoListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTest.swift; sourceTree = "<group>"; };
 		9A3377DB2790314900805138 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
+		9A3377FC27915C2900805138 /* MemoMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoMsg.swift; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9A89582C2771BE1000E7B773 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
@@ -268,6 +271,7 @@
 				9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */,
 				9A0474B627716BD300571D66 /* MemoStruct.swift */,
 				9A98E7572773021200057A84 /* ModelTest.swift */,
+				9A3377FC27915C2900805138 /* MemoMsg.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -594,6 +598,7 @@
 				9AC5D1FF278558AC007EAA28 /* NSPredicate+helper.swift in Sources */,
 				9AC5D1292784092F007EAA28 /* Folder+helper.swift in Sources */,
 				9AC5D21F2786F823007EAA28 /* TodoView.swift in Sources */,
+				9A3377FD27915C2900805138 /* MemoMsg.swift in Sources */,
 				9A3377B72790060100805138 /* MemosToolBarViewTest.swift in Sources */,
 				9A0474B727716BD300571D66 /* MemoStruct.swift in Sources */,
 				9A895823277179E100E7B773 /* PlusImage.swift in Sources */,
@@ -624,6 +629,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AC5D23E278D8435007EAA28 /* textFieldTestview.swift in Sources */,
+				9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */,
 				9AC5D1E527854266007EAA28 /* ContentView.swift in Sources */,
 				E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
 				9AC5D21D2786F815007EAA28 /* ProjectView.swift in Sources */,
@@ -777,6 +783,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "DeeepMemo--iOS--Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -809,6 +816,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "DeeepMemo--iOS--Info.plist";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

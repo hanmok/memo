@@ -72,13 +72,13 @@ struct HomeView: View { // top folder fetch
                 nav.selectedFolder = Folder.returnSampleFolder(context: context)
             }
         }
-        
+        // original
         return FolderView(currentFolder: nav.selectedFolder!)
             .onAppear {
-//                UnitTestHelpers.deletesAllMemos(context: context)
-//                UnitTestHelpers.deletesAllFolders(context: context)
                 nav.selectedFolder!.getFolderInfo()
             }
+        
+//        return MindMapView(homeFolder: nav.selectedFolder!)
     }
 }
 

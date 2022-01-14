@@ -19,51 +19,40 @@ import Combine
  5. 내용물이 바뀌는 어떤 지점마다 저장을 해야하나? 근데 그러다가 어느순간 title, contents 를 모두 지워버리면 바로 제거 ? ? 그러면 안되는데..
  */
 
+
+// relocate msg of removed memo to the folderView.
+
+
 struct MemoView: View {
-    
-//    @FocusState var focusState: Field?
-    //    @Environment(\.colorScheme)
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    @Environment(\.managedObjectContext) var context
-    
-    @ObservedObject var memo: Memo
-    
-    @EnvironmentObject var nav: NavigationStateManager
-    // 업데이트가.. 어떻게 이상한거야 ??
-    // CoreData 를 업데이트 해도 nav 가 업데이트 되지는 않아. 그런 것 같아.
-    // 음.. EnvironmentObject 에서, nav 자체를 업데이트 할 수는 없나?
-    // 할 수 있다고 쳐도, 받는건 Memo Object 로 받아야해
-    // Memo Object 로 받았는데, 왜이러지... ??
-    let parent: Folder
-    
-    //    @Binding var memo: MemoViewModel.currentMemo
-    //    @ObservedObject var memoViewModel: MemoViewModel
     
     enum Field: Hashable {
         case title
         case contents
     }
     
-    @State var isPinned: Bool = false
+    let screenSize = UIScreen.main.bounds
     
+    @ObservedObject var memo: Memo
+    @EnvironmentObject var nav: NavigationStateManager
+    
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    let parent: Folder
+    
+    
+    @State var isShowingMsg = false
     
 
-    //
-    func saveChanges() {
-        print("save changes has triggered")
-        memo.title = title
-        
-        memo.contents = contents
-        
-        if memo.title == "" && memo.contents == "" {
-            Memo.delete(memo)
-        }
-        
-//        memo.overview = overview
-        context.saveCoreData()
-        print("nav: \(nav.selectedFolder!.getFolderInfo())")
-    }
+    //    @FocusState var focusState: Field?
+
+    
+    @Environment(\.managedObjectContext) var context
+    
+    @State var msgType: MemoMsg?
+    
+    @State var title: String = ""
+    
+    @State var contents: String = ""
     
     var titlePlaceholder: String {
         if memo.title == "" {
@@ -72,15 +61,16 @@ struct MemoView: View {
             return memo.title
         }
     }
-    // 만약,
+    
     let initialTitle: String
     let initialContents: String
     
-    init(memo: Memo, parent: Folder) {
+    init(memo: Memo, parent: Folder, isNewMemo: Bool = false) {
         self.memo = memo
-//        self.title = memo.title
+        //        self.title = memo.title
+        //        if isNewMemo
         self.parent = parent
-        self.initialTitle = memo.title
+        self.initialTitle = isNewMemo ? "Enter Title" : memo.title
         self.initialContents = memo.contents
     }
     
@@ -90,64 +80,119 @@ struct MemoView: View {
         } else { return memo.contents }
     }
     
-
-    // should be bindings
-//    @Binding var titleBinded: String
-    @State var title: String = ""
-    @State var contents: String = ""
-//    @State var overview: String = ""
+    func saveChanges() {
+        print("save changes has triggered")
+        memo.title = title
+        
+        memo.contents = contents
+        
+        // if both title and contents are empty, delete memo
+        if memo.title == "" && memo.contents == "" {
+            Memo.delete(memo)
+        }
+        
+        context.saveCoreData()
+    }
     
-    //    @Binding var myTitle: String
-    //    @State var myTitle: String = "" // 이거.. Binding 으로 와야함..@ObservedObject
-    // MVVM
-    //    @State var myText: String = "initial text editor"
+    func togglePinMemo() {
+        
+        memo.pinned.toggle()
+        
+        msgType = memo.pinned ? .pinned : .unpinned
+        isShowingMsg = true
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            self.isShowingMsg = false
+        }
+    }
+    
+    func removeMemo() {
+        // move it to "trash bin" folder
+        
+        msgType = .removed // should be passed to folderView
+        isShowingMsg = true
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            self.isShowingMsg = false
+        }
+        
+        Memo.delete(memo)
+        saveChanges()
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    func copyText() {
+        
+        msgType = .copied
+        isShowingMsg = true
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            self.isShowingMsg = false
+        }
+        
+        UIPasteboard.general.string = memo.title + "\n\n" + memo.contents
+    }
+    
+    func saveAsImage() {
+        msgType = .savedAsImage
+        isShowingMsg = true
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            self.isShowingMsg = false
+        }
+        
+        //        let image = myTextField.snapshot()
+        //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            let image = self.takeCapture()
+            self.saveInPhoto(img: image)
+        }
+    }
+    
+    func relocateMemo() {
+        // show up some.. easy look Folder Map
+    }
+    
+    func changeColor() { // change BackgroundColor
+        
+    }
     
     
-    //    @Binding var myText: String
-    
-    //    @Binding var memo: Memo
+    //    @State var overview: String = ""
     
     var body: some View {
-        
-//        let binding = Binding<String>(get: {
-//            self.title
-//        }, set: {
-//            self.title = $0
-//            // do whatever you want here
-//            memo.title = title
-//            saveChanges()
-//        })
-        
-        return VStack {
-            
-            // MARK: - Navigation Bar
-            
-            // MARK: - Title
-            
-            TextField(initialTitle, text: $title)
+        ZStack {
+            VStack {
+                TextField(initialTitle, text: $title)
                 
-                .font(.title2)
-                .submitLabel(.continue)
-//                .focused($focusState, equals: Field.title)
-            //                .padding(.top, Sizes.largePadding) // 20
-                .padding(.bottom, Sizes.largePadding)
-                .padding(.horizontal, Sizes.overallPadding)
-            
-                .overlay {
-                    Divider()
-                        .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
+                    .font(.title2)
+                    .submitLabel(.continue)
+                //                .focused($focusState, equals: Field.title)
+                    .padding(.bottom, Sizes.largePadding)
+                    .padding(.horizontal, Sizes.overallPadding)
+                // TextField Underline
+                    .overlay {
+                        Divider()
+                            .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
+                    }
+                
+                // MARK: - Contents
+                
+                TextEditor(text: $contents)
+                    .padding(.horizontal, Sizes.overallPadding)
+                
+            }
+            if isShowingMsg {
+                if let validMsg = msgType {
+                    Text(validMsg.rawValue)
+                        .frame(width: screenSize.width * 0.6, height: screenSize.height * 0.05)
+                        .background(Color(.sRGB, white: 0.5, opacity: isShowingMsg ? 1 : 0))
+                        .animation(.easeOut, value: isShowingMsg)
+                        .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+                        .padding(.bottom, screenSize.height * 0.2)
                 }
-            
-            // MARK: - Contents
-            
-//            CustomTextEditor(placeholder: contentsPlaceholder, text: $contents)
-            TextEditor(text: $contents)
-//                .onChange(of: memo.contents, perform: { _ in
-//                    saveChanges()
-//                })
-                .padding(.horizontal, Sizes.overallPadding)
-               
-            
+            }
         }
         .onAppear(perform: {
             title = memo.title
@@ -164,8 +209,8 @@ struct MemoView: View {
             trailing: HStack {
                 
                 // pin Button
-                Button(action: pinMemo) {
-                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: isPinned ? "pin.fill" : "pin", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+                Button(action: togglePinMemo) {
+                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: memo.pinned ? "pin.fill" : "pin", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
                 
                 // trash Button
@@ -177,97 +222,43 @@ struct MemoView: View {
                 // more Button
                 
                 Menu {
-                    
-                    Button(action: changeColor) {
+                    Button(action: copyText) {
                         Label {
                             Text("Copy text")
+                            // including title ? or not ?
                         } icon: {
                             Image(systemName: "doc.on.doc")
                         }
                     }
-                    Button(action: changeColor) {
+                    
+                    Button(action: saveAsImage) {
                         Label {
                             Text("Save as Image")
                         } icon: {
                             Image(systemName: "camera.viewfinder")
                         }
                     }
-                    Button(action: changeColor) {
+                    Button(action: relocateMemo) {
                         Label {
                             Text("Relocate memo")
                         } icon: {
                             Image(systemName: "folder")
                         }
                     }
-                    
-                    // Inner Menu, change Color
-                    Menu {
-                        
-                        Button(action: changeBackgroundColor) {
-                            Text("Background Color")
-                        }
-                        Button(action: changeContentsColor) {
-                            Text("Contents Color")
-                        }
-                        Button(action: changeTitleColor) {
-                            Text("Title Color")
-                        }
-                        
-                    }label: {
+                    Button(action: changeColor) {
                         Label {
-                            Text("Change color")
+                            Text("Change Color")
                         } icon: {
                             Image(systemName: "eyedropper")
                         }
                     }
-                    // end of Inner Menu (changing Color
-                    
                 } label: {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: "ellipsis", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
             })
     }
     
-    func navigateBack() {
-        // save memo, and move back
-        // save
-        submit()
-        // move back
-    }
     
-    func pinMemo() {
-        // change it to pin.fill
-        isPinned.toggle()
-        // pin it ( to the very latest )
-        
-//        saveChanges()
-    }
-    
-    func removeMemo() {
-        // move it to "trash bin" folder
-    }
-    
-    func submit() {
-        // save all
-    }
-    
-    func moreActions() {
-        
-    }
-    
-    func changeColor() {
-        
-    }
-    
-    func changeBackgroundColor() {
-        
-    }
-    func changeTitleColor() {
-        
-    }
-    func changeContentsColor() {
-        
-    }
 }
 
 
@@ -282,13 +273,3 @@ struct MemoView_Previews: PreviewProvider {
             .preferredColorScheme(.dark)
     }
 }
-
-
-
-
-// MARK: - TODO
-/*
- focus to memo contents (show keyboard )
- 
- */
-

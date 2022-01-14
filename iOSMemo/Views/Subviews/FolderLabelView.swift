@@ -14,18 +14,15 @@ struct FolderLabelView: View {
     @ObservedObject var folder: Folder
     
     var body: some View {
-        VStack {
-            ChangeableImage(colorScheme: _colorScheme, imageSystemName: "folder", width: 40, height: 40)
-//            Image(systemName: "folder")
-//                .resizable()
-//                .aspectRatio(1, contentMode: .fit)
-//                .frame(width: 40, height: 40)
-//                .tint(.black)
+        VStack(spacing: 0) {
+            ChangeableImage(colorScheme: _colorScheme, imageSystemName: "folder", width: 32, height: 32)
+                .padding(.bottom, 5)
             Text(folder.title)
                 .font(.body)
                 .lineLimit(2)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
         } // aspectRatio: width / height
-        .aspectRatio(0.8, contentMode: .fit)
+        .aspectRatio(1, contentMode: .fit)
     }
 }
 

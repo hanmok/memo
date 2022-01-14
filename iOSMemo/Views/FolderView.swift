@@ -12,23 +12,32 @@ import CoreData
 
 struct FolderView: View {
 
-    @State var testToggler = false
+    @State var isAddingSubfolder = false
+    @State var newSubFolderName = ""
+    @State var isAddingMemo = false
+    
+    
+//    @State var testToggler = false
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     //    @EnvironmentObject var nav: NavigationStateManager
     
-    // get nav.selectedFolder from HomeView
-    // updated.
     @ObservedObject var currentFolder: Folder
     
-    var selectedMemos: [Memo]? // handle checked memos according to MemoToolBarView's action
+    var testMemos: [Memo] {
+        return currentFolder.memos.sorted()
+    }
     
+    var memoColumns: [GridItem] {
+        [GridItem(.flexible(minimum: 150, maximum: 200)),
+         GridItem(.flexible(minimum: 150, maximum: 200))
+        ]
+    }
     
     
     // use it to switch plus button into toolbar
-    @State var memoSelected = false
-//    @State var pinnedFolder: Bool = false
-    @State var plusButtonPressed: Bool = false
+//    @State var memoSelected = false
+//    @State var plusButtonPressed: Bool = false
     // if changed, present sheet
     
     func search() {
@@ -53,49 +62,44 @@ struct FolderView: View {
     }
     
     
+    
     var body: some View {
         NavigationView {
-            ScrollView(.vertical) {
-                VStack {
-//                    SubFolderPageView(folder: currentFolder)
-                    SubFolderPageView()
-                        .environmentObject(currentFolder)
-                        .background(.yellow)
-                    
-                    MemoList(folder: currentFolder)
-                    
-                } // end of main VStack
-            }
-            
-            .navigationBarTitle(currentFolder.title)
-        } // end of navigation View
-        
-        // MainTabBar, + Icon to add memos
-        .overlay {
-            VStack {
-                Spacer()
-                // + Icon
-                HStack {
-                    Spacer()
-                    
-                    if !memoSelected {
-                        // plus button
-                        Button(action: {
-                            plusButtonPressed.toggle()
-                            let newMemo = Memo(title: "new memo", contents: "new contents", context: context)
-                            currentFolder.add(memo: newMemo)
-                            context.saveCoreData()
-                        }) {
-                            PlusImage()
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
-                        }
-                    } else { // if some memos are selected
-                        MemosToolBarView()
-                            .padding([.trailing], Sizes.largePadding)
-                            .padding(.bottom,Sizes.overallPadding )
-                    }
+            ZStack {
+                ScrollView(.vertical) {
+                    VStack {
+                        SubFolderPageView(shouldAddSubFolder: $isAddingSubfolder)
+                            .environmentObject(currentFolder)
+                            .background(.yellow)
+                        
+                        MemoList(folder: currentFolder, isAddingMemo: $isAddingMemo)
+                    } // end of main VStack
+                    .frame(maxHeight: .infinity)
+                } // another Layer (of ZStack)
+                
+                // overlay white background when Alert show up
+                if isAddingSubfolder {
+                    Color(.white)
+                        .opacity(0.8)
                 }
-            }
+                
+                TextFieldAlert(
+                    isPresented: $isAddingSubfolder,
+                    text: $newSubFolderName) { subfolderName in
+                        currentFolder.add(
+                            subfolder: Folder(title: newSubFolderName, context: context)
+                        )
+                    }
+                
+//                NavigationLink(isActive: $isAddingMemo, destination: MemoView(memo: Memo(title: "", contents: "", context: context) , parent: currentFolder), label: Text(""))
+                NavigationLink(destination: MemoView(memo: Memo(title: "", contents: "", context: context), parent: currentFolder, isNewMemo: true), isActive: $isAddingMemo) {}
+                
+            } // end of navigation View
+
+            .navigationBarTitle(currentFolder.title)
+            .navigationBarItems(trailing:Button(action: {}, label: {
+                ChangeableImage(imageSystemName: "magnifyingglass")
+            }))
         }
     }
 }

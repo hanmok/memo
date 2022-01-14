@@ -13,6 +13,7 @@ struct SubFolderPageView: View {
     
 //    @ObservedObject var folder: Folder
     @EnvironmentObject var currentFolder: Folder
+    @Binding var shouldAddSubFolder: Bool
     
     var subfolders: [Folder] {
         let sortedOldFolders = currentFolder.subfolders.sorted()
@@ -25,21 +26,17 @@ struct SubFolderPageView: View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
-                SubFoldersToolView()
-                
+                SubFoldersToolView(shouldAddSubfolder: $shouldAddSubFolder)
+//                Color(.white)
             }
-            //            NavigationView{
-//            GeometryReader { proxy in
             ScrollView(.horizontal) {
-
                 HStack {
                     ForEach(subfolders) { subfolder in
                         
                         NavigationLink(
                             destination: FolderView(currentFolder: subfolder)) {
                                 FolderLabelView(folder: subfolder)
-//                                    .frame(width: proxy.size.width * 0.2)
-                                    
+                                    .frame(width:50, height: 50)
                             }
                             .onAppear(perform: {
                                 print("title of subFolder: \(subfolder.title)")
@@ -82,7 +79,7 @@ struct SubFolderPageView_Previews: PreviewProvider {
 
     static var previews: some View {
 //        SubFolderPageView(folder: testFolder)
-        SubFolderPageView()
+        SubFolderPageView( shouldAddSubFolder: .constant(false))
             .environmentObject(testFolder)
     }
 }
