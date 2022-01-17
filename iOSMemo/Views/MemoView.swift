@@ -25,9 +25,20 @@ import Combine
 
 struct MemoView: View {
     
+//    init() {
+//        UINavigationBar.appearance().tintColor = UIColor(colorSelected)
+//    }
+    
     enum Field: Hashable {
         case title
         case contents
+    }
+    
+    @State private var colorSelected: Color = .white {
+        didSet {
+            memo.colorAsInt = Int64(colorSelected.asRgba)
+            saveChanges()
+        }
     }
     
     let screenSize = UIScreen.main.bounds
@@ -42,9 +53,9 @@ struct MemoView: View {
     
     @State var isShowingMsg = false
     
-
+    
     //    @FocusState var focusState: Field?
-
+    
     
     @Environment(\.managedObjectContext) var context
     
@@ -72,6 +83,9 @@ struct MemoView: View {
         self.parent = parent
         self.initialTitle = isNewMemo ? "Enter Title" : memo.title
         self.initialContents = memo.contents
+//        let tempColor = Color(rgba: Int(memo.colorAsInt))
+//        colorSelected = tempColor
+//        UINavigationBar.appearance().tintColor = UIColor(tempColor)
     }
     
     var contentsPlaceholder: String {
@@ -163,6 +177,9 @@ struct MemoView: View {
     
     var body: some View {
         ZStack {
+            //            Color(colorSelected as CGColor ?? CGColor(gray: 1, alpha: 1))
+            Color(rgba: colorSelected.asRgba)
+                .ignoresSafeArea()
             VStack {
                 TextField(initialTitle, text: $title)
                 
@@ -179,9 +196,14 @@ struct MemoView: View {
                 
                 // MARK: - Contents
                 
+//                ZStack {
+//                    Color(rgba: colorSelected.asRgba)
                 TextEditor(text: $contents)
                     .padding(.horizontal, Sizes.overallPadding)
-                    
+                                    .colorMultiply(colorSelected)
+
+                //                }
+                
                 
             }
             if isShowingMsg {
@@ -195,6 +217,7 @@ struct MemoView: View {
                 }
             }
         }
+
         .onAppear(perform: {
             title = memo.title
             contents = memo.contents
@@ -209,6 +232,9 @@ struct MemoView: View {
         .navigationBarItems(
             trailing: HStack {
                 
+                ColorPicker(selection: $colorSelected) {
+                    
+                }
                 // pin Button
                 Button(action: togglePinMemo) {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: memo.pinned ? "pin.fill" : "pin", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
@@ -246,20 +272,11 @@ struct MemoView: View {
                             Image(systemName: "folder")
                         }
                     }
-                    Button(action: changeColor) {
-                        Label {
-                            Text("Change Color")
-                        } icon: {
-                            Image(systemName: "eyedropper")
-                        }
-                    }
                 } label: {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: "ellipsis", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
             })
     }
-    
-    
 }
 
 

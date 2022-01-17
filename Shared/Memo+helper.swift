@@ -54,12 +54,10 @@ extension Memo {
         set { pinned_ = newValue }
     }
     
-//    var folder: Folder {
-//        get { folder_ ?? folder}
+//    var colorAsInt: Int64 {
+//        get { colorAsInt_ ?? 0xFFFFFFFF}
+//        set { colorAsInt_ = newValue}
 //    }
-    
-
-    
     
     
     static func fetch(_ predicate: NSPredicate) -> NSFetchRequest<Memo> {

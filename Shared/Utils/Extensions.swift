@@ -15,16 +15,7 @@ extension Image {
             .adjustTintColor(scheme: scheme)
             .frame(width: size , height: size)
     }
-}
-
-extension View {
-    func adjustTintColor(scheme: ColorScheme) -> some View {
-        self
-            .tint(scheme == .dark ? .white : .black)
-    }
-}
-
-extension Image {
+    
     func addMode(contentMode: ContentMode = .fit) -> some View {
         self
             .resizable()
@@ -33,6 +24,17 @@ extension Image {
 }
 
 extension View {
+    
+}
+
+extension View {
+    // MARK: - TintColor
+    func adjustTintColor(scheme: ColorScheme) -> some View {
+        self
+            .tint(scheme == .dark ? .white : .black)
+    }
+    
+    // MARK: - Capture
     func snapshot() -> UIImage {
         let controller = UIHostingController(rootView: self)
         let view = controller.view
@@ -76,6 +78,9 @@ extension View {
         }
 
 }
+
+
+
 
 func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
     var emptyMemo: [Memo] = []

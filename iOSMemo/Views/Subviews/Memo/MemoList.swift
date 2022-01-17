@@ -38,13 +38,6 @@ struct FilteredMemoList: View {
                         MemoBoxView(memo: memo)
                             .frame(width: 170, alignment: .topLeading)
                     }
-//                    .disabled(memoVM.hasSelected)
-//                }
-//                else {
-//                    MemoBoxView(memo: memo)
-//                        .frame(width: 170, alignment: .topLeading)
-//                }
-                
                 
             }
         } header: {

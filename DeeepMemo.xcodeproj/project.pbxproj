@@ -21,6 +21,10 @@
 		9A3377DC2790314900805138 /* TextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377DB2790314900805138 /* TextFieldAlert.swift */; };
 		9A3377FD27915C2900805138 /* MemoMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377FC27915C2900805138 /* MemoMsg.swift */; };
 		9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377FC27915C2900805138 /* MemoMsg.swift */; };
+		9A3378012795736200805138 /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378002795736200805138 /* ColorExt.swift */; };
+		9A3378022795736200805138 /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378002795736200805138 /* ColorExt.swift */; };
+		9A337804279576CC00805138 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337803279576CC00805138 /* testView.swift */; };
+		9A337805279576CC00805138 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337803279576CC00805138 /* testView.swift */; };
 		9A895823277179E100E7B773 /* PlusMinusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusMinusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
 		9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582C2771BE1000E7B773 /* MemoView.swift */; };
@@ -112,6 +116,8 @@
 		9A3377B827900BF200805138 /* MemoListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTest.swift; sourceTree = "<group>"; };
 		9A3377DB2790314900805138 /* TextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlert.swift; sourceTree = "<group>"; };
 		9A3377FC27915C2900805138 /* MemoMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoMsg.swift; sourceTree = "<group>"; };
+		9A3378002795736200805138 /* ColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExt.swift; sourceTree = "<group>"; };
+		9A337803279576CC00805138 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusMinusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusMinusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9A89582C2771BE1000E7B773 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
@@ -311,6 +317,7 @@
 				9AD6EEC9277C3E3E00866456 /* Extensions.swift */,
 				9A3377B2278FFF2D00805138 /* TextViewWrapper.swift */,
 				9A89582627717EB500E7B773 /* Sizes.swift */,
+				9A3378002795736200805138 /* ColorExt.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -380,6 +387,7 @@
 				9AC5D21227857993007EAA28 /* CoreDataTestView.swift */,
 				9AC5D230278BE711007EAA28 /* ChangeFolderTitleTestView.swift */,
 				E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */,
+				9A337803279576CC00805138 /* testView.swift */,
 			);
 			path = Tester;
 			sourceTree = "<group>";
@@ -563,6 +571,7 @@
 			files = (
 				9AD6EF19277DB5DE00866456 /* CollapsibleView.swift in Sources */,
 				9A98E7582773021200057A84 /* ModelTest.swift in Sources */,
+				9A337804279576CC00805138 /* testView.swift in Sources */,
 				9AC5D20F27857328007EAA28 /* FolderViewModel.swift in Sources */,
 				9A3377B52790039200805138 /* FolderViewTest.swift in Sources */,
 				9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */,
@@ -582,6 +591,7 @@
 				9AC5D228278BC946007EAA28 /* NavigationStateManager.swift in Sources */,
 				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
 				9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */,
+				9A3378012795736200805138 /* ColorExt.swift in Sources */,
 				9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */,
 				9AC5D12C27840939007EAA28 /* Memo+helper.swift in Sources */,
 				9AC5D23A278D759E007EAA28 /* MemoListNode.swift in Sources */,
@@ -638,7 +648,9 @@
 				9AC5D1F827854405007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
 				9AC5D21027857328007EAA28 /* FolderViewModel.swift in Sources */,
 				9AC5D232278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */,
+				9A3378022795736200805138 /* ColorExt.swift in Sources */,
 				9AC5D235278C3145007EAA28 /* MemoList2.swift in Sources */,
+				9A337805279576CC00805138 /* testView.swift in Sources */,
 				9AC5D23B278D759E007EAA28 /* MemoListNode.swift in Sources */,
 				9AC5D229278BC946007EAA28 /* NavigationStateManager.swift in Sources */,
 				9AC5D20227855C0B007EAA28 /* Persistence.swift in Sources */,

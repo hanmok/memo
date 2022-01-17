@@ -83,37 +83,37 @@ struct MemoBoxView: View {
         .background(Color(white: 0.8))
         .border(isSelected ? .red : .clear , width: 3)
         .cornerRadius(5)
-        .onTapGesture {
-            print("onTapGesture on MemoBoxView triggered1")
-            if selectedVM.memos.contains(self.memo) {
-                selectedVM.memos.remove(self.memo)
-                self.isSelected = false
-            } else {
-                if selectedVM.count != 0 {
-//                    selectedVM.memos.update(with: self.memo)
-                    selectedVM.add(memo: self.memo)
-                    self.isSelected = true
-                }
-                print("onTapGesture on MemoBoxView triggered2")
-            }
-            selectedVM.hasSelected = selectedVM.count != 0
-        }
-        .disabled(!selectedVM.hasSelected)
+//        .onTapGesture {
+//            print("onTapGesture on MemoBoxView triggered1")
+//            if selectedVM.memos.contains(self.memo) {
+//                selectedVM.memos.remove(self.memo)
+//                self.isSelected = false
+//            } else {
+//                if selectedVM.count != 0 {
+////                    selectedVM.memos.update(with: self.memo)
+//                    selectedVM.add(memo: self.memo)
+//                    self.isSelected = true
+//                }
+//                print("onTapGesture on MemoBoxView triggered2")
+//            }
+//            selectedVM.hasSelected = selectedVM.count != 0
+//        }
+//        .disabled(!selectedVM.hasSelected)
         
-        .onLongPressGesture {
-
-            if !selectedVM.memos.contains(self.memo) {
-                selectedVM.add(memo: self.memo)
-                self.isSelected = true
-            } else {
-                selectedVM.memos.remove(self.memo)
-                self.isSelected = false
-            }
-            // if any selected, hasSelected is true
-            selectedVM.hasSelected = selectedVM.count != 0
-
-            print("self is pressed long, \(self)")
-        }
+//        .onLongPressGesture {
+//
+//            if !selectedVM.memos.contains(self.memo) {
+//                selectedVM.add(memo: self.memo)
+//                self.isSelected = true
+//            } else {
+//                selectedVM.memos.remove(self.memo)
+//                self.isSelected = false
+//            }
+//            // if any selected, hasSelected is true
+//            selectedVM.hasSelected = selectedVM.count != 0
+//
+//            print("self is pressed long, \(self)")
+//        }
         // navigation 이랑 겹침.. ;;
         
     }

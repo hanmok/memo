@@ -13,6 +13,7 @@
         <relationship name="subfolders_" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Folder" inverseName="parent" inverseEntity="Folder"/>
     </entity>
     <entity name="Memo" representedClassName="Memo" syncable="YES" codeGenerationType="class">
+        <attribute name="colorAsInt" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="contents_" optional="YES" attributeType="String"/>
         <attribute name="creationDate_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -26,6 +27,6 @@
     </entity>
     <elements>
         <element name="Folder" positionX="-216.10107421875" positionY="94.77685546875" width="128" height="179"/>
-        <element name="Memo" positionX="-36" positionY="45" width="128" height="179"/>
+        <element name="Memo" positionX="-36" positionY="45" width="128" height="194"/>
     </elements>
 </model>

@@ -93,7 +93,10 @@ struct FolderView: View {
             } // end of navigation View
 
             .navigationBarTitle(currentFolder.title)
-            .navigationBarItems(trailing:Button(action: {}, label: {
+            .navigationBarItems(trailing:Button(action: {
+                print("glass pressed! currentFolderInfo: ")
+                print(currentFolder.memos)
+            }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             }))
         }
