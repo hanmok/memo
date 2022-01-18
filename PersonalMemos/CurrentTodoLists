@@ -33,5 +33,22 @@ need to make some search Screen..
 
 
 
-SubFolderpageView 에서, NavigationLink 작동 안함. 
 
+Done
+SubFolderpageView 에서, NavigationLink 작동 안함.
+Hide / Show subFolderPageView
+
+
+
+Todo
+MemoList send + button to the bottom
+
+MemoBoxView set backgroundColor memo's color
+MemoView set ColorPicker color memo's color
+
+Make SearchPage
+
+
+Considering..
+ should SubFolderPageView height be flexible ?
+ 

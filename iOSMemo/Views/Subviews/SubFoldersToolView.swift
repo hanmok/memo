@@ -22,6 +22,7 @@ struct SubFoldersToolView: View {
     
     //    @State var shouldAddFolder = false
     @Binding var shouldAddSubfolder: Bool
+    @Binding var shouldHideSubFolderView: Bool
     //    @State var newSubFolderName = ""
     
     func addFolder() {
@@ -42,51 +43,38 @@ struct SubFoldersToolView: View {
     }
     
     func hideSubFolderView() {
-        
+        shouldHideSubFolderView.toggle()
     }
     
     var body: some View {
         ZStack {
             HStack {
-                Button(action: addFolder) {
-                    ChangeableImage(imageSystemName: "folder.badge.plus", width: imageSizes + 4, height: imageSizes + 4)
+                if !shouldHideSubFolderView {
+                    Button(action: addFolder) {
+                        ChangeableImage(imageSystemName: "folder.badge.plus", width: imageSizes + 4, height: imageSizes + 4)
+                    }
+                    .padding(.horizontal, Sizes.minimalSpacing)
+                    
+                    Button(action: deleteFolder) {
+                        ChangeableImage(imageSystemName: "gear", width: imageSizes, height: imageSizes)
+                    }
+                    
+                    .padding(.leading, Sizes.minimalSpacing)
+                    
                 }
-                .padding(.horizontal, Sizes.minimalSpacing)
-                
-                // original Buttons
-                //                Button(action: changeFolderName) {
-                //                    ChangeableImage(imageSystemName: "pencil", width: imageSizes, height: imageSizes)
-                //                }
-                //                .padding(.horizontal, Sizes.minimalSpacing)
-                //                Button(action: changeSort) {
-                //                    ChangeableImage(imageSystemName: "arrow.up.and.down.circle", width: imageSizes, height: imageSizes)
-                //
-                //                }
-                //                .padding(.horizontal, Sizes.minimalSpacing)
-                //                Button(action: deleteFolder) {
-                //                    ChangeableImage(imageSystemName: "trash", width: imageSizes, height: imageSizes)
-                //                }
-                //
-                //                .padding(.leading, Sizes.minimalSpacing)
-                //                .padding(.trailing, Sizes.overallPadding)
-                
-                Button(action: deleteFolder) {
-                    ChangeableImage(imageSystemName: "gear", width: imageSizes, height: imageSizes)
-                }
-                
-                .padding(.leading, Sizes.minimalSpacing)
                 
                 Button(action: hideSubFolderView, label: {
-                    ChangeableImage(imageSystemName: "chevron.right", width: imageSizes - 6, height: imageSizes - 6)
+//                    ChangeableImage(imageSystemName: "chevron.bottom", width: imageSizes - 6, height: imageSizes - 6)
+//                        .background(.red)
+                        
+                    
+                    ChangeableImage(imageSystemName: shouldHideSubFolderView ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
                 })
                     .padding(.leading, Sizes.minimalSpacing)
                     .padding(.trailing, Sizes.overallPadding)
+//                    .rotationEffect(shouldHideSubFolderView ?  .degrees(180) : .degrees(0))
                 
                 
-                //                Button(action: expandList) {
-                //                    ChangeableImage(imageSystemName: "chevron.down")
-                //                }
-                //                .padding(.horizontal, Sizes.minimalSpacing)
             }
             //            TextFieldAlert(
             //                isPresented: $shouldAddFolder,

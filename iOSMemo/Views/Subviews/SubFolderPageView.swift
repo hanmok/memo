@@ -14,6 +14,7 @@ struct SubFolderPageView: View {
 //    @ObservedObject var folder: Folder
     @EnvironmentObject var currentFolder: Folder
     @Binding var shouldAddSubFolder: Bool
+    @Binding var shouldHideSubFolderView: Bool
     
     var subfolders: [Folder] {
         let sortedOldFolders = currentFolder.subfolders.sorted()
@@ -26,13 +27,18 @@ struct SubFolderPageView: View {
         VStack(spacing: 0) {
             HStack {
                 Spacer()
-                SubFoldersToolView(shouldAddSubfolder: $shouldAddSubFolder)
-//                Color(.white)
+                SubFoldersToolView(
+                    shouldAddSubfolder: $shouldAddSubFolder,
+                    shouldHideSubFolderView: $shouldHideSubFolderView
+                )
+                //                Color(.white)
             }
+            if !shouldHideSubFolderView {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(subfolders) { subfolder in
                         // navigationLink 문제가 아니라, nav 문제일듯.
+                        
                         NavigationLink(
                             destination: FolderView(currentFolder: subfolder)) {
                                 FolderLabelView(folder: subfolder)
@@ -47,10 +53,12 @@ struct SubFolderPageView: View {
                         
                             .padding(.horizontal, Sizes.overallPadding)
                             .padding(.top, Sizes.minimalSpacing * 4)
+                        
                     }
                 }
                 .padding(.bottom, 10)
 //                }
+            } // end of horizontal ScrollView
             }
             //            }
         }
@@ -79,7 +87,7 @@ struct SubFolderPageView_Previews: PreviewProvider {
 
     static var previews: some View {
 //        SubFolderPageView(folder: testFolder)
-        SubFolderPageView( shouldAddSubFolder: .constant(false))
+        SubFolderPageView( shouldAddSubFolder: .constant(false), shouldHideSubFolderView: .constant(true))
             .environmentObject(testFolder)
     }
 }
