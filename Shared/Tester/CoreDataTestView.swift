@@ -150,7 +150,7 @@ struct CoreDataTestView: View {
         return fetchedFolders
         //        folders = fetchedFolders
         
-        print("fetched! \(fetchedFolders.count) folders!" )
+//        print("fetched! \(fetchedFolders.count) folders!" )
     }
     
     func returnOneFolder() -> Folder {

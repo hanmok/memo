@@ -20,11 +20,12 @@ class SelectedMemoViewModel: ObservableObject {
     
     func add(memo: Memo) {
         self.memos.update(with: memo)    }
-    
 }
+
 struct FilteredMemoList: View {
-    
+    // navigation 을 고쳐야해..
     @EnvironmentObject var memoVM: SelectedMemoViewModel
+    
     var memos: [Memo]
     var title: String
     let parent: Folder
@@ -38,7 +39,6 @@ struct FilteredMemoList: View {
                         MemoBoxView(memo: memo)
                             .frame(width: 170, alignment: .topLeading)
                     }
-                
             }
         } header: {
             HStack {
@@ -58,7 +58,8 @@ struct MemoList: View {
     @Environment(\.managedObjectContext) var context
     @StateObject var selectedViewModel = SelectedMemoViewModel()
     
-    @ObservedObject var folder: Folder
+    @EnvironmentObject var folder: Folder
+//    @ObservedObject var folder: Folder
     @Binding var isAddingMemo: Bool
     
     //    @State var selectedMemos: [Memo] = []
@@ -68,6 +69,7 @@ struct MemoList: View {
     //    var memoColumns: [GridItem] {
     //        [GridItem(.adaptive(minimum: 100, maximum: 150))]
     //    }
+    
     var memoColumns: [GridItem] {
         [GridItem(.flexible(minimum: 150, maximum: 200)),
          GridItem(.flexible(minimum: 150, maximum: 200))
@@ -113,9 +115,29 @@ struct MemoList: View {
                     //                        }
                     //                    }
                     
+                    if pinnedMemos.count != 0 {
+//                        FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
+                        Section {
+                            ForEach(pinnedMemos, id: \.self) { memo in
+                                NavigationLink(destination: MemoView(memo: memo, parent: folder)) {
+                                    MemoBoxView(memo: memo)
+                                        .frame(width: 170, alignment: .topLeading)
+                                }
+                            }
+                        }
+                    }
+
+//                    FilteredMemoList(memos: unpinnedMemos, title: "", parent: folder)
                     
-                    FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
-                    FilteredMemoList(memos: unpinnedMemos, title: "unpinned", parent: folder)
+                    Section {
+                        ForEach(unpinnedMemos, id: \.self) { memo in
+                            NavigationLink(destination: MemoView(memo: memo, parent: folder)) {
+                                MemoBoxView(memo: memo)
+                                    .frame(width: 170, alignment: .topLeading)
+                            }
+                        }
+                    }
+                    
                 }
                 .environmentObject(selectedViewModel)
                 // end of LazyVGrid

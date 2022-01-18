@@ -48,14 +48,14 @@ struct FolderView: View {
         
     }
     
-    var subfolders: [Folder] {
-        var folders: [Folder] = []
-        for eachFolder in currentFolder.subfolders {
-            folders.append(eachFolder)
-        }
-        folders.sort()
-        return folders
-    }
+//    var subfolders: [Folder] {
+//        var folders: [Folder] = []
+//        for eachFolder in currentFolder.subfolders {
+//            folders.append(eachFolder)
+//        }
+//        folders.sort()
+//        return folders
+//    }
     
     
     
@@ -68,10 +68,12 @@ struct FolderView: View {
                             .environmentObject(currentFolder)
                             .background(.yellow)
                         
-                        MemoList(folder: currentFolder, isAddingMemo: $isAddingMemo)
+//                        MemoList(folder: currentFolder, isAddingMemo: $isAddingMemo)
+                        MemoList(isAddingMemo: $isAddingMemo)
+                            .environmentObject(currentFolder)
                     } // end of main VStack
                     .frame(maxHeight: .infinity)
-                } // another Layer (of ZStack)
+                } // end of ScrollView
                 
                 // overlay white background when Alert show up
                 if isAddingSubfolder {
@@ -79,23 +81,34 @@ struct FolderView: View {
                         .opacity(0.8)
                 }
                 
+                // When add folder pressed
                 TextFieldAlert(
                     isPresented: $isAddingSubfolder,
                     text: $newSubFolderName) { subfolderName in
                         currentFolder.add(
                             subfolder: Folder(title: newSubFolderName, context: context)
                         )
+                        // setup initial name empty
+                        newSubFolderName = ""
                     }
                 
 //                NavigationLink(isActive: $isAddingMemo, destination: MemoView(memo: Memo(title: "", contents: "", context: context) , parent: currentFolder), label: Text(""))
-                NavigationLink(destination: MemoView(memo: Memo(title: "", contents: "", context: context), parent: currentFolder, isNewMemo: true), isActive: $isAddingMemo) {}
+                
+                // add new memo
+                // MemoView need to know whether it's new or not.
+                NavigationLink(destination: MemoView(memo: Memo(title: "", contents: " ", context: context), parent: currentFolder, isNewMemo: true), isActive: $isAddingMemo) {}
                 
             } // end of navigation View
 
             .navigationBarTitle(currentFolder.title)
             .navigationBarItems(trailing:Button(action: {
-                print("glass pressed! currentFolderInfo: ")
-                print(currentFolder.memos)
+                // test code
+//                print("glass pressed! currentFolderInfo: ")
+//                print(currentFolder.memos)
+             
+//                let newMemo = Memo(title: "new one for test", contents: "", context: context)
+//                currentFolder.add(memo: newMemo)
+//                context.saveCoreData()
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             }))

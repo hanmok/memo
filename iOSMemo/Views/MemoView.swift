@@ -41,29 +41,26 @@ struct MemoView: View {
         }
     }
     
-    let screenSize = UIScreen.main.bounds
+
     
     @ObservedObject var memo: Memo
     @EnvironmentObject var nav: NavigationStateManager
+    @Environment(\.managedObjectContext) var context
     
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    let parent: Folder
     
+    let parent: Folder
+    let screenSize = UIScreen.main.bounds
     
     @State var isShowingMsg = false
-    
-    
-    //    @FocusState var focusState: Field?
-    
-    
-    @Environment(\.managedObjectContext) var context
     
     @State var msgType: MemoMsg?
     
     @State var title: String = ""
     
     @State var contents: String = ""
+    //    @FocusState var focusState: Field?
     
     var titlePlaceholder: String {
         if memo.title == "" {
@@ -76,6 +73,14 @@ struct MemoView: View {
     let initialTitle: String
     let initialContents: String
     
+    var isNewMemo = false
+    
+    var contentsPlaceholder: String {
+        if memo.contents == "" {
+            return "Contents Placeholder"
+        } else { return memo.contents }
+    }
+    
     init(memo: Memo, parent: Folder, isNewMemo: Bool = false) {
         self.memo = memo
         //        self.title = memo.title
@@ -83,16 +88,12 @@ struct MemoView: View {
         self.parent = parent
         self.initialTitle = isNewMemo ? "Enter Title" : memo.title
         self.initialContents = memo.contents
-//        let tempColor = Color(rgba: Int(memo.colorAsInt))
-//        colorSelected = tempColor
-//        UINavigationBar.appearance().tintColor = UIColor(tempColor)
+        // this line make error.
+//        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
+        self.isNewMemo = isNewMemo
     }
     
-    var contentsPlaceholder: String {
-        if memo.contents == "" {
-            return "Contents Placeholder"
-        } else { return memo.contents }
-    }
+    
     
     func saveChanges() {
         print("save changes has triggered")
@@ -102,10 +103,20 @@ struct MemoView: View {
         
         // if both title and contents are empty, delete memo
         if memo.title == "" && memo.contents == "" {
-            Memo.delete(memo)
+            print("memo has deleted! title: \(title), contents: \(contents)")
+//            Memo.delete(memo)
         }
         
+        if isNewMemo {
+            parent.add(memo: memo) // error.. ??
+            print("add to parent!")
+        }
+
+        
         context.saveCoreData()
+        print("memo has saved, title: \(title)")
+        print("parent's memos: ")
+        print(parent.memos.sorted())
     }
     
     func togglePinMemo() {
@@ -179,6 +190,8 @@ struct MemoView: View {
         ZStack {
             //            Color(colorSelected as CGColor ?? CGColor(gray: 1, alpha: 1))
             Color(rgba: colorSelected.asRgba)
+//            Color(rgba: Int(memo.colorAsInt))
+//            Color(
                 .ignoresSafeArea()
             VStack {
                 TextField(initialTitle, text: $title)
@@ -221,12 +234,16 @@ struct MemoView: View {
         .onAppear(perform: {
             title = memo.title
             contents = memo.contents
+            print("initial color: \(memo.colorAsInt)")
+            print("initial pin state: \(memo.pinned)")
         })
         // triggered after FolderView has appeared
         .onDisappear(perform: {
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
+//            let newMemo = Memo(title: "new One", contents: "", context: context)
+            
         })
         
         .navigationBarItems(

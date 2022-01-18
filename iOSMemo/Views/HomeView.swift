@@ -64,6 +64,7 @@ struct HomeView: View { // top folder fetch
 //            currentFolder: initialFolder)
 //        UnitTestHelpers.deletesAll(container: )
 //        UnitTestHelpers.deletesAllMemos(context: context)
+        
 //        UnitTestHelpers.deletesAllFolders(context: context)
         
         if nav.selectedFolder == nil  {
