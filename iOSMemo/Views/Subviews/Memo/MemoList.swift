@@ -22,36 +22,7 @@ class SelectedMemoViewModel: ObservableObject {
         self.memos.update(with: memo)    }
 }
 
-struct FilteredMemoList: View {
-    // navigation 을 고쳐야해..
-    @EnvironmentObject var memoVM: SelectedMemoViewModel
-    
-    var memos: [Memo]
-    var title: String
-    let parent: Folder
-    
-    var body: some View {
-        Section {
-            ForEach(memos, id: \.self) { memo in
-                
-//                if !memoVM.hasSelected {
-                    NavigationLink(destination: MemoView(memo: memo, parent: parent)) {
-                        MemoBoxView(memo: memo)
-                            .frame(width: 170, alignment: .topLeading)
-                    }
-            }
-        } header: {
-            HStack {
-                Text(title)
-                    .foregroundColor(.gray)
-                    .font(.body)
-                    .frame(alignment: .topLeading)
-                    .padding(.leading, Sizes.overallPadding)
-                Spacer()
-            }
-        }
-    }
-}
+
 
 struct MemoList: View {
     
@@ -97,46 +68,22 @@ struct MemoList: View {
         return sortedOldMemos
     }
     
+    // need to be modified to have plus button when there's no memo
     var body: some View {
         
-        if memos.count != 0 {
+//        if memos.count != 0 {
             
             ZStack {
+                if memos.count != 0 {
                 LazyVGrid(columns: memoColumns) {
                     
-                    //                LazyVGrid
-                    //                    ForEach(memos, id: \.self) { eachMemo in
-                    //
-                    //                        NavigationLink(
-                    //                            destination: MemoView(memo: eachMemo, parent: folder)
-                    //                        ) {
-                    //                            MemoBoxView(memo: eachMemo)
-                    //                                .frame(width: 170, alignment: .topLeading)
-                    //                        }
-                    //                    }
                     
                     if pinnedMemos.count != 0 {
-//                        FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
-                        Section {
-                            ForEach(pinnedMemos, id: \.self) { memo in
-                                NavigationLink(destination: MemoView(memo: memo, parent: folder)) {
-                                    MemoBoxView(memo: memo)
-                                        .frame(width: 170, alignment: .topLeading)
-                                }
-                            }
-                        }
+                        FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
                     }
 
-//                    FilteredMemoList(memos: unpinnedMemos, title: "", parent: folder)
+                    FilteredMemoList(memos: unpinnedMemos, title: "", parent: folder)
                     
-                    Section {
-                        ForEach(unpinnedMemos, id: \.self) { memo in
-                            NavigationLink(destination: MemoView(memo: memo, parent: folder)) {
-                                MemoBoxView(memo: memo)
-                                    .frame(width: 170, alignment: .topLeading)
-                            }
-                        }
-                    }
                     
                 }
                 .environmentObject(selectedViewModel)
@@ -148,6 +95,7 @@ struct MemoList: View {
                         Spacer()
                         //                        if !memoSelected {
                         //                        if selectedMemos.count == 0 {
+                        
                         if selectedViewModel.count == 0 {
                             // show plus button
                             Button(action: {

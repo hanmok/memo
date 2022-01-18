@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct DeeepMemoApp: App {
@@ -13,15 +14,13 @@ struct DeeepMemoApp: App {
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
     
+    // homeView 가 반드시 필요한가 ??
     var body: some Scene {
         WindowGroup {
-                HomeView() // new Folder should be provided
-//            TestView()
-//            CoreDataTestView()
+//                HomeViewPrev() // new Folder should be provided
+            HomeView()
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .environmentObject(NavigationStateManager())
-            
-            
         }
         
         

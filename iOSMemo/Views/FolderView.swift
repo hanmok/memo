@@ -15,7 +15,7 @@ struct FolderView: View {
     @State var isAddingSubfolder = false
     @State var newSubFolderName = ""
     @State var isAddingMemo = false
-    
+//    @EnvironmentObject var nav: NavigationStateManager
     
 //    @State var testToggler = false
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
@@ -24,15 +24,15 @@ struct FolderView: View {
     
     @ObservedObject var currentFolder: Folder
     
-    var testMemos: [Memo] {
-        return currentFolder.memos.sorted()
-    }
+//    var testMemos: [Memo] {
+//        return currentFolder.memos.sorted()
+//    }
     
-    var memoColumns: [GridItem] {
-        [GridItem(.flexible(minimum: 150, maximum: 200)),
-         GridItem(.flexible(minimum: 150, maximum: 200))
-        ]
-    }
+//    var memoColumns: [GridItem] {
+//        [GridItem(.flexible(minimum: 150, maximum: 200)),
+//         GridItem(.flexible(minimum: 150, maximum: 200))
+//        ]
+//    }
     
     
     // use it to switch plus button into toolbar
@@ -48,27 +48,15 @@ struct FolderView: View {
         
     }
     
-//    var subfolders: [Folder] {
-//        var folders: [Folder] = []
-//        for eachFolder in currentFolder.subfolders {
-//            folders.append(eachFolder)
-//        }
-//        folders.sort()
-//        return folders
-//    }
-    
-    
-    
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ZStack {
                 ScrollView(.vertical) {
                     VStack {
                         SubFolderPageView(shouldAddSubFolder: $isAddingSubfolder)
                             .environmentObject(currentFolder)
-                            .background(.yellow)
+//                            .background(.yellow)
                         
-//                        MemoList(folder: currentFolder, isAddingMemo: $isAddingMemo)
                         MemoList(isAddingMemo: $isAddingMemo)
                             .environmentObject(currentFolder)
                     } // end of main VStack
@@ -98,21 +86,15 @@ struct FolderView: View {
                 // MemoView need to know whether it's new or not.
                 NavigationLink(destination: MemoView(memo: Memo(title: "", contents: " ", context: context), parent: currentFolder, isNewMemo: true), isActive: $isAddingMemo) {}
                 
-            } // end of navigation View
-
-            .navigationBarTitle(currentFolder.title)
-            .navigationBarItems(trailing:Button(action: {
-                // test code
-//                print("glass pressed! currentFolderInfo: ")
-//                print(currentFolder.memos)
-             
-//                let newMemo = Memo(title: "new one for test", contents: "", context: context)
-//                currentFolder.add(memo: newMemo)
-//                context.saveCoreData()
-            }, label: {
-                ChangeableImage(imageSystemName: "magnifyingglass")
-            }))
+//            } // end of navigation View
+//            .navigationBarTitle(currentFolder.title)
+//            .navigationBarItems(trailing:Button(action: {
+//            }, label: {
+//                ChangeableImage(imageSystemName: "magnifyingglass")
+//            }))
         }
+            
+//        } // end of navigation View
     }
 }
 

@@ -32,7 +32,7 @@ struct SubFolderPageView: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(subfolders) { subfolder in
-                        
+                        // navigationLink 문제가 아니라, nav 문제일듯.
                         NavigationLink(
                             destination: FolderView(currentFolder: subfolder)) {
                                 FolderLabelView(folder: subfolder)
@@ -75,7 +75,7 @@ struct SubFolderPageView: View {
 
 struct SubFolderPageView_Previews: PreviewProvider {
 
-    static var testFolder  = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
+    static var testFolder = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
 
     static var previews: some View {
 //        SubFolderPageView(folder: testFolder)
