@@ -36,11 +36,11 @@ struct HomeView: View { // top folder fetch
         // original
         return NavigationView {
             FolderView(currentFolder: nav.selectedFolder!)
-                .navigationBarTitle(nav.selectedFolder!.title)
-                .navigationBarItems(trailing:Button(action: {
-                }, label: {
-                    ChangeableImage(imageSystemName: "magnifyingglass")
-                }))
+//                .navigationBarTitle(nav.selectedFolder!.title)
+//                .navigationBarItems(trailing:Button(action: {
+//                }, label: {
+//                    ChangeableImage(imageSystemName: "magnifyingglass")
+//                }))
                 .onAppear {
                     nav.selectedFolder!.getFolderInfo()
                 }

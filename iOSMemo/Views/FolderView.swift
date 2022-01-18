@@ -93,6 +93,11 @@ struct FolderView: View {
 //                ChangeableImage(imageSystemName: "magnifyingglass")
 //            }))
         }
+            .navigationTitle(currentFolder.title)
+            .navigationBarItems(trailing:Button(action: {
+            }, label: {
+                ChangeableImage(imageSystemName: "magnifyingglass")
+            }))
             
 //        } // end of navigation View
     }
