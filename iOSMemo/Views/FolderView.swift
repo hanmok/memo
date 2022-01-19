@@ -11,7 +11,7 @@ import CoreData
 // FolderView should get a Valid Folder.
 
 struct FolderView: View {
-    
+    @StateObject var selectedViewModel = SelectedMemoViewModel()
     @State var shouldAddSubFolder = false
     @State var shouldHideSubFolders = false
     
@@ -65,22 +65,76 @@ struct FolderView: View {
                             shouldAddSubFolder: $shouldAddSubFolder,
                             shouldHideSubFolderView: $shouldHideSubFolders
                         )
-                            .environmentObject(currentFolder)
-                        
-
+//                            .environmentObject(currentFolder)
+                    
                         MemoList(isAddingMemo: $isAddingMemo)
-                            .environmentObject(currentFolder)
-                   
-                            
+//                            .environmentObject(currentFolder)
+                            .environmentObject(selectedViewModel)
                     } // end of main VStack
-                
-//                }
-                //                    .frame(maxHeight: .infinity)
+                .environmentObject(currentFolder)
+                // current folder to both SubFolderPageView, MemoList
+
             } // end of ScrollView
-//            .background(.yellow)
-//            .frame(maxHeight: .infinity)
-//            .background(.yellow)
+            VStack {
+                Spacer()
+//                Spacer()
+                HStack {
+                    Spacer()
+                    if selectedViewModel.count == 0 {
+                        // show plus button
+                        Button(action: {
+                            isAddingMemo = true
+                            // navigate to MemoView
+                        }) {
+                            PlusImage()
+                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
+                        }
+                    } else {
+                        // Do handler actions here
+                        MemosToolBarView(pinnedAction: { selMemos in
+                            // TODO : if all is pinned -> unpin
+                            // else : pin all
+                            
+                            var allPinned = true
+                            for each in selMemos {
+                                if each.pinned == false {
+                                    allPinned = false
+                                    break
+                                }
+                            }
+                            
+                            if !allPinned {
+                                for each in selMemos {
+                                    each.pinned = true
+                                }
+                            }
+                            context.saveCoreData()
+                            
+                        }, cutAction: { selMemos in
+                            
+                            
+                        }, copyAction: { selMemos in
+                            // TODO : .sheet(FolderMindMap)
+                            
+                        }, changeColorAcion: {selMemos in
+                            // Change backgroundColor
+                            for eachMemo in selMemos {
+                                //                                    eachMemo.bgColor = bgColor
+                            }
+                        }, removeAction: { selMemos in
+                            for eachMemo in selMemos {
+                                selectedViewModel.memos.remove(eachMemo)
+                                Memo.delete(eachMemo)
+                            }
+                            context.saveCoreData()
+                        })
+                            .padding([.trailing], Sizes.largePadding)
+                            .padding(.bottom,Sizes.overallPadding )
+                    }
+                } // end of HStack
+            } // end of VStack
             
+            // When add folder pressed
             // overlay white background when Alert show up
             if shouldAddSubFolder {
                 Color(.white)
@@ -88,6 +142,7 @@ struct FolderView: View {
             }
             
             // When add folder pressed
+            // Present TextFieldAlert
             TextFieldAlert(
                 isPresented: $shouldAddSubFolder,
                 text: $newSubFolderName) { subfolderName in

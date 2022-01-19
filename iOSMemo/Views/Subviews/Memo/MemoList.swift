@@ -27,7 +27,7 @@ class SelectedMemoViewModel: ObservableObject {
 struct MemoList: View {
     
     @Environment(\.managedObjectContext) var context
-    @StateObject var selectedViewModel = SelectedMemoViewModel()
+//    @StateObject var selectedViewModel = SelectedMemoViewModel()
     
     @EnvironmentObject var folder: Folder
     //    @ObservedObject var folder: Folder
@@ -73,7 +73,7 @@ struct MemoList: View {
         
         //        if memos.count != 0 {
         
-        ZStack {
+//        ZStack {
             if memos.count != 0 {
 //                LazyVGrid(columns: memoColumns) {
                 VStack {
@@ -85,72 +85,16 @@ struct MemoList: View {
                     FilteredMemoList(memos: unpinnedMemos, title: "", parent: folder)
                     
                     
-                .environmentObject(selectedViewModel)
+//                .environmentObject(selectedViewModel)
                 }
             }
             // end of LazyVGrid
             //            .background(.blue)
             
             // another ZStack Element
-            VStack {
-                Spacer()
-//                Spacer()
-                HStack {
-                    Spacer()
-                    if selectedViewModel.count == 0 {
-                        // show plus button
-                        Button(action: {
-                            isAddingMemo = true
-                            // navigate to MemoView
-                        }) {
-                            PlusImage()
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
-                        }
-                    } else {
-                        MemosToolBarView(pinnedAction: { selMemos in
-                            // TODO : if all is pinned -> unpin
-                            // else : pin all
-                            
-                            var allPinned = true
-                            for each in selMemos {
-                                if each.pinned == false {
-                                    allPinned = false
-                                    break
-                                }
-                            }
-                            
-                            if !allPinned {
-                                for each in selMemos {
-                                    each.pinned = true
-                                }
-                            }
-                            context.saveCoreData()
-                            
-                        }, cutAction: { selMemos in
-                            
-                            
-                        }, copyAction: { selMemos in
-                            // TODO : .sheet(FolderMindMap)
-                            
-                        }, changeColorAcion: {selMemos in
-                            // Change backgroundColor
-                            for eachMemo in selMemos {
-                                //                                    eachMemo.bgColor = bgColor
-                            }
-                        }, removeAction: { selMemos in
-                            for eachMemo in selMemos {
-                                selectedViewModel.memos.remove(eachMemo)
-                                Memo.delete(eachMemo)
-                            }
-                            context.saveCoreData()
-                        })
-                            .padding([.trailing], Sizes.largePadding)
-                            .padding(.bottom,Sizes.overallPadding )
-                    }
-                } // end of HStack
-            } // end of VStack
-        } // end of ZStack
-        .frame(maxHeight: .infinity)
+            
+//        } // end of ZStack
+//        .frame(maxHeight: .infinity)
     }
 }
 

@@ -29,9 +29,8 @@ struct MemosToolBarView: View {
             Button(action: {pinnedAction(sortedMemos)}) {
                     ChangeableImage(imageSystemName: "pin",width: 20, height: 20)
                 }
-                .padding([.leading], 25)
+                .padding(.leading, 25)
                 .padding([.vertical, .trailing], 5)
-                
                 .cornerRadius(5)
                 
             
@@ -62,10 +61,8 @@ struct MemosToolBarView: View {
                 .padding([.leading, .vertical], 5)
                 .cornerRadius(5)
         }
-//        .padding([.leading, .trailing], 30)
         .frame(width: 170, height: 30, alignment: .center)
         .padding(5)
-//        .background(.green)
         .cornerRadius(10)
 
     }
