@@ -10,7 +10,7 @@ import CoreData
 // navigation 이 안되면, test 가 거의.. 불가능해짐.. 왜 안될까 ??
 // FolderView should get a Valid Folder.
 
-struct FolderView: View {
+struct FolderView2: View {
     
     @State var shouldAddSubFolder = false
     @State var shouldHideSubFolders = false
@@ -126,13 +126,13 @@ struct FolderView: View {
 
 
 // Folder Name with.. a little Space
-struct FolderView_Previews: PreviewProvider {
+struct FolderView2_Previews: PreviewProvider {
     
     static var testFolder = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
     
     static var previews: some View {
         
-        FolderView(currentFolder: testFolder)
+        FolderView2(currentFolder: testFolder)
     }
 }
 //

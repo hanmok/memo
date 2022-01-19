@@ -26,7 +26,7 @@ struct HomeView: View { // top folder fetch
 //    var initialFolder: Folder
     
     var body: some View {
-        
+    
 //        UnitTestHelpers.deletesAllFolders(context: context)
         
         if nav.selectedFolder == nil  {

@@ -19,6 +19,12 @@ extension Memo {
         try? context.save()
     }
     
+    convenience init(title: String, contents: String, context: NSManagedObjectContext, modifiedAt: Date) {
+        self.init(title: title, contents: contents, context: context)
+        self.modificationDate = modifiedAt
+        try? context.save()
+    }
+    
     // these variables are not optionals.
     var uuid: UUID {
         get { uuid_ ?? UUID() }
@@ -64,7 +70,7 @@ extension Memo {
     static func fetch(_ predicate: NSPredicate) -> NSFetchRequest<Memo> {
         let request = NSFetchRequest<Memo>(entityName: "Memo")
 //        request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.order, ascending: true)]
-        request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.modificationDate, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.modificationDate, ascending: true)] // doesn't make change
         request.predicate = predicate
         return request
     }
@@ -82,7 +88,7 @@ extension Memo: Comparable {
     public static func < (lhs: Memo, rhs: Memo) -> Bool {
 //        lhs.order < rhs.order
         if lhs.modificationDate != nil && rhs.modificationDate != nil {
-            return lhs.modificationDate! < rhs.modificationDate!
+            return lhs.modificationDate! > rhs.modificationDate! // make change
         } else {
             return true
         }

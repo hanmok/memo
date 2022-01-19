@@ -26,6 +26,19 @@ extension Folder {
         }
     }
     
+    convenience init(title: String, context: NSManagedObjectContext, modifiedAt: Date) {
+        
+        self.init(title: title, context: context)
+        self.modificationDate = modifiedAt
+        
+        DispatchQueue.global().async {
+            context.saveCoreData()
+        }
+        
+    }
+    
+
+    
     public override func awakeFromInsert() {
         setPrimitiveValue(Date(), forKey: FolderProperties.creationDate)
         setPrimitiveValue(UUID(), forKey: FolderProperties.id)
@@ -114,7 +127,7 @@ extension Folder {
     static func fetch(_ predicate: NSPredicate)-> NSFetchRequest<Folder> {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
 //        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
-        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: true)]
         request.predicate = predicate
         return request
     }
@@ -122,7 +135,7 @@ extension Folder {
     static func topFolderFetch() -> NSFetchRequest<Folder> {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
 //        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
-        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: true)]
         
         let format = FolderProperties.parent + " = nil"
         request.predicate = NSPredicate(format: format)
@@ -167,7 +180,7 @@ extension Folder : Comparable {
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
 //        lhs.order < rhs.order
         if lhs.modificationDate != nil && rhs.modificationDate != nil {
-            return lhs.modificationDate! < rhs.modificationDate!
+            return lhs.modificationDate! > rhs.modificationDate!
         } else {
             return true
         }
@@ -182,36 +195,36 @@ extension Folder {
     }
     
     static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
-        let homeFolder = Folder(title: "Home Folder", context: context)
-        let firstChildFolder = Folder(title: "child1", context: context)
-        let secondChildFolder = Folder(title: "child2", context: context)
-        let thirdChildFolder = Folder(title: "child3", context: context)
-        let fourthChildFolder = Folder(title: "child4", context: context)
+        let homeFolder = Folder(title: "Home Folder", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
+        let firstChildFolder = Folder(title: "child1", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
+        let secondChildFolder = Folder(title: "child2", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
+        let thirdChildFolder = Folder(title: "child3", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
+        let fourthChildFolder = Folder(title: "child4", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
         
         homeFolder.add(subfolder: firstChildFolder)
         homeFolder.add(subfolder: secondChildFolder)
         homeFolder.add(subfolder: thirdChildFolder)
         homeFolder.add(subfolder: fourthChildFolder)
         
-        let memo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context)
-        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context)
-        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context)
-        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context)
-        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context)
-        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context)
-        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context)
-        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context)
-        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context)
+        let memo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
+        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
+        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
+        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
+        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
+        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
+        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
+        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
+        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
         
-        let hmemo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context)
-        let hmemo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context)
-        let hmemo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context)
-        let hmemo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context)
-        let hmemo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context)
-        let hmemo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context)
-        let hmemo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context)
-        let hmemo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context)
-        let hmemo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context)
+        let hmemo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
+        let hmemo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
+        let hmemo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
+        let hmemo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
+        let hmemo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
+        let hmemo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
+        let hmemo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
+        let hmemo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
+        let hmemo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
         
         firstChildFolder.add(memo: memo1)
         firstChildFolder.add(memo: memo2)

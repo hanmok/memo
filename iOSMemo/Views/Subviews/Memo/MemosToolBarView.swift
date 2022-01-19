@@ -65,7 +65,7 @@ struct MemosToolBarView: View {
 //        .padding([.leading, .trailing], 30)
         .frame(width: 170, height: 30, alignment: .center)
         .padding(5)
-        .background(.green)
+//        .background(.green)
         .cornerRadius(10)
 
     }

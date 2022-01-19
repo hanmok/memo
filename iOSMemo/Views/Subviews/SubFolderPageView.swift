@@ -33,28 +33,46 @@ struct SubFolderPageView: View {
                 )
                 //                Color(.white)
             }
+            // show SubFolderView
             if !shouldHideSubFolderView {
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(subfolders) { subfolder in
-                        // navigationLink 문제가 아니라, nav 문제일듯.
-                        
-                        NavigationLink(
-                            destination: FolderView(currentFolder: subfolder)) {
-                                FolderLabelView(folder: subfolder)
-                                    .frame(width:50, height: 50)
+                ScrollView(.horizontal) {
+                    HStack {
+                        if subfolders.count != 0 {
+                            ForEach(subfolders) { subfolder in
+                                // navigationLink 문제가 아니라, nav 문제일듯.
+                                
+                                NavigationLink(
+                                    destination: FolderView(currentFolder: subfolder)) {
+                                        FolderLabelView(folder: subfolder)
+                                            .frame(width:50, height: 50)
+                                    }
+                                    .onAppear(perform: {
+                                        print("title of subFolder: \(subfolder.title)")
+                                    })
+                                    .onTapGesture {
+                                        print("tapped !! \(subfolder.title)")
+                                    }
+                                
+                                    .padding(.horizontal, Sizes.overallPadding)
+                                    .padding(.top, Sizes.minimalSpacing * 4)
+                                
+                            } // end of ForEach.
+                        } else { // subfolder.count == 0
+//                            HStack(alignment: .center, spacing: 3) {
+                            HStack(spacing: 3) {
+
+                                Text("press   ")
+                                ChangeableImage(imageSystemName: "folder.badge.plus", width: 26, height: 26)
+                                Text("   to make a subFolder")
+                                    .frame(maxWidth: .infinity)
                             }
-                            .onAppear(perform: {
-                                print("title of subFolder: \(subfolder.title)")
-                            })
-                            .onTapGesture {
-                                print("tapped !! \(subfolder.title)")
-                            }
-                        
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.title3)
                             .padding(.horizontal, Sizes.overallPadding)
                             .padding(.top, Sizes.minimalSpacing * 4)
+//                            .background(.green)
+                        }
                         
-                    }
                 }
                 .padding(.bottom, 10)
 //                }

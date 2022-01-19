@@ -32,9 +32,9 @@ struct SubFoldersToolView: View {
     func changeFolderName() {
         
     }
-    func changeSort() {
-        
-    }
+//    func changeSort() {
+//        
+//    }
     func deleteFolder() {
         
     }
