@@ -89,7 +89,9 @@ func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
     }
     print("emptymemo: \(emptyMemo)")
     // the sooner the lower
-    emptyMemo.sort(by: { $0.order > $1.order})
+//    emptyMemo.sort(by: { $0.order > $1.order})
+//    emptyMemo.sort(by: { $0.modificationDate < $1.modificationDate})
+    emptyMemo.sort()
     
     return emptyMemo
 }

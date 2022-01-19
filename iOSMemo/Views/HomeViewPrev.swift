@@ -65,6 +65,7 @@ struct HomeViewPrev: View { // top folder fetch
 //        UnitTestHelpers.deletesAll(container: )
 //        UnitTestHelpers.deletesAllMemos(context: context)
         
+        //
 //        UnitTestHelpers.deletesAllFolders(context: context)
         
         if nav.selectedFolder == nil  {
@@ -82,6 +83,8 @@ struct HomeViewPrev: View { // top folder fetch
             FolderView(currentFolder: nav.selectedFolder!)
                 .navigationBarTitle(nav.selectedFolder!.title)
                 .navigationBarItems(trailing:Button(action: {
+                    print("subfolder Info: \n \(nav.selectedFolder!.subfolders)")
+                    print("memos Info: \n \(nav.selectedFolder!.memos)")
                 }, label: {
                     ChangeableImage(imageSystemName: "magnifyingglass")
                 }))

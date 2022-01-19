@@ -15,6 +15,7 @@ extension Memo {
         self.title = title
         self.creationDate = Date()
         self.contents = contents
+        self.modificationDate = Date()
         try? context.save()
     }
     
@@ -44,10 +45,10 @@ extension Memo {
         set { overview_ = newValue }
     }
     
-    var modificationDate: Date {
-        get { modificationDate_ ?? Date() }
-        set { modificationDate_ = newValue }
-    }
+//    var modificationDate: Date {
+//        get { modificationDate_ ?? Date() }
+//        set { modificationDate_ = newValue }
+//    }
     
     var pinned: Bool { // initialValue: false
         get { pinned_ }
@@ -62,7 +63,8 @@ extension Memo {
     
     static func fetch(_ predicate: NSPredicate) -> NSFetchRequest<Memo> {
         let request = NSFetchRequest<Memo>(entityName: "Memo")
-        request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.order, ascending: true)]
+//        request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.order, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.modificationDate, ascending: true)]
         request.predicate = predicate
         return request
     }
@@ -74,12 +76,17 @@ extension Memo {
             context.saveCoreData()
         }
     }
-    
 }
 
 extension Memo: Comparable {
     public static func < (lhs: Memo, rhs: Memo) -> Bool {
-        lhs.order < rhs.order
+//        lhs.order < rhs.order
+        if lhs.modificationDate != nil && rhs.modificationDate != nil {
+            return lhs.modificationDate! < rhs.modificationDate!
+        } else {
+            return true
+        }
+        
     }
 }
 
@@ -115,6 +122,7 @@ extension Memo {
 struct MemoProperties {
     static let id = "id_"
     static let creationDate = "creationDate_"
+    static let modificationDate = "modificationDate"
     static let title = "title_"
     static let order = "order"
     static let colorAsInt = "colorAsInt"

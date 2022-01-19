@@ -1,0 +1,6 @@
+
+TODO : .sheet(FolderMindMap)
+FullScreen: .sheet 대신, .fullScreenCover
+쓰면 됨.
+https://www.hackingwithswift.com/quick-start/swiftui/how-to-present-a-full-screen-modal-view-using-fullscreencover
+

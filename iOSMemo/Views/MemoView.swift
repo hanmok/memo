@@ -104,7 +104,7 @@ struct MemoView: View {
         // if both title and contents are empty, delete memo
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
-//            Memo.delete(memo)
+            Memo.delete(memo)
         }
         
         if isNewMemo {
@@ -112,6 +112,7 @@ struct MemoView: View {
             print("add to parent!")
         }
 
+        memo.modificationDate = Date()
         
         context.saveCoreData()
         print("memo has saved, title: \(title)")

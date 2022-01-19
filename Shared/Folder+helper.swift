@@ -14,10 +14,12 @@ extension Folder {
         self.init(context: context)
         self.title = title
         
-        let request = Folder.topFolderFetch()
-        let result = try? context.fetch(request)
-        let maxFolder = result?.max(by: {$0.order < $1.order })
-        self.order = ( maxFolder?.order ?? 0 ) + 1
+//        let request = Folder.topFolderFetch()
+//        let result = try? context.fetch(request)
+//        let maxFolder = result?.max(by: {$0.order < $1.order })
+//        self.order = ( maxFolder?.order ?? 0 ) + 1
+        
+        self.modificationDate = Date()
         
         DispatchQueue.global().async {
             context.saveCoreData()
@@ -53,60 +55,74 @@ extension Folder {
         set { subfolders_ = newValue as NSSet}
     }
     
+//    var modificationDate: Date {
+//        get { modificationDate_ ?? Date() }
+//        set { modificationDate_ = newValue }
+//    }
+    
     
     
     // order should be starting from 1, cause user decide.
     // 5 1 3 4 2 , say some memo want order of 3
     func add(memo: Memo, at index: Int64? = nil) {
-        let sortedOldMemos = self.memos.sorted()
-        // old original memos according to 'order'
-        
-        // 3
-        if let index = index {
-            memo.order = Int64(index)
-            // set new memo's order to index ( -> 3)
-            // 5 1 3 4 2 -> filter memo order of 3, 4 and 5
-            let changeMemos = sortedOldMemos.filter { $0.order >= index }
-            for memo in changeMemos {
-                memo.order += 1
-            }
-            // 6 1 4 5 2 , and new memo of order 3
-        } else {
-            memo.order = ( sortedOldMemos.last?.order ?? 0 ) + 1
-        }
+//        let sortedOldMemos = self.memos.sorted()
+//        // old original memos according to 'order'
+//
+//        // 3
+//        if let index = index {
+//            memo.order = Int64(index)
+//            // set new memo's order to index ( -> 3)
+//            // 5 1 3 4 2 -> filter memo order of 3, 4 and 5
+//            let changeMemos = sortedOldMemos.filter { $0.order >= index }
+//            for memo in changeMemos {
+//                memo.order += 1
+//            }
+//            // 6 1 4 5 2 , and new memo of order 3
+//        } else {
+//            memo.order = ( sortedOldMemos.last?.order ?? 0 ) + 1
+//        }
         memo.folder = self
+        memo.modificationDate = Date()
     }
+    
+//    func add(memo: Memo) {
+//        memo.folder = self
+//    }
     
     
     
     // not modified like above to check which one is correct.
     func add(subfolder: Folder, at index: Int64? = nil) {
-        let oldFolders = self.subfolders.sorted()
+//        let oldFolders = self.subfolders.sorted()
         
-        if let index = index {
-            subfolder.order = index + 1
-            let changeFolders = oldFolders.filter { $0.order > index }
-            for folder in changeFolders {
-                folder.order += 1
-            }
-        } else {
-            subfolder.order = (oldFolders.last?.order ?? 0) + 1
-        }
+//        if let index = index {
+//            subfolder.order = index + 1
+//            let changeFolders = oldFolders.filter { $0.order > index }
+//            for folder in changeFolders {
+//                folder.order += 1
+//            }
+//        } else {
+//            subfolder.order = (oldFolders.last?.order ?? 0) + 1
+//        }
+        
         subfolder.parent = self
-        try? subfolder.managedObjectContext?.save()
+
+        
         
     }
     
     static func fetch(_ predicate: NSPredicate)-> NSFetchRequest<Folder> {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
-        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
+//        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: false)]
         request.predicate = predicate
         return request
     }
     
     static func topFolderFetch() -> NSFetchRequest<Folder> {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
-        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
+//        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: false)]
         
         let format = FolderProperties.parent + " = nil"
         request.predicate = NSPredicate(format: format)
@@ -137,6 +153,7 @@ extension Folder {
 struct FolderProperties {
     static let id = "id_"
     static let creationDate = "creationDate_"
+    static let modificationDate = "modificationDate"
     static let title = "title_"
     static let order = "order"
     
@@ -148,7 +165,12 @@ struct FolderProperties {
 
 extension Folder : Comparable {
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
-        lhs.order < rhs.order
+//        lhs.order < rhs.order
+        if lhs.modificationDate != nil && rhs.modificationDate != nil {
+            return lhs.modificationDate! < rhs.modificationDate!
+        } else {
+            return true
+        }
     }
 }
 

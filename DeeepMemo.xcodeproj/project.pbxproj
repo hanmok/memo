@@ -29,6 +29,8 @@
 		9A3378082796A5CB00805138 /* FilteredMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378062796A5CB00805138 /* FilteredMemoList.swift */; };
 		9A33780A2796B10E00805138 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378092796B10E00805138 /* HomeView.swift */; };
 		9A33780B2796B10E00805138 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378092796B10E00805138 /* HomeView.swift */; };
+		9A3378272796DECA00805138 /* SkillsMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A3378262796DECA00805138 /* SkillsMemo */; };
+		9A3378282796DECA00805138 /* SkillsMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A3378262796DECA00805138 /* SkillsMemo */; };
 		9A895823277179E100E7B773 /* PlusMinusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusMinusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
 		9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582C2771BE1000E7B773 /* MemoView.swift */; };
@@ -124,6 +126,7 @@
 		9A337803279576CC00805138 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		9A3378062796A5CB00805138 /* FilteredMemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredMemoList.swift; sourceTree = "<group>"; };
 		9A3378092796B10E00805138 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		9A3378262796DECA00805138 /* SkillsMemo */ = {isa = PBXFileReference; lastKnownFileType = text; path = SkillsMemo; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusMinusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusMinusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9A89582C2771BE1000E7B773 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
@@ -345,6 +348,7 @@
 				9AC5D139278521F9007EAA28 /* Memo For Tips and Tricks */,
 				9AC5D13C2785247D007EAA28 /* Terms */,
 				9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */,
+				9A3378262796DECA00805138 /* SkillsMemo */,
 				9AC5D233278C3145007EAA28 /* MemoList2.swift */,
 			);
 			path = PersonalMemos;
@@ -547,6 +551,7 @@
 			files = (
 				9AC5D13D2785247D007EAA28 /* Terms in Resources */,
 				9AC5D13A278521F9007EAA28 /* Memo For Tips and Tricks in Resources */,
+				9A3378272796DECA00805138 /* SkillsMemo in Resources */,
 				9A0474C02771709D00571D66 /* OverallMemo in Resources */,
 				9A0474A927715D1400571D66 /* Assets.xcassets in Resources */,
 				9AC5D22E278BD8C6007EAA28 /* CurrentTodoLists in Resources */,
@@ -566,6 +571,7 @@
 			files = (
 				9AC5D1EA27854267007EAA28 /* Preview Assets.xcassets in Resources */,
 				9AC5D22F278BD8C6007EAA28 /* CurrentTodoLists in Resources */,
+				9A3378282796DECA00805138 /* SkillsMemo in Resources */,
 				9AC5D1E727854267007EAA28 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

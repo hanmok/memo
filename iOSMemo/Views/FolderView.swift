@@ -56,6 +56,7 @@ struct FolderView: View {
         //        NavigationView {
         ZStack {
             ScrollView(.vertical) {
+//                ScrollView(
 //                GeometryReader { proxy in
                 VStack {
                     // how to know size of this view ??
@@ -73,7 +74,13 @@ struct FolderView: View {
 
                         MemoList(isAddingMemo: $isAddingMemo)
                             .environmentObject(currentFolder)
-                            .background(.green)
+//                            .scaledToFill()
+//                            .background(.green)
+//                            .scaledToFit()
+//                            .background(.green)
+//                            .frame(maxHeight: .infinity)
+//                            .frame(height: .greatestFiniteMagnitude)
+//                            .frame(height: 600)
 //                            .safeAreaInset(edge: .bottom) {
 //                                Image(systemName: "folder")
 //                                    .background(.red)
@@ -89,8 +96,9 @@ struct FolderView: View {
 //                }
                 //                    .frame(maxHeight: .infinity)
             } // end of ScrollView
-            .frame(maxHeight: .infinity)
-            .background(.yellow)
+//            .background(.yellow)
+//            .frame(maxHeight: .infinity)
+//            .background(.yellow)
             
             // overlay white background when Alert show up
             if shouldAddSubFolder {
@@ -125,6 +133,8 @@ struct FolderView: View {
         .frame(maxHeight: .infinity)
         .navigationTitle(currentFolder.title)
         .navigationBarItems(trailing:Button(action: {
+            print("subfolder Info: \n \(currentFolder.subfolders)")
+            print("memos Info: \n \(currentFolder.memos)")
         }, label: {
             ChangeableImage(imageSystemName: "magnifyingglass")
         }))

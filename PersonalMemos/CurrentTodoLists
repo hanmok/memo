@@ -41,14 +41,23 @@ Hide / Show subFolderPageView
 
 
 Todo
-MemoList send + button to the bottom
+
+Make Relocation View ( FolderMindMap )
+
+MemoList send plus(+) button to the bottom
+    이거, ScrollView 위에다가 박아놓아야함.;;
+    어쩌면 MemoList 밖에 만들어야 할 수도..
+
 
 MemoBoxView set backgroundColor memo's color
 MemoView set ColorPicker color memo's color
 
 Make SearchPage
 
+SubFolderView make a placeholder for new SubFolder !
 
 Considering..
  should SubFolderPageView height be flexible ?
  
+
+

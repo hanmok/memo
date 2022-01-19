@@ -41,7 +41,7 @@ struct MemoList2: View {
                         destination: MemoView(memo: eachMemo, parent: folder)
                     ) {
                         MemoBoxView(memo: eachMemo)
-                            .background(.yellow)
+//                            .background(.yellow)
                             .onAppear {
                                 print("from MemoList: \(eachMemo.title)")
                             }

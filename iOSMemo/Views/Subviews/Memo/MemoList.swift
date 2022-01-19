@@ -75,8 +75,8 @@ struct MemoList: View {
         
         ZStack {
             if memos.count != 0 {
-                LazyVGrid(columns: memoColumns) {
-                    
+//                LazyVGrid(columns: memoColumns) {
+                VStack {
                     
                     if pinnedMemos.count != 0 {
                         FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
@@ -85,19 +85,18 @@ struct MemoList: View {
                     FilteredMemoList(memos: unpinnedMemos, title: "", parent: folder)
                     
                     
-                }
                 .environmentObject(selectedViewModel)
+                }
             }
             // end of LazyVGrid
             //            .background(.blue)
+            
+            // another ZStack Element
             VStack {
                 Spacer()
 //                Spacer()
                 HStack {
                     Spacer()
-                    //                        if !memoSelected {
-                    //                        if selectedMemos.count == 0 {
-                    
                     if selectedViewModel.count == 0 {
                         // show plus button
                         Button(action: {
@@ -127,13 +126,8 @@ struct MemoList: View {
                             }
                             context.saveCoreData()
                             
-                            
                         }, cutAction: { selMemos in
-                            // TODO : .sheet(FolderMindMap)
-                            // FullScreen: .sheet 대신, .fullScreenCover
-                            // 쓰면 됨.
-                            // https://www.hackingwithswift.com/quick-start/swiftui/how-to-present-a-full-screen-modal-view-using-fullscreencover
-                            //
+                            
                             
                         }, copyAction: { selMemos in
                             // TODO : .sheet(FolderMindMap)
@@ -154,9 +148,7 @@ struct MemoList: View {
                             .padding(.bottom,Sizes.overallPadding )
                     }
                 } // end of HStack
-//                .safeAreaInset(edge: ., content: <#T##() -> View#>)
             } // end of VStack
-            .frame(maxHeight: .infinity)
         } // end of ZStack
         .frame(maxHeight: .infinity)
     }
