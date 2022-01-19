@@ -108,10 +108,19 @@ struct MemoView: View {
         }
         
         if isNewMemo {
-            parent.add(memo: memo) // error.. ??
+            parent.add(memo: memo) // error.. ?? ??
+//            parent.modificationDate = Date()
+            
             print("add to parent!")
+        } else {
+//            parent.modificationDate = Date()
+            
         }
-
+        // update parent View.
+        // this line is essential to check changes in folderView
+        // never remove without any additional code.
+        parent.title += ""
+        
         memo.modificationDate = Date()
         
         context.saveCoreData()
@@ -237,6 +246,7 @@ struct MemoView: View {
             contents = memo.contents
             print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
+            print("memoView has appeared!")
         })
         // triggered after FolderView has appeared
         .onDisappear(perform: {

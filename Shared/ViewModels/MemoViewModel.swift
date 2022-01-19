@@ -1,31 +1,31 @@
+////
+////  MemoViewModel.swift
+////  DeeepMemo
+////
+////  Created by Mac mini on 2021/12/29.
+////
 //
-//  MemoViewModel.swift
-//  DeeepMemo
+//import Foundation
+//import SwiftUI
+//import Combine
 //
-//  Created by Mac mini on 2021/12/29.
+//class MemoViewModel: ObservableObject {
+//    @Published var currentMemo: Memo
 //
-
-import Foundation
-import SwiftUI
-import Combine
-
-class MemoViewModel: ObservableObject {
-    @Published var currentMemo: Memo
-    
-    init(memo: Memo) {
-        currentMemo = memo
-    }
-    
-//    var title : String {
-//        return currentMemo.title
+//    init(memo: Memo) {
+//        currentMemo = memo
 //    }
-    
-    
-    
-}
-
-
-
-//extension MemoViewModel
-// ManagedObjects conform to ObservableObjects.
-
+//
+////    var title : String {
+////        return currentMemo.title
+////    }
+//
+//
+//
+//}
+//
+//
+//
+////extension MemoViewModel
+//// ManagedObjects conform to ObservableObjects.
+//

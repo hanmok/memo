@@ -9,9 +9,9 @@ import SwiftUI
 
 struct FilteredMemoList: View {
    
-    @EnvironmentObject var memoVM: SelectedMemoViewModel
+//    @EnvironmentObject var memoVM: SelectedMemoViewModel
     
-    var memos: [Memo]
+    var memos: [Memo] // 이거때문일듯 ??..
     var title: String
     let parent: Folder
     

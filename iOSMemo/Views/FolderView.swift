@@ -67,9 +67,14 @@ struct FolderView: View {
                         )
 //                            .environmentObject(currentFolder)
                     
-                        MemoList(isAddingMemo: $isAddingMemo)
+                    MemoList(
+                        isAddingMemo: $isAddingMemo,
+                        pinViewModel: PinViewModel(
+                            memos: currentFolder.memos)
+                    )
 //                            .environmentObject(currentFolder)
                             .environmentObject(selectedViewModel)
+                            
                     } // end of main VStack
                 .environmentObject(currentFolder)
                 // current folder to both SubFolderPageView, MemoList
@@ -174,8 +179,12 @@ struct FolderView: View {
         }, label: {
             ChangeableImage(imageSystemName: "magnifyingglass")
         }))
-        
-        //        } // end of navigation View
+        .onAppear {
+            print("folderView has appeared!")
+        }
+        .onDisappear {
+            print("folderView has disappered!")
+        }
     }
 }
 

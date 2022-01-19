@@ -216,3 +216,13 @@ MindMap 은 어디에 놓을 지 정해야함
 
 
 
+
+Folder 를 Observe 할 때,
+Folder 내 Memo 를 update 하는 것으로는 Folder 자체를 update 하지 못하기 때문에
+pin / unpin 일 때 Folder 의 memos 가 잘 업데이트 되지 않음.
+
+folder 만을 Observed 로 사용하는 view 내에서,
+Memo 를 update 한 후 update 된 후를 보고싶으면, 그 memo 를 포함하고 있는 folder 도 update 시켜줘야함. 이때에는 folder 의 properties 중 아무거나 바꾸어주면 됨.
+
+
+

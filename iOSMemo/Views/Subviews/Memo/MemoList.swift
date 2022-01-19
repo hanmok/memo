@@ -8,38 +8,17 @@
 import SwiftUI
 
 
-class SelectedMemoViewModel: ObservableObject {
-    
-    @Published var memos = Set<Memo>()
-    
-    @Published var hasSelected = false
-    
-    public var count: Int {
-        memos.count
-    }
-    
-    func add(memo: Memo) {
-        self.memos.update(with: memo)    }
-}
-
-
-
 struct MemoList: View {
     
-    @Environment(\.managedObjectContext) var context
+//    @Environment(\.managedObjectContext) var context
 //    @StateObject var selectedViewModel = SelectedMemoViewModel()
     
     @EnvironmentObject var folder: Folder
     //    @ObservedObject var folder: Folder
     @Binding var isAddingMemo: Bool
     
-    //    @State var selectedMemos: [Memo] = []
-    
-    //    @Binding var selectedMemo: Memo?
-    
-    //    var memoColumns: [GridItem] {
-    //        [GridItem(.adaptive(minimum: 100, maximum: 150))]
-    //    }
+    @ObservedObject var pinViewModel : PinViewModel
+
     
     var memoColumns: [GridItem] {
         [GridItem(.flexible(minimum: 150, maximum: 200)),
@@ -47,17 +26,17 @@ struct MemoList: View {
         ]
     }
     
-    var pinnedMemos: [Memo] {
-        //        memos.filter {$0.pinned}
-        let sortedOldMemos = folder.memos.sorted()
-        return sortedOldMemos.filter {$0.pinned}
-    }
+//    var pinnedMemos: [Memo] {
+//        //        memos.filter {$0.pinned}
+//        let sortedOldMemos = folder.memos.sorted()
+//        return sortedOldMemos.filter {$0.pinned}
+//    }
     
-    var unpinnedMemos: [Memo] {
-        //        memos.filter { !$0.pinned}
-        let sortedOldMemos = folder.memos.sorted()
-        return sortedOldMemos.filter {!$0.pinned}
-    }
+//    var unpinnedMemos: [Memo] {
+//        //        memos.filter { !$0.pinned}
+//        let sortedOldMemos = folder.memos.sorted()
+//        return sortedOldMemos.filter {!$0.pinned}
+//    }
     
     //    @State var memoSelected: Bool = false
     //    @ObservedObject var memos: [Memo]
@@ -71,30 +50,39 @@ struct MemoList: View {
     // need to be modified to have plus button when there's no memo
     var body: some View {
         
-        //        if memos.count != 0 {
-        
-//        ZStack {
             if memos.count != 0 {
-//                LazyVGrid(columns: memoColumns) {
                 VStack {
-                    
-                    if pinnedMemos.count != 0 {
-                        FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
+//                    if pinnedMemos.count != 0 {
+                    if pinViewModel.pinnedMemos.count != 0 {
+//                        FilteredMemoList(memos: pinnedMemos, title: "pinned", parent: folder)
+                        
+                        Section {
+                            ForEach(pinViewModel.pinnedMemos, id: \.self) { pinnedmemo in
+                                    NavigationLink(destination: MemoView(memo: pinnedmemo, parent: folder)) {
+                                        MemoBoxView(memo: pinnedmemo)
+                                            .frame(width: 170, alignment: .topLeading)
+                                    }
+                            }
+                        }
+                        
+                        
+                    Rectangle()
+                            .frame(height: 1)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(Color(.sRGB, white: 0.5, opacity: 0.5))
                     }
+//                    FilteredMemoList(memos: unpinnedMemos, title: "unpinned", parent: folder)
                     
-                    FilteredMemoList(memos: unpinnedMemos, title: "", parent: folder)
-                    
-                    
-//                .environmentObject(selectedViewModel)
+                    Section {
+                        ForEach(pinViewModel.unpinnedMemos, id: \.self) { unpinnedmemo in
+                                NavigationLink(destination: MemoView(memo: unpinnedmemo, parent: folder)) {
+                                    MemoBoxView(memo: unpinnedmemo)
+                                        .frame(width: 170, alignment: .topLeading)
+                                }
+                        }
+                    }
                 }
             }
-            // end of LazyVGrid
-            //            .background(.blue)
-            
-            // another ZStack Element
-            
-//        } // end of ZStack
-//        .frame(maxHeight: .infinity)
     }
 }
 
