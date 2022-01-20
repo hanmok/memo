@@ -61,10 +61,14 @@ struct FolderView: View {
                 VStack {
                     // how to know size of this view ??
 //                    if !shouldHideSubFolders {
-                        SubFolderPageView(
-                            shouldAddSubFolder: $shouldAddSubFolder,
-                            shouldHideSubFolderView: $shouldHideSubFolders
-                        )
+//                        SubFolderPageView(
+//                            shouldAddSubFolder: $shouldAddSubFolder,
+//                            shouldHideSubFolderView: $shouldHideSubFolders
+//                        )
+                    SubFolderPageView(
+                        shouldAddSubFolder: $shouldAddSubFolder,
+                        shouldHideSubFolderView: $shouldHideSubFolders
+                    )
 //                            .environmentObject(currentFolder)
                     
                     MemoList(
@@ -164,16 +168,11 @@ struct FolderView: View {
             // MemoView need to know whether it's new or not.
             NavigationLink(destination: MemoView(memo: Memo(title: "", contents: " ", context: context), parent: currentFolder, isNewMemo: true), isActive: $isAddingMemo) {}
             
-            //            } // end of navigation View
-            //            .navigationBarTitle(currentFolder.title)
-            //            .navigationBarItems(trailing:Button(action: {
-            //            }, label: {
-            //                ChangeableImage(imageSystemName: "magnifyingglass")
-            //            }))
         } // end of ZStack
         .frame(maxHeight: .infinity)
         .navigationTitle(currentFolder.title)
-        .navigationBarItems(trailing:Button(action: {
+        .navigationBarItems(trailing:
+                                Button(action: {
             print("subfolder Info: \n \(currentFolder.subfolders)")
             print("memos Info: \n \(currentFolder.memos)")
         }, label: {

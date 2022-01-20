@@ -13,7 +13,8 @@ struct TextFieldAlert: View {
     
     @Binding var isPresented: Bool
     @Binding var text: String
-    
+    @FocusState var focusState: Bool
+    // working find..
     var submitAction: (String) -> Void = { _ in }
     var cancelAction: () -> Void = { }
     
@@ -21,6 +22,7 @@ struct TextFieldAlert: View {
         ZStack{
             VStack {
                 TextField("Enter New FolderName", text: $text)
+                    .focused($focusState)
                     .padding(.top, 5)
                     .background(.white)
                     .cornerRadius(5)
@@ -30,6 +32,7 @@ struct TextFieldAlert: View {
                     Button {
                         submitAction(text)
                         isPresented = false
+                        focusState = false
                     } label: {
                         Text("Done")
                             .foregroundColor(.black)
@@ -42,6 +45,7 @@ struct TextFieldAlert: View {
                     Button {
                         cancelAction()
                         isPresented = false
+                        focusState = false
                     } label: {
                         Text("Cancel")
                             .foregroundColor(.red)

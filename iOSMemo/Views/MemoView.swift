@@ -25,10 +25,6 @@ import Combine
 
 struct MemoView: View {
     
-//    init() {
-//        UINavigationBar.appearance().tintColor = UIColor(colorSelected)
-//    }
-    
     enum Field: Hashable {
         case title
         case contents
@@ -40,8 +36,6 @@ struct MemoView: View {
             saveChanges()
         }
     }
-    
-
     
     @ObservedObject var memo: Memo
     @EnvironmentObject var nav: NavigationStateManager
@@ -192,12 +186,20 @@ struct MemoView: View {
     func changeColor() { // change BackgroundColor
         
     }
-    
+    @FocusState var editorFocusState: Bool
     
     //    @State var overview: String = ""
     
+    @GestureState var isScrolled = false
+    
     var body: some View {
-        ZStack {
+        let scroll = DragGesture(minimumDistance: 30, coordinateSpace: .local)
+            .updating($isScrolled) { _, _, _ in
+                editorFocusState = false
+
+            }
+        
+        return ZStack {
             //            Color(colorSelected as CGColor ?? CGColor(gray: 1, alpha: 1))
             Color(rgba: colorSelected.asRgba)
 //            Color(rgba: Int(memo.colorAsInt))
@@ -224,10 +226,9 @@ struct MemoView: View {
                 TextEditor(text: $contents)
                     .padding(.horizontal, Sizes.overallPadding)
                                     .colorMultiply(colorSelected)
+                                    .gesture(scroll)
+                                    .focused($editorFocusState)
 
-                //                }
-                
-                
             }
             if isShowingMsg {
                 if let validMsg = msgType {

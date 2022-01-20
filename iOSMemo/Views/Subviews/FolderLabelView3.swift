@@ -7,7 +7,35 @@
 
 import SwiftUI
 
+
+
+
 struct FolderLabelView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    @ObservedObject var folder: Folder
+    
+    var body: some View {
+        HStack {
+            Text(Image(systemName: "folder")) + Text(folder.title)
+        }
+        .font(.title3)
+        .tint(colorScheme == .dark ? .white : .black)
+        .frame(maxWidth: .infinity, alignment: .leading)
+            
+    }
+}
+
+//struct FolderLabelView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FolderLabelView()
+//    }
+//}
+
+
+
+struct FolderLabelView3: View {
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -26,8 +54,10 @@ struct FolderLabelView: View {
     }
 }
 
-//struct FolderLabelView_Previews: PreviewProvider {
+//struct FolderLabelView3_Previews: PreviewProvider {
 //    static var previews: some View {
 //        FolderLabelView()
 //    }
 //}
+
+

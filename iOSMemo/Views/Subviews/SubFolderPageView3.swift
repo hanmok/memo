@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SubFolderPageView: View {
+struct SubFolderPageView3: View {
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -43,7 +43,7 @@ struct SubFolderPageView: View {
                                 
                                 NavigationLink(
                                     destination: FolderView(currentFolder: subfolder)) {
-                                        FolderLabelView(folder: subfolder)
+                                        FolderLabelView3(folder: subfolder)
                                             .frame(width:50, height: 50)
                                     }
                                     .onAppear(perform: {
@@ -105,7 +105,7 @@ struct SubFolderPageView_Previews: PreviewProvider {
 
     static var previews: some View {
 //        SubFolderPageView(folder: testFolder)
-        SubFolderPageView( shouldAddSubFolder: .constant(false), shouldHideSubFolderView: .constant(true))
+        SubFolderPageView3( shouldAddSubFolder: .constant(false), shouldHideSubFolderView: .constant(true))
             .environmentObject(testFolder)
     }
 }

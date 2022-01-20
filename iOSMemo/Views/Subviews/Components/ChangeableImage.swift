@@ -30,3 +30,32 @@ struct ChangeableImage: View {
 //}
 
 
+//extension ChangeableImage : StringProtocol {
+//    typealias UTF8View = <#type#>
+//
+//    typealias UTF16View = <#type#>
+//
+//    typealias UnicodeScalarView = <#type#>
+//
+//    var startIndex: String.Index {
+//        <#code#>
+//    }
+//
+//    var endIndex: String.Index {
+//        <#code#>
+//    }
+//
+//    mutating func write(_ string: String) {
+//        <#code#>
+//    }
+//
+//    func write<Target>(to target: inout Target) where Target : TextOutputStream {
+//        <#code#>
+//    }
+//
+//    var description: String {
+//        <#code#>
+//    }
+//
+//
+//}
