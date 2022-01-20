@@ -12,6 +12,7 @@ import CoreData
 
 struct FolderView: View {
     @StateObject var selectedViewModel = SelectedMemoViewModel()
+    @StateObject var folderViewModel = FolderViewModel()
     @State var shouldAddSubFolder = false
     @State var shouldHideSubFolders = false
     
@@ -23,11 +24,12 @@ struct FolderView: View {
     
     //    @State var testToggler = false
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    
+    @State var presentMindMapView = false
+    @State var isSpeading = false
     //    @EnvironmentObject var nav: NavigationStateManager
     
     @ObservedObject var currentFolder: Folder
-    
+    //    func presentFolderOverview
     //    var testMemos: [Memo] {
     //        return currentFolder.memos.sorted()
     //    }
@@ -56,47 +58,89 @@ struct FolderView: View {
         //        NavigationView {
         ZStack {
             ScrollView(.vertical) {
-//                ScrollView(
-//                GeometryReader { proxy in
+                //                ScrollView(
+                //                GeometryReader { proxy in
                 VStack {
                     // how to know size of this view ??
-//                    if !shouldHideSubFolders {
-//                        SubFolderPageView(
-//                            shouldAddSubFolder: $shouldAddSubFolder,
-//                            shouldHideSubFolderView: $shouldHideSubFolders
-//                        )
+                    //                    if !shouldHideSubFolders {
+                    //                        SubFolderPageView(
+                    //                            shouldAddSubFolder: $shouldAddSubFolder,
+                    //                            shouldHideSubFolderView: $shouldHideSubFolders
+                    //                        )
                     SubFolderPageView(
                         shouldAddSubFolder: $shouldAddSubFolder,
                         shouldHideSubFolderView: $shouldHideSubFolders
                     )
-//                            .environmentObject(currentFolder)
-                    
-                    MemoList(
-                        isAddingMemo: $isAddingMemo,
-                        pinViewModel: PinViewModel(
-                            memos: currentFolder.memos)
-                    )
-//                            .environmentObject(currentFolder)
+                    //                            .environmentObject(currentFolder)
+                    if !currentFolder.memos.isEmpty {
+//                    Spacer()
+//                    }
+                        MemoList(
+                            isAddingMemo: $isAddingMemo,
+                            isSpeading: $isSpeading,
+                            pinViewModel: PinViewModel(
+                                memos: currentFolder.memos)
+                        )
+                        //                            .environmentObject(currentFolder)
                             .environmentObject(selectedViewModel)
-                            
-                    } // end of main VStack
+                    }
+                    
+                } // end of main VStack
                 .environmentObject(currentFolder)
                 // current folder to both SubFolderPageView, MemoList
-
+                
             } // end of ScrollView
+            if currentFolder.memos.isEmpty {
+                Button(action: {
+                    isAddingMemo = true
+                }) {
+                    Text("Press ") + Text(Image(systemName: "plus.circle")) + Text(" to make a new memo")
+                }
+            }
             VStack {
                 Spacer()
-//                Spacer()
+                
                 HStack {
                     Spacer()
+                    
+                    //                    if !presentFolderOverview {
+                    
                     if selectedViewModel.count == 0 {
                         // show plus button
-                        Button(action: {
-                            isAddingMemo = true
-                            // navigate to MemoView
-                        }) {
-                            PlusImage()
+                        VStack(spacing: Sizes.minimalSpacing) {
+                            
+                            if !currentFolder.subfolders.isEmpty{
+                            Button(action: {
+                                isSpeading.toggle()
+                            }) {
+                                //                                ChangeableImage(imageSystemName: isSpeading ? "rays" : "timelapse", width: 32, height: 32)
+                                
+                                ZStack {
+                                    ChangeableImage(imageSystemName: "circle", width: 40, height: 40)
+                                    
+                                    if isSpeading {
+//                                        ChangeableImage(imageSystemName:  "smallcircle.fill.circle", width: 40, height: 40)
+                                        ChangeableImage(imageSystemName: "circle.fill", width: 10, height: 10)
+                                    }
+                                    else {
+                                    ChangeableImage(imageSystemName:  "circles.hexagongrid.fill", width: 24, height: 24)
+                                    }
+                                    
+                                }
                                 .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
+                                
+                                
+                            }
+                            }
+                            
+                            
+                            Button(action: {
+                                isAddingMemo = true
+                                // navigate to MemoView
+                            }) {
+                                ChangeableImage(imageSystemName: "plus.circle", width: 40, height: 40)
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
+                            }
                         }
                     } else {
                         // Do handler actions here
@@ -127,9 +171,9 @@ struct FolderView: View {
                             
                         }, changeColorAcion: {selMemos in
                             // Change backgroundColor
-                            for eachMemo in selMemos {
-                                //                                    eachMemo.bgColor = bgColor
-                            }
+                            //                            for eachMemo in selMemos {
+                            //                                        eachMemo.bgColor = bgColor
+                            //                            }
                         }, removeAction: { selMemos in
                             for eachMemo in selMemos {
                                 selectedViewModel.memos.remove(eachMemo)
@@ -140,6 +184,9 @@ struct FolderView: View {
                             .padding([.trailing], Sizes.largePadding)
                             .padding(.bottom,Sizes.overallPadding )
                     }
+                    
+                    //                    }
+                    
                 } // end of HStack
             } // end of VStack
             
@@ -162,22 +209,33 @@ struct FolderView: View {
                     newSubFolderName = ""
                 }
             
-            //                NavigationLink(isActive: $isAddingMemo, destination: MemoView(memo: Memo(title: "", contents: "", context: context) , parent: currentFolder), label: Text(""))
-            
-            // add new memo
-            // MemoView need to know whether it's new or not.
             NavigationLink(destination: MemoView(memo: Memo(title: "", contents: " ", context: context), parent: currentFolder, isNewMemo: true), isActive: $isAddingMemo) {}
+            
+            //            NavigationLink(destination: <#T##() -> _#>, label: <#T##() -> _#>)
             
         } // end of ZStack
         .frame(maxHeight: .infinity)
+        .fullScreenCover(isPresented: $presentMindMapView, content: {
+            MindMapView()
+                .environmentObject(folderViewModel)
+        })
+        
         .navigationTitle(currentFolder.title)
         .navigationBarItems(trailing:
-                                Button(action: {
-            print("subfolder Info: \n \(currentFolder.subfolders)")
-            print("memos Info: \n \(currentFolder.memos)")
-        }, label: {
-            ChangeableImage(imageSystemName: "magnifyingglass")
-        }))
+                                HStack {
+            Button(action: {
+                presentMindMapView = true
+            }) {
+                ChangeableImage(imageSystemName: "icloud")
+            }
+            
+            Button(action: {
+            }, label: {
+                ChangeableImage(imageSystemName: "magnifyingglass")
+            })
+        }
+        )
+        
         .onAppear {
             print("folderView has appeared!")
         }

@@ -12,9 +12,17 @@ class ExpandingClass: ObservableObject {
 }
 
 struct MindMapView: View {
-//    @ObservableObject var expansion : ExpandingClass
+
+    let imageSize: CGFloat = 28
+    @EnvironmentObject var folderViewModel: FolderViewModel
     @ObservedObject var expansion = ExpandingClass()
-    var homeFolder: Folder
+    
+    @Environment(\.presentationMode) var presentationMode
+    
+
+    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
+    
+    
     @State private var shouldNavigate: Bool = false
     
     func spreadPressed() {
@@ -24,21 +32,37 @@ struct MindMapView: View {
     
     var body: some View {
         ScrollView([.horizontal, .vertical]) {
-//            HorCollapsibleMind(expansion: expansion, folder: homeFolder)
-            HorCollapsibleMind(expansion: expansion, folder: homeFolder)
+            HorCollapsibleMind(expansion: expansion, folder: topFolders.first!, openFolder: { folder in
+                
+            })
                 .environmentObject(expansion)
         }
         .overlay {
             HStack {
                 Spacer()
                 VStack {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Close")
+                    }
+                    .padding()
+                    
                     Spacer()
+                    
                     Button(action: spreadPressed) {
                         if expansion.shouldExpand {
-                            MinusImage()
+//                            MinusImage()
+                            ChangeableImage(imageSystemName: "arrow.down.right.and.arrow.up.left", width: 28, height:28)
+                                .padding()
+                            
                         } else {
-                            PlusImage()
+//                            PlusImage()
+                            ChangeableImage(imageSystemName: "arrow.up.left.and.arrow.down.right", width: 28, height:28)
+                                .padding()
+                            
                         }
+                            
                     }
                     .padding(20)
 

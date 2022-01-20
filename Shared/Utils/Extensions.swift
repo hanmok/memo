@@ -97,3 +97,17 @@ func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
     return emptyMemo
 }
 
+func convertSetToArray(set: Set<Folder>) -> Array<Folder> {
+    var emptyFolder: [Folder] = []
+    for each in set {
+        emptyFolder.append(each)
+    }
+    print("emptymemo: \(emptyFolder)")
+    // the sooner the lower
+//    emptyMemo.sort(by: { $0.order > $1.order})
+//    emptyMemo.sort(by: { $0.modificationDate < $1.modificationDate})
+    emptyFolder.sort{ $0.modificationDate! > $1.modificationDate! }
+    // put latest at the front.
+    
+    return emptyFolder
+}

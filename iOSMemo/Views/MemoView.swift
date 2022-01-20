@@ -19,6 +19,8 @@ import Combine
  5. 내용물이 바뀌는 어떤 지점마다 저장을 해야하나? 근데 그러다가 어느순간 title, contents 를 모두 지워버리면 바로 제거 ? ? 그러면 안되는데..
  */
 
+// error : 빈 메모가 저장됨 ;;
+
 
 // relocate msg of removed memo to the folderView.
 
@@ -99,23 +101,19 @@ struct MemoView: View {
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
             Memo.delete(memo)
-        }
-        
-        if isNewMemo {
-            parent.add(memo: memo) // error.. ?? ??
-//            parent.modificationDate = Date()
-            
-            print("add to parent!")
         } else {
-//            parent.modificationDate = Date()
-            
+            memo.modificationDate = Date()
+            if isNewMemo {
+                
+                parent.add(memo: memo) // error.. ?? ??
+                //            parent.modificationDate = Date()
+                
+                print("add to parent!")
+            }
         }
-        // update parent View.
-        // this line is essential to check changes in folderView
-        // never remove without any additional code.
         parent.title += ""
         
-        memo.modificationDate = Date()
+
         
         context.saveCoreData()
         print("memo has saved, title: \(title)")

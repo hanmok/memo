@@ -23,3 +23,15 @@ class PinViewModel:ObservableObject {
         return memos.filter { !$0.pinned }
     }
 }
+
+class SpreadingViewModel: ObservableObject {
+    
+    init(folder : Folder) {
+        self.memos = convertSetToArray(set: folder.memos)
+        self.subfolders = convertSetToArray(set: folder.subfolders)
+    }
+    
+    @Published var memos: [Memo]
+    // need recursive, or dynamic programming.
+    var subfolders: [Folder]
+}

@@ -22,7 +22,7 @@ struct HomeView: View { // top folder fetch
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
-    
+    @State var presentFolderOverview = false
 //    var initialFolder: Folder
     
     var body: some View {
@@ -36,18 +36,16 @@ struct HomeView: View { // top folder fetch
                 nav.selectedFolder = Folder.returnSampleFolder(context: context)
             }
         }
+        
         // original
         return NavigationView {
             FolderView(currentFolder: nav.selectedFolder!)
-//                .navigationBarTitle(nav.selectedFolder!.title)
-//                .navigationBarItems(trailing:Button(action: {
-//                }, label: {
-//                    ChangeableImage(imageSystemName: "magnifyingglass")
-//                }))
                 .onAppear {
                     nav.selectedFolder!.getFolderInfo()
                 }
         }
+        
+//        return MindMapView(homeFolder: nav.selectedFolder!)
         
 //        return MindMapView(homeFolder: nav.selectedFolder!)
     }

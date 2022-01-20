@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HorCollapsibleMind: View, FolderNode {
+struct HorCollapsibleMind3: View, FolderNode {
     // navigation은, 밖에서 (으로) 전달해주어야 할 것 같은데 ??
     //
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -83,8 +83,6 @@ struct HorCollapsibleMind: View, FolderNode {
                 }
             }
             
-//            if subfolders != nil && !collapsed{
-//            if subfolders != nil && shouldExpandOverall{
             if folder.subfolders.count != 0 && shouldExpandOverall {
                 VStack(spacing: 0) {
                     ForEach(subfolders) {subfolder in
@@ -92,7 +90,7 @@ struct HorCollapsibleMind: View, FolderNode {
                         //                                CollapsibleMind(folder: subfolder)
 //                        HorCollapsibleMind(expansion: expansion, folder: subfolder)
 //                        HorCollapsibleMind(folder: subfolder, expansion: expansion)
-                        HorCollapsibleMind(expansion: expansion, folder: subfolder)
+                        HorCollapsibleMind3(expansion: expansion, folder: subfolder)
                             
                             .padding(.bottom, 20)
                     }
