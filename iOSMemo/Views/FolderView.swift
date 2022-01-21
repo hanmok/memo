@@ -13,10 +13,15 @@ import CoreData
 struct FolderView: View {
     @StateObject var selectedViewModel = SelectedMemoViewModel()
     @StateObject var folderViewModel = FolderViewModel()
+    
+    @StateObject var memoEditVM = MemoEditVM()
+    @StateObject var folderEditVM = FolderEditVM()
+    
     @State var shouldAddSubFolder = false
     @State var shouldHideSubFolders = false
     
     @State var newSubFolderName = ""
+    
     @State var isAddingMemo = false
     //    @State var shouldHideSubFolders = false
     
@@ -61,12 +66,16 @@ struct FolderView: View {
                 //                ScrollView(
                 //                GeometryReader { proxy in
                 VStack {
-                    // how to know size of this view ??
-                    //                    if !shouldHideSubFolders {
-                    //                        SubFolderPageView(
-                    //                            shouldAddSubFolder: $shouldAddSubFolder,
-                    //                            shouldHideSubFolderView: $shouldHideSubFolders
-                    //                        )
+//                    Text("subNavigation")
+                    
+//                    Text("root for this folder")
+//                        .frame(maxWidth: .infinity, alignment: .topLeading)
+//                        .padding(.leading, Sizes.overallPadding)
+                    HierarchyLabelView(currentFolder: currentFolder)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                        .padding(.leading, Sizes.overallPadding)
+                        
+                    
                     SubFolderPageView(
                         shouldAddSubFolder: $shouldAddSubFolder,
                         shouldHideSubFolderView: $shouldHideSubFolders
@@ -221,6 +230,15 @@ struct FolderView: View {
         })
         
         .navigationTitle(currentFolder.title)
+//        .navigationTitle(Text(currentFolder.title) + Text("\nguys"))
+//        .navigationBarTitleDisplayMode(.automatic)
+//        .toolbar {
+//            ToolbarItem(placement: .principal) {
+//                Text("Title").font(.headline)
+//                Text("Subtitle").font(.subheadline)
+//            }
+//        }
+        
         .navigationBarItems(trailing:
                                 HStack {
             Button(action: {

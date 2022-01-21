@@ -88,6 +88,7 @@ struct HomeViewPrev: View { // top folder fetch
                 }, label: {
                     ChangeableImage(imageSystemName: "magnifyingglass")
                 }))
+                
                 .onAppear {
                     nav.selectedFolder!.getFolderInfo()
                 }

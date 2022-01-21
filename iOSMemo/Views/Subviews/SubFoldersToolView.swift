@@ -16,6 +16,7 @@ struct SubFoldersToolView: View {
     
     let imageSizes : CGFloat = 24
     
+    
     //    @ObservedObject var currentFolder: Folder
     @EnvironmentObject var currentFolder: Folder
     @Environment(\.managedObjectContext) var context
@@ -32,18 +33,21 @@ struct SubFoldersToolView: View {
     func changeFolderName() {
         
     }
-//    func changeSort() {
-//        
-//    }
+    
     func deleteFolder() {
         
     }
+    
     func expandList() {
         
     }
     
     func hideSubFolderView() {
         shouldHideSubFolderView.toggle()
+    }
+    
+    func editSubfolders() {
+        
     }
     
     var body: some View {
@@ -55,7 +59,7 @@ struct SubFoldersToolView: View {
                     }
                     .padding(.horizontal, Sizes.minimalSpacing)
                     
-                    Button(action: deleteFolder) {
+                    Button(action: editSubfolders) {
                         ChangeableImage(imageSystemName: "gear", width: imageSizes, height: imageSizes)
                     }
                     
@@ -81,6 +85,8 @@ struct SubFoldersToolView: View {
             //                text: $newSubFolderName) { text in
             //                currentFolder.add(subfolder: currentFolder)
             //            }
+            
+            
         }
         
         

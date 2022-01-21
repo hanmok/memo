@@ -22,7 +22,8 @@ struct FilteredMemoList: View {
 //                if !memoVM.hasSelected {
                     NavigationLink(destination: MemoView(memo: memo, parent: parent)) {
                         MemoBoxView(memo: memo)
-                            .frame(width: 170, alignment: .topLeading)
+//                            .frame(width: 170, alignment: .topLeading)
+                            .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                     }
             }
         } header: {
