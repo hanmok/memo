@@ -18,11 +18,14 @@ struct HomeView: View { // top folder fetch
     // previously selected Folder
     @EnvironmentObject var nav: NavigationStateManager
 //    @ObservableObject var
-    @State var testChange = false
+
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
+    
+    @State var testChange = false
     @State var presentFolderOverview = false
+    
 //    var initialFolder: Folder
     
     var body: some View {
@@ -40,6 +43,8 @@ struct HomeView: View { // top folder fetch
         // original
         return NavigationView {
             FolderView(currentFolder: nav.selectedFolder!)
+                .environmentObject(MemoEditViewModel())
+                .environmentObject(FolderEditViewModel())
                 .onAppear {
                     nav.selectedFolder!.getFolderInfo()
                 }

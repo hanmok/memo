@@ -61,3 +61,13 @@ Considering..
  
 
 
+
+COPY action
+for Folder's copy action,
+we need to copy everything from target Folder and return that.
+
+
+메모의 경우, cut 과 copy 는 있지만, paste 가 아직 없음 .. ;;;;
+곤란하네..
+어디에 추가하지 ??
+우선 collapsibleMind 에 추가하기.

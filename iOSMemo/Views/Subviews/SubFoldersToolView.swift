@@ -15,19 +15,20 @@ import SwiftUI
 struct SubFoldersToolView: View {
     
     let imageSizes : CGFloat = 24
-    
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     
     //    @ObservedObject var currentFolder: Folder
     @EnvironmentObject var currentFolder: Folder
     @Environment(\.managedObjectContext) var context
     
     //    @State var shouldAddFolder = false
-    @Binding var shouldAddSubfolder: Bool
-    @Binding var shouldHideSubFolderView: Bool
+//    @Binding var shouldAddSubfolder: Bool
+//    @Binding var shouldHideSubFolderView: Bool
     //    @State var newSubFolderName = ""
     
     func addFolder() {
-        shouldAddSubfolder = true
+//        shouldAddSubfolder = true
+        folderEditVM.shouldAddFolder = true
     }
     
     func changeFolderName() {
@@ -43,7 +44,8 @@ struct SubFoldersToolView: View {
     }
     
     func hideSubFolderView() {
-        shouldHideSubFolderView.toggle()
+//        shouldHideSubFolderView.toggle()
+        folderEditVM.shouldHideSubFolders.toggle()
     }
     
     func editSubfolders() {
@@ -53,7 +55,8 @@ struct SubFoldersToolView: View {
     var body: some View {
         ZStack {
             HStack {
-                if !shouldHideSubFolderView {
+//                if !shouldHideSubFolderView {
+                if !folderEditVM.shouldHideSubFolders {
                     Button(action: addFolder) {
                         ChangeableImage(imageSystemName: "folder.badge.plus", width: imageSizes + 4, height: imageSizes + 4)
                     }
@@ -72,7 +75,8 @@ struct SubFoldersToolView: View {
 //                        .background(.red)
                         
                     
-                    ChangeableImage(imageSystemName: shouldHideSubFolderView ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
+//                    ChangeableImage(imageSystemName: shouldHideSubFolderView ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
+                    ChangeableImage(imageSystemName: folderEditVM.shouldHideSubFolders ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
                 })
                     .padding(.leading, Sizes.minimalSpacing)
                     .padding(.trailing, Sizes.overallPadding)

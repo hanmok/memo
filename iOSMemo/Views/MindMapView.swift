@@ -14,7 +14,8 @@ class ExpandingClass: ObservableObject {
 struct MindMapView: View {
 
     let imageSize: CGFloat = 28
-    @EnvironmentObject var folderViewModel: FolderViewModel
+//    @EnvironmentObject var folderViewModel: FolderViewModel
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @ObservedObject var expansion = ExpandingClass()
     
     @Environment(\.presentationMode) var presentationMode

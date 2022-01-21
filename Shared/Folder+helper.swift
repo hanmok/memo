@@ -124,6 +124,12 @@ extension Folder {
         
     }
     
+//    func copyFolder(context: NSManagedObjectContext) -> Folder {
+//        var newFolder = Folder(title: self.title, context: context)
+//
+//
+//    }
+    
     static func fetch(_ predicate: NSPredicate)-> NSFetchRequest<Folder> {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
 //        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
@@ -149,6 +155,12 @@ extension Folder {
         }
     }
     
+    // how can .. make all of the folder's subfolder and memos ??
+    static func copyFolder(target: Folder, context: NSManagedObjectContext) -> Folder {
+        var newFolder = Folder(title: target.title, context: context)
+        return newFolder
+    }
+    
     static func nestedFolder(context: NSManagedObjectContext) -> Folder {
         let parent = Folder(title: "parent", context: context)
         let child1 = Folder(title: "child1", context: context)
@@ -161,6 +173,8 @@ extension Folder {
         try? context.save()
         return parent
     }
+    
+    
 }
 
 struct FolderProperties {

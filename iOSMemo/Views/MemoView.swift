@@ -27,18 +27,6 @@ import Combine
 
 struct MemoView: View {
     
-    enum Field: Hashable {
-        case title
-        case contents
-    }
-    
-    @State private var colorSelected: Color = .white {
-        didSet {
-            memo.colorAsInt = Int64(colorSelected.asRgba)
-            saveChanges()
-        }
-    }
-    
     @ObservedObject var memo: Memo
     @EnvironmentObject var nav: NavigationStateManager
     @Environment(\.managedObjectContext) var context
@@ -46,8 +34,9 @@ struct MemoView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
-    let parent: Folder
-    let screenSize = UIScreen.main.bounds
+    @FocusState var editorFocusState: Bool
+    @GestureState var isScrolled = false
+    
     
     @State var isShowingMsg = false
     
@@ -56,6 +45,17 @@ struct MemoView: View {
     @State var title: String = ""
     
     @State var contents: String = ""
+    
+    @State private var colorSelected: Color = .white {
+        didSet {
+            memo.colorAsInt = Int64(colorSelected.asRgba)
+            saveChanges()
+        }
+    }
+    
+    let parent: Folder
+    let screenSize = UIScreen.main.bounds
+    
     //    @FocusState var focusState: Field?
     
     var titlePlaceholder: String {
@@ -77,6 +77,10 @@ struct MemoView: View {
         } else { return memo.contents }
     }
     
+   
+    
+   
+    
     init(memo: Memo, parent: Folder, isNewMemo: Bool = false) {
         self.memo = memo
         //        self.title = memo.title
@@ -89,6 +93,14 @@ struct MemoView: View {
         self.isNewMemo = isNewMemo
     }
     
+    
+    
+//    enum Field: Hashable {
+//        case title
+//        case contents
+//    }
+    
+    //    @State var overview: String = ""
     
     
     func saveChanges() {
@@ -112,9 +124,7 @@ struct MemoView: View {
             }
         }
         parent.title += ""
-        
-
-        
+    
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
@@ -184,11 +194,7 @@ struct MemoView: View {
     func changeColor() { // change BackgroundColor
         
     }
-    @FocusState var editorFocusState: Bool
     
-    //    @State var overview: String = ""
-    
-    @GestureState var isScrolled = false
     
     var body: some View {
         let scroll = DragGesture(minimumDistance: 30, coordinateSpace: .local)

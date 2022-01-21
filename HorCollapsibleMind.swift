@@ -13,9 +13,14 @@ import CoreData
 struct HorCollapsibleMind: View, FolderNode {
     // navigation은, 밖에서 (으로) 전달해주어야 할 것 같은데 ??
     @Environment(\.managedObjectContext) var context
-    @EnvironmentObject var folderVM: FolderViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
+//    @EnvironmentObject var folderVM: FolderViewModel
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+
     @ObservedObject var expansion: ExpandingClass
+    
     var folder: Folder
     
     var openFolder: (Folder) -> Void = { _ in }
@@ -61,11 +66,11 @@ struct HorCollapsibleMind: View, FolderNode {
             Button(action: toggleCollapsed) {
                 
                 HStack {
-                    if folder.subfolders.count != 0 {
-                        Image(systemName: !shouldExpandOverall ? "plus.circle" : "minus.circle")
-                    } else {
-                        Image(systemName: "")
-                    }
+//                    if folder.subfolders.count != 0 {
+//                        Image(systemName: !shouldExpandOverall ? "plus.circle" : "minus.circle")
+//                    } else {
+//                        Image(systemName: "")
+//                    }
                     
                     Text(folder.title)
                     
@@ -74,50 +79,89 @@ struct HorCollapsibleMind: View, FolderNode {
                 
             } // end of Button
             .padding(.leading, Sizes.overallPadding)
+            
             .contextMenu {
                 VStack {
+                    // NEW NAVIGATION
                     Button(action: {
-                        folderVM.navigationTargetFolder = folder
-//                         dismiss
-//                        navigationLink
+                        folderEditVM.navigationTargetFolder = folder
+//                         dismiss current View
+//                        navigationLink , navigate to navigationTarget
                     }) {
                         HStack {
                             Text("open")
                         }
                     }
+                    // RENAME
                     Button(action: {
                         //TODO : present TextField
                     }) {
                         Text("rename")
                     }
+                    // REMOVE
                     Button(action: {
                         Folder.delete(folder)
                         context.saveCoreData()
                     }) {
                         Text("remove")
                     }
+                    // COPY
                     Button(action: {
-                        folderVM.copiedFolders.append(folder)
+                        folderEditVM.didCopyFolders.append(folder)
                     }) {
                         Text("copy")
                     }
+                    // CUT
                     Button(action: {
-                        folderVM.cuttedFolders.append(folder)
+                        folderEditVM.didCutFolders.append(folder)
                     }) {
                         Text("cut")
                     }
+                    //PASTE HERE !
                     Button(action: {
-                        for each in folderVM.savedFolders {
+                        
+                        for each in folderEditVM.didCutFolders {
+                            each.parent = nil
+                        }
+                        
+                        for each in folderEditVM.savedFolders {
                             folder.add(subfolder: each)
                         }
+                        // 하나의 folder 에 있을수만 있나.. ??
+                        // copy action 을 하나 만들어봐야겠는데 ?
+
                         context.saveCoreData()
-                        //relocate !
-                        folderVM.cuttedFolders = []
                         
-                        folderVM.copiedFolders = []
+                        folderEditVM.didCutFolders = []
+                        
+                        folderEditVM.didCopyFolders = []
                         
                     }) {
-                        Text("paste here")
+                        Text("paste folders here")
+                    }
+                    
+                    Button(action: {
+                        
+//                        for each in folderEditVM.didCutFolders {
+                        for each in memoEditVM.didCopyMemos {
+                            
+                        }
+                        
+                        for each in memoEditVM.savedMemos {
+//                            folder.add(subfolder: each)
+                            folder.add(memo: each)
+                        }
+                        // 하나의 folder 에 있을수만 있나.. ??
+                        // copy action 을 하나 만들어봐야겠는데 ?
+
+                        context.saveCoreData()
+                        
+//                        folderEditVM.didCutFolders = []
+                        memoEditVM.didCutMemos = []
+//                        folderEditVM.didCopyFolders = []
+                        memoEditVM.didCopyMemos = []
+                    }) {
+                        Text("paste folders here")
                     }
                 }
             }

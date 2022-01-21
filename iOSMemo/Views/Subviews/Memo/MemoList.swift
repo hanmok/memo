@@ -15,12 +15,14 @@ struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
     //    @ObservedObject var folder: Folder
-    @Binding var isAddingMemo: Bool
+//    @Binding var isAddingMemo: Bool
     @Binding var isSpeading: Bool
     @ObservedObject var pinViewModel : PinViewModel
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
     
     func makeNewMemo() {
-        isAddingMemo = true
+//        isAddingMemo = true
+        memoEditVM.shouldAddMemo = true
     }
     
     var memoColumns: [GridItem] {

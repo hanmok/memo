@@ -11,45 +11,24 @@ import CoreData
 // FolderView should get a Valid Folder.
 
 struct FolderView: View {
-    @StateObject var selectedViewModel = SelectedMemoViewModel()
-    @StateObject var folderViewModel = FolderViewModel()
+//    @StateObject var selectedViewModel = SelectedMemoViewModel()
+//    @StateObject var folderViewModel = FolderViewModel()
     
-    @StateObject var memoEditVM = MemoEditVM()
-    @StateObject var folderEditVM = FolderEditVM()
+//    @StateObject var memoEditVM = MemoEditViewModel()
+//    @StateObject var folderEditVM = FolderEditViewModel()
     
-    @State var shouldAddSubFolder = false
-    @State var shouldHideSubFolders = false
-    
+    @EnvironmentObject var memoEditVM : MemoEditViewModel
+    @EnvironmentObject var folderEditVM : FolderEditViewModel
+        
     @State var newSubFolderName = ""
-    
-    @State var isAddingMemo = false
-    //    @State var shouldHideSubFolders = false
-    
-    //    @EnvironmentObject var nav: NavigationStateManager
-    
-    //    @State var testToggler = false
-    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @State var presentMindMapView = false
     @State var isSpeading = false
+    
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
     //    @EnvironmentObject var nav: NavigationStateManager
     
     @ObservedObject var currentFolder: Folder
-    //    func presentFolderOverview
-    //    var testMemos: [Memo] {
-    //        return currentFolder.memos.sorted()
-    //    }
-    
-    //    var memoColumns: [GridItem] {
-    //        [GridItem(.flexible(minimum: 150, maximum: 200)),
-    //         GridItem(.flexible(minimum: 150, maximum: 200))
-    //        ]
-    //    }
-    
-    
-    // use it to switch plus button into toolbar
-    //    @State var memoSelected = false
-    //    @State var plusButtonPressed: Bool = false
-    // if changed, present sheet
     
     func search() {
         
@@ -60,38 +39,24 @@ struct FolderView: View {
     }
     
     var body: some View {
-        //        NavigationView {
         ZStack {
             ScrollView(.vertical) {
-                //                ScrollView(
-                //                GeometryReader { proxy in
                 VStack {
-//                    Text("subNavigation")
-                    
-//                    Text("root for this folder")
-//                        .frame(maxWidth: .infinity, alignment: .topLeading)
-//                        .padding(.leading, Sizes.overallPadding)
+                    if currentFolder.parent != nil {
                     HierarchyLabelView(currentFolder: currentFolder)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                         .padding(.leading, Sizes.overallPadding)
-                        
+                    }
                     
-                    SubFolderPageView(
-                        shouldAddSubFolder: $shouldAddSubFolder,
-                        shouldHideSubFolderView: $shouldHideSubFolders
-                    )
-                    //                            .environmentObject(currentFolder)
+                    SubFolderPageView()
+                        .environmentObject(folderEditVM)
                     if !currentFolder.memos.isEmpty {
-//                    Spacer()
-//                    }
                         MemoList(
-                            isAddingMemo: $isAddingMemo,
                             isSpeading: $isSpeading,
                             pinViewModel: PinViewModel(
                                 memos: currentFolder.memos)
                         )
-                        //                            .environmentObject(currentFolder)
-                            .environmentObject(selectedViewModel)
+                            .environmentObject(memoEditVM)
                     }
                     
                 } // end of main VStack
@@ -101,20 +66,20 @@ struct FolderView: View {
             } // end of ScrollView
             if currentFolder.memos.isEmpty {
                 Button(action: {
-                    isAddingMemo = true
+//                    shouldAddMemo = true
+                    memoEditVM.shouldAddMemo = true
                 }) {
                     Text("Press ") + Text(Image(systemName: "plus.circle")) + Text(" to make a new memo")
                 }
             }
+            
             VStack {
                 Spacer()
                 
                 HStack {
                     Spacer()
                     
-                    //                    if !presentFolderOverview {
-                    
-                    if selectedViewModel.count == 0 {
+                    if memoEditVM.selectedMemos.count == 0 {
                         // show plus button
                         VStack(spacing: Sizes.minimalSpacing) {
                             
@@ -122,13 +87,11 @@ struct FolderView: View {
                             Button(action: {
                                 isSpeading.toggle()
                             }) {
-                                //                                ChangeableImage(imageSystemName: isSpeading ? "rays" : "timelapse", width: 32, height: 32)
                                 
                                 ZStack {
                                     ChangeableImage(imageSystemName: "circle", width: 40, height: 40)
                                     
                                     if isSpeading {
-//                                        ChangeableImage(imageSystemName:  "smallcircle.fill.circle", width: 40, height: 40)
                                         ChangeableImage(imageSystemName: "circle.fill", width: 10, height: 10)
                                     }
                                     else {
@@ -144,7 +107,7 @@ struct FolderView: View {
                             
                             
                             Button(action: {
-                                isAddingMemo = true
+                                memoEditVM.shouldAddMemo = true
                                 // navigate to MemoView
                             }) {
                                 ChangeableImage(imageSystemName: "plus.circle", width: 40, height: 40)
@@ -153,43 +116,45 @@ struct FolderView: View {
                         }
                     } else {
                         // Do handler actions here
-                        MemosToolBarView(pinnedAction: { selMemos in
-                            // TODO : if all is pinned -> unpin
-                            // else : pin all
-                            
-                            var allPinned = true
-                            for each in selMemos {
-                                if each.pinned == false {
-                                    allPinned = false
-                                    break
-                                }
-                            }
-                            
-                            if !allPinned {
-                                for each in selMemos {
-                                    each.pinned = true
-                                }
-                            }
-                            context.saveCoreData()
-                            
-                        }, cutAction: { selMemos in
-                            
-                            
-                        }, copyAction: { selMemos in
-                            // TODO : .sheet(FolderMindMap)
-                            
-                        }, changeColorAcion: {selMemos in
-                            // Change backgroundColor
-                            //                            for eachMemo in selMemos {
-                            //                                        eachMemo.bgColor = bgColor
-                            //                            }
-                        }, removeAction: { selMemos in
-                            for eachMemo in selMemos {
-                                selectedViewModel.memos.remove(eachMemo)
-                                Memo.delete(eachMemo)
-                            }
-                            context.saveCoreData()
-                        })
+//                        MemosToolBarView(pinnedAction: { selMemos in
+//                            // TODO : if all is pinned -> unpin
+//                            // else : pin all
+//
+//                            var allPinned = true
+//                            for each in selMemos {
+//                                if each.pinned == false {
+//                                    allPinned = false
+//                                    break
+//                                }
+//                            }
+//
+//                            if !allPinned {
+//                                for each in selMemos {
+//                                    each.pinned = true
+//                                }
+//                            }
+//                            context.saveCoreData()
+//
+//                        }, cutAction: { selMemos in
+//
+//
+//                        }, copyAction: { selMemos in
+//                            // TODO : .sheet(FolderMindMap)
+//
+//                        }, changeColorAcion: {selMemos in
+//                            // Change backgroundColor
+//                            //                            for eachMemo in selMemos {
+//                            //                                        eachMemo.bgColor = bgColor
+//                            //                            }
+//                        }, removeAction: { selMemos in
+//                            for eachMemo in selMemos {
+////                                selectedViewModel.memos.remove(eachMemo)
+//                                memoEditVM.selectedMemos.remove(eachMemo)
+//                                Memo.delete(eachMemo)
+//                            }
+//                            context.saveCoreData()
+//                        })
+                        MemosToolBarView()
                             .padding([.trailing], Sizes.largePadding)
                             .padding(.bottom,Sizes.overallPadding )
                     }
@@ -201,7 +166,8 @@ struct FolderView: View {
             
             // When add folder pressed
             // overlay white background when Alert show up
-            if shouldAddSubFolder {
+//            if shouldAddSubFolder {
+            if folderEditVM.shouldAddFolder {
                 Color(.white)
                     .opacity(0.8)
             }
@@ -209,7 +175,8 @@ struct FolderView: View {
             // When add folder pressed
             // Present TextFieldAlert
             TextFieldAlert(
-                isPresented: $shouldAddSubFolder,
+//                isPresented: $shouldAddSubFolder,
+                isPresented: $folderEditVM.shouldAddFolder,
                 text: $newSubFolderName) { subfolderName in
                     currentFolder.add(
                         subfolder: Folder(title: newSubFolderName, context: context)
@@ -218,7 +185,7 @@ struct FolderView: View {
                     newSubFolderName = ""
                 }
             
-            NavigationLink(destination: MemoView(memo: Memo(title: "", contents: " ", context: context), parent: currentFolder, isNewMemo: true), isActive: $isAddingMemo) {}
+            NavigationLink(destination: MemoView(memo: Memo(title: "", contents: " ", context: context), parent: currentFolder, isNewMemo: true), isActive: $memoEditVM.shouldAddMemo) {}
             
             //            NavigationLink(destination: <#T##() -> _#>, label: <#T##() -> _#>)
             
@@ -226,7 +193,8 @@ struct FolderView: View {
         .frame(maxHeight: .infinity)
         .fullScreenCover(isPresented: $presentMindMapView, content: {
             MindMapView()
-                .environmentObject(folderViewModel)
+//                .environmentObject(folderViewModel)
+                .environmentObject(folderEditVM)
         })
         
         .navigationTitle(currentFolder.title)
@@ -248,6 +216,7 @@ struct FolderView: View {
             }
             
             Button(action: {
+                print("folderEditVM : \(folderEditVM.shouldHideSubFolders)")
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })

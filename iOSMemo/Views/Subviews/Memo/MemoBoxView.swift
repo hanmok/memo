@@ -10,7 +10,7 @@ import SwiftUI
 // used only to show.
 struct MemoBoxView: View {
     
-    @EnvironmentObject var selectedVM: SelectedMemoViewModel
+//    @EnvironmentObject var selectedVM: SelectedMemoViewModel
     // navigation 과 연관지어주어야 그냥 클릭을 했을 때도 잘 될 것 같은데 ?
     
 //    var memo: Memo // has title, contents, overView(optional)

@@ -82,6 +82,14 @@ extension Memo {
             context.saveCoreData()
         }
     }
+    
+    static func copyMemo(target: Memo, context: NSManagedObjectContext) -> Memo {
+        var newMemo = Memo(title: target.title, contents: target.contents, context: context)
+        newMemo.modificationDate = target.modificationDate
+//        newMemo.pinned = target.pinned
+        return newMemo
+//        return Memo(title: target.title, contents: target.contents, context: context)
+    }
 }
 
 extension Memo: Comparable {

@@ -10,11 +10,11 @@ import SwiftUI
 struct SubFolderPageView: View {
     
     @Environment(\.colorScheme) var colorScheme
-    
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     //    @ObservedObject var folder: Folder
     @EnvironmentObject var currentFolder: Folder
-    @Binding var shouldAddSubFolder: Bool
-    @Binding var shouldHideSubFolderView: Bool
+//    @Binding var shouldAddSubFolder: Bool
+//    @Binding var shouldHideSubFolderView: Bool
     
     var subfolders: [Folder] {
         let sortedOldFolders = currentFolder.subfolders.sorted()
@@ -23,7 +23,8 @@ struct SubFolderPageView: View {
     }
     
     func makeNewSubfolder() {
-        shouldAddSubFolder = true
+//        shouldAddSubFolder = true
+        folderEditVM.shouldAddFolder = true
     }
     
     var body: some View {
@@ -32,13 +33,12 @@ struct SubFolderPageView: View {
             HStack {
                 Spacer()
                 SubFoldersToolView(
-                    shouldAddSubfolder: $shouldAddSubFolder,
-                    shouldHideSubFolderView: $shouldHideSubFolderView
+//                    shouldAddSubfolder: $shouldAddSubFolder,
+//                    shouldHideSubFolderView: $shouldHideSubFolderView
                 )
                 //                Color(.white)
             }
-            // show SubFolderView
-            if !shouldHideSubFolderView {
+            if !folderEditVM.shouldHideSubFolders {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         if subfolders.count != 0 {
@@ -79,14 +79,14 @@ struct SubFolderPageView: View {
 }
 
 
-struct SubFolderPageView2_Previews: PreviewProvider {
-    
-    static var testFolder = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
-    
-    static var previews: some View {
-        //        SubFolderPageView(folder: testFolder)
-        SubFolderPageView3( shouldAddSubFolder: .constant(false), shouldHideSubFolderView: .constant(true))
-            .environmentObject(testFolder)
-    }
-}
+//struct SubFolderPageView2_Previews: PreviewProvider {
+//
+//    static var testFolder = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
+//
+//    static var previews: some View {
+//        //        SubFolderPageView(folder: testFolder)
+//        SubFolderPageView3( shouldAddSubFolder: .constant(false), shouldHideSubFolderView: .constant(true))
+//            .environmentObject(testFolder)
+//    }
+//}
 
