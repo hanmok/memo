@@ -23,7 +23,7 @@ struct SubFoldersToolView: View {
     
     //    @State var shouldAddFolder = false
 //    @Binding var shouldAddSubfolder: Bool
-//    @Binding var shouldHideSubFolderView: Bool
+    @Binding var shouldHideSubFolderView: Bool
     //    @State var newSubFolderName = ""
     
     func addFolder() {
@@ -44,8 +44,10 @@ struct SubFoldersToolView: View {
     }
     
     func hideSubFolderView() {
-//        shouldHideSubFolderView.toggle()
-        folderEditVM.shouldHideSubFolders.toggle()
+        shouldHideSubFolderView.toggle()
+//        folderEditVM.shouldHideSubFolders.toggle() // 이거 .. 같은데 ?
+        // 여기서 이 값을 바꾸면, 해당 값을 사용하고 있는 다른 View. 에서 update 가 일어나서 해당 view 로 이동하는거 아닐까 ?
+        // 그렇다면, shouldHide property 는 State 이어야 하지 않을까 ?
     }
     
     func editSubfolders() {
@@ -55,8 +57,8 @@ struct SubFoldersToolView: View {
     var body: some View {
         ZStack {
             HStack {
-//                if !shouldHideSubFolderView {
-                if !folderEditVM.shouldHideSubFolders {
+                if !shouldHideSubFolderView {
+//                if !folderEditVM.shouldHideSubFolders {
                     Button(action: addFolder) {
                         ChangeableImage(imageSystemName: "folder.badge.plus", width: imageSizes + 4, height: imageSizes + 4)
                     }
@@ -75,8 +77,8 @@ struct SubFoldersToolView: View {
 //                        .background(.red)
                         
                     
-//                    ChangeableImage(imageSystemName: shouldHideSubFolderView ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
-                    ChangeableImage(imageSystemName: folderEditVM.shouldHideSubFolders ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
+                    ChangeableImage(imageSystemName: shouldHideSubFolderView ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
+//                    ChangeableImage(imageSystemName: folderEditVM.shouldHideSubFolders ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
                 })
                     .padding(.leading, Sizes.minimalSpacing)
                     .padding(.trailing, Sizes.overallPadding)

@@ -23,6 +23,7 @@ struct FolderView: View {
     @State var newSubFolderName = ""
     @State var presentMindMapView = false
     @State var isSpeading = false
+    @State var shouldHideSubFolders = false
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
@@ -43,20 +44,21 @@ struct FolderView: View {
             ScrollView(.vertical) {
                 VStack {
                     if currentFolder.parent != nil {
-                    HierarchyLabelView(currentFolder: currentFolder)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .padding(.leading, Sizes.overallPadding)
+                        HierarchyLabelView(currentFolder: currentFolder)
+                            .frame(maxWidth: .infinity, alignment: .topLeading)
+                            .padding(.leading, Sizes.overallPadding)
                     }
                     
-                    SubFolderPageView()
-                        .environmentObject(folderEditVM)
+                    SubFolderPageView(shouldHideSubFolderView: $shouldHideSubFolders)
+//                        .environmentObject(folderEditVM)
+                        .environmentObject(currentFolder)
                     if !currentFolder.memos.isEmpty {
                         MemoList(
                             isSpeading: $isSpeading,
                             pinViewModel: PinViewModel(
                                 memos: currentFolder.memos)
                         )
-                            .environmentObject(memoEditVM)
+//                            .environmentObject(memoEditVM)
                     }
                     
                 } // end of main VStack
@@ -185,9 +187,8 @@ struct FolderView: View {
                     newSubFolderName = ""
                 }
             
-            NavigationLink(destination: MemoView(memo: Memo(title: "", contents: " ", context: context), parent: currentFolder, isNewMemo: true), isActive: $memoEditVM.shouldAddMemo) {}
+            NavigationLink(destination: MemoView(memo: Memo(title: "", contents: "", context: context), parent: currentFolder, isNewMemo: true), isActive: $memoEditVM.shouldAddMemo) {}
             
-            //            NavigationLink(destination: <#T##() -> _#>, label: <#T##() -> _#>)
             
         } // end of ZStack
         .frame(maxHeight: .infinity)
@@ -216,7 +217,7 @@ struct FolderView: View {
             }
             
             Button(action: {
-                print("folderEditVM : \(folderEditVM.shouldHideSubFolders)")
+//                print("folderEditVM : \(folderEditVM.shouldHideSubFolders)")
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })

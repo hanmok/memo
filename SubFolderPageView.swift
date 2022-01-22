@@ -11,10 +11,11 @@ struct SubFolderPageView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
     //    @ObservedObject var folder: Folder
     @EnvironmentObject var currentFolder: Folder
 //    @Binding var shouldAddSubFolder: Bool
-//    @Binding var shouldHideSubFolderView: Bool
+    @Binding var shouldHideSubFolderView: Bool
     
     var subfolders: [Folder] {
         let sortedOldFolders = currentFolder.subfolders.sorted()
@@ -32,21 +33,21 @@ struct SubFolderPageView: View {
         VStack {
             HStack {
                 Spacer()
-                SubFoldersToolView(
-//                    shouldAddSubfolder: $shouldAddSubFolder,
-//                    shouldHideSubFolderView: $shouldHideSubFolderView
-                )
-                //                Color(.white)
+                SubFoldersToolView( shouldHideSubFolderView: $shouldHideSubFolderView)
             }
-            if !folderEditVM.shouldHideSubFolders {
+//            if !folderEditVM.shouldHideSubFolders {
+            if !shouldHideSubFolderView {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         if subfolders.count != 0 {
                             ForEach(subfolders) { subfolder in
-                                // navigationLink 문제가 아니라, nav 문제일듯.
-                                
+
                                 NavigationLink(
-                                    destination: FolderView(currentFolder: subfolder)) {
+                                    destination: FolderView(currentFolder: subfolder)
+                                        .environmentObject(folderEditVM)
+                                        .environmentObject(memoEditVM)
+                                )
+                                {
                                         FolderLabelView(folder: subfolder)
                                     }
                                     .padding(.horizontal, Sizes.overallPadding)

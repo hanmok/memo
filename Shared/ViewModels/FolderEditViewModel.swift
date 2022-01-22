@@ -31,7 +31,7 @@ class FolderEditViewModel: ObservableObject {
     }
     
     @Published var shouldAddFolder = false
-    @Published var shouldHideSubFolders = false
+//    @Published var shouldHideSubFolders = false
     
     // should be @Published ??
     @Published var selectedFolders: [Folder] = []

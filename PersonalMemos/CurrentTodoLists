@@ -71,3 +71,8 @@ we need to copy everything from target Folder and return that.
 곤란하네..
 어디에 추가하지 ??
 우선 collapsibleMind 에 추가하기.
+
+
+error code
+
+Thread 1: Fatal error: No ObservableObject of type FolderEditViewModel found. A View.environmentObject(_:) for FolderEditViewModel may be missing as an ancestor of this view.

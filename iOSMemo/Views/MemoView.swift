@@ -26,13 +26,14 @@ import Combine
 
 
 struct MemoView: View {
+
+    @Environment(\.managedObjectContext) var context
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @ObservedObject var memo: Memo
     @EnvironmentObject var nav: NavigationStateManager
-    @Environment(\.managedObjectContext) var context
-    
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     
     @FocusState var editorFocusState: Bool
     @GestureState var isScrolled = false
@@ -58,14 +59,6 @@ struct MemoView: View {
     
     //    @FocusState var focusState: Field?
     
-    var titlePlaceholder: String {
-        if memo.title == "" {
-            return "Title Placeholder"
-        } else {
-            return memo.title
-        }
-    }
-    
     let initialTitle: String
     let initialContents: String
     
@@ -77,14 +70,17 @@ struct MemoView: View {
         } else { return memo.contents }
     }
     
-   
+    var titlePlaceholder: String {
+        if memo.title == "" {
+            return "Title Placeholder"
+        } else {
+            return memo.title
+        }
+    }
     
    
-    
     init(memo: Memo, parent: Folder, isNewMemo: Bool = false) {
         self.memo = memo
-        //        self.title = memo.title
-        //        if isNewMemo
         self.parent = parent
         self.initialTitle = isNewMemo ? "Enter Title" : memo.title
         self.initialContents = memo.contents
@@ -92,16 +88,6 @@ struct MemoView: View {
 //        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
         self.isNewMemo = isNewMemo
     }
-    
-    
-    
-//    enum Field: Hashable {
-//        case title
-//        case contents
-//    }
-    
-    //    @State var overview: String = ""
-    
     
     func saveChanges() {
         print("save changes has triggered")
@@ -113,14 +99,12 @@ struct MemoView: View {
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
             Memo.delete(memo)
-        } else {
+        } else { // if both title and contents are not empty
             memo.modificationDate = Date()
             if isNewMemo {
                 
                 parent.add(memo: memo) // error.. ?? ??
                 //            parent.modificationDate = Date()
-                
-                print("add to parent!")
             }
         }
         parent.title += ""
