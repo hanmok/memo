@@ -14,7 +14,7 @@ struct SubFolderPageView: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     //    @ObservedObject var folder: Folder
     @EnvironmentObject var currentFolder: Folder
-//    @Binding var shouldAddSubFolder: Bool
+    //    @Binding var shouldAddSubFolder: Bool
     @Binding var shouldHideSubFolderView: Bool
     
     var subfolders: [Folder] {
@@ -24,34 +24,34 @@ struct SubFolderPageView: View {
     }
     
     func makeNewSubfolder() {
-//        shouldAddSubFolder = true
+        //        shouldAddSubFolder = true
         folderEditVM.shouldAddFolder = true
     }
     
     var body: some View {
         // MARK: - SubFolder List
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 Spacer()
                 SubFoldersToolView( shouldHideSubFolderView: $shouldHideSubFolderView)
+//                Spacer()
             }
-//            if !folderEditVM.shouldHideSubFolders {
+            //            if !folderEditVM.shouldHideSubFolders {
             if !shouldHideSubFolderView {
-                ScrollView {
+//                ScrollView {
                     VStack(alignment: .leading, spacing: 0) {
                         if subfolders.count != 0 {
                             ForEach(subfolders) { subfolder in
-
                                 NavigationLink(
                                     destination: FolderView(currentFolder: subfolder)
                                         .environmentObject(folderEditVM)
                                         .environmentObject(memoEditVM)
                                 )
                                 {
-                                        FolderLabelView(folder: subfolder)
-                                    }
-                                    .padding(.horizontal, Sizes.overallPadding)
-                                    .padding(.top, Sizes.minimalSpacing * 2)
+                                    FolderLabelView(folder: subfolder)
+                                }
+                                .padding(.horizontal, Sizes.smallSpacing)
+                                .padding(.top, Sizes.minimalSpacing * 2)
                             } // end of ForEach.
                         } else { // subfolder.count == 0
                             //                            HStack(alignment: .center, spacing: 3) {
@@ -69,13 +69,17 @@ struct SubFolderPageView: View {
                         }
                         
                     }
-                    .padding(.bottom, 20)
-                    .background(Color(.sRGB, white: 0.8, opacity: 0.5))
-                    //                }
-                } // end of horizontal ScrollView
+                    .padding(.bottom, Sizes.minimalSpacing * 2)
+                   
+//                } // end of horizontal ScrollView
             }
             //            }
         }
+        //        .background(Color(.sRGB, white: 0.9, opacity: 0.5))
+        .background(Color(.sRGB, white: 0.95))
+        .padding(.top, 15)
+        .cornerRadius(10)
+        .padding(.horizontal, Sizes.overallPadding)
     }
 }
 

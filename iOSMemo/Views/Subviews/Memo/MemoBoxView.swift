@@ -50,7 +50,8 @@ struct MemoBoxView: View {
             if title != nil {
                 Text(memo.title)
                 //                .font(.title2)
-                    .font(.title3)
+//                    .font(.title3)
+                    .font(.headline)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                     .lineLimit(1)
@@ -58,7 +59,7 @@ struct MemoBoxView: View {
                     .padding(5)
                 
             }
-            if memo.overview != "" {
+            if memo.overview != "" { // not using overview yet.
                 Text(memo.overview)
                     .font(.headline)
                     .foregroundColor(.primary)
@@ -69,7 +70,6 @@ struct MemoBoxView: View {
             } else {
                 if memo.contents != "" {
                     Text(memo.contents)
-                    
                         .font(.caption)
                         .foregroundColor(.primary)
                         .lineLimit(4)
@@ -79,10 +79,11 @@ struct MemoBoxView: View {
                 }
             }
         }
+        .padding(.horizontal, Sizes.smallSpacing)
 //        .frame(width: UIScreen.screenWidth / 2 - 1.5 * Sizes.overallPadding)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-        .background(Color(white: 0.8))
-        .border(isSelected ? .red : .clear , width: 3)
+        .background(Color(white: 0.95))
+        .border(isSelected ? .black : .clear , width: 3)
         .cornerRadius(5)
 //        .onTapGesture {
 //            print("onTapGesture on MemoBoxView triggered1")

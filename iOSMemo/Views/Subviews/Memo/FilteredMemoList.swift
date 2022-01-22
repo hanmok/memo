@@ -11,9 +11,10 @@ struct FilteredMemoList: View {
    
 //    @EnvironmentObject var memoVM: SelectedMemoViewModel
     
-    var memos: [Memo] // 이거때문일듯 ??..
+    var memos: [Memo]
     var title: String
     let parent: Folder
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var body: some View {
         Section {
@@ -28,11 +29,24 @@ struct FilteredMemoList: View {
             }
         } header: {
             HStack {
-                Text(title)
-                    .foregroundColor(.gray)
-                    .font(.body)
-                    .frame(alignment: .topLeading)
-                    .padding(.leading, Sizes.overallPadding)
+                if title == "pinned" {
+                    ChangeableImage(imageSystemName: "pin.fill", width: 16, height: 16)
+                        .frame(alignment: .topLeading)
+                        .rotationEffect(.degrees(45))
+                        .padding(.leading, Sizes.overallPadding + 4)
+                }
+                else if title == "unpinned" {
+                    
+                }
+                else {
+                    Text(title)
+//                        .foregroundColor(.gray)
+//                        .foregroundColor(colorsc)
+                        .foregroundColor(colorScheme.adjustTint())
+                        .font(.body)
+                        .frame(alignment: .topLeading)
+                        .padding(.leading, Sizes.overallPadding)
+                }
                 Spacer()
             }
         }

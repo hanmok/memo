@@ -61,6 +61,12 @@
 		9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7512772C17500057A84 /* CustomTextEditor.swift */; };
 		9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7542772D28C00057A84 /* ChangeableImage.swift */; };
 		9A98E7582773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
+		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
+		9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
+		9AC3B0E1279BE89C008D378B /* MemoListForMindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0E0279BE89C008D378B /* MemoListForMindMapView.swift */; };
+		9AC3B0E2279BE89C008D378B /* MemoListForMindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0E0279BE89C008D378B /* MemoListForMindMapView.swift */; };
+		9AC3B0E4279BEF46008D378B /* MemoViewForMindMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0E3279BEF46008D378B /* MemoViewForMindMap.swift */; };
+		9AC3B0E5279BEF46008D378B /* MemoViewForMindMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0E3279BEF46008D378B /* MemoViewForMindMap.swift */; };
 		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */; };
 		9AC5D10C27840554007EAA28 /* DeeepMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */; };
 		9AC5D1292784092F007EAA28 /* Folder+helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D1282784092F007EAA28 /* Folder+helper.swift */; };
@@ -167,6 +173,9 @@
 		9A98E7512772C17500057A84 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		9A98E7542772D28C00057A84 /* ChangeableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableImage.swift; sourceTree = "<group>"; };
 		9A98E7572773021200057A84 /* ModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
+		9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCollapsibleFolder.swift; sourceTree = "<group>"; };
+		9AC3B0E0279BE89C008D378B /* MemoListForMindMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListForMindMapView.swift; sourceTree = "<group>"; };
+		9AC3B0E3279BEF46008D378B /* MemoViewForMindMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewForMindMap.swift; sourceTree = "<group>"; };
 		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind3.swift; sourceTree = "<group>"; };
 		9AC5D10B27840554007EAA28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		9AC5D11527840609007EAA28 /* DeeepMemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeeepMemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,17 +258,12 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
-				9A337892279A5C9600805138 /* HierarchyLabelView.swift */,
+				9AC3B0E3279BEF46008D378B /* MemoViewForMindMap.swift */,
+				9AC3B0E0279BE89C008D378B /* MemoListForMindMapView.swift */,
+				9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */,
 				9A33788C279A553200805138 /* SubfolderEditingView.swift */,
-				9A33786C2799450100805138 /* HorCollapsibleMind.swift */,
-				9A33786927993ACA00805138 /* FolderOverView.swift */,
-				9A3378662799275E00805138 /* SubFolderPageView.swift */,
-				9A3377AF278EC6F000805138 /* SubFolderElementView.swift */,
-				9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */,
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
-				9AC5D227278BC946007EAA28 /* NavigationStateManager.swift */,
 				9AC5D20B27856F2F007EAA28 /* MemoTests.swift */,
-				9AC5D20827856E7D007EAA28 /* FolderTests.swift */,
 				9AC5D1F727854387007EAA28 /* DeeepMemo--iOS--Info.plist */,
 				9AC5D1D827854159007EAA28 /* DeeepMemo (iOS).entitlements */,
 				9A04749427715D1200571D66 /* Shared */,
@@ -274,6 +278,7 @@
 		9A04749427715D1200571D66 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				9AC5D227278BC946007EAA28 /* NavigationStateManager.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9AC5D12E278409FD007EAA28 /* Persistence.swift */,
 				9AC5D1282784092F007EAA28 /* Folder+helper.swift */,
@@ -303,6 +308,9 @@
 		9A0474B927716DBC00571D66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9A337892279A5C9600805138 /* HierarchyLabelView.swift */,
+				9A33786C2799450100805138 /* HorCollapsibleMind.swift */,
+				9A3378662799275E00805138 /* SubFolderPageView.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
 				9A0474BC27716E0000571D66 /* FolderView.swift */,
 				9A89582C2771BE1000E7B773 /* MemoView.swift */,
@@ -360,6 +368,11 @@
 		9A337898279A76A500805138 /* PreviousViews */ = {
 			isa = PBXGroup;
 			children = (
+				9AC5D233278C3145007EAA28 /* MemoList2.swift */,
+				9AC5D20827856E7D007EAA28 /* FolderTests.swift */,
+				9A33786927993ACA00805138 /* FolderOverView.swift */,
+				9A3377AF278EC6F000805138 /* SubFolderElementView.swift */,
+				9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */,
 				9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */,
 				9A04749627715D1200571D66 /* MainView.swift */,
 				9AC5D2182786F773007EAA28 /* HomeViewPrev.swift */,
@@ -403,7 +416,6 @@
 				9AC5D13C2785247D007EAA28 /* Terms */,
 				9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */,
 				9A3378262796DECA00805138 /* SkillsMemo */,
-				9AC5D233278C3145007EAA28 /* MemoList2.swift */,
 			);
 			path = PersonalMemos;
 			sourceTree = "<group>";
@@ -675,6 +687,7 @@
 				9AC5D22B278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */,
 				9A89582727717EB500E7B773 /* Sizes.swift in Sources */,
 				9A33788D279A553200805138 /* SubfolderEditingView.swift in Sources */,
+				9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */,
 				9AC5D1FF278558AC007EAA28 /* NSPredicate+helper.swift in Sources */,
 				9AC5D1292784092F007EAA28 /* Folder+helper.swift in Sources */,
 				9A3378612798207800805138 /* SelectedMemoViewModel.swift in Sources */,
@@ -695,6 +708,8 @@
 				9AC5D231278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */,
 				9A33780A2796B10E00805138 /* HomeView.swift in Sources */,
 				9AD6EEC4277C2C8A00866456 /* MemoBoxView.swift in Sources */,
+				9AC3B0E4279BEF46008D378B /* MemoViewForMindMap.swift in Sources */,
+				9AC3B0E1279BE89C008D378B /* MemoListForMindMapView.swift in Sources */,
 				9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */,
 				9A0474B427715FB200571D66 /* MainTabView.swift in Sources */,
 				9AC5D10C27840554007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
@@ -727,8 +742,10 @@
 				9A3378082796A5CB00805138 /* FilteredMemoList.swift in Sources */,
 				9A33788B27996F8300805138 /* ContainedMemos.swift in Sources */,
 				E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
+				9AC3B0E2279BE89C008D378B /* MemoListForMindMapView.swift in Sources */,
 				9AC5D22C278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */,
 				9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */,
+				9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */,
 				9AC5D21A2786F773007EAA28 /* HomeViewPrev.swift in Sources */,
 				9A33786E2799450100805138 /* HorCollapsibleMind.swift in Sources */,
 				9A33789C279A76C300805138 /* FolderLabelView3.swift in Sources */,
@@ -740,6 +757,7 @@
 				9AC5D232278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */,
 				9A33780B2796B10E00805138 /* HomeView.swift in Sources */,
 				9A3378022795736200805138 /* ColorExt.swift in Sources */,
+				9AC3B0E5279BEF46008D378B /* MemoViewForMindMap.swift in Sources */,
 				9AC5D235278C3145007EAA28 /* MemoList2.swift in Sources */,
 				9A337805279576CC00805138 /* testView.swift in Sources */,
 				9AC5D23B278D759E007EAA28 /* MemoListNode.swift in Sources */,

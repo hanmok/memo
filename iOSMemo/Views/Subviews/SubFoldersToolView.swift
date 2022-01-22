@@ -71,32 +71,25 @@ struct SubFoldersToolView: View {
                     .padding(.leading, Sizes.minimalSpacing)
                     
                 }
-                
                 Button(action: hideSubFolderView, label: {
-//                    ChangeableImage(imageSystemName: "chevron.bottom", width: imageSizes - 6, height: imageSizes - 6)
-//                        .background(.red)
                         
-                    
-                    ChangeableImage(imageSystemName: shouldHideSubFolderView ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
-//                    ChangeableImage(imageSystemName: folderEditVM.shouldHideSubFolders ? "chevron.up" : "chevron.down", width: imageSizes - 6, height: imageSizes - 6)
+                    if shouldHideSubFolderView {
+                        HStack {
+                            ChangeableImage(imageSystemName: "folder", width: imageSizes , height: imageSizes )
+                                .padding(.horizontal, Sizes.minimalSpacing)
+                            
+                        ChangeableImage(imageSystemName:  "chevron.up" , width: imageSizes - 6, height: imageSizes - 6)
+                                .padding(.leading, Sizes.minimalSpacing)
+//                                .padding(.trailing, Sizes.overallPadding)
+                        }
+                    } else {
+                        ChangeableImage(imageSystemName:  "chevron.down" , width: imageSizes - 6, height: imageSizes - 6)
+                    }
                 })
                     .padding(.leading, Sizes.minimalSpacing)
                     .padding(.trailing, Sizes.overallPadding)
-//                    .rotationEffect(shouldHideSubFolderView ?  .degrees(180) : .degrees(0))
-                
-                
             }
-            //            TextFieldAlert(
-            //                isPresented: $shouldAddFolder,
-            //                text: $newSubFolderName) { text in
-            //                currentFolder.add(subfolder: currentFolder)
-            //            }
-            
-            
         }
-        
-        
-        
     }
 }
 

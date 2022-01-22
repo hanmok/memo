@@ -76,3 +76,55 @@ we need to copy everything from target Folder and return that.
 error code
 
 Thread 1: Fatal error: No ObservableObject of type FolderEditViewModel found. A View.environmentObject(_:) for FolderEditViewModel may be missing as an ancestor of this view.
+
+
+
+copy and paste action
+
+cut, paste memo and folder.
+이거, 맡는 View 들이 너무 달라서 헷갈려.
+Memo 복사, 잘라내기는 memoList 에서 하고
+Folder 복사, 잘라내기는 Overview 에서 하고
+두개를 통합시키는게 맞는 거 아닐까 싶음..
+
+이 View 를..
+음.. ㅅㅂ..
+Overview 에서, Folder 는 좌측, Memo 는 선택한 Folder 에 대해서만 우측에 보이도록 하는건 어떄?
+
+이게 가장 우선 !!
+Not bad. maybe.. ?
+1. 그럼 우선, Collapsible 을 Vertical 로 만들어보자.
+
+2. Collapsible 에 있는 Bug 수정. 펼치고 오므릴 때 ..!!
+
+그리고, MemoView 좀 이쁘게 꾸며보자.
+
+Order 도 중요한데..
+Folder 의 경우 Order variable 다시 만들기.
+
+Search Page ??
+how .. ??
+Navigation 을 어떻게 해야하나.....??
+
+왜이렇게 펴지는 시간이 오래걸리지 ? um...
+
+어떻게 할까?
+어떡하지 ??
+
+OVerview 에서 Memo 도 볼 수 있는 기능 ??
+
+기능을 너무 많이 주면 오히려 사용성이 안좋아질 수 있다..
+그렇다고 반드시 있어야 하는 기능들이 없어지는 것도 안됨..
+
+펼치는 것을,.. 음..
+펼치고 접고 하는 기능이 아니라, 전부다 펼친 상태로 우선 열어둘까 ??
+
+여기서 메모를 열어둘 수 있도록 하는 방법을 하나 두자.
+memo 가 이미 존재하는 folder 에 대하여, archivebox 를 둔다.
+
+MindMap 에서, Mode 가 따로있어야 하는거 아닐까 ?
+
+모든 기능을 여기에 넣으려고 하다보니, 매우매우 복잡해지고 점점 어떻게 해야할지 모르겠는데.. ? ?
+
+그.. Minimap View 에서 sheet 있는 상태로 Navigation 그냥 이동하자.
+어차피 돌아올 때는 sheeet 가 있기를 원할 것 같아. 

@@ -70,8 +70,7 @@ struct MemoList: View {
                     }
                     FilteredMemoList(memos: pinViewModel.unpinnedMemos, title: "unpinned", parent: folder)
                 } // end of VStack
-            }else {
-                // speading memos
+            } else { // spreading memos
                 // search for all subfolders
                 // fetch all the memos
                 ForEach(folder.subfolders.sorted()) { subFolder in

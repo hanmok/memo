@@ -64,14 +64,7 @@ struct HorCollapsibleMind: View, FolderNode {
     var body: some View {
         HStack(alignment: .top) {
             Button(action: toggleCollapsed) {
-                
                 HStack {
-//                    if folder.subfolders.count != 0 {
-//                        Image(systemName: !shouldExpandOverall ? "plus.circle" : "minus.circle")
-//                    } else {
-//                        Image(systemName: "")
-//                    }
-                    
                     Text(folder.title)
                     
                 } // end of HStack

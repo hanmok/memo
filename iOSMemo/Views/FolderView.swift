@@ -52,6 +52,8 @@ struct FolderView: View {
                     SubFolderPageView(shouldHideSubFolderView: $shouldHideSubFolders)
 //                        .environmentObject(folderEditVM)
                         .environmentObject(currentFolder)
+                        .padding(.bottom, 20)
+                    
                     if !currentFolder.memos.isEmpty {
                         MemoList(
                             isSpeading: $isSpeading,
@@ -102,8 +104,6 @@ struct FolderView: View {
                                     
                                 }
                                 .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
-                                
-                                
                             }
                             }
                             

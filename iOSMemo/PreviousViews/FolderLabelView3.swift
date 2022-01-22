@@ -17,12 +17,24 @@ struct FolderLabelView: View {
     @ObservedObject var folder: Folder
     
     var body: some View {
-        HStack {
-            Text(Image(systemName: "folder")) + Text(folder.title)
+//        HStack {
+//            Text(Image(systemName: "folder")) + Text(folder.title)
+//        }
+//        .font(.title3)
+//        .tint(colorScheme == .dark ? .white : .black)
+//        .frame(maxWidth: .infinity, alignment: .leading)
+        
+        
+        VStack(alignment: .center) {
+                Text(Image(systemName: "folder"))
+                    .font(.subheadline)
+                + Text("  ")
+                + Text(folder.title)
+                    .font(.title3)
         }
-        .font(.title3)
-        .tint(colorScheme == .dark ? .white : .black)
-        .frame(maxWidth: .infinity, alignment: .leading)
+            .tint(colorScheme == .dark ? .white : .black)
+            
+            .frame(maxWidth: .infinity, alignment: .leading)
             
     }
 }

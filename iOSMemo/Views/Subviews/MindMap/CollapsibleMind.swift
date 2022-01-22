@@ -142,10 +142,10 @@ struct CollapsibleMind: View, FolderNode {
 //}
 
 
-struct Project {
-    var title: String
-    var id: UUID
-}
+//struct Project {
+//    var title: String
+//    var id: UUID
+//}
 
 // 문제는 ?? rendering 할때, ... 음 .. 전체를 다 하는 것 같아
 // 하나만 해야하는데 그게 아닌거지 ...
