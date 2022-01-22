@@ -30,7 +30,7 @@ struct VerCollapsibleFolder: View, FolderNode {
     
     var subfolders: [Folder] {
         var folders: [Folder] = []
-        for eachFolder in folder.subfolders {
+        for eachFolder in folder.subfolders.sorted() {
             folders.append(eachFolder)
         }
         return folders
@@ -86,12 +86,8 @@ struct VerCollapsibleFolder: View, FolderNode {
                     if !folder.memos.isEmpty {
                         Button(action: {
                             showingMemoVM.folderToShow = folder
-                            
                         }) {
-                           
                             Text(Image(systemName: "archivebox"))
-                           
-                          
                         }
                     }
 //                    .padding(.leading, Sizes.overallPadding)
