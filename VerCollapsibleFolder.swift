@@ -1,32 +1,20 @@
 import SwiftUI
 
-//enum MindType {
-//    case folder
-//    case project
-//}
-//
-//protocol FolderNode {
-//    var folder: Folder { get }
-//}
-
-//struct CollapsibleMind<Content: View>: View {
+// openFolder ?
 struct VerCollapsibleFolder: View, FolderNode {
     
-//    @Environment(\.presentationMode) var presentationMode
+    //    @Environment(\.presentationMode) var presentationMode
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @EnvironmentObject var showingMemoVM: ShowingMemoFolderVM
+    
+    @ObservedObject var expansion: ExpandingClass
+    
     let siblingSpacing: CGFloat = 5
     let parentSpacing: CGFloat = 5
     let basicSpacing: CGFloat = 3
-
     
-    //    @State var content: () -> Content
-    //    @State var content: Content
-    //    var type: MindType
-    //    var folder: Folder?
     var folder: Folder
-    //    var project: Project?
     
     var subfolders: [Folder] {
         var folders: [Folder] = []
@@ -36,9 +24,21 @@ struct VerCollapsibleFolder: View, FolderNode {
         return folders
     }
     
+    var shouldExpandOverall: Bool {
+        return !collapsed || expansion.shouldExpand
+    }
+    
+    func toggleCollapsed() {
+        self.collapsed.toggle()
+        if self.expansion.shouldExpand {
+            self.expansion.shouldExpand = false
+        }
+    }
+    
     //    @State private var navigationSelected: Bool = false
     //    @Binding var shouldNavigate: Bool
     @State private var collapsed: Bool = true
+    //    @State private var collapsed: Bool = false
     /// level of Depth
     /// Discussion: pass it using (varName + 1).
     
@@ -47,10 +47,6 @@ struct VerCollapsibleFolder: View, FolderNode {
     func moveToFolderView() {
         
     }
-    func toggleCollapsed() {
-        self.collapsed.toggle()
-    }
-    
     
     func openMemoBox() {
         
@@ -65,6 +61,7 @@ struct VerCollapsibleFolder: View, FolderNode {
         return ""
     }
     
+    
     var body: some View {
         //        NavigationView {
         HStack(alignment: .top) {
@@ -72,14 +69,12 @@ struct VerCollapsibleFolder: View, FolderNode {
                 
                 // First Element in VStack
                 HStack {
-                    // add Indentation to the left to indicate depth for both folder and project
                     
                     // Collapsing Button
                     Button(action: toggleCollapsed) {
                         HStack(alignment: .bottom) {
                             Text(folder.title)
-                            + Text(" \(numOfSubfolders) ")
-                                .font(.caption)
+                            + Text(" \(numOfSubfolders) ").font(.caption)
                         }
                     }
                     
@@ -90,36 +85,33 @@ struct VerCollapsibleFolder: View, FolderNode {
                             Text(Image(systemName: "archivebox"))
                         }
                     }
-//                    .padding(.leading, Sizes.overallPadding)
+                    //                    .padding(.leading, Sizes.overallPadding)
                 }
-                // Second Element in VStack
-                //                if subfolders != nil && !collapsed{
-                if folder.subfolders.count != 0 && !collapsed{
+                
+                if folder.subfolders.count != 0 {
                     HStack {
-                        ForEach((0 ..< collapsedLevel + 1), id: \.self) {_ in
-//                            Text("\t")
+                        ForEach((0 ..< collapsedLevel + 1), id: \.self) { _ in
                             Text("   ")
                         }
-                        
-                        VStack(spacing: 0) {
-                            //                        if subfolders != nil && !collapsed{
-                            ForEach(subfolders) {subfolder in
-                                // if last subfolder, no padding to the bottom
-                                if subfolder == subfolders.last {
-                                    VerCollapsibleFolder(folder: subfolder)
-                                } else {
-                                
-                                VerCollapsibleFolder(folder: subfolder)
-                                        .environmentObject(showingMemoVM)
-                                    .padding(.bottom, siblingSpacing)
+                        if folder.subfolders.count != 0 && shouldExpandOverall {
+                            VStack(spacing: 0) {
+                                ForEach(subfolders) {subfolder in
+                                    // if last subfolder, no padding to the bottom
+                                    if subfolder == subfolders.last {
+                                        VerCollapsibleFolder(expansion: expansion, folder: subfolder)
+                                    } else {
+                                        VerCollapsibleFolder(expansion: expansion, folder: subfolder)
+                                            .environmentObject(showingMemoVM)
+                                            .padding(.bottom, siblingSpacing)
+                                    }
                                 }
                             }
                         }
                     }
-//                    .padding(.top, parentSpacing)
-//                    .padding(.vertical, parentSpacing / 2)
-                    .animation(.easeOut, value: collapsed)
-                    .transition(.slide)
+//                    .animation(.easeOut, value: collapsed)
+//                    .animation(.easeOut, value: shouldExpandOverall)
+//                    .transition(.slide)
+                    
                 } // end of second Element in VStack (HStack)
             } // end of VStack
             Spacer()
@@ -128,6 +120,9 @@ struct VerCollapsibleFolder: View, FolderNode {
         .tint(colorScheme == .dark ? .white : .black)
         .onAppear {
             print("this view has appeared")
+            if expansion.shouldExpand {
+                collapsed = false
+            }
         }
     }
 }

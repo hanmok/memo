@@ -62,13 +62,14 @@ struct MindMapView: View {
                     showMemoList: $showMemoList,
                     showingMemoVM: showingMemoVM),
                                isActive: $showMemo) {}
-                
             }
             
             ScrollView(.vertical) {
                 
                 HStack {
-                    VerCollapsibleFolder(folder: topFolders.first!)
+//                    VerCollapsibleFolder(folder: topFolders.first!)
+//                    HorCollapsibleMind(expansion: expansion, folder: topFolders.first!)
+                    VerCollapsibleFolder(expansion: expansion, folder: topFolders.first!)
                         .environmentObject(showingMemoVM)
                         .padding([.leading], Sizes.overallPadding)
                         .padding(.top, Sizes.overallPadding * 3)
@@ -76,6 +77,7 @@ struct MindMapView: View {
                 }
                 .environmentObject(expansion)
             }
+            .navigationBarHidden(true)
             .sheet(isPresented: $showMemoList, content: {
                 ScrollView(.vertical) {
                     // makes fatal error
@@ -85,8 +87,8 @@ struct MindMapView: View {
                 }
                 .padding(.top, 20)
             })
-            
         }
+            
             if !showMemo {
                 HStack {
                     Spacer()
