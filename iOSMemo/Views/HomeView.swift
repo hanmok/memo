@@ -44,20 +44,40 @@ struct HomeView: View { // top folder fetch
         }
         
         // original
-        return NavigationView {
-            FolderView(currentFolder: nav.selectedFolder!)
-                .environmentObject(MemoEditViewModel())
-//                .environmentObject(memoEditVM)
-                .environmentObject(FolderEditViewModel())
-//                .environmentObject(folderEditVM)
-                .onAppear {
-                    nav.selectedFolder!.getFolderInfo()
-                }
-        }
+//        return NavigationView {
+//            FolderView(currentFolder: nav.selectedFolder!)
+//                .environmentObject(MemoEditViewModel())
+//                .environmentObject(FolderEditViewModel())
+//                .onAppear {
+//                    nav.selectedFolder!.getFolderInfo()
+//                }
+//        }
+        
+        return MindMapView()
+            .environmentObject(FolderEditViewModel())
+            .environmentObject(MemoEditViewModel())
+        
+//        return NavigationView {
+//            MindMapView()
+//                .environmentObject(FolderEditViewModel())
+//        }
+        
+//        return MindMapView(homeFolder: nav.selectedFolder!)
+//        return MindMapView().environmentObject(FolderEditViewModel())
         
 //        return MindMapView(homeFolder: nav.selectedFolder!)
         
-//        return MindMapView(homeFolder: nav.selectedFolder!)
+//        return NavigationView { MindMapView()
+//            .environmentObject(FolderEditViewModel())
+//        }
+//        return NavigationView {
+//            MindMapViewTest()
+//            .environmentObject(FolderEditViewModel())
+//        }
+//        return MindMapViewTest()
+//            .environmentObject(FolderEditViewModel())
+//            .environmentObject(MemoEditViewModel())
+        
     }
 }
 

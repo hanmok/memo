@@ -64,11 +64,10 @@ struct SubFoldersToolView: View {
                     }
                     .padding(.horizontal, Sizes.minimalSpacing)
                     
-                    Button(action: editSubfolders) {
-                        ChangeableImage(imageSystemName: "gear", width: imageSizes, height: imageSizes)
-                    }
-                    
-                    .padding(.leading, Sizes.minimalSpacing)
+//                    Button(action: editSubfolders) {
+//                        ChangeableImage(imageSystemName: "gear", width: imageSizes, height: imageSizes)
+//                    }
+//                    .padding(.leading, Sizes.minimalSpacing)
                     
                 }
                 Button(action: hideSubFolderView, label: {

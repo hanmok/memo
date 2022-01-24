@@ -26,14 +26,14 @@ import Combine
 
 
 struct MemoView: View {
-
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @ObservedObject var memo: Memo
     @EnvironmentObject var nav: NavigationStateManager
-
+    
     
     @FocusState var editorFocusState: Bool
     @GestureState var isScrolled = false
@@ -78,14 +78,14 @@ struct MemoView: View {
         }
     }
     
-   
+    
     init(memo: Memo, parent: Folder, isNewMemo: Bool = false) {
         self.memo = memo
         self.parent = parent
         self.initialTitle = isNewMemo ? "Enter Title" : memo.title
         self.initialContents = memo.contents
         // this line make error.
-//        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
+        //        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
         self.isNewMemo = isNewMemo
     }
     
@@ -108,7 +108,7 @@ struct MemoView: View {
             }
         }
         parent.title += ""
-    
+        
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
@@ -142,41 +142,9 @@ struct MemoView: View {
         presentationMode.wrappedValue.dismiss()
     }
     
-    func copyText() {
-        
-        msgType = .copied
-        isShowingMsg = true
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            self.isShowingMsg = false
-        }
-        
-        UIPasteboard.general.string = memo.title + "\n\n" + memo.contents
-    }
-    
-    func saveAsImage() {
-        msgType = .savedAsImage
-        isShowingMsg = true
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            self.isShowingMsg = false
-        }
-        
-        //        let image = myTextField.snapshot()
-        //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let image = self.takeCapture()
-            self.saveInPhoto(img: image)
-        }
-    }
     
     func relocateMemo() {
         // show up some.. easy look Folder Map
-    }
-    
-    func changeColor() { // change BackgroundColor
-        
     }
     
     
@@ -184,14 +152,14 @@ struct MemoView: View {
         let scroll = DragGesture(minimumDistance: 30, coordinateSpace: .local)
             .updating($isScrolled) { _, _, _ in
                 editorFocusState = false
-
+                
             }
         
         return ZStack {
             //            Color(colorSelected as CGColor ?? CGColor(gray: 1, alpha: 1))
             Color(rgba: colorSelected.asRgba)
-//            Color(rgba: Int(memo.colorAsInt))
-//            Color(
+            //            Color(rgba: Int(memo.colorAsInt))
+            //            Color(
                 .ignoresSafeArea()
             VStack {
                 TextField(initialTitle, text: $title)
@@ -209,14 +177,14 @@ struct MemoView: View {
                 
                 // MARK: - Contents
                 
-//                ZStack {
-//                    Color(rgba: colorSelected.asRgba)
+                //                ZStack {
+                //                    Color(rgba: colorSelected.asRgba)
                 TextEditor(text: $contents)
                     .padding(.horizontal, Sizes.overallPadding)
-                                    .colorMultiply(colorSelected)
-                                    .gesture(scroll)
-                                    .focused($editorFocusState)
-
+                    .colorMultiply(colorSelected)
+                    .gesture(scroll)
+                    .focused($editorFocusState)
+                
             }
             if isShowingMsg {
                 if let validMsg = msgType {
@@ -229,7 +197,7 @@ struct MemoView: View {
                 }
             }
         }
-
+        
         .onAppear(perform: {
             title = memo.title
             contents = memo.contents
@@ -242,16 +210,17 @@ struct MemoView: View {
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
-//            let newMemo = Memo(title: "new One", contents: "", context: context)
+            //            let newMemo = Memo(title: "new One", contents: "", context: context)
             
         })
         
         .navigationBarItems(
             trailing: HStack {
                 
-                ColorPicker(selection: $colorSelected) {
-                    
-                }
+//                ColorPicker(selection: $colorSelected) {
+//
+//                }
+                
                 // pin Button
                 Button(action: togglePinMemo) {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: memo.pinned ? "pin.fill" : "pin", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
@@ -263,38 +232,17 @@ struct MemoView: View {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: "trash", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
                 
-                // more Button
-                
-                Menu {
-                    Button(action: copyText) {
-                        Label {
-                            Text("Copy text")
-                            // including title ? or not ?
-                        } icon: {
-                            Image(systemName: "doc.on.doc")
-                        }
-                    }
+
+                Button(action: relocateMemo) {
+                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+//                        Image(systemName: "folder")
                     
-                    Button(action: saveAsImage) {
-                        Label {
-                            Text("Save as Image")
-                        } icon: {
-                            Image(systemName: "camera.viewfinder")
-                        }
                     }
-                    Button(action: relocateMemo) {
-                        Label {
-                            Text("Relocate memo")
-                        } icon: {
-                            Image(systemName: "folder")
-                        }
-                    }
-                } label: {
-                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: "ellipsis", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
-                }
-            })
+                })
+                
+            }
     }
-}
+    
 
 
 struct MemoView_Previews: PreviewProvider {

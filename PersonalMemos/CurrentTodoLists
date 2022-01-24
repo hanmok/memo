@@ -135,4 +135,12 @@ no problem on sorting .
 Navigation 을 타고 다녀오기때문에, VerCollapsibleView 의 상태가 초기화됨 .
 
 
-폈다 접었다 하지말고, 그냥 피자! 
+폈다 접었다 하지말고, 그냥 피자! 폈음. 시간이 그런데 왜이렇게 오래걸림.... ??
+
+Why does it take so long ???????
+
+
+할 것들
+1. 펼치는 시간 줄이기
+2. UI 다시 고려해보기.
+3. MemoList Navigation 에 LongClick 넣기

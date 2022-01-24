@@ -140,34 +140,7 @@ struct MemoViewForMindMap: View {
         presentationMode.wrappedValue.dismiss()
     }
     
-    func copyText() {
-        
-        msgType = .copied
-        isShowingMsg = true
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            self.isShowingMsg = false
-        }
-        
-        UIPasteboard.general.string = memo.title + "\n\n" + memo.contents
-    }
     
-    func saveAsImage() {
-        msgType = .savedAsImage
-        isShowingMsg = true
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            self.isShowingMsg = false
-        }
-        
-        //        let image = myTextField.snapshot()
-        //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            let image = self.takeCapture()
-            self.saveInPhoto(img: image)
-        }
-    }
     
     func relocateMemo() {
         // show up some.. easy look Folder Map
@@ -244,9 +217,10 @@ struct MemoViewForMindMap: View {
         .navigationBarItems(
             trailing: HStack {
                 
-                ColorPicker(selection: $colorSelected) {
-                    
-                }
+//                ColorPicker(selection: $colorSelected) {
+//
+//                }
+                
                 // pin Button
                 Button(action: togglePinMemo) {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: memo.pinned ? "pin.fill" : "pin", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
@@ -260,33 +234,12 @@ struct MemoViewForMindMap: View {
                 
                 // more Button
                 
-                Menu {
-                    Button(action: copyText) {
-                        Label {
-                            Text("Copy text")
-                            // including title ? or not ?
-                        } icon: {
-                            Image(systemName: "doc.on.doc")
-                        }
-                    }
-                    
-                    Button(action: saveAsImage) {
-                        Label {
-                            Text("Save as Image")
-                        } icon: {
-                            Image(systemName: "camera.viewfinder")
-                        }
-                    }
+               
                     Button(action: relocateMemo) {
-                        Label {
-                            Text("Relocate memo")
-                        } icon: {
-                            Image(systemName: "folder")
-                        }
+                        ChangeableImage(colorScheme: _colorScheme, imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+                        
                     }
-                } label: {
-                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: "ellipsis", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
-                }
+               
             })
     }
 }

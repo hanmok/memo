@@ -1,7 +1,7 @@
 import SwiftUI
 
 // openFolder ?
-struct VerCollapsibleFolder: View, FolderNode {
+struct VerCollapsibleFolderNode: View, FolderNode {
     
     //    @Environment(\.presentationMode) var presentationMode
     
@@ -78,15 +78,8 @@ struct VerCollapsibleFolder: View, FolderNode {
                     }
                     
                     
-                    //                    HStack(alignment: .bottom) {
-                    NavigationLink(destination:
-                                    FolderView( currentFolder: folder)
-                                    .environmentObject(MemoEditViewModel())
-                                    .environmentObject(FolderEditViewModel())
-                    ) {
+//                    HStack(alignment: .bottom) {
                         Text(folder.title)
-                    }
-//                        Text(folder.title)
 //                        .background(.yellow)
 //                        + Text(" \(numOfSubfolders) ").font(.caption)
 //                    }
@@ -111,9 +104,9 @@ struct VerCollapsibleFolder: View, FolderNode {
                                 ForEach(subfolders) {subfolder in
                                     // if last subfolder, no padding to the bottom
                                     if subfolder == subfolders.last {
-                                        VerCollapsibleFolder(expansion: expansion, folder: subfolder)
+                                        VerCollapsibleFolderNode(expansion: expansion, folder: subfolder)
                                     } else {
-                                        VerCollapsibleFolder(expansion: expansion, folder: subfolder)
+                                        VerCollapsibleFolderNode(expansion: expansion, folder: subfolder)
                                             .environmentObject(showingMemoVM)
                                             .padding(.bottom, siblingSpacing)
                                     }

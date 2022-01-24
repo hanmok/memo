@@ -125,12 +125,12 @@ struct CollapsibleMind: View, FolderNode {
                 } // end of second Element in VStack (HStack)
 //                Spacer()
             } // end of VStack
-            .background(.yellow)
+//            .background(.yellow)
             Spacer()
 
         } // end of HStack
         .onAppear {
-            print("this view has appeared")
+//            print("this view has appeared")
         }
     }
 }
