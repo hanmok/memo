@@ -53,14 +53,14 @@ struct HomeView: View { // top folder fetch
 //                }
 //        }
         
-        return MindMapView()
-            .environmentObject(FolderEditViewModel())
-            .environmentObject(MemoEditViewModel())
+//        return MindMapView()
+//            .environmentObject(FolderEditViewModel())
+//            .environmentObject(MemoEditViewModel())
         
-//        return NavigationView {
-//            MindMapView()
-//                .environmentObject(FolderEditViewModel())
-//        }
+        return NavigationView {
+            MindMapView()
+                .environmentObject(FolderEditViewModel())
+        }
         
 //        return MindMapView(homeFolder: nav.selectedFolder!)
 //        return MindMapView().environmentObject(FolderEditViewModel())

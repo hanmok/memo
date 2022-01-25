@@ -98,12 +98,6 @@ struct HorCollapsibleMind: View, FolderNode {
                     }) {
                         Text("remove")
                     }
-                    // COPY
-                    Button(action: {
-                        folderEditVM.didCopyFolders.append(folder)
-                    }) {
-                        Text("copy")
-                    }
                     // CUT
                     Button(action: {
                         folderEditVM.didCutFolders.append(folder)
@@ -117,7 +111,7 @@ struct HorCollapsibleMind: View, FolderNode {
                             each.parent = nil
                         }
                         
-                        for each in folderEditVM.savedFolders {
+                        for each in folderEditVM.didCutFolders {
                             folder.add(subfolder: each)
                         }
                         // 하나의 folder 에 있을수만 있나.. ??
@@ -127,32 +121,24 @@ struct HorCollapsibleMind: View, FolderNode {
                         
                         folderEditVM.didCutFolders = []
                         
-                        folderEditVM.didCopyFolders = []
-                        
                     }) {
                         Text("paste folders here")
                     }
                     
                     Button(action: {
                         
-//                        for each in folderEditVM.didCutFolders {
-                        for each in memoEditVM.didCopyMemos {
-                            
-                        }
-                        
-                        for each in memoEditVM.savedMemos {
+                        for each in memoEditVM.didCutMemos {
 //                            folder.add(subfolder: each)
                             folder.add(memo: each)
                         }
+                        
                         // 하나의 folder 에 있을수만 있나.. ??
-                        // copy action 을 하나 만들어봐야겠는데 ?
+                        // copy acti$on 을 하나 만들어봐야겠는데 ?
 
                         context.saveCoreData()
                         
 //                        folderEditVM.didCutFolders = []
                         memoEditVM.didCutMemos = []
-//                        folderEditVM.didCopyFolders = []
-                        memoEditVM.didCopyMemos = []
                     }) {
                         Text("paste folders here")
                     }

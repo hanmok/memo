@@ -1,19 +1,17 @@
+
+
+
+
+
+
 import SwiftUI
 
-// openFolder ?
 struct VerCollapsibleFolder: View, FolderNode {
     
-    //    @Environment(\.presentationMode) var presentationMode
-    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @EnvironmentObject var showingMemoVM: ShowingMemoFolderVM
     
     @ObservedObject var expansion: ExpandingClass
-    
-//    let siblingSpacing: CGFloat = 5
-//    let parentSpacing: CGFloat = 5
-//    let basicSpacing: CGFloat = 3
-    
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     let siblingSpacing: CGFloat = 3
     let parentSpacing: CGFloat = 3
     let basicSpacing: CGFloat = 2
@@ -41,7 +39,7 @@ struct VerCollapsibleFolder: View, FolderNode {
     
     @State private var collapsed: Bool = true
     
-    private let collapsedLevel: Int = 0
+    private let depthLevel: Int = 0
     
     var numOfSubfolders: String{
         
@@ -57,7 +55,7 @@ struct VerCollapsibleFolder: View, FolderNode {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
                 
-                // First Element in VStack, self.title
+                // First Element in VStack,collapsingButton + self.title
                 HStack {
                     // Collapsing Button
                     
@@ -68,42 +66,22 @@ struct VerCollapsibleFolder: View, FolderNode {
                     } else {
                         Button(action: toggleCollapsed) {
                             ChangeableImage(imageSystemName: shouldExpandOverall ? "chevron.down" : "chevron.right", width: 12, height: 12)
-//                            Image(systemName: shouldExpandOverall ? "chevron.down" : "chevron.right")
-//                                .resizable()
-//                                .frame(width: 12, height: 12)
-//                                .frame(width: 5, height: 5)
-//                                .background(.green)
-                            
                         }
                     }
                     
-                    
-                    //                    HStack(alignment: .bottom) {
                     NavigationLink(destination:
                                     FolderView( currentFolder: folder)
                                     .environmentObject(MemoEditViewModel())
-                                    .environmentObject(FolderEditViewModel())
+                                    .environmentObject(folderEditVM)
                     ) {
                         Text(folder.title)
-                    }
-//                        Text(folder.title)
-//                        .background(.yellow)
-//                        + Text(" \(numOfSubfolders) ").font(.caption)
-//                    }
-                    
-                    if !folder.memos.isEmpty {
-                        Button(action: {
-                            showingMemoVM.folderToShow = folder
-                        }) {
-                            Text(Image(systemName: "archivebox"))
-                        }
                     }
                 }
                 
                 // Second Element in VStack, children of self folder
                 if folder.subfolders.count != 0 {
                     HStack {
-                        ForEach((0 ..< collapsedLevel + 1), id: \.self) { _ in
+                        ForEach((0 ..< depthLevel + 1), id: \.self) { _ in
                             Text("   ")
                         }
                         if folder.subfolders.count != 0 && shouldExpandOverall {
@@ -114,7 +92,7 @@ struct VerCollapsibleFolder: View, FolderNode {
                                         VerCollapsibleFolder(expansion: expansion, folder: subfolder)
                                     } else {
                                         VerCollapsibleFolder(expansion: expansion, folder: subfolder)
-                                            .environmentObject(showingMemoVM)
+//                                            .environmentObject(showingMemoVM)
                                             .padding(.bottom, siblingSpacing)
                                     }
                                 }// this is .. super heavy ??

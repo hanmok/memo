@@ -57,15 +57,6 @@ struct MemosToolBarView: View {
             
             
             Menu {
-                // COPY MEMOS
-//                Button(action: {copyAction(sortedMemos)}) {
-                Button(action: {
-                    for each in editMemoVM.selectedMemos {
-                        editMemoVM.didCopyMemos.append(each)
-                    }
-                }) {
-                    Text("copy and paste")
-                }
                 // CUT MEMOS
 //                Button(action: {cutAction(sortedMemos)}) {
                 Button(action: {
