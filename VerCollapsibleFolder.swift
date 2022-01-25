@@ -12,6 +12,9 @@ struct VerCollapsibleFolder: View, FolderNode {
     
     @ObservedObject var expansion: ExpandingClass
     @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+//    @StateObject var memoEditVM = MemoEditViewModel()
+    
     let siblingSpacing: CGFloat = 3
     let parentSpacing: CGFloat = 3
     let basicSpacing: CGFloat = 2
@@ -71,7 +74,7 @@ struct VerCollapsibleFolder: View, FolderNode {
                     
                     NavigationLink(destination:
                                     FolderView( currentFolder: folder)
-                                    .environmentObject(MemoEditViewModel())
+                                    .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                     ) {
                         Text(folder.title)

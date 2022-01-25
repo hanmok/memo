@@ -21,7 +21,7 @@ struct FolderView: View {
     @EnvironmentObject var folderEditVM : FolderEditViewModel
         
     @State var newSubFolderName = ""
-    @State var presentMindMapView = false
+//    @State var presentMindMapView = false
     @State var isSpeading = false
     @State var shouldHideSubFolders = false
     
@@ -192,11 +192,6 @@ struct FolderView: View {
             
         } // end of ZStack
         .frame(maxHeight: .infinity)
-        .fullScreenCover(isPresented: $presentMindMapView, content: {
-            MindMapView()
-//                .environmentObject(folderViewModel)
-                .environmentObject(folderEditVM)
-        })
         
         .navigationTitle(currentFolder.title)
 //        .navigationTitle(Text(currentFolder.title) + Text("\nguys"))
@@ -210,11 +205,12 @@ struct FolderView: View {
         
         .navigationBarItems(trailing:
                                 HStack {
-            Button(action: {
-                presentMindMapView = true
-            }) {
-                ChangeableImage(imageSystemName: "icloud")
-            }
+            
+//            Button(action: {
+//                presentMindMapView = true
+//            }) {
+//                ChangeableImage(imageSystemName: "icloud")
+//            }
             
             Button(action: {
 //                print("folderEditVM : \(folderEditVM.shouldHideSubFolders)")

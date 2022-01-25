@@ -62,7 +62,6 @@ struct SubFolderPageView: View {
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .font(.title3)
-                            .tint(colorScheme == .dark ? .white : .black)
                             .padding(.horizontal, Sizes.overallPadding)
                             .padding(.top, Sizes.minimalSpacing * 4)
                             //                            .background(.green)
