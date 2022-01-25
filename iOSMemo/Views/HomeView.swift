@@ -35,13 +35,13 @@ struct HomeView: View { // top folder fetch
     
 //        UnitTestHelpers.deletesAllFolders(context: context)
         
-        if nav.selectedFolder == nil  {
-            if topFolders.count != 0 {
-                nav.selectedFolder = topFolders.first!
-            } else {
-                nav.selectedFolder = Folder.returnSampleFolder(context: context)
-            }
-        }
+//        if nav.selectedFolder == nil  {
+//            if topFolders.count != 0 {
+//                nav.selectedFolder = topFolders.first!
+//            } else {
+//                nav.selectedFolder = Folder.returnSampleFolder(context: context)
+//            }
+//        }
         
         // original
 //        return NavigationView {
@@ -58,7 +58,7 @@ struct HomeView: View { // top folder fetch
 //            .environmentObject(MemoEditViewModel())
         
         return NavigationView {
-            MindMapView()
+            MindMapView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolder: topFolders.first!))
                 .environmentObject(FolderEditViewModel())
         }
         

@@ -24,20 +24,22 @@ class ExpandingClass: ObservableObject {
 struct FolderWithLevel: Hashable {
     var folder: Folder
     var level: Int
+    var isCollapsed: Bool = false
+    var isShowing: Bool = true
 }
 
-//class FastFolderWithLevel: ObservableObject {
-//    @Published var folder: Folder
-//    @Published var level: Int
-//
-//    init(topFolder: Folder) {
-//        self.folder = topFolder
-//        self.level = 0
-//    }
-//}
+struct LevelAndCollapsed {
+    var level: Int
+    var collapsed: Bool
+}
+
 
 class FastFolderWithLevelGroup: ObservableObject {
+    @Published var allFolders: [FolderWithLevel]
     
+    init(targetFolder: Folder) {
+        self.allFolders = Folder.getHierarchicalFolders(topFolder: targetFolder)
+    }
 }
 
 struct MindMapView: View {
@@ -50,68 +52,20 @@ struct MindMapView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @StateObject var memoEditViewModel = MemoEditViewModel()
     
-    @ObservedObject var expansion = ExpandingClass()
+    @StateObject var expansion = ExpandingClass()
     
+    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
     func spreadPressed() {
         expansion.shouldExpand.toggle()
         print("\(expansion.shouldExpand) has changed to \(expansion.shouldExpand)")
     }
     
-    func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
-        var currentFolder: Folder? = topFolder
-        var level = 0
-        var trashSet = Set<Folder>()
-        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
-        var folderContainer = [currentFolder]
-        
-    whileLoop: while (currentFolder != nil) {
-        print("currentFolder: \(currentFolder!.id)")
-
-        if currentFolder!.subfolders.count != 0 {
-            
-            // check if trashSet has contained Folder of arrayContainer2
-            for folder in currentFolder!.subfolders.sorted() {
-                if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-    //            if !trashSet.contains(folder) && !arrayContainer2 {
-                    currentFolder = folder
-                    level += 1
-                    folderContainer.append(currentFolder!)
-                    folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
-                    continue whileLoop // this one..
-                }
-            }
-            // subFolders 가 모두 이미 고려된 경우.
-            trashSet.update(with: currentFolder!)
-            
-            
-        } else { // subfolder 가 Nil 인 경우
-            
-            trashSet.update(with: currentFolder!)
-        }
-        
-        for i in 0 ..< folderWithLevelContainer.count {
-            if !trashSet.contains(folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder) {
-                
-                currentFolder = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder
-                level = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].level
-                break
-            }
-        }
-        
-        if folderWithLevelContainer.count == trashSet.count {
-            break whileLoop
-        }
-    }
-        
-        
-        return folderWithLevelContainer
-    }
-    
-    
     var body: some View {
         
-        let foldersWithLevel = getHierarchicalFolders(topFolder: topFolders.first!)
+//        let foldersWithLevel = getHierarchicalFolders(topFolder: topFolders.first!)
+//        let foldersWithLevel = fastFolderWithLevelGroup.allFolders
+        var collapsedLevel = 1000
         
         // vercollapsibleFolder 가 recursive 라서 Binding 넣기가 너무 애매한데 .. ??
         
@@ -133,18 +87,23 @@ struct MindMapView: View {
                     
                     HStack {
                         VStack {
-                            ForEach(foldersWithLevel, id: \.self) { folderwithlevel in
-                                HStack {
-                                    Text("\(folderwithlevel.level)")
-                                    ForEach(0..<folderwithlevel.level) { _ in
-                                        Text(" ")
+                            ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) { folderwithlevel in
+                                
+//                                if collapsedLevel >= folderwithlevel.level {
+//                                if collapsedLevel >= folderwithlevel.level {
+                                    HStack {
+                                        Text("\(folderwithlevel.level)")
+                                        ForEach(0..<folderwithlevel.level) { _ in
+                                            Text(" ")
+                                        }
+                                        
+                                        FastVerCollapsibleFolder(folder: folderwithlevel.folder)
+                                            .environmentObject(memoEditViewModel)
                                     }
-//                                    Text(folderwithlevel.folder.title)
-                                    FastVerCollapsibleFolder(folder: folderwithlevel.folder)
-                                        .environmentObject(memoEditViewModel)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                     
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                    
+//                                }
                             }
                         }
                         Spacer()

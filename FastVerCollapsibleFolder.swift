@@ -35,9 +35,6 @@ struct FastVerCollapsibleFolder: View {
         return ""
     }
     
-    
-    
-    
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
