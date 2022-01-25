@@ -48,7 +48,7 @@ struct MindMapView: View {
     
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @StateObject var memoEditViewModel = MemoEditViewModel()
     
@@ -65,12 +65,12 @@ struct MindMapView: View {
         
 //        let foldersWithLevel = getHierarchicalFolders(topFolder: topFolders.first!)
 //        let foldersWithLevel = fastFolderWithLevelGroup.allFolders
-        var collapsedLevel = 1000
+//        var collapsedLevel = 1000
         
         // vercollapsibleFolder 가 recursive 라서 Binding 넣기가 너무 애매한데 .. ??
         
         
-        return ZStack {
+        return ZStack(alignment: .topLeading) {
 //            NavigationView {
                 ScrollView(.vertical) {
                     
@@ -79,59 +79,94 @@ struct MindMapView: View {
                             .padding(.leading, Sizes.overallPadding)
                             .padding(.top, Sizes.overallPadding * 3)
                         Spacer()
-                        
-                        
                     }
                     .environmentObject(expansion)
                     .environmentObject(memoEditViewModel)
                     
-                    HStack {
-                        VStack {
-                            ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) { folderwithlevel in
-                                
-//                                if collapsedLevel >= folderwithlevel.level {
-//                                if collapsedLevel >= folderwithlevel.level {
-                                    HStack {
-                                        Text("\(folderwithlevel.level)")
-                                        ForEach(0..<folderwithlevel.level) { _ in
-                                            Text(" ")
-                                        }
-                                        
-                                        FastVerCollapsibleFolder(folder: folderwithlevel.folder)
-                                            .environmentObject(memoEditViewModel)
+//                    Text("hello").swipeActions(edge: .leading, allowsFullSwipe: true) {
+//                        Text("hi")
+//                    }
+                    
+                    TestView()
+                    
+                    
+                        List {
+                            ForEach(1 ..< 18) { index in
+                                Text("\(index)")
+                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        Text("hi")
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    
-                                    
-//                                }
                             }
                         }
                         Spacer()
-                    }
-                    Spacer()
                     
+                    
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            
+//                            List {
+                                ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) { folderwithlevel in
+                                    
+                                    HStack {
+                                        ForEach(0..<folderwithlevel.level) { _ in
+                                            Text(" ")
+                                        }
+                                        FastVerCollapsibleFolder(folder: folderwithlevel.folder)
+                                            .environmentObject(memoEditViewModel)
+                                        
+                                    } // end of HStack
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.horizontal, Sizes.smallSpacing)
+                                    
+                                    Rectangle()
+                                        .frame(height: 0.5)
+                                        .foregroundColor(Color(.sRGB, white: 1, opacity: 1))
+                                        .padding(.horizontal, 10)
+
+                                } // end of ForEach, means each Folder cell
+                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                    Button(action: {print("to the left")}) {
+                                        Text("1")
+                                    }
+                                }
+//                            }
+                        }
+                        .padding(.vertical, 5)
+                        .background(Color(.sRGB, white: 0.95, opacity: 1))
+                        .cornerRadius(5)
+                        .padding(.horizontal, Sizes.overallPadding)
+                        .frame(width: UIScreen.screenWidth / 2)
+                        
+                        Spacer()
+                    }
+                
                 } // end of scrollView
                 .navigationBarHidden(true)
             //            }
-            HStack {
-                Spacer()
-                VStack {
-                    
-                    Spacer()
-                    
-                    Button(action: spreadPressed) {
-                        if expansion.shouldExpand {
-                            ChangeableImage(imageSystemName: "arrow.down.right.and.arrow.up.left", width: 28, height:28)
-                                .padding()
-                            
-                        } else {
-                            ChangeableImage(imageSystemName: "arrow.up.left.and.arrow.down.right", width: 28, height:28)
-                                .padding()
-                        }
-                    }
-                    .padding(20)
-                }
-            }
+            
+            // spreading Button
+//            HStack {
+//                Spacer()
+//                VStack {
+//
+//                    Spacer()
+//
+//                    Button(action: spreadPressed) {
+//                        if expansion.shouldExpand {
+//                            ChangeableImage(imageSystemName: "arrow.down.right.and.arrow.up.left", width: 28, height:28)
+//                                .padding()
+//
+//                        } else {
+//                            ChangeableImage(imageSystemName: "arrow.up.left.and.arrow.down.right", width: 28, height:28)
+//                                .padding()
+//                        }
+//                    }
+//                    .padding(20)
+//                }
+//            }
+            
+            
         }
     }
 }

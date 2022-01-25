@@ -57,10 +57,15 @@ struct HomeView: View { // top folder fetch
 //            .environmentObject(FolderEditViewModel())
 //            .environmentObject(MemoEditViewModel())
         
+        
+        // this is what i want.
+        
         return NavigationView {
             MindMapView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolder: topFolders.first!))
                 .environmentObject(FolderEditViewModel())
         }
+        
+//        return TestView()
         
 //        return MindMapView(homeFolder: nav.selectedFolder!)
 //        return MindMapView().environmentObject(FolderEditViewModel())
