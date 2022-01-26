@@ -41,7 +41,7 @@ struct MemoListTest: View {
     var body: some View {
                         
                         if memos.count != 0 {
-//                            NavigationView {
+
                             ForEach(memos, id: \.self) { eachMemo in
                                 
                                 NavigationLink(

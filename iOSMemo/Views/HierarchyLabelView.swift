@@ -45,6 +45,7 @@ struct HierarchyLabelView: View {
     var body: some View {
         ScrollView(.horizontal) {
             Text(getRoot(child:currentFolder))
+                .opacity(0.5)
         }
 
     }

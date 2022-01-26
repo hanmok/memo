@@ -4,6 +4,7 @@
         <attribute name="creationDate_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="hasSubfolder_" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title_" optional="YES" attributeType="String"/>
@@ -26,7 +27,7 @@
         <relationship name="folder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="memos_" inverseEntity="Folder"/>
     </entity>
     <elements>
-        <element name="Folder" positionX="-216.10107421875" positionY="94.77685546875" width="128" height="179"/>
+        <element name="Folder" positionX="-216.10107421875" positionY="94.77685546875" width="128" height="194"/>
         <element name="Memo" positionX="-36" positionY="45" width="128" height="194"/>
     </elements>
 </model>

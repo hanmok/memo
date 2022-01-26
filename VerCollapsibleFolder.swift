@@ -54,7 +54,7 @@ struct VerCollapsibleFolder: View, FolderNode {
     
     
     var body: some View {
-        //        NavigationView {
+
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
                 

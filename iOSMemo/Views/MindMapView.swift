@@ -63,33 +63,13 @@ struct MindMapView: View {
     
     var body: some View {
         
-//        let foldersWithLevel = getHierarchicalFolders(topFolder: topFolders.first!)
-//        let foldersWithLevel = fastFolderWithLevelGroup.allFolders
-//        var collapsedLevel = 1000
-        
-        // vercollapsibleFolder 가 recursive 라서 Binding 넣기가 너무 애매한데 .. ??
-        
-        
         return ZStack(alignment: .topLeading) {
-//            NavigationView {
                 ScrollView(.vertical) {
                     
-                    HStack {
-                        VerCollapsibleFolder(expansion: expansion, folder: topFolders.first!)
-                            .padding(.leading, Sizes.overallPadding)
-                            .padding(.top, Sizes.overallPadding * 3)
-                        Spacer()
-                    }
-                    .environmentObject(expansion)
-                    .environmentObject(memoEditViewModel)
+                    VStack {
                     
-//                    Text("hello").swipeActions(edge: .leading, allowsFullSwipe: true) {
-//                        Text("hi")
-//                    }
-                    
-                    TestView()
-                    
-                    
+                        TestView()
+                        
                         List {
                             ForEach(1 ..< 18) { index in
                                 Text("\(index)")
@@ -98,19 +78,21 @@ struct MindMapView: View {
                                     }
                             }
                         }
+                        
+                        HStack {
+                        Text("Folders")
+                                .padding(.leading, Sizes.overallPadding + Sizes.smallSpacing)
                         Spacer()
-                    
-                    
-                    
-                    HStack {
-                        VStack(alignment: .leading) {
-                            
-//                            List {
+                        }
+                        HStack {
+                            VStack(alignment: .leading) {
+                                
                                 ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) { folderwithlevel in
+                                    
                                     
                                     HStack {
                                         ForEach(0..<folderwithlevel.level) { _ in
-                                            Text(" ")
+                                            Text("  ")
                                         }
                                         FastVerCollapsibleFolder(folder: folderwithlevel.folder)
                                             .environmentObject(memoEditViewModel)
@@ -130,43 +112,20 @@ struct MindMapView: View {
                                         Text("1")
                                     }
                                 }
-//                            }
                         }
                         .padding(.vertical, 5)
                         .background(Color(.sRGB, white: 0.95, opacity: 1))
                         .cornerRadius(5)
                         .padding(.horizontal, Sizes.overallPadding)
-                        .frame(width: UIScreen.screenWidth / 2)
-                        
-                        Spacer()
+                    }
                     }
                 
                 } // end of scrollView
                 .navigationBarHidden(true)
-            //            }
-            
-            // spreading Button
-//            HStack {
-//                Spacer()
-//                VStack {
-//
-//                    Spacer()
-//
-//                    Button(action: spreadPressed) {
-//                        if expansion.shouldExpand {
-//                            ChangeableImage(imageSystemName: "arrow.down.right.and.arrow.up.left", width: 28, height:28)
-//                                .padding()
-//
-//                        } else {
-//                            ChangeableImage(imageSystemName: "arrow.up.left.and.arrow.down.right", width: 28, height:28)
-//                                .padding()
-//                        }
-//                    }
-//                    .padding(20)
-//                }
-//            }
-            
-            
         }
     }
 }
+
+// bubble.right.fill
+// square.split.1x2.fill
+// text.badge.plus

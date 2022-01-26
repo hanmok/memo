@@ -20,12 +20,7 @@ struct FastVerCollapsibleFolder: View {
     let parentSpacing: CGFloat = 3
     let basicSpacing: CGFloat = 2
     
-    var folder: Folder
-    
-    
-//    var shouldExpandOverall: Bool {
-//        return !collapsed || expansion.shouldExpand
-//    }
+    @ObservedObject var folder: Folder
     
     var numOfSubfolders: String{
         
@@ -38,14 +33,24 @@ struct FastVerCollapsibleFolder: View {
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
-                HStack {
-                    NavigationLink(destination: FolderView(currentFolder: folder)
-                                    .environmentObject(memoEditVM)
-                                    .environmentObject(folderEditVM)
-                    ) {
+                
+                NavigationLink(destination: FolderView(currentFolder: folder)
+                                .environmentObject(memoEditVM)
+                                .environmentObject(folderEditVM)
+                ) {
+                    HStack {
                         Text(folder.title)
+                                .foregroundColor(colorScheme.adjustTint())
+                            
+                            if folder.isFavorite {
+                                Text(Image(systemName: "star.fill"))
+                                    .tint(.yellow)
+                            }
+                        }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .background(.black)
                     }
-                }
+                
             }
         }
     }

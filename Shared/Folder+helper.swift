@@ -20,7 +20,7 @@ extension Folder {
 //        self.order = ( maxFolder?.order ?? 0 ) + 1
         
         self.modificationDate = Date()
-        
+        self.isFavorite = false
         DispatchQueue.global().async {
             context.saveCoreData()
         }
@@ -67,6 +67,11 @@ extension Folder {
         get { subfolders_ as? Set<Folder> ?? [] }
         set { subfolders_ = newValue as NSSet}
     }
+    
+//    var isFavorite: Bool {
+//        get { return isFavorite_ ?? false}
+//        set { isFavorite_ = newValue }
+//    }
     
 //    var modificationDate: Date {
 //        get { modificationDate_ ?? Date() }

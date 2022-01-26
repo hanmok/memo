@@ -22,7 +22,7 @@ struct FolderView: View {
         
     @State var newSubFolderName = ""
 //    @State var presentMindMapView = false
-    @State var isSpeading = false
+    @State var isSpreading = true
     @State var shouldHideSubFolders = false
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
@@ -37,6 +37,10 @@ struct FolderView: View {
     
     func editFolder() {
         
+    }
+    
+    func toggleFavorite() {
+        currentFolder.isFavorite.toggle()
     }
     
     var body: some View {
@@ -54,28 +58,35 @@ struct FolderView: View {
                         .environmentObject(currentFolder)
                         .padding(.bottom, 20)
                     
-                    if !currentFolder.memos.isEmpty {
-                        MemoList(
-                            isSpeading: $isSpeading,
+//                    if !currentFolder.memos.isEmpty {
+                    
+                    if currentFolder.memos.isEmpty {
+                        
+
+                    MemoList(
                             pinViewModel: PinViewModel(
                                 memos: currentFolder.memos)
                         )
-//                            .environmentObject(memoEditVM)
                     }
                     
+                    SubMemoList()
+                        .environmentObject(memoEditVM)
+                        .environmentObject(folderEditVM)
+                    
+//                    }
                 } // end of main VStack
                 .environmentObject(currentFolder)
                 // current folder to both SubFolderPageView, MemoList
                 
             } // end of ScrollView
-            if currentFolder.memos.isEmpty {
-                Button(action: {
-//                    shouldAddMemo = true
-                    memoEditVM.shouldAddMemo = true
-                }) {
-                    Text("Press ") + Text(Image(systemName: "plus.circle")) + Text(" to make a new memo")
-                }
-            }
+//            if currentFolder.memos.isEmpty {
+//                Button(action: {
+////                    shouldAddMemo = true
+//                    memoEditVM.shouldAddMemo = true
+//                }) {
+//                    Text("Press ") + Text(Image(systemName: "plus.circle")) + Text(" to make a new memo")
+//                }
+//            }
             
             VStack {
                 Spacer()
@@ -86,26 +97,6 @@ struct FolderView: View {
                     if memoEditVM.selectedMemos.count == 0 {
                         // show plus button
                         VStack(spacing: Sizes.minimalSpacing) {
-                            
-                            if !currentFolder.subfolders.isEmpty{
-                            Button(action: {
-                                isSpeading.toggle()
-                            }) {
-                                
-                                ZStack {
-                                    ChangeableImage(imageSystemName: "circle", width: 40, height: 40)
-                                    
-                                    if isSpeading {
-                                        ChangeableImage(imageSystemName: "circle.fill", width: 10, height: 10)
-                                    }
-                                    else {
-                                    ChangeableImage(imageSystemName:  "circles.hexagongrid.fill", width: 24, height: 24)
-                                    }
-                                    
-                                }
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding * 1.5))
-                            }
-                            }
                             
                             
                             Button(action: {
@@ -194,29 +185,30 @@ struct FolderView: View {
         .frame(maxHeight: .infinity)
         
         .navigationTitle(currentFolder.title)
-//        .navigationTitle(Text(currentFolder.title) + Text("\nguys"))
-//        .navigationBarTitleDisplayMode(.automatic)
-//        .toolbar {
-//            ToolbarItem(placement: .principal) {
-//                Text("Title").font(.headline)
-//                Text("Subtitle").font(.subheadline)
-//            }
-//        }
-        
         .navigationBarItems(trailing:
                                 HStack {
-            
-//            Button(action: {
-//                presentMindMapView = true
-//            }) {
-//                ChangeableImage(imageSystemName: "icloud")
-//            }
+            Button(action: {
+                toggleFavorite()
+            }, label: {
+                if currentFolder.isFavorite {
+                    Image(systemName: "star.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .tint(.yellow)
+                } else {
+                    ChangeableImage(imageSystemName: "star")
+                }
+            })
             
             Button(action: {
-//                print("folderEditVM : \(folderEditVM.shouldHideSubFolders)")
+                
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
+            
+            
+            
+            
         }
         )
         

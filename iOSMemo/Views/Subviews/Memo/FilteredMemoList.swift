@@ -37,16 +37,17 @@ struct FilteredMemoList: View {
                 }
                 else if title == "unpinned" {
                     
+                } else if title == "ignore" {
+                    
                 }
                 else {
                     Text(title)
-//                        .foregroundColor(.gray)
-//                        .foregroundColor(colorsc)
                         .foregroundColor(colorScheme.adjustTint())
                         .font(.body)
                         .frame(alignment: .topLeading)
                         .padding(.leading, Sizes.overallPadding)
                 }
+                
                 Spacer()
             }
         }

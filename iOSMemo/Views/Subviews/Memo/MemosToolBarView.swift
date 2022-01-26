@@ -56,25 +56,22 @@ struct MemosToolBarView: View {
             .cornerRadius(5)
             
             
-            Menu {
-                // CUT MEMOS
-//                Button(action: {cutAction(sortedMemos)}) {
-                Button(action: {
-                    for each in editMemoVM.selectedMemos {
-                        editMemoVM.didCutMemos.append(each)
-                    }
-                }) {
-                    Text("cut")
+            
+            // RELOCATE MEMOS
+            Button(action: {
+                for each in editMemoVM.selectedMemos {
+                    editMemoVM.didCutMemos.append(each)
                 }
-            } label: {
-//                Button(action: {copyAction(sortedMemos)}) {
-                Button(action: {
-                    // should it has some actions.. ??
-                }) {
-                    ChangeableImage(imageSystemName: "doc.on.doc",width: 20, height: 20)
-                }
-                .padding(5)
+            }) {
+                ChangeableImage(imageSystemName: "folder")
             }
+            Button {
+                // combine memos
+            } label: {
+                ChangeableImage(imageSystemName: "text.badge.plus")
+            }
+
+           
             
             // CHANGE COLOR
 //            Button(action: {changeColorAction(sortedMemos)}) {

@@ -16,10 +16,11 @@ struct MemoList: View {
     @EnvironmentObject var folder: Folder
     //    @ObservedObject var folder: Folder
 //    @Binding var isAddingMemo: Bool
-    @Binding var isSpeading: Bool
+//    @Binding var isSpeading: Bool
     @ObservedObject var pinViewModel : PinViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
+
     func makeNewMemo() {
 //        isAddingMemo = true
         memoEditVM.shouldAddMemo = true
@@ -55,36 +56,28 @@ struct MemoList: View {
     // need to be modified to have plus button when there's no memo
     var body: some View {
         
-        if memos.count != 0 {
-            
-            if !isSpeading {
-                VStack {
-                    //                    if pinnedMemos.count != 0 {
-                    if pinViewModel.pinnedMemos.count != 0 {
-                        FilteredMemoList(memos: pinViewModel.pinnedMemos, title: "pinned", parent: folder)
-                        // cross line between pinned / unpinned memos
-                        Rectangle()
-                            .frame(height: 1)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
-                    }
-                    FilteredMemoList(memos: pinViewModel.unpinnedMemos, title: "unpinned", parent: folder)
-                } // end of VStack
-            } else { // spreading memos
-                // search for all subfolders
-                // fetch all the memos
-                ForEach(folder.subfolders.sorted()) { subFolder in
-                    
-                    FilteredMemoList(memos: subFolder.returnAllMemos().memos, title: subFolder.title, parent: subFolder)
+        return VStack {
+            VStack {
+                if pinViewModel.pinnedMemos.count != 0 {
+                    FilteredMemoList(memos: pinViewModel.pinnedMemos, title: "pinned", parent: folder)
+                    // cross line between pinned / unpinned memos
                     Rectangle()
                         .frame(height: 1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
                 }
+                FilteredMemoList(memos: pinViewModel.unpinnedMemos, title: "unpinned", parent: folder)
+            } // end of VStack
+            
+            // end of current memo
+            
+            
+
+            
                 
                 
-            }
         }
+      
     }
 }
 
