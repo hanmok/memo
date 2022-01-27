@@ -14,6 +14,7 @@ struct FilteredMemoList: View {
     var memos: [Memo]
     var title: String
     let parent: Folder
+    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var body: some View {

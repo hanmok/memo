@@ -9,22 +9,6 @@ import SwiftUI
 import Combine
 
 
-/*
- Actions
- 1. 처음 상태는 어떤 것에도 Focus 가 맞추어있지 않은 상태
- 2. Title TextField : 받아온 memo 의 title 이 검정색으로 보임. 누르면 수정 가능,
- 모두 지울 시 기존 title gray 색으로 보임. 그대로 저장시 제목은 ""
- 3. 일단, 저장될 때 title, contents 가 모두 비어있는 경우 삭제하는 것으로 설정.
- 4. 사용자가 뒤로 가지 않고 앱을 갑자기 꺼버리면.. 그땐 어떻게 저장하지 ??
- 5. 내용물이 바뀌는 어떤 지점마다 저장을 해야하나? 근데 그러다가 어느순간 title, contents 를 모두 지워버리면 바로 제거 ? ? 그러면 안되는데..
- */
-
-// error : 빈 메모가 저장됨 ;;
-
-
-// relocate msg of removed memo to the folderView.
-
-
 struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
@@ -34,10 +18,10 @@ struct MemoView: View {
     @ObservedObject var memo: Memo
     @EnvironmentObject var nav: NavigationStateManager
     
-    
+    // Binding 이 하나 필요할 것 같은데 ??
     @FocusState var editorFocusState: Bool
     @GestureState var isScrolled = false
-    
+//    @Binding var isAddingMemo: Bool
     
     @State var isShowingMsg = false
     
@@ -62,7 +46,8 @@ struct MemoView: View {
     let initialTitle: String
     let initialContents: String
     
-    var isNewMemo = false
+//    var isNewMemo = false
+    var isNewMemo: Bool
     
     var contentsPlaceholder: String {
         if memo.contents == "" {
@@ -128,8 +113,6 @@ struct MemoView: View {
     }
     
     func removeMemo() {
-        // move it to "trash bin" folder
-        
         msgType = .removed // should be passed to folderView
         isShowingMsg = true
         
@@ -177,8 +160,6 @@ struct MemoView: View {
                 
                 // MARK: - Contents
                 
-                //                ZStack {
-                //                    Color(rgba: colorSelected.asRgba)
                 TextEditor(text: $contents)
                     .padding(.horizontal, Sizes.overallPadding)
                     .colorMultiply(colorSelected)
@@ -210,16 +191,9 @@ struct MemoView: View {
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
-            //            let newMemo = Memo(title: "new One", contents: "", context: context)
-            
         })
-        
         .navigationBarItems(
             trailing: HStack {
-                
-//                ColorPicker(selection: $colorSelected) {
-//
-//                }
                 
                 // pin Button
                 Button(action: togglePinMemo) {
@@ -232,17 +206,14 @@ struct MemoView: View {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: "trash", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
                 
-
+                
                 Button(action: relocateMemo) {
                     ChangeableImage(colorScheme: _colorScheme, imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
-//                        Image(systemName: "folder")
-                    
-                    }
-                })
-                
-            }
+                }
+            })
     }
-    
+}
+
 
 
 struct MemoView_Previews: PreviewProvider {

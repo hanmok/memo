@@ -13,12 +13,10 @@ struct FastVerCollapsibleFolder: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
-//    @ObservedObject var expansion: ExpandingClass
     
-    
-    let siblingSpacing: CGFloat = 3
-    let parentSpacing: CGFloat = 3
-    let basicSpacing: CGFloat = 2
+//    let siblingSpacing: CGFloat = 3
+//    let parentSpacing: CGFloat = 3
+//    let basicSpacing: CGFloat = 2
     
     @ObservedObject var folder: Folder
     
@@ -48,16 +46,8 @@ struct FastVerCollapsibleFolder: View {
                             }
                         }
                     .frame(maxWidth: .infinity, alignment: .leading)
-//                    .background(.black)
                     }
-                
             }
         }
     }
 }
-
-//struct FastVerCollapsibleFolder_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FastVerCollapsibleFolder()
-//    }
-//}

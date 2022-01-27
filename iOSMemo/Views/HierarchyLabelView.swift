@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HierarchyLabelView: View {
     let currentFolder: Folder
-//    var root = ""
     
     func getRoot(child: Folder) -> String {
         let hierarchy = getAllParents(child: child)
@@ -47,12 +46,5 @@ struct HierarchyLabelView: View {
             Text(getRoot(child:currentFolder))
                 .opacity(0.5)
         }
-
     }
 }
-
-//struct HierarchyLabelView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HierarchyLabelView()
-//    }
-//}

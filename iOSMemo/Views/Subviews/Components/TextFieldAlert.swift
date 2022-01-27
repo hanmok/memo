@@ -62,7 +62,8 @@ struct TextFieldAlert: View {
             .background(Color(.sRGB, white: 0.8))
             .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
             .offset(y: isPresented ? 0 : screenSize.height)
-            .animation(.spring().speed(2), value: isPresented)
+//            .animation(.spring().speed(2), value: isPresented)
+            .animation(.spring(), value: isPresented)
             .shadow(color: .white, radius: 6, x: -9, y: -9)
         }
     }

@@ -9,12 +9,19 @@ import SwiftUI
 
 struct PlusImage: View {
     
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+//    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var body: some View {
         
-        ChangeableImage(colorScheme: _colorScheme, imageSystemName: "plus.circle", width: 40, height: 40)
-            .frame(width: 40, height: 40)
+        ZStack {
+            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
+                .foregroundColor(.green)
+                .background(.green)
+                .clipShape(Circle())
+            ChangeableImage(imageSystemName: "plus")
+                .frame(width: 25, height: 25)
+                .foregroundColor(.black)
+        }
         
     }
 }
@@ -31,6 +38,19 @@ struct MinusImage: View {
     }
 }
 
+struct SubFolderButtonImage: View {
+    var body: some View {
+        ZStack {
+            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
+                .foregroundColor(.green)
+                .background(.green)
+                .clipShape(Circle())
+            ChangeableImage(imageSystemName: "folder")
+                .frame(width: 25, height: 25)
+                .foregroundColor(.black)
+        }
+    }
+}
 
 
 struct PlusImage_Previews: PreviewProvider {

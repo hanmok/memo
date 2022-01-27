@@ -20,6 +20,7 @@ extension Folder {
         var foldersContainer = [Folder]()
         var memosContainer = [Memo]()
         var memosCount = 0
+        
         func getAllFolders(folder: Folder)  {
             let tempFolders = folder.subfolders
             
@@ -52,6 +53,12 @@ extension Folder {
         
         return ContainedMemos(folder: self, memos: memosContainer, memosCount: memosCount)
     }
+    
+    func checkIfHasMemo() -> Bool {
+        
+        return false
+    }
+    
 }
 
 
