@@ -46,7 +46,7 @@ class MemoEditViewModel: ObservableObject {
     
     @Published var hasSelected = false
     
-    @Published var shouldAddMemo = false
+//    @Published var shouldAddMemo = false
     @Published var shouldChangeColor = false
     
     @Published var selectedMemos = Set<Memo>()

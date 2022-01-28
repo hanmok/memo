@@ -14,9 +14,9 @@ struct MemoList: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
 
-    func makeNewMemo() {
-        memoEditVM.shouldAddMemo = true
-    }
+//    func makeNewMemo() {
+//        memoEditVM.shouldAddMemo = true
+//    }
     
     var pinnedMemos: [Memo] {
         return folder.memos.filter { $0.pinned == true}

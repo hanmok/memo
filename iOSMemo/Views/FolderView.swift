@@ -17,8 +17,6 @@ struct FolderView: View {
     @State var isAddingMemo = false
     
     @State var newSubFolderName = ""
-    @State var isSpreading = true
-    @State var shouldHideSubFolders = false
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
@@ -63,7 +61,9 @@ struct FolderView: View {
 //                                    memos: currentFolder.memos)
 //                            )
                             MemoList()
+                                .padding(.top, 10)
                         }
+                        
                         HStack {
                             Spacer()
                             // Button Or SubFolderView
@@ -81,6 +81,7 @@ struct FolderView: View {
                                     .offset(x: isShowingSubFolderView ? 0 : UIScreen.screenWidth)
                                     .animation(.spring(), value: isShowingSubFolderView)
                             } // end of ZStack
+                            .padding(.top, 10)
                         }
                     }
                 } // end of main VStack

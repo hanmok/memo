@@ -42,13 +42,23 @@ struct SubFolderView: View {
             
             VStack {
                 ForEach(subFolders) { subFolder in
+                    // how to make.. it disappear if moved ?
+                    
+                    
                     NavigationLink {
                         FolderView(currentFolder: subFolder)
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
                     } label: {
                         Text(subFolder.title)
+                            .frame(alignment: .leading)
                     }
+                    
+//                    .onTapGesture {
+//                        print("nav has tapped!")
+//                        isShowingSubFolderView = false
+//                    }
+                    
                 }
             }
             

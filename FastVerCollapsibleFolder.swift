@@ -14,12 +14,12 @@ struct FastVerCollapsibleFolder: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     
-//    let siblingSpacing: CGFloat = 3
-//    let parentSpacing: CGFloat = 3
-//    let basicSpacing: CGFloat = 2
+    //    let siblingSpacing: CGFloat = 3
+    //    let parentSpacing: CGFloat = 3
+    //    let basicSpacing: CGFloat = 2
     
     @ObservedObject var folder: Folder
-    
+    var level: Int
     var numOfSubfolders: String{
         
         if folder.subfolders.count != 0 {
@@ -30,24 +30,60 @@ struct FastVerCollapsibleFolder: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            VStack(alignment: .leading) {
-                
-                NavigationLink(destination: FolderView(currentFolder: folder)
-                                .environmentObject(memoEditVM)
-                                .environmentObject(folderEditVM)
-                ) {
-                    HStack {
-                        Text(folder.title)
-                                .foregroundColor(colorScheme.adjustTint())
-                            
-                            if folder.isFavorite {
-                                Text(Image(systemName: "star.fill"))
-                                    .tint(.yellow)
-                            }
-                        }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            
+            NavigationLink(destination: FolderView(currentFolder: folder)
+                            .environmentObject(memoEditVM)
+                            .environmentObject(folderEditVM)
+            ) {
+                HStack {
+                    ForEach(0 ..< level + 1) { _ in
+                        Text("  ")
                     }
-            }
-        }
+                    
+                    Text(folder.title)
+                        .foregroundColor(colorScheme.adjustTint())
+                    
+                    if folder.isFavorite {
+                        Text(Image(systemName: "star.fill"))
+                            .tint(.yellow) // why not working ?
+                    }
+                    
+                    EmptyView()
+                        .background(.white)
+                } // end of HStack
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                    
+                    Button {
+                        // remove !
+                    } label: {
+                        ChangeableImage(imageSystemName: "trash")
+                        
+                    }
+                    .tint(.red)
+                    
+                    
+                    Button {
+                        // change Folder location
+                    } label: {
+                        ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
+                        
+                    }
+                    .tint(.green)
+                    
+                    Button {
+                        // change Folder location
+                        // change Folder Name
+                    } label: {
+                        //                                EmptyView()
+                        ChangeableImage(imageSystemName: "pencil")
+                        
+                    }
+                    .tint(.yellow)
+                    
+                }
+                //                    .background(.blue)
+                
+            } // end of NavigationLink
+        }// end of HStack
     }
 }

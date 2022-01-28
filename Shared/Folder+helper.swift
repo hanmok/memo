@@ -68,6 +68,10 @@ extension Folder {
         set { subfolders_ = newValue as NSSet}
     }
     
+//    var isCollased: Bool {
+//        get { isCollased}
+//    }
+    
 //    var isFavorite: Bool {
 //        get { return isFavorite_ ?? false}
 //        set { isFavorite_ = newValue }
@@ -226,7 +230,7 @@ extension Folder {
 }
 
 struct FolderProperties {
-    static let id = "id_"
+    static let id = "id"
     static let creationDate = "creationDate_"
     static let modificationDate = "modificationDate"
     static let title = "title_"
