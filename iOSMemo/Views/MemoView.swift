@@ -9,6 +9,11 @@ import SwiftUI
 import Combine
 
 
+enum Field: Hashable {
+    case title
+    case contents
+}
+
 struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
@@ -20,6 +25,8 @@ struct MemoView: View {
     
     // Binding 이 하나 필요할 것 같은데 ??
     @FocusState var editorFocusState: Bool
+    @FocusState var focusState: Field?
+    
     @GestureState var isScrolled = false
 //    @Binding var isAddingMemo: Bool
     
@@ -41,7 +48,7 @@ struct MemoView: View {
     let parent: Folder
     let screenSize = UIScreen.main.bounds
     
-    //    @FocusState var focusState: Field?
+
     
     let initialTitle: String
     let initialContents: String
@@ -149,9 +156,21 @@ struct MemoView: View {
                 
                     .font(.title2)
                     .submitLabel(.continue)
-                //                .focused($focusState, equals: Field.title)
+                    .focused($focusState, equals: .title)
+                    .onAppear(perform: {
+                        if self.isNewMemo == true {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  /// Anything over 0.5 seems to work
+                                self.focusState = .title
+                            }
+                        }
+                    })
                     .padding(.bottom, Sizes.largePadding)
                     .padding(.horizontal, Sizes.overallPadding)
+                    .onSubmit {
+                        focusState = .contents
+                    }
+                    
+                
                 // TextField Underline
                     .overlay {
                         Divider()
@@ -165,7 +184,14 @@ struct MemoView: View {
                     .colorMultiply(colorSelected)
                     .gesture(scroll)
                     .focused($editorFocusState)
-                
+                    .focused($focusState, equals: .contents)
+                    .onAppear(perform: {
+                        if self.isNewMemo == false {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+                                self.focusState = .contents
+                            }
+                        }
+                    })
             }
             if isShowingMsg {
                 if let validMsg = msgType {
@@ -185,7 +211,13 @@ struct MemoView: View {
             print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
+            
+            if isNewMemo == true {
+                self.focusState = .title
+                print("isNewMemo == true, focusState = .title ")
+            }
         })
+        
         // triggered after FolderView has appeared
         .onDisappear(perform: {
             print("memoView has disappeared!")
