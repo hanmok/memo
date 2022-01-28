@@ -66,6 +66,15 @@ struct MindMapView: View {
                         FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
                             .environmentObject(memoEditViewModel)
                             .environmentObject(folderEditViewModel)
+// without this action, trailing buttons not show up properly..
+                        
+                            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                Button {
+                                } label: {
+
+                                }
+
+                            }
                     }
                 } // end of List
                 

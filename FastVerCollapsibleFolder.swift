@@ -51,42 +51,42 @@ struct FastVerCollapsibleFolder: View {
                     EmptyView()
                         .background(.white)
                 } // end of HStack
-//                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-//
-//                    Button {
-//                        // remove ! delete!
-//                        Folder.delete(folder)
-//                        context.saveCoreData()
-//                    } label: {
-//                        ChangeableImage(imageSystemName: "trash")
-//
-//                    }
-//                    .tint(.red)
-//
-//                    // change Folder location
-//                    Button {
-//                        folderEditVM.shouldShowSelectingView = true
-//                        folderEditVM.folderToCut = folder
-//
-//                    } label: {
-//                        ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
-//
-//                    }
-//                    .tint(.green)
-//
-//                    // change Folder Name
-//                    Button {
-//                        folderEditVM.shouldChangeFolderName = true
-//                        folderEditVM.selectedFolder = folder
-//                    } label: {
-//                        //                                EmptyView()
-//                        ChangeableImage(imageSystemName: "pencil")
-//
-//                    }
-//                    .tint(.yellow)
-//
-//                }
-                //                    .background(.blue)
+                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+
+                    Button {
+                        // remove ! delete!
+                        Folder.delete(folder)
+                        context.saveCoreData()
+                    } label: {
+                        ChangeableImage(imageSystemName: "trash")
+
+                    }
+                    .tint(.red)
+
+                    // change Folder location
+                    Button {
+                        folderEditVM.shouldShowSelectingView = true
+                        folderEditVM.folderToCut = folder
+
+                    } label: {
+                        ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
+
+                    }
+                    .tint(.green)
+
+                    // change Folder Name
+                    Button {
+                        folderEditVM.shouldChangeFolderName = true
+                        folderEditVM.selectedFolder = folder
+                    } label: {
+                        //                                EmptyView()
+                        ChangeableImage(imageSystemName: "pencil")
+
+                    }
+                    .tint(.yellow)
+
+                }
+//                                    .background(.blue)
                 
             } // end of NavigationLink
         }// end of HStack
