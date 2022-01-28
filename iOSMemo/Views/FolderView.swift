@@ -22,6 +22,7 @@ struct FolderView: View {
     
     @ObservedObject var currentFolder: Folder
     
+    @FocusState var addFolderFocus: Bool
     func search() {
         
     }
@@ -62,6 +63,7 @@ struct FolderView: View {
 //                            )
                             MemoList()
                                 .padding(.top, 10)
+                                
                         }
                         
                         HStack {
@@ -122,13 +124,22 @@ struct FolderView: View {
             TextFieldAlert(
                 //                isPresented: $shouldAddSubFolder,
                 isPresented: $folderEditVM.shouldAddFolder,
-                text: $newSubFolderName) { subfolderName in
+                text: $newSubFolderName,
+                focusState: _addFolderFocus) { subfolderName in
                     currentFolder.add(
                         subfolder: Folder(title: newSubFolderName, context: context)
                     )
                     // setup initial name empty
                     newSubFolderName = ""
                     
+                }
+                .onReceive(folderEditVM.$shouldAddFolder) { output in
+                    if output == true {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+                            print("hi")
+                            self.addFolderFocus = true
+                        }
+                    }
                 }
             
             NavigationLink(

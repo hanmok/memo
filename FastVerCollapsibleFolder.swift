@@ -6,11 +6,11 @@
 //
 
 import SwiftUI
-
+import CoreData
 struct FastVerCollapsibleFolder: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+    @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     
@@ -54,7 +54,9 @@ struct FastVerCollapsibleFolder: View {
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                     
                     Button {
-                        // remove !
+                        // remove ! delete!
+                        Folder.delete(folder)
+                        context.saveCoreData()
                     } label: {
                         ChangeableImage(imageSystemName: "trash")
                         
@@ -70,9 +72,11 @@ struct FastVerCollapsibleFolder: View {
                     }
                     .tint(.green)
                     
+                    // change Folder Name
                     Button {
                         // change Folder location
-                        // change Folder Name
+                        folderEditVM.shouldChangeFolderName = true
+                        folderEditVM.selectedFolder = folder
                     } label: {
                         //                                EmptyView()
                         ChangeableImage(imageSystemName: "pencil")

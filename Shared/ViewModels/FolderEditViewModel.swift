@@ -19,6 +19,10 @@ class FolderEditViewModel: ObservableObject {
     
     var navigationTargetFolder: Folder? = nil
     
+    @Published var shouldChangeFolderName = false
+    
+    var selectedFolder: Folder? = nil
+    
     var targetFolder: Folder? = nil {
         didSet {
             for eachFolder in didCutFolders {
