@@ -121,18 +121,21 @@ struct FolderView: View {
             
             // When add folder pressed
             // Present TextFieldAlert
+            
+            
             TextFieldAlert(
-                //                isPresented: $shouldAddSubFolder,
                 isPresented: $folderEditVM.shouldAddFolder,
-                text: $newSubFolderName,
-                focusState: _addFolderFocus) { subfolderName in
-                    currentFolder.add(
-                        subfolder: Folder(title: newSubFolderName, context: context)
-                    )
-                    // setup initial name empty
-                    newSubFolderName = ""
-                    
-                }
+                           text: $newSubFolderName,
+                focusState: _addFolderFocus,
+                submitAction: { subfolderName in
+                currentFolder.add(
+                    subfolder: Folder(title: newSubFolderName, context: context)
+                )
+                newSubFolderName = ""
+            }, cancelAction: {
+                newSubFolderName = ""
+            })
+            
                 .onReceive(folderEditVM.$shouldAddFolder) { output in
                     if output == true {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
@@ -152,6 +155,10 @@ struct FolderView: View {
             
             
         } // end of ZStack
+        .onDisappear(perform: {
+            folderEditVM.shouldAddFolder = false
+            newSubFolderName = ""
+        })
         .frame(maxHeight: .infinity)
         
         .navigationTitle(currentFolder.title)

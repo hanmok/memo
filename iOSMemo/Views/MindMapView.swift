@@ -81,45 +81,45 @@ struct MindMapView: View {
             } // end of VStack
             
             // change Folder Name
-//            TextFieldAlert(
-//                isPresented: $folderEditViewModel.shouldChangeFolderName,
-//                text: $changedFolderName,
-//                focusState: _changingNameFocus) { newName in
-//
-//                    if folderEditViewModel.selectedFolder != nil {
-//
-//                    folderEditViewModel.selectedFolder!.title = newName
-//                        context.saveCoreData()
-//                        folderEditViewModel.selectedFolder = nil
-//                    }
-//
-//                // setup initial name empty
-//                changedFolderName = ""
-//            } cancelAction: {
-//                changedFolderName = ""
-//            }
-//            .onReceive(folderEditViewModel.$shouldChangeFolderName) { output in
-////                print("output : \(output)")
-//                if output == true {
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-//                        print("hi")
-//                        self.changingNameFocus = true
-//                    }
-//                }
-//            }
+            TextFieldAlert(
+                isPresented: $folderEditViewModel.shouldChangeFolderName,
+                text: $changedFolderName,
+                focusState: _changingNameFocus) { newName in
+
+                    if folderEditViewModel.selectedFolder != nil {
+
+                    folderEditViewModel.selectedFolder!.title = newName
+                        context.saveCoreData()
+                        folderEditViewModel.selectedFolder = nil
+                    }
+
+                // setup initial name empty
+                changedFolderName = ""
+            } cancelAction: {
+                changedFolderName = ""
+            }
+            .onReceive(folderEditViewModel.$shouldChangeFolderName) { output in
+//                print("output : \(output)")
+                if output == true {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+                        print("hi")
+                        self.changingNameFocus = true
+                    }
+                }
+            }
             
             // name for before and after !
             // and.. some varialbes are not named properly.
             
         } // end of ZStack
-//        .sheet(isPresented: $showSelectingFolderView, content: {
-//            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
-//                .environmentObject(folderEditViewModel)
-//                .environmentObject(memoEditViewModel)
-//        })
-//        .sheet(isPresented: $folderEditViewModel.shouldShowSelectingView, content: {
-//            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
-//        })
+        .sheet(isPresented: $showSelectingFolderView, content: {
+            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+                .environmentObject(folderEditViewModel)
+                .environmentObject(memoEditViewModel)
+        })
+        .sheet(isPresented: $folderEditViewModel.shouldShowSelectingView, content: {
+            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+        })
         .navigationBarHidden(true)
     }
 }

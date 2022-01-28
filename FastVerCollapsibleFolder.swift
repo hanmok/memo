@@ -86,8 +86,6 @@ struct FastVerCollapsibleFolder: View {
                     .tint(.yellow)
 
                 }
-//                                    .background(.blue)
-                
             } // end of NavigationLink
         }// end of HStack
     }
