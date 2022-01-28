@@ -144,3 +144,10 @@ Why does it take so long ???????
 1. 펼치는 시간 줄이기
 2. UI 다시 고려해보기.
 3. MemoList Navigation 에 LongClick 넣기
+
+
+
+MemoView 에 SelectingFolderView 를 어떻게 넣지 ??
+흠.. 그런데 꼭 여기에 넣어야해 ?
+FolderView 에 넣으면 안됨 ?
+빼자. 

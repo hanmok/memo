@@ -21,7 +21,7 @@ struct MemoView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @ObservedObject var memo: Memo
-    @EnvironmentObject var nav: NavigationStateManager
+//    @EnvironmentObject var nav: NavigationStateManager
     
     // Binding 이 하나 필요할 것 같은데 ??
     @FocusState var editorFocusState: Bool
@@ -37,6 +37,8 @@ struct MemoView: View {
     @State var title: String = ""
     
     @State var contents: String = ""
+    
+//    @State var showFoldersToSelect = false
     
     @State private var colorSelected: Color = .white {
         didSet {
@@ -133,9 +135,10 @@ struct MemoView: View {
     }
     
     
-    func relocateMemo() {
-        // show up some.. easy look Folder Map
-    }
+//    func relocateMemo() {
+//        // show up some.. easy look Folder Map
+//        self.showFoldersToSelect = true
+//    }
     
     
     var body: some View {
@@ -204,6 +207,7 @@ struct MemoView: View {
                 }
             }
         }
+
         
         .onAppear(perform: {
             title = memo.title
@@ -239,9 +243,9 @@ struct MemoView: View {
                 }
                 
                 
-                Button(action: relocateMemo) {
-                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
-                }
+//                Button(action: relocateMemo) {
+//                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+//                }
             })
     }
 }

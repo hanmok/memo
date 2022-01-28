@@ -38,7 +38,7 @@ struct MindMapView: View {
     
     @State var changedFolderName = ""
     
-    
+    @State var showSelectingFolderView = false
     
     var body: some View {
         
@@ -46,59 +46,71 @@ struct MindMapView: View {
             VStack(spacing: 0) {
                 
                 
-                //
-                //            Text("Folders")
-                //                .padding(.leading, Sizes.overallPadding)
-                //                .padding(.bottom, 10)
+                HStack {
+                    Text("Folders")
+                        .padding(.leading, Sizes.overallPadding)
+                        .padding(.vertical)
+                    Spacer()
+                    Button {
+                        // test
+                        showSelectingFolderView = true
+                    } label: {
+                        ChangeableImage(imageSystemName: "plus")
+                    }
+                    .padding(.trailing, Sizes.overallPadding)
+                    .padding(.vertical)
+                }
                 
                 List(fastFolderWithLevelGroup.allFolders) { folderWithLevel in
                     if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
                         FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
                             .environmentObject(memoEditViewModel)
                             .environmentObject(folderEditViewModel)
-                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                Button(action: {
-                                    
-                                    print("hi")
-                                }) {
-                                    Text("hello")
-                                }
-                            }
                     }
                 } // end of List
                 
             } // end of VStack
             
-            TextFieldAlert(
-                isPresented: $folderEditViewModel.shouldChangeFolderName,
-                text: $changedFolderName,
-                focusState: _changingNameFocus) { newName in
-
-                    if folderEditViewModel.selectedFolder != nil {
-
-                    folderEditViewModel.selectedFolder!.title = newName
-                        context.saveCoreData()
-                        folderEditViewModel.selectedFolder = nil
-                    }
-                    
-                // setup initial name empty
-                changedFolderName = ""
-            } cancelAction: {
-                changedFolderName = ""
-            }
-            .onReceive(folderEditViewModel.$shouldChangeFolderName) { output in
-//                print("output : \(output)")
-                if output == true {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                        print("hi")
-                        self.changingNameFocus = true
-                    }
-                }
-            }
+            // change Folder Name
+//            TextFieldAlert(
+//                isPresented: $folderEditViewModel.shouldChangeFolderName,
+//                text: $changedFolderName,
+//                focusState: _changingNameFocus) { newName in
+//
+//                    if folderEditViewModel.selectedFolder != nil {
+//
+//                    folderEditViewModel.selectedFolder!.title = newName
+//                        context.saveCoreData()
+//                        folderEditViewModel.selectedFolder = nil
+//                    }
+//
+//                // setup initial name empty
+//                changedFolderName = ""
+//            } cancelAction: {
+//                changedFolderName = ""
+//            }
+//            .onReceive(folderEditViewModel.$shouldChangeFolderName) { output in
+////                print("output : \(output)")
+//                if output == true {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+//                        print("hi")
+//                        self.changingNameFocus = true
+//                    }
+//                }
+//            }
             
-
+            // name for before and after !
+            // and.. some varialbes are not named properly.
             
         } // end of ZStack
+//        .sheet(isPresented: $showSelectingFolderView, content: {
+//            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+//                .environmentObject(folderEditViewModel)
+//                .environmentObject(memoEditViewModel)
+//        })
+//        .sheet(isPresented: $folderEditViewModel.shouldShowSelectingView, content: {
+//            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+//        })
         .navigationBarHidden(true)
     }
 }
