@@ -20,7 +20,6 @@ struct TitleWithLevelView: View {
             
             Text(folder.title)
                 .foregroundColor(colorScheme.adjustTint())
-            Text("lev : \(level)")
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))

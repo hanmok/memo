@@ -18,18 +18,10 @@ extension FolderWithLevel : Identifiable {
     
 }
 
-//struct FolderOrder {
-//
-//    enum OrderType {
-//        case modificationDate
-//        case creationDate
-//        case alphabetical
-//    }
-//
-//    var isAscending: Bool
-//
-//    var orderType: OrderType = .modificationDate
-//}
+//return MindMapView(
+//    fastFolderWithLevelGroup:
+//        FastFolderWithLevelGroup(
+//            targetFolder: topFolders.first!))
 
 
 
@@ -66,6 +58,7 @@ struct MindMapView: View {
         
         return ZStack {
             VStack(spacing: 0) {
+                // MARK: - TOP Views
                 HStack {
                     Text("Folders")
                         .padding(.leading, Sizes.overallPadding)
@@ -104,10 +97,11 @@ struct MindMapView: View {
                     .padding(.vertical)
                 }
                 
-                
+                // MARK: - List of all Folders (hierarchy)
                 // another VStack
                 List(fastFolderWithLevelGroup.allFolders) { folderWithLevel in
                     if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
+                        
                         FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
                             .environmentObject(memoEditViewModel)
                             .environmentObject(folderEditViewModel)
@@ -116,7 +110,7 @@ struct MindMapView: View {
                             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                 Button {
                                 } label: {
-                                    
+
                                 }
                             }
                     }
@@ -124,20 +118,21 @@ struct MindMapView: View {
             } // end of VStack
             
             // change Folder Name
+            
             PrettyTextFieldAlert(
                 placeHolderText: folderEditViewModel.selectedFolder != nil ? "\(folderEditViewModel.selectedFolder!.title)" : "Enter New FolderName",
                 type: .rename,
                 isPresented: $folderEditViewModel.shouldChangeFolderName,
                 text: $changedFolderName,
                 focusState: _changingNameFocus) { newName in
-                    
+
                     if folderEditViewModel.selectedFolder != nil {
-                        
+
                         folderEditViewModel.selectedFolder!.title = newName
                         context.saveCoreData()
                         folderEditViewModel.selectedFolder = nil
                     }
-                    
+
                     // setup initial name empty
                     changedFolderName = ""
                 } cancelAction: {
@@ -152,11 +147,16 @@ struct MindMapView: View {
                     }
                 }
             
+            
+            
             // name for before and after !
             // and.. some varialbes are not named properly.
             
         } // end of ZStack
-        .sheet(isPresented: $showSelectingFolderView, content: {
+        
+        
+        .sheet(isPresented: $showSelectingFolderView,
+               content: {
             SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
                 .environmentObject(folderEditViewModel)
                 .environmentObject(memoEditViewModel)
@@ -167,6 +167,8 @@ struct MindMapView: View {
                 .environmentObject(memoEditViewModel)
         })
         .navigationBarHidden(true)
+        
+        
     }
 }
 

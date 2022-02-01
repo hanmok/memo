@@ -19,6 +19,7 @@ struct FastVerCollapsibleFolder: View {
     //    let basicSpacing: CGFloat = 2
 //    @State var showSelectingFolderView = false
     @ObservedObject var folder: Folder
+    
     var level: Int
     var numOfSubfolders: String{
         
@@ -29,44 +30,43 @@ struct FastVerCollapsibleFolder: View {
     }
     
     var body: some View {
-        HStack(alignment: .top) {
-            
             NavigationLink(destination: FolderView(currentFolder: folder)
                             .environmentObject(memoEditVM)
                             .environmentObject(folderEditVM)
             ) {
                 TitleWithLevelView(level: level, folder: folder)
-                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-
-                    // remove !
-                    Button {
-                        Folder.delete(folder)
-                        context.saveCoreData()
-                    } label: {
-                        ChangeableImage(imageSystemName: "trash")
-                    }
-                    .tint(.red)
-
-                    // change Folder location
-                    Button {
-                        folderEditVM.shouldShowSelectingView = true
-                        folderEditVM.folderToCut = folder
-
-                    } label: {
-                        ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
-                    }
-                    .tint(.green)
-
-                    // change Folder Name
-                    Button {
-                        folderEditVM.shouldChangeFolderName = true
-                        folderEditVM.selectedFolder = folder
-                    } label: {
-                        ChangeableImage(imageSystemName: "pencil")
-                    }
-                    .tint(.yellow)
-                }
+                
             } // end of NavigationLink
-        }// end of HStack
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+
+                // remove !
+                Button {
+                    Folder.delete(folder)
+                    context.saveCoreData()
+                } label: {
+                    ChangeableImage(imageSystemName: "trash")
+                }
+                .tint(.red)
+
+                // change Folder location
+                Button {
+                    folderEditVM.shouldShowSelectingView = true
+                    folderEditVM.folderToCut = folder
+
+                } label: {
+                    ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
+                }
+                .tint(.green)
+
+                // change Folder Name
+                Button {
+                    folderEditVM.shouldChangeFolderName = true
+                    folderEditVM.selectedFolder = folder
+                } label: {
+                    ChangeableImage(imageSystemName: "pencil")
+                }
+                .tint(.yellow)
+            }
+
     }
 }
