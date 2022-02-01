@@ -228,7 +228,13 @@ Memo 를 update 한 후 update 된 후를 보고싶으면, 그 memo 를 포함�
 Folder 를 수정했을 때
 update 가 바로바로 되지 않는다. 왜지 ?? 음.... 어떻게 해야하지?
 이름을 바꾸는건 바로 수정이 되는데, 없애거나 할 때 이상함.
-이거, topFolder 가 변하지 않아서 그래 ;;
+이거, topFolder 가 변하지 않아서 그래 .
+수정 완료 !
+
 
 왜.. 앱을 Home 으로 보내려 하면 Navigation 이 Root 로 돌아올까 ?
+
+Sorting 하기. 
+
+Merge.. 어떻게 해야할까 ?
 
