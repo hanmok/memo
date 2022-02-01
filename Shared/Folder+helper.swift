@@ -129,6 +129,10 @@ extension Folder {
         
         subfolder.parent = self
         
+        if let context = subfolder.managedObjectContext {
+            context.saveCoreData()
+            Folder.updateTopFolder(context: context)
+        }
         
         
     }
@@ -160,10 +164,19 @@ extension Folder {
     static func delete(_ folder: Folder) {
         if let context = folder.managedObjectContext {
             context.delete(folder)
+            
             try? context.save()
+            Folder.updateTopFolder(context: context)
         }
     }
     
+    static func updateTopFolder(context: NSManagedObjectContext) {
+                let request = Folder.topFolderFetch()
+                let result = try? context.fetch(request)
+        if let firstFolder = result?.first {
+            firstFolder.title += ""
+        }
+    }
     
     static func nestedFolder(context: NSManagedObjectContext) -> Folder {
         let parent = Folder(title: "parent", context: context)

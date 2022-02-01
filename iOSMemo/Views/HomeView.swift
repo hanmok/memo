@@ -30,7 +30,7 @@ struct HomeView: View { // top folder fetch
 
 class FastFolderWithLevelGroup: ObservableObject {
     @Published var allFolders: [FolderWithLevel]
-    
+//    @Published var targetFolder: Folder
     init(targetFolder: Folder) {
         self.allFolders = Folder.getHierarchicalFolders(topFolder: targetFolder)
     }

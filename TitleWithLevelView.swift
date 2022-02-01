@@ -25,7 +25,6 @@ struct TitleWithLevelView: View {
                 Text(Image(systemName: "star.fill"))
                     .tint(.yellow) // why not working ?
             }
-            
         }
     }
 }

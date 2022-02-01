@@ -225,4 +225,10 @@ folder 만을 Observed 로 사용하는 view 내에서,
 Memo 를 update 한 후 update 된 후를 보고싶으면, 그 memo 를 포함하고 있는 folder 도 update 시켜줘야함. 이때에는 folder 의 properties 중 아무거나 바꾸어주면 됨.
 
 
+Folder 를 수정했을 때
+update 가 바로바로 되지 않는다. 왜지 ?? 음.... 어떻게 해야하지?
+이름을 바꾸는건 바로 수정이 되는데, 없애거나 할 때 이상함.
+이거, topFolder 가 변하지 않아서 그래 ;;
+
+왜.. 앱을 Home 으로 보내려 하면 Navigation 이 Root 로 돌아올까 ?
 

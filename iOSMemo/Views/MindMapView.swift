@@ -115,6 +115,9 @@ struct MindMapView: View {
                             }
                     }
                 } // end of List
+                .onReceive(fastFolderWithLevelGroup.$allFolders) { output in
+                    print("fastFolder output: \(output)")
+                }
             } // end of VStack
             
             // change Folder Name
