@@ -13,6 +13,12 @@
 		9A0474B427715FB200571D66 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474B327715FB200571D66 /* MainTabView.swift */; };
 		9A0474BD27716E0000571D66 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474BC27716E0000571D66 /* FolderView.swift */; };
 		9A0474C02771709D00571D66 /* OverallMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A0474BF2771709D00571D66 /* OverallMemo */; };
+		9A1D535927A925A1009294C1 /* TitleWithLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */; };
+		9A1D535A27A925A1009294C1 /* TitleWithLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */; };
+		9A1D535C27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */; };
+		9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */; };
+		9A1D535F27A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */; };
+		9A1D536027A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */; };
 		9A1D8536279E734A00B00156 /* MindMapViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8535279E734A00B00156 /* MindMapViewTest.swift */; };
 		9A1D8537279E734A00B00156 /* MindMapViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8535279E734A00B00156 /* MindMapViewTest.swift */; };
 		9A1D8539279FF32400B00156 /* FastVerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8538279FF32400B00156 /* FastVerCollapsibleFolder.swift */; };
@@ -166,6 +172,9 @@
 		9A0474B327715FB200571D66 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		9A0474BC27716E0000571D66 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
 		9A0474BF2771709D00571D66 /* OverallMemo */ = {isa = PBXFileReference; lastKnownFileType = text; path = OverallMemo; sourceTree = "<group>"; };
+		9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithLevelView.swift; sourceTree = "<group>"; };
+		9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingButtonLabel.swift; sourceTree = "<group>"; };
+		9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyTextFieldAlert.swift; sourceTree = "<group>"; };
 		9A1D8535279E734A00B00156 /* MindMapViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMapViewTest.swift; sourceTree = "<group>"; };
 		9A1D8538279FF32400B00156 /* FastVerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVerCollapsibleFolder.swift; sourceTree = "<group>"; };
 		9A1D853B27A0229500B00156 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
@@ -291,6 +300,9 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */,
+				9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */,
+				9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */,
 				9A1D856A27A3E98D00B00156 /* SelectingFolderView.swift */,
 				9A1D854D27A3C5E200B00156 /* ListTestView.swift */,
 				9A1D854A27A3C30500B00156 /* TestView2.swift */,
@@ -729,6 +741,7 @@
 				9A9E58CA279E357000A16023 /* PrevMemoView.swift in Sources */,
 				9AC5D23A278D759E007EAA28 /* MemoListNode.swift in Sources */,
 				9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */,
+				9A1D535C27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
 				9A3377B927900BF200805138 /* MemoListTest.swift in Sources */,
 				9AC5D225278834EC007EAA28 /* FolderLabelView3.swift in Sources */,
 				9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */,
@@ -737,6 +750,7 @@
 				9AD6EF2D277EDCC500866456 /* CollapsibleMind.swift in Sources */,
 				9AD6EEC7277C36AF00866456 /* MemoViewModel.swift in Sources */,
 				9AC5D22B278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */,
+				9A1D535927A925A1009294C1 /* TitleWithLevelView.swift in Sources */,
 				9A89582727717EB500E7B773 /* Sizes.swift in Sources */,
 				9A33788D279A553200805138 /* SubfolderEditingView.swift in Sources */,
 				9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */,
@@ -751,6 +765,7 @@
 				9A33785D279817B700805138 /* FolderView2.swift in Sources */,
 				9A895823277179E100E7B773 /* PlusMinusImage.swift in Sources */,
 				9A3377DC2790314900805138 /* TextFieldAlert.swift in Sources */,
+				9A1D535F27A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */,
 				9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */,
 				9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */,
 				9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
@@ -785,6 +800,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AC5D23E278D8435007EAA28 /* textFieldTestview.swift in Sources */,
+				9A1D535A27A925A1009294C1 /* TitleWithLevelView.swift in Sources */,
 				9A9E58CB279E357000A16023 /* PrevMemoView.swift in Sources */,
 				9A9E58E8279E41F200A16023 /* MindMapView2.swift in Sources */,
 				9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */,
@@ -792,6 +808,7 @@
 				9A33786B27993ACA00805138 /* FolderOverView.swift in Sources */,
 				9AC5D1E527854266007EAA28 /* ContentView.swift in Sources */,
 				9A337897279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
+				9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
 				9A3378622798207800805138 /* SelectedMemoViewModel.swift in Sources */,
 				9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */,
 				9A33789B279A76B700805138 /* MainView.swift in Sources */,
@@ -832,6 +849,7 @@
 				9A3378682799275E00805138 /* SubFolderPageView.swift in Sources */,
 				9A337894279A5C9600805138 /* HierarchyLabelView.swift in Sources */,
 				9AC5D20227855C0B007EAA28 /* Persistence.swift in Sources */,
+				9A1D536027A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

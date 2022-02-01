@@ -203,8 +203,6 @@ extension Folder {
             }
             // subFolders 가 모두 이미 고려된 경우.
             trashSet.update(with: currentFolder!)
-
-
         } else { // subfolder 가 Nil 인 경우
 
             trashSet.update(with: currentFolder!)

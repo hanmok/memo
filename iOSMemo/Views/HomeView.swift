@@ -25,20 +25,6 @@ struct HomeView: View { // top folder fetch
                         targetFolder: topFolders.first!))
 //                .environmentObject(FolderEditViewModel())
         }
-        
-//        return NavigationView {
-//            TestView2(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        targetFolder: topFolders.first!), folder:topFolders.first!)
-////            TestView2(folder: topFolders.first!)
-////                .environmentObject(FolderEditViewModel())
-//        }
-        
-//        return ListTestView()
-        
-        
-//        return TestView()
     }
 }
 

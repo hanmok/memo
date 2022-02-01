@@ -19,6 +19,7 @@ struct Sizes {
     static let largeCornerRadius: CGFloat = 10
     static let smallCornerRadius: CGFloat = 5
     static let regularButtonSize: CGFloat = 24
+    static let subFolderLeading: CGFloat = 6
 }
 
 

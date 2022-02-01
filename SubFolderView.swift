@@ -18,7 +18,10 @@ struct SubFolderView: View {
     var body: some View {
         let subFolders = folder.subfolders.sorted()
         
-        return VStack {
+        return VStack(alignment: .leading) {
+            
+            // Back Button and Adding SubFolder Button
+            
             HStack {
                 Button {
                     // dismiss
@@ -26,7 +29,7 @@ struct SubFolderView: View {
                 } label: {
                     ChangeableImage(imageSystemName: "arrow.right")
                 }
-                .padding(.leading, Sizes.smallSpacing)
+                .padding(.leading, 12)
                 
                 Spacer()
                 
@@ -34,17 +37,17 @@ struct SubFolderView: View {
                     // add new folder
                     folderEditVM.shouldAddFolder = true
                 } label: {
-                    ChangeableImage(imageSystemName: "folder.badge.plus")
+                    ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
                 }
-                .padding(.trailing, Sizes.smallSpacing)
+                .padding(.trailing, 12)
             }
             .padding(.vertical, Sizes.smallSpacing)
             
-            VStack {
+            
+            
+            VStack(alignment: .leading, spacing: 5) {
                 ForEach(subFolders) { subFolder in
                     // how to make.. it disappear if moved ?
-                    
-                    
                     NavigationLink {
                         FolderView(currentFolder: subFolder)
                             .environmentObject(folderEditVM)
@@ -53,14 +56,12 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                     }
-                    
-//                    .onTapGesture {
-//                        print("nav has tapped!")
-//                        isShowingSubFolderView = false
-//                    }
-                    
-                }
-            }
+//                    .padding(.leading, 4)
+
+                } // end of ForEach
+            } // end of VStack
+            .padding(.leading, 12)
+//            .background(.green)
             
             if subFolders.count == 0 {
                
@@ -69,9 +70,9 @@ struct SubFolderView: View {
                 } label: {
                     Text("Press to Add")
                 }
-
+                .padding(.leading, 12)
             }
-            
+                
             Spacer()
         }
     }

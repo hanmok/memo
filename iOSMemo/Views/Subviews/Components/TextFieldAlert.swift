@@ -28,19 +28,8 @@ struct TextFieldAlert: View {
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)
                 
+                // Cancel and Done Button
                 HStack(spacing: 15) {
-                    Button {
-                        submitAction(text)
-                        isPresented = false
-                        focusState = false
-                    } label: {
-                        Text("Done")
-                            .foregroundColor(.black)
-                            .padding(.horizontal, Sizes.overallPadding)
-                    }
-                    .padding(5)
-                    .background(Color.white)
-                    .cornerRadius(5)
                     
                     Button {
                         cancelAction()
@@ -54,6 +43,22 @@ struct TextFieldAlert: View {
                     .padding(5)
                     .background(Color.white)
                     .cornerRadius(5)
+                    
+                    
+                    Button {
+                        submitAction(text)
+                        isPresented = false
+                        focusState = false
+                    } label: {
+                        Text("Done")
+                            .foregroundColor(.black)
+                            .padding(.horizontal, Sizes.overallPadding)
+                    }
+                    .padding(5)
+                    .background(Color.white)
+                    .cornerRadius(5)
+                    
+                    
                 }
                 .padding(.horizontal, Sizes.overallPadding)
             }

@@ -12,7 +12,7 @@ struct FolderView: View {
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
-    
+    @StateObject var memoOrder = MemoOrder()
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     
@@ -23,6 +23,7 @@ struct FolderView: View {
     @ObservedObject var currentFolder: Folder
     
     @FocusState var addFolderFocus: Bool
+    
     func search() {
         
     }
@@ -40,7 +41,6 @@ struct FolderView: View {
     }
     
     func addMemo() {
-//        memoEditVM.shouldAddMemo = true
         isAddingMemo = true
     }
     
@@ -56,31 +56,25 @@ struct FolderView: View {
                     }
                     ZStack {
                         if !currentFolder.memos.isEmpty {
-                            
-//                            MemoList(
-//                                pinViewModel: PinViewModel(
-//                                    memos: currentFolder.memos)
-//                            )
                             MemoList()
                                 .padding(.top, 10)
-                                
                         }
-                        
                         HStack {
                             Spacer()
                             // Button Or SubFolderView
                             ZStack(alignment: .topTrailing) {
-            
+                                
                                 Button(action: showSubFolderView, label: {
                                     SubFolderButtonImage()
                                 })
-                                .padding(.trailing, Sizes.overallPadding )
+                                    .padding(.trailing, Sizes.overallPadding )
                                 
                                 SubFolderView(folder: currentFolder, isShowingSubFolderView: $isShowingSubFolderView)
-                                    .frame(width: UIScreen.screenWidth / 3)
+                                    .frame(width: UIScreen.screenWidth / 2.5)
                                     .background(.yellow)
-                                    .cornerRadius(5)
-                                    .offset(x: isShowingSubFolderView ? 0 : UIScreen.screenWidth)
+                                    .cornerRadius(10)
+                                // offset x : trailingPadding
+                                    .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
                                     .animation(.spring(), value: isShowingSubFolderView)
                             } // end of ZStack
                             .padding(.top, 10)
@@ -100,7 +94,7 @@ struct FolderView: View {
                         VStack(spacing: Sizes.minimalSpacing) {
                             Button(action: addMemo) {
                                 PlusImage()
-                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
                             }
                         }
                     } else {
@@ -119,23 +113,22 @@ struct FolderView: View {
                     .opacity(0.8)
             }
             
-            // When add folder pressed
-            // Present TextFieldAlert
-            
-            
-            TextFieldAlert(
+            //  Present TextFieldAlert when add folder pressed
+//            TextFieldAlert(
+            PrettyTextFieldAlert(
+                placeHolderText: "Enter new folder name",
+                type: .newFolder,
                 isPresented: $folderEditVM.shouldAddFolder,
-                           text: $newSubFolderName,
+                text: $newSubFolderName,
                 focusState: _addFolderFocus,
                 submitAction: { subfolderName in
-                currentFolder.add(
-                    subfolder: Folder(title: newSubFolderName, context: context)
-                )
-                newSubFolderName = ""
-            }, cancelAction: {
-                newSubFolderName = ""
-            })
-            
+                    currentFolder.add(
+                        subfolder: Folder(title: newSubFolderName, context: context)
+                    )
+                    newSubFolderName = ""
+                }, cancelAction: {
+                    newSubFolderName = ""
+                })
                 .onReceive(folderEditVM.$shouldAddFolder) { output in
                     if output == true {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
@@ -150,10 +143,7 @@ struct FolderView: View {
                     memo: Memo(title: "", contents: "", context: context),
                     parent: currentFolder,
                     isNewMemo: true),
-//                isActive: $memoEditVM.shouldAddMemo) {}
                 isActive: $isAddingMemo) {}
-            
-            
         } // end of ZStack
         .onDisappear(perform: {
             folderEditVM.shouldAddFolder = false
@@ -173,6 +163,23 @@ struct FolderView: View {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
             
+            // Ordering
+            Menu {
+                Text("Memo Ordering")
+                MemoOrderingButton(type: .modificationDate, memoOrder: memoOrder)
+                MemoOrderingButton(type: .creationDate, memoOrder: memoOrder)
+                MemoOrderingButton(type: .alphabetical, memoOrder: memoOrder)
+                
+                Divider()
+                
+                MemoAscDecButtonLabel(isAscending: true, memoOrder: memoOrder)
+                
+                MemoAscDecButtonLabel(isAscending: false, memoOrder: memoOrder)
+                
+            } label: {
+                ChangeableImage(imageSystemName: "arrow.up.arrow.down")
+            }
+            
             // favorite Button
             Button(action: {
                 toggleFavorite()
@@ -187,13 +194,14 @@ struct FolderView: View {
                 }
             })
 
+            // open talk View
             Button {
-                // open talk View
+
             } label: {
                 ChangeableImage(imageSystemName: "bubble.right")
-                
             }
-
+            
+            
             
         }
         )

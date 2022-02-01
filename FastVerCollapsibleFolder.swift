@@ -35,31 +35,15 @@ struct FastVerCollapsibleFolder: View {
                             .environmentObject(memoEditVM)
                             .environmentObject(folderEditVM)
             ) {
-                HStack {
-                    ForEach(0 ..< level + 1) { _ in
-                        Text("  ")
-                    }
-                    
-                    Text(folder.title)
-                        .foregroundColor(colorScheme.adjustTint())
-                    
-                    if folder.isFavorite {
-                        Text(Image(systemName: "star.fill"))
-                            .tint(.yellow) // why not working ?
-                    }
-                    
-                    EmptyView()
-                        .background(.white)
-                } // end of HStack
+                TitleWithLevelView(level: level, folder: folder)
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
 
+                    // remove !
                     Button {
-                        // remove ! delete!
                         Folder.delete(folder)
                         context.saveCoreData()
                     } label: {
                         ChangeableImage(imageSystemName: "trash")
-
                     }
                     .tint(.red)
 
@@ -70,7 +54,6 @@ struct FastVerCollapsibleFolder: View {
 
                     } label: {
                         ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
-
                     }
                     .tint(.green)
 
@@ -79,12 +62,9 @@ struct FastVerCollapsibleFolder: View {
                         folderEditVM.shouldChangeFolderName = true
                         folderEditVM.selectedFolder = folder
                     } label: {
-                        //                                EmptyView()
                         ChangeableImage(imageSystemName: "pencil")
-
                     }
                     .tint(.yellow)
-
                 }
             } // end of NavigationLink
         }// end of HStack
