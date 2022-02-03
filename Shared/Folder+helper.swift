@@ -196,16 +196,23 @@ extension Folder {
     
     static func getHierarchicalFolders(topFolders: [Folder]) -> [FolderWithLevel] {
         
+//        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
+//        var folderContainer = [currentFolder]
+        var folderWithLevelContainer: [FolderWithLevel] = []
+        var folderContainer: [Folder?] = []
+        
         for eachTop in topFolders.sorted() {
             
 
         
 //        var currentFolder: Folder? = topFolder
-            var currentFolder: Folder? = eachTop
+        var currentFolder: Folder? = eachTop
         var level = 0
         var trashSet = Set<Folder>()
-        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
-        var folderContainer = [currentFolder]
+//        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
+//        var folderContainer = [currentFolder]
+            folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
+            folderContainer.append(currentFolder)
 
     whileLoop: while (currentFolder != nil) {
         print("currentFolder: \(currentFolder!.id)")

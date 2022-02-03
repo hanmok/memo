@@ -125,7 +125,7 @@ struct FolderView: View {
 //            TextFieldAlert(
             PrettyTextFieldAlert(
                 placeHolderText: "Enter new folder name",
-                type: .newFolder,
+                type: .newSubFolder,
 //                isPresented: $folderEditVM.shouldAddFolder,
                 isPresented: $shouldAddFolder,
                 text: $newSubFolderName,

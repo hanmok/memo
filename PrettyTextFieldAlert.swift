@@ -9,7 +9,9 @@ import SwiftUI
 
 enum TextFieldAlertType: String {
     case rename = "Rename Folder"
-    case newFolder = "New Folder"
+    case newSubFolder = "New Subfolder"
+    case newTopFolder = "New Topfolder"
+    
 }
 
 struct PrettyTextFieldAlert: View {
