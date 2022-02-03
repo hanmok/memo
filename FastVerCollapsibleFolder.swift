@@ -52,7 +52,8 @@ struct FastVerCollapsibleFolder: View {
                 Button {
                     folderEditVM.shouldShowSelectingView = true
                     folderEditVM.folderToCut = folder
-
+                    
+                    
                 } label: {
                     ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
                 }
@@ -66,6 +67,50 @@ struct FastVerCollapsibleFolder: View {
                     ChangeableImage(imageSystemName: "pencil")
                 }
                 .tint(.yellow)
+            }
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                Button {
+                    let counts = folder.subfolders.count
+                    let newFolder = Folder(title: "under level\(counts + 1)", context: context)
+                    
+                    folder.add(subfolder: newFolder)
+                    context.saveCoreData()
+                    folder.title += ""
+                    Folder.updateTopFolders(context: context)
+                        
+                } label: {
+                    Text("under")
+                }
+                
+                Button {
+                    var counts = 0
+                    if folder.parent != nil { // has parent -> get subFolders' count
+                        counts = folder.parent!.subfolders.count
+                    } else { // has no parent -> get topFolders' count
+                        if let topFolders = try? context.fetch(Folder.topFolderFetch()) {
+                            counts = topFolders.count
+                            
+                        } else {
+                            counts = 100
+                        }
+                        print("topFolder counts: \(counts)")
+                        
+                        
+                    }
+                    
+                    let newFolder = Folder(title: "same level\(counts)", context: context)
+                    
+                    if folder.parent != nil { // has parent
+                        folder.parent!.add(subfolder: newFolder)
+                    }
+                    
+                    context.saveCoreData()
+                    folder.title += ""
+                    
+                } label: {
+                    Text("same")
+                }
+
             }
 
     }

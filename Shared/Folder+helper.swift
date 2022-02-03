@@ -13,7 +13,7 @@ extension Folder {
     convenience init(title: String, context: NSManagedObjectContext) {
         self.init(context: context)
         self.title = title
-        
+        self.creationDate = Date()
 //        let request = Folder.topFolderFetch()
 //        let result = try? context.fetch(request)
 //        let maxFolder = result?.max(by: {$0.order < $1.order })
@@ -128,10 +128,10 @@ extension Folder {
 //        }
         
         subfolder.parent = self
+        self.modificationDate = Date() // update
         
         if let context = subfolder.managedObjectContext {
             context.saveCoreData()
-            Folder.updateTopFolder(context: context)
         }
         
         
@@ -166,16 +166,17 @@ extension Folder {
             context.delete(folder)
             
             try? context.save()
-            Folder.updateTopFolder(context: context)
+            Folder.updateTopFolders(context: context)
         }
     }
     
-    static func updateTopFolder(context: NSManagedObjectContext) {
+    static func updateTopFolders(context: NSManagedObjectContext) {
                 let request = Folder.topFolderFetch()
                 let result = try? context.fetch(request)
-        if let firstFolder = result?.first {
-            firstFolder.title += ""
+        for eachFolder in result! {
+            eachFolder.title += ""
         }
+        context.saveCoreData()
     }
     
     static func nestedFolder(context: NSManagedObjectContext) -> Folder {
@@ -191,8 +192,16 @@ extension Folder {
         return parent
     }
     
-    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
-        var currentFolder: Folder? = topFolder
+//    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
+    
+    static func getHierarchicalFolders(topFolders: [Folder]) -> [FolderWithLevel] {
+        
+        for eachTop in topFolders.sorted() {
+            
+
+        
+//        var currentFolder: Folder? = topFolder
+            var currentFolder: Folder? = eachTop
         var level = 0
         var trashSet = Set<Folder>()
         var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
@@ -233,8 +242,14 @@ extension Folder {
         if folderWithLevelContainer.count == trashSet.count {
             break whileLoop
         }
-    }
-        return folderWithLevelContainer
+    } // end of whileLoop
+            if eachTop == topFolders.sorted().last {
+            return folderWithLevelContainer
+            }
+        }
+
+//        return folderWithLevelContainer
+        return [FolderWithLevel(folder: topFolders.first!, level: 0)]
     }
     
     
@@ -253,25 +268,67 @@ struct FolderProperties {
     
 }
 
+extension Folder {
+    
+    static var isAscending: Bool = true
+    static var orderType: OrderType = .creationDate
+    
+    static func sortModifiedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
+        if Folder.isAscending {
+            return lhs.modificationDate! < rhs.modificationDate!
+        } else {
+            return lhs.modificationDate! >= rhs.modificationDate!
+        }
+    }
+    
+    static func sortCreatedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
+        if Folder.isAscending {
+            return lhs.creationDate < rhs.creationDate
+        } else {
+            return lhs.creationDate >= rhs.creationDate
+        }
+    }
+    
+    static func sortAlphabetOrder(_ lhs: Folder, _ rhs: Folder) -> Bool {
+        if Folder.isAscending {
+            return lhs.title < rhs.title
+        } else {
+            return lhs.title >= rhs.title
+        }
+    }
+}
+
 extension Folder : Comparable {
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
 //        lhs.order < rhs.order
-        if lhs.modificationDate != nil && rhs.modificationDate != nil {
-            return lhs.modificationDate! > rhs.modificationDate!
-        } else {
-            return true
+        
+//        if lhs.modificationDate != nil && rhs.modificationDate != nil {
+//            return lhs.modificationDate! > rhs.modificationDate!
+//        } else {
+//            return true
+//        }
+        
+        switch Folder.orderType {
+        case .modificationDate : return sortModifiedDate(lhs, rhs)
+        case .creationDate:
+            return sortCreatedDate(lhs, rhs)
+        case .alphabetical:
+            return sortAlphabetOrder(lhs, rhs)
         }
+        
     }
 }
 
 extension Folder {
     static func createHomeFolder(context: NSManagedObjectContext) -> Folder {
         let home = Folder(title: "Home Folder", context: context)
-        try? context.save()
+        context.saveCoreData()
+//        try? context.save()
         return home
     }
     
     static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
+        
         let homeFolder = Folder(title: "Home Folder", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
         let firstChildFolder = Folder(title: "child1", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
         let secondChildFolder = Folder(title: "child2", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
@@ -323,6 +380,8 @@ extension Folder {
         homeFolder.add(memo: hmemo8)
         homeFolder.add(memo: hmemo9)
         
+        context.saveCoreData()
+        // 저장 했는데 왜이러지 ?? ???
         return homeFolder
     }
 }

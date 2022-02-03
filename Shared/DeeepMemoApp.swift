@@ -18,6 +18,7 @@ struct DeeepMemoApp: App {
     var body: some Scene {
         WindowGroup {
 //                HomeViewPrev() // new Folder should be provided
+//            HomeView(context: persistenceController.container.viewContext)
             HomeView()
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .environmentObject(NavigationStateManager())

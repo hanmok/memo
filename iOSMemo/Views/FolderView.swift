@@ -131,9 +131,12 @@ struct FolderView: View {
                 text: $newSubFolderName,
                 focusState: _addFolderFocus,
                 submitAction: { subfolderName in
+                    // when adding new subfolder, navigate to mindmapView. why.. ?'
+                    // because of updateTopFolder .
                     currentFolder.add(
                         subfolder: Folder(title: newSubFolderName, context: context)
                     )
+                    
                     newSubFolderName = ""
                     shouldAddFolder = false
                 }, cancelAction: {

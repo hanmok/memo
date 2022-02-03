@@ -14,25 +14,170 @@ struct HomeView: View { // top folder fetch
     
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
-    var body: some View {
+//    var initialFolder: Folder
     
+//    init(context: NSManagedObjectContext) {
+//        let req = Folder.topFolderFetch()
+//        let res = try? context.fetch(req)
+//        if let validFolder = res {
+//            if validFolder.count != 0 {
+//                initialFolder = validFolder.first!
+//            } else {
+//                initialFolder = Folder.createHomeFolder(context: context)
+//            }
+//        }
+//        initialFolder = Folder.createHomeFolder(context: context)
+//    }
+    
+    // 어디서부터 어떤게 잘못된걸까?
+    var body: some View {
+
+
+        
 //        UnitTestHelpers.deletesAllFolders(context: context)
-                
+        
+//        var initialFolder: Folder
+        
+//        if topFolders.count != 0 {
+//            initialFolder = topFolders.first!
+//            print("topFolders: \(topFolders)")
+//            print("topFolder.title :\(topFolders.first!.title)")
+////            initialFolder = Folder.returnSampleFolder(context: context)
+//        } else {
+//            initialFolder = Folder.createHomeFolder(context: context)
+////            initialFolder = Folder.returnSampleFolder(context: context)
+////            initialFolder = Folder.returnSampleFolder(context: context)
+//        }
+        
+        
+//        if topFolders.count != 0 {
+//            print("triggered line : 40")
+//
+//            return NavigationView {
+////                MindMapView(
+////                    fastFolderWithLevelGroup:
+////                        FastFolderWithLevelGroup(
+////                            targetFolder: topFolders.first!))
+//                MindMapView(
+//                    fastFolderWithLevelGroup:
+//                        FastFolderWithLevelGroup(
+//                            targetFolder: Folder.returnSampleFolder(context: context)))
+//            }
+//        } else {
+//            print("triggered line : 48")
+//            return NavigationView {
+//                MindMapView(
+//                    fastFolderWithLevelGroup:
+//                        FastFolderWithLevelGroup(
+//                            targetFolder: Folder.createHomeFolder(context: context)))
+//        }
+        
+//        MindMapView(
+//            fastFolderWithLevelGroup:
+//                FastFolderWithLevelGroup(
+//                    targetFolder: Folder.returnSampleFolder(context: context)))
+
+//        if topFolders.count != 0 {
+//        return MindMapView(
+//            fastFolderWithLevelGroup:
+//                FastFolderWithLevelGroup(
+//                    targetFolder: Folder.returnSampleFolder(context: context)))
+//        } else {
+//            return MindMapView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        targetFolder: Folder.returnSampleFolder(context: context)))
+//        }
+        
+//        return MindMapView(
+//            fastFolderWithLevelGroup:
+//                FastFolderWithLevelGroup(
+//                    targetFolder: Folder.returnSampleFolder(context: context)))
+        
+//        return NavigationView {
+//            MindMapView(
+//            fastFolderWithLevelGroup:
+//                FastFolderWithLevelGroup(
+//                    targetFolder: initialFolder))
+//        }
+        
+//        return NavigationView {
+//            MindMapView(
+//            fastFolderWithLevelGroup:
+//                FastFolderWithLevelGroup(
+//                    targetFolder: topFolders.first!))
+//        }
+        
+//        return NavigationView {
+//            MindMapView(
+//            fastFolderWithLevelGroup:
+//                FastFolderWithLevelGroup(
+//                    targetFolder: Folder.returnSampleFolder(context: context)))
+//        }
+        
         return NavigationView {
+//            ZStack {
+//                MindMapView(
+//                    fastFolderWithLevelGroup:
+//                        FastFolderWithLevelGroup(
+//                            targetFolder: topFolders.first!))
+                
+//                MindMapView(
+//                    fastFolderWithLevelGroup:
+//                        FastFolderWithLevelGroup(
+//                            targetFolder: Folder.returnSampleFolder(context: context)))
+            
+//            MindMapView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        targetFolder: topFolders.first!))
+            
             MindMapView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
-                        targetFolder: topFolders.first!))
+                        targetFolders: topFolders.sorted()))
+            
+//            MindMapView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        targetFolders: [Folder(title: "home", context: context)]))
+            
+                
+//                VStack {
+//                    Spacer()
+//                    ForEach(topFolders.first!.subfolders.sorted()) { subFolder in
+//                        Text(subFolder.title)
+//                            .background(.green)
+//                    }
+//                }
+            }
+        }
+
+//        return EmptyView()
+//
+//        return NavigationView {
+//            MindMapView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        targetFolder: initialFolder))
+
+        
+                
+//        return NavigationView {
+//            MindMapView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        targetFolder: topFolders.first!))
 //                .environmentObject(FolderEditViewModel())
         }
-    }
-}
+
+
 
 class FastFolderWithLevelGroup: ObservableObject {
     @Published var allFolders: [FolderWithLevel]
 //    @Published var targetFolder: Folder
-    init(targetFolder: Folder) {
-        self.allFolders = Folder.getHierarchicalFolders(topFolder: targetFolder)
+    init(targetFolders: [Folder]) {
+        self.allFolders = Folder.getHierarchicalFolders(topFolders: targetFolders)
     }
 }
 

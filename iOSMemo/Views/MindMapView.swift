@@ -44,7 +44,7 @@ struct MindMapView: View {
     
     @StateObject var memoEditViewModel = MemoEditViewModel()
     @StateObject var folderEditViewModel = FolderEditViewModel()
-//    @StateObject var folderOrder = FolderMemoOrder(identity: .folder)
+    //    @StateObject var folderOrder = FolderMemoOrder(identity: .folder)
     @StateObject var folderOrder = FolderOrder()
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
@@ -60,13 +60,8 @@ struct MindMapView: View {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
-                    Text("Folders")
-                        .padding(.leading, Sizes.overallPadding)
-                        .padding(.vertical)
                     Spacer()
-                    
                     HStack {
-                        
                         // sort
                         Menu {
                             
@@ -79,8 +74,8 @@ struct MindMapView: View {
                             
                             Divider()
                             
-                            FolderAscDecButtonLabel(isAscending: true, folderOrder: folderOrder)
-                            FolderAscDecButtonLabel(isAscending: false, folderOrder: folderOrder)
+                            FolderAscDecButton(isAscending: true, folderOrder: folderOrder)
+                            FolderAscDecButton(isAscending: false, folderOrder: folderOrder)
                             
                         } label: {
                             ChangeableImage(imageSystemName: "arrow.up.arrow.down")
@@ -89,7 +84,16 @@ struct MindMapView: View {
                         
                         // Add new Folder
                         Button {
-                            showSelectingFolderView = true
+//                            showSelectingFolderView = true
+//                            print(fastFolderWithLevelGroup.allFolders)
+//                            Folder.updateTopFolder(context: context)
+//                            Folder.up
+                            let folder = Folder(title: "home", context: context)
+                            
+//                            Folder.topFolderFetch()
+                            context.saveCoreData()
+                            Folder.updateTopFolders(context: context)
+                            
                         } label: {
                             ChangeableImage(imageSystemName: "plus")
                         }
@@ -100,25 +104,44 @@ struct MindMapView: View {
                 
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack
-                List(fastFolderWithLevelGroup.allFolders) { folderWithLevel in
-                    if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
-                        
-                        FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
-                            .environmentObject(memoEditViewModel)
-                            .environmentObject(folderEditViewModel)
-                        // without this action, trailing buttons not show up properly..
-                        
-                            .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                Button {
-                                } label: {
-
-                                }
-                            }
-                    }
+                
+                List {
+                    Section(header:
+                            Text("Folders")
+                    ) {
+                        ForEach(fastFolderWithLevelGroup.allFolders) {folderWithLevel in
+                            
+                            
+//                            if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
+                                
+                                FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                                    .environmentObject(memoEditViewModel)
+                                    .environmentObject(folderEditViewModel)
+                                
+                                // without this action, trailing buttons not show up properly..
+                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                        Button {
+                                            let newFolder = Folder(title: "new Folder", context: context)
+                                            context.saveCoreData()
+                                            let topFolders = Folder.topFolderFetch()
+                                            let folders = Folder.fetch(.all)
+                                        } label: {
+                                            
+                                        }
+                                    }
+                                    
+//                            }
+                            
+                            
+                        } // end of ForEach
+                    } // end of Section
                 } // end of List
+                .listStyle(InsetGroupedListStyle())
+                
                 .onReceive(fastFolderWithLevelGroup.$allFolders) { output in
                     print("fastFolder output: \(output)")
                 }
+                
             } // end of VStack
             
             // change Folder Name
@@ -129,14 +152,14 @@ struct MindMapView: View {
                 isPresented: $folderEditViewModel.shouldChangeFolderName,
                 text: $changedFolderName,
                 focusState: _changingNameFocus) { newName in
-
+                    
                     if folderEditViewModel.selectedFolder != nil {
-
+                        
                         folderEditViewModel.selectedFolder!.title = newName
                         context.saveCoreData()
                         folderEditViewModel.selectedFolder = nil
                     }
-
+                    
                     // setup initial name empty
                     changedFolderName = ""
                 } cancelAction: {

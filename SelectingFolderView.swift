@@ -38,6 +38,9 @@ struct SelectingFolderView: View {
                         
                         folderEditViewModel.folderToCut = nil
                         folderEditViewModel.folderToPaste = nil
+                        
+                        Folder.updateTopFolders(context: context)
+                        
                         presentationMode.wrappedValue.dismiss()
                     } label: {
                         SelectingCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)

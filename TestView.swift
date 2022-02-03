@@ -13,13 +13,13 @@ struct TestView: View {
             ForEach(1 ..< 18) { index in
                 Text("\(index)")
                 // from the leading side.
-                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                        Button(action: {
-                            print("hi")
-                        }) {
-                            Text("hello")
-                        }
-                    }
+//                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+//                        Button(action: {
+//                            print("hi")
+//                        }) {
+//                            Text("hello")
+//                        }
+//                    }
             }
         }
         Spacer()
