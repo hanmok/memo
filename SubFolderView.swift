@@ -14,6 +14,7 @@ struct SubFolderView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @Binding var isShowingSubFolderView: Bool
+    @Binding var isAddingFolder: Bool
     
     var body: some View {
         let subFolders = folder.subfolders.sorted()
@@ -35,7 +36,8 @@ struct SubFolderView: View {
                 
                 Button {
                     // add new folder
-                    folderEditVM.shouldAddFolder = true
+//                    folderEditVM.shouldAddFolder = true
+                    isAddingFolder = true
                 } label: {
                     ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
                 }
@@ -56,23 +58,20 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                     }
-//                    .padding(.leading, 4)
 
                 } // end of ForEach
             } // end of VStack
             .padding(.leading, 12)
-//            .background(.green)
             
             if subFolders.count == 0 {
                
                 Button {
-                    folderEditVM.shouldAddFolder = true
+                    isAddingFolder = true
                 } label: {
                     Text("Press to Add")
                 }
                 .padding(.leading, 12)
             }
-                
             Spacer()
         }
     }

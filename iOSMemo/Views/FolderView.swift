@@ -15,7 +15,7 @@ struct FolderView: View {
     @StateObject var memoOrder = MemoOrder()
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
-    
+    @State var shouldAddFolder = false
     @State var newSubFolderName = ""
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
@@ -69,7 +69,7 @@ struct FolderView: View {
                                 })
                                     .padding(.trailing, Sizes.overallPadding )
                                 
-                                SubFolderView(folder: currentFolder, isShowingSubFolderView: $isShowingSubFolderView)
+                                SubFolderView(folder: currentFolder, isShowingSubFolderView: $isShowingSubFolderView, isAddingFolder: $shouldAddFolder)
                                     .frame(width: UIScreen.screenWidth / 2.5)
                                     .background(.yellow)
                                     .cornerRadius(10)
@@ -108,17 +108,26 @@ struct FolderView: View {
             // When add folder pressed
             // overlay white background when Alert show up
             //            if shouldAddSubFolder {
-            if folderEditVM.shouldAddFolder {
+            
+//            if folderEditVM.shouldAddFolder {
+//                Color(.white)
+//                    .opacity(0.8)
+//            }
+            
+            if shouldAddFolder {
                 Color(.white)
                     .opacity(0.8)
             }
+            
+            
             
             //  Present TextFieldAlert when add folder pressed
 //            TextFieldAlert(
             PrettyTextFieldAlert(
                 placeHolderText: "Enter new folder name",
                 type: .newFolder,
-                isPresented: $folderEditVM.shouldAddFolder,
+//                isPresented: $folderEditVM.shouldAddFolder,
+                isPresented: $shouldAddFolder,
                 text: $newSubFolderName,
                 focusState: _addFolderFocus,
                 submitAction: { subfolderName in
@@ -126,17 +135,29 @@ struct FolderView: View {
                         subfolder: Folder(title: newSubFolderName, context: context)
                     )
                     newSubFolderName = ""
+                    shouldAddFolder = false
                 }, cancelAction: {
                     newSubFolderName = ""
+                    shouldAddFolder = false
                 })
-                .onReceive(folderEditVM.$shouldAddFolder) { output in
-                    if output == true {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                            print("hi")
-                            self.addFolderFocus = true
-                        }
-                    }
-                }
+//                .onReceive(folderEditVM.$shouldAddFolder) {
+//                .onReceive($shouldAddFolder) {output in
+//                    if output == true {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+//                            print("hi")
+//                            self.addFolderFocus = true
+//                        }
+//                    }
+//                }
+//                .onChange(of: _addFolderFocus) { newValue in
+//                    if newValue == .true {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+//                            print("hi")
+//                            self.addFolderFocus = true
+//                        }
+//                    }
+//                }
+                
             
             NavigationLink(
                 destination: MemoView(
@@ -146,7 +167,7 @@ struct FolderView: View {
                 isActive: $isAddingMemo) {}
         } // end of ZStack
         .onDisappear(perform: {
-            folderEditVM.shouldAddFolder = false
+//            folderEditVM.shouldAddFolder = false
             newSubFolderName = ""
         })
         .frame(maxHeight: .infinity)

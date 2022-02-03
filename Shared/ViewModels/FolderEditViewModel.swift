@@ -50,7 +50,7 @@ class FolderEditViewModel: ObservableObject {
     
     @Published var shouldChangeFolderName = false
     
-    @Published var shouldAddFolder = false
+//    @Published var shouldAddFolder = false
     
     @Published var shouldShowSelectingView = false
     

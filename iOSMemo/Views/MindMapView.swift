@@ -69,8 +69,10 @@ struct MindMapView: View {
                         
                         // sort
                         Menu {
+                            
                             Text("Folder Ordering")
                                 .font(.title3)
+                            
                             FolderOrderingButton(type: .modificationDate, folderOrder: folderOrder)
                             FolderOrderingButton( type: .creationDate, folderOrder: folderOrder)
                             FolderOrderingButton(type: .alphabetical, folderOrder: folderOrder)
@@ -78,7 +80,6 @@ struct MindMapView: View {
                             Divider()
                             
                             FolderAscDecButtonLabel(isAscending: true, folderOrder: folderOrder)
-                            
                             FolderAscDecButtonLabel(isAscending: false, folderOrder: folderOrder)
                             
                         } label: {
