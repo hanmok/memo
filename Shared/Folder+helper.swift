@@ -256,7 +256,10 @@ extension Folder {
         }
 
 //        return folderWithLevelContainer
-        return [FolderWithLevel(folder: topFolders.first!, level: 0)]
+//        return [FolderWithLevel(folder: topFolders.first!, level: 0)]
+//        folderWithLevelContainer
+        return folderWithLevelContainer
+//        return [FolderWithLevel(folder: Folder(title: "home", context: topFolders.), level: 0)]
     }
     
     
@@ -390,6 +393,40 @@ extension Folder {
         context.saveCoreData()
         // 저장 했는데 왜이러지 ?? ???
         return homeFolder
+    }
+    
+    static func returnSampleFolder2(context: NSManagedObjectContext)  {
+        
+        let newFolder1 = Folder(title: "Category 1", context: context)
+
+        newFolder1.creationDate = Date().advanced(by: 2)
+        
+        let subFolder1 = Folder(title: "SubCategory 1", context: context)
+        let subFolder2 = Folder(title: "SubCategory 2", context: context)
+        let subFolder3 = Folder(title: "SubCategory 3", context: context)
+        
+        subFolder1.creationDate = Date().advanced(by: 2)
+        subFolder2.creationDate = Date().advanced(by: 1)
+        subFolder3.creationDate = Date().advanced(by: 3)
+        
+        subFolder1.modificationDate = Date().advanced(by: 2)
+        subFolder2.modificationDate = Date().advanced(by: 3)
+        subFolder3.modificationDate = Date().advanced(by: 1)
+        
+        let newFolder2 = Folder(title: "Category 2", context: context)
+
+        newFolder1.add(subfolder: subFolder1)
+        newFolder1.add(subfolder: subFolder2)
+        newFolder1.add(subfolder: subFolder3)
+        
+        newFolder2.creationDate = Date().advanced(by: 1)
+        // return TopFolders
+        // order
+        // 1. Alphabetical : SubCategory 1 > 2 > 3
+        // 1. Creation : SubCategory 2 > 1 > 3
+        // 1. Modification : SubCategory 3 > 1 > 2
+        
+//        return [newFolder1, newFolder2]
     }
 }
 

@@ -19,19 +19,6 @@ extension FolderWithLevel : Identifiable {
     
 }
 
-//return MindMapView(
-//    fastFolderWithLevelGroup:
-//        FastFolderWithLevelGroup(
-//            targetFolder: topFolders.first!))
-
-
-
-
-
-
-
-
-
 struct LevelAndCollapsed {
     var level: Int
     var collapsed: Bool
@@ -62,7 +49,6 @@ struct MindMapView: View {
     
     @FocusState var changingNameFocus: Bool
     
-    
     @State var showSelectingFolderView = false
     
     var body: some View {
@@ -75,7 +61,6 @@ struct MindMapView: View {
                     HStack {
                         // sort
                         Menu {
-                            
                             Text("Folder Ordering")
                                 .font(.title3)
                             
@@ -95,16 +80,6 @@ struct MindMapView: View {
                         
                         // Add new Folder to the top Folder
                         Button {
-                            //                            showSelectingFolderView = true
-                            //                            print(fastFolderWithLevelGroup.allFolders)
-                            //                            Folder.updateTopFolder(context: context)
-                            //                            Folder.up
-                            
-                            //                            let folder = Folder(title: "home", context: context)
-                            
-                            //                            Folder.topFolderFetch()
-                            //                            context.saveCoreData()
-                            //                            Folder.updateTopFolders(context: context)
                             shouldAddFolderToTop = true
                         } label: {
                             ChangeableImage(imageSystemName: "plus")
@@ -123,35 +98,12 @@ struct MindMapView: View {
                     ) {
                         ForEach(fastFolderWithLevelGroup.allFolders) {folderWithLevel in
                             
-                            
-                            //                            if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
-                            
                             FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
                                 .environmentObject(memoEditViewModel)
                                 .environmentObject(folderEditViewModel)
                             
-                            // without this action, trailing buttons not show up properly..
-                            //                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                            //                                        Button {
-                            //                                            let newFolder = Folder(title: "new Folder", context: context)
-                            //                                            context.saveCoreData()
-                            //                                            let topFolders = Folder.topFolderFetch()
-                            //                                            let folders = Folder.fetch(.all)
-                            //                                        } label: {
-                            //
-                            //                                        }
-                            //                                    }
                                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                     Button {
-                                        //                                            let counts = folderWithLevel.folder.subfolders.count
-                                        //                                            let some = folderWithLevel.folder.subfolders.count
-                                        //                                            let newFolder = Folder(title: "under level\(counts + 1)", context: context)
-                                        
-                                        //                                            folderWithLevel.folder.add(subfolder: newFolder)
-                                        //                                            context.saveCoreData()
-                                        //                                            folderWithLevel.folder.title += ""
-                                        //                                            Folder.updateTopFolders(context: context)
-                                        
                                         folderToAddSubFolder = folderWithLevel.folder
                                         shouldAddSubFolder = true
                                     } label: {
@@ -204,7 +156,7 @@ struct MindMapView: View {
             //                }
             
             
-            //MARK: - add Folder To Top Level
+            //MARK: - Add Top Folder
             
             PrettyTextFieldAlert(
                 placeHolderText: "New Top Folder",
@@ -212,15 +164,14 @@ struct MindMapView: View {
                 isPresented: $shouldAddFolderToTop,
                 text: $newTopFolderName,
                 focusState: _changingNameFocus) { newName in
-                    let newFolder = Folder(title: newName, context: context)
+                    // new Top Folder
+                    let _ = Folder(title: newName, context: context)
                     context.saveCoreData()
                     
                     Folder.updateTopFolders(context: context)
                     newTopFolderName = ""
-//                    shouldAddFolderToTop = false
                 } cancelAction: {
                     newTopFolderName = ""
-//                    shouldAddFolderToTop = false
                 }
             
             
@@ -228,7 +179,6 @@ struct MindMapView: View {
             PrettyTextFieldAlert(
                 placeHolderText: "New SubFolder",
                 type: .newSubFolder,
-                //                isPresented: $folderEditViewModel.shouldChangeFolderName,
                 isPresented: $shouldAddSubFolder,
                 text: $newSubFolderName,
                 focusState: _changingNameFocus) { newName in
@@ -242,13 +192,13 @@ struct MindMapView: View {
                     context.saveCoreData()
                     
                     newSubFolderName = ""
-//                    shouldAddSubFolder = false
+
                 } cancelAction: {
                     newSubFolderName = ""
-//                    shouldAddSubFolder = false
                 }
         } // end of ZStack
         
+        // what are the purpose of thoes two sheets ??
         .sheet(isPresented: $showSelectingFolderView,
                content: {
             SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)

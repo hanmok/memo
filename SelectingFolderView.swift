@@ -25,15 +25,22 @@ struct SelectingFolderView: View {
                 .padding(.vertical)
             
             List(fastFolderWithLevelGroup.allFolders) { folderWithLevel in
-                if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
+//                if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
                     
                     Button {
                         
                         folderEditViewModel.folderToPaste = folderWithLevel.folder
                         
-                        if folderEditViewModel.folderToCut != nil {
-                        folderEditViewModel.folderToPaste!.add(subfolder: folderEditViewModel.folderToCut!)
+        // move only when cutted folder and paste target folder are different.
+                        // if same, do nothing but set both to nil
+                        if folderEditViewModel.folderToCut != folderEditViewModel.folderToPaste {
+                            
+                            if folderEditViewModel.folderToCut != nil {
+                                folderEditViewModel.folderToPaste!.add(subfolder: folderEditViewModel.folderToCut!)
+                            }
+                            
                         }
+                        
                         context.saveCoreData()
                         
                         folderEditViewModel.folderToCut = nil
@@ -42,10 +49,11 @@ struct SelectingFolderView: View {
                         Folder.updateTopFolders(context: context)
                         
                         presentationMode.wrappedValue.dismiss()
+                        
                     } label: {
                         SelectingCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
                     }
-                }
+//                }
             } // end of List
         }
     }

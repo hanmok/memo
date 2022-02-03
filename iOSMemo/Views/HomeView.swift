@@ -15,7 +15,7 @@ struct HomeView: View { // top folder fetch
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
 //    var initialFolder: Folder
-    
+
 //    init(context: NSManagedObjectContext) {
 //        let req = Folder.topFolderFetch()
 //        let res = try? context.fetch(req)
@@ -32,143 +32,24 @@ struct HomeView: View { // top folder fetch
     // 어디서부터 어떤게 잘못된걸까?
     var body: some View {
 
+        // MARK: - FOR TESTING
+//        if topFolders.isEmpty {
+//            Folder.returnSampleFolder2(context: context)
+//        }
 
-        
 //        UnitTestHelpers.deletesAllFolders(context: context)
         
-//        var initialFolder: Folder
         
-//        if topFolders.count != 0 {
-//            initialFolder = topFolders.first!
-//            print("topFolders: \(topFolders)")
-//            print("topFolder.title :\(topFolders.first!.title)")
-////            initialFolder = Folder.returnSampleFolder(context: context)
-//        } else {
-//            initialFolder = Folder.createHomeFolder(context: context)
-////            initialFolder = Folder.returnSampleFolder(context: context)
-////            initialFolder = Folder.returnSampleFolder(context: context)
-//        }
-        
-        
-//        if topFolders.count != 0 {
-//            print("triggered line : 40")
-//
-//            return NavigationView {
-////                MindMapView(
-////                    fastFolderWithLevelGroup:
-////                        FastFolderWithLevelGroup(
-////                            targetFolder: topFolders.first!))
-//                MindMapView(
-//                    fastFolderWithLevelGroup:
-//                        FastFolderWithLevelGroup(
-//                            targetFolder: Folder.returnSampleFolder(context: context)))
-//            }
-//        } else {
-//            print("triggered line : 48")
-//            return NavigationView {
-//                MindMapView(
-//                    fastFolderWithLevelGroup:
-//                        FastFolderWithLevelGroup(
-//                            targetFolder: Folder.createHomeFolder(context: context)))
-//        }
-        
-//        MindMapView(
-//            fastFolderWithLevelGroup:
-//                FastFolderWithLevelGroup(
-//                    targetFolder: Folder.returnSampleFolder(context: context)))
-
-//        if topFolders.count != 0 {
-//        return MindMapView(
-//            fastFolderWithLevelGroup:
-//                FastFolderWithLevelGroup(
-//                    targetFolder: Folder.returnSampleFolder(context: context)))
-//        } else {
-//            return MindMapView(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        targetFolder: Folder.returnSampleFolder(context: context)))
-//        }
-        
-//        return MindMapView(
-//            fastFolderWithLevelGroup:
-//                FastFolderWithLevelGroup(
-//                    targetFolder: Folder.returnSampleFolder(context: context)))
-        
-//        return NavigationView {
-//            MindMapView(
-//            fastFolderWithLevelGroup:
-//                FastFolderWithLevelGroup(
-//                    targetFolder: initialFolder))
-//        }
-        
-//        return NavigationView {
-//            MindMapView(
-//            fastFolderWithLevelGroup:
-//                FastFolderWithLevelGroup(
-//                    targetFolder: topFolders.first!))
-//        }
-        
-//        return NavigationView {
-//            MindMapView(
-//            fastFolderWithLevelGroup:
-//                FastFolderWithLevelGroup(
-//                    targetFolder: Folder.returnSampleFolder(context: context)))
-//        }
         
         return NavigationView {
-//            ZStack {
-//                MindMapView(
-//                    fastFolderWithLevelGroup:
-//                        FastFolderWithLevelGroup(
-//                            targetFolder: topFolders.first!))
-                
-//                MindMapView(
-//                    fastFolderWithLevelGroup:
-//                        FastFolderWithLevelGroup(
-//                            targetFolder: Folder.returnSampleFolder(context: context)))
-            
-//            MindMapView(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        targetFolder: topFolders.first!))
-            
             MindMapView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         targetFolders: topFolders.sorted()))
             
-//            MindMapView(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        targetFolders: [Folder(title: "home", context: context)]))
-            
-                
-//                VStack {
-//                    Spacer()
-//                    ForEach(topFolders.first!.subfolders.sorted()) { subFolder in
-//                        Text(subFolder.title)
-//                            .background(.green)
-//                    }
-//                }
             }
         }
 
-//        return EmptyView()
-//
-//        return NavigationView {
-//            MindMapView(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        targetFolder: initialFolder))
-
-        
-                
-//        return NavigationView {
-//            MindMapView(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        targetFolder: topFolders.first!))
-//                .environmentObject(FolderEditViewModel())
         }
 
 
