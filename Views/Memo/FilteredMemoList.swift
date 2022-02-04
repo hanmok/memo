@@ -38,10 +38,6 @@ struct FilteredMemoList: View {
             memosToShow = folder.memos.sorted()
         }
         
-        //        memoEditVM.navigateToMemo = folder.memos.sorted().first!
-        
-        
-        //        return ZStack(alignment: .topLeading) {
         return ZStack {
             if memoEditVM.navigateToMemo != nil {
                 NavigationLink(

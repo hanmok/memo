@@ -10,22 +10,12 @@ import CoreData
 // need connection to FolderView.
 // maybe.. onReive necessary.
 struct MemosToolBarView: View {
+    
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     
-//    var sortedMemos: [Memo] {
-//        //        selMemos.memos.sorted()
-//        editMemoVM.selectedMemos.sorted()
-//    }
     @Binding var showSelectingFolderView: Bool
     let spacingBetweenButtons: CGFloat = 12
-    
-    //    var pinnedAction: ([Memo]) -> Void = {fo _ in }
-    //    var cutAction: ([Memo]) -> Void = { _ in }
-    //    var copyAction: ([Memo]) -> Void = { _ in }
-    //    var changeColorAcion: ([Memo]) -> Void = { _ in }
-    //    var removeAction: ([Memo]) -> Void = { _ in }
-    
     
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
@@ -119,10 +109,8 @@ struct MemosToolBarView: View {
             .cornerRadius(5)
         }
         .frame(width: 170, height: 30, alignment: .center)
-//        .padding(5)
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, 5)
-//        .background(Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255, opacity: 0.5))
         .background(Color.subColor)
         .cornerRadius(10)
     }

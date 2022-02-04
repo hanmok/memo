@@ -35,8 +35,6 @@ struct SubFolderView: View {
                 Spacer()
                 
                 Button {
-                    // add new folder
-//                    folderEditVM.shouldAddFolder = true
                     isAddingFolder = true
                 } label: {
                     ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
@@ -80,6 +78,10 @@ struct SubFolderView: View {
             }
             Spacer()
         }
+        .frame(width: UIScreen.screenWidth / 2.5)
+            .background(Color.subColor)
+            .cornerRadius(10)
+        
     }
 }
 

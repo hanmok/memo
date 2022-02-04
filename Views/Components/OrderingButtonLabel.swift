@@ -9,21 +9,11 @@ import SwiftUI
 import CoreData
 
 
-// MARK: - ORDERING BASIC STRUCTURE
-enum OrderType: String, CaseIterable {
-    case modificationDate = "Modification Date"
-    case creationDate = "Creation Date"
-    case alphabetical = "Alphabetical"
-}
 
 
 // MARK: - FOLDER ORDERING
 
-class FolderOrder: ObservableObject {
-    @Published var isAscending = true
-    
-    @Published var orderType: OrderType = .creationDate
-}
+
 
 
 struct FolderOrderingButton: View {
@@ -75,11 +65,7 @@ struct FolderAscDecButton: View {
 
 // MARK: - MEMO ORDERING
 
-class MemoOrder: ObservableObject {
-    @Published var isAscending = false
-    
-    @Published var orderType: OrderType = .modificationDate
-}
+
 
 struct MemoOrderingButton: View {
 
@@ -146,6 +132,29 @@ struct FolderOrderingMenu: View {
             
             FolderAscDecButton(isAscending: true, folderOrder: folderOrder)
             FolderAscDecButton(isAscending: false, folderOrder: folderOrder)
+            
+        } label: {
+            ChangeableImage(imageSystemName: "arrow.up.arrow.down")
+        }
+    }
+}
+
+struct MemoOrderingMenu: View {
+    @ObservedObject var memoOrder: MemoOrder
+    @ObservedObject var parentFolder: Folder
+    
+    var body: some View {
+        Menu {
+            Text("Memo Ordering")
+            MemoOrderingButton(type: .modificationDate, memoOrder: memoOrder, parentFolder: parentFolder)
+            MemoOrderingButton(type: .creationDate, memoOrder: memoOrder, parentFolder: parentFolder)
+            MemoOrderingButton(type: .alphabetical, memoOrder: memoOrder, parentFolder: parentFolder)
+            
+            Divider()
+            
+            MemoAscDecButtonLabel(isAscending: true, memoOrder: memoOrder, parentFolder: parentFolder)
+            
+            MemoAscDecButtonLabel(isAscending: false, memoOrder: memoOrder, parentFolder: parentFolder)
             
         } label: {
             ChangeableImage(imageSystemName: "arrow.up.arrow.down")

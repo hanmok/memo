@@ -15,11 +15,12 @@ struct TitleWithLevelView: View {
     
     var level: Int
 
+    var shouldHideArrow = false
     
     var body: some View {
         HStack {
             ForEach( 0 ..< level + 1) { _ in
-                Text("  ")
+                Text("  ") // double Space for each level
             }
             
             Text(folder.title)
@@ -28,6 +29,10 @@ struct TitleWithLevelView: View {
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
                     .tint(.yellow) // why not working ?
+            }
+            if shouldHideArrow {
+                EmptyView()
+                    .background(.white)
             }
         }
     }

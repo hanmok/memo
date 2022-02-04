@@ -9,13 +9,13 @@ import SwiftUI
 import CoreData
 
 struct FolderView: View {
-
+    
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-//    @StateObject var memoOrder = MemoOrder()
+    //    @StateObject var memoOrder = MemoOrder()
     
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
@@ -29,14 +29,6 @@ struct FolderView: View {
     @ObservedObject var currentFolder: Folder
     
     @FocusState var addFolderFocus: Bool
-    
-    func search() {
-        
-    }
-    
-    func editFolder() {
-        
-    }
     
     func toggleFavorite() {
         currentFolder.isFavorite.toggle()
@@ -69,22 +61,17 @@ struct FolderView: View {
                             
                             // Button Or SubFolderView
                             ZStack(alignment: .topTrailing) {
-                                
                                 Button(action: {
                                     isShowingSubFolderView = true
-                                },
-                                       label: {
-                                    SubFolderButtonImage()
-                                })
-                                .padding(.trailing, Sizes.overallPadding )
+                                }, label: {
+                                    SubFolderButtonImage() })
+                                    .padding(.trailing, Sizes.overallPadding )
                                 
                                 SubFolderView(
                                     folder: currentFolder,
                                     isShowingSubFolderView: $isShowingSubFolderView,
                                     isAddingFolder: $shouldAddFolder)
-                                    .frame(width: UIScreen.screenWidth / 2.5)
-                                    .background(Color.subColor)
-                                    .cornerRadius(10)
+                                    
                                 // offset x : trailingPadding
                                     .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
                                     .animation(.spring(), value: isShowingSubFolderView)
@@ -118,15 +105,9 @@ struct FolderView: View {
                 } // end of HStack
             } // end of VStack
             
+            
             // When add folder pressed
             // overlay white background when Alert show up
-            //            if shouldAddSubFolder {
-            
-//            if folderEditVM.shouldAddFolder {
-//                Color(.white)
-//                    .opacity(0.8)
-//            }
-            
             if shouldAddFolder {
                 Color(.white)
                     .opacity(0.8)
@@ -137,9 +118,9 @@ struct FolderView: View {
             
             //  Present TextFieldAlert when add folder pressed
             PrettyTextFieldAlert(
-//                placeHolderText: "Enter new folder name",
+                //                placeHolderText: "Enter new folder name",
                 type: .newSubFolder,
-//                isPresented: $folderEditVM.shouldAddFolder,
+                //                isPresented: $folderEditVM.shouldAddFolder,
                 isPresented: $shouldAddFolder,
                 text: $newSubFolderName,
                 focusState: _addFolderFocus,
@@ -156,24 +137,6 @@ struct FolderView: View {
                     newSubFolderName = ""
                     shouldAddFolder = false
                 })
-//                .onReceive(folderEditVM.$shouldAddFolder) {
-//                .onReceive($shouldAddFolder) {output in
-//                    if output == true {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-//                            print("hi")
-//                            self.addFolderFocus = true
-//                        }
-//                    }
-//                }
-//                .onChange(of: _addFolderFocus) { newValue in
-//                    if newValue == .true {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-//                            print("hi")
-//                            self.addFolderFocus = true
-//                        }
-//                    }
-//                }
-                
             
             NavigationLink(
                 destination: MemoView(
@@ -182,7 +145,7 @@ struct FolderView: View {
                     isNewMemo: true),
                 isActive: $isAddingMemo) {}
         } // end of ZStack
-        
+        .frame(maxHeight: .infinity)
         .sheet(isPresented: $showSelectingFolderView,
                content: {
             SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
@@ -191,46 +154,22 @@ struct FolderView: View {
         })
         
         .onDisappear(perform: {
-//            folderEditVM.shouldAddFolder = false
             newSubFolderName = ""
-//            memoEditVM.initSelectedMemos() // it makes nav error.
+            //            memoEditVM.initSelectedMemos() // it makes nav error.
         })
-        .frame(maxHeight: .infinity)
         
         .navigationTitle(currentFolder.title)
-        
         .navigationBarItems(trailing:
                                 HStack {
             // search Button
             Button(action: {
-//                print("currentFolder's memos: \(currentFolder.memos)")
-//                print("currentFolder's memo count : \(currentFolder.memos.count)")
-//                for eachMemo in currentFolder.memos.sorted() {
-//                    print("memo Title: \(eachMemo.title)")
-//                    print("memo pinned : \(eachMemo.pinned)")
-//                }
-                currentFolder.title += "" // ;;; how can i change //. ??
-//                context.saveCoreData()
+                currentFolder.title += ""
+                //                context.saveCoreData()
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
             
-            // Ordering
-            Menu {
-                Text("Memo Ordering")
-                MemoOrderingButton(type: .modificationDate, memoOrder: memoOrder, parentFolder: currentFolder)
-                MemoOrderingButton(type: .creationDate, memoOrder: memoOrder, parentFolder: currentFolder)
-                MemoOrderingButton(type: .alphabetical, memoOrder: memoOrder, parentFolder: currentFolder)
-                
-                Divider()
-                
-                MemoAscDecButtonLabel(isAscending: true, memoOrder: memoOrder, parentFolder: currentFolder)
-                
-                MemoAscDecButtonLabel(isAscending: false, memoOrder: memoOrder, parentFolder: currentFolder)
-                
-            } label: {
-                ChangeableImage(imageSystemName: "arrow.up.arrow.down")
-            }
+            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
             
             // favorite Button
             Button(action: {
@@ -245,38 +184,13 @@ struct FolderView: View {
                     ChangeableImage(imageSystemName: "star")
                 }
             })
-
+            
             // open talk View
             Button {
-
+                
             } label: {
                 ChangeableImage(imageSystemName: "bubble.right")
             }
-            
-            
-            
-        }
-        )
+        })
     }
 }
-
-
-
-
-
-
-// Folder Name with.. a little Space
-struct FolderView_Previews: PreviewProvider {
-    
-    static var testFolder = Folder(title: "test Folder", context: PersistenceController.preview.container.viewContext)
-    
-    static var previews: some View {
-        
-        FolderView(currentFolder: testFolder)
-    }
-}
-//
-
-
-
-

@@ -56,46 +56,12 @@ struct SelectingFolderView: View {
                     presentationMode.wrappedValue.dismiss()
                     
                 } label: {
-                    SelectingCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                    TitleWithLevelView(
+                        folder: folderWithLevel.folder,
+                        level: folderWithLevel.level,
+                        shouldHideArrow: true)
                 }
             } // end of List
         }
     }
-}
-
-
-
-struct SelectingCollapsibleFolder: View {
-    
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    @ObservedObject var folder: Folder
-    
-    var level: Int
-    var numOfSubfolders: String{
-        if folder.subfolders.count != 0 {
-            return "\(folder.subfolders.count)"
-        }
-        return ""
-    }
-    
-    var body: some View {
-        HStack {
-            ForEach(0 ..< level + 1) { _ in
-                Text("  ")
-            }
-            
-            Text(folder.title)
-                .foregroundColor(colorScheme.adjustTint())
-            
-            if folder.isFavorite {
-                Text(Image(systemName: "star.fill"))
-                    .tint(.yellow) // why not working ?
-            }
-            
-            EmptyView()
-                .background(.white)
-        }
-    }
-    
 }
