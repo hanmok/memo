@@ -58,6 +58,12 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                     }
+                    .simultaneousGesture(TapGesture().onEnded{
+                        // hide SubFolderView when navigate
+                        isShowingSubFolderView = false
+                        memoEditVM.selectedMemos.removeAll()
+                        memoEditVM.initSelectedMemos()
+                    })
 
                 } // end of ForEach
             } // end of VStack

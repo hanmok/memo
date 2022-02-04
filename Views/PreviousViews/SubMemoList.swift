@@ -11,7 +11,6 @@
 //struct SubMemoList: View {
 //
 //    //    @Environment(\.managedObjectContext) var context
-//    //    @StateObject var selectedViewModel = SelectedMemoViewModel()
 //
 //    @EnvironmentObject var folder: Folder
 //    //    @ObservedObject var folder: Folder

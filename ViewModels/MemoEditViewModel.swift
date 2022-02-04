@@ -4,21 +4,43 @@ class MemoEditViewModel: ObservableObject {
     
     //    var context: NSManagedObjectContext
     
-    var testMemos: Memo? = nil
+//    var testMemos: Memo? = nil
     
-    @Published var hasSelected = false
+    @Published var hasNotLongSelected = true
     
 //    @Published var shouldAddMemo = false
     @Published var shouldChangeColor = false
     
     @Published var selectedMemos = Set<Memo>()
     
-    @Published var didCutMemos: [Memo] = []
+    @Published var navigateToMemo: Memo? = nil
+    
+//    @Published var didCutMemos: [Memo] = [] // not necessary ..
     
     public var count: Int {
         selectedMemos.count
     }
     
+    func add(memo: Memo) {
+        self.selectedMemos.update(with: memo)
+    }
+    
+    func erase(memo: Memo) {
+        self.selectedMemos.remove(memo)
+    }
+    
+    func initSelectedMemos() {
+        self.selectedMemos.removeAll()
+        hasNotLongSelected = true
+    }
+    
+    func dealWhenMemoSelected(_ memo: Memo) {
+        if selectedMemos.contains(memo) {
+            erase(memo: memo)
+        } else{
+            add(memo: memo)
+        }
+    }
     
     // after selecting several memos
     
@@ -48,9 +70,7 @@ class MemoEditViewModel: ObservableObject {
     //    }
     
     
-    func add(memo: Memo) {
-        self.selectedMemos.update(with: memo)
-    }
+    
     
     //    var pinnedAction: ([Memo]) -> Void
     //    var cutAction: ([Memo]) -> Void

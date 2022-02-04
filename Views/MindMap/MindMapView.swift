@@ -116,9 +116,9 @@ struct MindMapView: View {
                 } // end of List
                 .listStyle(InsetGroupedListStyle())
                 
-                .onReceive(fastFolderWithLevelGroup.$allFolders) { output in
-                    print("fastFolder output: \(output)")
-                }
+//                .onReceive(fastFolderWithLevelGroup.$allFolders) { output in
+//                    print("fastFolder output: \(output)")
+//                }
                 
             } // end of VStack
             

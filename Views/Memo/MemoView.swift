@@ -86,9 +86,9 @@ struct MemoView: View {
     func saveChanges() {
         print("save changes has triggered")
         memo.title = title
-        
+
         memo.contents = contents
-        
+
         // if both title and contents are empty, delete memo
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
@@ -96,13 +96,13 @@ struct MemoView: View {
         } else { // if both title and contents are not empty
             memo.modificationDate = Date()
             if isNewMemo {
-                
+
                 parent.add(memo: memo) // error.. ?? ??
-                //            parent.modificationDate = Date()
+                parent.modificationDate = Date()
             }
         }
         parent.title += ""
-        
+
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
@@ -162,7 +162,7 @@ struct MemoView: View {
                     .focused($focusState, equals: .title)
                     .onAppear(perform: {
                         if self.isNewMemo == true {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {  /// Anything over 0.5 seems to work
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
                                 self.focusState = .title
                             }
                         }
@@ -215,6 +215,8 @@ struct MemoView: View {
             print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
+            print("title or memoView : \(title)")
+            print("isNewMemo ? \(isNewMemo)")
             
             if isNewMemo == true {
                 self.focusState = .title
