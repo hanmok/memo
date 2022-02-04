@@ -28,11 +28,10 @@ struct MemoView: View {
     @FocusState var focusState: Field?
     
     @GestureState var isScrolled = false
-//    @Binding var isAddingMemo: Bool
     
-    @State var isShowingMsg = false
+//    @State var isShowingMsg = false
     
-    @State var msgType: MemoMsg?
+//    @State var msgType: MemoMsg?
     
     @State var title: String = ""
     
@@ -113,21 +112,21 @@ struct MemoView: View {
         
         memo.pinned.toggle()
         
-        msgType = memo.pinned ? .pinned : .unpinned
-        isShowingMsg = true
+//        msgType = memo.pinned ? .pinned : .unpinned
+//        isShowingMsg = true
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            self.isShowingMsg = false
-        }
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+//            self.isShowingMsg = false
+//        }
     }
     
     func removeMemo() {
-        msgType = .removed // should be passed to folderView
-        isShowingMsg = true
+//        msgType = .removed // should be passed to folderView
+//        isShowingMsg = true
         
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            self.isShowingMsg = false
-        }
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+//            self.isShowingMsg = false
+//        }
         
         Memo.delete(memo)
         saveChanges()
@@ -196,16 +195,16 @@ struct MemoView: View {
                         }
                     })
             }
-            if isShowingMsg {
-                if let validMsg = msgType {
-                    Text(validMsg.rawValue)
-                        .frame(width: screenSize.width * 0.6, height: screenSize.height * 0.05)
-                        .background(Color(.sRGB, white: 0.5, opacity: isShowingMsg ? 1 : 0))
-                        .animation(.easeOut, value: isShowingMsg)
-                        .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
-                        .padding(.bottom, screenSize.height * 0.2)
-                }
-            }
+//            if isShowingMsg {
+//                if let validMsg = msgType {
+//                    Text(validMsg.rawValue)
+//                        .frame(width: screenSize.width * 0.6, height: screenSize.height * 0.05)
+//                        .background(Color(.sRGB, white: 0.5, opacity: isShowingMsg ? 1 : 0))
+//                        .animation(.easeOut, value: isShowingMsg)
+//                        .clipShape(RoundedRectangle(cornerRadius: 10.0, style: .continuous))
+//                        .padding(.bottom, screenSize.height * 0.2)
+//                }
+//            }
         }
 
         

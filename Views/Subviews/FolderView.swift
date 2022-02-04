@@ -9,13 +9,13 @@ import SwiftUI
 import CoreData
 
 struct FolderView: View {
-    
+
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
-    
-    @StateObject var memoOrder = MemoOrder()
+    @EnvironmentObject var memoOrder: MemoOrder
+//    @StateObject var memoOrder = MemoOrder()
     
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
@@ -77,7 +77,10 @@ struct FolderView: View {
                                 })
                                 .padding(.trailing, Sizes.overallPadding )
                                 
-                                SubFolderView(folder: currentFolder, isShowingSubFolderView: $isShowingSubFolderView, isAddingFolder: $shouldAddFolder)
+                                SubFolderView(
+                                    folder: currentFolder,
+                                    isShowingSubFolderView: $isShowingSubFolderView,
+                                    isAddingFolder: $shouldAddFolder)
                                     .frame(width: UIScreen.screenWidth / 2.5)
                                     .background(.yellow)
                                     .cornerRadius(10)
@@ -198,14 +201,14 @@ struct FolderView: View {
                                 HStack {
             // search Button
             Button(action: {
-                print("currentFolder's memos: \(currentFolder.memos)")
-                print("currentFolder's memo count : \(currentFolder.memos.count)")
-                for eachMemo in currentFolder.memos.sorted() {
-                    print("memo Title: \(eachMemo.title)")
-                    print("memo pinned : \(eachMemo.pinned)")
-                }
-                currentFolder.title += ""
-                context.saveCoreData()
+//                print("currentFolder's memos: \(currentFolder.memos)")
+//                print("currentFolder's memo count : \(currentFolder.memos.count)")
+//                for eachMemo in currentFolder.memos.sorted() {
+//                    print("memo Title: \(eachMemo.title)")
+//                    print("memo pinned : \(eachMemo.pinned)")
+//                }
+                currentFolder.title += "" // ;;; how can i change //. ??
+//                context.saveCoreData()
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
@@ -213,15 +216,15 @@ struct FolderView: View {
             // Ordering
             Menu {
                 Text("Memo Ordering")
-                MemoOrderingButton(type: .modificationDate, memoOrder: memoOrder)
-                MemoOrderingButton(type: .creationDate, memoOrder: memoOrder)
-                MemoOrderingButton(type: .alphabetical, memoOrder: memoOrder)
+                MemoOrderingButton(type: .modificationDate, memoOrder: memoOrder, parentFolder: currentFolder)
+                MemoOrderingButton(type: .creationDate, memoOrder: memoOrder, parentFolder: currentFolder)
+                MemoOrderingButton(type: .alphabetical, memoOrder: memoOrder, parentFolder: currentFolder)
                 
                 Divider()
                 
-                MemoAscDecButtonLabel(isAscending: true, memoOrder: memoOrder)
+                MemoAscDecButtonLabel(isAscending: true, memoOrder: memoOrder, parentFolder: currentFolder)
                 
-                MemoAscDecButtonLabel(isAscending: false, memoOrder: memoOrder)
+                MemoAscDecButtonLabel(isAscending: false, memoOrder: memoOrder, parentFolder: currentFolder)
                 
             } label: {
                 ChangeableImage(imageSystemName: "arrow.up.arrow.down")

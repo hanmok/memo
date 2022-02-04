@@ -20,11 +20,9 @@ struct FilteredMemoList: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @ObservedObject var folder: Folder
-    
-    //    @State var isNotLongSelecting = false
-    
+        
     var listType: MemoListType
-    //    var selectedMemo: Memo? = nil
+
     
     var body: some View {
         
@@ -49,12 +47,11 @@ struct FilteredMemoList: View {
                 NavigationLink(
                     destination:
                         MemoView(memo: memoEditVM.navigateToMemo!, parent: folder),
-                    //                    isActive: $isNotLongSelecting) {}
                     isActive: $memoEditVM.hasNotLongSelected) {}
             }
 
             
-            VStack {
+            VStack { // without this, views stack for each memos
                 Section {
                     ForEach(memosToShow, id: \.self) { memo in
                         MemoBoxView(memo: memo)

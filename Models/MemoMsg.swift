@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum MemoMsg: String {
-    case pinned = "memo has been pinned"
-    case unpinned = "memo has been unpinned"
-    case removed =  "memo has been removed"
-    case copied =  "memo has been copied"
-    case savedAsImage = "Saved as Image"
-}
+//enum MemoMsg: String {
+//    case pinned = "memo has been pinned"
+//    case unpinned = "memo has been unpinned"
+//    case removed =  "memo has been removed"
+//    case copied =  "memo has been copied"
+//    case savedAsImage = "Saved as Image"
+//}

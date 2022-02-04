@@ -20,7 +20,7 @@ struct MemosToolBarView: View {
     @Binding var showSelectingFolderView: Bool
     let spacingBetweenButtons: CGFloat = 12
     
-    //    var pinnedAction: ([Memo]) -> Void = { _ in }
+    //    var pinnedAction: ([Memo]) -> Void = {fo _ in }
     //    var cutAction: ([Memo]) -> Void = { _ in }
     //    var copyAction: ([Memo]) -> Void = { _ in }
     //    var changeColorAcion: ([Memo]) -> Void = { _ in }
@@ -68,7 +68,7 @@ struct MemosToolBarView: View {
             
             
             
-            // RELOCATE MEMOS, LOOKING FINE 
+            // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
                 showSelectingFolderView = true
 //                for each in memoEditVM.selectedMemos {
