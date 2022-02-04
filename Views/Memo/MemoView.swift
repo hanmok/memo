@@ -39,12 +39,12 @@ struct MemoView: View {
     
 //    @State var showFoldersToSelect = false
     
-    @State private var colorSelected: Color = .white {
-        didSet {
-            memo.colorAsInt = Int64(colorSelected.asRgba)
-            saveChanges()
-        }
-    }
+//    @State private var colorSelected: Color = .white {
+//        didSet {
+//            memo.colorAsInt = Int64(colorSelected.asRgba)
+//            saveChanges()
+//        }
+//    }
     
     let parent: Folder
     let screenSize = UIScreen.main.bounds
@@ -149,10 +149,10 @@ struct MemoView: View {
         
         return ZStack {
             //            Color(colorSelected as CGColor ?? CGColor(gray: 1, alpha: 1))
-            Color(rgba: colorSelected.asRgba)
+//            Color(rgba: colorSelected.asRgba)
             //            Color(rgba: Int(memo.colorAsInt))
             //            Color(
-                .ignoresSafeArea()
+//                .ignoresSafeArea()
             VStack {
                 TextField(initialTitle, text: $title)
                 
@@ -183,7 +183,7 @@ struct MemoView: View {
                 
                 TextEditor(text: $contents)
                     .padding(.horizontal, Sizes.overallPadding)
-                    .colorMultiply(colorSelected)
+//                    .colorMultiply(colorSelected)
                     .gesture(scroll)
                     .focused($editorFocusState)
                     .focused($focusState, equals: .contents)

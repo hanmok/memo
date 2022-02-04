@@ -192,7 +192,7 @@ struct FolderView: View {
         .onDisappear(perform: {
 //            folderEditVM.shouldAddFolder = false
             newSubFolderName = ""
-            memoEditVM.initSelectedMemos()
+//            memoEditVM.initSelectedMemos() // it makes nav error.
         })
         .frame(maxHeight: .infinity)
         
