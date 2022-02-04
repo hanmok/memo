@@ -3,8 +3,7 @@ import SwiftUI
 class MemoEditViewModel: ObservableObject {
     
     //    var context: NSManagedObjectContext
-    
-//    var testMemos: Memo? = nil
+
     
     @Published var hasNotLongSelected = true
     
@@ -13,9 +12,11 @@ class MemoEditViewModel: ObservableObject {
     
     @Published var selectedMemos = Set<Memo>()
     
+
     @Published var navigateToMemo: Memo? = nil
     
 //    @Published var didCutMemos: [Memo] = [] // not necessary ..
+
     
     public var count: Int {
         selectedMemos.count
@@ -70,7 +71,9 @@ class MemoEditViewModel: ObservableObject {
     //    }
     
     
-    
+    func add(memo: Memo) {
+        self.selectedMemos.update(with: memo)
+    }
     
     //    var pinnedAction: ([Memo]) -> Void
     //    var cutAction: ([Memo]) -> Void

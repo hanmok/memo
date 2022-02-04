@@ -11,6 +11,7 @@ import CoreData
 // maybe.. onReive necessary.
 struct MemosToolBarView: View {
     @Environment(\.managedObjectContext) var context
+
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     
 //    var sortedMemos: [Memo] {
@@ -21,6 +22,7 @@ struct MemosToolBarView: View {
     let spacingBetweenButtons: CGFloat = 12
     
     //    var pinnedAction: ([Memo]) -> Void = {fo _ in }
+
     //    var cutAction: ([Memo]) -> Void = { _ in }
     //    var copyAction: ([Memo]) -> Void = { _ in }
     //    var changeColorAcion: ([Memo]) -> Void = { _ in }
@@ -32,12 +34,14 @@ struct MemosToolBarView: View {
             
             
 
+
             // PIN BUTTON, WORKS FINE
             Button(action: {
 // 로직이 좀 이상한데 ? 기본적으로 pin 시킴.
                 // 만약 모든게 pin 되어있는 경우에만 모두 unpin
                 var allPinned = true
                 for each in memoEditVM.selectedMemos {
+
                     if each.pinned == false {
                         allPinned = false
                         break
@@ -45,6 +49,7 @@ struct MemosToolBarView: View {
                 }
 
                 if !allPinned {
+
                     for each in memoEditVM.selectedMemos {
                         each.pinned = true
                     }
@@ -63,11 +68,13 @@ struct MemosToolBarView: View {
             }
             .padding(.leading, 25)
 //            .padding(.horizontal, 25)
+
             .padding([.vertical, .trailing], 5)
             .cornerRadius(5)
             
             
             
+
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
                 showSelectingFolderView = true
@@ -111,6 +118,7 @@ struct MemosToolBarView: View {
                 }
                 context.saveCoreData()
                 memoEditVM.initSelectedMemos()
+
             }) {
                 ChangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }
@@ -119,6 +127,7 @@ struct MemosToolBarView: View {
             .cornerRadius(5)
         }
         .frame(width: 170, height: 30, alignment: .center)
+
 //        .padding(5)
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, 5)
@@ -133,3 +142,4 @@ struct MemosToolBarView: View {
 //            .previewLayout(.sizeThatFits)
 //    }
 //}
+

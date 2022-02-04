@@ -16,8 +16,9 @@ extension Memo {
         self.creationDate = Date()
         self.contents = contents
         self.modificationDate = Date()
+
         context.saveCoreData()
-//        try? context.save()
+
     }
     
     convenience init(title: String, contents: String, context: NSManagedObjectContext, modifiedAt: Date) {

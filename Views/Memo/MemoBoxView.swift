@@ -15,7 +15,9 @@ struct MemoBoxView: View {
     
 //    var memo: Memo // has title, contents, overView(optional)
     @ObservedObject var memo: Memo
+
     @EnvironmentObject var memoEditVM: MemoEditViewModel
+
 //    var overview: String? {
 //        if  memo.overView != ""{
 //            return memo.overView
@@ -83,7 +85,9 @@ struct MemoBoxView: View {
 //        .frame(width: UIScreen.screenWidth / 2 - 1.5 * Sizes.overallPadding)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
         .background(Color(white: 0.95))
+
         .border(memoEditVM.selectedMemos.contains(memo) ? .green : .clear , width: 1)
+
         .cornerRadius(5)
 //        .onTapGesture {
 //            print("onTapGesture on MemoBoxView triggered1")

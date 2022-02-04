@@ -7,21 +7,25 @@
 
 import SwiftUI
 
+
 struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
+
 //    @EnvironmentObject var folderEditVM: FolderEditViewModel
 //     not sure whether folderEditVM is needed here.
 
     var hasPinnedMemo: Bool {
         return folder.memos.contains { $0.pinned == true }
+
     }
     
     // need to be modified to have plus button when there's no memo
     var body: some View {
         
         return VStack {
+
             
             if hasPinnedMemo {
                 
@@ -41,4 +45,5 @@ struct MemoList: View {
         .environmentObject(memoEditVM)
     }
 }
+
 

@@ -12,8 +12,10 @@ struct SelectingFolderView: View {
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @Environment(\.managedObjectContext) var context
+
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
+
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -25,6 +27,7 @@ struct SelectingFolderView: View {
                 .padding(.vertical)
             
             List(fastFolderWithLevelGroup.allFolders) { folderWithLevel in
+
                 //                if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
                 
                 Button {
@@ -58,6 +61,7 @@ struct SelectingFolderView: View {
                 } label: {
                     SelectingCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
                 }
+
             } // end of List
         }
     }

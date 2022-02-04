@@ -28,10 +28,12 @@ struct MemoView: View {
     @FocusState var focusState: Field?
     
     @GestureState var isScrolled = false
+
     
 //    @State var isShowingMsg = false
     
 //    @State var msgType: MemoMsg?
+
     
     @State var title: String = ""
     
@@ -86,6 +88,7 @@ struct MemoView: View {
         print("save changes has triggered")
         memo.title = title
 
+
         memo.contents = contents
 
         // if both title and contents are empty, delete memo
@@ -95,6 +98,7 @@ struct MemoView: View {
         } else { // if both title and contents are not empty
             memo.modificationDate = Date()
             if isNewMemo {
+
 
                 parent.add(memo: memo) // error.. ?? ??
                 parent.modificationDate = Date()
@@ -112,6 +116,7 @@ struct MemoView: View {
         
         memo.pinned.toggle()
         
+
 //        msgType = memo.pinned ? .pinned : .unpinned
 //        isShowingMsg = true
         
@@ -127,6 +132,7 @@ struct MemoView: View {
 //        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
 //            self.isShowingMsg = false
 //        }
+
         
         Memo.delete(memo)
         saveChanges()
@@ -161,7 +167,9 @@ struct MemoView: View {
                     .focused($focusState, equals: .title)
                     .onAppear(perform: {
                         if self.isNewMemo == true {
+
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+
                                 self.focusState = .title
                             }
                         }
@@ -195,6 +203,7 @@ struct MemoView: View {
                         }
                     })
             }
+
 //            if isShowingMsg {
 //                if let validMsg = msgType {
 //                    Text(validMsg.rawValue)
@@ -205,6 +214,7 @@ struct MemoView: View {
 //                        .padding(.bottom, screenSize.height * 0.2)
 //                }
 //            }
+
         }
 
         
@@ -214,8 +224,10 @@ struct MemoView: View {
             print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
+
             print("title or memoView : \(title)")
             print("isNewMemo ? \(isNewMemo)")
+
             
             if isNewMemo == true {
                 self.focusState = .title

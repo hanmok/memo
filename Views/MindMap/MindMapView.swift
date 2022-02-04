@@ -32,8 +32,10 @@ struct MindMapView: View {
     
     @StateObject var memoEditViewModel = MemoEditViewModel()
     @StateObject var folderEditViewModel = FolderEditViewModel()
+
     @StateObject var folderOrder = FolderOrder()
     @StateObject var memoOrder = MemoOrder()
+
     
     @State var shouldChangeFolderName = false
     @State var shouldAddFolderToTop = false
@@ -101,7 +103,9 @@ struct MindMapView: View {
                             FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
                                 .environmentObject(memoEditViewModel)
                                 .environmentObject(folderEditViewModel)
+
                                 .environmentObject(memoOrder)
+
                                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                     Button {
                                         folderToAddSubFolder = folderWithLevel.folder
@@ -116,9 +120,11 @@ struct MindMapView: View {
                 } // end of List
                 .listStyle(InsetGroupedListStyle())
                 
+
 //                .onReceive(fastFolderWithLevelGroup.$allFolders) { output in
 //                    print("fastFolder output: \(output)")
 //                }
+
                 
             } // end of VStack
             

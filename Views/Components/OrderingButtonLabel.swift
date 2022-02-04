@@ -87,16 +87,19 @@ struct MemoOrderingButton: View {
     
     @ObservedObject var memoOrder: MemoOrder
     
+
     @ObservedObject var parentFolder: Folder
     
     var body: some View {
         
         Button {
             memoOrder.orderType = type
+
             Memo.orderType = type
             parentFolder.title += "" // update parent
             // but .. it goes back to mindmapView... why ?
             // i don't know ....
+
         } label: {
             HStack {
                 if memoOrder.orderType == type {
@@ -112,13 +115,17 @@ struct MemoOrderingButton: View {
 struct MemoAscDecButtonLabel: View {
     var isAscending: Bool
     @ObservedObject var memoOrder: MemoOrder
+
     @ObservedObject var parentFolder: Folder
+
     
     var body: some View {
         Button {
             memoOrder.isAscending = isAscending
+
             Memo.isAscending = isAscending
             parentFolder.title += ""
+
         } label: {
             HStack {
                 if memoOrder.isAscending == isAscending {

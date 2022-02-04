@@ -10,6 +10,7 @@ import CoreData
 
 struct FolderView: View {
 
+
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
@@ -17,12 +18,15 @@ struct FolderView: View {
     @EnvironmentObject var memoOrder: MemoOrder
 //    @StateObject var memoOrder = MemoOrder()
     
+
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
     @State var newSubFolderName = ""
     
+
     @State var showSelectingFolderView = false
+
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @ObservedObject var currentFolder: Folder
@@ -62,6 +66,7 @@ struct FolderView: View {
                     ZStack {
                         if !currentFolder.memos.isEmpty {
                             MemoList()
+
                         }
                         HStack {
                             Spacer()
@@ -81,6 +86,7 @@ struct FolderView: View {
                                     folder: currentFolder,
                                     isShowingSubFolderView: $isShowingSubFolderView,
                                     isAddingFolder: $shouldAddFolder)
+
                                     .frame(width: UIScreen.screenWidth / 2.5)
                                     .background(.yellow)
                                     .cornerRadius(10)
@@ -89,7 +95,7 @@ struct FolderView: View {
                                     .animation(.spring(), value: isShowingSubFolderView)
                             } // end of ZStack
                             .padding(.top, 10)
-                            
+
                         }
                     }
                 } // end of main VStack
@@ -110,8 +116,10 @@ struct FolderView: View {
                             }
                         }
                     } else {
+
                         MemosToolBarView(showSelectingFolderView: $showSelectingFolderView)
 //                            .background(Color(.sRGB, red: 50, green: 150, blue: 50, opacity: 1))
+
                             .padding([.trailing], Sizes.largePadding)
                             .padding(.bottom,Sizes.overallPadding )
                     }
@@ -181,6 +189,7 @@ struct FolderView: View {
                     isNewMemo: true),
                 isActive: $isAddingMemo) {}
         } // end of ZStack
+
         
         .sheet(isPresented: $showSelectingFolderView,
                content: {
@@ -188,7 +197,7 @@ struct FolderView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })
-        
+
         .onDisappear(perform: {
 //            folderEditVM.shouldAddFolder = false
             newSubFolderName = ""
@@ -201,6 +210,7 @@ struct FolderView: View {
                                 HStack {
             // search Button
             Button(action: {
+
 //                print("currentFolder's memos: \(currentFolder.memos)")
 //                print("currentFolder's memo count : \(currentFolder.memos.count)")
 //                for eachMemo in currentFolder.memos.sorted() {
@@ -209,6 +219,7 @@ struct FolderView: View {
 //                }
                 currentFolder.title += "" // ;;; how can i change //. ??
 //                context.saveCoreData()
+
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
@@ -216,6 +227,7 @@ struct FolderView: View {
             // Ordering
             Menu {
                 Text("Memo Ordering")
+
                 MemoOrderingButton(type: .modificationDate, memoOrder: memoOrder, parentFolder: currentFolder)
                 MemoOrderingButton(type: .creationDate, memoOrder: memoOrder, parentFolder: currentFolder)
                 MemoOrderingButton(type: .alphabetical, memoOrder: memoOrder, parentFolder: currentFolder)
@@ -225,6 +237,7 @@ struct FolderView: View {
                 MemoAscDecButtonLabel(isAscending: true, memoOrder: memoOrder, parentFolder: currentFolder)
                 
                 MemoAscDecButtonLabel(isAscending: false, memoOrder: memoOrder, parentFolder: currentFolder)
+
                 
             } label: {
                 ChangeableImage(imageSystemName: "arrow.up.arrow.down")

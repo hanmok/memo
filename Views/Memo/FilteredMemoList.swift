@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+
 enum MemoListType: String {
     case pinned
     case unpinned
@@ -103,7 +104,9 @@ struct FilteredMemoList: View {
                         }
                     }
                 }
+
             }
         }
     }
 }
+
