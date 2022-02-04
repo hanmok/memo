@@ -16,12 +16,13 @@ extension Memo {
         self.creationDate = Date()
         self.contents = contents
         self.modificationDate = Date()
+        context.saveCoreData()
     }
     
     convenience init(title: String, contents: String, context: NSManagedObjectContext, modifiedAt: Date) {
         self.init(title: title, contents: contents, context: context)
         self.modificationDate = modifiedAt
-        try? context.save()
+        context.saveCoreData()
     }
     
     // these variables are not optionals.
