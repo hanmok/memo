@@ -17,6 +17,7 @@ struct UnitTestHelpers {
                 context.delete(r)
             }
         }
+        context.saveCoreData()
     }
     
     static func deletesAllFolders(context: NSManagedObjectContext) {

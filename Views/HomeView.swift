@@ -18,12 +18,13 @@ struct HomeView: View { // top folder fetch
     var body: some View {
         
         // MARK: - FOR TESTING
+
+        
+//                UnitTestHelpers.deletesAllFolders(context: context)
+
         if topFolders.isEmpty {
             Folder.returnSampleFolder2(context: context)
         }
-        
-        //        UnitTestHelpers.deletesAllFolders(context: context)
-        
         
         
         return NavigationView {
@@ -31,8 +32,9 @@ struct HomeView: View { // top folder fetch
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         targetFolders: topFolders.sorted()))
-            
+
         }
+//        return Text("hi")
     }
 }
 

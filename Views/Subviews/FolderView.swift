@@ -192,6 +192,7 @@ struct FolderView: View {
         .onDisappear(perform: {
 //            folderEditVM.shouldAddFolder = false
             newSubFolderName = ""
+            memoEditVM.initSelectedMemos()
         })
         .frame(maxHeight: .infinity)
         
