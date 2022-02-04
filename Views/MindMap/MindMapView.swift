@@ -7,16 +7,12 @@
 
 import SwiftUI
 
-struct FolderWithLevel: Hashable {
+struct FolderWithLevel: Hashable, Identifiable {
     var folder: Folder
     var level: Int
     var isCollapsed: Bool = false
     var isShowing: Bool = true
     var id = UUID()
-}
-
-extension FolderWithLevel : Identifiable {
-    
 }
 
 struct LevelAndCollapsed {
@@ -30,24 +26,21 @@ struct MindMapView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
-    @StateObject var memoEditViewModel = MemoEditViewModel()
-    @StateObject var folderEditViewModel = FolderEditViewModel()
+    @StateObject var memoEditVM = MemoEditViewModel()
+    @StateObject var folderEditVM = FolderEditViewModel()
     @StateObject var folderOrder = FolderOrder()
     @StateObject var memoOrder = MemoOrder()
     
-    @State var shouldChangeFolderName = false
-    @State var shouldAddFolderToTop = false
-    @State var shouldAddSubFolder = false
-    
-    @State var changedFolderName = ""
-    @State var newSubFolderName = ""
-    @State var newTopFolderName = ""
+    @State var newFolderName = ""
+
+    @State var showTextField = false
+    @State var textFieldType: TextFieldAlertType? = nil
     
     @State var folderToAddSubFolder : Folder? = nil
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
-    @FocusState var changingNameFocus: Bool
+    @FocusState var textFieldFocus: Bool
     
     @State var showSelectingFolderView = false
     
@@ -60,27 +53,14 @@ struct MindMapView: View {
                     Spacer()
                     HStack {
                         // sort
-                        Menu {
-                            Text("Folder Ordering")
-                                .font(.title3)
-                            
-                            FolderOrderingButton(type: .modificationDate, folderOrder: folderOrder)
-                            FolderOrderingButton( type: .creationDate, folderOrder: folderOrder)
-                            FolderOrderingButton(type: .alphabetical, folderOrder: folderOrder)
-                            
-                            Divider()
-                            
-                            FolderAscDecButton(isAscending: true, folderOrder: folderOrder)
-                            FolderAscDecButton(isAscending: false, folderOrder: folderOrder)
-                            
-                        } label: {
-                            ChangeableImage(imageSystemName: "arrow.up.arrow.down")
-                        }
+                        FolderOrderingMenu(folderOrder: folderOrder)
                         .padding(.trailing, Sizes.smallSpacing)
                         
                         // Add new Folder to the top Folder
                         Button {
-                            shouldAddFolderToTop = true
+//                            shouldAddFolderToTop = true
+                            showTextField = true
+                            textFieldType = .newTopFolder
                         } label: {
                             ChangeableImage(imageSystemName: "plus")
                         }
@@ -98,116 +78,85 @@ struct MindMapView: View {
                     ) {
                         ForEach(fastFolderWithLevelGroup.allFolders) {folderWithLevel in
                             
-                            FastVerCollapsibleFolder(folder: folderWithLevel.folder, level: folderWithLevel.level)
-                                .environmentObject(memoEditViewModel)
-                                .environmentObject(folderEditViewModel)
+                            FastVerCollapsibleFolder(
+                                folder: folderWithLevel.folder,
+                                level: folderWithLevel.level)
+                                .environmentObject(memoEditVM)
+                                .environmentObject(folderEditVM)
                                 .environmentObject(memoOrder)
+                            // ADD Sub Folder
                                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                     Button {
                                         folderToAddSubFolder = folderWithLevel.folder
-                                        shouldAddSubFolder = true
+//                                 shouldAddSubFolder = true
+                                        showTextField = true
+                                        textFieldType = .newSubFolder
                                     } label: {
                                         ChangeableImage(imageSystemName: "folder.badge.plus")
                                     }
                                     .tint(.blue)
+                                }
+                            // Change Folder Name
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    Button {
+                                        showTextField = true
+                                        textFieldType = .rename
+                                    } label: {
+                                        ChangeableImage(imageSystemName: "pencil")
+                                    }
+                                    .tint(.yellow)
                                 }
                         } // end of ForEach
                     } // end of Section
                 } // end of List
                 .listStyle(InsetGroupedListStyle())
                 
-//                .onReceive(fastFolderWithLevelGroup.$allFolders) { output in
-//                    print("fastFolder output: \(output)")
-//                }
-                
             } // end of VStack
+            // new Element of ZStack
             
-            //MARK: - change Folder Name
-            
+            // MARK: - rename is not currently working .
             PrettyTextFieldAlert(
-                placeHolderText: folderEditViewModel.selectedFolder != nil ? "\(folderEditViewModel.selectedFolder!.title)" : "Enter New FolderName",
-                type: .rename,
-                //                isPresented: $folderEditViewModel.shouldChangeFolderName,
-                isPresented: $shouldChangeFolderName,
-                text: $changedFolderName,
-                focusState: _changingNameFocus) { newName in
+                type: textFieldType ?? .rename,
+                isPresented: $showTextField,
+                text: $newFolderName,
+                focusState: _textFieldFocus) { newName in
                     
-                    if folderEditViewModel.selectedFolder != nil {
-                        folderEditViewModel.selectedFolder!.title = newName
-                        context.saveCoreData()
-                        folderEditViewModel.selectedFolder = nil
+                    switch textFieldType! {
+                        
+                    case .newTopFolder:
+                        let _ = Folder(title: newName, context: context)
+                        
+                    case .newSubFolder:
+                        let newSubFolder = Folder(title: newName, context: context)
+                        if let validSubFolder = folderToAddSubFolder {
+                            validSubFolder.add(subfolder: newSubFolder)
+                        }
+                        
+                    case .rename:
+                        if folderEditVM.selectedFolder != nil {
+                            folderEditVM.selectedFolder!.title = newName
+                            context.saveCoreData()
+                            folderEditVM.selectedFolder = nil
+                        }
                     }
                     
-                    // setup initial name empty
-                    changedFolderName = ""
-//                    shouldChangeFolderName = false
-                } cancelAction: {
-                    changedFolderName = ""
-//                    shouldChangeFolderName = false
-                }
-            //                .onReceive(folderEditViewModel.$shouldChangeFolderName) { output in
-            //                    //                print("output : \(output)")
-            //                    if output == true {
-            //                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-            //                            self.changingNameFocus = true
-            //                        }
-            //                    }
-            //                }
-            
-            
-            //MARK: - Add Top Folder
-            
-            PrettyTextFieldAlert(
-                placeHolderText: "New Top Folder",
-                type: .newTopFolder,
-                isPresented: $shouldAddFolderToTop,
-                text: $newTopFolderName,
-                focusState: _changingNameFocus) { newName in
-                    // new Top Folder
-                    let _ = Folder(title: newName, context: context)
                     context.saveCoreData()
-                    
                     Folder.updateTopFolders(context: context)
-                    newTopFolderName = ""
+                    
+                    newFolderName = ""
+                    textFieldType = nil
+                    showTextField = false
                 } cancelAction: {
-                    newTopFolderName = ""
-                }
-            
-            
-            // MARK: - Add SubFolder
-            PrettyTextFieldAlert(
-                placeHolderText: "New SubFolder",
-                type: .newSubFolder,
-                isPresented: $shouldAddSubFolder,
-                text: $newSubFolderName,
-                focusState: _changingNameFocus) { newName in
-                    
-                    let newSubFolder = Folder(title: newName, context: context)
-                    if let validSubFolder = folderToAddSubFolder {
-                        validSubFolder.add(subfolder: newSubFolder)
-                    }
-                    
-                    Folder.updateTopFolders(context: context)
-                    context.saveCoreData()
-                    
-                    newSubFolderName = ""
-
-                } cancelAction: {
-                    newSubFolderName = ""
+                    newFolderName = ""
+                    textFieldType = nil
+                    showTextField = false
                 }
         } // end of ZStack
         
-        // what are the purpose of thoes two sheets ??
-        .sheet(isPresented: $showSelectingFolderView,
-               content: {
+        .sheet(isPresented: $folderEditVM.shouldShowSelectingView, content: {
             SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
-                .environmentObject(folderEditViewModel)
-                .environmentObject(memoEditViewModel)
-        })
-        .sheet(isPresented: $folderEditViewModel.shouldShowSelectingView, content: {
-            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
-                .environmentObject(folderEditViewModel)
-                .environmentObject(memoEditViewModel)
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
         })
         .navigationBarHidden(true)
     }

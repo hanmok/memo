@@ -7,21 +7,41 @@
 
 import SwiftUI
 
+//enum TextFieldAlertType: String {
+//    case rename = "Rename Folder"
+//    case newSubFolder = "New Subfolder"
+//    case newTopFolder = "New Topfolder"
+//}
+
 enum TextFieldAlertType: String {
     case rename = "Rename Folder"
     case newSubFolder = "New Subfolder"
     case newTopFolder = "New Topfolder"
+}
+
+struct TextFieldStruct {
     
+    
+    var textEnum: TextFieldAlertType
+    
+    var placeHolder: String {
+        switch textEnum {
+        case .rename: return "Enter New Folder Name!"
+        case .newSubFolder: return "Enter New SubFolder Name"
+        case .newTopFolder: return "Enter New TopFolder Name"
+        }
+    }
 }
 
 struct PrettyTextFieldAlert: View {
-    let placeHolderText: String
+//    let placeHolderText: String
     let type: TextFieldAlertType
     
     let screenSize = UIScreen.main.bounds
     
     @Binding var isPresented: Bool
     @Binding var text: String
+    
     @FocusState var focusState: Bool
     // working find..
     var submitAction: (String) -> Void = { _ in }
@@ -35,14 +55,22 @@ struct PrettyTextFieldAlert: View {
                     .padding(.vertical, 15)
                 // placeHolder ..
 //                TextField("Enter New FolderName", text: $text)
-                TextField(placeHolderText, text: $text)
+//                TextField(placeHolderText, text: $text)
+                TextField(TextFieldStruct(textEnum: type).placeHolder, text: $text)
                     .font(.callout)
                     .focused($focusState)
                     .background(.white)
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)
                     .padding(.bottom, 15)
-                    
+                    .onChange(of: isPresented) { newValue in
+                        if newValue == true {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+                                print("newValue is turned to true")
+                                self.focusState = true
+                            }
+                        }
+                    }
                 
                 // Cancel and Done Button
                 Rectangle()

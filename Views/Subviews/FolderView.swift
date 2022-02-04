@@ -20,6 +20,7 @@ struct FolderView: View {
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
+    
     @State var newSubFolderName = ""
     
     @State var showSelectingFolderView = false
@@ -82,7 +83,7 @@ struct FolderView: View {
                                     isShowingSubFolderView: $isShowingSubFolderView,
                                     isAddingFolder: $shouldAddFolder)
                                     .frame(width: UIScreen.screenWidth / 2.5)
-                                    .background(.yellow)
+                                    .background(Color.subColor)
                                     .cornerRadius(10)
                                 // offset x : trailingPadding
                                     .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
@@ -111,7 +112,6 @@ struct FolderView: View {
                         }
                     } else {
                         MemosToolBarView(showSelectingFolderView: $showSelectingFolderView)
-//                            .background(Color(.sRGB, red: 50, green: 150, blue: 50, opacity: 1))
                             .padding([.trailing], Sizes.largePadding)
                             .padding(.bottom,Sizes.overallPadding )
                     }
@@ -133,10 +133,11 @@ struct FolderView: View {
             }
             
             
+            // instance. are they different instances ?
             
             //  Present TextFieldAlert when add folder pressed
             PrettyTextFieldAlert(
-                placeHolderText: "Enter new folder name",
+//                placeHolderText: "Enter new folder name",
                 type: .newSubFolder,
 //                isPresented: $folderEditVM.shouldAddFolder,
                 isPresented: $shouldAddFolder,

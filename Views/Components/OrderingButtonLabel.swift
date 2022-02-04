@@ -10,7 +10,7 @@ import CoreData
 
 
 // MARK: - ORDERING BASIC STRUCTURE
-enum OrderType: String {
+enum OrderType: String, CaseIterable {
     case modificationDate = "Modification Date"
     case creationDate = "Creation Date"
     case alphabetical = "Alphabetical"
@@ -126,6 +126,29 @@ struct MemoAscDecButtonLabel: View {
                 }
                 Text(isAscending ? "Ascending Order" : "Decending Order")
             }
+        }
+    }
+}
+
+struct FolderOrderingMenu: View {
+    @ObservedObject var folderOrder: FolderOrder
+  
+    var body: some View {
+        Menu {
+            Text("Folder Ordering")
+                .font(.title3)
+            
+            FolderOrderingButton(type: .modificationDate, folderOrder: folderOrder)
+            FolderOrderingButton( type: .creationDate, folderOrder: folderOrder)
+            FolderOrderingButton(type: .alphabetical, folderOrder: folderOrder)
+            
+            Divider()
+            
+            FolderAscDecButton(isAscending: true, folderOrder: folderOrder)
+            FolderAscDecButton(isAscending: false, folderOrder: folderOrder)
+            
+        } label: {
+            ChangeableImage(imageSystemName: "arrow.up.arrow.down")
         }
     }
 }

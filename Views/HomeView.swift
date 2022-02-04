@@ -14,7 +14,6 @@ struct HomeView: View { // top folder fetch
     
     @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
-    // 어디서부터 어떤게 잘못된걸까?
     var body: some View {
         
         // MARK: - FOR TESTING
@@ -32,9 +31,7 @@ struct HomeView: View { // top folder fetch
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         targetFolders: topFolders.sorted()))
-
         }
-//        return Text("hi")
     }
 }
 

@@ -2,20 +2,12 @@ import SwiftUI
 
 class MemoEditViewModel: ObservableObject {
     
-    //    var context: NSManagedObjectContext
-    
-//    var testMemos: Memo? = nil
-    
     @Published var hasNotLongSelected = true
-    
-//    @Published var shouldAddMemo = false
     @Published var shouldChangeColor = false
     
     @Published var selectedMemos = Set<Memo>()
     
     @Published var navigateToMemo: Memo? = nil
-    
-//    @Published var didCutMemos: [Memo] = [] // not necessary ..
     
     public var count: Int {
         selectedMemos.count

@@ -122,7 +122,8 @@ struct MemosToolBarView: View {
 //        .padding(5)
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, 5)
-        .background(Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255, opacity: 0.5))
+//        .background(Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255, opacity: 0.5))
+        .background(Color.subColor)
         .cornerRadius(10)
     }
 }

@@ -282,12 +282,11 @@
 		9A0474B927716DBC00571D66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9A3378092796B10E00805138 /* HomeView.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
+				9A3378092796B10E00805138 /* HomeView.swift */,
 				9AD6EF28277EC64A00866456 /* MindMap */,
 				9AD6EF14277D9EE800866456 /* Folder */,
 				9AD6EF13277D9EE200866456 /* Memo */,
-				9A33788927996F8300805138 /* ContainedMemos.swift */,
 				9A3377DA2790313200805138 /* Components */,
 				9A337898279A76A500805138 /* PreviousViews */,
 				9A1D536427ACE3A2009294C1 /* Tests */,
@@ -454,6 +453,7 @@
 				9AD6EF10277D9DF100866456 /* MemoList.swift */,
 				9A3378062796A5CB00805138 /* FilteredMemoList.swift */,
 				9AD6EEC3277C2C8A00866456 /* MemoBoxView.swift */,
+				9A33788927996F8300805138 /* ContainedMemos.swift */,
 				9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */,
 			);
 			path = Memo;

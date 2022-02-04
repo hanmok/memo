@@ -61,13 +61,13 @@ struct FastVerCollapsibleFolder: View {
                 .tint(.green)
 
                 // change Folder Name
-                Button {
-                    folderEditVM.shouldChangeFolderName = true
-                    folderEditVM.selectedFolder = folder
-                } label: {
-                    ChangeableImage(imageSystemName: "pencil")
-                }
-                .tint(.yellow)
+//                Button {
+//                    folderEditVM.shouldChangeFolderName = true
+//                    folderEditVM.selectedFolder = folder
+//                } label: {
+//                    ChangeableImage(imageSystemName: "pencil")
+//                }
+//                .tint(.yellow)
             }
 //            .swipeActions(edge: .leading, allowsFullSwipe: true) {
 //                Button {

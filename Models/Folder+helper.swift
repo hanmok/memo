@@ -14,35 +14,33 @@ extension Folder {
         self.init(context: context)
         self.title = title
         self.creationDate = Date()
-//        let request = Folder.topFolderFetch()
-//        let result = try? context.fetch(request)
-//        let maxFolder = result?.max(by: {$0.order < $1.order })
-//        self.order = ( maxFolder?.order ?? 0 ) + 1
         
         self.modificationDate = Date()
+        
         self.isFavorite = false
         DispatchQueue.global().async {
             context.saveCoreData()
         }
     }
     
-    convenience init(title: String, context: NSManagedObjectContext, modifiedAt: Date) {
-        
+// for test, when createdAt should be specified.
+    convenience init(title: String, context: NSManagedObjectContext, createdAt: Date) {
+
         self.init(title: title, context: context)
-        self.modificationDate = modifiedAt
+        self.modificationDate = createdAt
+        self.creationDate = createdAt
         
         DispatchQueue.global().async {
             context.saveCoreData()
         }
-        
     }
-    
-
     
     public override func awakeFromInsert() {
         setPrimitiveValue(Date(), forKey: FolderProperties.creationDate)
         setPrimitiveValue(UUID(), forKey: FolderProperties.id)
     }
+    
+    
     
     var uuid: UUID {
         get { uuid_ ?? UUID() }
@@ -137,11 +135,6 @@ extension Folder {
         
     }
     
-//    func copyFolder(context: NSManagedObjectContext) -> Folder {
-//        var newFolder = Folder(title: self.title, context: context)
-//
-//
-//    }
     
     static func fetch(_ predicate: NSPredicate)-> NSFetchRequest<Folder> {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
@@ -179,18 +172,19 @@ extension Folder {
         context.saveCoreData()
     }
     
-    static func nestedFolder(context: NSManagedObjectContext) -> Folder {
-        let parent = Folder(title: "parent", context: context)
-        let child1 = Folder(title: "child1", context: context)
-        let child2 = Folder(title: "child2", context: context)
-        let child3 = Folder(title: "child3", context: context)
-        
-        parent.add(subfolder: child1)
-        parent.add(subfolder: child2)
-        child2.add(subfolder: child3)
-        try? context.save()
-        return parent
-    }
+//    static func nestedFolder(context: NSManagedObjectContext) -> Folder {
+//        let parent = Folder(title: "parent", context: context)
+//        let child1 = Folder(title: "child1", context: context)
+//        let child2 = Folder(title: "child2", context: context)
+//        let child3 = Folder(title: "child3", context: context)
+//
+//        parent.add(subfolder: child1)
+//        parent.add(subfolder: child2)
+//        child2.add(subfolder: child3)
+//
+//        context.saveCoreData()
+//        return parent
+//    }
     
 //    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
     
@@ -311,7 +305,6 @@ extension Folder : Comparable {
         case .alphabetical:
             return sortAlphabetOrder(lhs, rhs)
         }
-        
     }
 }
 
@@ -319,17 +312,17 @@ extension Folder {
     static func createHomeFolder(context: NSManagedObjectContext) -> Folder {
         let home = Folder(title: "Home Folder", context: context)
         context.saveCoreData()
-//        try? context.save()
+
         return home
     }
     
     static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
         
-        let homeFolder = Folder(title: "Home Folder", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
-        let firstChildFolder = Folder(title: "child1", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
-        let secondChildFolder = Folder(title: "child2", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
-        let thirdChildFolder = Folder(title: "child3", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
-        let fourthChildFolder = Folder(title: "child4", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
+        let homeFolder = Folder(title: "Home Folder", context: context,createdAt: Date(timeIntervalSinceNow: 1))
+        let firstChildFolder = Folder(title: "child1", context: context,createdAt: Date(timeIntervalSinceNow: 2))
+        let secondChildFolder = Folder(title: "child2", context: context,createdAt: Date(timeIntervalSinceNow: 3))
+        let thirdChildFolder = Folder(title: "child3", context: context,createdAt: Date(timeIntervalSinceNow: 4))
+        let fourthChildFolder = Folder(title: "child4", context: context,createdAt: Date(timeIntervalSinceNow: 5))
         
         homeFolder.add(subfolder: firstChildFolder)
         homeFolder.add(subfolder: secondChildFolder)
@@ -377,7 +370,7 @@ extension Folder {
         homeFolder.add(memo: hmemo9)
         
         context.saveCoreData()
-        // 저장 했는데 왜이러지 ?? ???
+
         return homeFolder
     }
     
@@ -435,19 +428,9 @@ extension Folder {
             print("memo info: ")
             eachMemo.getMemoInfo()
         }
-
     }
 }
 
-/*
-var subfolders: [Folder] {
-    var folders: [Folder] = []
-    for eachFolder in folder.subfolders {
-        folders.append(eachFolder)
-    }
-    return folders
-}
-*/
 
 extension NSManagedObjectContext {
     func saveCoreData() { // save to coreData
