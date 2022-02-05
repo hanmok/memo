@@ -169,6 +169,12 @@ struct FolderView: View {
             Button(action: {
                 print("currentFolder's memos: \(currentFolder.memos)")
                 print("currentFolder's memo count : \(currentFolder.memos.count)")
+                
+                if let validParent = currentFolder.parent {
+                    validParent.title += ""
+                    print("parent's title has changed")
+                }
+                
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })

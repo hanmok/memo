@@ -178,51 +178,65 @@ extension Folder {
         return parent
     }
     
-    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
-        var currentFolder: Folder? = topFolder
-        var level = 0
-        var trashSet = Set<Folder>()
-        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
-        var folderContainer = [currentFolder]
-
-    whileLoop: while (currentFolder != nil) {
-        print("currentFolder: \(currentFolder!.id)")
-
-        if currentFolder!.subfolders.count != 0 {
-
-            // check if trashSet has contained Folder of arrayContainer2
-            for folder in currentFolder!.subfolders.sorted() {
-                if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-    //            if !trashSet.contains(folder) && !arrayContainer2 {
-                    currentFolder = folder
-                    level += 1
-                    folderContainer.append(currentFolder!)
-                    folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
-                    continue whileLoop // this one..
+    static func getHierarchicalFolders(topFolders: [Folder]) -> [FolderWithLevel] {
+        
+        //        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
+        //        var folderContainer = [currentFolder]
+        var folderWithLevelContainer: [FolderWithLevel] = []
+        var folderContainer: [Folder?] = []
+        
+        for eachTop in topFolders.sorted() {
+            
+            
+            
+            //        var currentFolder: Folder? = topFolder
+            var currentFolder: Folder? = eachTop
+            var level = 0
+            var trashSet = Set<Folder>()
+            //        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
+            //        var folderContainer = [currentFolder]
+            folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
+            folderContainer.append(currentFolder)
+            
+        whileLoop: while (currentFolder != nil) {
+            print("currentFolder: \(String(describing: currentFolder!.id))")
+            
+            if currentFolder!.subfolders.count != 0 {
+                
+                // check if trashSet has contained Folder of arrayContainer2
+                for folder in currentFolder!.subfolders.sorted() {
+                    if !trashSet.contains(folder) && !folderContainer.contains(folder) {
+                        //            if !trashSet.contains(folder) && !arrayContainer2 {
+                        currentFolder = folder
+                        level += 1
+                        folderContainer.append(currentFolder!)
+                        folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
+                        continue whileLoop // this one..
+                    }
+                }
+                // subFolders 가 모두 이미 고려된 경우.
+                trashSet.update(with: currentFolder!)
+            } else { // subfolder 가 Nil 인 경우
+                
+                trashSet.update(with: currentFolder!)
+            }
+            
+            for i in 0 ..< folderWithLevelContainer.count {
+                if !trashSet.contains(folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder) {
+                    
+                    currentFolder = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder
+                    level = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].level
+                    break
                 }
             }
-            // subFolders 가 모두 이미 고려된 경우.
-            trashSet.update(with: currentFolder!)
-
-
-        } else { // subfolder 가 Nil 인 경우
-
-            trashSet.update(with: currentFolder!)
-        }
-
-        for i in 0 ..< folderWithLevelContainer.count {
-            if !trashSet.contains(folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder) {
-
-                currentFolder = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder
-                level = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].level
-                break
+            
+            if folderWithLevelContainer.count == trashSet.count {
+                break whileLoop
             }
-        }
-
-        if folderWithLevelContainer.count == trashSet.count {
-            break whileLoop
-        }
-    }
+        } // end of whileLoop
+            
+        } // end of for in loop
+        
         return folderWithLevelContainer
     }
     
