@@ -15,13 +15,13 @@ extension Memo {
         self.title = title
         self.creationDate = Date()
         self.contents = contents
-        self.modificationDate = Date()
+//        self.modificationDate = Date()
         try? context.save()
     }
     
     convenience init(title: String, contents: String, context: NSManagedObjectContext, modifiedAt: Date) {
         self.init(title: title, contents: contents, context: context)
-        self.modificationDate = modifiedAt
+//        self.modificationDate = modifiedAt
         try? context.save()
     }
     
@@ -85,7 +85,7 @@ extension Memo {
     
     static func copyMemo(target: Memo, context: NSManagedObjectContext) -> Memo {
         var newMemo = Memo(title: target.title, contents: target.contents, context: context)
-        newMemo.modificationDate = target.modificationDate
+//        newMemo.modificationDate = target.modificationDate
 //        newMemo.pinned = target.pinned
         return newMemo
 //        return Memo(title: target.title, contents: target.contents, context: context)
@@ -95,12 +95,12 @@ extension Memo {
 extension Memo: Comparable {
     public static func < (lhs: Memo, rhs: Memo) -> Bool {
 //        lhs.order < rhs.order
-        if lhs.modificationDate != nil && rhs.modificationDate != nil {
-            return lhs.modificationDate! > rhs.modificationDate! // make change
-        } else {
-            return true
-        }
-        
+//        if lhs.modificationDate != nil && rhs.modificationDate != nil {
+//            return lhs.modificationDate! > rhs.modificationDate! // make change
+//        } else {
+//            return true
+//        }
+        return true
     }
 }
 
@@ -112,7 +112,7 @@ extension Memo {
         print("memo.title: \(self.title)")
         print("memo.creationDate: \(self.creationDate)")
         print("memo.contents: \(self.contents)")
-        print("memo.modificationDate: \(self.modificationDate)")
+//        print("memo.modificationDate: \(self.modificationDate)")
         print("memo.overview: \(self.overview)")
     }
     

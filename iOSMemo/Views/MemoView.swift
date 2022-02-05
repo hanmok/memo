@@ -85,7 +85,7 @@ struct MemoView: View {
             print("memo has deleted! title: \(title), contents: \(contents)")
             Memo.delete(memo)
         } else { // if both title and contents are not empty
-            memo.modificationDate = Date()
+//            memo.modificationDate = Date()
             if isNewMemo {
                 
                 parent.add(memo: memo) // error.. ?? ??
