@@ -95,6 +95,12 @@ struct FolderView: View {
         }
             .navigationTitle(currentFolder.title)
             .navigationBarItems(trailing:Button(action: {
+                
+                if currentFolder.parent != nil {
+                    currentFolder.parent!.title += ""
+                    print("parents' title has changed !!")
+                }
+                
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             }))
