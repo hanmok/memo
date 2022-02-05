@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 struct FastVerCollapsibleFolder: View {
     
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+//    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel

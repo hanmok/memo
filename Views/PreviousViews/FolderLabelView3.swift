@@ -32,7 +32,8 @@ struct FolderLabelView: View {
                 + Text(folder.title)
                     .font(.title3)
         }
-            .tint(colorScheme == .dark ? .white : .black)
+//            .tint(colorScheme == .dark ? .white : .black)
+        .adjustTintColor(scheme: colorScheme)
             
             .frame(maxWidth: .infinity, alignment: .leading)
             

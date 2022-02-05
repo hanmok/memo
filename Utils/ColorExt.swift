@@ -29,7 +29,12 @@ extension Color {
       (Int(r * 255) << 24)
   }
     
-    static var mainColor = Color(.sRGB, red: 140/255, green: 180/255, blue: 140/255)
+//    static var mainColor = Color(.sRGB, red: 140/255, green: 180/255, blue: 140/255)
     
     static var subColor = Color(.sRGB, red: 100/255, green: 200/255, blue: 100/255)
+    
+    static var subColorDark = Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255)
+    
+    
+    
 }

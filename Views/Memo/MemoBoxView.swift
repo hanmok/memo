@@ -12,7 +12,7 @@ struct MemoBoxView: View {
     
     @ObservedObject var memo: Memo
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    
+    @Environment(\.colorScheme) var colorScheme
     @State var isSelected = false
     
     var title: String? {
@@ -67,11 +67,12 @@ struct MemoBoxView: View {
                 }
             }
         }
+        .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
         .padding(.horizontal, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-        .background(Color(white: 0.95))
+//        .background(Color(white: 0.95))
+        .background(colorScheme == .dark ? Color(white: 33 / 255) : Color(white: 0.9))
         .border(memoEditVM.selectedMemos.contains(memo) ? .green : .clear , width: 1)
         .cornerRadius(5)
-        
     }
 }

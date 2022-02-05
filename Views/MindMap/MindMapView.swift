@@ -28,7 +28,7 @@ struct LevelAndCollapsed {
 struct MindMapView: View {
     
     @Environment(\.managedObjectContext) var context
-    @Environment(\.colorScheme) var colorScheme
+//    @Environment(\.colorScheme) var colorScheme
     
     @StateObject var memoEditVM = MemoEditViewModel()
     @StateObject var folderEditVM = FolderEditViewModel()

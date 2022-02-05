@@ -18,7 +18,10 @@ struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+//    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
+    // better not being implemented.
+    //    @Environment(\.scenePhase) var scenePhase
     
     @ObservedObject var memo: Memo
     
@@ -29,7 +32,7 @@ struct MemoView: View {
     
     @State var title: String = ""
     @State var contents: String = ""
-        
+    
     let parent: Folder
     let screenSize = UIScreen.main.bounds
     
@@ -66,23 +69,23 @@ struct MemoView: View {
     func saveChanges() {
         print("save changes has triggered")
         memo.title = title
-
+        
         memo.contents = contents
-
+        
         // if both title and contents are empty, delete memo
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
             Memo.delete(memo)
         } else { // if both title and contents are not empty
-//            memo.modificationDate = Date()
+            //            memo.modificationDate = Date()
             if isNewMemo {
-
+                
                 parent.add(memo: memo) // error.. ?? ??
                 parent.modificationDate = Date()
             }
         }
         parent.title += ""
-
+        
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
@@ -96,7 +99,8 @@ struct MemoView: View {
     func removeMemo() {
         
         Memo.delete(memo)
-        saveChanges()
+        //        saveChanges()
+        context.saveCoreData()
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -125,7 +129,7 @@ struct MemoView: View {
                     .onSubmit {
                         focusState = .contents
                     }
-                    
+                
                 // TextField Underline
                     .overlay {
                         Divider()
@@ -148,7 +152,7 @@ struct MemoView: View {
                     })
             }
         }
-// How..
+        // How..
         .onAppear(perform: {
             title = memo.title
             contents = memo.contents
@@ -175,16 +179,23 @@ struct MemoView: View {
                 
                 // pin Button
                 Button(action: togglePinMemo) {
-                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: memo.pinned ? "pin.fill" : "pin", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+                    ChangeableImage(
+                        imageSystemName: memo.pinned ? "pin.fill" : "pin",
+                        width: Sizes.regularButtonSize,
+                        height: Sizes.regularButtonSize)
                 }
                 
                 // trash Button
                 
                 Button(action: removeMemo) {
-                    ChangeableImage(colorScheme: _colorScheme, imageSystemName: "trash", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+                    ChangeableImage(
+                        imageSystemName: "trash",
+                        width: Sizes.regularButtonSize,
+                        height: Sizes.regularButtonSize)
                 }
             })
     }
+    
 }
 
 

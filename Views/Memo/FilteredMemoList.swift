@@ -16,7 +16,7 @@ enum MemoListType: String {
 
 struct FilteredMemoList: View {
     
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+//    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @ObservedObject var folder: Folder

@@ -15,6 +15,7 @@ struct SubFolderView: View {
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @Binding var isShowingSubFolderView: Bool
     @Binding var isAddingFolder: Bool
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         let subFolders = folder.subfolders.sorted()
@@ -38,6 +39,7 @@ struct SubFolderView: View {
                     isAddingFolder = true
                 } label: {
                     ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
+                    
                 }
                 .padding(.trailing, 12)
             }
@@ -80,6 +82,7 @@ struct SubFolderView: View {
         }
         .frame(width: UIScreen.screenWidth / 2.5)
             .background(Color.subColor)
+        
             .cornerRadius(10)
         
     }

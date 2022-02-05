@@ -27,11 +27,11 @@ struct PlusImage: View {
 
 struct MinusImage: View {
     
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
+//    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var body: some View {
         
-        ChangeableImage(colorScheme: _colorScheme, imageSystemName: "minus.circle", width: 40, height: 40)
+        ChangeableImage( imageSystemName: "minus.circle", width: 40, height: 40)
             .frame(width: 40, height: 40)
         
     }
