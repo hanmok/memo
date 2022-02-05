@@ -24,7 +24,7 @@ struct SelectingFolderView: View {
                 .padding(.leading, Sizes.overallPadding)
                 .padding(.vertical)
             
-            List(fastFolderWithLevelGroup.allFolders) { folderWithLevel in
+            List(fastFolderWithLevelGroup.allFolders, id: \.self) { folderWithLevel in
                 //                if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
                 
                 Button {

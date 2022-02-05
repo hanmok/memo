@@ -136,18 +136,29 @@ struct MemoProperties {
 }
 
 extension Memo {
-    
+
     static var isAscending: Bool = false
     static var orderType: OrderType = .modificationDate
-    
+
+    // MARK: - Have TO FIX MODIFICATION DATE. it should not be nil for all.
     static func sortModifiedDate(_ lhs: Memo, _ rhs: Memo) -> Bool {
-        if Memo.isAscending {
-            return lhs.modificationDate! < rhs.modificationDate!
+//        if Memo.isAscending {
+//            return lhs.modificationDate! < rhs.modificationDate!
+//        } else {
+//            return lhs.modificationDate! >= rhs.modificationDate!
+//        }
+        
+        if lhs.modificationDate != nil && rhs.modificationDate != nil {
+            if Memo.isAscending   {
+                return lhs.modificationDate! < rhs.modificationDate!
+            } else {
+                return lhs.modificationDate! >= rhs.modificationDate!
+            }
         } else {
-            return lhs.modificationDate! >= rhs.modificationDate!
+            return true
         }
     }
-    
+
     static func sortCreatedDate(_ lhs: Memo, _ rhs: Memo) -> Bool {
         if Memo.isAscending {
             return lhs.creationDate < rhs.creationDate
@@ -155,7 +166,7 @@ extension Memo {
             return lhs.creationDate >= rhs.creationDate
         }
     }
-    
+
     static func sortAlphabetOrder(_ lhs: Memo, _ rhs: Memo) -> Bool {
         if Memo.isAscending {
             return lhs.title < rhs.title
@@ -177,5 +188,6 @@ extension Memo: Comparable {
         case .alphabetical:
             return sortAlphabetOrder(lhs, rhs)
         }
+//        return true
     }
 }

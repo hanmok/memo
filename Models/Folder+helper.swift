@@ -17,7 +17,7 @@ extension Folder {
         
         self.modificationDate = Date()
         
-        self.isFavorite = false
+//        self.isFavorite = false
         DispatchQueue.global().async {
             context.saveCoreData()
         }
@@ -140,6 +140,8 @@ extension Folder {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
 //        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
         request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: true)]
+        // temp
+//        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.title, ascending: true)]
         request.predicate = predicate
         return request
     }
@@ -148,6 +150,8 @@ extension Folder {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
 //        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
         request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: true)]
+        // temp
+//        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.title, ascending: true)]
         
         let format = FolderProperties.parent + " = nil"
         request.predicate = NSPredicate(format: format)
@@ -265,10 +269,10 @@ struct FolderProperties {
 }
 
 extension Folder {
-    
+
     static var isAscending: Bool = true
     static var orderType: OrderType = .creationDate
-    
+
     static func sortModifiedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
         if Folder.isAscending {
             return lhs.modificationDate! < rhs.modificationDate!
@@ -276,7 +280,7 @@ extension Folder {
             return lhs.modificationDate! >= rhs.modificationDate!
         }
     }
-    
+
     static func sortCreatedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
         if Folder.isAscending {
             return lhs.creationDate < rhs.creationDate
@@ -284,7 +288,7 @@ extension Folder {
             return lhs.creationDate >= rhs.creationDate
         }
     }
-    
+
     static func sortAlphabetOrder(_ lhs: Folder, _ rhs: Folder) -> Bool {
         if Folder.isAscending {
             return lhs.title < rhs.title
@@ -305,6 +309,8 @@ extension Folder : Comparable {
         case .alphabetical:
             return sortAlphabetOrder(lhs, rhs)
         }
+        
+        return true
     }
 }
 

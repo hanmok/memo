@@ -7,13 +7,17 @@
 
 import SwiftUI
 
-struct FolderWithLevel: Hashable, Identifiable {
+struct FolderWithLevel: Hashable {
     var folder: Folder
     var level: Int
     var isCollapsed: Bool = false
     var isShowing: Bool = true
-    var id = UUID()
+//    var id = UUID()
 }
+
+//struct FolderWithLevel: Identifiable {
+//
+//}
 
 struct LevelAndCollapsed {
     var level: Int
@@ -76,7 +80,7 @@ struct MindMapView: View {
                     Section(header:
                                 Text("Folders")
                     ) {
-                        ForEach(fastFolderWithLevelGroup.allFolders) {folderWithLevel in
+                        ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) {folderWithLevel in
                             
                             FastVerCollapsibleFolder(
                                 folder: folderWithLevel.folder,

@@ -26,7 +26,7 @@ struct FolderOrderingButton: View {
         
         Button {
             folderOrder.orderType = type
-            Folder.orderType = type
+//            Folder.orderType = type
             Folder.updateTopFolders(context: context)
         } label: {
             HStack {
@@ -49,7 +49,7 @@ struct FolderAscDecButton: View {
     var body: some View {
         Button {
             folderOrder.isAscending = isAscending
-            Folder.isAscending = isAscending
+//            Folder.isAscending = isAscending
             Folder.updateTopFolders(context: context)
         } label: {
             HStack {
@@ -79,7 +79,7 @@ struct MemoOrderingButton: View {
         
         Button {
             memoOrder.orderType = type
-            Memo.orderType = type
+//            Memo.orderType = type
             parentFolder.title += "" // update parent
             // but .. it goes back to mindmapView... why ?
             // i don't know ....
@@ -103,7 +103,7 @@ struct MemoAscDecButtonLabel: View {
     var body: some View {
         Button {
             memoOrder.isAscending = isAscending
-            Memo.isAscending = isAscending
+//            Memo.isAscending = isAscending
             parentFolder.title += ""
         } label: {
             HStack {

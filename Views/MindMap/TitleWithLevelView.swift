@@ -26,10 +26,10 @@ struct TitleWithLevelView: View {
             Text(folder.title)
                 .foregroundColor(colorScheme.adjustTint())
             
-            if folder.isFavorite {
-                Text(Image(systemName: "star.fill"))
-                    .tint(.yellow) // why not working ?
-            }
+//            if folder.isFavorite {
+//                Text(Image(systemName: "star.fill"))
+//                    .tint(.yellow) // why not working ?
+//            }
             if shouldHideArrow {
                 EmptyView()
                     .background(.white)
