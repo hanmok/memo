@@ -33,7 +33,7 @@ struct FolderView: View {
     }
     
     func toggleFavorite() {
-        currentFolder.isFavorite.toggle()
+//        currentFolder.isFavorite.toggle()
     }
     
     func showSubFolderView() {
@@ -150,6 +150,10 @@ struct FolderView: View {
             Button(action: {
                 print("currentFolder's memos: \(currentFolder.memos)")
                 print("currentFolder's memo count : \(currentFolder.memos.count)")
+                if let validParent = currentFolder.parent {
+                    validParent.title += ""
+                    print("parent's title has changed")
+                }
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
@@ -158,14 +162,14 @@ struct FolderView: View {
             Button(action: {
                 toggleFavorite()
             }, label: {
-                if currentFolder.isFavorite {
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .tint(.yellow)
-                } else {
-                    ChangeableImage(imageSystemName: "star")
-                }
+//                if currentFolder.isFavorite {
+//                    Image(systemName: "star.fill")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .tint(.yellow)
+//                } else {
+//                    ChangeableImage(imageSystemName: "star")
+//                }
             })
 
             Button {

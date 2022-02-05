@@ -19,8 +19,8 @@ extension Folder {
 //        let maxFolder = result?.max(by: {$0.order < $1.order })
 //        self.order = ( maxFolder?.order ?? 0 ) + 1
         
-        self.modificationDate = Date()
-        self.isFavorite = false
+//        self.modificationDate = Date()
+//        self.isFavorite = false
         DispatchQueue.global().async {
             context.saveCoreData()
         }
@@ -29,7 +29,7 @@ extension Folder {
     convenience init(title: String, context: NSManagedObjectContext, modifiedAt: Date) {
         
         self.init(title: title, context: context)
-        self.modificationDate = modifiedAt
+//        self.modificationDate = modifiedAt
         
         DispatchQueue.global().async {
             context.saveCoreData()
@@ -100,7 +100,7 @@ extension Folder {
 //            memo.order = ( sortedOldMemos.last?.order ?? 0 ) + 1
 //        }
         memo.folder = self
-        memo.modificationDate = Date()
+//        memo.modificationDate = Date()
     }
     
 //    func add(memo: Memo) {
@@ -241,11 +241,12 @@ struct FolderProperties {
 extension Folder : Comparable {
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
 //        lhs.order < rhs.order
-        if lhs.modificationDate != nil && rhs.modificationDate != nil {
-            return lhs.modificationDate! > rhs.modificationDate!
-        } else {
-            return true
-        }
+//        if lhs.modificationDate != nil && rhs.modificationDate != nil {
+//            return lhs.modificationDate! > rhs.modificationDate!
+//        } else {
+//            return true
+//        }
+        return true
     }
 }
 

@@ -40,10 +40,10 @@ struct FastVerCollapsibleFolder: View {
                         Text(folder.title)
                                 .foregroundColor(colorScheme.adjustTint())
                             
-                            if folder.isFavorite {
-                                Text(Image(systemName: "star.fill"))
-                                    .tint(.yellow)
-                            }
+//                            if folder.isFavorite {
+//                                Text(Image(systemName: "star.fill"))
+//                                    .tint(.yellow)
+//                            }
                         }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     }
