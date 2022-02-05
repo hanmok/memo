@@ -22,7 +22,7 @@ struct HomeView: View { // top folder fetch
             MindMapView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
-                        targetFolder: topFolders.first!))
+                        targetFolders: topFolders.sorted()))
 //                .environmentObject(FolderEditViewModel())
         }
         
@@ -45,8 +45,8 @@ struct HomeView: View { // top folder fetch
 class FastFolderWithLevelGroup: ObservableObject {
     @Published var allFolders: [FolderWithLevel]
     
-    init(targetFolder: Folder) {
-        self.allFolders = Folder.getHierarchicalFolders(topFolder: targetFolder)
+    init(targetFolders: [Folder]) {
+        self.allFolders = Folder.getHierarchicalFolders(topFolders: targetFolders)
     }
 }
 
