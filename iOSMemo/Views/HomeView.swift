@@ -17,12 +17,16 @@ struct HomeView: View { // top folder fetch
     var body: some View {
     
 //        UnitTestHelpers.deletesAllFolders(context: context)
-                
+        
+        if topFolders.isEmpty {
+            Folder.returnSampleFolder2(context: context)
+        }
+        
         return NavigationView {
             MindMapView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
-                        targetFolder: topFolders.first!))
+                        targetFolders: topFolders.sorted()))
 //                .environmentObject(FolderEditViewModel())
         }
     }
@@ -31,8 +35,8 @@ struct HomeView: View { // top folder fetch
 class FastFolderWithLevelGroup: ObservableObject {
     @Published var allFolders: [FolderWithLevel]
     
-    init(targetFolder: Folder) {
-        self.allFolders = Folder.getHierarchicalFolders(topFolder: targetFolder)
+    init(targetFolders: [Folder]) {
+        self.allFolders = Folder.getHierarchicalFolders(topFolders: targetFolders)
     }
 }
 
