@@ -48,6 +48,8 @@ struct MindMapView: View {
     
     @State var showSelectingFolderView = false
     
+    @State var folderToBeRenamed : Folder? = nil
+    
     var body: some View {
         
         return ZStack {
@@ -105,6 +107,7 @@ struct MindMapView: View {
                                     Button {
                                         showTextField = true
                                         textFieldType = .rename
+                                        folderToBeRenamed = folderWithLevel.folder
                                     } label: {
                                         ChangeableImage(imageSystemName: "pencil")
                                     }
@@ -124,7 +127,7 @@ struct MindMapView: View {
                 isPresented: $showTextField,
                 text: $newFolderName,
                 focusState: _textFieldFocus) { newName in
-                    
+                    // MARK: - submit Actions
                     switch textFieldType! {
                         
                     case .newTopFolder:
@@ -137,11 +140,16 @@ struct MindMapView: View {
                         }
                         
                     case .rename:
-                        if folderEditVM.selectedFolder != nil {
-                            folderEditVM.selectedFolder!.title = newName
+                        if folderToBeRenamed != nil {
+                            folderToBeRenamed!.title = newName
+                            folderToBeRenamed = nil
                             context.saveCoreData()
-                            folderEditVM.selectedFolder = nil
                         }
+//                        if folderEditVM.selectedFolder != nil {
+//                            folderEditVM.selectedFolder!.title = newName
+//                            context.saveCoreData()
+//                            folderEditVM.selectedFolder = nil
+//                        }
                     }
                     
                     context.saveCoreData()
