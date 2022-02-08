@@ -162,12 +162,18 @@ struct MindMapView: View {
                 }
         } // end of ZStack
         
-        .sheet(isPresented: $folderEditVM.shouldShowSelectingView, content: {
-            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+//        .sheet(isPresented: $folderEditVM.shouldShowSelectingView, content: {
+//            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
+//        })
+        .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView, content: {
+            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, isFullScreen: true)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })
-        
+
+        .animation(nil)
         
         .navigationBarHidden(true)
     }

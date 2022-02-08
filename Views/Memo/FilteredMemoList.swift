@@ -83,6 +83,7 @@ struct FilteredMemoList: View {
                             
                             if memoEditVM.selectedMemos.isEmpty {
                                     memoEditVM.hasNotLongSelected = true
+//                                memoEditVM.parentFolder = nil
                                 }
                             })
                         
@@ -93,13 +94,16 @@ struct FilteredMemoList: View {
 
                                     memoEditVM.dealWhenMemoSelected(memo)
 
-                                } else { // if not long tapped
+                                } else { // if not long tapped already
                                     memoEditVM.hasNotLongSelected = false
                                     memoEditVM.add(memo: memo)
+//                                    memoEditVM.parentFolder = memo.folder
+//                                    print("parentFolder: \(memo.folder!.title)")
                                 }
 
                                 if memoEditVM.selectedMemos.isEmpty {
                                     memoEditVM.hasNotLongSelected = true
+// initialized.
                                 }
                             })
                         

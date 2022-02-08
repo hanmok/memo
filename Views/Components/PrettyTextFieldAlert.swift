@@ -65,7 +65,8 @@ struct PrettyTextFieldAlert: View {
 
 //                    .background(.green)
                     .background(colorScheme == .dark ? .black : .white)
-                    .foregroundColor(.yellow)
+//                    .foregroundColor(.yellow)
+                    .foregroundColor(colorScheme.adjustBlackAndWhite())
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)
                     .padding(.bottom, 15)

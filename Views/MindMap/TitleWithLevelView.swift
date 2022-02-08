@@ -35,6 +35,7 @@ struct TitleWithLevelView: View {
                     .background(.white)
             }
         }
+//        .listRowBackground(.green)
     }
 }
 

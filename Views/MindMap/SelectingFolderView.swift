@@ -16,13 +16,42 @@ struct SelectingFolderView: View {
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
-    
+    @Environment(\.colorScheme) var colorScheme
+    @State var invalidFolderWithLevels: [FolderWithLevel]? = nil
+    var isFullScreen: Bool = false
     var body: some View {
+        
+//        if let invalidFolders = folderEditVM.folderToCut {
+//            let some = Folder.getHierarchicalFolders(topFolders: [invalidFolders])
+//        }
+//        if folderEditVM.folderToCut != nil {
+//            invalidFolderWithLevels = Folder.getHierarchicalFolders(topFolders: [folderEditVM.folderToCut!])
+//        }
+        
         return VStack {
-            
-            Text("Select Folder ")
-                .padding(.leading, Sizes.overallPadding)
-                .padding(.vertical)
+            HStack {
+                Spacer()
+                Text("Select Folder ")
+                    .frame(maxWidth: .infinity, alignment: .center)
+                //                .padding(.leading, Sizes.overallPadding)
+                    .padding(.vertical)
+                
+                
+            }.overlay {
+                if isFullScreen {
+                    HStack {
+                        Spacer()
+                        Button {
+                            // DISMISS
+                            presentationMode.wrappedValue.dismiss()
+                            UIView.setAnimationsEnabled(true)
+                        } label: {
+                            ChangeableImage(imageSystemName: "multiply")
+                        }
+                        .padding(.trailing, Sizes.overallPadding)
+                    }
+                }
+            }
             
             List(fastFolderWithLevelGroup.allFolders, id: \.self) { folderWithLevel in
                 //                if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
@@ -32,45 +61,71 @@ struct SelectingFolderView: View {
                     // Select Target Folder to be pasted First.
                     folderEditVM.folderToPaste = folderWithLevel.folder
                     
-    // move only when cutted folder and paste target folder are different.
-    
-                    if folderEditVM.folderToCut != folderEditVM.folderToPaste {
+                    if folderEditVM.folderToCut != nil {
+                        
+                            invalidFolderWithLevels = Folder.getHierarchicalFolders(topFolders: [folderEditVM.folderToCut!])
+                        
+                        if Folder.convertLevelIntoFolder(invalidFolderWithLevels!).contains(where: { $0 == folderEditVM.folderToPaste}) == true {
+                            // INVALIDATE ACTION WHEN PASTED FOLDER IS UNDER CUTTED FOLDER, invalidate action !
+                            folderEditVM.folderToCut = nil
+                        }
+                    }
+                    
+                    
+                    // move only when cutted folder and paste target folder are different.
+                    
+                    if folderEditVM.folderToCut == folderEditVM.folderToPaste {
                         print("flag 2")
+                        folderEditVM.folderToCut = nil
+                    } else {
                         
                         if folderEditVM.folderToCut != nil {
                             folderEditVM.folderToPaste!.add(subfolder: folderEditVM.folderToCut!)
                             folderEditVM.folderToCut = nil
                             print("flag 3")
-            // No Folder to Cut Selected. Memo Cut and Paste!
+                            // No Folder to Cut Selected. Memo Cut and Paste!
                         } else {
                             print("flag 4")
-
+                            
                             for memo in memoEditVM.selectedMemos.sorted() {
                                 folderEditVM.folderToPaste?.add(memo: memo)
                                 print("memo to be cut : \(memo.title)")
                             }
                             memoEditVM.initSelectedMemos()
                         }
-// if Folder to Cut and Paste are the same, do nothing but set both to nil
-                    } else {
-                        folderEditVM.folderToCut = nil
+                        // if Folder to Cut and Paste are the same, do nothing but set both to nil
                     }
                     print("flag 5")
                     context.saveCoreData()
                     
                     folderEditVM.folderToPaste = nil
-                     // do we need it ..?? unnecessary.
-//                    Folder.updateTopFolders(context: context)
+                    // do we need it ..?? unnecessary.
+                    //                    Folder.updateTopFolders(context: context)
                     
                     presentationMode.wrappedValue.dismiss()
                     
                 } label: {
+                    if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
+                        TitleWithLevelView(
+                            folder: folderWithLevel.folder,
+                            level: folderWithLevel.level,
+                            shouldHideArrow: true)
+                            .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
+                            .background(colorScheme.adjustSubColors())
+//                            .listRowBackground(.green)
+                        
+                    } else {
                     TitleWithLevelView(
                         folder: folderWithLevel.folder,
                         level: folderWithLevel.level,
                         shouldHideArrow: true)
+                            
+                    }
                 }
             } // end of List
+        }
+        .onDisappear {
+            UIView.setAnimationsEnabled(true)
         }
     }
 }

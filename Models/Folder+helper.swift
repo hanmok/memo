@@ -269,6 +269,14 @@ extension Folder {
         
         return folderWithLevelContainer
     }
+    
+    static func convertLevelIntoFolder(_ withLevels: [FolderWithLevel]) -> [Folder] {
+        var folders: [Folder] = []
+        for eachLevel in withLevels {
+            folders.append(eachLevel.folder)
+        }
+        return folders
+    }
 }
 
 struct FolderProperties {

@@ -21,4 +21,5 @@ class FolderEditViewModel: ObservableObject {
     
     var selectedFolder: Folder? = nil
 
+    var tobeColoredFolder : Folder? = nil
 }

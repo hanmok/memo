@@ -51,9 +51,10 @@ struct DynamicFolderCell: View {
 
                 // change Folder location
                 Button {
+                    UIView.setAnimationsEnabled(false)
                     folderEditVM.shouldShowSelectingView = true
                     folderEditVM.folderToCut = folder
-                    
+
                     
                 } label: {
                     ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
