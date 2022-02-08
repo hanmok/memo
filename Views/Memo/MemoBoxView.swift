@@ -61,6 +61,7 @@ struct MemoBoxView: View {
                         .font(.caption)
                         .foregroundColor(.primary)
                         .lineLimit(4)
+                        .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding([.leading, .bottom], 5 )
                     

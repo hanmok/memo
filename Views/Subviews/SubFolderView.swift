@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-
+import CoreData
 struct SubFolderView: View {
     
     //    @EnvironmentObject var folder: Folder
+//    @Environment(\.managedObjectContext) var context
     @ObservedObject var folder: Folder
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
@@ -49,6 +50,24 @@ struct SubFolderView: View {
             
             
             VStack(alignment: .leading, spacing: 5) {
+                // testing
+                NavigationLink {
+                    FolderView(currentFolder: folder)
+                        .environmentObject(folderEditVM)
+                        .environmentObject(memoEditVM)
+                        .environmentObject(memoOrder)
+                } label: {
+                    Text(folder.title)
+                        .frame(alignment: .leading)
+                }
+                // What makes a subfolder go back to parent Folder ?
+                .simultaneousGesture(TapGesture().onEnded{
+                    // hide SubFolderView when navigate
+                    isShowingSubFolderView = false
+                    memoEditVM.selectedMemos.removeAll()
+                    memoEditVM.initSelectedMemos()
+                })
+                
                 ForEach(subFolders) { subFolder in
                     // how to make.. it disappear if moved ?
                     NavigationLink {
@@ -60,6 +79,7 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                     }
+                    // What makes a subfolder go back to parent Folder ?
                     .simultaneousGesture(TapGesture().onEnded{
                         // hide SubFolderView when navigate
                         isShowingSubFolderView = false

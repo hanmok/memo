@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CoreData
-struct FastVerCollapsibleFolder: View {
+struct DynamicFolderCell: View {
     
 //    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) var context

@@ -20,7 +20,8 @@ struct FilteredMemoList: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @ObservedObject var folder: Folder
-        
+    @State var hasNotLongSelected = false
+    
     var listType: MemoListType
 
     
@@ -38,53 +39,71 @@ struct FilteredMemoList: View {
             memosToShow = folder.memos.sorted()
         }
         
+        // 아마.. 여기서 에러가 생긴 것 같아.
         return ZStack {
-            if memoEditVM.navigateToMemo != nil {
-                NavigationLink(
-                    destination:
-                        MemoView(memo: memoEditVM.navigateToMemo!, parent: folder),
-                    isActive: $memoEditVM.hasNotLongSelected) {}
-            }
+//            if memoEditVM.navigateToMemo != nil {
+//                NavigationLink(
+//                    destination:
+//                        MemoView(memo: memoEditVM.navigateToMemo!, parent: folder),
+//                    isActive: $memoEditVM.hasNotLongSelected) {}
+//            }
 
             
-            VStack { // without this, views stack for each memos
+            VStack { // without this, views stack on other memos
                 Section {
                     ForEach(memosToShow, id: \.self) { memo in
-                        MemoBoxView(memo: memo)
-                            .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         
-                        // MARK: - Tapped
-                            .simultaneousGesture(TapGesture().onEnded{
-                                // if already long tapped
+                        NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)) {
+                            MemoBoxView(memo: memo)
+                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+                        }
+                        .disabled(!memoEditVM.hasNotLongSelected)
+//                        MemoBoxView(memo: memo)
+//                            .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+//
+
+// MARK: - Problem occured here
+//                        // MARK: - Tapped
+                        .simultaneousGesture(TapGesture().onEnded{
+//                        .simultaneousGesture(DragGesture(minimumDistance: 1).onEnded { _ in
+                            // if already long tapped
                                 if !memoEditVM.hasNotLongSelected {
-                                    
+
                                     memoEditVM.dealWhenMemoSelected(memo)
-                                    
-                                } else { // if not long tapped
+
+                                }
+                            
+                            else { // if not long tapped
                                     memoEditVM.navigateToMemo = memo
                                     memoEditVM.hasNotLongSelected = true
                                 }
-                                
-                                if memoEditVM.selectedMemos.isEmpty {
+                            
+                            hasNotLongSelected.toggle()
+                            memoEditVM.someBool.toggle()
+                            
+                            if memoEditVM.selectedMemos.isEmpty {
                                     memoEditVM.hasNotLongSelected = true
                                 }
                             })
-                        // MARK: - LONG PRESSED
+                        
+//                        // MARK: - LONG PRESSED
                             .simultaneousGesture(LongPressGesture().onEnded{_ in
                                 // if already long tapped
                                 if !memoEditVM.hasNotLongSelected { // if it has been long pressed
-                                    
+
                                     memoEditVM.dealWhenMemoSelected(memo)
-                                    
+
                                 } else { // if not long tapped
                                     memoEditVM.hasNotLongSelected = false
                                     memoEditVM.add(memo: memo)
                                 }
-                                
+
                                 if memoEditVM.selectedMemos.isEmpty {
                                     memoEditVM.hasNotLongSelected = true
                                 }
                             })
+                        
+                        
                     } // end of ForEach
                 } header: {
                     VStack {
@@ -99,7 +118,7 @@ struct FilteredMemoList: View {
                         }
                     }
                 }
-            }
-        }
+            } // end of VStack
+        } // end of ZStack
     }
 }

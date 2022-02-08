@@ -24,8 +24,8 @@
 		9A1D536527ACE439009294C1 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474BC27716E0000571D66 /* FolderView.swift */; };
 		9A1D536627ACE454009294C1 /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF25277EC5CF00866456 /* MindMapView.swift */; };
 		9A1D536727ACE516009294C1 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
-		9A1D8539279FF32400B00156 /* FastVerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8538279FF32400B00156 /* FastVerCollapsibleFolder.swift */; };
-		9A1D853A279FF32400B00156 /* FastVerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8538279FF32400B00156 /* FastVerCollapsibleFolder.swift */; };
+		9A1D8539279FF32400B00156 /* DynamicFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8538279FF32400B00156 /* DynamicFolderCell.swift */; };
+		9A1D853A279FF32400B00156 /* DynamicFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8538279FF32400B00156 /* DynamicFolderCell.swift */; };
 		9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D853E27A16BE800B00156 /* SubMemoList.swift */; };
 		9A1D854027A16BE800B00156 /* SubMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D853E27A16BE800B00156 /* SubMemoList.swift */; };
 		9A1D854527A24F9400B00156 /* SubFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D854427A24F9400B00156 /* SubFolderView.swift */; };
@@ -148,7 +148,7 @@
 		9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingButtonLabel.swift; sourceTree = "<group>"; };
 		9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyTextFieldAlert.swift; sourceTree = "<group>"; };
 		9A1D536127ACE2E3009294C1 /* SubFolderButtonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderButtonImage.swift; sourceTree = "<group>"; };
-		9A1D8538279FF32400B00156 /* FastVerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastVerCollapsibleFolder.swift; sourceTree = "<group>"; };
+		9A1D8538279FF32400B00156 /* DynamicFolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicFolderCell.swift; sourceTree = "<group>"; };
 		9A1D853E27A16BE800B00156 /* SubMemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMemoList.swift; sourceTree = "<group>"; };
 		9A1D854427A24F9400B00156 /* SubFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderView.swift; sourceTree = "<group>"; };
 		9A1D856A27A3E98D00B00156 /* SelectingFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingFolderView.swift; sourceTree = "<group>"; };
@@ -486,7 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
-				9A1D8538279FF32400B00156 /* FastVerCollapsibleFolder.swift */,
+				9A1D8538279FF32400B00156 /* DynamicFolderCell.swift */,
 				9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */,
 				9A1D856A27A3E98D00B00156 /* SelectingFolderView.swift */,
 			);
@@ -643,7 +643,7 @@
 				9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */,
 				9A3378672799275E00805138 /* SubFolderPageView.swift in Sources */,
 				9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */,
-				9A1D8539279FF32400B00156 /* FastVerCollapsibleFolder.swift in Sources */,
+				9A1D8539279FF32400B00156 /* DynamicFolderCell.swift in Sources */,
 				9AD6EF20277DC1AD00866456 /* TestLazyAndScrollView.swift in Sources */,
 				9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */,
 				9AC5D22227883475007EAA28 /* SubFolderPageView3.swift in Sources */,
@@ -739,7 +739,7 @@
 				9A1D536627ACE454009294C1 /* MindMapView.swift in Sources */,
 				9A1D854627A24F9400B00156 /* SubFolderView.swift in Sources */,
 				9AC5D232278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */,
-				9A1D853A279FF32400B00156 /* FastVerCollapsibleFolder.swift in Sources */,
+				9A1D853A279FF32400B00156 /* DynamicFolderCell.swift in Sources */,
 				9A33780B2796B10E00805138 /* HomeView.swift in Sources */,
 				9A3378022795736200805138 /* ColorExt.swift in Sources */,
 				9AC5D235278C3145007EAA28 /* MemoList2.swift in Sources */,

@@ -69,9 +69,9 @@ struct MemoView: View {
     func saveChanges() {
         print("save changes has triggered")
         memo.title = title
-        
+
         memo.contents = contents
-        
+
         // if both title and contents are empty, delete memo
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
@@ -79,17 +79,17 @@ struct MemoView: View {
         } else { // if both title and contents are not empty
             //            memo.modificationDate = Date()
             if isNewMemo {
-                
+
                 parent.add(memo: memo) // error.. ?? ??
                 parent.modificationDate = Date()
             }
         }
-        parent.title += ""
-        
+        parent.title += "" //
+
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
-        print(parent.memos.sorted())
+//        print(parent.memos.sorted())
     }
     
     func togglePinMemo() {
@@ -139,10 +139,12 @@ struct MemoView: View {
                 // MARK: - Contents
                 
                 TextEditor(text: $contents)
+                    .disableAutocorrection(true)
                     .padding(.horizontal, Sizes.overallPadding)
                     .gesture(scroll)
                     .focused($editorFocusState)
                     .focused($focusState, equals: .contents)
+//                    .frame(alignment: .leading)
                     .onAppear(perform: {
                         if self.isNewMemo == false {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work

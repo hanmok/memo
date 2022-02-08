@@ -12,12 +12,8 @@ struct FolderWithLevel: Hashable {
     var level: Int
     var isCollapsed: Bool = false
     var isShowing: Bool = true
-//    var id = UUID()
 }
 
-//struct FolderWithLevel: Identifiable {
-//
-//}
 
 struct LevelAndCollapsed {
     var level: Int
@@ -85,7 +81,7 @@ struct MindMapView: View {
                     ) {
                         ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) {folderWithLevel in
                             
-                            FastVerCollapsibleFolder(
+                            DynamicFolderCell(
                                 folder: folderWithLevel.folder,
                                 level: folderWithLevel.level)
                                 .environmentObject(memoEditVM)
@@ -170,6 +166,7 @@ struct MindMapView: View {
             SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
+                
         })
         .navigationBarHidden(true)
     }

@@ -20,10 +20,5 @@ class FolderEditViewModel: ObservableObject {
     
     
     var selectedFolder: Folder? = nil
-    
-    
-    
+
 }
-
-
-
