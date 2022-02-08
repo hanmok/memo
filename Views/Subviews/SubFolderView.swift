@@ -20,7 +20,7 @@ struct SubFolderView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        let subFolders = folder.subfolders.sorted()
+        let subFolders = folder.subfolders.sorted{ $0.title < $1.title}
         
         return VStack(alignment: .leading) {
             

@@ -10,7 +10,7 @@ import CoreData
 
 struct FolderView: View {
     
-    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
+//    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
@@ -147,12 +147,12 @@ struct FolderView: View {
                 isActive: $isAddingMemo) {}
         } // end of ZStack
         .frame(maxHeight: .infinity)
-        .sheet(isPresented: $showSelectingFolderView,
-               content: {
-            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
-        })
+//        .sheet(isPresented: $showSelectingFolderView,
+//               content: {
+////            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
+////                .environmentObject(folderEditVM)
+////                .environmentObject(memoEditVM)
+//        })
         
         .onDisappear(perform: {
             newSubFolderName = ""
