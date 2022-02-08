@@ -168,6 +168,7 @@ struct MindMapView: View {
                 .environmentObject(memoEditVM)
         })
         
+        
         .navigationBarHidden(true)
     }
 }

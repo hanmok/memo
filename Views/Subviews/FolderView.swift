@@ -147,12 +147,13 @@ struct FolderView: View {
                 isActive: $isAddingMemo) {}
         } // end of ZStack
         .frame(maxHeight: .infinity)
-//        .sheet(isPresented: $showSelectingFolderView,
-//               content: {
-////            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
-////                .environmentObject(folderEditVM)
-////                .environmentObject(memoEditVM)
-//        })
+        .sheet(isPresented: $showSelectingFolderView,
+               content: {
+//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
+            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
+        })
         
         .onDisappear(perform: {
             newSubFolderName = ""

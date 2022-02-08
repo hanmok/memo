@@ -12,7 +12,7 @@ struct HomeView: View { // top folder fetch
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
+    @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
     
     var body: some View {
         

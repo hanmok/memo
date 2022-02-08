@@ -17,7 +17,6 @@ struct SelectingFolderView: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     
-    
     var body: some View {
         return VStack {
             
@@ -29,30 +28,39 @@ struct SelectingFolderView: View {
                 //                if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
                 
                 Button {
-                    
+                    print("flag 1")
+                    // Select Target Folder to be pasted First.
                     folderEditVM.folderToPaste = folderWithLevel.folder
                     
-                    // move only when cutted folder and paste target folder are different.
-                    // if same, do nothing but set both to nil
+    // move only when cutted folder and paste target folder are different.
+    
                     if folderEditVM.folderToCut != folderEditVM.folderToPaste {
+                        print("flag 2")
                         
                         if folderEditVM.folderToCut != nil {
                             folderEditVM.folderToPaste!.add(subfolder: folderEditVM.folderToCut!)
                             folderEditVM.folderToCut = nil
+                            print("flag 3")
+            // No Folder to Cut Selected. Memo Cut and Paste!
                         } else {
-//                            memoEditVM.selectedMemos
+                            print("flag 4")
+
                             for memo in memoEditVM.selectedMemos.sorted() {
                                 folderEditVM.folderToPaste?.add(memo: memo)
+                                print("memo to be cut : \(memo.title)")
                             }
                             memoEditVM.initSelectedMemos()
                         }
+// if Folder to Cut and Paste are the same, do nothing but set both to nil
+                    } else {
+                        folderEditVM.folderToCut = nil
                     }
-                    
+                    print("flag 5")
                     context.saveCoreData()
                     
                     folderEditVM.folderToPaste = nil
-                    
-                    Folder.updateTopFolders(context: context)
+                     // do we need it ..?? unnecessary.
+//                    Folder.updateTopFolders(context: context)
                     
                     presentationMode.wrappedValue.dismiss()
                     

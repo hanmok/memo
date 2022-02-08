@@ -151,7 +151,7 @@ extension Folder {
         return request
     }
     
-    static func topFolderFetch() -> NSFetchRequest<Folder> {
+    static func topFolderFetchReq() -> NSFetchRequest<Folder> {
         let request = NSFetchRequest<Folder>(entityName: "Folder")
 //        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.order, ascending: true)]
         request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: true)]
@@ -161,6 +161,17 @@ extension Folder {
         let format = FolderProperties.parent + " = nil"
         request.predicate = NSPredicate(format: format)
         return request
+    }
+    
+    static func fetchTopFolders(context: NSManagedObjectContext) -> [Folder] {
+        let req = Folder.topFolderFetchReq()
+        // MARK: - recommend using guard
+        if let result = try? context.fetch(req) {
+            return result
+        } else {
+            print("error fetching top Folders !!")
+            return []
+        }
     }
     
     static func delete(_ folder: Folder) {
@@ -173,7 +184,7 @@ extension Folder {
     }
     
     static func updateTopFolders(context: NSManagedObjectContext) {
-                let request = Folder.topFolderFetch()
+                let request = Folder.topFolderFetchReq()
                 let result = try? context.fetch(request)
         for eachFolder in result! {
             eachFolder.title += ""
