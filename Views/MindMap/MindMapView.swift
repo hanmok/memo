@@ -29,7 +29,7 @@ struct MindMapView: View {
     
     @Environment(\.managedObjectContext) var context
 //    @Environment(\.colorScheme) var colorScheme
-    
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var memoEditVM = MemoEditViewModel()
     @StateObject var folderEditVM = FolderEditViewModel()
     @StateObject var folderOrder = FolderOrder()
@@ -69,6 +69,7 @@ struct MindMapView: View {
                             textFieldType = .newTopFolder
                         } label: {
                             ChangeableImage(imageSystemName: "plus")
+                                .foregroundColor(colorScheme.adjustBlackAndWhite())
                         }
                     }
                     .padding(.trailing, Sizes.overallPadding)

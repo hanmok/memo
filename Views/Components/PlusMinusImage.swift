@@ -9,18 +9,21 @@ import SwiftUI
 
 struct PlusImage: View {
     
-//    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     var body: some View {
         
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-                .foregroundColor(.green)
-                .background(.green)
+//                .foregroundColor(.green)
+//                .background(.green)
+                .foregroundColor(colorScheme == .dark ? Color.subColorDark : Color.subColor)
+                .background(colorScheme == .dark ? Color.subColorDark : Color.subColor)
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "plus")
                 .frame(width: 25, height: 25)
-                .foregroundColor(.black)
+//                .foregroundColor(.black)
+                .foregroundColor(colorScheme.adjustBlackAndWhite())
         }
     }
 }

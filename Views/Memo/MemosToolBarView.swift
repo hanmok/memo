@@ -15,7 +15,8 @@ struct MemosToolBarView: View {
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     
     @Binding var showSelectingFolderView: Bool
-    let spacingBetweenButtons: CGFloat = 12
+//    let spacingBetweenButtons: CGFloat = 12
+    let spacingBetweenButtons: CGFloat = 16
     
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
@@ -51,9 +52,6 @@ struct MemosToolBarView: View {
             }) {
                 ChangeableImage(imageSystemName: "pin", width: 20, height: 20)
             }
-            .padding(.leading, 25)
-//            .padding(.horizontal, 25)
-            .padding([.vertical, .trailing], 5)
             .cornerRadius(5)
             
             
@@ -69,9 +67,9 @@ struct MemosToolBarView: View {
             }) {
                 ChangeableImage(imageSystemName: "folder")
             }
-            .padding(5)
+//            .padding(5)
             
-            // MARK: - 보류.
+            // MARK: - 보류 : Combine , Change Color
 //            Button {
 //                // combine memos
 //                memoEditVM.initSelectedMemos()
@@ -95,6 +93,7 @@ struct MemosToolBarView: View {
             
             // REMOVE ACTION, WORKS FINE
 //            Button(action: {removeAction(sortedMemos)}) {
+            
             Button(action: {
                 for each in memoEditVM.selectedMemos {
                     Memo.delete(each)
@@ -104,13 +103,10 @@ struct MemosToolBarView: View {
             }) {
                 ChangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }
-            .padding(.trailing, 25)
-            .padding([.leading, .vertical], 5)
             .cornerRadius(5)
-        }
-        .frame(width: 170, height: 30, alignment: .center)
-        .padding(.horizontal, Sizes.smallSpacing)
-        .padding(.vertical, 5)
+        } // end of HStack
+        .padding(.horizontal, Sizes.overallPadding)
+        .padding(.vertical, 10)
         .background(Color.subColor)
         .cornerRadius(10)
     }

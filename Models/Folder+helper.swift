@@ -8,6 +8,11 @@
 import Foundation
 import CoreData
 
+
+protocol Archive: Folder {
+    var isArchive: Bool { get }
+}
+
 extension Folder {
     
     convenience init(title: String, context: NSManagedObjectContext) {

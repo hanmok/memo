@@ -114,7 +114,7 @@ func convertSetToArray(set: Set<Folder>) -> Array<Folder> {
 
 
 extension ColorScheme {
-     func adjustTint() -> Color {
+     func adjustBlackAndWhite() -> Color {
         return self == .dark ? .white : .black
     }
 }

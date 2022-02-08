@@ -28,3 +28,12 @@ struct SubFolderButtonImage: View {
         }
     }
 }
+
+//struct ColoredImage : View {
+//    @Environment(\.colorScheme) var colorScheme
+//    var imageName: String
+//    var body: some View {
+//        return ChangeableImage(imageSystemName: imageName)
+//            .foregroundColor(.foregroundColor(colorScheme == .dark ? Color(white: 1) : Color(white: 0)))
+//    }
+//}

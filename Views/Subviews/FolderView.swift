@@ -84,6 +84,7 @@ struct FolderView: View {
                 .environmentObject(currentFolder)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
+                .environmentObject(memoOrder)
             } // end of scrollView
             
             VStack {
