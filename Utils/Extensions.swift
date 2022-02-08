@@ -117,4 +117,8 @@ extension ColorScheme {
      func adjustBlackAndWhite() -> Color {
         return self == .dark ? .white : .black
     }
+    
+    func adjustSubColors() -> Color {
+        return self == .dark ? Color.subColorDark : Color.subColor
+    }
 }

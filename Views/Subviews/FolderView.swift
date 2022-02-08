@@ -16,7 +16,7 @@ struct FolderView: View {
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     //    @StateObject var memoOrder = MemoOrder()
-    
+    @Environment(\.colorScheme) var colorScheme
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
@@ -156,7 +156,9 @@ struct FolderView: View {
         
         .onDisappear(perform: {
             newSubFolderName = ""
-            //            memoEditVM.initSelectedMemos() // it makes nav error.
+            memoEditVM.selectedMemos.removeAll()
+            memoEditVM.initSelectedMemos()
+            
         })
         
         .navigationTitle(currentFolder.title)
@@ -187,7 +189,10 @@ struct FolderView: View {
                         .aspectRatio(contentMode: .fit)
                         .tint(.yellow)
                 } else {
-                    ChangeableImage(imageSystemName: "star")
+                    Image(systemName: "star")
+                        .resizable()
+                        .aspectRatio( contentMode: .fit)
+                        .tint(colorScheme.adjustBlackAndWhite())
                 }
             })
             

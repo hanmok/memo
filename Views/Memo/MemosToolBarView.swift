@@ -13,7 +13,7 @@ struct MemosToolBarView: View {
     
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-    
+    @Environment(\.colorScheme) var colorScheme
     @Binding var showSelectingFolderView: Bool
 //    let spacingBetweenButtons: CGFloat = 12
     let spacingBetweenButtons: CGFloat = 16
@@ -107,7 +107,7 @@ struct MemosToolBarView: View {
         } // end of HStack
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
-        .background(Color.subColor)
+        .background(colorScheme.adjustSubColors())
         .cornerRadius(10)
     }
 }

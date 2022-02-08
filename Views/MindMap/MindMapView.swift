@@ -166,8 +166,8 @@ struct MindMapView: View {
             SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
-                
         })
+        
         .navigationBarHidden(true)
     }
 }

@@ -10,12 +10,13 @@ import CoreData
 
 struct SelectingFolderView: View {
     
-    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @Environment(\.managedObjectContext) var context
+    @Environment(\.presentationMode) var presentationMode
+    
+    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     
-    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         return VStack {
