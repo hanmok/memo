@@ -26,6 +26,11 @@ protocol Archive: Folder {
 
 extension Folder {
     
+    enum FolderType{
+        case home
+        case archive
+    }
+    
     convenience init(title: String, context: NSManagedObjectContext) {
         self.init(context: context)
         self.title = title
@@ -56,7 +61,17 @@ extension Folder {
         setPrimitiveValue(UUID(), forKey: FolderProperties.id)
     }
     
-    
+    var folderType: FolderType? {
+        get {
+            if self.creationDate == Date(timeIntervalSince1970: 0) {
+                return .home
+            } else if self.creationDate == Date(timeIntervalSince1970: 1) {
+                return .archive
+            } else {
+                return nil
+            }
+        }
+    }
     
     var uuid: UUID {
         get { uuid_ ?? UUID() }
@@ -192,7 +207,8 @@ extension Folder {
         if let context = folder.managedObjectContext {
             context.delete(folder)
             
-            try? context.save()
+//            try? context.save()
+            context.saveCoreData()
             Folder.updateTopFolders(context: context)
         }
     }
@@ -443,6 +459,48 @@ extension Folder {
         newFolder1.add(subfolder: subFolder3)
         
         newFolder2.creationDate = Date().advanced(by: 1)
+        // return TopFolders
+        // order
+        // 1. Alphabetical : SubCategory 1 > 2 > 3
+        // 1. Creation : SubCategory 2 > 1 > 3
+        // 1. Modification : SubCategory 3 > 1 > 2
+        
+//        return [newFolder1, newFolder2]
+    }
+    
+    static func returnSampleFolder3(context: NSManagedObjectContext)  {
+        
+        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
+//        homeFolder.folderType = .home
+
+        homeFolder.creationDate = Date().advanced(by: 2)
+        
+        let subFolder1 = Folder(title: "Category 1", context: context)
+        let subFolder2 = Folder(title: "Category 2", context: context)
+        let subFolder3 = Folder(title: "Category 3", context: context)
+        
+        subFolder1.creationDate = Date().advanced(by: 2)
+        subFolder2.creationDate = Date().advanced(by: 1)
+        subFolder3.creationDate = Date().advanced(by: 3)
+        
+        subFolder1.modificationDate = Date().advanced(by: 2)
+        subFolder2.modificationDate = Date().advanced(by: 3)
+        subFolder3.modificationDate = Date().advanced(by: 1)
+        
+        
+
+        homeFolder.add(subfolder: subFolder1)
+        homeFolder.add(subfolder: subFolder2)
+        homeFolder.add(subfolder: subFolder3)
+        
+        let newFolder2 = Folder(title: "Sub Category 2", context: context)
+        subFolder1.add(subfolder: newFolder2)
+        
+        newFolder2.creationDate = Date().advanced(by: 1)
+        
+        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
+//        archive.folderType = .archive
+        context.saveCoreData()
         // return TopFolders
         // order
         // 1. Alphabetical : SubCategory 1 > 2 > 3

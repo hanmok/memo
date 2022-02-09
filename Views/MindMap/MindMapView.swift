@@ -85,8 +85,9 @@ struct MindMapView: View {
                     Section(header:
                                 Text("Folders")
                     ) {
+                        // need to fetch only Home Folder
                         ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) {folderWithLevel in
-                            
+//                            folderWithLevel.folder
                             DynamicFolderCell(
                                 folder: folderWithLevel.folder,
                                 level: folderWithLevel.level)
@@ -117,6 +118,8 @@ struct MindMapView: View {
                                     .tint(.yellow)
                                 }
                         } // end of ForEach
+                        
+                        Text("hi")
                     } // end of Section
                 }
                 .listStyle(InsetGroupedListStyle())

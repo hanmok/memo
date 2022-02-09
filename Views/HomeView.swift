@@ -24,7 +24,8 @@ struct HomeView: View { // top folder fetch
 //                UnitTestHelpers.deletesAllFolders(context: context)
 
         if topFolders.isEmpty {
-            Folder.returnSampleFolder2(context: context)
+//            Folder.returnSampleFolder2(context: context)
+            Folder.returnSampleFolder3(context: context)
         }
         
         
