@@ -29,14 +29,21 @@ struct HomeView: View { // top folder fetch
         }
         
         
+//        return NavigationView {
+//            MindMapView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        targetFolders: topFolders.sorted())
+
+                //                , bookMarkedMemos: BookMarkedMemos(memos: memos.sorted())
+            
         return NavigationView {
             MindMapView(
-                fastFolderWithLevelGroup:
-                    FastFolderWithLevelGroup(
-                        targetFolders: topFolders.sorted())
-//                , bookMarkedMemos: BookMarkedMemos(memos: memos.sorted())
-            )
+                 folderGroup: FolderGroup(targetFolders: topFolders.sorted()))
         }
+        
+        
+        
     }
 }
 

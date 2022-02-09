@@ -13,7 +13,8 @@ struct SelectingFolderView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
+//    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
+    @ObservedObject var folderGroup: FolderGroup
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @Environment(\.colorScheme) var colorScheme
@@ -53,13 +54,13 @@ struct SelectingFolderView: View {
                 }
             }
             
-            List(fastFolderWithLevelGroup.allFolders, id: \.self) { folderWithLevel in
+            List(folderGroup.realFolders, id: \.self) { folder in
                 //                if folderWithLevel != fastFolderWithLevelGroup.allFolders.last {
                 
                 Button {
                     print("flag 1")
                     // Select Target Folder to be pasted First.
-                    folderEditVM.folderToPaste = folderWithLevel.folder
+                    folderEditVM.folderToPaste = folder
                     
                     if folderEditVM.folderToCut != nil {
                         
@@ -105,19 +106,21 @@ struct SelectingFolderView: View {
                     presentationMode.wrappedValue.dismiss()
                     
                 } label: {
-                    if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
-                        TitleWithLevelView(
-                            folder: folderWithLevel.folder,
-                            level: folderWithLevel.level,
-                            shouldHideArrow: true)
+                    if folder == folderEditVM.folderToCut || folder == memoEditVM.parentFolder{
+//                        TitleWithLevelView(
+//                            folder: folderWithLevel.folder,
+//                            level: folderWithLevel.level,
+//                            shouldHideArrow: true)
+                        FolderTitleWithStar(folder: folder)
                             .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
                             .background(colorScheme.adjustSubColors())
                         
                     } else {
-                    TitleWithLevelView(
-                        folder: folderWithLevel.folder,
-                        level: folderWithLevel.level,
-                        shouldHideArrow: true)
+//                    TitleWithLevelView(
+//                        folder: folderWithLevel.folder,
+//                        level: folderWithLevel.level,
+//                        shouldHideArrow: true)
+                        FolderTitleWithStar(folder: folder)
                             
                     }
                 }

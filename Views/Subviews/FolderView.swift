@@ -150,7 +150,9 @@ struct FolderView: View {
         .sheet(isPresented: $showSelectingFolderView,
                content: {
 //            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
-            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
+//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
+            SelectingFolderView(folderGroup: FolderGroup(targetFolders: Folder.fetchTopFolders(context: context)))
+            
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })

@@ -97,6 +97,10 @@ extension Folder {
         set { subfolders_ = newValue as NSSet}
     }
     
+    var children: [Folder]? {
+        get { subfolders.sorted() }
+    }
+    
 //    var id: UUID {
 //        get { UUID()}
 //    }
