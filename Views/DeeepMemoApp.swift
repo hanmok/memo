@@ -17,11 +17,12 @@ struct DeeepMemoApp: App {
     // homeView 가 반드시 필요한가 ??
     var body: some Scene {
         WindowGroup {
-//                HomeViewPrev() // new Folder should be provided
-//            HomeView(context: persistenceController.container.viewContext)
-            HomeView()
-            .environment(\.managedObjectContext, persistenceController.container.viewContext)
-//            .environmentObject(NavigationStateManager())
+
+//            HomeView()
+//            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            
+            CollapsingTest()
+            
         }
         
         

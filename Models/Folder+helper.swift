@@ -13,6 +13,17 @@ protocol Archive: Folder {
     var isArchive: Bool { get }
 }
 
+//extension Folder: RandomAccessCollection {
+//    public typealias Element = <#type#>
+//
+//    public typealias Index = <#type#>
+//
+//    public typealias SubSequence = <#type#>
+//
+//    public typealias Indices = <#type#>
+//
+//}
+
 extension Folder {
     
     convenience init(title: String, context: NSManagedObjectContext) {
@@ -71,6 +82,9 @@ extension Folder {
         set { subfolders_ = newValue as NSSet}
     }
     
+//    var id: UUID {
+//        get { UUID()}
+//    }
 //    var isCollased: Bool {
 //        get { isCollased}
 //    }

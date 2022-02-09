@@ -121,6 +121,11 @@ struct MindMapView: View {
                 }
                 .listStyle(InsetGroupedListStyle())
                 
+//                List(fastFolderWithLevelGroup.allFolders.first!.folder, children: \.subfolders_) { folder in
+//                    HStack {
+//
+//                    }
+//                }
                 
                 
                     // MARK: - ANOTHER SECTION !
