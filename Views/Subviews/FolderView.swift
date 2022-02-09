@@ -178,7 +178,7 @@ struct FolderView: View {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
             
-            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+            
             
             // favorite Button
             Button(action: {
@@ -197,12 +197,7 @@ struct FolderView: View {
                 }
             })
             
-            // open talk View
-            Button {
-                
-            } label: {
-                ChangeableImage(imageSystemName: "bubble.right")
-            }
+            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
         })
     }
 }

@@ -19,6 +19,7 @@
         <attribute name="contents_" optional="YES" attributeType="String"/>
         <attribute name="creationDate_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isBookMarked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="overview_" optional="YES" attributeType="String"/>
@@ -29,6 +30,6 @@
     </entity>
     <elements>
         <element name="Folder" positionX="-216.10107421875" positionY="94.77685546875" width="128" height="209"/>
-        <element name="Memo" positionX="-36" positionY="45" width="128" height="194"/>
+        <element name="Memo" positionX="-36" positionY="45" width="128" height="209"/>
     </elements>
 </model>

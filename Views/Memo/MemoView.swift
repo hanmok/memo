@@ -95,6 +95,10 @@ struct MemoView: View {
     func togglePinMemo() {
         memo.pinned.toggle()
     }
+//    toggleBookMark
+    func toggleBookMark() {
+        memo.isBookMarked.toggle()
+    }
     
     func removeMemo() {
         
@@ -105,13 +109,14 @@ struct MemoView: View {
     }
     
     var body: some View {
-        let scroll = DragGesture(minimumDistance: 30, coordinateSpace: .local)
+        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
             .updating($isScrolled) { _, _, _ in
                 editorFocusState = false
             }
         
-        return ZStack {
-            VStack {
+//        return ScrollView {
+            return VStack(spacing: 0) {
+//                ScrollViewProxy
                 TextField(initialTitle, text: $title)
                 
                     .font(.title2)
@@ -139,21 +144,32 @@ struct MemoView: View {
                 // MARK: - Contents
                 
                 TextEditor(text: $contents)
+                
+                    .frame(maxHeight: .infinity, alignment: .bottom)
                     .disableAutocorrection(true)
                     .padding(.horizontal, Sizes.overallPadding)
-                    .gesture(scroll)
+//                    .gesture(scroll)
+//                    .background(.yellow )
                     .focused($editorFocusState)
                     .focused($focusState, equals: .contents)
 //                    .frame(alignment: .leading)
-                    .onAppear(perform: {
-                        if self.isNewMemo == false {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                                self.focusState = .contents
-                            }
-                        }
-                    })
-            }
-        }
+                 
+                 // make auto focus to the end when open the memo
+//                    .onAppear(perform: {
+//                        if self.isNewMemo == false {
+//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+//                                self.focusState = .contents
+//                            }
+//                        }
+//                    })
+                 
+                 
+            } // end of VStack
+             .frame(maxHeight: .infinity, alignment: .bottom)
+             
+//        } // end of ScrollView
+
+        .gesture(scroll)
         // How..
         .onAppear(perform: {
             title = memo.title
@@ -179,6 +195,13 @@ struct MemoView: View {
         .navigationBarItems(
             trailing: HStack {
                 
+                Button(action: toggleBookMark) {
+                    ChangeableImage(
+                        imageSystemName: memo.isBookMarked ? "bookmark.fill" : "bookmark",
+                        width: Sizes.regularButtonSize,
+                        height: Sizes.regularButtonSize)
+                }
+                
                 // pin Button
                 Button(action: togglePinMemo) {
                     ChangeableImage(
@@ -197,7 +220,6 @@ struct MemoView: View {
                 }
             })
     }
-    
 }
 
 

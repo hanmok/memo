@@ -28,7 +28,7 @@ struct SelectingFolderView: View {
 //            invalidFolderWithLevels = Folder.getHierarchicalFolders(topFolders: [folderEditVM.folderToCut!])
 //        }
         
-        return VStack {
+        return VStack(spacing: 0) {
             HStack {
                 Spacer()
                 Text("Select Folder ")
@@ -112,7 +112,6 @@ struct SelectingFolderView: View {
                             shouldHideArrow: true)
                             .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
                             .background(colorScheme.adjustSubColors())
-//                            .listRowBackground(.green)
                         
                     } else {
                     TitleWithLevelView(

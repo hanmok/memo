@@ -14,6 +14,8 @@ struct HomeView: View { // top folder fetch
     
     @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
     
+    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
+    
     var body: some View {
         
         // MARK: - FOR TESTING
@@ -30,7 +32,9 @@ struct HomeView: View { // top folder fetch
             MindMapView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
-                        targetFolders: topFolders.sorted()))
+                        targetFolders: topFolders.sorted())
+//                , bookMarkedMemos: BookMarkedMemos(memos: memos.sorted())
+            )
         }
     }
 }
@@ -42,5 +46,13 @@ class FastFolderWithLevelGroup: ObservableObject {
     
     init(targetFolders: [Folder]) {
         self.allFolders = Folder.getHierarchicalFolders(topFolders: targetFolders)
+    }
+}
+
+class BookMarkedMemos: ObservableObject {
+    @Published var markedMemos: [Memo]
+    
+    init(memos: [Memo]) {
+        self.markedMemos = memos.filter { $0.isBookMarked == true }
     }
 }

@@ -60,6 +60,8 @@ extension Memo {
         get { pinned_ }
         set { pinned_ = newValue }
     }
+    
+    
 
     var colorAsInt: Int64 { // initialValue: 0
         get { colorAsInt_ }
@@ -73,6 +75,13 @@ extension Memo {
         request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.modificationDate, ascending: true)] // doesn't make change
         request.predicate = predicate
         return request
+    }
+    
+    static func bookMarkedFetchReq() -> NSFetchRequest<Memo> {
+        let req = NSFetchRequest<Memo>(entityName: "Memo")
+        req.sortDescriptors = [NSSortDescriptor(key: MemoProperties.modificationDate, ascending: false)]
+        
+        return req
     }
     
     static func delete(_ memo: Memo) {

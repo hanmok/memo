@@ -40,11 +40,15 @@ struct MindMapView: View {
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
+//    @ObservedObject var bookMarkedMemos: BookMarkedMemos
+    
     @FocusState var textFieldFocus: Bool
     
     @State var showSelectingFolderView = false
     
     @State var folderToBeRenamed : Folder? = nil
+    
+
     
     var body: some View {
         
@@ -64,7 +68,9 @@ struct MindMapView: View {
                             showTextField = true
                             textFieldType = .newTopFolder
                         } label: {
-                            ChangeableImage(imageSystemName: "plus")
+//                            ChangeableImage(imageSystemName: "plus")
+                            ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
+                                
                                 .foregroundColor(colorScheme.adjustBlackAndWhite())
                         }
                     }
@@ -112,9 +118,43 @@ struct MindMapView: View {
                                 }
                         } // end of ForEach
                     } // end of Section
-                } // end of List
+                }
                 .listStyle(InsetGroupedListStyle())
                 
+                
+                
+                    // MARK: - ANOTHER SECTION !
+//                    Section(header:
+//                                Text("BookMarked Memos")
+//                    ) {
+//                        ScrollView(.horizontal) {
+//                            HStack {
+//
+//
+//
+//                        ForEach(bookMarkedMemos.markedMemos, id: \.self) { memo in
+//
+//                            NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
+//
+//                            ) {
+//
+//                                BookMarkedMemoBoxView(memo: memo)
+//                                    .frame(width: 100, alignment: .leading)
+//                                    .padding(.horizontal, Sizes.smallSpacing)
+//                            }
+////                            .environmentObject(memoEditVM)
+//
+//                        } // end of ForEach
+//                        } // HStack
+//                        }
+//                    } // end of Section
+                
+               
+                
+                
+                
+                
+//                Text("hi")
             } // end of VStack
             // new Element of ZStack
             
@@ -168,13 +208,13 @@ struct MindMapView: View {
 //                .environmentObject(memoEditVM)
 //        })
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView, content: {
-            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, isFullScreen: true)
+            NavigationView {
+                SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, isFullScreen: true)
+                    .navigationBarHidden(true)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
+            }
         })
-
-        .animation(nil)
-        
         .navigationBarHidden(true)
     }
 }
@@ -183,3 +223,4 @@ struct MindMapView: View {
 // bubble.right.fill
 // square.split.1x2.fill
 // text.badge.plus
+//}

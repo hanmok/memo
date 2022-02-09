@@ -1,17 +1,15 @@
 //
-//  MemoBoxView.swift
+//  BookMarkedMemoBoxView.swift
 //  DeeepMemo
 //
-//  Created by Mac mini on 2021/12/29.
+//  Created by Mac mini on 2022/02/09.
 //
 
 import SwiftUI
 
-// used only to show.
-struct MemoBoxView: View {
+struct BookMarkedMemoBoxView: View {
     
     @ObservedObject var memo: Memo
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
     @Environment(\.colorScheme) var colorScheme
     @State var isSelected = false
     
@@ -71,9 +69,11 @@ struct MemoBoxView: View {
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
         .background(colorScheme == .dark ? Color(white: 33 / 255) : Color(white: 0.9))
         .cornerRadius(5)
-        .overlay(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? colorScheme.adjustSubColors() : .clear, lineWidth: 2)
-        )
     }
 }
+
+//struct BookMarkedMemoBoxView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BookMarkedMemoBoxView()
+//    }
+//}
