@@ -23,3 +23,7 @@ class FolderEditViewModel: ObservableObject {
 
     var tobeColoredFolder : Folder? = nil
 }
+
+class FolderViewModel: ObservableObject {
+    
+}
