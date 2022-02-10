@@ -56,29 +56,30 @@ struct FolderView: View {
                         if !currentFolder.memos.isEmpty {
                             MemoList()
                         }
-                        HStack {
-                            Spacer()
-                            
-                            // Button Or SubFolderView
-                            ZStack(alignment: .topTrailing) {
-                                Button(action: {
-                                    isShowingSubFolderView = true
-                                }, label: {
-                                    SubFolderButtonImage() })
-                                    .padding(.trailing, Sizes.overallPadding )
-                                
-                                SubFolderView(
-                                    folder: currentFolder,
-                                    isShowingSubFolderView: $isShowingSubFolderView,
-                                    isAddingFolder: $shouldAddFolder)
-                                    
-                                // offset x : trailingPadding
-                                    .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
-                                    .animation(.spring(), value: isShowingSubFolderView)
-                            } // end of ZStack
-                            .padding(.top, 10)
-                            
-                        }
+//                        HStack {
+//                            Spacer()
+//
+//                            // Button Or SubFolderView
+//                            ZStack(alignment: .topTrailing) {
+//                                Button(action: {
+//                                    isShowingSubFolderView = true
+//                                }, label: {
+//                                    SubFolderButtonImage() })
+//                                    .padding(.trailing, Sizes.overallPadding )
+//
+//                                SubFolderView(
+//                                    folder: currentFolder,
+//                                    isShowingSubFolderView: $isShowingSubFolderView,
+//                                    isAddingFolder: $shouldAddFolder)
+//
+//                                // offset x : trailingPadding
+//                                    .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
+//                                    .animation(.spring(), value: isShowingSubFolderView)
+//                            } // end of ZStack
+//                            .padding(.top, 10)
+//
+//                        }
+                        
                     }
                 } // end of main VStack
                 .environmentObject(currentFolder)
@@ -88,6 +89,29 @@ struct FolderView: View {
             } // end of scrollView
             
             VStack {
+                HStack {
+                    Spacer()
+                    
+                    // Button Or SubFolderView
+                    ZStack(alignment: .topTrailing) {
+                        Button(action: {
+                            isShowingSubFolderView = true
+                        }, label: {
+                            SubFolderButtonImage() })
+                            .padding(.trailing, Sizes.overallPadding )
+                        
+                        SubFolderView(
+                            folder: currentFolder,
+                            isShowingSubFolderView: $isShowingSubFolderView,
+                            isAddingFolder: $shouldAddFolder)
+                            
+                        // offset x : trailingPadding
+                            .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
+                            .animation(.spring(), value: isShowingSubFolderView)
+                    } // end of ZStack
+                    .padding(.top, 10)
+                    
+                }
                 Spacer()
                 HStack {
                     Spacer()
@@ -169,6 +193,7 @@ struct FolderView: View {
                                 HStack {
             // search Button
             Button(action: {
+                
                 currentFolder.title += ""
                 if let validParent = currentFolder.parent {
                     validParent.title += ""

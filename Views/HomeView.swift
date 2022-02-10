@@ -14,7 +14,7 @@ struct HomeView: View { // top folder fetch
     
     @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
     
-    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
+//    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
     
     var body: some View {
         
@@ -39,8 +39,9 @@ struct HomeView: View { // top folder fetch
             
         return NavigationView {
             MindMapView(
-                folderGroup: FolderGroup(targetFolders: topFolders.sorted()),
-                bookMarkedMemos: BookMarkedMemos(memos: memos.sorted()))
+                folderGroup: FolderGroup(targetFolders: topFolders.sorted())
+//                ,bookMarkedMemos: BookMarkedMemos(memos: memos.sorted())
+            )
         }
         
         

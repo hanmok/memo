@@ -184,7 +184,7 @@ struct MemoView: View {
             print("memoView has appeared!")
             print("title or memoView : \(title)")
             print("isNewMemo ? \(isNewMemo)")
-            
+
             if isNewMemo == true {
                 self.focusState = .title
                 print("isNewMemo == true, focusState = .title ")

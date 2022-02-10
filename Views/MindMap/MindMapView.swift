@@ -16,9 +16,27 @@ struct FolderWithLevel: Hashable {
 
 class FolderGroup: ObservableObject {
     @Published var realFolders: [Folder]
+    
+    @Published var allFolders: [FolderWithLevel]
+    
+    @Published var markedMemos: [Memo]
+    
     init(targetFolders: [Folder]) {
         self.realFolders = targetFolders
+        self.allFolders = Folder.getHierarchicalFolders(topFolders: targetFolders)
+        let folders =  Folder.getHierarchicalFolders(topFolders: targetFolders).map { $0.folder}
+        var emptyMemos: [Memo] = []
+        
+        for eachFolder in folders {
+            for eachMemo in eachFolder.memos.sorted() {
+                emptyMemos.append(eachMemo)
+            }
+        }
+        
+        self.markedMemos = emptyMemos.filter { $0.isBookMarked == true }
+        print("markedMEmos: \(markedMemos)")
     }
+    
 }
 
 
@@ -48,7 +66,7 @@ struct MindMapView: View {
     //    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var folderGroup: FolderGroup
     
-    @ObservedObject var bookMarkedMemos: BookMarkedMemos
+//    @ObservedObject var bookMarkedMemos: BookMarkedMemos
 //    @StateObject var
     @FocusState var textFieldFocus: Bool
     
@@ -272,7 +290,7 @@ struct MindMapView: View {
                 
                 
                 // MARK: - MEMO SECTION
-                
+//                BookMarkListView()
                 Section(header:
                             HStack {
                     Text("BookMarked Memos")
@@ -284,32 +302,23 @@ struct MindMapView: View {
                 ) {
                     ScrollView(.horizontal) {
                         LazyHStack(alignment: .top, spacing: Sizes.smallSpacing ) {
-                            ForEach(bookMarkedMemos.markedMemos, id: \.self) { memo in
+                            ForEach(folderGroup.markedMemos, id: \.self) { memo in
 
                                 NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
-// Memo 만을 위한 ViewModel 이 있으면 좋..을까?
                                 ) {
-//EmptyView()
                                     BookMarkedMemoBoxView(memo: memo)
-//                                        .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding, alignment: .leading)
-//                                        .frame(width: UIScreen.screenWidth, alignment: .leading)
-//                                        .padding(.leading, Sizes.overallPadding)
-//                                        .padding(.trailing, Sizes.smallSpacing)
-                                        
                                 }
-                                //                            .environmentObject(memoEditVM)
-
                             } // end of ForEach
-                            
                         } // HStack
                         .padding(.horizontal, Sizes.overallPadding)
                     }
                     .frame(height: 150)
                 } // end of Section
-                        
-                        
-                        
-                        
+                
+                
+                
+                
+                
             }
             // MARK: - rename is not currently working .
             PrettyTextFieldAlert(
