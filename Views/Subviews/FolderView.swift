@@ -173,9 +173,13 @@ struct FolderView: View {
                 if let validParent = currentFolder.parent {
                     validParent.title += ""
                     print("parent's title has changed")
-
+                    
                 }
-
+                let validMemos = currentFolder.memos.sorted()
+                for eachMemo in validMemos {
+                    eachMemo.title += ""
+                }
+                 // does not go back
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })

@@ -11,6 +11,8 @@
 		9A046CCA27B3A042003169C7 /* BookMarkedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* BookMarkedMemoBoxView.swift */; };
 		9A046CCC27B3A72E003169C7 /* CollapsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */; };
 		9A046CCD27B3A72E003169C7 /* CollapsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */; };
+		9A046CF927B4DEB9003169C7 /* RecursiveFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CF827B4DEB9003169C7 /* RecursiveFolderCell.swift */; };
+		9A046CFA27B4DEB9003169C7 /* RecursiveFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CF827B4DEB9003169C7 /* RecursiveFolderCell.swift */; };
 		9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
 		9A0474A727715D1400571D66 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* MainView.swift */; };
 		9A0474A927715D1400571D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A04749727715D1300571D66 /* Assets.xcassets */; };
@@ -143,6 +145,7 @@
 /* Begin PBXFileReference section */
 		9A046CC827B3A042003169C7 /* BookMarkedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkedMemoBoxView.swift; sourceTree = "<group>"; };
 		9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingTest.swift; sourceTree = "<group>"; };
+		9A046CF827B4DEB9003169C7 /* RecursiveFolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveFolderCell.swift; sourceTree = "<group>"; };
 		9A04749527715D1200571D66 /* DeeepMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeepMemoApp.swift; sourceTree = "<group>"; };
 		9A04749627715D1200571D66 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9A04749727715D1300571D66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9A046CF827B4DEB9003169C7 /* RecursiveFolderCell.swift */,
 				9A046CC827B3A042003169C7 /* BookMarkedMemoBoxView.swift */,
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
 				9AC5D1F727854387007EAA28 /* DeeepMemo--iOS--Info.plist */,
@@ -654,6 +658,7 @@
 				9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */,
 				9A1D8539279FF32400B00156 /* DynamicFolderCell.swift in Sources */,
 				9AD6EF20277DC1AD00866456 /* TestLazyAndScrollView.swift in Sources */,
+				9A046CF927B4DEB9003169C7 /* RecursiveFolderCell.swift in Sources */,
 				9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */,
 				9AC5D22227883475007EAA28 /* SubFolderPageView3.swift in Sources */,
 				9A3378642798277400805138 /* PinViewModel.swift in Sources */,
@@ -730,6 +735,7 @@
 				9A337897279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
 				9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
 				9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */,
+				9A046CFA27B4DEB9003169C7 /* RecursiveFolderCell.swift in Sources */,
 				9A33789B279A76B700805138 /* MainView.swift in Sources */,
 				9A1D854027A16BE800B00156 /* SubMemoList.swift in Sources */,
 				9A337891279A56C500805138 /* FolderEditViewModel.swift in Sources */,

@@ -17,6 +17,7 @@ extension Memo {
         self.contents = contents
         self.modificationDate = Date()
         context.saveCoreData()
+        print("memo has created! ")
     }
     
     convenience init(title: String, contents: String, context: NSManagedObjectContext, modifiedAt: Date) {
@@ -79,9 +80,23 @@ extension Memo {
     
     static func bookMarkedFetchReq() -> NSFetchRequest<Memo> {
         let req = NSFetchRequest<Memo>(entityName: "Memo")
+        
         req.sortDescriptors = [NSSortDescriptor(key: MemoProperties.modificationDate, ascending: false)]
         
+        let format = MemoProperties.isBookMarked + " = true"
+        req.predicate = NSPredicate(format: format)
         return req
+    }
+    
+    static func fetchBookMarked(context: NSManagedObjectContext) -> [Memo] {
+        let req = bookMarkedFetchReq()
+        
+        if let result = try? context.fetch(req) {
+            return result
+        } else {
+            print("Error fetching bookMarked Memos")
+            return []
+        }
     }
     
     static func delete(_ memo: Memo) {
@@ -142,6 +157,7 @@ struct MemoProperties {
     static let overview = "overview_"
     
     static let folder = "folder"
+    static let isBookMarked = "isBookMarked"
 }
 
 extension Memo {

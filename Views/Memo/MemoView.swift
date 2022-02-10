@@ -64,6 +64,11 @@ struct MemoView: View {
         // this line make error.
         //        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
         self.isNewMemo = isNewMemo
+        
+//        self.memo = Memo(context: context)
+//        self.parent = Folder(context: context)
+        
+        
     }
     
     func saveChanges() {

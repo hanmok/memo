@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+class OneMemoViewModel: ObservableObject {
+    @Published var memo: Memo
+    
+    init(memo: Memo) {
+        self.memo = memo
+    }
+}
+
 struct BookMarkedMemoBoxView: View {
     
     @ObservedObject var memo: Memo
@@ -27,6 +35,8 @@ struct BookMarkedMemoBoxView: View {
         return nil // empty contents
     }
     
+//    var frameSize = UIScreen.screenWidth / 2 - 1.5 * Sizes.overallPadding
+    var frameSize = (UIScreen.screenWidth - Sizes.smallSpacing) / 2 - 1.5 * Sizes.overallPadding
     
     // If both overview exist, contents doesn't show up
     // if overview doesn't only title and contents show up
@@ -39,7 +49,8 @@ struct BookMarkedMemoBoxView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
                     .lineLimit(1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(width: frameSize, alignment: .leading)
                     .padding(5)
                 
             }
@@ -48,7 +59,7 @@ struct BookMarkedMemoBoxView: View {
                     .font(.headline)
                     .foregroundColor(.primary)
                     .lineLimit(2)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(width: frameSize, alignment: .leading)
                     .padding(.leading, 5)
                 
             } else {
@@ -56,24 +67,16 @@ struct BookMarkedMemoBoxView: View {
                     Text(memo.contents)
                         .font(.caption)
                         .foregroundColor(.primary)
-                        .lineLimit(4)
+//                        .lineLimit(4)
                         .multilineTextAlignment(.leading)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .frame(width: frameSize, alignment: .leading)
                         .padding([.leading, .bottom], 5 )
-                    
                 }
             }
         }
         .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
-        .padding(.horizontal, Sizes.smallSpacing)
-        .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
+//        .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
         .background(colorScheme == .dark ? Color(white: 33 / 255) : Color(white: 0.9))
         .cornerRadius(5)
     }
 }
-
-//struct BookMarkedMemoBoxView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BookMarkedMemoBoxView()
-//    }
-//}
