@@ -324,10 +324,12 @@ struct MindMapView: View {
             }
             
             NavigationLink(
-                destination: MemoView(
-                    memo: Memo(title: "", contents: "", context: context),
-                    parent: folderGroup.realFolders.first!,
-                    isNewMemo: true),
+                destination:
+//                    MemoView(
+//                    memo: Memo(title: "", contents: "", context: context),
+//                    parent: folderGroup.realFolders.first!,
+//                    isNewMemo: true),
+                MemoView(parent: folderGroup.realFolders.first!, context2: context),
                 isActive: $isAddingMemo) {}
             
             
