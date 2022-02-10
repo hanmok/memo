@@ -37,6 +37,9 @@ struct MindMapView: View {
     @StateObject var folderEditVM = FolderEditViewModel()
     @StateObject var folderOrder = FolderOrder()
     @StateObject var memoOrder = MemoOrder()
+//    @StateObject var
+    @EnvironmentObject var allMemoVM: AllMemosViewModel
+    
     
     @State var newFolderName = ""
     
@@ -48,7 +51,7 @@ struct MindMapView: View {
     //    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var folderGroup: FolderGroup
     
-    @ObservedObject var bookMarkedMemos: BookMarkedMemos
+//    @ObservedObject var bookMarkedMemos: BookMarkedMemos
 //    @StateObject var
     @FocusState var textFieldFocus: Bool
     
@@ -188,6 +191,7 @@ struct MindMapView: View {
                         .environmentObject(memoEditVM)
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)
+                        .environmentObject(allMemoVM)
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             
                             // remove !
@@ -284,7 +288,7 @@ struct MindMapView: View {
                 ) {
                     ScrollView(.horizontal) {
                         LazyHStack(alignment: .top, spacing: Sizes.smallSpacing ) {
-                            ForEach(bookMarkedMemos.markedMemos, id: \.self) { memo in
+                            ForEach(allMemoVM.bookMarkedMemos, id: \.self) { memo in
 
                                 NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
 // Memo 만을 위한 ViewModel 이 있으면 좋..을까?

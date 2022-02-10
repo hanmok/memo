@@ -39,8 +39,9 @@ struct HomeView: View { // top folder fetch
             
         return NavigationView {
             MindMapView(
-                folderGroup: FolderGroup(targetFolders: topFolders.sorted()),
-                bookMarkedMemos: BookMarkedMemos(memos: memos.sorted()))
+                folderGroup: FolderGroup(targetFolders: topFolders.sorted()))
+//                ,bookMarkedMemos: BookMarkedMemos(memos: memos.sorted()))
+                .environmentObject(AllMemosViewModel(memos: memos.sorted()))
         }
         
         

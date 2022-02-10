@@ -11,7 +11,8 @@ struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-
+    @EnvironmentObject var allMemosVM: AllMemosViewModel
+    
     var hasPinnedMemo: Bool {
         return folder.memos.contains { $0.pinned == true }
     }
@@ -23,6 +24,7 @@ struct MemoList: View {
             if hasPinnedMemo {
                 
                 FilteredMemoList(folder: folder, listType: .pinned)
+//                    .environmentObject(allMemosVM)
                 
                 // line between pinned / unpinned memos
                 Rectangle()
@@ -32,7 +34,12 @@ struct MemoList: View {
             }
             
             FilteredMemoList(folder: folder, listType: .unpinned)
+//                .environmentObject(allMemosVM)
         } // end of VStack
+        .onAppear(perform: {
+            print("memoList has appeared!")
+//            allMemosVM.targetFolder = folder
+        })
         .environmentObject(memoEditVM)
     }
 }

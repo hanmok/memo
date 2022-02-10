@@ -7,12 +7,54 @@
 
 import SwiftUI
 
-class OneMemoViewModel: ObservableObject {
-    @Published var memo: Memo
+class AllMemosViewModel: ObservableObject {
+    @Published var memo: Memo? = nil
     
-    init(memo: Memo) {
-        self.memo = memo
+    @Published var bookMarkedMemos: [Memo] = []
+
+    @Published var targetFolder: Folder? {
+//        didSet {
+//            print("didSet triggered")
+//            if oldValue != nil {
+//            memosToHandle = oldValue!.memos.sorted()
+//            print("memosToHandle has initialized")
+//                print("memosToHandle.count : \(memosToHandle.count)")
+//            } else {
+//                print("memosToHandle failed to initialize")
+//            }
+//
+//        }
+        // this one is effective.
+        willSet {
+            print("willSet triggered")
+            if newValue != nil {
+            memosToHandle = newValue!.memos.sorted()
+            print("memosToHandle has initialized")
+                print("memosToHandle.count : \(memosToHandle.count)")
+            } else {
+                print("memosToHandle failed to initialize")
+            }
+        }
     }
+    
+    @Published var memosToHandle: [Memo] = [] {
+        didSet {
+            print("memosToHandle.count : \(oldValue.count)")
+        }
+    }
+    
+    // need to get targetFolder or bookMarked Memos (all memos )
+    init(memos: [Memo]) {
+//        if isBookMarked {
+//            self.bookMarkedMemos = memos.filter { $0.isBookMarked == true}
+//        } else {
+//            self.memosToHandle = memos
+//        }
+        self.bookMarkedMemos = memos.filter { $0.isBookMarked == true }
+        
+    }
+    
+    
 }
 
 struct BookMarkedMemoBoxView: View {

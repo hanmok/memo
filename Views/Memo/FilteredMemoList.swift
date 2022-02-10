@@ -21,23 +21,29 @@ struct FilteredMemoList: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @ObservedObject var folder: Folder
     @State var hasNotLongSelected = false
-    
+    @EnvironmentObject var allMemosVM: AllMemosViewModel
     var listType: MemoListType
 
     
     var body: some View {
         
+//        allMemosVM.targetFolder = folder
         
         var memosToShow = [Memo]()
         
         switch listType {
         case .pinned:
-            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
+//            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
+            memosToShow = allMemosVM.memosToHandle.filter { $0.pinned == true}.sorted()
         case .unpinned:
-            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
+//            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
+            memosToShow = allMemosVM.memosToHandle.filter { $0.pinned != true}.sorted()
         case .all:
-            memosToShow = folder.memos.sorted()
+//            memosToShow = folder.memos.sorted()
+            memosToShow = allMemosVM.memosToHandle.sorted()
         }
+        
+        // 뭐지 씨발 ....??
         
         // 아마.. 여기서 에러가 생긴 것 같아.
         return ZStack {
@@ -124,5 +130,9 @@ struct FilteredMemoList: View {
                 }
             } // end of VStack
         } // end of ZStack
+        .onAppear {
+            print("FilteredMemoList has appeared!")
+//            allMemosVM.targetFolder = folder
+        }
     }
 }

@@ -20,13 +20,17 @@ struct FolderView: View {
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
-    
+    @EnvironmentObject var allMemosVM: AllMemosViewModel
     @State var newSubFolderName = ""
     
     @State var showSelectingFolderView = false
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    @ObservedObject var currentFolder: Folder
+    @ObservedObject var currentFolder: Folder {
+        didSet {
+            allMemosVM.targetFolder = currentFolder
+        }
+    }
     
     @FocusState var addFolderFocus: Bool
     
@@ -55,6 +59,7 @@ struct FolderView: View {
                     ZStack {
                         if !currentFolder.memos.isEmpty {
                             MemoList()
+                                .environmentObject(allMemosVM)
                         }
                         HStack {
                             Spacer()
@@ -169,16 +174,29 @@ struct FolderView: View {
                                 HStack {
             // search Button
             Button(action: {
-                currentFolder.title += ""
-                if let validParent = currentFolder.parent {
-                    validParent.title += ""
-                    print("parent's title has changed")
-                    
+                // This Block Makes AllMemosViewModel to disappear
+//                currentFolder.title += ""
+//                if let validParent = currentFolder.parent {
+//                    validParent.title += ""
+//                    print("parent's title has changed")
+//                }
+                
+//                let validMemos = currentFolder.memos.sorted()
+                
+//                for eachMemo in validMemos {
+//                    eachMemo.title += ""
+//                }
+                
+                print("selectedFolder: \(allMemosVM.targetFolder?.title)")
+                for each in allMemosVM.memosToHandle {
+                    print("memosToHandle: \(each.title)")
                 }
-                let validMemos = currentFolder.memos.sorted()
-                for eachMemo in validMemos {
-                    eachMemo.title += ""
+                allMemosVM.targetFolder = currentFolder
+                for each in currentFolder.memos.sorted() {
+                    print("current folder has memo of title \(each.title)")
                 }
+            
+                
                  // does not go back
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
@@ -205,5 +223,9 @@ struct FolderView: View {
             
             MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
         })
+        .onAppear {
+            print("FolderView has appeared!")
+            allMemosVM.targetFolder = currentFolder
+        }
     }
 }

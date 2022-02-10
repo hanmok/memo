@@ -128,6 +128,7 @@ struct MemoView: View {
                     .submitLabel(.continue)
                     .focused($focusState, equals: .title)
                     .onAppear(perform: {
+                        print("MemoView has appeared!!")
                         if self.isNewMemo == true {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
                                 self.focusState = .title
@@ -160,13 +161,13 @@ struct MemoView: View {
 //                    .frame(alignment: .leading)
                  
                  // make auto focus to the end when open the memo
-//                    .onAppear(perform: {
-//                        if self.isNewMemo == false {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-//                                self.focusState = .contents
-//                            }
-//                        }
-//                    })
+                    .onAppear(perform: {
+                        if self.isNewMemo == false {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+                                self.focusState = .contents
+                            }
+                        }
+                    })
                  
                  
             } // end of VStack
@@ -182,7 +183,7 @@ struct MemoView: View {
             print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
-            print("title or memoView : \(title)")
+            print("title of memoView : \(title)")
             print("isNewMemo ? \(isNewMemo)")
             
             if isNewMemo == true {

@@ -19,7 +19,7 @@ struct RecursiveFolderCell: View {
     //    let basicSpacing: CGFloat = 2
     //    @State var showSelectingFolderView = false
     @ObservedObject var folder: Folder
-    
+    @EnvironmentObject var allMemosVM: AllMemosViewModel
     var numOfSubfolders: String{
         
         if folder.subfolders.count != 0 {
@@ -34,6 +34,7 @@ struct RecursiveFolderCell: View {
                             .environmentObject(memoEditVM)
                             .environmentObject(folderEditVM)
                             .environmentObject(memoOrder)
+                            .environmentObject(allMemosVM)
             ) {
                 EmptyView()
                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
