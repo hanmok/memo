@@ -188,6 +188,11 @@ struct MemoView: View {
             if isNewMemo == true {
                 self.focusState = .title
                 print("isNewMemo == true, focusState = .title ")
+                    parent.add(memo: memo) // error.. ?? ??
+                    parent.modificationDate = Date()
+              
+                
+                
             }
         })
         

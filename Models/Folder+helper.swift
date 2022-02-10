@@ -361,7 +361,8 @@ extension Folder : Comparable {
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
         
         switch Folder.orderType {
-        case .modificationDate : return sortModifiedDate(lhs, rhs)
+        case .modificationDate:
+            return sortModifiedDate(lhs, rhs)
         case .creationDate:
             return sortCreatedDate(lhs, rhs)
         case .alphabetical:

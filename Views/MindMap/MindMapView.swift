@@ -57,6 +57,11 @@ struct MindMapView: View {
     @State var folderToBeRenamed : Folder? = nil
     
     @State var shouldExpand = true
+    @State var isAddingMemo = false
+    
+    func addMemo() {
+            isAddingMemo = true
+    }
     
     var body: some View {
         
@@ -275,7 +280,9 @@ struct MindMapView: View {
                 
                 Section(header:
                             HStack {
-                    Text("BookMarked Memos")
+                    ChangeableImage(imageSystemName: "bookmark.fill")
+                        .adjustTintColor(scheme: colorScheme)
+//                    Text("BookMarked Memos")
                         .padding(.vertical, Sizes.smallSpacing)
                         .padding(.leading, Sizes.overallPadding)
 
@@ -287,15 +294,8 @@ struct MindMapView: View {
                             ForEach(bookMarkedMemos.markedMemos, id: \.self) { memo in
 
                                 NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
-// Memo 만을 위한 ViewModel 이 있으면 좋..을까?
                                 ) {
-//EmptyView()
                                     BookMarkedMemoBoxView(memo: memo)
-//                                        .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding, alignment: .leading)
-//                                        .frame(width: UIScreen.screenWidth, alignment: .leading)
-//                                        .padding(.leading, Sizes.overallPadding)
-//                                        .padding(.trailing, Sizes.smallSpacing)
-                                        
                                 }
                                 //                            .environmentObject(memoEditVM)
 
@@ -310,7 +310,27 @@ struct MindMapView: View {
                         
                         
                         
+            } // end of VStack .
+            // another ZSTack
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: addMemo) {
+                        PlusImage()
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 160, trailing: Sizes.overallPadding))
+                    }
+                }
             }
+            
+            NavigationLink(
+                destination: MemoView(
+                    memo: Memo(title: "", contents: "", context: context),
+                    parent: folderGroup.realFolders.first!,
+                    isNewMemo: true),
+                isActive: $isAddingMemo) {}
+            
+            
             // MARK: - rename is not currently working .
             PrettyTextFieldAlert(
                 type: textFieldType ?? .rename,
