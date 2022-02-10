@@ -147,7 +147,10 @@ struct FolderView: View {
 //                    isNewMemo: true),
                 
                 MemoView(parent: currentFolder, context2: context),
+//                MemoView(parent: Folder.fetchTopFolders(context: context).first!, context2: context), //For testing, Not working !! tq..  why ? !
                 isActive: $isAddingMemo) {}
+            
+            
         } // end of ZStack
         .frame(maxHeight: .infinity)
         .sheet(isPresented: $showSelectingFolderView,

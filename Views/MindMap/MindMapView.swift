@@ -14,6 +14,11 @@ struct FolderWithLevel: Hashable {
     var isShowing: Bool = true
 }
 
+enum FolderOrArchive: String {
+    case folder = "folder"
+    case archive = "tray"
+}
+
 class FolderGroup: ObservableObject {
     @Published var realFolders: [Folder]
     init(targetFolders: [Folder]) {
@@ -58,7 +63,7 @@ struct MindMapView: View {
     
     @State var shouldExpand = true
     @State var isAddingMemo = false
-    
+    @State var selectionEnum = FolderOrArchive.folder
     func addMemo() {
             isAddingMemo = true
     }
@@ -139,22 +144,19 @@ struct MindMapView: View {
                 
                 
                 
-                
-                
-                
-                
-                
-                
-                //                List(fastFolderWithLevelGroup.allFolders.first!.folder, children: \.subfolders_) { folder in
-                //                    HStack {
-                //
-                //                    }
-                //                }
-                
-                
-                
-                
-                
+                Picker("", selection: $selectionEnum) {
+                    Image(systemName: FolderOrArchive.folder.rawValue).tag(FolderOrArchive.folder)
+                    Image(systemName: FolderOrArchive.archive.rawValue).tag(FolderOrArchive.archive)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.top, Sizes.overallPadding)
+                // Use it for manipulations
+                if selectionEnum == .folder {
+                    Text("Folder")
+                } else {
+                    Text("Archive")
+                }
+
                 
                 // MARK: - VERSION 1
                 //                List {
@@ -188,93 +190,100 @@ struct MindMapView: View {
                 
                 //                // MARK: - VERSION 2
                 List(folderGroup.realFolders,children: \.children ) { folder in
-                    
+                
+                
                     RecursiveFolderCell(folder: folder)
                         .environmentObject(memoEditVM)
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            
-                            // remove !
-                            Button {
-                                context.saveCoreData()
-                            } label: {
-                                ChangeableImage(imageSystemName: "trash")
-                            }
-                            .tint(.red)
-                            
-                            // change Folder location
-                        }
-                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                            
-                            // remove !
-                            Button {
-                                context.saveCoreData()
-                            } label: {
-                                ChangeableImage(imageSystemName: "pencil")
-                            }
-                            .tint(.red)
-                            
-                            // change Folder location
-                        }
+                        
                 } // End of List
+                
+                
+                // MARK: - VERSION 3
+                /*
+                List {
+                    Section(header:
+                                ZStack {
+                        EmptyView()
+                            .opacity(0)
+                        Picker("", selection: $selectionEnum) {
+                          // 2
+                            Text(FolderOrArchive.folder.rawValue).tag(FolderOrArchive.folder)
+                            Text(FolderOrArchive.archive.rawValue).tag(FolderOrArchive.archive)
+        //                    Text(Appearance.automatic.name).tag(Appearance.automatic)
+                        }
+                        .pickerStyle(SegmentedPickerStyle())
+                        .padding(.vertical, Sizes.overallPadding)
+                    }
+                    ) {
+                        ForEach(folderGroup.realFolders) { folder in
+                            RecursiveFolderCell(folder: folder)
+                                .environmentObject(memoEditVM)
+                                .environmentObject(folderEditVM)
+                                .environmentObject(memoOrder)
+                        }
+                    }
+                }
+                */
+                
                 
                 
                 //                List(folderGroup.realFolders,children: \.children ) { folder in
                 //                Text("Using Disclosure Group")
                 
-                // MARK: - VERSION 3
-                //                List {
-                //                    Section(header: Text("Folder")) {
-                //                        ForEach(folderGroup.realFolders) { folder in
-                ////                            DisclosureGroup((folder.title)) {
-                //
-                //
-                //
-                ////                            DisclosureGroup(isExpanded: $shouldExpand, content: {
-                ////
-                ////
-                ////                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
-                ////                                    RecursiveFolderCell(folder: child)
-                ////                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                ////
-                ////                                            // remove !
-                ////                                            Button {
-                ////                                                context.saveCoreData()
-                ////                                            } label: {
-                ////                                                ChangeableImage(imageSystemName: "pencil")
-                ////                                            }
-                ////                                            .tint(.red)
-                ////
-                ////                                            // change Folder location
-                ////                                        }
-                ////                                }
-                ////                            }, label:{ Text(folder.title)
-                ////                            })
-                //
-                //                            DisclosureGroup {
-                //                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
-                //                                    RecursiveFolderCell(folder: child)
-                //                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                //
-                //                                            // remove !
-                //                                            Button {
-                //                                                context.saveCoreData()
-                //                                            } label: {
-                //                                                ChangeableImage(imageSystemName: "pencil")
-                //                                            }
-                //                                            .tint(.red)
-                //
-                //                                            // change Folder location
-                //                                        }
-                //                                }
-                //                            } label: {
-                //                                Text(folder.title)
-                //                            }
-                //                            }
-                //                        }
-                //                    }
+                // MARK: - VERSION 4
+                /*
+                                List {
+                                    
+                                    Section(header: Text("Folder")) {
+                                        ForEach(folderGroup.realFolders) { folder in
+                                            DisclosureGroup((folder.title)) {
+                                            DisclosureGroup(isExpanded: $shouldExpand, content: {
                 
+                
+                                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
+                                                    RecursiveFolderCell(folder: child)
+                                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                
+                                                            // remove !
+                                                            Button {
+                                                                context.saveCoreData()
+                                                            } label: {
+                                                                ChangeableImage(imageSystemName: "pencil")
+                                                            }
+                                                            .tint(.red)
+                
+                                                            // change Folder location
+                                                        }
+                                                }
+                                            }, label:{ Text(folder.title)
+                                            })
+                
+//                                            DisclosureGroup {
+//                                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
+//                                                    RecursiveFolderCell(folder: child)
+//                                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+//
+//                                                            // remove !
+//                                                            Button {
+//                                                                context.saveCoreData()
+//                                                            } label: {
+//                                                                ChangeableImage(imageSystemName: "pencil")
+//                                                            }
+//                                                            .tint(.red)
+//
+//                                                            // change Folder location
+//                                                        }
+//                                                }
+//                                            } label: {
+//                                                Text(folder.title)
+//                                            }
+                                            }
+                                        }
+                                    }
+                                }
+                */
                 
                 // MARK: - MEMO SECTION
                 
