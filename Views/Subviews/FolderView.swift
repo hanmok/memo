@@ -140,11 +140,17 @@ struct FolderView: View {
                 })
             
             NavigationLink(
-                destination: MemoView(
-                    memo: Memo(title: "", contents: "", context: context),
-                    parent: currentFolder,
-                    isNewMemo: true),
+                destination:
+//                    MemoView(
+//                    memo: Memo(title: "", contents: "", context: context),
+//                    parent: currentFolder,
+//                    isNewMemo: true),
+                
+                MemoView(parent: currentFolder, context2: context),
+//                MemoView(parent: Folder.fetchTopFolders(context: context).first!, context2: context), //For testing, Not working !! tq..  why ? !
                 isActive: $isAddingMemo) {}
+            
+            
         } // end of ZStack
         .frame(maxHeight: .infinity)
         

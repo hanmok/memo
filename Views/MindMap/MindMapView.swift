@@ -15,16 +15,6 @@ struct FolderWithLevel: Hashable {
 //    var id: UUID
 }
 
-//extension FolderWithLevel: Identifiable {
-//
-//}
-
-
-//enum FolderType: String {
-//    case folder = "folder"
-//    case archive = "tray"
-//}
-
 class FolderGroup: ObservableObject {
     @Published var realFolders: [Folder]
     init(targetFolders: [Folder]) {
@@ -77,6 +67,8 @@ struct MindMapView: View {
     
     @State var shouldExpand = true
     @State var isAddingMemo = false
+  
+  
     @State var foldersToFetch: [FolderWithLevel] = []
     
     @State var selectionEnum = FolderTypeEnum.folder // default value
@@ -130,7 +122,7 @@ struct MindMapView: View {
                 
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack
-                
+
                                 List {
                                     Section(header:
                                                 Text("Folders")
@@ -225,6 +217,7 @@ struct MindMapView: View {
                 
                 
                 //                // MARK: - VERSION 2
+
 //                List(folderGroup.realFolders,children: \.children ) { folder in
 //
 //                    RecursiveFolderCell(folder: folder)
@@ -233,64 +226,64 @@ struct MindMapView: View {
 //                        .environmentObject(memoOrder)
 //                } // End of List
                 
-                
+             
                 
                 
                 //                List(folderGroup.realFolders,children: \.children ) { folder in
                 //                Text("Using Disclosure Group")
                 
-                // MARK: - VERSION 3
-                //                List {
-                //                    Section(header: Text("Folder")) {
-                //                        ForEach(folderGroup.realFolders) { folder in
-                ////                            DisclosureGroup((folder.title)) {
-                //
-                //
-                //
-                ////                            DisclosureGroup(isExpanded: $shouldExpand, content: {
-                ////
-                ////
-                ////                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
-                ////                                    RecursiveFolderCell(folder: child)
-                ////                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                ////
-                ////                                            // remove !
-                ////                                            Button {
-                ////                                                context.saveCoreData()
-                ////                                            } label: {
-                ////                                                ChangeableImage(imageSystemName: "pencil")
-                ////                                            }
-                ////                                            .tint(.red)
-                ////
-                ////                                            // change Folder location
-                ////                                        }
-                ////                                }
-                ////                            }, label:{ Text(folder.title)
-                ////                            })
-                //
-                //                            DisclosureGroup {
-                //                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
-                //                                    RecursiveFolderCell(folder: child)
-                //                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                //
-                //                                            // remove !
-                //                                            Button {
-                //                                                context.saveCoreData()
-                //                                            } label: {
-                //                                                ChangeableImage(imageSystemName: "pencil")
-                //                                            }
-                //                                            .tint(.red)
-                //
-                //                                            // change Folder location
-                //                                        }
-                //                                }
-                //                            } label: {
-                //                                Text(folder.title)
-                //                            }
-                //                            }
-                //                        }
-                //                    }
+                // MARK: - VERSION 4
+                /*
+                                List {
+                                    
+                                    Section(header: Text("Folder")) {
+                                        ForEach(folderGroup.realFolders) { folder in
+                                            DisclosureGroup((folder.title)) {
+                                            DisclosureGroup(isExpanded: $shouldExpand, content: {
                 
+                
+                                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
+                                                    RecursiveFolderCell(folder: child)
+                                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                
+                                                            // remove !
+                                                            Button {
+                                                                context.saveCoreData()
+                                                            } label: {
+                                                                ChangeableImage(imageSystemName: "pencil")
+                                                            }
+                                                            .tint(.red)
+                
+                                                            // change Folder location
+                                                        }
+                                                }
+                                            }, label:{ Text(folder.title)
+                                            })
+                
+//                                            DisclosureGroup {
+//                                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
+//                                                    RecursiveFolderCell(folder: child)
+//                                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+//
+//                                                            // remove !
+//                                                            Button {
+//                                                                context.saveCoreData()
+//                                                            } label: {
+//                                                                ChangeableImage(imageSystemName: "pencil")
+//                                                            }
+//                                                            .tint(.red)
+//
+//                                                            // change Folder location
+//                                                        }
+//                                                }
+//                                            } label: {
+//                                                Text(folder.title)
+//                                            }
+                                            }
+                                        }
+                                    }
+                                }
+                */
                 
                 // MARK: - MEMO SECTION
                 
@@ -339,12 +332,14 @@ struct MindMapView: View {
                 }
             }
             
+
 //            NavigationLink(
 //                destination: MemoView(
 //                    memo: Memo(title: "", contents: "", context: context),
 //                    parent: folderGroup.realFolders.first!,
 //                    isNewMemo: true),
 //                isActive: $isAddingMemo) {}
+
             
             
             // MARK: - rename is not currently working .

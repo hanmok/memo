@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-
+import CoreData
 
 enum Field: Hashable {
     case title
@@ -32,7 +32,9 @@ struct MemoView: View {
     
     @State var title: String = ""
     @State var contents: String = ""
-    
+//    @State var isBookMarkedTemp: Bool = false
+     @State var isBookMarkedTemp: Bool?
+
     let parent: Folder
     let screenSize = UIScreen.main.bounds
     
@@ -56,19 +58,34 @@ struct MemoView: View {
     }
     
     
-    init(memo: Memo, parent: Folder, isNewMemo: Bool = false) {
+    init(memo: Memo, parent: Folder ) {
         self.memo = memo
         self.parent = parent
-        self.initialTitle = isNewMemo ? "Enter Title" : memo.title
+//        self.initialTitle = isNewMemo ? "Enter Title" : memo.title
+        self.initialTitle = memo.title
         self.initialContents = memo.contents
         // this line make error.
         //        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
-        self.isNewMemo = isNewMemo
+        self.isNewMemo = false
         
 //        self.memo = Memo(context: context)
 //        self.parent = Folder(context: context)
+//        self.isBookMarkedTemp = memo.isBookMarked
+//        self.isBookMarkedTemp = false
+//        self.title = "asmkd"
+    }
+    // Initializer For New Memo
+    init(parent: Folder, context2: NSManagedObjectContext) {
         
-        
+        let newMemo = Memo(context: context2)
+        self.memo = newMemo
+        parent.add(memo: newMemo)
+        self.isNewMemo = true
+        self.initialTitle = "Enter Title"
+        self.initialContents = ""
+        self.parent = parent
+//        self.isBookMarkedTemp = memo.isBookMarked
+//        self.isBookMarkedTemp = false
     }
     
     func saveChanges() {
@@ -76,7 +93,7 @@ struct MemoView: View {
         memo.title = title
 
         memo.contents = contents
-
+        memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if both title and contents are empty, delete memo
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
@@ -89,6 +106,7 @@ struct MemoView: View {
                 parent.modificationDate = Date()
             }
         }
+        
         parent.title += "" //
 
         context.saveCoreData()
@@ -102,7 +120,16 @@ struct MemoView: View {
     }
 //    toggleBookMark
     func toggleBookMark() {
-        memo.isBookMarked.toggle()
+//        memo.isBookMarked.toggle()
+//         memo.isBookMarked
+        // initial
+        if isBookMarkedTemp == nil {
+            isBookMarkedTemp = memo.isBookMarked ? false : true
+        } else {
+            isBookMarkedTemp!.toggle()
+        }
+        
+
     }
     
     func removeMemo() {
@@ -128,6 +155,7 @@ struct MemoView: View {
                     .submitLabel(.continue)
                     .focused($focusState, equals: .title)
                     .onAppear(perform: {
+                        print("BookMarked!!!!!!!! : \(isBookMarkedTemp)")
                         if self.isNewMemo == true {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
                                 self.focusState = .title
@@ -207,7 +235,7 @@ struct MemoView: View {
                 
                 Button(action: toggleBookMark) {
                     ChangeableImage(
-                        imageSystemName: memo.isBookMarked ? "bookmark.fill" : "bookmark",
+                        imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",
                         width: Sizes.regularButtonSize,
                         height: Sizes.regularButtonSize)
                 }
