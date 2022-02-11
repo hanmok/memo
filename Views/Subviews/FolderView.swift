@@ -146,7 +146,7 @@ struct FolderView: View {
 //                    parent: currentFolder,
 //                    isNewMemo: true),
                 
-                MemoView(parent: currentFolder, context2: context),
+                MemoView( parent: currentFolder, context2: context),
 //                MemoView(parent: Folder.fetchTopFolders(context: context).first!, context2: context), //For testing, Not working !! tq..  why ? !
                 isActive: $isAddingMemo) {}
             
@@ -158,9 +158,6 @@ struct FolderView: View {
         
         .sheet(isPresented: $showSelectingFolderView,
                content: {
-//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
-//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
-//            SelectingFolderView(folderGroup: FolderGroup(targetFolders: Folder.fetchHomeFolder(context: context)))
             
             SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
                 homeFolder: Folder.fetchHomeFolder(context: context)!,

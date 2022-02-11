@@ -32,29 +32,53 @@ struct SelectingFolderView: View {
 //        }
         
         return VStack(spacing: 0) {
+//            HStack {
+//                Spacer()
+//                Text("Select Folder ")
+//                    .frame(maxWidth: .infinity, alignment: .center)
+//                //                .padding(.leading, Sizes.overallPadding)
+//                    .padding(.vertical)
+//
+//
+//
+//            }.overlay {
+//                if isFullScreen {
+//                    HStack {
+//                        Spacer()
+//                        Button {
+//                            // DISMISS
+//                            presentationMode.wrappedValue.dismiss()
+//                            UIView.setAnimationsEnabled(true)
+//                        } label: {
+//                            ChangeableImage(imageSystemName: "multiply")
+//                                .frame(height: 28)
+//                        }
+//
+//                        .padding(.trailing, Sizes.overallPadding)
+//                    }
+//                }
+//            }
+            
             HStack {
                 Spacer()
-                Text("Select Folder ")
-                    .frame(maxWidth: .infinity, alignment: .center)
-                //                .padding(.leading, Sizes.overallPadding)
-                    .padding(.vertical)
-                
-                
-            }.overlay {
-                if isFullScreen {
-                    HStack {
-                        Spacer()
-                        Button {
-                            // DISMISS
-                            presentationMode.wrappedValue.dismiss()
-                            UIView.setAnimationsEnabled(true)
-                        } label: {
-                            ChangeableImage(imageSystemName: "multiply")
-                        }
-                        .padding(.trailing, Sizes.overallPadding)
+                HStack {
+                    Text("Select Folder ")
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+
+                        ChangeableImage(imageSystemName: "multiply")
+                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+                        Image(systemName: "").frame(height: 28)
                     }
                 }
+                .padding(.trailing, Sizes.overallPadding)
+                .padding(.vertical)
             }
+            
+            
             
             Picker("", selection: $selectionEnum) {
                 
@@ -296,5 +320,6 @@ struct SelectingFolderView: View {
         .onDisappear {
             UIView.setAnimationsEnabled(true)
         }
+        .navigationBarHidden(true)
     }
 }

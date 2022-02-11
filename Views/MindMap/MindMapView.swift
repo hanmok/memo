@@ -83,7 +83,7 @@ struct MindMapView: View {
             foldersToFetch = selectionEnum == .folder ? fastFolderWithLevelGroup.folders : fastFolderWithLevelGroup.archives
         }
         
-        return ZStack {
+        return ZStack(alignment: .topLeading) {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
@@ -109,6 +109,7 @@ struct MindMapView: View {
                     .padding(.vertical)
                 }
                 
+                
                 Picker("", selection: $selectionEnum) {
                     
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(FolderTypeEnum.folder)
@@ -124,9 +125,9 @@ struct MindMapView: View {
                 // another VStack
                 if selectionEnum == .folder {
                     List {
-                        Section(header:
-                                    Text("Folders")
-                        ) {
+//                        Section(header:
+//                                    Text("Folders")
+//                        ) {
                             // need to fetch only Home Folder
                             ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
     //                            folderWithLevel.folder
@@ -160,14 +161,14 @@ struct MindMapView: View {
                                         .tint(.yellow)
                                     }
                             } // end of ForEach
-                        } // end of Section
+//                        } // end of Section
                     }
                     .listStyle(InsetGroupedListStyle())
                 } else {
                     List {
-                        Section(header:
-                                    Text("Folders")
-                        ) {
+//                        Section(header:
+//                                    Text("Folders")
+//                        ) {
                             // need to fetch only Home Folder
                             ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
     //                            folderWithLevel.folder
@@ -201,7 +202,7 @@ struct MindMapView: View {
                                         .tint(.yellow)
                                     }
                             } // end of ForEach
-                        } // end of Section
+//                        } // end of Section
                     }
                     .listStyle(InsetGroupedListStyle())
                 }
@@ -437,11 +438,12 @@ struct MindMapView: View {
             //            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
 //            SelectingFolderView(folderGroup: folderGroup)
 //            SelectingFolderView(fastfolder)
-            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
+            NavigationView {SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
                 homeFolder: Folder.fetchHomeFolder(context: context)!,
-                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!))
+                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!), isFullScreen: true)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
+            }
         })
         
         
