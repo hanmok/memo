@@ -153,16 +153,19 @@ struct FolderView: View {
             
         } // end of ZStack
         .frame(maxHeight: .infinity)
-        .sheet(isPresented: $showSelectingFolderView,
-               content: {
-//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
-//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
-            SelectingFolderView(folderGroup: FolderGroup(targetFolders: Folder.fetchTopFolders(context: context)))
-            
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
-        })
         
+        // fetch both home Folder and Archive Folder Separately.
+        
+//        .sheet(isPresented: $showSelectingFolderView,
+//               content: {
+////            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
+////            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
+//            SelectingFolderView(folderGroup: FolderGroup(targetFolders: Folder.fetchHomeFolder(context: context)))
+//
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
+//        })
+
         .onDisappear(perform: {
             newSubFolderName = ""
             memoEditVM.selectedMemos.removeAll()

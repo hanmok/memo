@@ -19,7 +19,7 @@ struct TitleWithLevelView: View {
     
     var body: some View {
         HStack {
-            ForEach( 0 ..< level + 1) { _ in
+            ForEach( 0 ..< level) { _ in
                 Text("  ") // double Space for each level
             }
             

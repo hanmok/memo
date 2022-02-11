@@ -13,23 +13,30 @@ protocol Archive: Folder {
     var isArchive: Bool { get }
 }
 
-//extension Folder: RandomAccessCollection {
-//    public typealias Element = <#type#>
-//
-//    public typealias Index = <#type#>
-//
-//    public typealias SubSequence = <#type#>
-//
-//    public typealias Indices = <#type#>
-//
-//}
+enum FolderTypeEnum {
+    case folder
+    case archive
+}
+
+struct FolderType {
+    
+    static func getFolderName(type: FolderTypeEnum) -> String {
+        switch type {
+        case .folder: return "Folder"
+        case .archive: return "Archive"
+        }
+    }
+    
+    static func getfolderImageName(type: FolderTypeEnum) -> String {
+        switch type {
+        case .folder: return "folder"
+        case .archive: return "tray"
+        }
+    }
+}
+
 
 extension Folder {
-    
-    enum FolderType{
-        case home
-        case archive
-    }
     
     convenience init(title: String, context: NSManagedObjectContext) {
         self.init(context: context)
@@ -61,17 +68,6 @@ extension Folder {
         setPrimitiveValue(UUID(), forKey: FolderProperties.id)
     }
     
-    var folderType: FolderType? {
-        get {
-            if self.creationDate == Date(timeIntervalSince1970: 0) {
-                return .home
-            } else if self.creationDate == Date(timeIntervalSince1970: 1) {
-                return .archive
-            } else {
-                return nil
-            }
-        }
-    }
     
     var uuid: UUID {
         get { uuid_ ?? UUID() }
@@ -193,19 +189,47 @@ extension Folder {
         
         let format = FolderProperties.parent + " = nil"
         request.predicate = NSPredicate(format: format)
+        
         return request
     }
     
-    static func fetchTopFolders(context: NSManagedObjectContext) -> [Folder] {
+    static func fetchHomeFolder(context: NSManagedObjectContext, fetchingHome: Bool = true) -> Folder? {
+        
+        let folderType: FolderTypeEnum = fetchingHome ? .folder : .archive
+        
         let req = Folder.topFolderFetchReq()
+        
         // MARK: - recommend using guard
+        
         if let result = try? context.fetch(req) {
-            return result
+            
+//            result.map {
+//                print($0.title)
+//            }
+            
+//            return result.first!
+            switch folderType {
+                // Found Nil !
+            case .folder: return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
+            case .archive: return result.filter { $0.title == FolderType.getFolderName(type: .archive)}.first!
+            }
+            
         } else {
             print("error fetching top Folders !!")
-            return []
+            return nil
         }
     }
+    
+//    static func fetchArchiveFolder(context: NSManagedObjectContext) -> Folder? {
+//        let req = Folder.topFolderFetchReq()
+//        // MARK: - recommend using guard
+//        if let result = try? context.fetch(req) {
+//            return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
+//        } else {
+//            print("error fetching top Folders !!")
+//            return nil
+//        }
+//    }
     
     static func delete(_ folder: Folder) {
         if let context = folder.managedObjectContext {
@@ -304,6 +328,51 @@ extension Folder {
         return folderWithLevelContainer
     }
     
+    
+    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
+            var currentFolder: Folder? = topFolder
+            var level = 0
+            var trashSet = Set<Folder>()
+            var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
+            var folderContainer = [currentFolder]
+
+        whileLoop: while (currentFolder != nil) {
+            print("currentFolder: \(currentFolder!.id)")
+
+            if currentFolder!.subfolders.count != 0 {
+
+                // check if trashSet has contained Folder of arrayContainer2
+                for folder in currentFolder!.subfolders.sorted() {
+                    if !trashSet.contains(folder) && !folderContainer.contains(folder) {
+        //            if !trashSet.contains(folder) && !arrayContainer2 {
+                        currentFolder = folder
+                        level += 1
+                        folderContainer.append(currentFolder!)
+                        folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
+                        continue whileLoop // this one..
+                    }
+                }
+                // subFolders 가 모두 이미 고려된 경우.
+                trashSet.update(with: currentFolder!)
+            } else { // subfolder 가 Nil 인 경우
+                trashSet.update(with: currentFolder!)
+            }
+
+            for i in 0 ..< folderWithLevelContainer.count {
+                if !trashSet.contains(folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder) {
+
+                    currentFolder = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder
+                    level = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].level
+                    break
+                }
+            }
+
+            if folderWithLevelContainer.count == trashSet.count {
+                break whileLoop
+            }
+        }
+            return folderWithLevelContainer
+        }
     static func convertLevelIntoFolder(_ withLevels: [FolderWithLevel]) -> [Folder] {
         var folders: [Folder] = []
         for eachLevel in withLevels {
@@ -381,104 +450,103 @@ extension Folder {
         return home
     }
     
-    static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
-        
-        let homeFolder = Folder(title: "Home Folder", context: context,createdAt: Date(timeIntervalSinceNow: 1))
-        let firstChildFolder = Folder(title: "child1", context: context,createdAt: Date(timeIntervalSinceNow: 2))
-        let secondChildFolder = Folder(title: "child2", context: context,createdAt: Date(timeIntervalSinceNow: 3))
-        let thirdChildFolder = Folder(title: "child3", context: context,createdAt: Date(timeIntervalSinceNow: 4))
-        let fourthChildFolder = Folder(title: "child4", context: context,createdAt: Date(timeIntervalSinceNow: 5))
-        
-        homeFolder.add(subfolder: firstChildFolder)
-        homeFolder.add(subfolder: secondChildFolder)
-        homeFolder.add(subfolder: thirdChildFolder)
-        homeFolder.add(subfolder: fourthChildFolder)
-        
-        let memo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
-        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
-        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
-        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
-        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
-        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
-        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
-        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
-        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
-        
-        let hmemo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
-        let hmemo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
-        let hmemo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
-        let hmemo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
-        let hmemo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
-        let hmemo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
-        let hmemo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
-        let hmemo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
-        let hmemo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
-        
-        firstChildFolder.add(memo: memo1)
-        firstChildFolder.add(memo: memo2)
-        firstChildFolder.add(memo: memo3)
-        firstChildFolder.add(memo: memo4)
-        firstChildFolder.add(memo: memo5)
-        firstChildFolder.add(memo: memo6)
-        firstChildFolder.add(memo: memo7)
-        firstChildFolder.add(memo: memo8)
-        firstChildFolder.add(memo: memo9)
-        
-        homeFolder.add(memo: hmemo1)
-        homeFolder.add(memo: hmemo2)
-        homeFolder.add(memo: hmemo3)
-        homeFolder.add(memo: hmemo4)
-        homeFolder.add(memo: hmemo5)
-        homeFolder.add(memo: hmemo6)
-        homeFolder.add(memo: hmemo7)
-        homeFolder.add(memo: hmemo8)
-        homeFolder.add(memo: hmemo9)
-        
-        context.saveCoreData()
-
-        return homeFolder
-    }
+//    static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
+//
+//        let homeFolder = Folder(title: "Home Folder", context: context,createdAt: Date(timeIntervalSinceNow: 1))
+//        let firstChildFolder = Folder(title: "child1", context: context,createdAt: Date(timeIntervalSinceNow: 2))
+//        let secondChildFolder = Folder(title: "child2", context: context,createdAt: Date(timeIntervalSinceNow: 3))
+//        let thirdChildFolder = Folder(title: "child3", context: context,createdAt: Date(timeIntervalSinceNow: 4))
+//        let fourthChildFolder = Folder(title: "child4", context: context,createdAt: Date(timeIntervalSinceNow: 5))
+//
+//        homeFolder.add(subfolder: firstChildFolder)
+//        homeFolder.add(subfolder: secondChildFolder)
+//        homeFolder.add(subfolder: thirdChildFolder)
+//        homeFolder.add(subfolder: fourthChildFolder)
+//
+//        let memo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
+//        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
+//        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
+//        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
+//        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
+//        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
+//        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
+//        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
+//        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
+//
+//        let hmemo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
+//        let hmemo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
+//        let hmemo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
+//        let hmemo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
+//        let hmemo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
+//        let hmemo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
+//        let hmemo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
+//        let hmemo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
+//        let hmemo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
+//
+//        firstChildFolder.add(memo: memo1)
+//        firstChildFolder.add(memo: memo2)
+//        firstChildFolder.add(memo: memo3)
+//        firstChildFolder.add(memo: memo4)
+//        firstChildFolder.add(memo: memo5)
+//        firstChildFolder.add(memo: memo6)
+//        firstChildFolder.add(memo: memo7)
+//        firstChildFolder.add(memo: memo8)
+//        firstChildFolder.add(memo: memo9)
+//
+//        homeFolder.add(memo: hmemo1)
+//        homeFolder.add(memo: hmemo2)
+//        homeFolder.add(memo: hmemo3)
+//        homeFolder.add(memo: hmemo4)
+//        homeFolder.add(memo: hmemo5)
+//        homeFolder.add(memo: hmemo6)
+//        homeFolder.add(memo: hmemo7)
+//        homeFolder.add(memo: hmemo8)
+//        homeFolder.add(memo: hmemo9)
+//
+//        context.saveCoreData()
+//
+//        return homeFolder
+//    }
     
-    static func returnSampleFolder2(context: NSManagedObjectContext)  {
-        
-        let newFolder1 = Folder(title: "Category 1", context: context)
-
-        newFolder1.creationDate = Date().advanced(by: 2)
-        
-        let subFolder1 = Folder(title: "SubCategory 1", context: context)
-        let subFolder2 = Folder(title: "SubCategory 2", context: context)
-        let subFolder3 = Folder(title: "SubCategory 3", context: context)
-        
-        subFolder1.creationDate = Date().advanced(by: 2)
-        subFolder2.creationDate = Date().advanced(by: 1)
-        subFolder3.creationDate = Date().advanced(by: 3)
-        
-        subFolder1.modificationDate = Date().advanced(by: 2)
-        subFolder2.modificationDate = Date().advanced(by: 3)
-        subFolder3.modificationDate = Date().advanced(by: 1)
-        
-        let newFolder2 = Folder(title: "Category 2", context: context)
-
-        newFolder1.add(subfolder: subFolder1)
-        newFolder1.add(subfolder: subFolder2)
-        newFolder1.add(subfolder: subFolder3)
-        
-        newFolder2.creationDate = Date().advanced(by: 1)
-        // return TopFolders
-        // order
-        // 1. Alphabetical : SubCategory 1 > 2 > 3
-        // 1. Creation : SubCategory 2 > 1 > 3
-        // 1. Modification : SubCategory 3 > 1 > 2
-        
-//        return [newFolder1, newFolder2]
-    }
+//    static func returnSampleFolder2(context: NSManagedObjectContext)  {
+//
+//        let newFolder1 = Folder(title: "Category 1", context: context)
+//
+//        newFolder1.creationDate = Date().advanced(by: 2)
+//
+//        let subFolder1 = Folder(title: "SubCategory 1", context: context)
+//        let subFolder2 = Folder(title: "SubCategory 2", context: context)
+//        let subFolder3 = Folder(title: "SubCategory 3", context: context)
+//
+//        subFolder1.creationDate = Date().advanced(by: 2)
+//        subFolder2.creationDate = Date().advanced(by: 1)
+//        subFolder3.creationDate = Date().advanced(by: 3)
+//
+//        subFolder1.modificationDate = Date().advanced(by: 2)
+//        subFolder2.modificationDate = Date().advanced(by: 3)
+//        subFolder3.modificationDate = Date().advanced(by: 1)
+//
+//        let newFolder2 = Folder(title: "Category 2", context: context)
+//
+//        newFolder1.add(subfolder: subFolder1)
+//        newFolder1.add(subfolder: subFolder2)
+//        newFolder1.add(subfolder: subFolder3)
+//
+//        newFolder2.creationDate = Date().advanced(by: 1)
+//        // return TopFolders
+//        // order
+//        // 1. Alphabetical : SubCategory 1 > 2 > 3
+//        // 1. Creation : SubCategory 2 > 1 > 3
+//        // 1. Modification : SubCategory 3 > 1 > 2
+//
+////        return [newFolder1, newFolder2]
+//    }
     
     static func returnSampleFolder3(context: NSManagedObjectContext)  {
         
-        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
+//        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
+        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context, createdAt: Date(timeIntervalSince1970: 0))
 //        homeFolder.folderType = .home
-
-        homeFolder.creationDate = Date().advanced(by: 2)
         
         let subFolder1 = Folder(title: "Category 1", context: context)
         let subFolder2 = Folder(title: "Category 2", context: context)
@@ -503,7 +571,8 @@ extension Folder {
         
         newFolder2.creationDate = Date().advanced(by: 1)
         
-        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
+//        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
+        let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context, createdAt: Date(timeIntervalSince1970: 1))
 //        archive.folderType = .archive
         context.saveCoreData()
         // return TopFolders
