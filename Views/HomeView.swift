@@ -18,7 +18,7 @@ struct HomeView: View { // top folder fetch
 //    @FetchRequest(fetchRequest: Folder.top)
     
     @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
-    
+    @StateObject var folderOrderVM = FolderOrderVM()
 //    let shouldInitialize = true
     @State var shouldExecuteOne = true
     var body: some View {
@@ -28,14 +28,15 @@ struct HomeView: View { // top folder fetch
         
 //                UnitTestHelpers.deletesAllFolders(context: context)
 
-        // For Testing
+//  //      For Testing
 //        DispatchQueue.main.async {
 //            if true {
 //                if shouldExecuteOne {
 //                UnitTestHelpers.deletesAllFolders(context: context)
 //                    shouldExecuteOne.toggle()
+//                    Folder.returnSampleFolder3(context: context)
 //                }
-//                Folder.returnSampleFolder3(context: context)
+//
 //            }
 //        }
         
@@ -51,8 +52,10 @@ struct HomeView: View { // top folder fetch
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
-                        archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!),
+                        archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
+                        sortingMethod: folderOrderVM.sortingMethod),
                 bookMarkedMemos: BookMarkedMemos(memos: memos.sorted()))
+                .environmentObject(folderOrderVM)
         }
 //        .onAppear {
 //            switch order.folderOrderType {
@@ -92,9 +95,9 @@ class FastFolderWithLevelGroup: ObservableObject {
     @Published var folders: [FolderWithLevel]
     @Published var archives: [FolderWithLevel]
     
-    init(homeFolder: Folder, archiveFolder: Folder) {
-        self.folders = Folder.getHierarchicalFolders(topFolder: homeFolder)
-        self.archives = Folder.getHierarchicalFolders(topFolder: archiveFolder)
+    init(homeFolder: Folder, archiveFolder: Folder, sortingMethod: (Folder, Folder) -> Bool) {
+        self.folders = Folder.getHierarchicalFolders(topFolder: homeFolder, sortingMethod: sortingMethod)
+        self.archives = Folder.getHierarchicalFolders(topFolder: archiveFolder, sortingMethod: sortingMethod)
     }
 }
 

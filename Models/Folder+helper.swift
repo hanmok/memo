@@ -209,11 +209,12 @@ extension Folder {
 //            result.map {
 //                print($0.title)
 //            }
-            
-//            return result.first!
+//            result.removeFirst()
+//            return result.last!
             switch folderType {
-//                // Found Nil !
+////                // Found Nil !
             case .folder: return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
+//            case .folder: return result.first(where: title == FolderType.getFolderName(type: .folder))
             case .archive: return result.filter { $0.title == FolderType.getFolderName(type: .archive)}.first!
             }
             
@@ -332,7 +333,9 @@ extension Folder {
     }
     
     
-    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
+    static func getHierarchicalFolders(topFolder: Folder, sortingMethod: (Folder, Folder) -> Bool) -> [FolderWithLevel] {
+//        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
+        
             var currentFolder: Folder? = topFolder
             var level = 0
             var trashSet = Set<Folder>()
@@ -345,7 +348,7 @@ extension Folder {
             if currentFolder!.subfolders.count != 0 {
 
                 // check if trashSet has contained Folder of arrayContainer2
-                for folder in currentFolder!.subfolders.sorted() {
+                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                     if !trashSet.contains(folder) && !folderContainer.contains(folder) {
         //            if !trashSet.contains(folder) && !arrayContainer2 {
                         currentFolder = folder
@@ -400,50 +403,52 @@ struct FolderProperties {
     
 }
 
-extension Folder {
-
-    static var isAscending: Bool = true
-    static var orderType: OrderType = .creationDate
-
-    static func sortModifiedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
-        if Folder.isAscending {
-            return lhs.modificationDate! < rhs.modificationDate!
-        } else {
-            return lhs.modificationDate! >= rhs.modificationDate!
-        }
-    }
-
-    static func sortCreatedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
-        if Folder.isAscending {
-            return lhs.creationDate < rhs.creationDate
-        } else {
-            return lhs.creationDate >= rhs.creationDate
-        }
-    }
-
-    static func sortAlphabetOrder(_ lhs: Folder, _ rhs: Folder) -> Bool {
-        if Folder.isAscending {
-            return lhs.title < rhs.title
-        } else {
-            return lhs.title >= rhs.title
-        }
-    }
-}
+//extension Folder {
+//
+//    static var isAscending: Bool = true
+//    static var orderType: OrderType = .creationDate
+//
+//    static func sortModifiedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
+//        if Folder.isAscending {
+//            return lhs.modificationDate! < rhs.modificationDate!
+//        } else {
+//            return lhs.modificationDate! >= rhs.modificationDate!
+//        }
+//    }
+//
+//    static func sortCreatedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
+//        if Folder.isAscending {
+//            return lhs.creationDate < rhs.creationDate
+//        } else {
+//            return lhs.creationDate >= rhs.creationDate
+//        }
+//    }
+//
+//    static func sortAlphabetOrder(_ lhs: Folder, _ rhs: Folder) -> Bool {
+//        if Folder.isAscending {
+//            return lhs.title < rhs.title
+//        } else {
+//            return lhs.title >= rhs.title
+//        }
+//    }
+//
+//
+//}
 
 extension Folder : Comparable {
     
-
-    
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
         
-        switch Folder.orderType {
-        case .modificationDate:
-            return sortModifiedDate(lhs, rhs)
-        case .creationDate:
-            return sortCreatedDate(lhs, rhs)
-        case .alphabetical:
-            return sortAlphabetOrder(lhs, rhs)
-        }
+        lhs.creationDate > rhs.creationDate
+        
+//        switch Folder.orderType {
+//        case .modificationDate:
+//            return sortModifiedDate(lhs, rhs)
+//        case .creationDate:
+//            return sortCreatedDate(lhs, rhs)
+//        case .alphabetical:
+//            return sortAlphabetOrder(lhs, rhs)
+//        }
         
 //        return true
     }

@@ -161,7 +161,8 @@ struct FolderView: View {
             
             SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
                 homeFolder: Folder.fetchHomeFolder(context: context)!,
-                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!))
+                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
+                sortingMethod: FolderOrderVM.shard.sortingMethod))
             
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)

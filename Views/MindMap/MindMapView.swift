@@ -43,7 +43,8 @@ struct MindMapView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var memoEditVM = MemoEditViewModel()
     @StateObject var folderEditVM = FolderEditViewModel()
-    @StateObject var folderOrder = FolderOrderVM()
+//    @StateObject var folderOrder = FolderOrderVM()
+    @EnvironmentObject var folderOrder: FolderOrderVM
     @StateObject var memoOrder = MemoOrder()
     
     @State var newFolderName = ""
@@ -441,7 +442,7 @@ struct MindMapView: View {
 //            SelectingFolderView(fastfolder)
             NavigationView {SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
                 homeFolder: Folder.fetchHomeFolder(context: context)!,
-                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!), isFullScreen: true)
+                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!, sortingMethod: FolderOrderVM.shard.sortingMethod), isFullScreen: true)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
             }
