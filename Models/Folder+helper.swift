@@ -587,6 +587,7 @@ extension Folder {
         context.saveCoreData()
         // return TopFolders
         // order
+        // In Asc Order
         // 1. Alphabetical : SubCategory 1 > 2 > 3
         // 1. Creation : SubCategory 2 > 1 > 3
         // 1. Modification : SubCategory 3 > 1 > 2

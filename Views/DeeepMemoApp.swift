@@ -15,7 +15,7 @@ struct DeeepMemoApp: App {
     @Environment(\.scenePhase) var scenePhase
     
 //    @AppStorage("FolderOrderings2") var folderOrdering = FolderOrdering2()
-    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
+//    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
     
     // homeView 가 반드시 필요한가 ??
     var body: some Scene {

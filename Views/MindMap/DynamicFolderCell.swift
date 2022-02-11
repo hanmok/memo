@@ -13,7 +13,7 @@ struct DynamicFolderCell: View {
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
-//    @EnvironmentObject var memoOrder: MemoOrder
+    @EnvironmentObject var memoOrder: MemoOrder
     //    let siblingSpacing: CGFloat = 3
     //    let parentSpacing: CGFloat = 3
     //    let basicSpacing: CGFloat = 2
@@ -33,7 +33,7 @@ struct DynamicFolderCell: View {
             NavigationLink(destination: FolderView(currentFolder: folder)
                             .environmentObject(memoEditVM)
                             .environmentObject(folderEditVM)
-//                            .environmentObject(memoOrder)
+                            .environmentObject(memoOrder)
             ) {
                 TitleWithLevelView(folder: folder, level: level)
                 

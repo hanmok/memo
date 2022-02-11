@@ -12,7 +12,7 @@ struct HomeView: View { // top folder fetch
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
+//    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
     
     @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
 //    @FetchRequest(fetchRequest: Folder.top)
@@ -54,24 +54,25 @@ struct HomeView: View { // top folder fetch
                         archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!),
                 bookMarkedMemos: BookMarkedMemos(memos: memos.sorted()))
         }
-        .onAppear {
-            switch order.folderOrderType {
-            case OrderType.modificationDate.rawValue:
-                Folder.orderType = .modificationDate
-            case OrderType.creationDate.rawValue:
-                Folder.orderType = .creationDate
-            case OrderType.alphabetical.rawValue:
-                Folder.orderType = .alphabetical
-            default:
-                Folder.orderType = .modificationDate
-            }
-            switch order.folderAsc {
-            case true :
-                Folder.isAscending = true
-            case false:
-                Folder.isAscending = false
-            }
-        }
+//        .onAppear {
+//            switch order.folderOrderType {
+//            case OrderType.modificationDate.rawValue:
+//                Folder.orderType = .modificationDate
+//
+//            case OrderType.creationDate.rawValue:
+//                Folder.orderType = .creationDate
+//            case OrderType.alphabetical.rawValue:
+//                Folder.orderType = .alphabetical
+//            default:
+//                Folder.orderType = .modificationDate
+//            }
+//            switch order.folderAsc {
+//            case true :
+//                Folder.isAscending = true
+//            case false:
+//                Folder.isAscending = false
+//            }
+//        }
         
         //        return EmptyView()
         

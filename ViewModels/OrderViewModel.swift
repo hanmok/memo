@@ -16,43 +16,59 @@ enum OrderType: String, CaseIterable, Codable {
 }
 
 
-//class FolderOrder: ObservableObject {
-//    @Published var isAscending = true
-//
-//    @Published var orderType: OrderType = .creationDate
-//}
-//
-//class MemoOrder: ObservableObject {
-//    @Published var isAscending = false
-//
-//    @Published var orderType: OrderType = .modificationDate
-//}
-
-
-
-
-
-typealias FolderOrdering2 = [OrderType]
-
-extension FolderOrdering2: RawRepresentable {
-    public init?(rawValue: String) {
-        guard let data = rawValue.data(using: .utf8),
-              let result = try? JSONDecoder().decode(
-                                FolderOrdering2.self, from: data)
-        else {
-            return nil
+class FolderOrderVM: ObservableObject {
+    @Published var isAscending = true {
+        didSet {
+            Folder.isAscending = isAscending
         }
-        self = result
     }
-    
-    public var rawValue: String {
-        guard let data = try? JSONEncoder().encode(self),
-              let result = String(data: data, encoding: .utf8)
-        else {
-            return "[]"
+
+    @Published var orderType: OrderType = .creationDate {
+        didSet {
+            Folder.orderType = orderType
         }
-        return result
     }
 }
+
+class MemoOrder: ObservableObject {
+    @Published var isAscending = false {
+        didSet {
+            Memo.isAscending = isAscending
+        }
+    }
+
+    @Published var orderType: OrderType = .modificationDate {
+        didSet{
+            Memo.orderType = orderType
+        }
+    }
+}
+
+
+
+
+
+//typealias FolderOrdering2 = [OrderType]
+//
+//extension FolderOrdering2: RawRepresentable {
+//    public init?(rawValue: String) {
+//        guard let data = rawValue.data(using: .utf8),
+//              let result = try? JSONDecoder().decode(
+//                                FolderOrdering2.self, from: data)
+//        else {
+//            return nil
+//        }
+//        self = result
+//    }
+//
+//    public var rawValue: String {
+//        guard let data = try? JSONEncoder().encode(self),
+//              let result = String(data: data, encoding: .utf8)
+//        else {
+//            return "[]"
+//        }
+//        return result
+//    }
+//}
 
 

@@ -167,20 +167,10 @@ extension Memo {
 
     // MARK: - Have TO FIX MODIFICATION DATE. it should not be nil for all.
     static func sortModifiedDate(_ lhs: Memo, _ rhs: Memo) -> Bool {
-//        if Memo.isAscending {
-//            return lhs.modificationDate! < rhs.modificationDate!
-//        } else {
-//            return lhs.modificationDate! >= rhs.modificationDate!
-//        }
-        
-        if lhs.modificationDate != nil && rhs.modificationDate != nil {
-            if Memo.isAscending   {
-                return lhs.modificationDate! < rhs.modificationDate!
-            } else {
-                return lhs.modificationDate! >= rhs.modificationDate!
-            }
+        if Memo.isAscending {
+            return lhs.modificationDate! < rhs.modificationDate!
         } else {
-            return true
+            return lhs.modificationDate! >= rhs.modificationDate!
         }
     }
 
@@ -207,7 +197,8 @@ extension Memo: Comparable {
     public static func < (lhs: Memo, rhs: Memo) -> Bool {
         
         switch Memo.orderType {
-        case .modificationDate : return sortModifiedDate(lhs, rhs)
+        case .modificationDate :
+            return sortModifiedDate(lhs, rhs)
         case .creationDate:
             return sortCreatedDate(lhs, rhs)
         case .alphabetical:

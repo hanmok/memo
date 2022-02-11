@@ -43,8 +43,8 @@ struct MindMapView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var memoEditVM = MemoEditViewModel()
     @StateObject var folderEditVM = FolderEditViewModel()
-//    @StateObject var folderOrder = FolderOrder()
-//    @StateObject var memoOrder = MemoOrder()
+    @StateObject var folderOrder = FolderOrderVM()
+    @StateObject var memoOrder = MemoOrder()
     
     @State var newFolderName = ""
     
@@ -90,8 +90,8 @@ struct MindMapView: View {
                     Spacer()
                     HStack {
                         // sort
-//                        FolderOrderingMenu(folderOrder: folderOrder)
-                        FolderOrderingMenu()
+                        FolderOrderingMenu(folderOrder: folderOrder)
+//                        FolderOrderingMenu()
                             .padding(.trailing, Sizes.smallSpacing)
                         
                         // Add new Folder to the top Folder
@@ -137,7 +137,7 @@ struct MindMapView: View {
                                     level: folderWithLevel.level)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
-//                                    .environmentObject(memoOrder)
+                                    .environmentObject(memoOrder)
                                 // ADD Sub Folder
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                         Button {
@@ -178,7 +178,7 @@ struct MindMapView: View {
                                     level: folderWithLevel.level)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
-//                                    .environmentObject(memoOrder)
+                                    .environmentObject(memoOrder)
                                 // ADD Sub Folder
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                         Button {

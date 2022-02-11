@@ -14,7 +14,7 @@ struct FolderView: View {
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
-//    @EnvironmentObject var memoOrder: MemoOrder
+    @EnvironmentObject var memoOrder: MemoOrder
     //    @StateObject var memoOrder = MemoOrder()
     @Environment(\.colorScheme) var colorScheme
     @State var isShowingSubFolderView = false
@@ -84,7 +84,7 @@ struct FolderView: View {
                 .environmentObject(currentFolder)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
-//                .environmentObject(memoOrder)
+                .environmentObject(memoOrder)
             } // end of scrollView
             
             VStack {
@@ -213,8 +213,8 @@ struct FolderView: View {
                 }
             })
             
-//            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
-            MemoOrderingMenu(parentFolder: currentFolder)
+            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+//            MemoOrderingMenu(parentFolder: currentFolder)
         })
     }
 }
