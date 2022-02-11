@@ -14,6 +14,12 @@ struct FolderWithLevel: Hashable {
     var isShowing: Bool = true
 }
 
+
+enum FolderType: String {
+    case folder = "folder"
+    case archive = "tray"
+}
+
 class FolderGroup: ObservableObject {
     @Published var realFolders: [Folder]
     init(targetFolders: [Folder]) {
@@ -58,6 +64,8 @@ struct MindMapView: View {
     
     @State var shouldExpand = true
     @State var isAddingMemo = false
+    
+    @State var selectionEnum = FolderType.folder
     
     func addMemo() {
             isAddingMemo = true
@@ -139,7 +147,18 @@ struct MindMapView: View {
                 
                 
                 
-                
+                Picker("", selection: $selectionEnum) {
+                    Image(systemName: FolderType.folder.rawValue).tag(FolderType.folder)
+                    Image(systemName: FolderType.archive.rawValue).tag(FolderType.archive)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.top, Sizes.overallPadding)
+                // Use it for manipulations
+                if selectionEnum == .folder {
+                    Text("Folder")
+                } else {
+                    Text("Archive")
+                }
                 
                 
                 
@@ -278,34 +297,34 @@ struct MindMapView: View {
                 
                 // MARK: - MEMO SECTION
                 
-                Section(header:
-                            HStack {
-                    ChangeableImage(imageSystemName: "bookmark.fill")
-                        .adjustTintColor(scheme: colorScheme)
-//                    Text("BookMarked Memos")
-                        .padding(.vertical, Sizes.smallSpacing)
-                        .padding(.leading, Sizes.overallPadding)
-
-                    Spacer()
-                }
-                ) {
-                    ScrollView(.horizontal) {
-                        LazyHStack(alignment: .top, spacing: Sizes.smallSpacing ) {
-                            ForEach(bookMarkedMemos.markedMemos, id: \.self) { memo in
-
-                                NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
-                                ) {
-                                    BookMarkedMemoBoxView(memo: memo)
-                                }
-                                //                            .environmentObject(memoEditVM)
-
-                            } // end of ForEach
-                            
-                        } // HStack
-                        .padding(.horizontal, Sizes.overallPadding)
-                    }
-                    .frame(height: 150)
-                } // end of Section
+//                Section(header:
+//                            HStack {
+//                    ChangeableImage(imageSystemName: "bookmark.fill")
+//                        .adjustTintColor(scheme: colorScheme)
+////                    Text("BookMarked Memos")
+//                        .padding(.vertical, Sizes.smallSpacing)
+//                        .padding(.leading, Sizes.overallPadding)
+//
+//                    Spacer()
+//                }
+//                ) {
+//                    ScrollView(.horizontal) {
+//                        LazyHStack(alignment: .top, spacing: Sizes.smallSpacing ) {
+//                            ForEach(bookMarkedMemos.markedMemos, id: \.self) { memo in
+//
+//                                NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
+//                                ) {
+//                                    BookMarkedMemoBoxView(memo: memo)
+//                                }
+//                                //                            .environmentObject(memoEditVM)
+//
+//                            } // end of ForEach
+//
+//                        } // HStack
+//                        .padding(.horizontal, Sizes.overallPadding)
+//                    }
+//                    .frame(height: 150)
+//                } // end of Section
                         
                         
                         
@@ -323,12 +342,12 @@ struct MindMapView: View {
                 }
             }
             
-            NavigationLink(
-                destination: MemoView(
-                    memo: Memo(title: "", contents: "", context: context),
-                    parent: folderGroup.realFolders.first!,
-                    isNewMemo: true),
-                isActive: $isAddingMemo) {}
+//            NavigationLink(
+//                destination: MemoView(
+//                    memo: Memo(title: "", contents: "", context: context),
+//                    parent: folderGroup.realFolders.first!,
+//                    isNewMemo: true),
+//                isActive: $isAddingMemo) {}
             
             
             // MARK: - rename is not currently working .
