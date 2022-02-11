@@ -12,13 +12,18 @@ struct FolderWithLevel: Hashable {
     var level: Int
     var isCollapsed: Bool = false
     var isShowing: Bool = true
+//    var id: UUID
 }
 
+//extension FolderWithLevel: Identifiable {
+//
+//}
 
-enum FolderType: String {
-    case folder = "folder"
-    case archive = "tray"
-}
+
+//enum FolderType: String {
+//    case folder = "folder"
+//    case archive = "tray"
+//}
 
 class FolderGroup: ObservableObject {
     @Published var realFolders: [Folder]
@@ -26,6 +31,13 @@ class FolderGroup: ObservableObject {
         self.realFolders = targetFolders
     }
 }
+
+//class FolderGroup2: ObservableObject {
+//    @Published var realFolders: [Folder]
+//    init(targetFolders: Folder) {
+//        self.realFolders = targetFolders
+//    }
+//}
 
 
 struct LevelAndCollapsed {
@@ -51,8 +63,9 @@ struct MindMapView: View {
     
     @State var folderToAddSubFolder : Folder? = nil
     
-    //    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-    @ObservedObject var folderGroup: FolderGroup
+    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
+    
+//    @ObservedObject var folderGroup: FolderGroup
     
     @ObservedObject var bookMarkedMemos: BookMarkedMemos
 //    @StateObject var
@@ -64,14 +77,19 @@ struct MindMapView: View {
     
     @State var shouldExpand = true
     @State var isAddingMemo = false
+    @State var foldersToFetch: [FolderWithLevel] = []
     
-    @State var selectionEnum = FolderType.folder
+    @State var selectionEnum = FolderTypeEnum.folder // default value
     
     func addMemo() {
             isAddingMemo = true
     }
     
     var body: some View {
+        
+        DispatchQueue.main.async {
+            foldersToFetch = selectionEnum == .folder ? fastFolderWithLevelGroup.folders : fastFolderWithLevelGroup.archives
+        }
         
         return ZStack {
             VStack(spacing: 0) {
@@ -99,77 +117,78 @@ struct MindMapView: View {
                     .padding(.vertical)
                 }
                 
-                // MARK: - List of all Folders (hierarchy)
-                // another VStack
-                
-                //                List {
-                //                    Section(header:
-                //                                Text("Folders")
-                //                    ) {
-                //                        // need to fetch only Home Folder
-                //                        ForEach(fastFolderWithLevelGroup.allFolders, id: \.self) {folderWithLevel in
-                ////                            folderWithLevel.folder
-                //                            DynamicFolderCell(
-                //                                folder: folderWithLevel.folder,
-                //                                level: folderWithLevel.level)
-                //                                .environmentObject(memoEditVM)
-                //                                .environmentObject(folderEditVM)
-                //                                .environmentObject(memoOrder)
-                //                            // ADD Sub Folder
-                //                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                //                                    Button {
-                //                                        folderToAddSubFolder = folderWithLevel.folder
-                ////                                 shouldAddSubFolder = true
-                //                                        showTextField = true
-                //                                        textFieldType = .newSubFolder
-                //                                    } label: {
-                //                                        ChangeableImage(imageSystemName: "folder.badge.plus")
-                //                                    }
-                //                                    .tint(.blue)
-                //                                }
-                //                            // Change Folder Name
-                //                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                //                                    Button {
-                //                                        showTextField = true
-                //                                        textFieldType = .rename
-                //                                        folderToBeRenamed = folderWithLevel.folder
-                //                                    } label: {
-                //                                        ChangeableImage(imageSystemName: "pencil")
-                //                                    }
-                //                                    .tint(.yellow)
-                //                                }
-                //                        } // end of ForEach
-                //
-                //                        Text("hi")
-                //                    } // end of Section
-                //                }
-                //                .listStyle(InsetGroupedListStyle())
-                
-                
-                
                 Picker("", selection: $selectionEnum) {
-                    Image(systemName: FolderType.folder.rawValue).tag(FolderType.folder)
-                    Image(systemName: FolderType.archive.rawValue).tag(FolderType.archive)
+                    
+                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(FolderTypeEnum.folder)
+                    
+                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(FolderTypeEnum.archive)
+                    
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)
-                // Use it for manipulations
-                if selectionEnum == .folder {
-                    Text("Folder")
-                } else {
-                    Text("Archive")
-                }
+                
+                
+                // MARK: - List of all Folders (hierarchy)
+                // another VStack
+                
+                                List {
+                                    Section(header:
+                                                Text("Folders")
+                                    ) {
+                                        // need to fetch only Home Folder
+                                        ForEach(foldersToFetch, id: \.self) {folderWithLevel in
+                //                            folderWithLevel.folder
+                                            DynamicFolderCell(
+                                                folder: folderWithLevel.folder,
+                                                level: folderWithLevel.level)
+                                                .environmentObject(memoEditVM)
+                                                .environmentObject(folderEditVM)
+                                                .environmentObject(memoOrder)
+                                            // ADD Sub Folder
+                                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                                    Button {
+                                                        folderToAddSubFolder = folderWithLevel.folder
+                //                                 shouldAddSubFolder = true
+                                                        showTextField = true
+                                                        textFieldType = .newSubFolder
+                                                    } label: {
+                                                        ChangeableImage(imageSystemName: "folder.badge.plus")
+                                                    }
+                                                    .tint(.blue)
+                                                }
+                                            // Change Folder Name
+                                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                                    Button {
+                                                        showTextField = true
+                                                        textFieldType = .rename
+                                                        folderToBeRenamed = folderWithLevel.folder
+                                                    } label: {
+                                                        ChangeableImage(imageSystemName: "pencil")
+                                                    }
+                                                    .tint(.yellow)
+                                                }
+                                        } // end of ForEach
+                                    } // end of Section
+                                }
+                                .listStyle(InsetGroupedListStyle())
                 
                 
                 
                 
                 
-                //                List(fastFolderWithLevelGroup.allFolders.first!.folder, children: \.subfolders_) { folder in
-                //                    HStack {
-                //
-                //                    }
-                //                }
                 
+                
+//                List(fastFolderWithLevelGroup.folders.first!.folder, children: \.subfolders_) { folder in
+//                    HStack {
+//
+//                    }
+//                }
+
+//                List {
+//                    ForEach(fastFolderWithLevelGroup.folders) {folderWithLevel in
+//                        TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
+//                    }
+//                }
                 
                 
                 
@@ -206,37 +225,15 @@ struct MindMapView: View {
                 
                 
                 //                // MARK: - VERSION 2
-                List(folderGroup.realFolders,children: \.children ) { folder in
-                    
-                    RecursiveFolderCell(folder: folder)
-                        .environmentObject(memoEditVM)
-                        .environmentObject(folderEditVM)
-                        .environmentObject(memoOrder)
-                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                            
-                            // remove !
-                            Button {
-                                context.saveCoreData()
-                            } label: {
-                                ChangeableImage(imageSystemName: "trash")
-                            }
-                            .tint(.red)
-                            
-                            // change Folder location
-                        }
-                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                            
-                            // remove !
-                            Button {
-                                context.saveCoreData()
-                            } label: {
-                                ChangeableImage(imageSystemName: "pencil")
-                            }
-                            .tint(.red)
-                            
-                            // change Folder location
-                        }
-                } // End of List
+//                List(folderGroup.realFolders,children: \.children ) { folder in
+//
+//                    RecursiveFolderCell(folder: folder)
+//                        .environmentObject(memoEditVM)
+//                        .environmentObject(folderEditVM)
+//                        .environmentObject(memoOrder)
+//                } // End of List
+                
+                
                 
                 
                 //                List(folderGroup.realFolders,children: \.children ) { folder in
@@ -394,12 +391,16 @@ struct MindMapView: View {
         //                .environmentObject(folderEditVM)
         //                .environmentObject(memoEditVM)
         //        })
-        .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
-            //            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
-            SelectingFolderView(folderGroup: folderGroup)
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
-        })
+        
+        
+//        .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
+//            //            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+//            SelectingFolderView(folderGroup: folderGroup)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
+//        })
+        
+        
         .navigationBarHidden(true)
     }
 }
