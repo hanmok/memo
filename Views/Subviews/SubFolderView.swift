@@ -14,7 +14,7 @@ struct SubFolderView: View {
     @ObservedObject var folder: Folder
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-    @EnvironmentObject var memoOrder: MemoOrder
+//    @EnvironmentObject var memoOrder: MemoOrder
     @Binding var isShowingSubFolderView: Bool
     @Binding var isAddingFolder: Bool
     @Environment(\.colorScheme) var colorScheme
@@ -59,7 +59,7 @@ struct SubFolderView: View {
                         FolderView(currentFolder: subFolder)
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
-                            .environmentObject(memoOrder)
+//                            .environmentObject(memoOrder)
                     } label: {
                         Text(subFolder.title)
                             .frame(alignment: .leading)

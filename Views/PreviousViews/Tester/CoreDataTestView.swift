@@ -92,7 +92,7 @@ struct CoreDataTestView: View {
         
         //        let _ = Folder(title: "my home folder", context: context)
         //        try? context.save()
-        let _ = Folder.createHomeFolder(context: context)
+//        let _ = Folder.createHomeFolder(context: context)
         print("add Folder!")
     }
     

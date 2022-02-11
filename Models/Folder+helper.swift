@@ -38,6 +38,9 @@ struct FolderType {
 
 extension Folder {
     
+//    static var order:  = OrderType
+//    static var orderType = OrderType.creationDate
+    
     convenience init(title: String, context: NSManagedObjectContext) {
         self.init(context: context)
         self.title = title
@@ -209,7 +212,7 @@ extension Folder {
             
 //            return result.first!
             switch folderType {
-                // Found Nil !
+//                // Found Nil !
             case .folder: return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
             case .archive: return result.filter { $0.title == FolderType.getFolderName(type: .archive)}.first!
             }
@@ -288,7 +291,7 @@ extension Folder {
             
         whileLoop: while (currentFolder != nil) {
             print("currentFolder: \(String(describing: currentFolder!.id))")
-            
+            print(#line)
             if currentFolder!.subfolders.count != 0 {
                 
                 // check if trashSet has contained Folder of arrayContainer2
@@ -338,7 +341,7 @@ extension Folder {
 
         whileLoop: while (currentFolder != nil) {
             print("currentFolder: \(currentFolder!.id)")
-
+            print(#line)
             if currentFolder!.subfolders.count != 0 {
 
                 // check if trashSet has contained Folder of arrayContainer2
@@ -373,6 +376,8 @@ extension Folder {
         }
             return folderWithLevelContainer
         }
+    
+    
     static func convertLevelIntoFolder(_ withLevels: [FolderWithLevel]) -> [Folder] {
         var folders: [Folder] = []
         for eachLevel in withLevels {
@@ -427,6 +432,8 @@ extension Folder {
 
 extension Folder : Comparable {
     
+
+    
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
         
         switch Folder.orderType {
@@ -443,12 +450,15 @@ extension Folder : Comparable {
 }
 
 extension Folder {
-    static func createHomeFolder(context: NSManagedObjectContext) -> Folder {
-        let home = Folder(title: "Home Folder", context: context)
-        context.saveCoreData()
-
-        return home
-    }
+    
+//    static func createHomeFolder(context: NSManagedObjectContext) -> Folder {
+//        let home = Folder(title: "Home Folder", context: context)
+//        context.saveCoreData()
+//
+//        return home
+//    }
+    
+    
     
 //    static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
 //
