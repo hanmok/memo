@@ -156,15 +156,19 @@ struct FolderView: View {
         
         // fetch both home Folder and Archive Folder Separately.
         
-//        .sheet(isPresented: $showSelectingFolderView,
-//               content: {
-////            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
-////            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
+        .sheet(isPresented: $showSelectingFolderView,
+               content: {
+//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: topFolders.sorted()))
+//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(targetFolders: Folder.fetchTopFolders(context: context)))
 //            SelectingFolderView(folderGroup: FolderGroup(targetFolders: Folder.fetchHomeFolder(context: context)))
-//
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
-//        })
+            
+            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
+                homeFolder: Folder.fetchHomeFolder(context: context)!,
+                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!))
+            
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
+        })
 
         .onDisappear(perform: {
             newSubFolderName = ""
