@@ -159,11 +159,18 @@ struct FolderView: View {
         .sheet(isPresented: $showSelectingFolderView,
                content: {
             
-            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
-                homeFolder: Folder.fetchHomeFolder(context: context)!,
-                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
-                sortingMethod: FolderOrderVM.shard.sortingMethod))
-            
+//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
+//                homeFolder: Folder.fetchHomeFolder(context: context)!,
+//                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
+//                sortingMethod: FolderOrderVM.shard.sortingMethod))
+            SelectingFolderView(
+                fastFolderWithLevelGroup:
+                    FastFolderWithLevelGroup(
+                        homeFolder: Folder.fetchHomeFolder(context: context)!,
+                        archiveFolder: Folder.fetchHomeFolder(context: context,
+                                                              fetchingHome: false)!
+                    )
+            )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })

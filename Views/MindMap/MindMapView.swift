@@ -44,7 +44,7 @@ struct MindMapView: View {
     @StateObject var memoEditVM = MemoEditViewModel()
     @StateObject var folderEditVM = FolderEditViewModel()
 //    @StateObject var folderOrder = FolderOrderVM()
-    @EnvironmentObject var folderOrder: FolderOrderVM
+//    @EnvironmentObject var folderOrder: FolderOrderVM
     @StateObject var memoOrder = MemoOrder()
     
     @State var newFolderName = ""
@@ -91,7 +91,8 @@ struct MindMapView: View {
                     Spacer()
                     HStack {
                         // sort
-                        FolderOrderingMenu(folderOrder: folderOrder)
+//                        FolderOrderingMenu(folderOrder: folderOrder)
+                        FolderOrderingMenu(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
 //                        FolderOrderingMenu()
                             .padding(.trailing, Sizes.smallSpacing)
                         
@@ -440,9 +441,14 @@ struct MindMapView: View {
             //            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
 //            SelectingFolderView(folderGroup: folderGroup)
 //            SelectingFolderView(fastfolder)
-            NavigationView {SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
-                homeFolder: Folder.fetchHomeFolder(context: context)!,
-                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!, sortingMethod: FolderOrderVM.shard.sortingMethod), isFullScreen: true)
+            NavigationView {
+//                SelectingFolderView(
+//                    fastFolderWithLevelGroup: FastFolderWithLevelGroup(
+//                homeFolder: Folder.fetchHomeFolder(context: context)!,
+//                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
+//                sortingMethod: FolderOrderVM.shard.sortingMethod),
+//                    isFullScreen: true)
+                SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, isFullScreen: true)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
             }
