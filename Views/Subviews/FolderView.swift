@@ -12,11 +12,14 @@ struct FolderView: View {
     
 //    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
     
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    //    @StateObject var memoOrder = MemoOrder()
+
     @Environment(\.colorScheme) var colorScheme
+    
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
@@ -24,7 +27,6 @@ struct FolderView: View {
     @State var newSubFolderName = ""
     
     @State var showSelectingFolderView = false
-    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @ObservedObject var currentFolder: Folder
     
@@ -56,29 +58,7 @@ struct FolderView: View {
                         if !currentFolder.memos.isEmpty {
                             MemoList()
                         }
-                        HStack {
-                            Spacer()
-                            
-                            // Button Or SubFolderView
-                            ZStack(alignment: .topTrailing) {
-                                Button(action: {
-                                    isShowingSubFolderView = true
-                                }, label: {
-                                    SubFolderButtonImage() })
-                                    .padding(.trailing, Sizes.overallPadding )
-                                
-                                SubFolderView(
-                                    folder: currentFolder,
-                                    isShowingSubFolderView: $isShowingSubFolderView,
-                                    isAddingFolder: $shouldAddFolder)
-                                    
-                                // offset x : trailingPadding
-                                    .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
-                                    .animation(.spring(), value: isShowingSubFolderView)
-                            } // end of ZStack
-                            .padding(.top, 10)
-                            
-                        }
+                       
                     }
                 } // end of main VStack
                 .environmentObject(currentFolder)
@@ -88,6 +68,32 @@ struct FolderView: View {
             } // end of scrollView
             
             VStack {
+                
+                HStack {
+                    Spacer()
+                    
+                    // Button Or SubFolderView
+                    ZStack(alignment: .topTrailing) {
+                        Button(action: {
+                            isShowingSubFolderView = true
+                        }, label: {
+                            SubFolderButtonImage() })
+                            .padding(.trailing, Sizes.overallPadding )
+                        
+                        SubFolderView(
+                            folder: currentFolder,
+                            isShowingSubFolderView: $isShowingSubFolderView,
+                            isAddingFolder: $shouldAddFolder)
+                            
+                        // offset x : trailingPadding
+                            .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
+                            .animation(.spring(), value: isShowingSubFolderView)
+                    } // end of ZStack
+                    .padding(.top, 10)
+                    
+                }
+                
+                
                 Spacer()
                 HStack {
                     Spacer()
@@ -141,13 +147,14 @@ struct FolderView: View {
             
             NavigationLink(
                 destination:
-//                    MemoView(
-//                    memo: Memo(title: "", contents: "", context: context),
-//                    parent: currentFolder,
-//                    isNewMemo: true),
+                    
+                    MemoView(
+                    memo: Memo(title: "", contents: "", context: context),
+                    parent: currentFolder,
+                    isNewMemo: true),
                 
-                MemoView( parent: currentFolder, context2: context),
-//                MemoView(parent: Folder.fetchTopFolders(context: context).first!, context2: context), //For testing, Not working !! tq..  why ? !
+                // this is the problem.. why...??
+//                MemoView( parent: currentFolder, context2: context),
                 isActive: $isAddingMemo) {}
             
             
@@ -163,16 +170,16 @@ struct FolderView: View {
 //                homeFolder: Folder.fetchHomeFolder(context: context)!,
 //                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
 //                sortingMethod: FolderOrderVM.shard.sortingMethod))
-            SelectingFolderView(
-                fastFolderWithLevelGroup:
-                    FastFolderWithLevelGroup(
-                        homeFolder: Folder.fetchHomeFolder(context: context)!,
-                        archiveFolder: Folder.fetchHomeFolder(context: context,
-                                                              fetchingHome: false)!
-                    )
-            )
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
+//            SelectingFolderView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        homeFolder: Folder.fetchHomeFolder(context: context)!,
+//                        archiveFolder: Folder.fetchHomeFolder(context: context,
+//                                                              fetchingHome: false)!
+//                    )
+//            )
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
         })
 
         .onDisappear(perform: {
@@ -191,12 +198,16 @@ struct FolderView: View {
                 if let validParent = currentFolder.parent {
                     validParent.title += ""
                     print("parent's title has changed")
-                    
                 }
+                
                 let validMemos = currentFolder.memos.sorted()
+                print("name of each memos: ")
                 for eachMemo in validMemos {
                     eachMemo.title += ""
+                    
+                    print(eachMemo.title)
                 }
+                
                  // does not go back
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")

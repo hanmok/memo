@@ -9,15 +9,12 @@ import SwiftUI
 import CoreData
 struct DynamicFolderCell: View {
     
-//    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) var context
+    
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    //    let siblingSpacing: CGFloat = 3
-    //    let parentSpacing: CGFloat = 3
-    //    let basicSpacing: CGFloat = 2
-//    @State var showSelectingFolderView = false
+    
     @ObservedObject var folder: Folder
     
     var level: Int
@@ -36,7 +33,6 @@ struct DynamicFolderCell: View {
                             .environmentObject(memoOrder)
             ) {
                 TitleWithLevelView(folder: folder, level: level)
-                
             } // end of NavigationLink
             .swipeActions(edge: .trailing, allowsFullSwipe: false) {
 

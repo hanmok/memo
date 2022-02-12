@@ -58,35 +58,37 @@ struct MemoView: View {
     }
     
     
-    init(memo: Memo, parent: Folder ) {
+    init(memo: Memo, parent: Folder, isNewMemo: Bool = false ) {
         self.memo = memo
         self.parent = parent
-//        self.initialTitle = isNewMemo ? "Enter Title" : memo.title
-        self.initialTitle = memo.title
+        self.initialTitle = isNewMemo ? "Enter Title" : memo.title
+//        self.initialTitle = memo.title
         self.initialContents = memo.contents
         // this line make error.
         //        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
         self.isNewMemo = false
-        
+        self.isNewMemo = isNewMemo
 //        self.memo = Memo(context: context)
 //        self.parent = Folder(context: context)
 //        self.isBookMarkedTemp = memo.isBookMarked
 //        self.isBookMarkedTemp = false
 //        self.title = "asmkd"
     }
+    
     // Initializer For New Memo
-    init(parent: Folder, context2: NSManagedObjectContext) {
-        
-        let newMemo = Memo(context: context2)
-        self.memo = newMemo
-        parent.add(memo: newMemo)
-        self.isNewMemo = true
-        self.initialTitle = "Enter Title"
-        self.initialContents = ""
-        self.parent = parent
-//        self.isBookMarkedTemp = memo.isBookMarked
-//        self.isBookMarkedTemp = false
-    }
+    // It should not be used !!!!
+//    init(parent: Folder, context2: NSManagedObjectContext) {
+//
+//        let newMemo = Memo(context: context2)
+//        self.memo = newMemo
+//        parent.add(memo: newMemo)
+//        self.isNewMemo = true
+//        self.initialTitle = "Enter Title"
+//        self.initialContents = ""
+//        self.parent = parent // redundant.
+////        self.isBookMarkedTemp = memo.isBookMarked
+////        self.isBookMarkedTemp = false
+//    }
     
     func saveChanges() {
         print("save changes has triggered")
@@ -100,9 +102,10 @@ struct MemoView: View {
             Memo.delete(memo)
         } else { // if both title and contents are not empty
             //            memo.modificationDate = Date()
+            
+            // This block..
             if isNewMemo {
-
-                parent.add(memo: memo) // error.. ?? ??
+                parent.add(memo: memo) // error.. ?? ?? um...
                 parent.modificationDate = Date()
             }
         }

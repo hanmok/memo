@@ -38,14 +38,18 @@ struct LevelAndCollapsed {
 
 struct MindMapView: View {
     
+//    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
+    
+    
     @Environment(\.managedObjectContext) var context
-    //    @Environment(\.colorScheme) var colorScheme
     @Environment(\.colorScheme) var colorScheme
+    
     @StateObject var memoEditVM = MemoEditViewModel()
     @StateObject var folderEditVM = FolderEditViewModel()
     @StateObject var folderOrder = FolderOrder()
-//    @EnvironmentObject var folderOrder: FolderOrderVM
     @StateObject var memoOrder = MemoOrder()
+    
+//    @EnvironmentObject var folderOrder: FolderOrderVM
     
     @State var newFolderName = ""
     
@@ -56,10 +60,6 @@ struct MindMapView: View {
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
-//    @ObservedObject var folderGroup: FolderGroup
-    
-    @ObservedObject var bookMarkedMemos: BookMarkedMemos
-//    @StateObject var
     @FocusState var textFieldFocus: Bool
     
     @State var showSelectingFolderView = false
@@ -79,22 +79,13 @@ struct MindMapView: View {
     }
     
     var body: some View {
-        
-        DispatchQueue.main.async {
-            foldersToFetch = selectionEnum == .folder ? fastFolderWithLevelGroup.folders : fastFolderWithLevelGroup.archives
-        }
-        
-        return ZStack(alignment: .topLeading) {
+        return ZStack {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
                     Spacer()
                     HStack {
-                        // sort
-//                        FolderOrderingMenu(folderOrder: folderOrder)
-//                        FolderOrderingMenu(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
                         FolderOrderingMenu(folderOrder: folderOrder)
-//                        FolderOrderingMenu()
                             .padding(.trailing, Sizes.smallSpacing)
                         
                         // Add new Folder to the top Folder
@@ -211,166 +202,8 @@ struct MindMapView: View {
                     .listStyle(InsetGroupedListStyle())
                 }
                 
-                
-                                
-                
-                
-                
-                
-                
-                
-                
-//                List(fastFolderWithLevelGroup.folders.first!.folder, children: \.subfolders_) { folder in
-//                    HStack {
-//
-//                    }
-//                }
-
-//                List {
-//                    ForEach(fastFolderWithLevelGroup.folders) {folderWithLevel in
-//                        TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
-//                    }
-//                }
-                
-                
-                
-                
-                
-                // MARK: - VERSION 1
-                //                List {
-                //                    ForEach(folderGroup.realFolders) { folder in
-                //                        Section(header: FolderTitleWithStar(folder: folder)) { // TopFolder, and Archive should be located here.
-                //                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
-                //                                ZStack(alignment: .leading) {
-                //                                NavigationLink(destination: FolderView(currentFolder: child)
-                //                                                .environmentObject(memoEditVM)
-                //                                                .environmentObject(folderEditVM)
-                //                                                .environmentObject(memoOrder)
-                //                                ) {
-                //                                    EmptyView()
-                //                                }.opacity(0)
-                //                                    FolderTitleWithStar(folder: child)
-                //                                }
-                //                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                //                                    Button {
-                //                                        print("nothing")
-                //                                    } label: {
-                //                                        ChangeableImage(imageSystemName: "trash")
-                //                                    }
-                //                                    .tint(.red)
-                //                                }
-                //                            }
-                //                                         .listItemTint(.black)
-                //                        }
-                //                    }
-                //                }
-                
-                
-                //                // MARK: - VERSION 2
-
-//                List(folderGroup.realFolders,children: \.children ) { folder in
-//
-//                    RecursiveFolderCell(folder: folder)
-//                        .environmentObject(memoEditVM)
-//                        .environmentObject(folderEditVM)
-//                        .environmentObject(memoOrder)
-//                } // End of List
-                
-             
-                
-                
-                //                List(folderGroup.realFolders,children: \.children ) { folder in
-                //                Text("Using Disclosure Group")
-                
-                // MARK: - VERSION 4
-                /*
-                                List {
-                                    
-                                    Section(header: Text("Folder")) {
-                                        ForEach(folderGroup.realFolders) { folder in
-                                            DisclosureGroup((folder.title)) {
-                                            DisclosureGroup(isExpanded: $shouldExpand, content: {
-                
-                
-                                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
-                                                    RecursiveFolderCell(folder: child)
-                                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                
-                                                            // remove !
-                                                            Button {
-                                                                context.saveCoreData()
-                                                            } label: {
-                                                                ChangeableImage(imageSystemName: "pencil")
-                                                            }
-                                                            .tint(.red)
-                
-                                                            // change Folder location
-                                                        }
-                                                }
-                                            }, label:{ Text(folder.title)
-                                            })
-                
-//                                            DisclosureGroup {
-//                                                OutlineGroup(folder.children ?? [Folder](), children: \.children) { child in
-//                                                    RecursiveFolderCell(folder: child)
-//                                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
-//
-//                                                            // remove !
-//                                                            Button {
-//                                                                context.saveCoreData()
-//                                                            } label: {
-//                                                                ChangeableImage(imageSystemName: "pencil")
-//                                                            }
-//                                                            .tint(.red)
-//
-//                                                            // change Folder location
-//                                                        }
-//                                                }
-//                                            } label: {
-//                                                Text(folder.title)
-//                                            }
-                                            }
-                                        }
-                                    }
-                                }
-                */
-                
-                // MARK: - MEMO SECTION
-                
-//                Section(header:
-//                            HStack {
-//                    ChangeableImage(imageSystemName: "bookmark.fill")
-//                        .adjustTintColor(scheme: colorScheme)
-////                    Text("BookMarked Memos")
-//                        .padding(.vertical, Sizes.smallSpacing)
-//                        .padding(.leading, Sizes.overallPadding)
-//
-//                    Spacer()
-//                }
-//                ) {
-//                    ScrollView(.horizontal) {
-//                        LazyHStack(alignment: .top, spacing: Sizes.smallSpacing ) {
-//                            ForEach(bookMarkedMemos.markedMemos, id: \.self) { memo in
-//
-//                                NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
-//                                ) {
-//                                    BookMarkedMemoBoxView(memo: memo)
-//                                }
-//                                //                            .environmentObject(memoEditVM)
-//
-//                            } // end of ForEach
-//
-//                        } // HStack
-//                        .padding(.horizontal, Sizes.overallPadding)
-//                    }
-//                    .frame(height: 150)
-//                } // end of Section
-                        
-                        
-                        
-                        
             } // end of VStack .
-            // another ZSTack
+            // another ZStack
             VStack {
                 Spacer()
                 HStack {
@@ -382,12 +215,15 @@ struct MindMapView: View {
                 }
             }
             
+            // MARK: - 여기에 메모 관련된 것을 만들면, FolderView 에서 작동을 안함.. 왜 그럴까 ?? 
 
 //            NavigationLink(
-//                destination: MemoView(
+//                destination:
+//                    MemoView(
 //                    memo: Memo(title: "", contents: "", context: context),
-//                    parent: folderGroup.realFolders.first!,
-//                    isNewMemo: true),
+//                    parent: fastFolderWithLevelGroup.homeFolder,
+//                    isNewMemo: true
+//                    ),
 //                isActive: $isAddingMemo) {}
 
             
@@ -431,33 +267,18 @@ struct MindMapView: View {
                 }
         } // end of ZStack
         
-        //        .sheet(isPresented: $folderEditVM.shouldShowSelectingView, content: {
-        //            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
-        //                .environmentObject(folderEditVM)
-        //                .environmentObject(memoEditVM)
-        //        })
         
         
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
-            //            SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
-//            SelectingFolderView(folderGroup: folderGroup)
-//            SelectingFolderView(fastfolder)
             NavigationView {
-//                SelectingFolderView(
-//                    fastFolderWithLevelGroup: FastFolderWithLevelGroup(
-//                homeFolder: Folder.fetchHomeFolder(context: context)!,
-//                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
-//                sortingMethod: FolderOrderVM.shard.sortingMethod),
-//                    isFullScreen: true)
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, isFullScreen: true)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
             }
         })
-        
-        
         .navigationBarHidden(true)
     }
+        
 
 }
 
