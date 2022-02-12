@@ -128,6 +128,8 @@
 		9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */; };
 		9AD6EF20277DC1AD00866456 /* TestLazyAndScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1F277DC1AD00866456 /* TestLazyAndScrollView.swift */; };
 		9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF25277EC5CF00866456 /* MindMapView.swift */; };
+		E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
+		E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596A6C427AD8D5000076E95 /* OrderViewModel.swift */; };
@@ -235,6 +237,7 @@
 		9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleFolderList.swift; sourceTree = "<group>"; };
 		9AD6EF1F277DC1AD00866456 /* TestLazyAndScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLazyAndScrollView.swift; sourceTree = "<group>"; };
 		9AD6EF25277EC5CF00866456 /* MindMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMapView.swift; sourceTree = "<group>"; };
+		E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedFolderView.swift; sourceTree = "<group>"; };
 		E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemoVarsTestView.swift; sourceTree = "<group>"; };
 		E596A6C427AD8D5000076E95 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +272,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */,
 				9A046CF827B4DEB9003169C7 /* RecursiveFolderCell.swift */,
 				9A046CC827B3A042003169C7 /* BookMarkedMemoBoxView.swift */,
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
@@ -655,6 +659,7 @@
 				9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */,
 				9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */,
 				9AC5D1FD278557D8007EAA28 /* UnitTestHelper.swift in Sources */,
+				E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
 				9A337890279A56C500805138 /* FolderEditViewModel.swift in Sources */,
 				9A3377B3278FFF2D00805138 /* TextViewWrapper.swift in Sources */,
 				9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */,
@@ -749,6 +754,7 @@
 				9A33788B27996F8300805138 /* ContainedMemos.swift in Sources */,
 				E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
 				9AC5D22C278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */,
+				E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
 				9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */,
 				9A1D536727ACE516009294C1 /* DeeepMemoApp.swift in Sources */,
 				9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */,

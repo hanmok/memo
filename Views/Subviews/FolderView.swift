@@ -195,11 +195,14 @@ struct FolderView: View {
                 
                 let validMemos = currentFolder.memos.sorted()
                 print("name of each memos: ")
+                
                 for eachMemo in validMemos {
                     eachMemo.title += ""
                     
                     print(eachMemo.title)
                 }
+                
+                print("count : \(currentFolder.memos.count)")
                 
                  // does not go back
             }, label: {

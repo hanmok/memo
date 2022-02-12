@@ -194,16 +194,17 @@ extension Memo {
 
 
 extension Memo: Comparable {
+    
     public static func < (lhs: Memo, rhs: Memo) -> Bool {
         
-        switch Memo.orderType {
-        case .modificationDate :
-            return sortModifiedDate(lhs, rhs)
-        case .creationDate:
-            return sortCreatedDate(lhs, rhs)
-        case .alphabetical:
-            return sortAlphabetOrder(lhs, rhs)
-        }
-//        return true
+//        switch Memo.orderType {
+//        case .modificationDate :
+//            return sortModifiedDate(lhs, rhs)
+//        case .creationDate:
+//            return sortCreatedDate(lhs, rhs)
+//        case .alphabetical:
+//            return sortAlphabetOrder(lhs, rhs)
+//        }
+        return lhs.title < rhs.title
     }
 }

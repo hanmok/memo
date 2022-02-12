@@ -386,6 +386,49 @@ extension Folder {
                 return folderWithLevelContainer
             }
     
+    static func returnContainedMemos(folder: Folder, onlyMarked: Bool = false ) -> [Memo] {
+        
+        var foldersContainer = [Folder]()
+        var memosContainer = [Memo]()
+//        var memosCount = 0
+        
+        func getAllFolders(folder: Folder)  {
+            let tempFolders = folder.subfolders
+            
+            if !tempFolders.isEmpty {
+                for eachFolder in tempFolders {
+                    foldersContainer.append(eachFolder)
+                    getAllFolders(folder: eachFolder)
+                }
+            }
+        }
+        
+        func appendMemos(folder: Folder) {
+            for eachMemo in folder.memos {
+                memosContainer.append(eachMemo)
+//                memosCount += 1
+            }
+        }
+        
+        appendMemos(folder: folder)
+        
+        getAllFolders(folder: folder)
+        
+        // get all memos from each of collected Folders
+        for eachFolder in foldersContainer {
+            
+            appendMemos(folder: eachFolder)
+            print("memosContainer: \(memosContainer)")
+        }
+//        memosContainer = memosContainer.filter { $0.isBookMarked == true }
+//        folder.title += ""
+        if onlyMarked {
+            return memosContainer.filter { $0.isBookMarked == true}.sorted()
+        }
+        
+        return memosContainer
+    }
+    
     
     
 //    static func getHierarchicalFolders(topFolder: Folder, sortingMethod: (Folder, Folder) -> Bool) -> [FolderWithLevel] {

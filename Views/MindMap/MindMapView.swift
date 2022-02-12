@@ -61,6 +61,7 @@ struct MindMapView: View {
     
     func addMemo() {
             isAddingMemo = true
+        
     }
     
     var body: some View {
@@ -181,12 +182,30 @@ struct MindMapView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Button(action: addMemo) {
-                        PlusImage()
-                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 160, trailing: Sizes.overallPadding))
-                    }
+//                    Button(action: addMemo) {
+                        BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
+//                    BookmarkedFolderView(folder: fastFolderWithLevelGroup.folders.first!.folder)
+                            .environmentObject(memoEditVM)
+                            .environmentObject(folderEditVM)
+                            .environmentObject(memoOrder)
+//                    }
                 }
             }
+            
+            // ANOTHER Z STACK
+//            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
+//                .environmentObject(memoEditVM)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoOrder)
+//                .frame(width: UIScreen.screenWidth,height: UIScreen.screenHeight)
+//                    .offset(y: UIScreen.screenHeight - 160)
+            
+//            PlusImage()
+            
+            
+//                .offset(y: 500)
+//                .offset(y: -130)
+//                    .padding(.bottom, 100)
             
             // MARK: - 여기에 메모 관련된 것을 만들면, FolderView 에서 작동을 안함.. 왜 그럴까 ??
 

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+
 struct DynamicFolderCell: View {
     
     @Environment(\.managedObjectContext) var context

@@ -13,6 +13,10 @@ struct ContainedMemos {
     var memosCount: Int
 }
 
+struct bookMarkedMemos {
+    var memos: [Memo]
+}
+
 
 extension Folder {
     

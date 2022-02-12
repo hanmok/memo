@@ -25,16 +25,15 @@ struct HomeView: View { // top folder fetch
 
 
 //        For Testing
-        DispatchQueue.main.async {
-            if true {
-                if shouldExecuteOne {
-                UnitTestHelpers.deletesAllFolders(context: context)
-                    shouldExecuteOne.toggle()
-                    Folder.returnSampleFolder3(context: context)
-                }
-
-            }
-        }
+//        DispatchQueue.main.async {
+//            if true {
+//                if shouldExecuteOne {
+//                UnitTestHelpers.deletesAllFolders(context: context)
+//                    shouldExecuteOne.toggle()
+//                    Folder.returnSampleFolder3(context: context)
+//                }
+//            }
+//        }
         
 //        return EmptyView()
 //        if topFolders.isEmpty {
@@ -64,8 +63,8 @@ class FastFolderWithLevelGroup: ObservableObject {
      @Published var folders: [FolderWithLevel]
      @Published var archives: [FolderWithLevel]
     
-    var homeFolder: Folder
-    var archive: Folder
+    @Published var homeFolder: Folder
+    @Published var archive: Folder
 
     init(homeFolder: Folder, archiveFolder: Folder) {
         self.homeFolder = homeFolder

@@ -151,6 +151,7 @@ struct MemoView: View {
                 
                     .font(.title2)
                     .submitLabel(.continue)
+                    .disableAutocorrection(true)
                     .focused($focusState, equals: .title)
                     .onAppear(perform: {
                         print("BookMarked!!!!!!!! : \(isBookMarkedTemp)")
@@ -196,12 +197,12 @@ struct MemoView: View {
             print("title or memoView : \(title)")
             print("isNewMemo ? \(isNewMemo)")
             
-            if isNewMemo == true {
-                self.focusState = .title
-                print("isNewMemo == true, focusState = .title ")
-                    parent.add(memo: memo) // error.. ?? ??
-                    parent.modificationDate = Date()
-            }
+//            if isNewMemo == true {
+//                self.focusState = .title
+//                print("isNewMemo == true, focusState = .title ")
+//                    parent.add(memo: memo) // error.. ?? ??
+//                    parent.modificationDate = Date()
+//            }
         })
         
         // triggered after FolderView has appeared
