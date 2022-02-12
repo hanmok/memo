@@ -82,6 +82,11 @@ extension Folder {
         set { creationDate_ = newValue }
     }
     
+    var modificationDate: Date {
+        get { return modificationDate_ ?? Date() }
+        set { modificationDate_ = newValue }
+    }
+    
     var title: String {
         get { return title_ ?? "" }
         set { title_ = newValue }
@@ -443,7 +448,7 @@ extension Folder {
 struct FolderProperties {
     static let id = "id"
     static let creationDate = "creationDate_"
-    static let modificationDate = "modificationDate"
+    static let modificationDate = "modificationDate_"
     static let title = "title_"
     static let order = "order"
     
@@ -451,6 +456,50 @@ struct FolderProperties {
     static let parent = "parent"
     static let subfolders = "subfolders_"
     
+}
+
+extension Folder {
+    
+    static var isAscending: Bool = true
+    static var orderType: OrderType = .creationDate
+    
+    static func sortModifiedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
+        if Folder.isAscending {
+            return lhs.modificationDate < rhs.modificationDate
+        } else {
+            return lhs.modificationDate >= rhs.modificationDate
+        }
+    }
+    
+    static func sortCreatedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
+        if Folder.isAscending {
+            return lhs.creationDate < rhs.creationDate
+        } else {
+            return lhs.creationDate >= rhs.creationDate
+        }
+    }
+    
+    static func sortAlphabetOrder(_ lhs: Folder, _ rhs: Folder) -> Bool {
+        if Folder.isAscending {
+            return lhs.title < rhs.title
+        } else {
+            return lhs.title >= rhs.title
+        }
+    }
+}
+
+extension Folder : Comparable {
+    
+    public static func < (lhs: Folder, rhs: Folder) -> Bool {
+        
+        switch Folder.orderType {
+        case .modificationDate : return sortModifiedDate(lhs, rhs)
+        case .creationDate:
+            return sortCreatedDate(lhs, rhs)
+        case .alphabetical:
+            return sortAlphabetOrder(lhs, rhs)
+        }
+    }
 }
 
 //extension Folder {
@@ -485,24 +534,24 @@ struct FolderProperties {
 //
 //}
 
-extension Folder : Comparable {
-    
-    public static func < (lhs: Folder, rhs: Folder) -> Bool {
-        
-        lhs.creationDate > rhs.creationDate
-        
-//        switch Folder.orderType {
-//        case .modificationDate:
-//            return sortModifiedDate(lhs, rhs)
-//        case .creationDate:
-//            return sortCreatedDate(lhs, rhs)
-//        case .alphabetical:
-//            return sortAlphabetOrder(lhs, rhs)
-//        }
-        
-//        return true
-    }
-}
+//extension Folder : Comparable {
+//
+//    public static func < (lhs: Folder, rhs: Folder) -> Bool {
+//
+//        lhs.creationDate > rhs.creationDate
+//
+////        switch Folder.orderType {
+////        case .modificationDate:
+////            return sortModifiedDate(lhs, rhs)
+////        case .creationDate:
+////            return sortCreatedDate(lhs, rhs)
+////        case .alphabetical:
+////            return sortAlphabetOrder(lhs, rhs)
+////        }
+//
+////        return true
+//    }
+//}
 
 extension Folder {
     
@@ -617,13 +666,11 @@ extension Folder {
         let subFolder2 = Folder(title: "Category 2", context: context)
         let subFolder3 = Folder(title: "Category 3", context: context)
         
-        subFolder1.creationDate = Date().advanced(by: 2)
-        subFolder2.creationDate = Date().advanced(by: 1)
-        subFolder3.creationDate = Date().advanced(by: 3)
+        subFolder1.creationDate = Date().advanced(by: 200)
+        subFolder2.creationDate = Date().advanced(by: 100)
+        subFolder3.creationDate = Date().advanced(by: 300)
         
-        subFolder1.modificationDate = Date().advanced(by: 2)
-        subFolder2.modificationDate = Date().advanced(by: 3)
-        subFolder3.modificationDate = Date().advanced(by: 1)
+
         
         
 
@@ -635,6 +682,12 @@ extension Folder {
         subFolder1.add(subfolder: newFolder2)
         
         newFolder2.creationDate = Date().advanced(by: 1)
+        
+        
+        subFolder1.modificationDate = Date().advanced(by: 200)
+        subFolder2.modificationDate = Date().advanced(by: 300)
+        subFolder3.modificationDate = Date().advanced(by: 100)
+        
         
 //        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
         let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context, createdAt: Date(timeIntervalSince1970: 1))

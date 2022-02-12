@@ -15,6 +15,19 @@ enum OrderType: String, CaseIterable, Codable {
     case alphabetical = "Alphabetical"
 }
 
+class FolderOrder: ObservableObject {
+    @Published var isAscending = true
+    
+    @Published var orderType: OrderType = .creationDate
+}
+
+class MemoOrder: ObservableObject {
+    @Published var isAscending = false
+    
+    @Published var orderType: OrderType = .modificationDate
+}
+
+//8599795fcfe9bd92d8e67c53eb29c7678db43d29
 
 //class FolderOrderVM: ObservableObject {
 //
@@ -100,23 +113,25 @@ enum OrderType: String, CaseIterable, Codable {
 //
 //}
 
-class MemoOrder: ObservableObject {
-    @Published var isAscending = false
-//    {
-//        didSet {
-//            Memo.isAscending = isAscending
-//        }
-//    }
 
-    @Published var orderType: OrderType = .modificationDate
-//    {
-//        didSet{
-//            Memo.orderType = orderType
-//        }
-//    }
-    
-    @Published var sortingMethod: (Memo, Memo) -> Bool = { _, _ in true}
-}
+
+//class MemoOrder: ObservableObject {
+//    @Published var isAscending = false
+////    {
+////        didSet {
+////            Memo.isAscending = isAscending
+////        }
+////    }
+//
+//    @Published var orderType: OrderType = .modificationDate
+////    {
+////        didSet{
+////            Memo.orderType = orderType
+////        }
+////    }
+//
+//    @Published var sortingMethod: (Memo, Memo) -> Bool = { _, _ in true}
+//}
 
 
 

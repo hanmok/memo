@@ -29,16 +29,16 @@ struct HomeView: View { // top folder fetch
 //                UnitTestHelpers.deletesAllFolders(context: context)
 
 //  //      For Testing
-//        DispatchQueue.main.async {
-//            if true {
-//                if shouldExecuteOne {
-//                UnitTestHelpers.deletesAllFolders(context: context)
-//                    shouldExecuteOne.toggle()
-//                    Folder.returnSampleFolder3(context: context)
-//                }
-//
-//            }
-//        }
+        DispatchQueue.main.async {
+            if true {
+                if shouldExecuteOne {
+                UnitTestHelpers.deletesAllFolders(context: context)
+                    shouldExecuteOne.toggle()
+                    Folder.returnSampleFolder3(context: context)
+                }
+
+            }
+        }
         
         
         if topFolders.isEmpty {
@@ -117,106 +117,104 @@ class FastFolderWithLevelGroup: ObservableObject {
         
         self.archives = Folder.getHierarchicalFolders(topFolder: archiveFolder)
         self.folders = Folder.getHierarchicalFolders(topFolder: homeFolder)
-//        self.archives = returnFolders()
-//        self.folders = returnFolders()
     }
     
-    func returnFolders() -> [FolderWithLevel]{
-       return [FolderWithLevel]()
-    }
-    
-    @Published var isAscending = true
-    {
-        didSet {
-            print("type has changed to \(isAscending)")
-            switch orderType {
-            case .creationDate:
-                self.sortingMethod = oldValue ? {$0.creationDate < $1.creationDate} : {$0.creationDate >= $1.creationDate}
-            case .modificationDate:
-                self.sortingMethod = oldValue ? {$0.modificationDate! < $1.modificationDate!} : {$0.modificationDate! >= $1.modificationDate!}
-            case .alphabetical:
-                self.sortingMethod = oldValue ? {$0.title < $1.title} : {$0.title >= $1.title}
-            }
-        }
-    }
-
-    @Published var orderType: OrderType = .creationDate
-    {
-        willSet {
-            print("type has changed to : \(newValue)")
-            switch newValue {
-            case .creationDate:
-                self.sortingMethod = isAscending ? {$0.creationDate < $1.creationDate} : {$0.creationDate >= $1.creationDate}
-            case .modificationDate:
-                self.sortingMethod = isAscending ? {$0.modificationDate! < $1.modificationDate!} : {$0.modificationDate! >= $1.modificationDate!}
-            case .alphabetical:
-                self.sortingMethod = isAscending ? {$0.title < $1.title} : {$0.title >= $1.title}
-            }
-        }
-    }
-    
-    // Default value is .. creation, by ascending order !
-//    @Published var sortingMethod: (Folder, Folder) -> Bool = { _, _ in true}
-    @Published var sortingMethod: (Folder, Folder) -> Bool = { $0.creationDate < $1.creationDate} {
-        didSet {
-            print("sortingMethod has changed")
-            print(orderType.rawValue)
-            print(isAscending)
-            self.archives = getHierarchicalFolders(topFolder: archive)
-            self.folders = getHierarchicalFolders(topFolder: homeFolder)
-        }
-    }
-    
-    func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
-        print(#function)
-        print(#line)
-        print("func in VM has called")
-//        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
-        
-            var currentFolder: Folder? = topFolder
-            var level = 0
-            var trashSet = Set<Folder>()
-            var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
-            var folderContainer = [currentFolder]
-
-        whileLoop: while (currentFolder != nil) {
-            print("currentFolder: \(currentFolder!.id)")
-            print(#line)
-            if currentFolder!.subfolders.count != 0 {
-
-                // check if trashSet has contained Folder of arrayContainer2
+//    func returnFolders() -> [FolderWithLevel]{
+//       return [FolderWithLevel]()
+//    }
+//
+//    @Published var isAscending = true
+//    {
+//        didSet {
+//            print("type has changed to \(isAscending)")
+//            switch orderType {
+//            case .creationDate:
+//                self.sortingMethod = oldValue ? {$0.creationDate < $1.creationDate} : {$0.creationDate >= $1.creationDate}
+//            case .modificationDate:
+//                self.sortingMethod = oldValue ? {$0.modificationDate! < $1.modificationDate!} : {$0.modificationDate! >= $1.modificationDate!}
+//            case .alphabetical:
+//                self.sortingMethod = oldValue ? {$0.title < $1.title} : {$0.title >= $1.title}
+//            }
+//        }
+//    }
+//
+//    @Published var orderType: OrderType = .creationDate
+//    {
+//        willSet {
+//            print("type has changed to : \(newValue)")
+//            switch newValue {
+//            case .creationDate:
+//                self.sortingMethod = isAscending ? {$0.creationDate < $1.creationDate} : {$0.creationDate >= $1.creationDate}
+//            case .modificationDate:
+//                self.sortingMethod = isAscending ? {$0.modificationDate! < $1.modificationDate!} : {$0.modificationDate! >= $1.modificationDate!}
+//            case .alphabetical:
+//                self.sortingMethod = isAscending ? {$0.title < $1.title} : {$0.title >= $1.title}
+//            }
+//        }
+//    }
+//
+//    // Default value is .. creation, by ascending order !
+////    @Published var sortingMethod: (Folder, Folder) -> Bool = { _, _ in true}
+//    @Published var sortingMethod: (Folder, Folder) -> Bool = { $0.creationDate < $1.creationDate} {
+//        didSet {
+//            print("sortingMethod has changed")
+//            print(orderType.rawValue)
+//            print(isAscending)
+//            self.archives = getHierarchicalFolders(topFolder: archive)
+//            self.folders = getHierarchicalFolders(topFolder: homeFolder)
+//        }
+//    }
+//
+//    func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
+//        print(#function)
+//        print(#line)
+//        print("func in VM has called")
+////        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
+//
+//            var currentFolder: Folder? = topFolder
+//            var level = 0
+//            var trashSet = Set<Folder>()
+//            var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
+//            var folderContainer = [currentFolder]
+//
+//        whileLoop: while (currentFolder != nil) {
+//            print("currentFolder: \(currentFolder!.id)")
+//            print(#line)
+//            if currentFolder!.subfolders.count != 0 {
+//
+//                // check if trashSet has contained Folder of arrayContainer2
+////                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
 //                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
-                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
-                    if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-        //            if !trashSet.contains(folder) && !arrayContainer2 {
-                        currentFolder = folder
-                        level += 1
-                        folderContainer.append(currentFolder!)
-                        folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
-                        continue whileLoop // this one..
-                    }
-                }
-                // subFolders 가 모두 이미 고려된 경우.
-                trashSet.update(with: currentFolder!)
-            } else { // subfolder 가 Nil 인 경우
-                trashSet.update(with: currentFolder!)
-            }
-
-            for i in 0 ..< folderWithLevelContainer.count {
-                if !trashSet.contains(folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder) {
-
-                    currentFolder = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder
-                    level = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].level
-                    break
-                }
-            }
-
-            if folderWithLevelContainer.count == trashSet.count {
-                break whileLoop
-            }
-        }
-            return folderWithLevelContainer
-        }
+//                    if !trashSet.contains(folder) && !folderContainer.contains(folder) {
+//        //            if !trashSet.contains(folder) && !arrayContainer2 {
+//                        currentFolder = folder
+//                        level += 1
+//                        folderContainer.append(currentFolder!)
+//                        folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
+//                        continue whileLoop // this one..
+//                    }
+//                }
+//                // subFolders 가 모두 이미 고려된 경우.
+//                trashSet.update(with: currentFolder!)
+//            } else { // subfolder 가 Nil 인 경우
+//                trashSet.update(with: currentFolder!)
+//            }
+//
+//            for i in 0 ..< folderWithLevelContainer.count {
+//                if !trashSet.contains(folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder) {
+//
+//                    currentFolder = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder
+//                    level = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].level
+//                    break
+//                }
+//            }
+//
+//            if folderWithLevelContainer.count == trashSet.count {
+//                break whileLoop
+//            }
+//        }
+//            return folderWithLevelContainer
+//        }
 }
 
 class BookMarkedMemos: ObservableObject {

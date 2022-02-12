@@ -43,7 +43,7 @@ struct MindMapView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var memoEditVM = MemoEditViewModel()
     @StateObject var folderEditVM = FolderEditViewModel()
-//    @StateObject var folderOrder = FolderOrderVM()
+    @StateObject var folderOrder = FolderOrder()
 //    @EnvironmentObject var folderOrder: FolderOrderVM
     @StateObject var memoOrder = MemoOrder()
     
@@ -92,7 +92,8 @@ struct MindMapView: View {
                     HStack {
                         // sort
 //                        FolderOrderingMenu(folderOrder: folderOrder)
-                        FolderOrderingMenu(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+//                        FolderOrderingMenu(fastFolderWithLevelGroup: fastFolderWithLevelGroup)
+                        FolderOrderingMenu(folderOrder: folderOrder)
 //                        FolderOrderingMenu()
                             .padding(.trailing, Sizes.smallSpacing)
                         

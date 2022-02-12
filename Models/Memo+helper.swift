@@ -52,10 +52,10 @@ extension Memo {
         set { overview_ = newValue }
     }
     
-//    var modificationDate: Date {
-//        get { modificationDate_ ?? Date() }
-//        set { modificationDate_ = newValue }
-//    }
+    var modificationDate: Date {
+        get { modificationDate_ ?? Date() }
+        set { modificationDate_ = newValue }
+    }
     
     var pinned: Bool { // initialValue: false
         get { pinned_ }
@@ -149,7 +149,7 @@ extension Memo {
 struct MemoProperties {
     static let id = "id_"
     static let creationDate = "creationDate_"
-    static let modificationDate = "modificationDate"
+    static let modificationDate = "modificationDate_"
     static let title = "title_"
     static let order = "order"
     static let colorAsInt = "colorAsInt"
@@ -168,9 +168,9 @@ extension Memo {
     // MARK: - Have TO FIX MODIFICATION DATE. it should not be nil for all.
     static func sortModifiedDate(_ lhs: Memo, _ rhs: Memo) -> Bool {
         if Memo.isAscending {
-            return lhs.modificationDate! < rhs.modificationDate!
+            return lhs.modificationDate < rhs.modificationDate
         } else {
-            return lhs.modificationDate! >= rhs.modificationDate!
+            return lhs.modificationDate >= rhs.modificationDate
         }
     }
 
