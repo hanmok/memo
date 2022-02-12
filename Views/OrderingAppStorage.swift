@@ -7,31 +7,6 @@
 
 import SwiftUI
 
-//struct OrderingAppStorage: View {
-//
-////    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
-//    var body: some View {
-//        VStack {
-//            Text(order.folderOrderType)
-//            Text(order.memoOrderType)
-////            Text("\String((order.folderAsc))")
-//            Text(String(order.memoAsc))
-//            Text(String(order.folderAsc))
-//
-//            Button {
-//                order.folderAsc.toggle()
-//            } label: {
-//                Text("Toggle Folder Asc")
-//            }
-//        }
-//    }
-//}
-
-//struct AppStoragePractice_Previews: PreviewProvider {
-//    static var previews: some View {
-//        OrderingAppStorage()
-//    }
-//}
 
 
 struct Ordering: Codable {
@@ -52,12 +27,6 @@ struct Ordering: Codable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-//        do {
-//            folderOrderType = try String(values.decode(String.self, forKey: .folderOrderType))
-//
-//        } catch DecodingError.typeMismatch {
-//           id = try String(values.decode(String.self, forKey: .id))
-//        }
         self.folderOrderType = try values.decode(String.self, forKey: .folderOrderType)
         self.memoOrderType = try values.decode(String.self, forKey: .memoOrderType)
         

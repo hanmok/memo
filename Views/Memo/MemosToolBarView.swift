@@ -25,7 +25,7 @@ struct MemosToolBarView: View {
 
             // PIN BUTTON, WORKS FINE
             Button(action: {
-// 로직이 좀 이상한데 ? 기본적으로 pin 시킴.
+                // default: pin all.
                 // 만약 모든게 pin 되어있는 경우에만 모두 unpin
                 var allPinned = true
                 for each in memoEditVM.selectedMemos {
@@ -59,11 +59,6 @@ struct MemosToolBarView: View {
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
                 showSelectingFolderView = true
-//                for each in memoEditVM.selectedMemos {
-//                    memoEditVM.didCutMemos.append(each)
-                    // show up mindmapView !
-//                }
-//                memoEditVM.initSelectedMemos()
             }) {
                 ChangeableImage(imageSystemName: "folder")
             }

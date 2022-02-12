@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-//enum TextFieldAlertType: String {
-//    case rename = "Rename Folder"
-//    case newSubFolder = "New Subfolder"
-//    case newTopFolder = "New Topfolder"
-//}
 
 enum TextFieldAlertType: String {
     case rename = "Rename Folder"
@@ -20,7 +15,6 @@ enum TextFieldAlertType: String {
 }
 
 struct TextFieldStruct {
-    
     
     var textEnum: TextFieldAlertType
     
@@ -55,17 +49,11 @@ struct PrettyTextFieldAlert: View {
                 Text(type.rawValue)
                     .font(.headline)
                     .padding(.vertical, 15)
-                // placeHolder ..
-//                TextField("Enter New FolderName", text: $text)
-//                TextField(placeHolderText, text: $text)
+                
                 TextField(TextFieldStruct(textEnum: type).placeHolder, text: $text)
                     .font(.callout)
                     .focused($focusState)
-//                    .background(.white)
-
-//                    .background(.green)
                     .background(colorScheme == .dark ? .black : .white)
-//                    .foregroundColor(.yellow)
                     .foregroundColor(colorScheme.adjustBlackAndWhite())
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)
@@ -82,10 +70,8 @@ struct PrettyTextFieldAlert: View {
                 // Cancel and Done Button
                 Rectangle()
                     .frame(height: 1)
-//                    .foregroundColor(Color(white: 225 / 255))
                     .foregroundColor(colorScheme == .dark ? Color(white: 80 / 255) : Color(white: 205 / 255))
                 
-//                HStack(spacing: 15) {
                 HStack(alignment: .center) {
                     
                     Button {
@@ -95,7 +81,6 @@ struct PrettyTextFieldAlert: View {
                     } label: {
                         Text("Cancel")
                             .foregroundColor(.red)
-//                            .padding(.horizontal, Sizes.overallPadding)
                             .frame(alignment: .center)
                            
                     }
@@ -103,7 +88,6 @@ struct PrettyTextFieldAlert: View {
 
                     Rectangle()
                         .frame(width: 1)
-//                        .foregroundColor(Color(white: 225 / 255))
                         .foregroundColor(colorScheme == .dark ? Color(white: 80 / 255) : Color(white: 205 / 255))
                     
                     
@@ -113,9 +97,7 @@ struct PrettyTextFieldAlert: View {
                         focusState = false
                     } label: {
                         Text("Done")
-//                            .foregroundColor(.black)
                             .foregroundColor(colorScheme == .dark ? .white : .black)
-//                            .padding(.horizontal, Sizes.overallPadding)
                             .frame(alignment: .center)
                     }
                     .frame(width: screenSize.width * 0.32, alignment: .center)
@@ -124,19 +106,10 @@ struct PrettyTextFieldAlert: View {
             }
 
             .frame(width: screenSize.width * 0.65, height: 132)
-//            .background(Color(.sRGB, white: 0.8))
-//            .background(Color(.sRGB, white: 241/255)) //
             .background(colorScheme == .dark ? Color(white: 50 / 255) : Color(white: 240 / 255))
             .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
             .offset(y: isPresented ? 0 : screenSize.height)
             .animation(.spring(), value: isPresented)
-//            .shadow(color: .white, radius: 6, x: -9, y: -9)
         }
     }
 }
-
-//struct PrettyTextFieldAlert_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PrettyTextFieldAlert(type: .rename, isPresented: .constant(true), text: .constant("Placeholder Text"))
-//    }
-//}

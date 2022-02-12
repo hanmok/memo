@@ -62,17 +62,12 @@ struct MemoView: View {
         self.memo = memo
         self.parent = parent
         self.initialTitle = isNewMemo ? "Enter Title" : memo.title
-//        self.initialTitle = memo.title
         self.initialContents = memo.contents
         // this line make error.
         //        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
         self.isNewMemo = false
         self.isNewMemo = isNewMemo
-//        self.memo = Memo(context: context)
-//        self.parent = Folder(context: context)
-//        self.isBookMarkedTemp = memo.isBookMarked
-//        self.isBookMarkedTemp = false
-//        self.title = "asmkd"
+        
     }
     
     // Initializer For New Memo
@@ -184,25 +179,10 @@ struct MemoView: View {
                     .frame(maxHeight: .infinity, alignment: .bottom)
                     .disableAutocorrection(true)
                     .padding(.horizontal, Sizes.overallPadding)
-//                    .gesture(scroll)
-//                    .background(.yellow )
                     .focused($editorFocusState)
                     .focused($focusState, equals: .contents)
-//                    .frame(alignment: .leading)
-                 
-                 // make auto focus to the end when open the memo
-//                    .onAppear(perform: {
-//                        if self.isNewMemo == false {
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-//                                self.focusState = .contents
-//                            }
-//                        }
-//                    })
-                 
-                 
             } // end of VStack
              .frame(maxHeight: .infinity, alignment: .bottom)
-             
 //        } // end of ScrollView
 
         .gesture(scroll)
@@ -221,9 +201,6 @@ struct MemoView: View {
                 print("isNewMemo == true, focusState = .title ")
                     parent.add(memo: memo) // error.. ?? ??
                     parent.modificationDate = Date()
-              
-                
-                
             }
         })
         

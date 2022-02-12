@@ -74,7 +74,7 @@
 		9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B42790039200805138 /* FolderViewTest.swift */; };
 		9A33789B279A76B700805138 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* MainView.swift */; };
 		9A33789C279A76C300805138 /* FolderLabelView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D224278834EC007EAA28 /* FolderLabelView3.swift */; };
-		9A895823277179E100E7B773 /* PlusMinusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusMinusImage.swift */; };
+		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
 		9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582C2771BE1000E7B773 /* MemoView.swift */; };
 		9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7512772C17500057A84 /* CustomTextEditor.swift */; };
@@ -185,7 +185,7 @@
 		9A33788F279A56C500805138 /* FolderEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEditViewModel.swift; sourceTree = "<group>"; };
 		9A337892279A5C9600805138 /* HierarchyLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HierarchyLabelView.swift; sourceTree = "<group>"; };
 		9A337895279A6F3C00805138 /* MemoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewModel.swift; sourceTree = "<group>"; };
-		9A895822277179E100E7B773 /* PlusMinusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusMinusImage.swift; sourceTree = "<group>"; };
+		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9A89582C2771BE1000E7B773 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		9A98E7512772C17500057A84 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
@@ -343,7 +343,7 @@
 		9A3377DA2790313200805138 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				9A895822277179E100E7B773 /* PlusMinusImage.swift */,
+				9A895822277179E100E7B773 /* PlusImage.swift */,
 				9A98E7542772D28C00057A84 /* ChangeableImage.swift */,
 				9A1D536127ACE2E3009294C1 /* SubFolderButtonImage.swift */,
 				9A337892279A5C9600805138 /* HierarchyLabelView.swift */,
@@ -699,7 +699,7 @@
 				9A3377B72790060100805138 /* MemosToolBarViewTest.swift in Sources */,
 				E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */,
 				9A33785D279817B700805138 /* FolderView2.swift in Sources */,
-				9A895823277179E100E7B773 /* PlusMinusImage.swift in Sources */,
+				9A895823277179E100E7B773 /* PlusImage.swift in Sources */,
 				9A1D535F27A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */,
 				9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */,
 				9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */,

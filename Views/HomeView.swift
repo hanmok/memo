@@ -60,14 +60,13 @@ struct HomeView: View { // top folder fetch
 
 class FastFolderWithLevelGroup: ObservableObject {
     
-//    @Published var folders: [FolderWithLevel]
-//    @Published var archives: [FolderWithLevel]
+
      @Published var folders: [FolderWithLevel]
      @Published var archives: [FolderWithLevel]
     
     var homeFolder: Folder
     var archive: Folder
-    // 여기 두개에서 계속해서 호출한다 ?? 왜 ?
+
     init(homeFolder: Folder, archiveFolder: Folder) {
         self.homeFolder = homeFolder
         self.archive = archiveFolder

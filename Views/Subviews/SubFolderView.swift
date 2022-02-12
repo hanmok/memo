@@ -9,15 +9,16 @@ import SwiftUI
 import CoreData
 struct SubFolderView: View {
     
-    //    @EnvironmentObject var folder: Folder
-//    @Environment(\.managedObjectContext) var context
+    @Environment(\.colorScheme) var colorScheme
+
     @ObservedObject var folder: Folder
+
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
+
     @Binding var isShowingSubFolderView: Bool
     @Binding var isAddingFolder: Bool
-    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         let subFolders = folder.subfolders.sorted{ $0.title < $1.title}
@@ -50,11 +51,9 @@ struct SubFolderView: View {
             
             
             VStack(alignment: .leading, spacing: 5) {
-                // testing
-                
-                
+            
                 ForEach(subFolders) { subFolder in
-                    // how to make.. it disappear if moved ?
+
                     NavigationLink {
                         FolderView(currentFolder: subFolder)
                             .environmentObject(folderEditVM)
@@ -64,14 +63,13 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                     }
-                    // What makes a subfolder go back to parent Folder ?
+
                     .simultaneousGesture(TapGesture().onEnded{
                         // hide SubFolderView when navigate
                         isShowingSubFolderView = false
                         memoEditVM.selectedMemos.removeAll()
                         memoEditVM.initSelectedMemos()
                     })
-
                 } // end of ForEach
             } // end of VStack
             .padding(.leading, 12)
@@ -94,9 +92,3 @@ struct SubFolderView: View {
         
     }
 }
-
-//struct SubFolderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SubFolderView()
-//    }
-//}

@@ -10,8 +10,6 @@ import CoreData
 
 struct FolderView: View {
     
-//    @FetchRequest(fetchRequest: Folder.topFolderFetch()) var topFolders: FetchedResults<Folder>
-    
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
@@ -166,27 +164,22 @@ struct FolderView: View {
         .sheet(isPresented: $showSelectingFolderView,
                content: {
             
-//            SelectingFolderView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
-//                homeFolder: Folder.fetchHomeFolder(context: context)!,
-//                archiveFolder: Folder.fetchHomeFolder(context: context, fetchingHome: false)!,
-//                sortingMethod: FolderOrderVM.shard.sortingMethod))
-//            SelectingFolderView(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        homeFolder: Folder.fetchHomeFolder(context: context)!,
-//                        archiveFolder: Folder.fetchHomeFolder(context: context,
-//                                                              fetchingHome: false)!
-//                    )
-//            )
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
+            SelectingFolderView(
+                fastFolderWithLevelGroup:
+                    FastFolderWithLevelGroup(
+                        homeFolder: Folder.fetchHomeFolder(context: context)!,
+                        archiveFolder: Folder.fetchHomeFolder(context: context,
+                                                              fetchingHome: false)!
+                    )
+            )
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
         })
 
         .onDisappear(perform: {
             newSubFolderName = ""
             memoEditVM.selectedMemos.removeAll()
             memoEditVM.initSelectedMemos()
-            
         })
         
         .navigationTitle(currentFolder.title)
@@ -214,7 +207,6 @@ struct FolderView: View {
             })
             
             
-            
             // favorite Button
             Button(action: {
                 toggleFavorite()
@@ -231,9 +223,7 @@ struct FolderView: View {
                         .tint(colorScheme.adjustBlackAndWhite())
                 }
             })
-            
             MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
-//            MemoOrderingMenu(parentFolder: currentFolder)
         })
     }
 }

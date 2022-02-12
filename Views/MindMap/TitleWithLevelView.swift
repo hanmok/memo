@@ -35,12 +35,5 @@ struct TitleWithLevelView: View {
                     .background(.white)
             }
         }
-//        .listRowBackground(.green)
     }
 }
-
-//struct TItleWithLavelView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TItleWithLavelView()
-//    }
-//}

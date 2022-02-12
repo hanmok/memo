@@ -12,7 +12,6 @@ struct FolderWithLevel: Hashable {
     var level: Int
     var isCollapsed: Bool = false
     var isShowing: Bool = true
-//    var id: UUID
 }
 
 class FolderGroup: ObservableObject {
@@ -21,14 +20,6 @@ class FolderGroup: ObservableObject {
         self.realFolders = targetFolders
     }
 }
-
-//class FolderGroup2: ObservableObject {
-//    @Published var realFolders: [Folder]
-//    init(targetFolders: Folder) {
-//        self.realFolders = targetFolders
-//    }
-//}
-
 
 struct LevelAndCollapsed {
     var level: Int
@@ -49,7 +40,9 @@ struct MindMapView: View {
     @StateObject var folderOrder = FolderOrder()
     @StateObject var memoOrder = MemoOrder()
     
-//    @EnvironmentObject var folderOrder: FolderOrderVM
+    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
+    
+    @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
     
@@ -58,19 +51,11 @@ struct MindMapView: View {
     
     @State var folderToAddSubFolder : Folder? = nil
     
-    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-    
-    @FocusState var textFieldFocus: Bool
-    
     @State var showSelectingFolderView = false
     
     @State var folderToBeRenamed : Folder? = nil
     
-    @State var shouldExpand = true
     @State var isAddingMemo = false
-  
-  
-    @State var foldersToFetch: [FolderWithLevel] = []
     
     @State var selectionEnum = FolderTypeEnum.folder // default value
     
@@ -120,12 +105,7 @@ struct MindMapView: View {
                 // another VStack
                 if selectionEnum == .folder {
                     List {
-//                        Section(header:
-//                                    Text("Folders")
-//                        ) {
-                            // need to fetch only Home Folder
                             ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
-    //                            folderWithLevel.folder
                                 DynamicFolderCell(
                                     folder: folderWithLevel.folder,
                                     level: folderWithLevel.level)
@@ -136,7 +116,6 @@ struct MindMapView: View {
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                         Button {
                                             folderToAddSubFolder = folderWithLevel.folder
-    //                                 shouldAddSubFolder = true
                                             showTextField = true
                                             textFieldType = .newSubFolder
                                         } label: {
@@ -156,28 +135,22 @@ struct MindMapView: View {
                                         .tint(.yellow)
                                     }
                             } // end of ForEach
-//                        } // end of Section
                     }
                     .listStyle(InsetGroupedListStyle())
                 } else {
                     List {
-//                        Section(header:
-//                                    Text("Folders")
-//                        ) {
-                            // need to fetch only Home Folder
                             ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
-    //                            folderWithLevel.folder
                                 DynamicFolderCell(
                                     folder: folderWithLevel.folder,
                                     level: folderWithLevel.level)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                     .environmentObject(memoOrder)
+                                    
                                 // ADD Sub Folder
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                         Button {
                                             folderToAddSubFolder = folderWithLevel.folder
-    //                                 shouldAddSubFolder = true
                                             showTextField = true
                                             textFieldType = .newSubFolder
                                         } label: {
@@ -215,7 +188,7 @@ struct MindMapView: View {
                 }
             }
             
-            // MARK: - 여기에 메모 관련된 것을 만들면, FolderView 에서 작동을 안함.. 왜 그럴까 ?? 
+            // MARK: - 여기에 메모 관련된 것을 만들면, FolderView 에서 작동을 안함.. 왜 그럴까 ??
 
 //            NavigationLink(
 //                destination:
@@ -278,30 +251,6 @@ struct MindMapView: View {
         })
         .navigationBarHidden(true)
     }
-        
-
 }
 
 
-// text.bubble
-// bubble.right.fill
-// square.split.1x2.fill
-// text.badge.plus
-//}
-
-
-struct FolderTitleWithStar: View {
-    @ObservedObject var folder: Folder
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    var body: some View {
-        HStack {
-            Text(folder.title)
-                .foregroundColor(colorScheme.adjustBlackAndWhite())
-            
-            if folder.isFavorite {
-                Text(Image(systemName: "star.fill"))
-                    .tint(.yellow) // why not working ?
-            }
-        }
-    }
-}

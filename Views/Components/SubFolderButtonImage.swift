@@ -15,25 +15,13 @@ struct SubFolderButtonImage: View {
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
             // FG and BG should be the same color
-//                .foregroundColor(.yellow)
-//                .background(.red)
                 .foregroundColor(colorScheme == .dark ? Color.subColorDark : Color.subColor)
                 .background(colorScheme == .dark ? Color.subColorDark : Color.subColor)
             
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "folder")
                 .frame(width: 25, height: 25)
-//                .foregroundColor(.black)
                 .foregroundColor(colorScheme == .dark ? Color(white: 1) : Color(white: 0))
         }
     }
 }
-
-//struct ColoredImage : View {
-//    @Environment(\.colorScheme) var colorScheme
-//    var imageName: String
-//    var body: some View {
-//        return ChangeableImage(imageSystemName: imageName)
-//            .foregroundColor(.foregroundColor(colorScheme == .dark ? Color(white: 1) : Color(white: 0)))
-//    }
-//}

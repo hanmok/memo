@@ -15,9 +15,7 @@ enum MemoListType: String {
 }
 
 struct FilteredMemoList: View {
-    
-//    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+        
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @ObservedObject var folder: Folder
     @State var hasNotLongSelected = false
@@ -26,7 +24,6 @@ struct FilteredMemoList: View {
 
     
     var body: some View {
-        
         
         var memosToShow = [Memo]()
         
@@ -41,13 +38,6 @@ struct FilteredMemoList: View {
         
         // 아마.. 여기서 에러가 생긴 것 같아.
         return ZStack {
-//            if memoEditVM.navigateToMemo != nil {
-//                NavigationLink(
-//                    destination:
-//                        MemoView(memo: memoEditVM.navigateToMemo!, parent: folder),
-//                    isActive: $memoEditVM.hasNotLongSelected) {}
-//            }
-
             
             VStack { // without this, views stack on other memos
                 Section {
@@ -58,15 +48,11 @@ struct FilteredMemoList: View {
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }
                         .disabled(!memoEditVM.hasNotLongSelected)
-//                        MemoBoxView(memo: memo)
-//                            .frame(width: UIScreen.screenWidth - 20, alignment: .center)
 //
 
-// MARK: - Problem occured here
+
 //                        // MARK: - Tapped
                         .simultaneousGesture(TapGesture().onEnded{
-//                        .simultaneousGesture(DragGesture(minimumDistance: 1).onEnded { _ in
-                            // if already long tapped
                                 if !memoEditVM.hasNotLongSelected {
 
                                     memoEditVM.dealWhenMemoSelected(memo)
@@ -97,8 +83,7 @@ struct FilteredMemoList: View {
                                 } else { // if not long tapped already
                                     memoEditVM.hasNotLongSelected = false
                                     memoEditVM.add(memo: memo)
-//                                    memoEditVM.parentFolder = memo.folder
-//                                    print("parentFolder: \(memo.folder!.title)")
+
                                 }
 
                                 if memoEditVM.selectedMemos.isEmpty {
