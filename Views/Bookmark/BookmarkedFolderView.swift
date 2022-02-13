@@ -17,17 +17,6 @@ struct BookmarkedFolderView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     
-    // 160 for bookMark, UIScreen.screenHeight for MemoView
-    @State var height: CGFloat = 160 {
-        willSet {
-            print("height newValue in BookmarkedFolderView: \(newValue)")
-            if newValue == UIScreen.screenHeight {
-                UIView.setAnimationsEnabled(false)
-            } else {
-                UIView.setAnimationsEnabled(true)
-            }
-        }
-    }
     @State var newMemoPressed = false
     @State var presentingView = false
     @ObservedObject var folder: Folder
@@ -48,22 +37,20 @@ struct BookmarkedFolderView: View {
                                     
                                     NavigationLink(
                                         destination:
-                                            SpecialMemoView(
+                                            BookmarkMemoView(
                                                 memo: bookMarkedMemo, presentingView: $presentingView,
-                                                passedHeight: $height, parent: bookMarkedMemo.folder!,
+                                                parent: bookMarkedMemo.folder!,
                                                 initialTitle: bookMarkedMemo.title, isNewMemo: false)) {
-                                        BookMarkedMemoBoxView(memo: bookMarkedMemo)
+                                        BookmarkedMemoBoxView(memo: bookMarkedMemo)
                                             .padding(.top, 0)
                                     }
                                 }
                             } // end of HStack
                             .padding(.horizontal, Sizes.overallPadding)
-//                            .background(.orange)
                             Spacer()
                             }
                         }
                         .frame(height: 150)
-//                        .background(.blue)
                         .padding(.top, 30)
 
                         Spacer()
@@ -72,9 +59,9 @@ struct BookmarkedFolderView: View {
                     
                     
                     NavigationLink(destination:
-                                    SpecialMemoView(
+                                    BookmarkMemoView(
                                         memo: Memo(title: "", contents: "", context: context),
-                                        presentingView: $presentingView, passedHeight: $height,
+                                        presentingView: $presentingView,
                                         parent: folder,
                                         initialTitle: "Enter Title" ,
                                         isNewMemo: true),
@@ -83,7 +70,6 @@ struct BookmarkedFolderView: View {
                 .navigationBarHidden(true)
             } // end of NavigationView
             .navigationBarHidden(true)
-//            .ignoresSafeArea()
             VStack {
                 HStack {
                     
@@ -94,36 +80,25 @@ struct BookmarkedFolderView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(colorScheme.adjustBlackAndWhite())
                     .padding(.leading, Sizes.overallPadding)
-//                    .padding(.vertical)
-//                    .offset(y: height == 160 ? -40 : -100)
-                    .offset(y: presentingView ? -100 : -40 )
-                    //                    .offset(y: -40)
-
+                    .offset(y: presentingView ? -100 : -45 )
+                    
                     
                     Spacer()
                     
-                    
-                    
                     Button {
-                        height = UIScreen.screenHeight
                         newMemoPressed = true
                     } label:
                     {
                         PlusImage2()
                     }
                     .padding(.trailing, Sizes.overallPadding)
-//                    .offset(y: height == 160 ? -25 : -100)
                     .offset(y: presentingView ? -100 : -25 )
-//                    .offset(y: -25)
                 }
                 Spacer()
             }
             
         } // end of ZStack
-//        .offset(y: presentingView ? 0 : UIScreen.screenHeight - 300)
         .offset(y: presentingView ? 0 : UIScreen.screenHeight - 250)
         .animation(.spring(), value: presentingView)
-//        .background(.red)
-        
     }
 }

@@ -12,33 +12,30 @@ struct HomeView: View { // top folder fetch
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-//    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
+    //    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
     
     @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
     
-//    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
+    //    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
     
     @State var shouldExecuteOne = true
     var body: some View {
         
         // MARK: - FOR TESTING
-
-
-//        For Testing
-//        DispatchQueue.main.async {
-//            if true {
-//                if shouldExecuteOne {
-//                UnitTestHelpers.deletesAllFolders(context: context)
-//                    shouldExecuteOne.toggle()
-//                    Folder.returnSampleFolder3(context: context)
-//                }
-//            }
-//        }
         
-//        return EmptyView()
-//        if topFolders.isEmpty {
-//            Folder.returnSampleFolder3(context: context)
-//                }
+        
+        //   // MARK: - For Testing
+        //        DispatchQueue.main.async {
+        //            if true {
+        //                if shouldExecuteOne {
+        //                UnitTestHelpers.deletesAllFolders(context: context)
+        //                    shouldExecuteOne.toggle()
+        //                    Folder.returnSampleFolder3(context: context)
+        //                }
+        //            }
+        //        }
+        
+        //        return EmptyView()
         
         return NavigationView {
             MindMapView(
@@ -46,11 +43,9 @@ struct HomeView: View { // top folder fetch
                     FastFolderWithLevelGroup(
                         homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
                         archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
-                        )
-//                ,bookMarkedMemos: BookMarkedMemos(memos: memos.sorted())
+                    )
             )
         }
-        
     }
 }
 
@@ -59,26 +54,17 @@ struct HomeView: View { // top folder fetch
 
 class FastFolderWithLevelGroup: ObservableObject {
     
-
-     @Published var folders: [FolderWithLevel]
-     @Published var archives: [FolderWithLevel]
+    @Published var folders: [FolderWithLevel]
+    @Published var archives: [FolderWithLevel]
     
     @Published var homeFolder: Folder
     @Published var archive: Folder
-
+    
     init(homeFolder: Folder, archiveFolder: Folder) {
         self.homeFolder = homeFolder
         self.archive = archiveFolder
         
         self.archives = Folder.getHierarchicalFolders(topFolder: archiveFolder)
         self.folders = Folder.getHierarchicalFolders(topFolder: homeFolder)
-    }
-}
-
-class BookMarkedMemos: ObservableObject {
-    @Published var markedMemos: [Memo]
-    
-    init(memos: [Memo]) {
-        self.markedMemos = memos.filter { $0.isBookMarked == true }
     }
 }

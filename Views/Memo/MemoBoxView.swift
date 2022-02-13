@@ -9,29 +9,28 @@ import SwiftUI
 
 // used only to show.
 struct MemoBoxView: View {
-    
-    @ObservedObject var memo: Memo
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
+
     @Environment(\.colorScheme) var colorScheme
+
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+
+    @ObservedObject var memo: Memo
+
     @State var isSelected = false
     
     var title: String? {
         if memo.title != "" {
             return memo.title
         }
-        return nil // empty Title
+        return nil
     }
     
     var contents: String? {
         if memo.contents != "" {
             return memo.contents
         }
-        return nil // empty contents
+        return nil
     }
-    
-    
-    // If both overview exist, contents doesn't show up
-    // if overview doesn't only title and contents show up
     
     var body: some View {
         VStack(alignment: .leading) {

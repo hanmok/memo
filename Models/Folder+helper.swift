@@ -18,6 +18,13 @@ enum FolderTypeEnum {
     case archive
 }
 
+struct ContainedMemos {
+    var folder: Folder
+    var memos: [Memo]
+    var memosCount: Int
+}
+
+
 struct FolderType {
     
     static func getFolderName(type: FolderTypeEnum) -> String {
@@ -390,7 +397,6 @@ extension Folder {
         
         var foldersContainer = [Folder]()
         var memosContainer = [Memo]()
-//        var memosCount = 0
         
         func getAllFolders(folder: Folder)  {
             let tempFolders = folder.subfolders
@@ -420,8 +426,7 @@ extension Folder {
             appendMemos(folder: eachFolder)
             print("memosContainer: \(memosContainer)")
         }
-//        memosContainer = memosContainer.filter { $0.isBookMarked == true }
-//        folder.title += ""
+        
         if onlyMarked {
             return memosContainer.filter { $0.isBookMarked == true}.sorted()
         }
@@ -429,54 +434,50 @@ extension Folder {
         return memosContainer
     }
     
-    
-    
-//    static func getHierarchicalFolders(topFolder: Folder, sortingMethod: (Folder, Folder) -> Bool) -> [FolderWithLevel] {
-////        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
+//    static func returnContainedMemosWithFolder(folder: Folder, onlyMarked: Bool = false ) -> [ContainedMemos] {
 //
-//            var currentFolder: Folder? = topFolder
-//            var level = 0
-//            var trashSet = Set<Folder>()
-//            var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
-//            var folderContainer = [currentFolder]
+//        var foldersContainer = [Folder]()
+//        var memosContainer = [Memo]()
 //
-//        whileLoop: while (currentFolder != nil) {
-//            print("currentFolder: \(currentFolder!.id)")
-//            print(#line)
-//            if currentFolder!.subfolders.count != 0 {
+//        func getAllFolders(folder: Folder)  {
+//            let tempFolders = folder.subfolders
 //
-//                // check if trashSet has contained Folder of arrayContainer2
-//                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
-//                    if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-//        //            if !trashSet.contains(folder) && !arrayContainer2 {
-//                        currentFolder = folder
-//                        level += 1
-//                        folderContainer.append(currentFolder!)
-//                        folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
-//                        continue whileLoop // this one..
-//                    }
-//                }
-//                // subFolders 가 모두 이미 고려된 경우.
-//                trashSet.update(with: currentFolder!)
-//            } else { // subfolder 가 Nil 인 경우
-//                trashSet.update(with: currentFolder!)
-//            }
-//
-//            for i in 0 ..< folderWithLevelContainer.count {
-//                if !trashSet.contains(folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder) {
-//
-//                    currentFolder = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].folder
-//                    level = folderWithLevelContainer[folderWithLevelContainer.count - i - 1].level
-//                    break
+//            if !tempFolders.isEmpty {
+//                for eachFolder in tempFolders {
+//                    foldersContainer.append(eachFolder)
+//                    getAllFolders(folder: eachFolder)
 //                }
 //            }
+//        }
 //
-//            if folderWithLevelContainer.count == trashSet.count {
-//                break whileLoop
+//        func appendMemos(folder: Folder) {
+//            for eachMemo in folder.memos {
+//                memosContainer.append(eachMemo)
+////                memosCount += 1
 //            }
 //        }
-//            return folderWithLevelContainer
+//
+//        appendMemos(folder: folder)
+//
+//        getAllFolders(folder: folder)
+//
+//        // get all memos from each of collected Folders
+//        for eachFolder in foldersContainer {
+//
+//            appendMemos(folder: eachFolder)
+//            print("memosContainer: \(memosContainer)")
 //        }
+//
+//        if onlyMarked {
+//            return memosContainer.filter { $0.isBookMarked == true}.sorted()
+//        }
+//
+//        return memosContainer
+//    }
+    
+    func checkIfHasMemo() -> Bool {
+        return false
+    }
     
     
     static func convertLevelIntoFolder(_ withLevels: [FolderWithLevel]) -> [Folder] {

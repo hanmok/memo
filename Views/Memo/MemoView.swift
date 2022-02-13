@@ -18,10 +18,6 @@ struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
-//    @Environment(\.colorScheme) var colorScheme: ColorScheme
-
-    // better not being implemented.
-    //    @Environment(\.scenePhase) var scenePhase
     
     @ObservedObject var memo: Memo
     
@@ -32,9 +28,9 @@ struct MemoView: View {
     
     @State var title: String = ""
     @State var contents: String = ""
-//    @State var isBookMarkedTemp: Bool = false
-     @State var isBookMarkedTemp: Bool?
-
+    
+    @State var isBookMarkedTemp: Bool?
+    
     let parent: Folder
     let screenSize = UIScreen.main.bounds
     
@@ -63,32 +59,15 @@ struct MemoView: View {
         self.parent = parent
         self.initialTitle = isNewMemo ? "Enter Title" : memo.title
         self.initialContents = memo.contents
-        // this line make error.
-        //        self.colorSelected = Color(rgba: Int(memo.colorAsInt))
         self.isNewMemo = false
         self.isNewMemo = isNewMemo
-        
     }
     
-    // Initializer For New Memo
-    // It should not be used !!!!
-//    init(parent: Folder, context2: NSManagedObjectContext) {
-//
-//        let newMemo = Memo(context: context2)
-//        self.memo = newMemo
-//        parent.add(memo: newMemo)
-//        self.isNewMemo = true
-//        self.initialTitle = "Enter Title"
-//        self.initialContents = ""
-//        self.parent = parent // redundant.
-////        self.isBookMarkedTemp = memo.isBookMarked
-////        self.isBookMarkedTemp = false
-//    }
     
     func saveChanges() {
         print("save changes has triggered")
         memo.title = title
-
+        
         memo.contents = contents
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if both title and contents are empty, delete memo
@@ -98,7 +77,7 @@ struct MemoView: View {
         } else { // if both title and contents are not empty
             //            memo.modificationDate = Date()
             
-            // This block..
+            
             if isNewMemo {
                 parent.add(memo: memo) // error.. ?? ?? um...
                 parent.modificationDate = Date()
@@ -106,34 +85,28 @@ struct MemoView: View {
         }
         
         parent.title += "" //
-
+        
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
-//        print(parent.memos.sorted())
+
     }
     
     func togglePinMemo() {
         memo.pinned.toggle()
     }
-//    toggleBookMark
+
     func toggleBookMark() {
-//        memo.isBookMarked.toggle()
-//         memo.isBookMarked
-        // initial
+        
         if isBookMarkedTemp == nil {
             isBookMarkedTemp = memo.isBookMarked ? false : true
         } else {
             isBookMarkedTemp!.toggle()
         }
-        
-
     }
     
     func removeMemo() {
-        
         Memo.delete(memo)
-        //        saveChanges()
         context.saveCoreData()
         presentationMode.wrappedValue.dismiss()
     }
@@ -144,48 +117,45 @@ struct MemoView: View {
                 editorFocusState = false
             }
         
-//        return ScrollView {
-            return VStack(spacing: 0) {
-//                ScrollViewProxy
-                TextField(initialTitle, text: $title)
-                
-                    .font(.title2)
-                    .submitLabel(.continue)
-                    .disableAutocorrection(true)
-                    .focused($focusState, equals: .title)
-                    .onAppear(perform: {
-                        print("BookMarked!!!!!!!! : \(isBookMarkedTemp)")
-                        if self.isNewMemo == true {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                                self.focusState = .title
-                            }
+        return VStack(spacing: 0) {
+            TextField(initialTitle, text: $title)
+            
+                .font(.title2)
+                .submitLabel(.continue)
+                .disableAutocorrection(true)
+                .focused($focusState, equals: .title)
+                .onAppear(perform: {
+                    print("BookMarked!!!!!!!! : \(isBookMarkedTemp)")
+                    if self.isNewMemo == true {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+                            self.focusState = .title
                         }
-                    })
-                    .padding(.bottom, Sizes.largePadding)
-                    .padding(.horizontal, Sizes.overallPadding)
-                    .onSubmit {
-                        focusState = .contents
                     }
-                
-                // TextField Underline
-                    .overlay {
-                        Divider()
-                            .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
-                    }
-                
-                // MARK: - Contents
-                
-                TextEditor(text: $contents)
-                
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .disableAutocorrection(true)
-                    .padding(.horizontal, Sizes.overallPadding)
-                    .focused($editorFocusState)
-                    .focused($focusState, equals: .contents)
-            } // end of VStack
-             .frame(maxHeight: .infinity, alignment: .bottom)
-//        } // end of ScrollView
-
+                })
+                .padding(.bottom, Sizes.largePadding)
+                .padding(.horizontal, Sizes.overallPadding)
+                .onSubmit {
+                    focusState = .contents
+                }
+            
+            // TextField Underline
+                .overlay {
+                    Divider()
+                        .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
+                }
+            
+            // MARK: - Contents
+            
+            TextEditor(text: $contents)
+            
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .disableAutocorrection(true)
+                .padding(.horizontal, Sizes.overallPadding)
+                .focused($editorFocusState)
+                .focused($focusState, equals: .contents)
+        } // end of VStack
+        .frame(maxHeight: .infinity, alignment: .bottom)
+        
         .gesture(scroll)
         // How..
         .onAppear(perform: {
@@ -196,13 +166,6 @@ struct MemoView: View {
             print("memoView has appeared!")
             print("title or memoView : \(title)")
             print("isNewMemo ? \(isNewMemo)")
-            
-//            if isNewMemo == true {
-//                self.focusState = .title
-//                print("isNewMemo == true, focusState = .title ")
-//                    parent.add(memo: memo) // error.. ?? ??
-//                    parent.modificationDate = Date()
-//            }
         })
         
         // triggered after FolderView has appeared

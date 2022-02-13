@@ -87,8 +87,6 @@ struct SubFolderView: View {
         }
         .frame(width: UIScreen.screenWidth / 2.5)
             .background(Color.subColor)
-        
             .cornerRadius(10)
-        
     }
 }

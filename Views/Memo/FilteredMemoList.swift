@@ -48,7 +48,6 @@ struct FilteredMemoList: View {
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }
                         .disabled(!memoEditVM.hasNotLongSelected)
-//
 
 
 //                        // MARK: - Tapped
@@ -69,7 +68,6 @@ struct FilteredMemoList: View {
                             
                             if memoEditVM.selectedMemos.isEmpty {
                                     memoEditVM.hasNotLongSelected = true
-//                                memoEditVM.parentFolder = nil
                                 }
                             })
                         

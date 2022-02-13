@@ -27,7 +27,6 @@ struct SelectingFolderView: View {
   
     var body: some View {
         
-
         if folderEditVM.folderToCut != nil {
             DispatchQueue.main.async {
                 invalidFolderWithLevels = Folder.getHierarchicalFolders(topFolders: [folderEditVM.folderToCut!])
@@ -35,7 +34,6 @@ struct SelectingFolderView: View {
                     print("invalidFolder: \(each.folder.title)")
                 }
             }
-            
         }
         
         return VStack(spacing: 0) {

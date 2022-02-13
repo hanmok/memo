@@ -31,7 +31,6 @@ struct MindMapView: View {
     
 //    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
     
-    
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
@@ -45,24 +44,16 @@ struct MindMapView: View {
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
-    
     @State var showTextField = false
     @State var textFieldType: TextFieldAlertType? = nil
-    
+
     @State var folderToAddSubFolder : Folder? = nil
-    
     @State var showSelectingFolderView = false
-    
     @State var folderToBeRenamed : Folder? = nil
-    
-    @State var isAddingMemo = false
-    
+
     @State var selectionEnum = FolderTypeEnum.folder // default value
     
-    func addMemo() {
-            isAddingMemo = true
-        
-    }
+
     
     var body: some View {
         return ZStack {
@@ -76,11 +67,9 @@ struct MindMapView: View {
                         
                         // Add new Folder to the top Folder
                         Button {
-                            //                            shouldAddFolderToTop = true
                             showTextField = true
                             textFieldType = .newTopFolder
                         } label: {
-                            //                            ChangeableImage(imageSystemName: "plus")
                             ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
                             
                                 .foregroundColor(colorScheme.adjustBlackAndWhite())
@@ -92,11 +81,8 @@ struct MindMapView: View {
                 
                 
                 Picker("", selection: $selectionEnum) {
-                    
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(FolderTypeEnum.folder)
-                    
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(FolderTypeEnum.archive)
-                    
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)
@@ -171,53 +157,15 @@ struct MindMapView: View {
                                         .tint(.yellow)
                                     }
                             } // end of ForEach
-//                        } // end of Section
                     }
                     .listStyle(InsetGroupedListStyle())
                 }
                 
             } // end of VStack .
-            // another ZStack
-//            VStack {
-//                Spacer()
-//                HStack {
-//                    Button(action: addMemo) {
                         BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
-//                    BookmarkedFolderView(folder: fastFolderWithLevelGroup.folders.first!.folder)
                             .environmentObject(memoEditVM)
                             .environmentObject(folderEditVM)
                             .environmentObject(memoOrder)
-//                    }
-//                }
-//            }
-//            .ignoresSafeArea( edges: .horizontal)
-            
-            // ANOTHER Z STACK
-//            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
-//                .environmentObject(memoEditVM)
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoOrder)
-//                .frame(width: UIScreen.screenWidth,height: UIScreen.screenHeight)
-//                    .offset(y: UIScreen.screenHeight - 160)
-            
-//            PlusImage()
-            
-            
-//                .offset(y: 500)
-//                .offset(y: -130)
-//                    .padding(.bottom, 100)
-            
-            // MARK: - 여기에 메모 관련된 것을 만들면, FolderView 에서 작동을 안함.. 왜 그럴까 ??
-
-//            NavigationLink(
-//                destination:
-//                    MemoView(
-//                    memo: Memo(title: "", contents: "", context: context),
-//                    parent: fastFolderWithLevelGroup.homeFolder,
-//                    isNewMemo: true
-//                    ),
-//                isActive: $isAddingMemo) {}
-
             
             
             // MARK: - rename is not currently working .
@@ -258,8 +206,6 @@ struct MindMapView: View {
                     showTextField = false
                 }
         } // end of ZStack
-        
-        
         
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {

@@ -15,7 +15,7 @@ struct FolderView: View {
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-//    @State var height: CGFloat = 100
+    
     @Environment(\.colorScheme) var colorScheme
     
     @State var isShowingSubFolderView = false
@@ -90,8 +90,7 @@ struct FolderView: View {
                     .padding(.top, 10)
                     
                 }
-                
-                
+                // ANOTHER ELEMENT IN VSTACK
                 Spacer()
                 HStack {
                     Spacer()
@@ -150,13 +149,6 @@ struct FolderView: View {
                     parent: currentFolder,
                     isNewMemo: true),
                 isActive: $isAddingMemo) {}
-            
-//            NavigationLink(
-//                destination:
-//                    SpecialMemoView(passedHeight: $height, parent: currentFolder),
-//                isActive: $isAddingMemo) {}
-            
-            
             
         } // end of ZStack
         .frame(maxHeight: .infinity)

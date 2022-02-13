@@ -10,7 +10,7 @@ import Combine
 import CoreData
 
 
-struct SpecialMemoView: View {
+struct BookmarkMemoView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
@@ -24,19 +24,10 @@ struct SpecialMemoView: View {
     
     @State var title: String = ""
     @State var contents: String = ""
-    //    @State var isBookMarkedTemp: Bool = false
+    
     @State var isBookMarkedTemp: Bool?
     @Binding var presentingView: Bool
-    @Binding var passedHeight: CGFloat {
-        willSet {
-            print("height newValue in memoView: \(newValue)")
-            if newValue == 160.0 {
-                UIView.setAnimationsEnabled(true)
-            } else {
-                UIView.setAnimationsEnabled(false)
-            }
-        }
-    }
+    
     
     let parent: Folder
     let screenSize = UIScreen.main.bounds
@@ -116,8 +107,7 @@ struct SpecialMemoView: View {
                 .focused($focusState, equals: .title)
                 .onAppear(perform: {
                     presentingView = true
-                    passedHeight = UIScreen.screenHeight
-                    print("BookMarked!!!!!!!! : \(isBookMarkedTemp)")
+                    // MARK: - In case of New Memo -> FOCUS TO TITLE !
                     if self.isNewMemo == true {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
                             self.focusState = .title
@@ -145,12 +135,10 @@ struct SpecialMemoView: View {
                 .padding(.horizontal, Sizes.overallPadding)
                 .focused($editorFocusState)
                 .focused($focusState, equals: .contents)
+            
         } // end of VStack
         .frame(maxHeight: .infinity, alignment: .bottom)
-        //        } // end of ScrollView
-        
         .gesture(scroll)
-        // How..
         .onAppear(perform: {
             title = memo.title
             contents = memo.contents
@@ -159,19 +147,12 @@ struct SpecialMemoView: View {
             print("memoView has appeared!")
             print("title or memoView : \(title)")
             print("isNewMemo ? \(isNewMemo)")
-            
-            //            if isNewMemo == true {
-            //                self.focusState = .title
-            //                print("isNewMemo == true, focusState = .title ")
-            //                    parent.add(memo: memo) // error.. ?? ??
-            //                    parent.modificationDate = Date()
-            //            }
         })
         
         // triggered after FolderView has appeared
         .onDisappear(perform: {
             presentingView = false
-            passedHeight = 160
+
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
