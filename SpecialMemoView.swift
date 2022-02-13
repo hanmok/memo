@@ -26,6 +26,7 @@ struct SpecialMemoView: View {
     @State var contents: String = ""
     //    @State var isBookMarkedTemp: Bool = false
     @State var isBookMarkedTemp: Bool?
+    @Binding var presentingView: Bool
     @Binding var passedHeight: CGFloat {
         willSet {
             print("height newValue in memoView: \(newValue)")
@@ -114,6 +115,7 @@ struct SpecialMemoView: View {
                 .disableAutocorrection(true)
                 .focused($focusState, equals: .title)
                 .onAppear(perform: {
+                    presentingView = true
                     passedHeight = UIScreen.screenHeight
                     print("BookMarked!!!!!!!! : \(isBookMarkedTemp)")
                     if self.isNewMemo == true {
@@ -168,10 +170,12 @@ struct SpecialMemoView: View {
         
         // triggered after FolderView has appeared
         .onDisappear(perform: {
+            presentingView = false
             passedHeight = 160
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
+
         })
         .navigationBarItems(
             trailing: HStack {

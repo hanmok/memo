@@ -178,9 +178,9 @@ struct MindMapView: View {
                 
             } // end of VStack .
             // another ZStack
-            VStack {
-                Spacer()
-                HStack {
+//            VStack {
+//                Spacer()
+//                HStack {
 //                    Button(action: addMemo) {
                         BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
 //                    BookmarkedFolderView(folder: fastFolderWithLevelGroup.folders.first!.folder)
@@ -188,8 +188,8 @@ struct MindMapView: View {
                             .environmentObject(folderEditVM)
                             .environmentObject(memoOrder)
 //                    }
-                }
-            }
+//                }
+//            }
 //            .ignoresSafeArea( edges: .horizontal)
             
             // ANOTHER Z STACK
