@@ -26,7 +26,16 @@ struct SpecialMemoView: View {
     @State var contents: String = ""
     //    @State var isBookMarkedTemp: Bool = false
     @State var isBookMarkedTemp: Bool?
-    @Binding var passedHeight: CGFloat
+    @Binding var passedHeight: CGFloat {
+        willSet {
+            print("height newValue in memoView: \(newValue)")
+            if newValue == 160.0 {
+                UIView.setAnimationsEnabled(true)
+            } else {
+                UIView.setAnimationsEnabled(false)
+            }
+        }
+    }
     
     let parent: Folder
     let screenSize = UIScreen.main.bounds

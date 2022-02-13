@@ -18,7 +18,16 @@ struct BookmarkedFolderView: View {
     @EnvironmentObject var memoOrder: MemoOrder
     
     // 160 for bookMark, UIScreen.screenHeight for MemoView
-    @State var height: CGFloat = 160
+    @State var height: CGFloat = 160 {
+        willSet {
+            print("height newValue in BookmarkedFolderView: \(newValue)")
+            if newValue == UIScreen.screenHeight {
+                UIView.setAnimationsEnabled(false)
+            } else {
+                UIView.setAnimationsEnabled(true)
+            }
+        }
+    }
     @State var newMemoPressed = false
     
     @ObservedObject var folder: Folder
@@ -29,24 +38,24 @@ struct BookmarkedFolderView: View {
         return ZStack {
             NavigationView {
                 ZStack {
-                    
                     VStack {
-                        
                         HStack {
-                            Text(Image(systemName: "bookmark")) + Text(" BookMarked Folders")
+//                            Text(Image(systemName: "bookmark")) + Text(" BookMarked Folders")
                             
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(colorScheme.adjustBlackAndWhite())
                         .padding(.leading, Sizes.overallPadding)
                         .padding(.vertical)
+//                        .offset(y: -25)
                         
                         ScrollView(.horizontal) {
                             HStack(alignment: .top, spacing: Sizes.smallSpacing) {
                                 
-                                ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: false), id: \.self) {bookMarkedMemo in
+                                ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
                                     
-                                    NavigationLink(destination: SpecialMemoView(memo: bookMarkedMemo, passedHeight: $height, parent: bookMarkedMemo.folder!, initialTitle: bookMarkedMemo.title, isNewMemo: false)) {
+                                    NavigationLink(
+                                        destination: SpecialMemoView(memo: bookMarkedMemo, passedHeight: $height, parent: bookMarkedMemo.folder!, initialTitle: bookMarkedMemo.title, isNewMemo: false)) {
                                         BookMarkedMemoBoxView(memo: bookMarkedMemo)
                                             .padding(.top, 0)
                                     }
@@ -71,7 +80,20 @@ struct BookmarkedFolderView: View {
             } // end of NavigationView
             VStack {
                 HStack {
+                    
+                    HStack {
+                        Text(Image(systemName: "bookmark.fill")) + Text(" BookMarked Memos")
+                    }
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+                    .padding(.leading, Sizes.overallPadding)
+//                    .padding(.vertical)
+                    .offset(y: height == 160 ? -40 : -100)
+                    
                     Spacer()
+                    
+                    
                     
                     Button {
                         height = UIScreen.screenHeight
