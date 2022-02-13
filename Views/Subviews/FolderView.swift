@@ -15,7 +15,7 @@ struct FolderView: View {
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-
+//    @State var height: CGFloat = 100
     @Environment(\.colorScheme) var colorScheme
     
     @State var isShowingSubFolderView = false
@@ -145,15 +145,17 @@ struct FolderView: View {
             
             NavigationLink(
                 destination:
-                    
                     MemoView(
                     memo: Memo(title: "", contents: "", context: context),
                     parent: currentFolder,
                     isNewMemo: true),
-                
-                // this is the problem.. why...??
-//                MemoView( parent: currentFolder, context2: context),
                 isActive: $isAddingMemo) {}
+            
+//            NavigationLink(
+//                destination:
+//                    SpecialMemoView(passedHeight: $height, parent: currentFolder),
+//                isActive: $isAddingMemo) {}
+            
             
             
         } // end of ZStack

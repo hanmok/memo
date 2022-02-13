@@ -130,6 +130,8 @@
 		9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF25277EC5CF00866456 /* MindMapView.swift */; };
 		E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
+		E523DB3F27B86E4F00D8D78B /* SpecialMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3E27B86E4F00D8D78B /* SpecialMemoView.swift */; };
+		E523DB4027B86E4F00D8D78B /* SpecialMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3E27B86E4F00D8D78B /* SpecialMemoView.swift */; };
 		E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596A6C427AD8D5000076E95 /* OrderViewModel.swift */; };
@@ -238,6 +240,7 @@
 		9AD6EF1F277DC1AD00866456 /* TestLazyAndScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestLazyAndScrollView.swift; sourceTree = "<group>"; };
 		9AD6EF25277EC5CF00866456 /* MindMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMapView.swift; sourceTree = "<group>"; };
 		E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedFolderView.swift; sourceTree = "<group>"; };
+		E523DB3E27B86E4F00D8D78B /* SpecialMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialMemoView.swift; sourceTree = "<group>"; };
 		E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemoVarsTestView.swift; sourceTree = "<group>"; };
 		E596A6C427AD8D5000076E95 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -272,6 +275,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				E523DB3E27B86E4F00D8D78B /* SpecialMemoView.swift */,
 				E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */,
 				9A046CF827B4DEB9003169C7 /* RecursiveFolderCell.swift */,
 				9A046CC827B3A042003169C7 /* BookMarkedMemoBoxView.swift */,
@@ -710,6 +714,7 @@
 				9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */,
 				9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
 				9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */,
+				E523DB3F27B86E4F00D8D78B /* SpecialMemoView.swift in Sources */,
 				9A33786D2799450100805138 /* HorCollapsibleMind.swift in Sources */,
 				9A3378072796A5CB00805138 /* FilteredMemoList.swift in Sources */,
 				9A337893279A5C9600805138 /* HierarchyLabelView.swift in Sources */,
@@ -742,6 +747,7 @@
 				9A33786B27993ACA00805138 /* FolderOverView.swift in Sources */,
 				9AC5D1E527854266007EAA28 /* ContentView.swift in Sources */,
 				9A046CCA27B3A042003169C7 /* BookMarkedMemoBoxView.swift in Sources */,
+				E523DB4027B86E4F00D8D78B /* SpecialMemoView.swift in Sources */,
 				9A337897279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
 				9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
 				9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */,

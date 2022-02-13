@@ -25,6 +25,24 @@ struct PlusImage: View {
     }
 }
 
+struct PlusImage2: View {
+    
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
+    var body: some View {
+        
+        ZStack {
+            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
+                .foregroundColor(colorScheme == .dark ? Color.subColorDark2 : Color.subColor2)
+                .background(colorScheme == .dark ? Color.subColorDark2 : Color.subColor2)
+                .clipShape(Circle())
+            ChangeableImage(imageSystemName: "plus")
+                .frame(width: 25, height: 25)
+                .foregroundColor(colorScheme.adjustBlackAndWhite())
+        }
+    }
+}
+
 
 
 struct PlusImage_Previews: PreviewProvider {

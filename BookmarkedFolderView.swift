@@ -19,50 +19,77 @@ struct BookmarkedFolderView: View {
     
     // 160 for bookMark, UIScreen.screenHeight for MemoView
     @State var height: CGFloat = 160
+    @State var newMemoPressed = false
     
     @ObservedObject var folder: Folder
     
-    
+    // first Test
     var body: some View {
-        VStack {
-            HStack {
-                Text(folder.title)
-                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+        
+        return ZStack {
+            NavigationView {
+                ZStack {
                     
-                Spacer()
-                Button {
-                    print("fetchedMemos: \(folder.memos.count)")
-                    for each in folder.memos.sorted() {
-                        print(each.title)
-                    }
-                } label:
-                {
-                    PlusImage()
-                }
-
-                    .padding(.trailing, Sizes.overallPadding)
-                    .offset(y: -25)
-            }
-            .padding(.leading, Sizes.overallPadding)
-            
-            ScrollView(.horizontal) {
-                HStack(spacing: Sizes.smallSpacing) {
-                    
-                    ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
+                    VStack {
                         
-                        BookMarkedMemoBoxView(memo: bookMarkedMemo)
-                            .padding(.top, 0)
-
+                        HStack {
+                            Text(Image(systemName: "bookmark")) + Text(" BookMarked Folders")
+                            
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(colorScheme.adjustBlackAndWhite())
+                        .padding(.leading, Sizes.overallPadding)
+                        .padding(.vertical)
+                        
+                        ScrollView(.horizontal) {
+                            HStack(alignment: .top, spacing: Sizes.smallSpacing) {
+                                
+                                ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: false), id: \.self) {bookMarkedMemo in
+                                    
+                                    NavigationLink(destination: SpecialMemoView(memo: bookMarkedMemo, passedHeight: $height, parent: bookMarkedMemo.folder!, initialTitle: bookMarkedMemo.title, isNewMemo: false)) {
+                                        BookMarkedMemoBoxView(memo: bookMarkedMemo)
+                                            .padding(.top, 0)
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, Sizes.overallPadding)
+                        }
+                        Spacer()
                     }
+                    .background(colorScheme.adjustSubColors())
+                    
+                    
+                    NavigationLink(destination:
+                                    SpecialMemoView(
+                                        memo: Memo(title: "", contents: "", context: context),
+                                        passedHeight: $height,
+                                        parent: folder,
+                                        initialTitle: "Enter Title" ,
+                                        isNewMemo: true),
+                                   isActive: $newMemoPressed) {}
+                }        .navigationBarHidden(true)
+            } // end of NavigationView
+            VStack {
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                        height = UIScreen.screenHeight
+                        newMemoPressed = true
+                    } label:
+                    {
+                        PlusImage2()
+                    }
+                    .padding(.trailing, Sizes.overallPadding)
+                    .offset(y: height == 160 ? -25 : -100)
                 }
+                Spacer()
             }
-            .padding(.leading, Sizes.overallPadding)
             
-            Spacer()
-        }
-        // when it applied, it occupy all screen
+        } // end of ZStack
+        
         .frame(height: height)
-//        .frame(width: UIScreen.screenWidth, height: UIScreen.screenHeight)
-        .background(colorScheme.adjustSubColors())
+        .background(.red)
+        
     }
 }

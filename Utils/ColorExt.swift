@@ -35,6 +35,7 @@ extension Color {
     
     static var subColorDark = Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255)
     
-    
-    
+    static var subColor2 = Color(.sRGB, red: 130/255, green: 230/255, blue: 130/255)
+
+    static var subColorDark2 = Color(.sRGB, red: 80/255, green: 180/255, blue: 80/255)
 }

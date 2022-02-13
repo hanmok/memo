@@ -36,7 +36,9 @@ struct BookMarkedMemoBoxView: View {
     }
     
 //    var frameSize = UIScreen.screenWidth / 2 - 1.5 * Sizes.overallPadding
-    var frameSize = (UIScreen.screenWidth - Sizes.smallSpacing) / 2 - 1.5 * Sizes.overallPadding
+//    var frameSize = (UIScreen.screenWidth - Sizes.smallSpacing) / 2 - 1.5 * Sizes.overallPadding
+    var frameSize = (UIScreen.screenWidth - Sizes.overallPadding) / 2 - 2 * Sizes.smallSpacing
+        
     
     // If both overview exist, contents doesn't show up
     // if overview doesn't only title and contents show up

@@ -181,7 +181,6 @@ struct MindMapView: View {
             VStack {
                 Spacer()
                 HStack {
-                    Spacer()
 //                    Button(action: addMemo) {
                         BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
 //                    BookmarkedFolderView(folder: fastFolderWithLevelGroup.folders.first!.folder)
@@ -191,6 +190,7 @@ struct MindMapView: View {
 //                    }
                 }
             }
+//            .ignoresSafeArea( edges: .horizontal)
             
             // ANOTHER Z STACK
 //            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
