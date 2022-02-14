@@ -258,9 +258,13 @@ extension Folder {
     static func updateTopFolders(context: NSManagedObjectContext) {
                 let request = Folder.topFolderFetchReq()
                 let result = try? context.fetch(request)
-        for eachFolder in result! {
-            eachFolder.title += ""
-        }
+        
+        _ = result!.map { $0.title += "" }
+
+        //        for eachFolder in result! {
+//            eachFolder.title += ""
+//        }
+        
         context.saveCoreData()
     }
     
@@ -493,18 +497,24 @@ extension Folder {
             let tempFolders = folder.subfolders
             
             if !tempFolders.isEmpty {
-                for eachFolder in tempFolders {
-                    foldersContainer.append(eachFolder)
-                    getAllFolders(folder: eachFolder)
+//                for eachFolder in tempFolders {
+//                    foldersContainer.append(eachFolder)
+//                    getAllFolders(folder: eachFolder)
+//                }
+                
+                _ = tempFolders.map {
+                    foldersContainer.append($0)
+                    getAllFolders(folder: $0)
                 }
+                
             }
         }
         
         func appendMemos(folder: Folder) {
-            for eachMemo in folder.memos {
-                memosContainer.append(eachMemo)
-//                memosCount += 1
-            }
+            _ = folder.memos.map { memosContainer.append($0)}
+//            for eachMemo in folder.memos {
+//                memosContainer.append(eachMemo)
+//            }
         }
         
         appendMemos(folder: folder)
@@ -512,11 +522,13 @@ extension Folder {
         getAllFolders(folder: folder)
         
         // get all memos from each of collected Folders
-        for eachFolder in foldersContainer {
-            
-            appendMemos(folder: eachFolder)
-            print("memosContainer: \(memosContainer)")
-        }
+//        for eachFolder in foldersContainer {
+//
+//            appendMemos(folder: eachFolder)
+//            print("memosContainer: \(memosContainer)")
+//        }
+        
+        _ = foldersContainer.map { appendMemos(folder: $0)}
         
         if onlyMarked {
             return memosContainer.filter { $0.isBookMarked == true}.sorted()
@@ -573,9 +585,12 @@ extension Folder {
     
     static func convertLevelIntoFolder(_ withLevels: [FolderWithLevel]) -> [Folder] {
         var folders: [Folder] = []
-        for eachLevel in withLevels {
-            folders.append(eachLevel.folder)
-        }
+
+//        for eachLevel in withLevels {
+//            folders.append(eachLevel.folder)
+//        }
+        
+        withLevels.map { folders.append($0.folder)}
         return folders
     }
 }
@@ -848,17 +863,32 @@ extension Folder {
         print("Folder.title: \(self.title)")
         print("Folder.creationDate: \(self.creationDate)")
         
-        for eachFolder in self.subfolders {
-            print(eachFolder.title)
-        }
+//        for eachFolder in self.subfolders {
+//            print(eachFolder.title)
+//        }
+        _ = self.subfolders.map { print($0.title)}
         print("number of subfolders: \(self.subfolders.count)")
         print("parent: \(String(describing: self.parent?.title))")
         
         print("number of memos: \(self.memos.count)")
-        for eachMemo in self.memos {
-            print("memo info: ")
-            eachMemo.getMemoInfo()
+//        for eachMemo in self.memos {
+//            print("memo info: ")
+//            eachMemo.getMemoInfo()
+//        }
+        _ = self.memos.map { $0.getMemoInfo()}
+    }
+    
+    static func isBelongToArchive(currentfolder: Folder) -> Bool {
+        var folder: Folder? = currentfolder
+        
+        while (folder!.parent != nil ) {
+            folder = folder!.parent
         }
+        
+        if folder!.title == FolderType.getFolderName(type: .folder) {
+            return false
+        }
+        return true
     }
 }
 

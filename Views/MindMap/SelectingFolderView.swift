@@ -50,9 +50,11 @@ struct SelectingFolderView: View {
                     
                     // MARK: - FOR TESTING
                     Button {
-                        for each in invalidFolderWithLevels {
-                            print("invalidFolder: \(each.folder.title)")
-                        }
+                        _ = invalidFolderWithLevels.map { print("invalidFolder: \($0.folder.title)")}
+//                        for each in invalidFolderWithLevels {
+//                            print("invalidFolder: \(each.folder.title)")
+//                        }
+                        
                     } label: {
                         ChangeableImage(imageSystemName: "star")
                     }
@@ -92,9 +94,11 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                             }
                         } else {
-                            for eachMemo in memoEditVM.selectedMemos.sorted() {
-                                folderEditVM.folderToPaste!.add(memo: eachMemo)
-                            }
+                            _ = memoEditVM.selectedMemos.sorted().map { folderEditVM.folderToPaste!.add(memo: $0)}
+//                            for eachMemo in memoEditVM.selectedMemos.sorted() {
+//                                folderEditVM.folderToPaste!.add(memo: eachMemo)
+//                            }
+                            
                             memoEditVM.initSelectedMemos()
                         }
                         folderEditVM.folderToPaste = nil
@@ -133,9 +137,10 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                             }
                         } else {
-                            for eachMemo in memoEditVM.selectedMemos.sorted() {
-                                folderEditVM.folderToPaste!.add(memo: eachMemo)
-                            }
+                            _ = memoEditVM.selectedMemos.sorted().map { folderEditVM.folderToPaste!.add(memo: $0)}
+//                            for eachMemo in memoEditVM.selectedMemos.sorted() {
+//                                folderEditVM.folderToPaste!.add(memo: eachMemo)
+//                            }
                             memoEditVM.initSelectedMemos()
                         }
                         folderEditVM.folderToPaste = nil

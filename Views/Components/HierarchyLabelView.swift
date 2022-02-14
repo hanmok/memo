@@ -19,9 +19,11 @@ struct HierarchyLabelView: View {
         
         var root = ""
         
-        for eachFolder in hierarchy {
-            root = "\(eachFolder.title)" + " > " + root
-        }
+//        for eachFolder in hierarchy {
+//            root = "\(eachFolder.title)" + " > " + root
+//        }
+        
+        _ = hierarchy.map { root = "\($0.title)" + ">" + root}
         
         let lastIndex = root.lastIndex(of: ">")!
         root.remove(at: lastIndex)

@@ -83,10 +83,14 @@ extension View {
 
 
 func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
+    
     var emptyMemo: [Memo] = []
-    for each in set {
-        emptyMemo.append(each)
-    }
+    _ = set.map { emptyMemo.append($0)}
+    
+//    for each in set {
+//        emptyMemo.append(each)
+//    }
+    
     print("emptymemo: \(emptyMemo)")
     // the sooner the lower
 //    emptyMemo.sort(by: { $0.order > $1.order})
@@ -99,9 +103,12 @@ func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
 
 func convertSetToArray(set: Set<Folder>) -> Array<Folder> {
     var emptyFolder: [Folder] = []
-    for each in set {
-        emptyFolder.append(each)
-    }
+    
+    _ = set.map { emptyFolder.append($0)}
+    
+//    for each in set {
+//        emptyFolder.append(each)
+//    }
     print("emptymemo: \(emptyFolder)")
     // the sooner the lower
 //    emptyMemo.sort(by: { $0.order > $1.order})

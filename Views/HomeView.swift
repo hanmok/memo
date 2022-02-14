@@ -28,13 +28,15 @@ struct HomeView: View { // top folder fetch
 //                DispatchQueue.main.async {
 //                    if true {
 //                        if shouldExecuteOne {
-//                            UnitTestHelpers.deletesAll2(context: context)
+////                            UnitTestHelpers.deletesAll2(context: context)
+//                            UnitTestHelpers.deletesAllMemos(context: context)
+//                            UnitTestHelpers.deletesAllFolders(context: context)
 //                            shouldExecuteOne.toggle()
 //                            Folder.returnSampleFolder3(context: context)
 //                        }
 //                    }
 //                }
-        
+//
 //                return EmptyView()
         
         return NavigationView {
@@ -46,6 +48,9 @@ struct HomeView: View { // top folder fetch
                     )
             )
         }
+        
+        
+        
     }
 }
 

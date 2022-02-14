@@ -18,6 +18,7 @@ struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     
@@ -34,38 +35,17 @@ struct MemoView: View {
     @State var isBookMarkedTemp: Bool?
     
     let parent: Folder
-    let screenSize = UIScreen.main.bounds
     
     let initialTitle: String
-    let initialContents: String
+
     
-    var isNewMemo: Bool
-    
-    var contentsPlaceholder: String {
-        if memo.contents == "" {
-            return "Contents Placeholder"
-        } else { return memo.contents }
-    }
-    
-    var titlePlaceholder: String {
-        if memo.title == "" {
-            return "Title Placeholder"
-        } else {
-            return memo.title
-        }
-    }
-    
-    
-    init(memo: Memo, parent: Folder, isNewMemo: Bool = false ) {
+    init(memo: Memo, parent: Folder  ) {
         self.memo = memo
         self.parent = parent
-        self.initialTitle = isNewMemo ? "Enter Title" : memo.title
-        self.initialContents = memo.contents
-        self.isNewMemo = false
-        self.isNewMemo = isNewMemo
+        self.initialTitle = memo.title
     }
     
-//    init()
+
     
     
     func saveChanges() {
@@ -81,11 +61,6 @@ struct MemoView: View {
         } else { // if both title and contents are not empty
             //            memo.modificationDate = Date()
             
-            
-            if isNewMemo {
-                parent.add(memo: memo) // error.. ?? ?? um...
-                parent.modificationDate = Date()
-            }
         }
         
         parent.title += "" //
@@ -128,19 +103,12 @@ struct MemoView: View {
                 .submitLabel(.continue)
                 .disableAutocorrection(true)
                 .focused($focusState, equals: .title)
-                .onAppear(perform: {
-                    if self.isNewMemo == true {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                            self.focusState = .title
-                        }
-                    }
-                })
                 .padding(.bottom, Sizes.largePadding)
                 .padding(.horizontal, Sizes.overallPadding)
                 .onSubmit {
                     focusState = .contents
                 }
-            
+
             // TextField Underline
                 .overlay {
                     Divider()
@@ -168,7 +136,7 @@ struct MemoView: View {
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
             print("title or memoView : \(title)")
-            print("isNewMemo ? \(isNewMemo)")
+           
         })
         
         // triggered after FolderView has appeared
@@ -223,7 +191,8 @@ struct MemoView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), invalidFolderWithLevels: []
+                    ), invalidFolderWithLevels: [],
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)

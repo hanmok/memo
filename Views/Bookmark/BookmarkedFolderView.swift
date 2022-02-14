@@ -20,7 +20,10 @@ struct BookmarkedFolderView: View {
     @State var newMemoPressed = false
     @State var presentingView = false
     @ObservedObject var folder: Folder
-    
+    @State var presentingNewMemo = false
+//    var presentingOverall: Bool {
+//        return presentingview
+//    }
     // first Test
     var body: some View {
         
@@ -37,14 +40,14 @@ struct BookmarkedFolderView: View {
 
                                     NavigationLink(destination:
                                                     
-                                                    BookmarkMemoView(
-                                                        memo: bookMarkedMemo, presentingView: $presentingView,
-                                                        parent: bookMarkedMemo.folder!,
-                                                        initialTitle: bookMarkedMemo.title, isNewMemo: false
-                                                    )
+//                                                    BookmarkMemoView(
+//                                                        memo: bookMarkedMemo, presentingView: $presentingView,
+//                                                        parent: bookMarkedMemo.folder!,
+//                                                        initialTitle: bookMarkedMemo.title
+//                                                    )
+                                                   BookmarkMemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView)
                                                     .environmentObject(memoEditVM)
-                                                    .environmentObject(folderEditVM)
-                                                   
+                                                    .environmentObject(folderEditVM) // 둘이 같은걸 쓰면 안되지 ..?
                                                    ,isActive: $presentingView) {
                                         BookmarkedMemoBoxView(memo: bookMarkedMemo)
                                     }
@@ -66,7 +69,7 @@ struct BookmarkedFolderView: View {
                                     NewMemoView(parent: folder)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
-                                   ,isActive: $presentingView) {}
+                                   ,isActive: $presentingNewMemo) {}
                 }
                 .navigationBarHidden(true)
             } // end of NavigationView
@@ -81,28 +84,28 @@ struct BookmarkedFolderView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(colorScheme.adjustBlackAndWhite())
                     .padding(.leading, Sizes.overallPadding)
-                    .offset(y: presentingView ? -100 : -45 )
-                    .animation(.spring(response: 0.2), value: presentingView)
+                    .offset(y: presentingView || presentingNewMemo ? -100 : -45 )
+                    .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                     
                     
                     Spacer()
                     
                     Button {
-//                        newMemoPressed = true
-                        presentingView = true
+
+                        presentingNewMemo = true
                     } label:
                     {
                         PlusImage2()
                     }
                     .padding(.trailing, Sizes.overallPadding)
-                    .offset(y: presentingView ? -100 : -25 )
-                    .animation(.spring(response: 0.2), value: presentingView)
+                    .offset(y: presentingView || presentingNewMemo ? -100 : -25 )
+                    .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                 }
                 Spacer()
             }
             
         } // end of ZStack
-        .offset(y: presentingView ? 0 : UIScreen.screenHeight - 250)
+        .offset(y: presentingView || presentingNewMemo ? 0 : UIScreen.screenHeight - 250)
 //        .animation(.spring(response: 0.2), value: presentingView)
     }
 }

@@ -202,11 +202,12 @@ struct FolderView: View {
                 print("name of each memos: ")
                 print("number of memos contained: \(validMemos.count)")
                 
-                for eachMemo in validMemos {
-                    eachMemo.title += ""
-
-                    print(eachMemo.title)
-                }
+//                for eachMemo in validMemos {
+//                    eachMemo.title += ""
+//
+//                    print(eachMemo.title)
+//                }
+                _ = validMemos.map { $0.title += "" }
                 
                 print("count : \(currentFolder.memos.count)")
                 

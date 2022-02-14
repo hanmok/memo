@@ -15,27 +15,33 @@ struct BookmarkMemoView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+    
     @ObservedObject var memo: Memo
     
     @FocusState var editorFocusState: Bool
     @FocusState var focusState: Field?
-    
+    @State var showSelectingFolderView = false
     @GestureState var isScrolled = false
     
     @State var title: String = ""
     @State var contents: String = ""
     
     @State var isBookMarkedTemp: Bool?
-    @Binding var presentingView: Bool
+    @Binding var presentingView: Bool // only Bookmark memoView has.
     
     
     let parent: Folder
-    let screenSize = UIScreen.main.bounds
     
     let initialTitle: String
-//    let initialContents: String
-    
-    let isNewMemo: Bool
+
+    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>) {
+        self.memo = memo
+        self.parent = parent
+        self.initialTitle = memo.title
+        self._presentingView = presentingView
+    }
     
     func saveChanges() {
         print("save changes has triggered")
@@ -47,14 +53,6 @@ struct BookmarkMemoView: View {
         if memo.title == "" && memo.contents == "" {
             print("memo has deleted! title: \(title), contents: \(contents)")
             Memo.delete(memo)
-        } else { // if both title and contents are not empty
-            //            memo.modificationDate = Date()
-            
-            // This block..
-            if isNewMemo {
-                parent.add(memo: memo) // error.. ?? ?? um...
-                parent.modificationDate = Date()
-            }
         }
         
         parent.title += "" //
@@ -62,30 +60,23 @@ struct BookmarkMemoView: View {
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
-        //        print(parent.memos.sorted())
     }
     
     func togglePinMemo() {
         memo.pinned.toggle()
     }
-    //    toggleBookMark
+
     func toggleBookMark() {
-        //        memo.isBookMarked.toggle()
-        //         memo.isBookMarked
-        // initial
+
         if isBookMarkedTemp == nil {
             isBookMarkedTemp = memo.isBookMarked ? false : true
         } else {
             isBookMarkedTemp!.toggle()
         }
-        
-        
     }
     
     func removeMemo() {
-        
         Memo.delete(memo)
-        //        saveChanges()
         context.saveCoreData()
         presentationMode.wrappedValue.dismiss()
     }
@@ -105,19 +96,12 @@ struct BookmarkMemoView: View {
                 .submitLabel(.continue)
                 .disableAutocorrection(true)
                 .focused($focusState, equals: .title)
-                .onAppear(perform: {
-
-                    presentingView = true
-                    print("presentingView: \(presentingView)")
-                    // MARK: - In case of New Memo -> FOCUS TO TITLE !
-//                    if self.isNewMemo == true {
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-//                            self.focusState = .title
-//                        }
-//                    }
-                })
                 .padding(.bottom, Sizes.largePadding)
                 .padding(.horizontal, Sizes.overallPadding)
+                .onAppear(perform: {
+                    presentingView = true
+                    print("presentingView: \(presentingView)")
+                })
                 .onSubmit {
                     focusState = .contents
                 }
@@ -140,6 +124,7 @@ struct BookmarkMemoView: View {
             
         } // end of VStack
         .frame(maxHeight: .infinity, alignment: .bottom)
+        
         .gesture(scroll)
         .onAppear(perform: {
             title = memo.title
@@ -148,7 +133,6 @@ struct BookmarkMemoView: View {
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
             print("title or memoView : \(title)")
-            print("isNewMemo ? \(isNewMemo)")
         })
         
         // triggered after FolderView has appeared
@@ -178,6 +162,17 @@ struct BookmarkMemoView: View {
                         height: Sizes.regularButtonSize)
                 }
                 
+                Button {
+                    // RELOCATE
+                    showSelectingFolderView = true
+//                    memoEditVM.selectedMemos.update(with: memo)
+//                    memoEditVM.parentFolder = memo.folder
+                    memoEditVM.dealWhenMemoSelected(memo)
+                    
+                } label: {
+                    ChangeableImage(imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+                }
+                
                 // trash Button
                 
                 Button(action: removeMemo) {
@@ -187,5 +182,19 @@ struct BookmarkMemoView: View {
                         height: Sizes.regularButtonSize)
                 }
             })
+        .sheet(isPresented: $showSelectingFolderView) {
+            SelectingFolderView(
+                fastFolderWithLevelGroup:
+                    FastFolderWithLevelGroup(
+                        homeFolder: Folder.fetchHomeFolder(context: context)!,
+                        archiveFolder: Folder.fetchHomeFolder(context: context,
+                                                              fetchingHome: false)!),
+                invalidFolderWithLevels: [],
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder
+            )
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
+            
+        }
     }
 }

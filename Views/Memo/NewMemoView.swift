@@ -207,7 +207,8 @@ struct NewMemoView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), invalidFolderWithLevels: []
+                    ), invalidFolderWithLevels: [],
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)

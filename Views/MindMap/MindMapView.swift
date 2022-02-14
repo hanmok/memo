@@ -68,10 +68,14 @@ struct MindMapView: View {
                     HStack {
                         // MARK: - Button For Test
                         Button {
-                            for each in fastFolderWithLevelGroup.folders {
-                                print("title: \(each.folder.title)")
-                                print("level: \(each.level)")
+                            _ = fastFolderWithLevelGroup.folders.map {
+                                print("title: \($0.folder.title)")
+                                print("level: \($0.level)")
                             }
+//                            for each in fastFolderWithLevelGroup.folders {
+//                                print("title: \(each.folder.title)")
+//                                print("level: \(each.level)")
+//                            }
                         } label: {
                             ChangeableImage(imageSystemName: "magnifyingglass")
                         }
@@ -260,13 +264,17 @@ struct MindMapView: View {
                     switch textFieldType! {
                         
                     case .newTopFolder:
-                        let _ = Folder(title: newName, context: context)
+                        let newFolder = Folder(title: newName, context: context)
+
+                        fastFolderWithLevelGroup.folders.first(where: {$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
+
                         
                     case .newSubFolder:
                         let newSubFolder = Folder(title: newName, context: context)
                         if let validSubFolder = folderToAddSubFolder {
                             validSubFolder.add(subfolder: newSubFolder)
                         }
+//                        context.saveCoreData()
                         
                     case .rename:
                         if folderToBeRenamed != nil {

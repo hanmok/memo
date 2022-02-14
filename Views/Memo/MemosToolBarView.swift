@@ -37,6 +37,8 @@ struct MemosToolBarView: View {
                 // default: pin all.
                 // 만약 모든게 pin 되어있는 경우에만 모두 unpin
                 var allPinned = true
+                
+
                 for each in memoEditVM.selectedMemos {
                     if each.pinned == false {
                         allPinned = false
@@ -45,13 +47,17 @@ struct MemosToolBarView: View {
                 }
 
                 if !allPinned {
-                    for each in memoEditVM.selectedMemos {
-                        each.pinned = true
-                    }
+                    _ = memoEditVM.selectedMemos.map { $0.pinned = true}
+//                    for each in memoEditVM.selectedMemos {
+//                        each.pinned = true
+//                    }
+                    
                 } else {
-                    for each in memoEditVM.selectedMemos {
-                        each.pinned = false
-                    }
+                    _ = memoEditVM.selectedMemos.map { $0.pinned = false}
+//                    for each in memoEditVM.selectedMemos {
+//                        each.pinned = false
+//                    }
+                    
                 }
                 
                 context.saveCoreData()
@@ -101,9 +107,10 @@ struct MemosToolBarView: View {
 //            Button(action: {removeAction(sortedMemos)}) {
             
             Button(action: {
-                for each in memoEditVM.selectedMemos {
-                    Memo.delete(each)
-                }
+//                for each in memoEditVM.selectedMemos {
+//                    Memo.delete(each)
+//                }
+                _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
                 context.saveCoreData()
                 memoEditVM.initSelectedMemos()
             }) {
