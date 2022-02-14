@@ -134,7 +134,8 @@ struct MindMapView: View {
                 
                 
                 // MARK: - Start
-                if selectionEnum == .folder {
+
+                ZStack {
                     List {
                         ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
                             
@@ -194,7 +195,7 @@ struct MindMapView: View {
                     }
                     .listStyle(InsetGroupedListStyle())
                     
-                } else {
+                    // Another ZStack Element
                     List {
                         ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
                             if folderWithLevel.folder.parent == nil {
@@ -222,7 +223,7 @@ struct MindMapView: View {
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                     .environmentObject(memoOrder)
-                                
+
                                 // ADD Sub Folder
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                         Button {
@@ -251,6 +252,7 @@ struct MindMapView: View {
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
+                    .offset(x: selectionEnum == .folder ? UIScreen.screenWidth : 0)
                 }
                 
                 // END
