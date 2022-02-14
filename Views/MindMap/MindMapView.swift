@@ -115,20 +115,6 @@ struct MindMapView: View {
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)
                 
-                
-                
-                //                switch selectionEnum {
-                //                case .folder: Text("Folder")
-                //                case .archive: Text("Archive")
-                //                }
-                
-                //                if selectionEnum == .folder {
-                //                    Text("Folder")
-                //                } else {
-                //                    Text("Archive")
-                //                }
-                
-                
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack
                 
@@ -250,14 +236,14 @@ struct MindMapView: View {
                                     }
                             } // end of ForEach
                         }
-                    }
+                    } // end of List
                     .listStyle(InsetGroupedListStyle())
                     .offset(x: selectionEnum == .folder ? UIScreen.screenWidth : 0)
-                }
+                } // end of ZStack
                 
                 // END
                 
-            } // end of VStack .
+            } // end of VStack , Inside ZStack.
             BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
@@ -308,7 +294,7 @@ struct MindMapView: View {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
                                     invalidFolderWithLevels:
                                         Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
-                                    //                                    Folder.getHierarchicalFolders(topFolders: folderEditVM.folderToCut),
+                                    selectionEnum: selectionEnum,
                                     isFullScreen: true)
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
@@ -317,5 +303,3 @@ struct MindMapView: View {
         .navigationBarHidden(true)
     }
 }
-
-

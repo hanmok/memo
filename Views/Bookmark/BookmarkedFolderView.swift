@@ -35,19 +35,20 @@ struct BookmarkedFolderView: View {
                                 
                                 ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
 
-                                    NavigationLink(
-                                        destination:
-                                            BookmarkMemoView(
-                                                memo: bookMarkedMemo, presentingView: $presentingView,
-                                                parent: bookMarkedMemo.folder!,
-                                                initialTitle: bookMarkedMemo.title, isNewMemo: false)) {
+                                    NavigationLink(destination:
+                                                    
+                                                    BookmarkMemoView(
+                                                        memo: bookMarkedMemo, presentingView: $presentingView,
+                                                        parent: bookMarkedMemo.folder!,
+                                                        initialTitle: bookMarkedMemo.title, isNewMemo: false
+                                                    )
+                                                    .environmentObject(memoEditVM)
+                                                    .environmentObject(folderEditVM)
+                                                   
+                                                   ,isActive: $presentingView) {
                                         BookmarkedMemoBoxView(memo: bookMarkedMemo)
-                                    EmptyView()
-                                            .padding(.top, 0)
                                     }
                                 }
-                                
-                                
                             } // end of HStack
                             .padding(.horizontal, Sizes.overallPadding)
                             Spacer()
@@ -102,6 +103,6 @@ struct BookmarkedFolderView: View {
             
         } // end of ZStack
         .offset(y: presentingView ? 0 : UIScreen.screenHeight - 250)
-        .animation(.spring(response: 0.2), value: presentingView)
+//        .animation(.spring(response: 0.2), value: presentingView)
     }
 }

@@ -106,13 +106,15 @@ struct BookmarkMemoView: View {
                 .disableAutocorrection(true)
                 .focused($focusState, equals: .title)
                 .onAppear(perform: {
+
                     presentingView = true
+                    print("presentingView: \(presentingView)")
                     // MARK: - In case of New Memo -> FOCUS TO TITLE !
-                    if self.isNewMemo == true {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                            self.focusState = .title
-                        }
-                    }
+//                    if self.isNewMemo == true {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+//                            self.focusState = .title
+//                        }
+//                    }
                 })
                 .padding(.bottom, Sizes.largePadding)
                 .padding(.horizontal, Sizes.overallPadding)
