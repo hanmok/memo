@@ -7,7 +7,6 @@ class MemoEditViewModel: ObservableObject {
      var hasNotLongSelected = true
 
     
-    
      @Published var selectedMemos = Set<Memo>()
     
      var navigateToMemo: Memo? = nil
@@ -15,13 +14,24 @@ class MemoEditViewModel: ObservableObject {
      var someBool: Bool = false
     
     public var count: Int {
-        get {selectedMemos.count }
+        get { selectedMemos.count }
         set { if newValue == 0 { self.parentFolder = nil }}
     }
     
     func add(memo: Memo) {
         self.selectedMemos.update(with: memo)
         self.parentFolder = memo.folder
+    }
+    
+    func add(memos: [Memo]) {
+        
+        for eachMemo in memos {
+            self.selectedMemos.update(with: eachMemo)
+        }
+        if memos.count != 0 {
+            self.parentFolder = memos.first!.folder
+        }
+
     }
     
     func erase(memo: Memo) {

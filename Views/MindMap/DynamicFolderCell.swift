@@ -51,13 +51,10 @@ struct DynamicFolderCell: View {
                 UIView.setAnimationsEnabled(false)
                 folderEditVM.shouldShowSelectingView = true
                 folderEditVM.folderToCut = folder
-                
-                
             } label: {
                 ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
             }
             .tint(.green)
-            
         }
     }
 }

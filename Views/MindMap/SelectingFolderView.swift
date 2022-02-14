@@ -26,7 +26,6 @@ struct SelectingFolderView: View {
 
 //    var onSubmitAction: () -> Void = { }
 //    var onCancelAction: () -> Void = { }
-//    @Binding var indicator: Bool
     var isFullScreen: Bool = false
   
     var body: some View {
@@ -60,7 +59,6 @@ struct SelectingFolderView: View {
                     
                     
                     Button {
-//                        indicator = false
                         presentationMode.wrappedValue.dismiss()
                         folderEditVM.folderToCut = nil
                         memoEditVM.initSelectedMemos() // ?? should it be ?  yes.
@@ -90,17 +88,13 @@ struct SelectingFolderView: View {
                         if folderEditVM.folderToCut != nil {
                             if Folder.convertLevelIntoFolder(invalidFolderWithLevels).contains(folderEditVM.folderToPaste!) {
                                 folderEditVM.folderToCut = nil
-//                                indicator = false
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
-//                                indicator = true
                             }
                         } else {
-                            // folderToCut == nil
                             for eachMemo in memoEditVM.selectedMemos.sorted() {
                                 folderEditVM.folderToPaste!.add(memo: eachMemo)
                             }
-//                            indicator = true
                             memoEditVM.initSelectedMemos()
                         }
                         folderEditVM.folderToPaste = nil
@@ -114,7 +108,6 @@ struct SelectingFolderView: View {
                         
                     } label: {
                         
-//                        if invalidFolderWithLevels.contains(where: {$0 == folderWithLevel}) {
                         if invalidFolderWithLevels.contains(folderWithLevel) {
                             TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
                                 .background(.red)
@@ -136,17 +129,13 @@ struct SelectingFolderView: View {
                         if folderEditVM.folderToCut != nil {
                             if Folder.convertLevelIntoFolder(invalidFolderWithLevels).contains(folderEditVM.folderToPaste!) {
                                 folderEditVM.folderToCut = nil
-//                                indicator = false
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
-//                                indicator = true
                             }
                         } else {
-                            // folderToCut == nil
                             for eachMemo in memoEditVM.selectedMemos.sorted() {
                                 folderEditVM.folderToPaste!.add(memo: eachMemo)
                             }
-//                            indicator = true
                             memoEditVM.initSelectedMemos()
                         }
                         folderEditVM.folderToPaste = nil
@@ -160,7 +149,6 @@ struct SelectingFolderView: View {
                         
                     } label: {
                         
-//                        if invalidFolderWithLevels.contains(where: {$0 == folderWithLevel}) {
                         if invalidFolderWithLevels.contains(folderWithLevel) {
                             TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
                                 .background(.red)

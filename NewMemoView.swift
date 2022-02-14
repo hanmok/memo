@@ -165,13 +165,8 @@ struct NewMemoView: View {
                     
                     
                     if title == "" && contents == "" {
-                    // none is typed -> Do nothing. Cause memo is not created yet.
                         print("flag1")
                     } else {
-                        // 이거.. ;; 어떻게 처리하지 ??
-                        // 폴더를 옮긴 다음에는 과거 폴더에 메모를 생성하면 안됨.
-                        // 생성 했는지 안했는지 판별해야함. ;;
-                        // SelectingFolderView 에 success / cancel 여부를 알려주는 무언가를 넣어야겠다.
                         memo = Memo(title: title, contents: contents, context: context)
                         memo!.isBookMarked = isBookMarkedTemp
                         memo!.pinned = isPinned
@@ -213,13 +208,9 @@ struct NewMemoView: View {
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
                     ), invalidFolderWithLevels: []
-//                ,indicator: $indicator
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
-            
         }
     }
 }
-
-// false -> 잿

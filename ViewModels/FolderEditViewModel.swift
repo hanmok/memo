@@ -17,13 +17,10 @@ class FolderEditViewModel: ObservableObject {
     
     @Published var folderToPaste: Folder? = nil
     @Published var folderToCut: Folder? = nil
-    
+//    @Published var folderToCut: [Folder] = []
     
     var selectedFolder: Folder? = nil
 
-    var tobeColoredFolder : Folder? = nil
+
 }
 
-class FolderViewModel: ObservableObject {
-    
-}
