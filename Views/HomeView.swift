@@ -16,7 +16,7 @@ struct HomeView: View { // top folder fetch
     
     @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
     
-    //    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
+//        @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
     
     @State var shouldExecuteOne = true
     var body: some View {
@@ -25,17 +25,17 @@ struct HomeView: View { // top folder fetch
         
         
         //   // MARK: - For Testing
-        //        DispatchQueue.main.async {
-        //            if true {
-        //                if shouldExecuteOne {
-        //                UnitTestHelpers.deletesAllFolders(context: context)
-        //                    shouldExecuteOne.toggle()
-        //                    Folder.returnSampleFolder3(context: context)
-        //                }
-        //            }
-        //        }
+//                DispatchQueue.main.async {
+//                    if true {
+//                        if shouldExecuteOne {
+//                            UnitTestHelpers.deletesAll2(context: context)
+//                            shouldExecuteOne.toggle()
+//                            Folder.returnSampleFolder3(context: context)
+//                        }
+//                    }
+//                }
         
-        //        return EmptyView()
+//                return EmptyView()
         
         return NavigationView {
             MindMapView(

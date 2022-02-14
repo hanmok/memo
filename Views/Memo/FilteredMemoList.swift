@@ -19,7 +19,7 @@ struct FilteredMemoList: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @ObservedObject var folder: Folder
     @State var hasNotLongSelected = false
-    
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     var listType: MemoListType
 
     
@@ -36,19 +36,22 @@ struct FilteredMemoList: View {
             memosToShow = folder.memos.sorted()
         }
         
-        // 아마.. 여기서 에러가 생긴 것 같아.
         return ZStack {
             
             VStack { // without this, views stack on other memos
                 Section {
                     ForEach(memosToShow, id: \.self) { memo in
                         
-                        NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)) {
+                        NavigationLink(destination: MemoView(memo: memo, parent: memo.folder!)
+                                        .environmentObject(memoEditVM)
+                                        .environmentObject(folderEditVM)
+                        
+                        ) {
                             MemoBoxView(memo: memo)
+                            
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }
                         .disabled(!memoEditVM.hasNotLongSelected)
-
 
 //                        // MARK: - Tapped
                         .simultaneousGesture(TapGesture().onEnded{

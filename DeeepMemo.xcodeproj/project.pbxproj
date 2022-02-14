@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A013F6727BA135E00C612ED /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A013F6627BA135E00C612ED /* NewMemoView.swift */; };
+		9A013F6827BA135E00C612ED /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A013F6627BA135E00C612ED /* NewMemoView.swift */; };
 		9A046CC927B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */; };
 		9A046CCA27B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */; };
 		9A046CCC27B3A72E003169C7 /* CollapsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */; };
@@ -145,6 +147,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A013F6627BA135E00C612ED /* NewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
 		9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedMemoBoxView.swift; sourceTree = "<group>"; };
 		9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingTest.swift; sourceTree = "<group>"; };
 		9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAppStorage.swift; sourceTree = "<group>"; };
@@ -269,6 +272,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9A013F6627BA135E00C612ED /* NewMemoView.swift */,
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
 				9AC5D1F727854387007EAA28 /* DeeepMemo--iOS--Info.plist */,
 				9AC5D1D827854159007EAA28 /* DeeepMemo (iOS).entitlements */,
@@ -715,6 +719,7 @@
 				E523DB3F27B86E4F00D8D78B /* BookmarkMemoView.swift in Sources */,
 				9A33786D2799450100805138 /* HorCollapsibleMind.swift in Sources */,
 				9A3378072796A5CB00805138 /* FilteredMemoList.swift in Sources */,
+				9A013F6727BA135E00C612ED /* NewMemoView.swift in Sources */,
 				9A337893279A5C9600805138 /* HierarchyLabelView.swift in Sources */,
 				9AC5D231278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */,
 				9A33780A2796B10E00805138 /* HomeView.swift in Sources */,
@@ -756,6 +761,7 @@
 				9A046D1C27B67508003169C7 /* OrderingAppStorage.swift in Sources */,
 				E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
 				9AC5D22C278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */,
+				9A013F6827BA135E00C612ED /* NewMemoView.swift in Sources */,
 				E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
 				9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */,
 				9A1D536727ACE516009294C1 /* DeeepMemoApp.swift in Sources */,

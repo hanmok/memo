@@ -30,6 +30,8 @@ struct FolderView: View {
     
     @FocusState var addFolderFocus: Bool
     
+    @State var allMemos: [Memo] = []
+    
     func toggleFavorite() {
         currentFolder.isFavorite.toggle()
     }
@@ -75,7 +77,9 @@ struct FolderView: View {
                         Button(action: {
                             isShowingSubFolderView = true
                         }, label: {
-                            SubFolderButtonImage() })
+                            SubFolderButtonImage()
+                            EmptyView()
+                        })
                             .padding(.trailing, Sizes.overallPadding )
                         
                         SubFolderView(
@@ -134,21 +138,25 @@ struct FolderView: View {
                     currentFolder.add(
                         subfolder: Folder(title: newSubFolderName, context: context)
                     )
-                    
+
                     newSubFolderName = ""
                     shouldAddFolder = false
                 }, cancelAction: {
                     newSubFolderName = ""
                     shouldAddFolder = false
                 })
+            // MARK: - ERROR!!!! SOURCE
+//            NavigationLink(
+//                destination:
+//                    MemoView(
+//                    memo: Memo(title: "", contents: "", context: context),
+//                    parent: currentFolder,
+//                    isNewMemo: true),
+//                isActive: $isAddingMemo) {}
             
-            NavigationLink(
-                destination:
-                    MemoView(
-                    memo: Memo(title: "", contents: "", context: context),
-                    parent: currentFolder,
-                    isNewMemo: true),
-                isActive: $isAddingMemo) {}
+            NavigationLink(destination: NewMemoView(parent: currentFolder), isActive: $isAddingMemo) {}
+            .environmentObject(folderEditVM)
+            .environmentObject(memoEditVM)
             
         } // end of ZStack
         .frame(maxHeight: .infinity)
@@ -157,14 +165,14 @@ struct FolderView: View {
         
         .sheet(isPresented: $showSelectingFolderView,
                content: {
-            
+
             SelectingFolderView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    )
+                    ), invalidFolderWithLevels: []
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
@@ -181,7 +189,10 @@ struct FolderView: View {
                                 HStack {
             // search Button
             Button(action: {
-                currentFolder.title += ""
+                
+                // This Line makes memos . Why ?
+                currentFolder.title += "" // 이거 할 때마다 두개씩 memo 가 생김. 왜 ??
+                
                 if let validParent = currentFolder.parent {
                     validParent.title += ""
                     print("parent's title has changed")
@@ -189,10 +200,11 @@ struct FolderView: View {
                 
                 let validMemos = currentFolder.memos.sorted()
                 print("name of each memos: ")
+                print("number of memos contained: \(validMemos.count)")
                 
                 for eachMemo in validMemos {
                     eachMemo.title += ""
-                    
+
                     print(eachMemo.title)
                 }
                 
@@ -202,6 +214,16 @@ struct FolderView: View {
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
+            // MARK: - FOR TESTING !!
+//            Button {
+////                            print(Memo.fetchAllmemos(context: context))
+//                allMemos = Memo.fetchAllmemos(context: context)
+//                print("num of memos:  \(allMemos.count)")
+//                print("num of memos that has no parent: \(allMemos.filter { $0.folder == nil}.count)")
+//
+//            } label: {
+//                ChangeableImage(imageSystemName: "folder")
+//            }
             
             
             // favorite Button

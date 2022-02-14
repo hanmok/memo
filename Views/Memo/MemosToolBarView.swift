@@ -23,6 +23,15 @@ struct MemosToolBarView: View {
             
             
 
+            Button {
+                // DESELECT ALL
+//                memoEditVM.selectedMemos.removeAll()
+                memoEditVM.initSelectedMemos()
+            } label: {
+                ChangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+            }
+
+            
             // PIN BUTTON, WORKS FINE
             Button(action: {
                 // default: pin all.
@@ -59,10 +68,12 @@ struct MemosToolBarView: View {
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
                 showSelectingFolderView = true
+                
             }) {
                 ChangeableImage(imageSystemName: "folder")
             }
 //            .padding(5)
+            
             
             // MARK: - 보류 : Combine , Change Color
 //            Button {

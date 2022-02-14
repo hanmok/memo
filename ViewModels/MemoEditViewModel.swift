@@ -2,17 +2,10 @@ import SwiftUI
 
 class MemoEditViewModel: ObservableObject {
     
-//    @Published var hasNotLongSelected = true
-//    @Published var shouldChangeColor = false
-//
-//    @Published var selectedMemos = Set<Memo>()
-//
-//    @Published var navigateToMemo: Memo? = nil
-    
     var parentFolder: Folder? = nil
     
      var hasNotLongSelected = true
-     var shouldChangeColor = false
+
     
     
      @Published var selectedMemos = Set<Memo>()

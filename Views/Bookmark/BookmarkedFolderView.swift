@@ -34,7 +34,7 @@ struct BookmarkedFolderView: View {
                             HStack(alignment: .top, spacing: Sizes.smallSpacing) {
                                 
                                 ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
-                                    
+
                                     NavigationLink(
                                         destination:
                                             BookmarkMemoView(
@@ -42,9 +42,12 @@ struct BookmarkedFolderView: View {
                                                 parent: bookMarkedMemo.folder!,
                                                 initialTitle: bookMarkedMemo.title, isNewMemo: false)) {
                                         BookmarkedMemoBoxView(memo: bookMarkedMemo)
+                                    EmptyView()
                                             .padding(.top, 0)
                                     }
                                 }
+                                
+                                
                             } // end of HStack
                             .padding(.horizontal, Sizes.overallPadding)
                             Spacer()
@@ -57,15 +60,12 @@ struct BookmarkedFolderView: View {
                     } // end of VStack
                     .background(colorScheme.adjustSubColors())
                     
-                    
+
                     NavigationLink(destination:
-                                    BookmarkMemoView(
-                                        memo: Memo(title: "", contents: "", context: context),
-                                        presentingView: $presentingView,
-                                        parent: folder,
-                                        initialTitle: "Enter Title" ,
-                                        isNewMemo: true),
-                                   isActive: $newMemoPressed) {}
+                                    NewMemoView(parent: folder)
+                                    .environmentObject(memoEditVM)
+                                    .environmentObject(folderEditVM)
+                                   ,isActive: $presentingView) {}
                 }
                 .navigationBarHidden(true)
             } // end of NavigationView
@@ -81,24 +81,27 @@ struct BookmarkedFolderView: View {
                     .foregroundColor(colorScheme.adjustBlackAndWhite())
                     .padding(.leading, Sizes.overallPadding)
                     .offset(y: presentingView ? -100 : -45 )
+                    .animation(.spring(response: 0.2), value: presentingView)
                     
                     
                     Spacer()
                     
                     Button {
-                        newMemoPressed = true
+//                        newMemoPressed = true
+                        presentingView = true
                     } label:
                     {
                         PlusImage2()
                     }
                     .padding(.trailing, Sizes.overallPadding)
                     .offset(y: presentingView ? -100 : -25 )
+                    .animation(.spring(response: 0.2), value: presentingView)
                 }
                 Spacer()
             }
             
         } // end of ZStack
         .offset(y: presentingView ? 0 : UIScreen.screenHeight - 250)
-        .animation(.spring(), value: presentingView)
+        .animation(.spring(response: 0.2), value: presentingView)
     }
 }

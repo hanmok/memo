@@ -11,7 +11,7 @@ struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     var hasPinnedMemo: Bool {
         return folder.memos.contains { $0.pinned == true }
     }
@@ -34,6 +34,7 @@ struct MemoList: View {
             FilteredMemoList(folder: folder, listType: .unpinned)
         } // end of VStack
         .environmentObject(memoEditVM)
+        .environmentObject(folderEditVM)
     }
 }
 

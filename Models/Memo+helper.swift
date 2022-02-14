@@ -78,6 +78,18 @@ extension Memo {
         return request
     }
     
+    static func fetchAllmemos(context: NSManagedObjectContext) -> [Memo] {
+        let req = Memo.fetch(.all)
+        
+        if let result = try? context.fetch(req) {
+            return result
+        } else {
+            print("Error fetching all Memos")
+            return []
+        }
+        
+    }
+    
     static func bookMarkedFetchReq() -> NSFetchRequest<Memo> {
         let req = NSFetchRequest<Memo>(entityName: "Memo")
         

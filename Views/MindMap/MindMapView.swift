@@ -31,6 +31,9 @@ struct MindMapView: View {
     
 //    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
     
+//    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
+    
+//    @FetchRequ
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
@@ -52,8 +55,9 @@ struct MindMapView: View {
     @State var folderToBeRenamed : Folder? = nil
 
     @State var selectionEnum = FolderTypeEnum.folder // default value
-    
+    @State var foldersToShow: [Folder] = []
 
+    @State var allMemos:[Memo] = []
     
     var body: some View {
         return ZStack {
@@ -62,10 +66,23 @@ struct MindMapView: View {
                 HStack {
                     Spacer()
                     HStack {
+                        // MARK: - Button 1: Folder Ordering
                         FolderOrderingMenu(folderOrder: folderOrder)
                             .padding(.trailing, Sizes.smallSpacing)
                         
-                        // Add new Folder to the top Folder
+                        // MARK: - Button for Test
+//                        Button {
+////                            print(Memo.fetchAllmemos(context: context))
+//                            allMemos = Memo.fetchAllmemos(context: context)
+//                            print("num of memos:  \(allMemos.count)")
+//                            print("num of memos that has no parent: \(allMemos.filter { $0.folder == nil}.count)")
+//
+//                        } label: {
+//                            ChangeableImage(imageSystemName: "folder")
+//                        }
+
+                        
+                        // MARK: - Button 2: Add new Folder to the top Folder
                         Button {
                             showTextField = true
                             textFieldType = .newTopFolder
@@ -86,6 +103,17 @@ struct MindMapView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)
+                
+//                switch selectionEnum {
+//                case .folder: Text("Folder")
+//                case .archive: Text("Archive")
+//                }
+                
+//                if selectionEnum == .folder {
+//                    Text("Folder")
+//                } else {
+//                    Text("Archive")
+//                }
                 
                 
                 // MARK: - List of all Folders (hierarchy)
@@ -209,7 +237,9 @@ struct MindMapView: View {
         
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
-                SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, isFullScreen: true)
+                SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
+                                    invalidFolderWithLevels:
+                                        Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut), isFullScreen: true)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
             }

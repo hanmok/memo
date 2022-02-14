@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 struct UnitTestHelpers {
+    
     static func deletesAllMemos(context: NSManagedObjectContext) {
         let request = Memo.fetch(.all)
         
@@ -30,9 +31,13 @@ struct UnitTestHelpers {
         }
         context.saveCoreData()
     }
+    static func deletesAll2(context: NSManagedObjectContext) {
+        UnitTestHelpers.deletesAllFolders(context: context)
+        UnitTestHelpers.deletesAllMemos(context: context)
+    }
     
     static func deletesAll(container: NSPersistentCloudKitContainer) {
-        UnitTestHelpers.deletesAllMemos(context: container.viewContext)
+        UnitTestHelpers.deletesAllFolders(context: container.viewContext)
         UnitTestHelpers.deletesAllMemos(context: container.viewContext)
     }
     

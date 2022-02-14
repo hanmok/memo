@@ -9,109 +9,90 @@ import SwiftUI
 import Combine
 import CoreData
 
-enum Field: Hashable {
-    case title
-    case contents
-}
-
-struct MemoView: View {
+struct NewMemoView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     
-    @ObservedObject var memo: Memo
-    
     @FocusState var editorFocusState: Bool
     @FocusState var focusState: Field?
-    @State var showSelectingFolderView = false
+    
     @GestureState var isScrolled = false
     
     @State var title: String = ""
     @State var contents: String = ""
     
-    @State var isBookMarkedTemp: Bool?
+    @State var isBookMarkedTemp: Bool = false
+    @State var isPinned: Bool = false
+    @State var showSelectingFolderView = false
+//    @State var indicator = false {
+//        didSet {
+//            if oldValue == false {
+//                // does not save on disappear
+//            }
+//        }
+//    }
+    
+    @State var memo: Memo? = nil
     
     let parent: Folder
-    let screenSize = UIScreen.main.bounds
-    
-    let initialTitle: String
-    let initialContents: String
-    
-    var isNewMemo: Bool
-    
-    var contentsPlaceholder: String {
-        if memo.contents == "" {
-            return "Contents Placeholder"
-        } else { return memo.contents }
-    }
-    
-    var titlePlaceholder: String {
-        if memo.title == "" {
-            return "Title Placeholder"
-        } else {
-            return memo.title
-        }
-    }
-    
-    
-    init(memo: Memo, parent: Folder, isNewMemo: Bool = false ) {
-        self.memo = memo
+
+    let initialTitle: String = "Enter Title"
+
+    init(parent: Folder) {
         self.parent = parent
-        self.initialTitle = isNewMemo ? "Enter Title" : memo.title
-        self.initialContents = memo.contents
-        self.isNewMemo = false
-        self.isNewMemo = isNewMemo
     }
-    
-//    init()
-    
     
     func saveChanges() {
         print("save changes has triggered")
-        memo.title = title
         
-        memo.contents = contents
-        memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
-        // if both title and contents are empty, delete memo
-        if memo.title == "" && memo.contents == "" {
-            print("memo has deleted! title: \(title), contents: \(contents)")
-            Memo.delete(memo)
-        } else { // if both title and contents are not empty
-            //            memo.modificationDate = Date()
+        if title == "" && contents == "" {
+        // none is typed -> Do nothing. Cause memo is not created yet.
+        } else {
             
-            
-            if isNewMemo {
-                parent.add(memo: memo) // error.. ?? ?? um...
-                parent.modificationDate = Date()
+            if memo != nil {
+                if memo!.folder == parent {
+                    parent.modificationDate = Date()
+                }
+                memo!.title = title
+                memo!.contents = contents
+                memo!.isBookMarked = isBookMarkedTemp
+                memo!.pinned = isPinned
+                memo!.creationDate = Date()
+                memo!.modificationDate = Date()
+                context.saveCoreData()
+                
+                // memo is not created yet.
+            } else {
+                memo = Memo(title: title, contents: contents, context: context)
+                memo!.isBookMarked = isBookMarkedTemp
+                memo!.pinned = isPinned
+                memo!.creationDate = Date()
+                memo!.modificationDate = Date()
+                parent.add(memo: memo!)
+                memo!.folder = parent
+                context.saveCoreData()
+                parent.title += ""
             }
         }
-        
-        parent.title += "" //
-        
-        context.saveCoreData()
-        print("memo has saved, title: \(title)")
-        print("parent's memos: ")
-
     }
     
     func togglePinMemo() {
-        memo.pinned.toggle()
+        isPinned.toggle()
     }
 
     func toggleBookMark() {
-        
-        if isBookMarkedTemp == nil {
-            isBookMarkedTemp = memo.isBookMarked ? false : true
-        } else {
-            isBookMarkedTemp!.toggle()
-        }
+        isBookMarkedTemp.toggle()
     }
     
     func removeMemo() {
-        Memo.delete(memo)
-        context.saveCoreData()
+        // nothing has been saved yet.
+        title = ""
+        contents = ""
+        
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -123,16 +104,13 @@ struct MemoView: View {
         
         return VStack(spacing: 0) {
             TextField(initialTitle, text: $title)
-            
                 .font(.title2)
                 .submitLabel(.continue)
                 .disableAutocorrection(true)
                 .focused($focusState, equals: .title)
                 .onAppear(perform: {
-                    if self.isNewMemo == true {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                            self.focusState = .title
-                        }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
+                        self.focusState = .title
                     }
                 })
                 .padding(.bottom, Sizes.largePadding)
@@ -150,28 +128,15 @@ struct MemoView: View {
             // MARK: - Contents
             
             TextEditor(text: $contents)
-            
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .disableAutocorrection(true)
                 .padding(.horizontal, Sizes.overallPadding)
                 .focused($editorFocusState)
                 .focused($focusState, equals: .contents)
         } // end of VStack
+        
         .frame(maxHeight: .infinity, alignment: .bottom)
-        
         .gesture(scroll)
-        // How..
-        .onAppear(perform: {
-            title = memo.title
-            contents = memo.contents
-            print("initial color: \(memo.colorAsInt)")
-            print("initial pin state: \(memo.pinned)")
-            print("memoView has appeared!")
-            print("title or memoView : \(title)")
-            print("isNewMemo ? \(isNewMemo)")
-        })
-        
-        // triggered after FolderView has appeared
         .onDisappear(perform: {
             print("memoView has disappeared!")
             saveChanges()
@@ -182,7 +147,7 @@ struct MemoView: View {
                 
                 Button(action: toggleBookMark) {
                     ChangeableImage(
-                        imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",
+                        imageSystemName: isBookMarkedTemp ?  "bookmark.fill" : "bookmark",
                         width: Sizes.regularButtonSize,
                         height: Sizes.regularButtonSize)
                 }
@@ -190,22 +155,46 @@ struct MemoView: View {
                 // pin Button
                 Button(action: togglePinMemo) {
                     ChangeableImage(
-                        imageSystemName: memo.pinned ? "pin.fill" : "pin",
+                        imageSystemName: isPinned ? "pin.fill" : "pin",
                         width: Sizes.regularButtonSize,
                         height: Sizes.regularButtonSize)
                 }
                 
                 Button {
-                    // RELOCATE
-                    showSelectingFolderView = true
-//                    memoEditVM.selectedMemos.update(with: memo)
-//                    memoEditVM.parentFolder = memo.folder
-                    memoEditVM.dealWhenMemoSelected(memo)
+                    // RELOCATE MEMO
                     
-                } label: {
-                    ChangeableImage(imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
-                }
+                    
+                    if title == "" && contents == "" {
+                    // none is typed -> Do nothing. Cause memo is not created yet.
+                        print("flag1")
+                    } else {
+                        // 이거.. ;; 어떻게 처리하지 ??
+                        // 폴더를 옮긴 다음에는 과거 폴더에 메모를 생성하면 안됨.
+                        // 생성 했는지 안했는지 판별해야함. ;;
+                        // SelectingFolderView 에 success / cancel 여부를 알려주는 무언가를 넣어야겠다.
+                        memo = Memo(title: title, contents: contents, context: context)
+                        memo!.isBookMarked = isBookMarkedTemp
+                        memo!.pinned = isPinned
+                        memo!.creationDate = Date()
+                        memo!.modificationDate = Date()
+                        parent.add(memo: memo!)
+                        memo!.folder = parent
+                        context.saveCoreData()
+                        parent.title += ""
 
+                        memoEditVM.dealWhenMemoSelected(memo!)
+                        print("flag2")
+                    }
+                    print("flag3")
+                    showSelectingFolderView = true
+
+                } label: {
+                    ChangeableImage(
+                        imageSystemName: "folder",
+                        width: Sizes.regularButtonSize,
+                        height: Sizes.regularButtonSize)
+                }
+                
                 
                 // trash Button
                 
@@ -224,6 +213,7 @@ struct MemoView: View {
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
                     ), invalidFolderWithLevels: []
+//                ,indicator: $indicator
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
@@ -232,16 +222,4 @@ struct MemoView: View {
     }
 }
 
-
-
-struct MemoView_Previews: PreviewProvider {
-    
-    static var sampleMemo = Memo(title: "Sample Memo",contents: "sample contents", context: PersistenceController.preview.container.viewContext)
-    
-    static var sampleFolder = Folder(title: "Sample Folder", context: PersistenceController.preview.container.viewContext)
-    
-    static var previews: some View {
-        MemoView(memo: sampleMemo, parent: sampleFolder)
-            .preferredColorScheme(.dark)
-    }
-}
+// false -> 잿
