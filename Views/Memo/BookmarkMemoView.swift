@@ -35,7 +35,17 @@ struct BookmarkMemoView: View {
     let parent: Folder
     
     let initialTitle: String
+    
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            ChangeableImage(imageSystemName: "chevron.left")
+        }
+    }
+    
 
+    
     init(memo: Memo, parent: Folder, presentingView: Binding<Bool>) {
         self.memo = memo
         self.parent = parent
@@ -182,6 +192,8 @@ struct BookmarkMemoView: View {
                         height: Sizes.regularButtonSize)
                 }
             })
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
         .sheet(isPresented: $showSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:

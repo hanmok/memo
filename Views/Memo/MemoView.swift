@@ -38,6 +38,13 @@ struct MemoView: View {
     
     let initialTitle: String
 
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            ChangeableImage(imageSystemName: "chevron.left")
+        }
+    }
     
     init(memo: Memo, parent: Folder  ) {
         self.memo = memo
@@ -184,6 +191,8 @@ struct MemoView: View {
                         height: Sizes.regularButtonSize)
                 }
             })
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
         .sheet(isPresented: $showSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:

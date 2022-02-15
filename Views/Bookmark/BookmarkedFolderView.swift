@@ -21,10 +21,7 @@ struct BookmarkedFolderView: View {
     @State var presentingView = false
     @ObservedObject var folder: Folder
     @State var presentingNewMemo = false
-//    var presentingOverall: Bool {
-//        return presentingview
-//    }
-    // first Test
+    
     var body: some View {
         
         return ZStack {
@@ -39,16 +36,12 @@ struct BookmarkedFolderView: View {
                                 ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
 
                                     NavigationLink(destination:
-                                                    
-//                                                    BookmarkMemoView(
-//                                                        memo: bookMarkedMemo, presentingView: $presentingView,
-//                                                        parent: bookMarkedMemo.folder!,
-//                                                        initialTitle: bookMarkedMemo.title
-//                                                    )
-                                                   BookmarkMemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView)
+                                                   BookmarkMemoView(memo: bookMarkedMemo,
+                                                                    parent: bookMarkedMemo.folder!,
+                                                                    presentingView: $presentingView)
                                                     .environmentObject(memoEditVM)
-                                                    .environmentObject(folderEditVM) // 둘이 같은걸 쓰면 안되지 ..?
-                                                   ,isActive: $presentingView) {
+                                                    .environmentObject(folderEditVM)
+                                    ) {
                                         BookmarkedMemoBoxView(memo: bookMarkedMemo)
                                     }
                                 }
@@ -90,8 +83,8 @@ struct BookmarkedFolderView: View {
                     
                     Spacer()
                     
+                    // Adding New Memo Button
                     Button {
-
                         presentingNewMemo = true
                     } label:
                     {
@@ -106,6 +99,6 @@ struct BookmarkedFolderView: View {
             
         } // end of ZStack
         .offset(y: presentingView || presentingNewMemo ? 0 : UIScreen.screenHeight - 250)
-//        .animation(.spring(response: 0.2), value: presentingView)
+        .animation(.spring(response: 0.1), value: presentingView || presentingNewMemo)
     }
 }

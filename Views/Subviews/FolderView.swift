@@ -11,7 +11,7 @@ import CoreData
 struct FolderView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
-    
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
@@ -31,6 +31,14 @@ struct FolderView: View {
     @FocusState var addFolderFocus: Bool
     
     @State var allMemos: [Memo] = []
+    
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            ChangeableImage(imageSystemName: "chevron.left")
+        }
+    }
     
     func toggleFavorite() {
         currentFolder.isFavorite.toggle()
@@ -183,6 +191,8 @@ struct FolderView: View {
             memoEditVM.selectedMemos.removeAll()
             memoEditVM.initSelectedMemos()
         })
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
         
         .navigationTitle(currentFolder.title)
         .navigationBarItems(trailing:
@@ -246,4 +256,5 @@ struct FolderView: View {
             MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
         })
     }
+
 }

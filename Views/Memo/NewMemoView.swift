@@ -42,6 +42,14 @@ struct NewMemoView: View {
 
     let initialTitle: String = "Enter Title"
 
+    var btnBack : some View {
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }) {
+            ChangeableImage(imageSystemName: "chevron.left")
+        }
+    }
+    
     init(parent: Folder) {
         self.parent = parent
     }
@@ -200,6 +208,8 @@ struct NewMemoView: View {
                         height: Sizes.regularButtonSize)
                 }
             })
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: btnBack)
         .sheet(isPresented: $showSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
