@@ -15,7 +15,6 @@ enum Field: Hashable {
 }
 
 struct MemoView: View {
-    
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     
@@ -26,8 +25,9 @@ struct MemoView: View {
     
     @FocusState var editorFocusState: Bool
     @FocusState var focusState: Field?
-    @State var showSelectingFolderView = false
     @GestureState var isScrolled = false
+    
+    @State var showSelectingFolderView = false
     
     @State var title: String = ""
     @State var contents: String = ""
@@ -37,7 +37,7 @@ struct MemoView: View {
     let parent: Folder
     
     let initialTitle: String
-
+    
     var btnBack : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -46,13 +46,11 @@ struct MemoView: View {
         }
     }
     
-    init(memo: Memo, parent: Folder  ) {
+    init(memo: Memo, parent: Folder) {
         self.memo = memo
         self.parent = parent
         self.initialTitle = memo.title
     }
-    
-
     
     
     func saveChanges() {
@@ -69,19 +67,18 @@ struct MemoView: View {
             //            memo.modificationDate = Date()
             
         }
-        
         parent.title += "" //
         
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
-
+        
     }
     
     func togglePinMemo() {
         memo.pinned.toggle()
     }
-
+    
     func toggleBookMark() {
         
         if isBookMarkedTemp == nil {
@@ -115,7 +112,7 @@ struct MemoView: View {
                 .onSubmit {
                     focusState = .contents
                 }
-
+            
             // TextField Underline
                 .overlay {
                     Divider()
@@ -125,15 +122,14 @@ struct MemoView: View {
             // MARK: - Contents
             
             TextEditor(text: $contents)
-            
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .disableAutocorrection(true)
                 .padding(.horizontal, Sizes.overallPadding)
                 .focused($editorFocusState)
                 .focused($focusState, equals: .contents)
+            
         } // end of VStack
         .frame(maxHeight: .infinity, alignment: .bottom)
-        
         .gesture(scroll)
         // How..
         .onAppear(perform: {
@@ -143,15 +139,14 @@ struct MemoView: View {
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
             print("title or memoView : \(title)")
-           
         })
-        
         // triggered after FolderView has appeared
         .onDisappear(perform: {
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
         })
+        
         .navigationBarItems(
             trailing: HStack {
                 
@@ -162,7 +157,7 @@ struct MemoView: View {
                         height: Sizes.regularButtonSize)
                 }
                 
-                // pin Button
+                // PIN Button
                 Button(action: togglePinMemo) {
                     ChangeableImage(
                         imageSystemName: memo.pinned ? "pin.fill" : "pin",
@@ -170,20 +165,15 @@ struct MemoView: View {
                         height: Sizes.regularButtonSize)
                 }
                 
+                // RELOCATE
                 Button {
-                    // RELOCATE
                     showSelectingFolderView = true
-//                    memoEditVM.selectedMemos.update(with: memo)
-//                    memoEditVM.parentFolder = memo.folder
                     memoEditVM.dealWhenMemoSelected(memo)
-                    
                 } label: {
                     ChangeableImage(imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
-
                 
-                // trash Button
-                
+                // REMOVE
                 Button(action: removeMemo) {
                     ChangeableImage(
                         imageSystemName: "trash",
@@ -198,14 +188,15 @@ struct MemoView: View {
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
-                        archiveFolder: Folder.fetchHomeFolder(context: context,
-                                                              fetchingHome: false)!
-                    ), invalidFolderWithLevels: [],
+                        archiveFolder: Folder.fetchHomeFolder(
+                            context: context,
+                            fetchingHome: false)!
+                    ),
+                invalidFolderWithLevels: [],
                 selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
-            
         }
     }
 }

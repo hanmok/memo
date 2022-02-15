@@ -175,7 +175,7 @@ struct FolderView: View {
 //                    isNewMemo: true),
 //                isActive: $isAddingMemo) {}
             
-            NavigationLink(destination: NewMemoView(parent: currentFolder), isActive: $isAddingMemo) {}
+            NavigationLink(destination: NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
             .environmentObject(folderEditVM)
             .environmentObject(memoEditVM)
             
@@ -198,7 +198,7 @@ struct FolderView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })
-        .alert("Are you sure to delete ?", isPresented: $showDeleteAlert, actions: {
+        .alert(AlertMessages.alertDeleteMain, isPresented: $showDeleteAlert, actions: {
             // delete
             Button(role: .destructive) {
                 _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
@@ -206,16 +206,16 @@ struct FolderView: View {
                 context.saveCoreData()
                 memoEditVM.initSelectedMemos()
             } label: {
-                Text("Delete")
+                Text(AlertMessages.deleteConfirm)
             }
             
             Button(role: .cancel) {
-// DO NOTHING
+                // DO NOTHING
             } label: {
-                Text("Cancel")
+                Text(AlertMessages.cancel)
             }
         }, message: {
-            Text("All deleted are NOT Recoverable. ").foregroundColor(.red)
+            Text(AlertMessages.alertDeleteSub).foregroundColor(.red)
         })
 
         .onDisappear(perform: {

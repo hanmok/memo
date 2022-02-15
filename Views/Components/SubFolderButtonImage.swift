@@ -15,8 +15,8 @@ struct SubFolderButtonImage: View {
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
             // FG and BG should be the same color
-                .foregroundColor(colorScheme == .dark ? Color.subColorDark : Color.subColor)
-                .background(colorScheme == .dark ? Color.subColorDark : Color.subColor)
+                .foregroundColor(Color(UIColor(named: "mainColor")!))
+                .background(Color(UIColor(named: "mainColor")!))
             
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "folder")

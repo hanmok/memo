@@ -44,40 +44,6 @@ struct DynamicTopFolderCell: View {
                 ChangeableImage(imageSystemName: "multiply")
             }
             .tint(.gray)
-
-            // REMOVE, DONE .
-//            Button {
-//                for eachFolder in folder.subfolders {
-//                    Folder.delete(eachFolder)
-//                }
-//                for eachMemo in folder.memos {
-//                    Memo.delete(eachMemo)
-//                }
-//
-//                context.saveCoreData()
-//            } label: {
-//                ChangeableImage(imageSystemName: "trash")
-//            }
-//            .tint(.red)
-            
-            // RELOCATE FOLDER
-//            Button {
-//                UIView.setAnimationsEnabled(false)
-//
-//                for eachFolder in folder.subfolders.sorted() {
-//                    folderEditVM.folderToCut.append(eachFolder)
-//                }
-//                for eachMemo in folder.memos {
-//                    memoEditVM.add(memo: eachMemo)
-//                }
-//
-//                folderEditVM.shouldShowSelectingView = true
-//            } label: {
-//                ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
-//            }
-//            .tint(.green)
-            
-            
         }
     }
 }

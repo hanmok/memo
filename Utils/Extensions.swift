@@ -109,7 +109,9 @@ func convertSetToArray(set: Set<Folder>) -> Array<Folder> {
 //    for each in set {
 //        emptyFolder.append(each)
 //    }
+    
     print("emptymemo: \(emptyFolder)")
+    
     // the sooner the lower
 //    emptyMemo.sort(by: { $0.order > $1.order})
 //    emptyMemo.sort(by: { $0.modificationDate < $1.modificationDate})
@@ -124,8 +126,12 @@ extension ColorScheme {
      func adjustBlackAndWhite() -> Color {
         return self == .dark ? .white : .black
     }
-    
+ 
     func adjustSubColors() -> Color {
-        return self == .dark ? Color.subColorDark : Color.subColor
+        return Color(UIColor(named: "mainColor")!)
+    }
+    
+    func adjustSecondSubColors() -> Color {
+        Color(UIColor(named: "subColor")!)
     }
 }

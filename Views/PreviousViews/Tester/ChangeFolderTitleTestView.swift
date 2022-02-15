@@ -9,8 +9,11 @@ import SwiftUI
 import CoreData
 
 struct ChangeFolderTitleTestView: View {
+    
     @Environment(\.managedObjectContext) var context
+    
     let folder: Folder
+    
     @State private var folderName: String = ""
     
     func saveChange() {

@@ -31,7 +31,8 @@ struct BookmarkedFolderView: View {
                         ScrollView(.horizontal) {
                             
                             VStack {
-                            HStack(alignment: .top, spacing: Sizes.smallSpacing) {
+//                            HStack(alignment: .top, spacing: Sizes.smallSpacing) {
+                                HStack(alignment: .top, spacing: Sizes.properSpacing) {
                                 
                                 ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
 
@@ -46,21 +47,26 @@ struct BookmarkedFolderView: View {
                                     }
                                 }
                             } // end of HStack
-                            .padding(.horizontal, Sizes.overallPadding)
+//                            .padding(.horizontal, Sizes.overallPadding)
+                            .padding(.horizontal, Sizes.properSpacing)
                             Spacer()
                             }
                         } // end of ScrollView
                         .frame(height: 150)
                         .padding(.top, 30)
 
+
                         Spacer()
 //                            .frame(height: 15)
                     } // end of VStack
-                    .background(colorScheme.adjustSubColors())
+//                    .background()
+//                    .background(colorScheme.adjustSubColors())
+//                    .background(Color(UIColor(named: "subColor")!))
+                    .background(Color(UIColor(named: "mainColor")!))
                     
 
                     NavigationLink(destination:
-                                    NewMemoView(parent: folder)
+                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                    ,isActive: $presentingNewMemo) {}
@@ -77,9 +83,10 @@ struct BookmarkedFolderView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
 //                    .background(Color(.sRGB, white: 0.8, opacity: 0.3))
                     .foregroundColor(colorScheme.adjustBlackAndWhite())
-                    .padding(.leading, Sizes.overallPadding)
+                    .background(colorScheme.adjustSubColors())
+//                    .padding(.leading, Sizes.overallPadding)
 //                    .offset(y: presentingView || presentingNewMemo ? -100 : -45 )
-                    .offset(y: presentingView || presentingNewMemo ? -100 : -10 )
+                    .offset(y: presentingView || presentingNewMemo ? -100 : -20 )
                     .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                     
                     Spacer()
@@ -95,12 +102,14 @@ struct BookmarkedFolderView: View {
                     .offset(y: presentingView || presentingNewMemo ? -100 : -25 )
                     .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                 }
-//                .background(Color(.sRGB, white: 0.5, opacity: 0.5))
+                .padding(.leading, Sizes.overallPadding)
+                .background(Color(.sRGB, white: 0.5, opacity: 0.5))
                 Spacer()
             }
             
         } // end of ZStack
         .offset(y: presentingView || presentingNewMemo ? 0 : UIScreen.screenHeight - 250)
         .animation(.spring(response: 0.1), value: presentingView || presentingNewMemo)
+//        .ignoresSafeArea( edges: .horizontal)
     }
 }

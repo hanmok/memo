@@ -12,6 +12,7 @@ enum TextFieldAlertType: String {
     case rename = "Rename Folder"
     case newSubFolder = "New Sub Folder"
     case newTopFolder = "New Folder"
+    case newTopArchive = "New Archive"
 }
 
 struct TextFieldStruct {
@@ -24,6 +25,7 @@ struct TextFieldStruct {
         case .rename: return "Enter New Folder Name!"
         case .newSubFolder: return "Enter New SubFolder Name"
         case .newTopFolder: return "Enter New TopFolder Name"
+        case .newTopArchive: return "Enter New Top Archive Name"
         }
     }
 }

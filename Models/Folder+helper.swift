@@ -590,7 +590,7 @@ extension Folder {
 //            folders.append(eachLevel.folder)
 //        }
         
-        withLevels.map { folders.append($0.folder)}
+        _ = withLevels.map { folders.append($0.folder)}
         return folders
     }
 }

@@ -31,13 +31,17 @@ extension Color {
     
 //    static var mainColor = Color(.sRGB, red: 140/255, green: 180/255, blue: 140/255)
     
+    // Those two are mainColors
     static var subColor = Color(.sRGB, red: 100/255, green: 200/255, blue: 100/255)
     
     static var subColorDark = Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255)
     
+    // subColor
     static var subColor2 = Color(.sRGB, red: 130/255, green: 230/255, blue: 130/255)
 
     static var subColorDark2 = Color(.sRGB, red: 80/255, green: 180/255, blue: 80/255)
+    
+    // second subColor
     
     static var weekSubColor = Color(.sRGB, red: 150/255, green: 220/255, blue: 150/255)
 }

@@ -27,7 +27,8 @@ struct BookmarkedMemoBoxView: View {
         return nil // empty contents
     }
     
-    var frameSize = (UIScreen.screenWidth - Sizes.overallPadding) / 2 - 2 * Sizes.smallSpacing
+//    var frameSize = (UIScreen.screenWidth - Sizes.overallPadding) / 2 - 2 * Sizes.smallSpacing
+    var frameSize = ( UIScreen.screenWidth - 5 * Sizes.properSpacing ) / 2
         
     var body: some View {
         VStack(alignment: .leading) {

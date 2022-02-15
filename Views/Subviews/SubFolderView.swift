@@ -96,7 +96,9 @@ struct SubFolderView: View {
 //            .background(Color.subColor)
         .background(Color.weekSubColor)
 //        .background(Color(uiColor(named)))
-//        .background(Color(UIColor(named: "mainColor")!))
+        .background(
+            Color(UIColor(named: "mainColor")!)
+        )
             .cornerRadius(10)
     }
 }

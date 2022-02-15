@@ -100,10 +100,12 @@ struct MindMapView: View {
                         // MARK: - Button 2: Add new Folder to the top Folder
                         Button {
                             showTextField = true
-                            textFieldType = .newTopFolder
+//                            textFieldType = .newTopFolder
                             if selectionEnum == .folder {
+                                textFieldType = .newTopFolder
                                 newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)'s \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1) th Folder"
                             } else {
+                                textFieldType = .newTopArchive
                                 newFolderName = "\(fastFolderWithLevelGroup.archive.title)'s \(fastFolderWithLevelGroup.archive.subfolders.count + 1) th Folder"
                             }
 
@@ -341,6 +343,12 @@ struct MindMapView: View {
 
                         fastFolderWithLevelGroup.folders.first(where: {$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
 
+                    case .newTopArchive:
+                        
+                        let newFolder = Folder(title: newName, context: context)
+
+                        fastFolderWithLevelGroup.archives.first(where: {$0.folder.title == FolderType.getFolderName(type: .archive)})!.folder.add(subfolder: newFolder)
+                    
                     case .newSubFolder:
                         let newSubFolder = Folder(title: newName, context: context)
                         if let validSubFolder = folderToAddSubFolder {
@@ -368,7 +376,7 @@ struct MindMapView: View {
                 }
         } // end of ZStack
         
-        .alert("Are you sure to delete ?", isPresented: $showingDeleteAction, actions: {
+        .alert(AlertMessages.alertDeleteMain, isPresented: $showingDeleteAction, actions: {
             // delete
             Button(role: .destructive) {
                 if let validFolderToRemoved = folderEditVM.folderToRemove {
@@ -377,16 +385,16 @@ struct MindMapView: View {
                 }
                 context.saveCoreData()
             } label: {
-                Text("Delete")
+                Text(AlertMessages.deleteConfirm)
             }
             
             Button(role: .cancel) {
                 folderEditVM.folderToRemove = nil
             } label: {
-                Text("Cancel")
+                Text(AlertMessages.cancel)
             }
         }, message: {
-            Text("All deleted are NOT Recoverable. ").foregroundColor(.red)
+            Text(AlertMessages.alertDeleteSub).foregroundColor(.red)
         })
     
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
@@ -402,4 +410,11 @@ struct MindMapView: View {
         })
         .navigationBarHidden(true)
     }
+}
+
+struct AlertMessages {
+    static let deleteConfirm = "Delete"
+    static let cancel = "Cancel"
+    static let alertDeleteMain = "Are you sure to delete?"
+    static let alertDeleteSub = "All deleted are NOT Recoverable. "
 }

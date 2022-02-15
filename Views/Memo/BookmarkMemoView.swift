@@ -37,7 +37,9 @@ struct BookmarkMemoView: View {
     let initialTitle: String
     
     var btnBack : some View {
+
         Button(action: {
+            self.presentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
             ChangeableImage(imageSystemName: "chevron.left")

@@ -28,6 +28,7 @@ struct NewMemoView: View {
     @State var isBookMarkedTemp: Bool = false
     @State var isPinned: Bool = false
     @State var showSelectingFolderView = false
+    
 //    @State var indicator = false {
 //        didSet {
 //            if oldValue == false {
@@ -35,23 +36,26 @@ struct NewMemoView: View {
 //            }
 //        }
 //    }
-    
+    @Binding var presentingNewMemo: Bool
     @State var memo: Memo? = nil
     
     let parent: Folder
 
     let initialTitle: String = "Enter Title"
 
-    var btnBack : some View {
+    var backBtn : some View {
+        
         Button(action: {
+            self.presentingNewMemo = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
             ChangeableImage(imageSystemName: "chevron.left")
         }
     }
     
-    init(parent: Folder) {
+    init(parent: Folder, presentingNewMemo: Binding<Bool> ) {
         self.parent = parent
+            self._presentingNewMemo = presentingNewMemo
     }
     
     func saveChanges() {
@@ -209,7 +213,7 @@ struct NewMemoView: View {
                 }
             })
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack)
+        .navigationBarItems(leading: backBtn)
         .sheet(isPresented: $showSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:

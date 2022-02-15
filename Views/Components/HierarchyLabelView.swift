@@ -23,7 +23,7 @@ struct HierarchyLabelView: View {
 //            root = "\(eachFolder.title)" + " > " + root
 //        }
         
-        _ = hierarchy.map { root = "\($0.title)" + ">" + root}
+        _ = hierarchy.map { root = "\($0.title)" + " > " + root}
         
         let lastIndex = root.lastIndex(of: ">")!
         root.remove(at: lastIndex)

@@ -33,6 +33,7 @@ struct MemoBoxView: View {
     }
     
     var body: some View {
+        
         VStack(alignment: .leading) {
             if title != nil {
                 Text(memo.title)
@@ -42,7 +43,6 @@ struct MemoBoxView: View {
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
-                
             }
             if memo.overview != "" { // not using overview yet.
                 Text(memo.overview)
@@ -51,7 +51,6 @@ struct MemoBoxView: View {
                     .lineLimit(2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 5)
-                
             } else {
                 if memo.contents != "" {
                     Text(memo.contents)
@@ -61,7 +60,6 @@ struct MemoBoxView: View {
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding([.leading, .bottom], 5 )
-                    
                 }
             }
         }
@@ -72,7 +70,7 @@ struct MemoBoxView: View {
         .cornerRadius(5)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? colorScheme.adjustSubColors() : .clear, lineWidth: 2)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? Color(UIColor(named: "mainColor")!) : .clear, lineWidth: 2)
         )
     }
 }

@@ -106,7 +106,8 @@ struct MemosToolBarView: View {
         } // end of HStack
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
-        .background(colorScheme.adjustSubColors())
+//        .background(colorScheme.adjustSubColors())
+        .background(Color(UIColor(named: "mainColor")!))
         .cornerRadius(10)
     }
 }

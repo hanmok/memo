@@ -12,6 +12,7 @@ import SwiftUI
 struct Sizes {
     static let largePadding: CGFloat = 40
     static let overallPadding: CGFloat = 20
+    static let properSpacing: CGFloat = 10
     static let minimalSpacing: CGFloat = 4
     static let smallSpacing: CGFloat = 8
     static let memoVerticalSpacing: CGFloat = 12

@@ -117,15 +117,15 @@ struct SelectingFolderView: View {
                     } label: {
                         
                         if invalidFolderWithLevels.contains(folderWithLevel) {
-                            TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                                 .background(.red)
                             
                         } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
-                            TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
-                                .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
-                                .background(colorScheme.adjustSubColors())
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, shouldCheck: true)
+//                                .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
+//                                .background(colorScheme.adjustSubColors())
                         } else {
-                            TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }
                     }
                 }// end of List
@@ -147,6 +147,7 @@ struct SelectingFolderView: View {
 //                            }
                             memoEditVM.initSelectedMemos()
                         }
+                        
                         folderEditVM.folderToPaste = nil
                         presentationMode.wrappedValue.dismiss()
                         
@@ -159,15 +160,15 @@ struct SelectingFolderView: View {
                     } label: {
                         
                         if invalidFolderWithLevels.contains(folderWithLevel) {
-                            TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                                 .background(.red)
                             
                         } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
-                            TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
-                                .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
-                                .background(colorScheme.adjustSubColors())
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, shouldCheck: true)
+//                                .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
+//                                .background(colorScheme.adjustSubColors())
                         } else {
-                            TitleWithLevelView(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }
                     }
                 }// end of List
@@ -183,3 +184,4 @@ struct SelectingFolderView: View {
         .navigationBarHidden(true)
     }
 }
+
