@@ -38,4 +38,6 @@ extension Color {
     static var subColor2 = Color(.sRGB, red: 130/255, green: 230/255, blue: 130/255)
 
     static var subColorDark2 = Color(.sRGB, red: 80/255, green: 180/255, blue: 80/255)
+    
+    static var weekSubColor = Color(.sRGB, red: 150/255, green: 220/255, blue: 150/255)
 }

@@ -10,14 +10,15 @@ import SwiftUI
 
 enum TextFieldAlertType: String {
     case rename = "Rename Folder"
-    case newSubFolder = "New Subfolder"
-    case newTopFolder = "New Topfolder"
+    case newSubFolder = "New Sub Folder"
+    case newTopFolder = "New Folder"
 }
 
 struct TextFieldStruct {
     
     var textEnum: TextFieldAlertType
     
+    // Not Curretly using
     var placeHolder: String {
         switch textEnum {
         case .rename: return "Enter New Folder Name!"
@@ -51,6 +52,7 @@ struct PrettyTextFieldAlert: View {
                     .padding(.vertical, 15)
                 
                 TextField(TextFieldStruct(textEnum: type).placeHolder, text: $text)
+                    .disableAutocorrection(true)
                     .font(.callout)
                     .focused($focusState)
                     .background(colorScheme == .dark ? .black : .white)
@@ -58,6 +60,16 @@ struct PrettyTextFieldAlert: View {
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)
                     .padding(.bottom, 15)
+                    .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
+                        if let textField = obj.object as? UITextField {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.52) {  /// Anything over 0.5 seems to work
+                                textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+                            }
+                            
+//                            textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+                        }
+                    }
+                
                     .onChange(of: isPresented) { newValue in
                         if newValue == true {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
@@ -65,6 +77,9 @@ struct PrettyTextFieldAlert: View {
                                 self.focusState = true
                             }
                         }
+                    }
+                    .onAppear {
+                        print("text: \(text)")
                     }
                 
                 // Cancel and Done Button

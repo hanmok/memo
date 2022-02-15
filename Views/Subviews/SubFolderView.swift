@@ -62,6 +62,8 @@ struct SubFolderView: View {
                     } label: {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
+                            .lineLimit(1)
+                            .adjustTintColor(scheme: colorScheme)
                     }
 
                     .simultaneousGesture(TapGesture().onEnded{
@@ -71,8 +73,11 @@ struct SubFolderView: View {
                         memoEditVM.initSelectedMemos()
                     })
                 } // end of ForEach
+                // 왜.. 빈공간이 생깁니까??
             } // end of VStack
             .padding(.leading, 12)
+            .padding(.bottom, subFolders.count == 0 ? 0 : 10)
+//            .padding(.bottom, 10)
             
             if subFolders.count == 0 {
                
@@ -80,13 +85,19 @@ struct SubFolderView: View {
                     isAddingFolder = true
                 } label: {
                     Text("Press to Add")
+                        .adjustTintColor(scheme: colorScheme)
                 }
                 .padding(.leading, 12)
+                .padding(.bottom, 10)
             }
-            Spacer()
+
         }
         .frame(width: UIScreen.screenWidth / 2.5)
-            .background(Color.subColor)
+//            .background(Color.subColor)
+        .background(Color.weekSubColor)
+//        .background(Color(uiColor(named)))
+//        .background(Color(UIColor(named: "mainColor")!))
             .cornerRadius(10)
     }
 }
+

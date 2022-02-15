@@ -17,10 +17,10 @@ struct MemosToolBarView: View {
     @Binding var showSelectingFolderView: Bool
 //    let spacingBetweenButtons: CGFloat = 12
     let spacingBetweenButtons: CGFloat = 16
+    @Binding var showDeleteAlert: Bool
     
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
-            
             
 
             Button {
@@ -38,7 +38,6 @@ struct MemosToolBarView: View {
                 // 만약 모든게 pin 되어있는 경우에만 모두 unpin
                 var allPinned = true
                 
-
                 for each in memoEditVM.selectedMemos {
                     if each.pinned == false {
                         allPinned = false
@@ -48,16 +47,9 @@ struct MemosToolBarView: View {
 
                 if !allPinned {
                     _ = memoEditVM.selectedMemos.map { $0.pinned = true}
-//                    for each in memoEditVM.selectedMemos {
-//                        each.pinned = true
-//                    }
                     
                 } else {
                     _ = memoEditVM.selectedMemos.map { $0.pinned = false}
-//                    for each in memoEditVM.selectedMemos {
-//                        each.pinned = false
-//                    }
-                    
                 }
                 
                 context.saveCoreData()
@@ -104,15 +96,9 @@ struct MemosToolBarView: View {
             
             
             // REMOVE ACTION, WORKS FINE
-//            Button(action: {removeAction(sortedMemos)}) {
-            
             Button(action: {
-//                for each in memoEditVM.selectedMemos {
-//                    Memo.delete(each)
-//                }
-                _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
-                context.saveCoreData()
-                memoEditVM.initSelectedMemos()
+
+                showDeleteAlert = true
             }) {
                 ChangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }

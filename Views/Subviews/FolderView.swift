@@ -15,12 +15,13 @@ struct FolderView: View {
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    
     @Environment(\.colorScheme) var colorScheme
     
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
+    
+    @State var showDeleteAlert = false
     
     @State var newSubFolderName = ""
     
@@ -53,7 +54,14 @@ struct FolderView: View {
     }
     
     var body: some View {
-        ZStack {
+        
+        if shouldAddFolder {
+            DispatchQueue.main.async {
+                newSubFolderName = "\(currentFolder.title)'s \(currentFolder.subfolders.count + 1) th Folder"
+            }
+        }
+        
+        return ZStack {
             ScrollView(.vertical) {
                 VStack(spacing: 0) {
                     if currentFolder.parent != nil {
@@ -86,7 +94,6 @@ struct FolderView: View {
                             isShowingSubFolderView = true
                         }, label: {
                             SubFolderButtonImage()
-                            EmptyView()
                         })
                             .padding(.trailing, Sizes.overallPadding )
                         
@@ -114,7 +121,9 @@ struct FolderView: View {
                             }
                         }
                     } else {
-                        MemosToolBarView(showSelectingFolderView: $showSelectingFolderView)
+                        MemosToolBarView(
+                            showSelectingFolderView: $showSelectingFolderView,
+                            showDeleteAlert: $showDeleteAlert)
                             .padding([.trailing], Sizes.largePadding)
                             .padding(.bottom,Sizes.overallPadding )
                     }
@@ -128,6 +137,10 @@ struct FolderView: View {
                 Color(.white)
                     .opacity(0.8)
             }
+            
+//            if shouldAddFolder {
+//                newSubFolderName = ""
+//            }
             
             
             // instance. are they different instances ?
@@ -184,6 +197,25 @@ struct FolderView: View {
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
+        })
+        .alert("Are you sure to delete ?", isPresented: $showDeleteAlert, actions: {
+            // delete
+            Button(role: .destructive) {
+                _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
+                
+                context.saveCoreData()
+                memoEditVM.initSelectedMemos()
+            } label: {
+                Text("Delete")
+            }
+            
+            Button(role: .cancel) {
+// DO NOTHING
+            } label: {
+                Text("Cancel")
+            }
+        }, message: {
+            Text("All deleted are NOT Recoverable. ").foregroundColor(.red)
         })
 
         .onDisappear(perform: {

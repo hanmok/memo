@@ -57,6 +57,7 @@ struct MindMapView: View {
     @State var selectionEnum = FolderTypeEnum.folder // default value
     @State var foldersToShow: [Folder] = []
     
+    @State var showingDeleteAction = false
     @State var allMemos:[Memo] = []
     
     var body: some View {
@@ -100,6 +101,12 @@ struct MindMapView: View {
                         Button {
                             showTextField = true
                             textFieldType = .newTopFolder
+                            if selectionEnum == .folder {
+                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)'s \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1) th Folder"
+                            } else {
+                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)'s \(fastFolderWithLevelGroup.archive.subfolders.count + 1) th Folder"
+                            }
+
                         } label: {
                             ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
                             
@@ -107,7 +114,7 @@ struct MindMapView: View {
                         }
                     }
                     .padding(.trailing, Sizes.overallPadding)
-                    .padding(.vertical)
+                    .padding(.top, 5)
                 }
                 
                 
@@ -126,6 +133,7 @@ struct MindMapView: View {
                 // MARK: - Start
 
                 ZStack {
+                    VStack(spacing: 0) {
                     List {
                         ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
                             
@@ -142,6 +150,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
+                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
                                             ChangeableImage(imageSystemName: "folder.badge.plus")
                                         }
@@ -162,6 +171,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
+                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
                                             ChangeableImage(imageSystemName: "folder.badge.plus")
                                         }
@@ -169,23 +179,56 @@ struct MindMapView: View {
                                     }
                                 // Change Folder Name
                                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                        
+                                        
+                                        Button {
+                                            showingDeleteAction = true
+                                            folderEditVM.folderToRemove = folderWithLevel.folder
+                                        } label: {
+                                            ChangeableImage(imageSystemName: "trash")
+                                        }
+                                        .tint(.red)
+                                        
+                                        
+                                        // RELOCATE FOLDER
+                                        Button {
+                                            UIView.setAnimationsEnabled(false)
+                                            folderEditVM.shouldShowSelectingView = true
+                                            folderEditVM.folderToCut = folderWithLevel.folder
+                                        } label: {
+                                            ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
+                                        }
+                                        .tint(.green)
+                                    
                                         Button {
                                             if folderWithLevel.folder.parent != nil {
                                                 showTextField = true
                                                 textFieldType = .rename
                                                 folderToBeRenamed = folderWithLevel.folder
+                                                newFolderName = folderWithLevel.folder.title
                                             }
                                         } label: {
                                             ChangeableImage(imageSystemName: "pencil")
                                         }
                                         .tint(.yellow)
+                                    
                                     }
                             } // end of ForEach
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
+                        
+                    Rectangle()
+//                            .foregroundColor(.clear)
+//                            .background(.clear)
+                            .foregroundColor(colorScheme == .dark ? .black : Color(white: 242 / 255))
+                            .background(colorScheme == .dark ? .black : Color(white: 242 / 255))
+//                            .frame(height: 150)
+                            .frame(height: 185)
+                    }
                     
                     // Another ZStack Element
+                    VStack {
                     List {
                         ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
                             if folderWithLevel.folder.parent == nil {
@@ -201,6 +244,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
+                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
                                             ChangeableImage(imageSystemName: "folder.badge.plus")
                                         }
@@ -220,6 +264,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
+                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
                                             ChangeableImage(imageSystemName: "folder.badge.plus")
                                         }
@@ -227,11 +272,34 @@ struct MindMapView: View {
                                     }
                                 // Change Folder Name
                                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                        
+                                        
+                                        // DELETE FOLDER
+                                        Button {
+                                            showingDeleteAction = true
+                                            folderEditVM.folderToRemove = folderWithLevel.folder
+                                        } label: {
+                                            ChangeableImage(imageSystemName: "trash")
+                                        }
+                                        .tint(.red)
+                                        
+                                        
+                                        // RELOCATE FOLDER
+                                        Button {
+                                            UIView.setAnimationsEnabled(false)
+                                            folderEditVM.shouldShowSelectingView = true
+                                            folderEditVM.folderToCut = folderWithLevel.folder
+                                        } label: {
+                                            ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
+                                        }
+                                        .tint(.green)
+                                        
                                         Button {
                                             if folderWithLevel.folder.parent != nil {
                                                 showTextField = true
                                                 textFieldType = .rename
                                                 folderToBeRenamed = folderWithLevel.folder
+                                                newFolderName = folderWithLevel.folder.title
                                             }
                                         } label: {
                                             ChangeableImage(imageSystemName: "pencil")
@@ -242,6 +310,9 @@ struct MindMapView: View {
                         }
                     } // end of List
                     .listStyle(InsetGroupedListStyle())
+                        EmptyView()
+                            .frame(height: 250)
+                    }
                     .offset(x: selectionEnum == .folder ? UIScreen.screenWidth : 0)
                 } // end of ZStack
                 
@@ -255,10 +326,11 @@ struct MindMapView: View {
             
             
             // MARK: - rename is not currently working .
+            
             PrettyTextFieldAlert(
                 type: textFieldType ?? .rename,
                 isPresented: $showTextField,
-                text: $newFolderName,
+                text: $newFolderName, //
                 focusState: _textFieldFocus) { newName in
                     // MARK: - submit Actions
                     switch textFieldType! {
@@ -268,13 +340,11 @@ struct MindMapView: View {
 
                         fastFolderWithLevelGroup.folders.first(where: {$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
 
-                        
                     case .newSubFolder:
                         let newSubFolder = Folder(title: newName, context: context)
                         if let validSubFolder = folderToAddSubFolder {
                             validSubFolder.add(subfolder: newSubFolder)
                         }
-//                        context.saveCoreData()
                         
                     case .rename:
                         if folderToBeRenamed != nil {
@@ -297,6 +367,27 @@ struct MindMapView: View {
                 }
         } // end of ZStack
         
+        .alert("Are you sure to delete ?", isPresented: $showingDeleteAction, actions: {
+            // delete
+            Button(role: .destructive) {
+                if let validFolderToRemoved = folderEditVM.folderToRemove {
+                    Folder.delete(validFolderToRemoved)
+                    folderEditVM.folderToRemove = nil
+                }
+                context.saveCoreData()
+            } label: {
+                Text("Delete")
+            }
+            
+            Button(role: .cancel) {
+                folderEditVM.folderToRemove = nil
+            } label: {
+                Text("Cancel")
+            }
+        }, message: {
+            Text("All deleted are NOT Recoverable. ").foregroundColor(.red)
+        })
+    
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,

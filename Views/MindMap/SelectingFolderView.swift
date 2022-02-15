@@ -47,33 +47,36 @@ struct SelectingFolderView: View {
                 HStack {
                     Text("Select Folder ")
                         .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    // MARK: - FOR TESTING
-                    Button {
-                        _ = invalidFolderWithLevels.map { print("invalidFolder: \($0.folder.title)")}
-//                        for each in invalidFolderWithLevels {
-//                            print("invalidFolder: \(each.folder.title)")
-//                        }
-                        
-                    } label: {
-                        ChangeableImage(imageSystemName: "star")
-                    }
-                    
-                    
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-                        folderEditVM.folderToCut = nil
-                        memoEditVM.initSelectedMemos() // ?? should it be ?  yes.
-                    } label: {
-
-                        ChangeableImage(imageSystemName: "multiply")
-                            .foregroundColor(colorScheme.adjustBlackAndWhite())
-                        Image(systemName: "").frame(height: 28)
+                        .overlay {
+                        HStack {
+                            // MARK: - FOR TESTING
+                            Spacer()
+                            Button {
+                                _ = invalidFolderWithLevels.map { print("invalidFolder: \($0.folder.title)")}
+                                
+                            } label: {
+                                ChangeableImage(imageSystemName: "star")
+                            }
+                            
+                            
+                            Button {
+                                presentationMode.wrappedValue.dismiss()
+                                folderEditVM.folderToCut = nil
+                                memoEditVM.initSelectedMemos() // ?? should it be ?  yes.
+                            } label: {
+                                ChangeableImage(imageSystemName: "multiply")
+                                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+                                Image(systemName: "").frame(height: 28)
+                            }
+                        }
+                        .padding(.trailing, Sizes.overallPadding)
+                        .padding(.vertical)
                     }
                 }
-                .padding(.trailing, Sizes.overallPadding)
-                .padding(.vertical)
             }
+            .frame(height: 28)
+//            .padding(.vertical)
+            .padding(.top, 5)
             
             Picker("", selection: $selectionEnum) {
                 Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(FolderTypeEnum.folder)

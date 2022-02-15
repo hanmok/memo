@@ -26,7 +26,7 @@ struct BookmarkedFolderView: View {
         
         return ZStack {
             NavigationView {
-                ZStack {
+                ZStack(alignment: .topLeading) {
                     VStack(spacing: 0) {
                         ScrollView(.horizontal) {
                             
@@ -49,11 +49,12 @@ struct BookmarkedFolderView: View {
                             .padding(.horizontal, Sizes.overallPadding)
                             Spacer()
                             }
-                        }
+                        } // end of ScrollView
                         .frame(height: 150)
                         .padding(.top, 30)
 
                         Spacer()
+//                            .frame(height: 15)
                     } // end of VStack
                     .background(colorScheme.adjustSubColors())
                     
@@ -69,17 +70,17 @@ struct BookmarkedFolderView: View {
             .navigationBarHidden(true)
             VStack {
                 HStack {
-                    
                     HStack {
                         Text(Image(systemName: "bookmark.fill")) + Text(" BookMarked Memos")
                     }
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
+//                    .background(Color(.sRGB, white: 0.8, opacity: 0.3))
                     .foregroundColor(colorScheme.adjustBlackAndWhite())
                     .padding(.leading, Sizes.overallPadding)
-                    .offset(y: presentingView || presentingNewMemo ? -100 : -45 )
+//                    .offset(y: presentingView || presentingNewMemo ? -100 : -45 )
+                    .offset(y: presentingView || presentingNewMemo ? -100 : -10 )
                     .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
-                    
                     
                     Spacer()
                     
@@ -94,6 +95,7 @@ struct BookmarkedFolderView: View {
                     .offset(y: presentingView || presentingNewMemo ? -100 : -25 )
                     .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                 }
+//                .background(Color(.sRGB, white: 0.5, opacity: 0.5))
                 Spacer()
             }
             
