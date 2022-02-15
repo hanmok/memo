@@ -196,7 +196,8 @@ struct MindMapView: View {
                                             folderEditVM.shouldShowSelectingView = true
                                             folderEditVM.folderToCut = folderWithLevel.folder
                                         } label: {
-                                            ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
+//                                            ChangeableImage(imageSystemName: "arrowshape.turn.up.right.fill")
+                                            ChangeableImage(imageSystemName: "folder")
                                         }
                                         .tint(.green)
                                     

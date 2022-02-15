@@ -23,6 +23,7 @@ struct SelectingFolderView: View {
     var invalidFolderWithLevels: [FolderWithLevel]
 
     @State var selectionEnum = FolderTypeEnum.folder // default value
+//    @Binding var selectionEnum: FolderTypeEnum // default value
 
 //    var onSubmitAction: () -> Void = { }
 //    var onCancelAction: () -> Void = { }
