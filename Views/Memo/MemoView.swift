@@ -101,8 +101,8 @@ struct MemoView: View {
             }
         
         return VStack(spacing: 0) {
-            TextField(initialTitle, text: $title)
             
+            TextField(initialTitle, text: $title)
                 .font(.title2)
                 .submitLabel(.continue)
                 .disableAutocorrection(true)
@@ -116,14 +116,16 @@ struct MemoView: View {
             // TextField Underline
                 .overlay {
                     Divider()
-                        .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
+//                        .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
+                        .padding(.top, 15)
+                        .padding(.horizontal, Sizes.overallPadding)
                 }
             
             // MARK: - Contents
             
             TextEditor(text: $contents)
                 .frame(maxHeight: .infinity, alignment: .bottom)
-                .disableAutocorrection(true)
+                .disableAutocorrection(true) 
                 .padding(.horizontal, Sizes.overallPadding)
                 .focused($editorFocusState)
                 .focused($focusState, equals: .contents)

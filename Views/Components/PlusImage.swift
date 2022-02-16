@@ -35,8 +35,8 @@ struct PlusImage2: View {
         
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-                .foregroundColor(Color(UIColor(named: "subColor")!))
-                .background(Color(UIColor(named: "subColor")!))
+                .foregroundColor(Color(UIColor(named: "mainColor")!))
+                .background(Color(UIColor(named: "mainColor")!))
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "plus")
                 .frame(width: 25, height: 25)

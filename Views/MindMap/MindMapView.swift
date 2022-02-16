@@ -85,17 +85,6 @@ struct MindMapView: View {
                         FolderOrderingMenu(folderOrder: folderOrder)
                             .padding(.trailing, Sizes.smallSpacing)
                         
-                        // MARK: - Button for Test
-                        //                        Button {
-                        ////                            print(Memo.fetchAllmemos(context: context))
-                        //                            allMemos = Memo.fetchAllmemos(context: context)
-                        //                            print("num of memos:  \(allMemos.count)")
-                        //                            print("num of memos that has no parent: \(allMemos.filter { $0.folder == nil}.count)")
-                        //
-                        //                        } label: {
-                        //                            ChangeableImage(imageSystemName: "folder")
-                        //                        }
-                        
                         
                         // MARK: - Button 2: Add new Folder to the top Folder
                         Button {
@@ -118,6 +107,7 @@ struct MindMapView: View {
                     .padding(.trailing, Sizes.overallPadding)
                     .padding(.top, 5)
                 }
+                .padding(.trailing, Sizes.overallPadding)
                 
                 
                 Picker("", selection: $selectionEnum) {
@@ -318,6 +308,7 @@ struct MindMapView: View {
                     }
                     .offset(x: selectionEnum == .folder ? UIScreen.screenWidth : 0)
                 } // end of ZStack
+                .padding(.horizontal, Sizes.overallPadding)
                 
                 // END
                 

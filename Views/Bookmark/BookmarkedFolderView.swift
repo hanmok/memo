@@ -27,44 +27,39 @@ struct BookmarkedFolderView: View {
         return ZStack {
             NavigationView {
                 ZStack(alignment: .topLeading) {
+                    
+                    // BOOKMARK Memos
                     VStack(spacing: 0) {
                         ScrollView(.horizontal) {
-                            
                             VStack {
-//                            HStack(alignment: .top, spacing: Sizes.smallSpacing) {
                                 HStack(alignment: .top, spacing: Sizes.properSpacing) {
-                                
-                                ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
-
-                                    NavigationLink(destination:
-                                                   BookmarkMemoView(memo: bookMarkedMemo,
-                                                                    parent: bookMarkedMemo.folder!,
-                                                                    presentingView: $presentingView)
-                                                    .environmentObject(memoEditVM)
-                                                    .environmentObject(folderEditVM)
-                                    ) {
-                                        BookmarkedMemoBoxView(memo: bookMarkedMemo)
+                                    
+                                    ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
+                                        
+                                        NavigationLink(destination:
+                                                        BookmarkMemoView(memo: bookMarkedMemo,
+                                                                         parent: bookMarkedMemo.folder!,
+                                                                         presentingView: $presentingView)
+                                                        .environmentObject(memoEditVM)
+                                                        .environmentObject(folderEditVM)
+                                        ) {
+                                            BookmarkedMemoBoxView(memo: bookMarkedMemo)
+                                        }
                                     }
-                                }
-                            } // end of HStack
-//                            .padding(.horizontal, Sizes.overallPadding)
-                            .padding(.horizontal, Sizes.properSpacing)
-                            Spacer()
+                                } // end of HStack
+                                .padding(.horizontal, Sizes.properSpacing)
+                                Spacer()
                             }
                         } // end of ScrollView
                         .frame(height: 150)
-                        .padding(.top, 30)
-
-
+                        .padding(.top, 10) // prev: 30
+                        
                         Spacer()
-//                            .frame(height: 15)
                     } // end of VStack
-//                    .background()
-//                    .background(colorScheme.adjustSubColors())
-//                    .background(Color(UIColor(named: "subColor")!))
                     .background(Color(UIColor(named: "mainColor")!))
-                    
-
+//                    .padding(.horizontal, Sizes.overallPadding)
+                    // Another ZStack Element
+                    // NEW MEMO
                     NavigationLink(destination:
                                     NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                     .environmentObject(memoEditVM)
@@ -72,44 +67,53 @@ struct BookmarkedFolderView: View {
                                    ,isActive: $presentingNewMemo) {}
                 }
                 .navigationBarHidden(true)
-            } // end of NavigationView
-            .navigationBarHidden(true)
+            } // end of NavigationView, Another ZStack Element begins
+            .padding(.horizontal, Sizes.overallPadding)
+            //            .navigationBarHidden(true)
             VStack {
                 HStack {
-                    HStack {
-                        Text(Image(systemName: "bookmark.fill")) + Text(" BookMarked Memos")
-                    }
-                    .font(.headline)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .background(Color(.sRGB, white: 0.8, opacity: 0.3))
-                    .foregroundColor(colorScheme.adjustBlackAndWhite())
-                    .background(colorScheme.adjustSubColors())
-//                    .padding(.leading, Sizes.overallPadding)
-//                    .offset(y: presentingView || presentingNewMemo ? -100 : -45 )
-                    .offset(y: presentingView || presentingNewMemo ? -100 : -20 )
-                    .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
-                    
-                    Spacer()
-                    
-                    // Adding New Memo Button
-                    Button {
-                        presentingNewMemo = true
-                    } label:
-                    {
-                        PlusImage2()
-                    }
-                    .padding(.trailing, Sizes.overallPadding)
-                    .offset(y: presentingView || presentingNewMemo ? -100 : -25 )
-                    .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
+                    ZStack {
+                        // BookMarked memos Text.
+                        Rectangle()
+                            .frame(width: UIScreen.screenWidth, height: 30)
+                            .background(Color(UIColor(named: "subColor")!))
+                            .foregroundColor(Color(UIColor(named: "subColor")!))
+                            .offset(y: -20)
+                        
+                        HStack {
+                            HStack {
+                                Text(Image(systemName: "bookmark.fill")) + Text(" BookMarked Memos")
+                            }
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+                            .offset(y: presentingView || presentingNewMemo ? -100 : -20 )
+                            .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
+                            
+                            Spacer()
+                            
+                            // Adding New Memo Button
+                            Button {
+                                presentingNewMemo = true
+                            } label:
+                            {
+                                PlusImage2() // plus Image with subColor
+                            }
+//                            .padding(.trailing, Sizes.overallPadding)
+                            .offset(y: presentingView || presentingNewMemo ? -100 : -35 ) // priv : -25
+                            .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
+                        }
+                        .padding(.horizontal, Sizes.overallPadding)
+                    } // end of ZStack
                 }
-                .padding(.leading, Sizes.overallPadding)
-                .background(Color(.sRGB, white: 0.5, opacity: 0.5))
+                .padding(.horizontal, Sizes.overallPadding)
+//                .background(Color(.sRGB, white: 0, opacity: 0.5))
+                .offset(y: presentingView || presentingNewMemo ? -100 : -20) // remove top bar when new Memo Presented.
                 Spacer()
             }
-            
         } // end of ZStack
         .offset(y: presentingView || presentingNewMemo ? 0 : UIScreen.screenHeight - 250)
         .animation(.spring(response: 0.1), value: presentingView || presentingNewMemo)
-//        .ignoresSafeArea( edges: .horizontal)
+        //        .ignoresSafeArea( edges: .horizontal)
     }
 }
