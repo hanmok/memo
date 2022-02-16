@@ -60,6 +60,8 @@ struct CustomTextView: UIViewRepresentable {
         let newPosition = uiView.endOfDocument
         uiView.selectedTextRange = uiView.textRange(from: newPosition, to: newPosition)
         
+//        uiView.scrollRangeToVisible(NSRange(uiView.selectedTextRange!))
+//        uiView.scrollRangeToVisible(<#T##range: NSRange##NSRange#>)
         
 //        if let newPosition = textField.position(from: , offset: -1) {
 //            uiView.selectedTextRange = uiView.textRange(from: newPosition, to: newPosition)

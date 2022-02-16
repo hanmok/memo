@@ -48,7 +48,12 @@ struct HomeView: View { // top folder fetch
 //                    )
 //            )
 //        }
-        return MemoClone()
+        
+        // TEXT EDITOR TESTS
+//        return MemoClone()
+        
+        // This one looks hopeful..
+        return ContentView2()
         
 //        return SearchView(fastFolderWithLevelGroup:
 //                            FastFolderWithLevelGroup(

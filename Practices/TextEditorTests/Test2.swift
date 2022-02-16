@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView2: View {
     @State private var textEditorHeight : CGFloat = 100
     @State private var text = "Testing text. Hit a few returns to see what happens"
-
+    @State private var textStyle = UIFont.TextStyle.body
     var body: some View {
         ScrollView {
             VStack{
@@ -26,7 +26,8 @@ struct ContentView2: View {
                                                    value: $0.frame(in: .local).size.height)
                         })
                         .fixedSize(horizontal: false, vertical: true)
-                    TextEditor(text: $text)
+//                    TextEditor(text: $text)
+                    CustomTextView(text: $text, textStyle: $textStyle)
 //                        .font(.custom("Courier", size: 24))
                         .padding(6)
                         .frame(height: textEditorHeight)
