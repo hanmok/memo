@@ -106,7 +106,8 @@ struct FolderView: View {
                             .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
                             .animation(.spring(), value: isShowingSubFolderView)
                     } // end of ZStack
-                    .padding(.top, 10)
+//                    .padding(.top, 10)
+//                    .offset(y: -40)
                     
                 }
                 // ANOTHER ELEMENT IN VSTACK

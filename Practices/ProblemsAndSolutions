@@ -1,0 +1,21 @@
+
+TextEditor
+
+https://stackoverflow.com/questions/70211903/scrolling-to-texteditor-cursor-position-in-swiftui
+
+
+UITextField and UITextView Useful Tips
+
+https://stackoverflow.com/questions/34922331/getting-and-setting-cursor-position-of-uitextfield-and-uitextview-in-swift
+
+UILabel: "The UILabel class implements a read-only text view."
+UITextField: "A UITextField object is a control that displays editable text and sends an action message to a target object when the user presses the return button."
+
+UITextView: "The UITextView class implements the behavior for a scrollable, multiline text region."
+
+
+
+
+https://www.appcoda.com/swiftui-textview-uiviewrepresentable/
+
+

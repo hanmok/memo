@@ -109,9 +109,11 @@ struct MemoView: View {
                 .focused($focusState, equals: .title)
                 .padding(.bottom, Sizes.largePadding)
                 .padding(.horizontal, Sizes.overallPadding)
+                .submitLabel(.continue)
                 .onSubmit {
                     focusState = .contents
                 }
+
             
             // TextField Underline
                 .overlay {
@@ -125,12 +127,14 @@ struct MemoView: View {
             
             TextEditor(text: $contents)
                 .frame(maxHeight: .infinity, alignment: .bottom)
-                .disableAutocorrection(true) 
+                .disableAutocorrection(true)
                 .padding(.horizontal, Sizes.overallPadding)
                 .focused($editorFocusState)
                 .focused($focusState, equals: .contents)
             
         } // end of VStack
+        
+        
         .frame(maxHeight: .infinity, alignment: .bottom)
         .gesture(scroll)
         // How..

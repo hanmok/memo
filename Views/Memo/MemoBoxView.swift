@@ -66,7 +66,8 @@ struct MemoBoxView: View {
         .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
         .padding(.horizontal, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-        .background(colorScheme == .dark ? Color(white: 33 / 255) : Color(white: 0.9))
+//        .background(colorScheme == .dark ? Color(white: 33 / 255) : Color(white: 0.9))
+        .background(Color(.sRGB, red: 242 / 255, green: 206 / 255, blue: 128 / 255))
         .cornerRadius(5)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
