@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK: - Color Picker View
 struct ColorPickerView: View {
+//    @Binding var memoColor: UIColor
+    @Binding var selectedIndex: Int
     var body: some View {
         ZStack {
             Circle()
@@ -20,14 +22,16 @@ struct ColorPickerView: View {
                 
             ChangeableImage(imageSystemName: "circle")
                 .frame(width: 16, height: 16)
-                .foregroundColor(.red)
-                .background(.red)
+//                .foregroundColor(.red)
+//                .background(.red)
+                .background(Color.pastelColors[selectedIndex])
+                .foregroundColor(Color.pastelColors[selectedIndex])
                 .clipShape(Circle())
         }
     }
 }
-struct ColorPickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        ColorPickerView()
-    }
-}
+//struct ColorPickerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ColorPickerView()
+//    }
+//}

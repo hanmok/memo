@@ -107,7 +107,8 @@ struct MemosToolBarView: View {
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
 //        .background(colorScheme.adjustSubColors())
-        .background(Color(UIColor(named: "mainColor")!))
+//        .background(Color(UIColor(named: "mainColor")!))
+        .background(colorScheme.adjustMainColors())
         .cornerRadius(10)
     }
 }

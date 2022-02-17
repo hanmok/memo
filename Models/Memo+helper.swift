@@ -13,7 +13,7 @@ extension Memo {
     
     convenience init(title: String, contents: String, context: NSManagedObjectContext) {
         self.init(context: context)
-        self.title = title
+//        self.title = title
         self.creationDate = Date()
         self.contents = contents
         self.modificationDate = Date()
@@ -46,10 +46,10 @@ extension Memo {
         set { creationDate_ = newValue }
     }
     
-    var title: String {
-        get { title_ ?? "" }
-        set { title_ = newValue }
-    }
+//    var title: String {
+//        get { title_ ?? "" }
+//        set { title_ = newValue }
+//    }
     
     var contents: String {
         get { contents_ ?? ""}
@@ -80,6 +80,15 @@ extension Memo {
             if let newColor = newColor {
                 colorAsHex = newColor.toHex
             }
+        }
+    }
+    
+    var colorIndex: Int {
+        get {
+            Int(colorIndex_)
+        }
+        set (newValue) {
+            colorIndex_ = Int64(newValue)
         }
     }
     
@@ -147,7 +156,8 @@ extension Memo {
     }
     
     static func copyMemo(target: Memo, context: NSManagedObjectContext) -> Memo {
-        let newMemo = Memo(title: target.title, contents: target.contents, context: context)
+//        let newMemo = Memo(title: target.title, contents: target.contents, context: context)
+        let newMemo = Memo(contents: target.contents, context: context)
         newMemo.modificationDate = target.modificationDate
 //        newMemo.pinned = target.pinned
         return newMemo
@@ -161,7 +171,7 @@ extension Memo {
     func getMemoInfo() {
         print("getMemoInfo")
         print("memo.uuid: \(self.uuid)")
-        print("memo.title: \(self.title)")
+//        print("memo.title: \(self.title)")
         print("memo.creationDate: \(self.creationDate)")
         print("memo.contents: \(self.contents)")
         print("memo.modificationDate: \(String(describing: self.modificationDate))")
@@ -223,9 +233,9 @@ extension Memo {
 
     static func sortAlphabetOrder(_ lhs: Memo, _ rhs: Memo) -> Bool {
         if Memo.isAscending {
-            return lhs.title < rhs.title
+            return lhs.contents < rhs.contents
         } else {
-            return lhs.title >= rhs.title
+            return lhs.contents >= rhs.contents
         }
     }
 }

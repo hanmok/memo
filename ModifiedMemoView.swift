@@ -26,7 +26,9 @@ struct ModifiedMemoView: View {
     @State var contents: String = ""
     
     @State var isBookMarkedTemp: Bool?
-    
+    @State var showColorPalette = false
+    @State var memoColor = UIColor.magenta
+    @State var selectedColorIndex = 0
     let parent: Folder
     
     var btnBack : some View {
@@ -52,7 +54,7 @@ struct ModifiedMemoView: View {
         if memo.contents == "" {
             Memo.delete(memo)
         }
-
+        
         parent.title += "" //
         context.saveCoreData()
     }
@@ -91,26 +93,10 @@ struct ModifiedMemoView: View {
                     
                     HStack(spacing: 15) {
                         
-//                        Button {
-//                            // apply changes
-////                            let color = memo.color
-////                            self.background(Color(uiColor: color!))
-////                            print("color saved: \(color?.toHex)")
-//                        } label: {
-//                            Image(systemName: "eyedropper")
-//                        }
-                       
-                        
-                        
-// get list of pastel colors !!
                         Button {
-                            // save change
-//                            memo.color = UIColor(hex: "00FF00")
-//                            context.saveCoreData()
-
+                            showColorPalette = true
                         } label: {
-//                            ChangeableImage(imageSystemName: "pencil.tip")
-                            ColorPickerView()
+                            ColorPickerView(selectedIndex: $selectedColorIndex)
                         }
                         
                         
@@ -147,8 +133,7 @@ struct ModifiedMemoView: View {
                     }
                 }
                 .padding(.bottom)
-                .ignoresSafeArea(edges: .horizontal)
-//                .background(.brown)
+
                 
                 CustomTextView(text: $contents)
                     .padding(.top)
@@ -156,21 +141,35 @@ struct ModifiedMemoView: View {
             }
             .padding(.horizontal, Sizes.overallPadding)
             .gesture(scroll)
+            
+            VStack {
+                HStack {
+                    Spacer()
+                    ColorPaletteView(selectedColorIndex: $selectedColorIndex, showColorPalette: $showColorPalette)
+                        .padding(.top, Sizes.overallPadding)
+                }
+                Spacer()
+            }
+            .offset(y: showColorPalette ? -35 : -300)
+            .animation(.spring(), value: showColorPalette)
         }
         .padding(.vertical)
         
         .navigationBarHidden(true)
         .onAppear(perform: {
             contents = memo.contents
-//            print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
+//            memo.colorIndex = selectedColorIndex
+            selectedColorIndex = memo.colorIndex
         })
-
+        
         .onDisappear(perform: {
+            memo.colorIndex = selectedColorIndex
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
+
         })
         .sheet(isPresented: $showSelectingFolderView) {
             SelectingFolderView(

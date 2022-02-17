@@ -63,7 +63,9 @@ struct BookmarkedFolderView: View {
                         
                         Spacer()
                     } // end of VStack
-                    .background(Color(UIColor(named: "mainColor")!))
+//                    .background(Color(UIColor(named: "mainColor")!))
+//                    .background(Color.applyMainColor())
+                    .background(colorScheme.adjustMainColors())
 //                    .padding(.horizontal, Sizes.overallPadding)
                     // Another ZStack Element
                     // NEW MEMO
@@ -84,8 +86,10 @@ struct BookmarkedFolderView: View {
                         // BookMarked memos Text.
                         Rectangle()
                             .frame(width: UIScreen.screenWidth, height: 30)
-                            .background(Color(UIColor(named: "subColor")!))
-                            .foregroundColor(Color(UIColor(named: "subColor")!))
+//                            .background(Color(UIColor(named: "subColor")!))
+//                            .foregroundColor(Color(UIColor(named: "subColor")!))
+                            .background(colorScheme.adjustSecondSubColors())
+                            .foregroundColor(colorScheme.adjustSecondSubColors())
                             .offset(y: -20)
                         
                         HStack {

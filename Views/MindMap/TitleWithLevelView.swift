@@ -73,7 +73,8 @@ struct CheckableFolderCell: View {
                 ChangeableImage(imageSystemName: "checkmark")
             }
 //            .tint(Color.subColor)
-            .tint(Color(UIColor(named: "mainColor")!))
+//            .tint(Color(UIColor(named: "mainColor")!))
+            .tint(colorScheme.adjustMainColors())
             }
         }
         

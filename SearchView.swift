@@ -44,7 +44,7 @@ struct SearchView: View {
         
         // check if any memo has search Keyword
         _ = allMemos.map { $0.contents.contains(searchKeyword)}
-        _ = allMemos.map { $0.title.contains(searchKeyword)}
+//        _ = allMemos.map { $0.title.contains(searchKeyword)}
         
         return allMemos
     }

@@ -39,6 +39,8 @@ struct HomeView: View { // top folder fetch
 //
 //                return EmptyView()
         
+//        return ColorPaletteView(selectedColorIndex: .constant(4))
+        
         return NavigationView {
             MindMapView(
                 fastFolderWithLevelGroup:

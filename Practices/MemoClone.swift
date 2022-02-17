@@ -57,6 +57,7 @@ struct CustomTextView: UIViewRepresentable {
         uiTextView.text += ""
         uiTextView.showsVerticalScrollIndicator = false
 //        uiTextView.text = "asjdi"
+        
         return uiTextView
     }
     
@@ -97,8 +98,6 @@ struct CustomTextView: UIViewRepresentable {
 
         }
         else {
-//            let attribtedText = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
-            
             let attributedText = NSMutableAttributedString(
                 string: uiView.text,
                 attributes:
@@ -137,7 +136,7 @@ struct CustomTextView: UIViewRepresentable {
             print("textViewDidBeginEditingTriggered")
             }
         }
-
+        
     }
     
     // simply returns an instance of Coordinator.

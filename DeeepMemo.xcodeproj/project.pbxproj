@@ -88,8 +88,8 @@
 		9AA2672D27BE45BD00AC75DB /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */; };
 		9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
 		9AA2673027BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
-		9AA2673227BE4E2900AC75DB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* Colors.swift */; };
-		9AA2673327BE4E2900AC75DB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* Colors.swift */; };
+		9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
+		9AA2673327BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
 		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */; };
@@ -164,6 +164,8 @@
 		E523DB4027B86E4F00D8D78B /* BookmarkMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3E27B86E4F00D8D78B /* BookmarkMemoView.swift */; };
 		E523DB4927BBF04900D8D78B /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4827BBF04900D8D78B /* BackButton.swift */; };
 		E523DB4A27BBF04900D8D78B /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4827BBF04900D8D78B /* BackButton.swift */; };
+		E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */; };
+		E523DB5027BE9A3000D8D78B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */; };
 		E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596A6C427AD8D5000076E95 /* OrderViewModel.swift */; };
@@ -231,7 +233,7 @@
 		9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedMemoBoxView.swift; sourceTree = "<group>"; };
 		9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
 		9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
-		9AA2673127BE4E2900AC75DB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		9AA2673127BE4E2900AC75DB /* FavColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavColors.swift; sourceTree = "<group>"; };
 		9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCollapsibleFolder.swift; sourceTree = "<group>"; };
 		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind3.swift; sourceTree = "<group>"; };
 		9AC5D10B27840554007EAA28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 		E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedFolderView.swift; sourceTree = "<group>"; };
 		E523DB3E27B86E4F00D8D78B /* BookmarkMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMemoView.swift; sourceTree = "<group>"; };
 		E523DB4827BBF04900D8D78B /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
 		E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemoVarsTestView.swift; sourceTree = "<group>"; };
 		E596A6C427AD8D5000076E95 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -323,6 +326,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */,
 				9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */,
 				9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */,
 				9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */,
@@ -461,7 +465,7 @@
 				9AD6EEC9277C3E3E00866456 /* Extensions.swift */,
 				9A3377B2278FFF2D00805138 /* TextViewWrapper.swift */,
 				9A89582627717EB500E7B773 /* Sizes.swift */,
-				9AA2673127BE4E2900AC75DB /* Colors.swift */,
+				9AA2673127BE4E2900AC75DB /* FavColors.swift */,
 				9A3378002795736200805138 /* ColorExt.swift */,
 				9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */,
 			);
@@ -742,6 +746,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */,
 				9AD8332327BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */,
 				9AD6EF19277DB5DE00866456 /* CollapsibleView.swift in Sources */,
 				9A98E7582773021200057A84 /* ModelTest.swift in Sources */,
@@ -791,7 +796,7 @@
 				9AD8333127BD18E200506AE8 /* Test3.swift in Sources */,
 				9A3377B927900BF200805138 /* MemoListTest.swift in Sources */,
 				9AC5D225278834EC007EAA28 /* FolderLabelView3.swift in Sources */,
-				9AA2673227BE4E2900AC75DB /* Colors.swift in Sources */,
+				9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */,
 				9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */,
 				E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
 				9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */,
@@ -846,7 +851,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AC5D23E278D8435007EAA28 /* textFieldTestview.swift in Sources */,
-				9AA2673327BE4E2900AC75DB /* Colors.swift in Sources */,
+				9AA2673327BE4E2900AC75DB /* FavColors.swift in Sources */,
 				9A1D535A27A925A1009294C1 /* TitleWithLevelView.swift in Sources */,
 				9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */,
 				9A33786B27993ACA00805138 /* FolderOverView.swift in Sources */,
@@ -855,6 +860,7 @@
 				E523DB4027B86E4F00D8D78B /* BookmarkMemoView.swift in Sources */,
 				9AD8332C27BD18CB00506AE8 /* Test1.swift in Sources */,
 				9A337897279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
+				E523DB5027BE9A3000D8D78B /* ColorPaletteView.swift in Sources */,
 				9AA2672D27BE45BD00AC75DB /* UIColorExt.swift in Sources */,
 				9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
 				9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */,

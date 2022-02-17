@@ -253,7 +253,8 @@ struct FolderView: View {
 //
 //                    print(eachMemo.title)
 //                }
-                _ = validMemos.map { $0.title += "" }
+                
+//                _ = validMemos.map { $0.title += "" }
                 
                 print("count : \(currentFolder.memos.count)")
                 

@@ -121,17 +121,3 @@ func convertSetToArray(set: Set<Folder>) -> Array<Folder> {
     return emptyFolder
 }
 
-
-extension ColorScheme {
-     func adjustBlackAndWhite() -> Color {
-        return self == .dark ? .white : .black
-    }
- 
-    func adjustSubColors() -> Color {
-        return Color(UIColor(named: "mainColor")!)
-    }
-    
-    func adjustSecondSubColors() -> Color {
-        Color(UIColor(named: "subColor")!)
-    }
-}

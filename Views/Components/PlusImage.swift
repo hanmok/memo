@@ -16,9 +16,11 @@ struct PlusImage: View {
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
 //                .foregroundColor(colorScheme == .dark ? Color.subColorDark : Color.subColor)
-                .foregroundColor(Color(UIColor(named: "mainColor")!))
+//                .foregroundColor(Color(UIColor(named: "mainColor")!))
+                .foregroundColor(colorScheme.adjustMainColors())
 //            Color(UIColor(named: "mainColor")!)
-                .background(Color(UIColor(named: "mainColor")!))
+//                .background(Color(UIColor(named: "mainColor")!))
+                .background(colorScheme.adjustMainColors())
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "plus")
                 .frame(width: 25, height: 25)
@@ -35,8 +37,8 @@ struct PlusImage2: View {
         
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-                .foregroundColor(Color(UIColor(named: "mainColor")!))
-                .background(Color(UIColor(named: "mainColor")!))
+                .foregroundColor(colorScheme.adjustMainColors())
+                .background(colorScheme.adjustMainColors())
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "plus")
                 .frame(width: 25, height: 25)
