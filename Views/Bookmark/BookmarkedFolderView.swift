@@ -61,7 +61,8 @@ struct BookmarkedFolderView: View {
                     // Another ZStack Element
                     // NEW MEMO
                     NavigationLink(destination:
-                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
+//                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
+                                   ModifiedNewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                    ,isActive: $presentingNewMemo) {}

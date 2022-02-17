@@ -176,7 +176,10 @@ struct FolderView: View {
 //                    isNewMemo: true),
 //                isActive: $isAddingMemo) {}
             
-            NavigationLink(destination: NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
+            NavigationLink(destination:
+//                            NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
+                           ModifiedNewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
+            
             .environmentObject(folderEditVM)
             .environmentObject(memoEditVM)
             

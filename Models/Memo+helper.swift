@@ -26,6 +26,14 @@ extension Memo {
         context.saveCoreData()
     }
     
+    convenience init(contents: String, context: NSManagedObjectContext) {
+        self.init(context: context)
+        self.contents = contents
+        self.creationDate = Date()
+        self.modificationDate = Date()
+        context.saveCoreData()
+    }
+    
     // these variables are not optionals.
     var uuid: UUID {
         get { uuid_ ?? UUID() }

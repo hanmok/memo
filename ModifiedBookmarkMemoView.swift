@@ -9,12 +9,9 @@ import SwiftUI
 import Combine
 import CoreData
 
-enum Field: Hashable {
-    case title
-    case contents
-}
 
-struct MemoView: View {
+struct ModifiedBookmarkMemoView: View {
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     
@@ -24,34 +21,34 @@ struct MemoView: View {
     @ObservedObject var memo: Memo
     
     @FocusState var editorFocusState: Bool
-    @FocusState var focusState: Field?
+
+    @State var showSelectingFolderView = false
     @GestureState var isScrolled = false
     
-    @State var showSelectingFolderView = false
-    
-    @State var title: String = ""
     @State var contents: String = ""
     
     @State var isBookMarkedTemp: Bool?
+    @Binding var presentingView: Bool // only Bookmark memoView has.
     
     let parent: Folder
     
-    let initialTitle: String
-    
     var btnBack : some View {
+
         Button(action: {
+            self.presentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
             ChangeableImage(imageSystemName: "chevron.left")
         }
     }
     
-    init(memo: Memo, parent: Folder) {
+
+    
+    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>) {
         self.memo = memo
         self.parent = parent
-        self.initialTitle = memo.title
+        self._presentingView = presentingView
     }
-    
     
     func saveChanges() {
         print("save changes has triggered")
@@ -60,27 +57,25 @@ struct MemoView: View {
         memo.contents = contents
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if both title and contents are empty, delete memo
-        if memo.title == "" && memo.contents == "" {
-            print("memo has deleted! title: \(title), contents: \(contents)")
+        if memo.contents == "" {
+            print("memo has deleted! title: \(), contents: \(contents)")
             Memo.delete(memo)
-        } else { // if both title and contents are not empty
-            //            memo.modificationDate = Date()
-            
+            print()
         }
+        
         parent.title += "" //
         
         context.saveCoreData()
         print("memo has saved, title: \(title)")
         print("parent's memos: ")
-        
     }
     
     func togglePinMemo() {
         memo.pinned.toggle()
     }
-    
+
     func toggleBookMark() {
-        
+
         if isBookMarkedTemp == nil {
             isBookMarkedTemp = memo.isBookMarked ? false : true
         } else {
@@ -100,32 +95,35 @@ struct MemoView: View {
                 editorFocusState = false
             }
         
+        //        return ScrollView {
         return VStack(spacing: 0) {
-            
+            //                ScrollViewProxy
             TextField(initialTitle, text: $title)
+            
                 .font(.title2)
                 .submitLabel(.continue)
                 .disableAutocorrection(true)
                 .focused($focusState, equals: .title)
                 .padding(.bottom, Sizes.largePadding)
                 .padding(.horizontal, Sizes.overallPadding)
-                .submitLabel(.continue)
+                .onAppear(perform: {
+                    presentingView = true
+                    print("presentingView: \(presentingView)")
+                })
                 .onSubmit {
                     focusState = .contents
                 }
-
             
             // TextField Underline
                 .overlay {
                     Divider()
-//                        .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
-                        .padding(.top, 15)
-                        .padding(.horizontal, Sizes.overallPadding)
+                        .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
                 }
             
             // MARK: - Contents
             
             TextEditor(text: $contents)
+            
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .disableAutocorrection(true)
                 .padding(.horizontal, Sizes.overallPadding)
@@ -133,10 +131,9 @@ struct MemoView: View {
                 .focused($focusState, equals: .contents)
             
         } // end of VStack
-        
         .frame(maxHeight: .infinity, alignment: .bottom)
+        
         .gesture(scroll)
-        // How..
         .onAppear(perform: {
             title = memo.title
             contents = memo.contents
@@ -145,13 +142,16 @@ struct MemoView: View {
             print("memoView has appeared!")
             print("title or memoView : \(title)")
         })
+        
         // triggered after FolderView has appeared
         .onDisappear(perform: {
+            presentingView = false
+
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
+
         })
-        
         .navigationBarItems(
             trailing: HStack {
                 
@@ -162,7 +162,7 @@ struct MemoView: View {
                         height: Sizes.regularButtonSize)
                 }
                 
-                // PIN Button
+                // pin Button
                 Button(action: togglePinMemo) {
                     ChangeableImage(
                         imageSystemName: memo.pinned ? "pin.fill" : "pin",
@@ -170,15 +170,19 @@ struct MemoView: View {
                         height: Sizes.regularButtonSize)
                 }
                 
-                // RELOCATE
                 Button {
+                    // RELOCATE
                     showSelectingFolderView = true
+//                    memoEditVM.selectedMemos.update(with: memo)
+//                    memoEditVM.parentFolder = memo.folder
                     memoEditVM.dealWhenMemoSelected(memo)
+                    
                 } label: {
                     ChangeableImage(imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                 }
                 
-                // REMOVE
+                // trash Button
+                
                 Button(action: removeMemo) {
                     ChangeableImage(
                         imageSystemName: "trash",
@@ -193,17 +197,14 @@ struct MemoView: View {
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
-                        archiveFolder: Folder.fetchHomeFolder(
-                            context: context,
-                            fetchingHome: false)!
-                    ),
+                        archiveFolder: Folder.fetchHomeFolder(context: context,
+                                                              fetchingHome: false)!),
                 invalidFolderWithLevels: [],
                 selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
+            
         }
     }
 }
-
-

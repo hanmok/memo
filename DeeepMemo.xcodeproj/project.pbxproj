@@ -142,6 +142,12 @@
 		9AD8332F27BD18D600506AE8 /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332D27BD18D600506AE8 /* Test2.swift */; };
 		9AD8333127BD18E200506AE8 /* Test3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333027BD18E200506AE8 /* Test3.swift */; };
 		9AD8333227BD18E200506AE8 /* Test3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333027BD18E200506AE8 /* Test3.swift */; };
+		9AD8333427BDF9E400506AE8 /* Test4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333327BDF9E400506AE8 /* Test4.swift */; };
+		9AD8333527BDF9E400506AE8 /* Test4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333327BDF9E400506AE8 /* Test4.swift */; };
+		9AD8333727BE148A00506AE8 /* ModifiedMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* ModifiedMemoView.swift */; };
+		9AD8333827BE148A00506AE8 /* ModifiedMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* ModifiedMemoView.swift */; };
+		9AD8333A27BE2A2E00506AE8 /* ModifiedNewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333927BE2A2E00506AE8 /* ModifiedNewMemoView.swift */; };
+		9AD8333B27BE2A2E00506AE8 /* ModifiedNewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333927BE2A2E00506AE8 /* ModifiedNewMemoView.swift */; };
 		E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E523DB3F27B86E4F00D8D78B /* BookmarkMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3E27B86E4F00D8D78B /* BookmarkMemoView.swift */; };
@@ -205,6 +211,7 @@
 		9A33788F279A56C500805138 /* FolderEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEditViewModel.swift; sourceTree = "<group>"; };
 		9A337892279A5C9600805138 /* HierarchyLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HierarchyLabelView.swift; sourceTree = "<group>"; };
 		9A337895279A6F3C00805138 /* MemoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewModel.swift; sourceTree = "<group>"; };
+		9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedBookmarkMemoView.swift; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9A89582C2771BE1000E7B773 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
@@ -262,6 +269,9 @@
 		9AD8332A27BD18CB00506AE8 /* Test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1.swift; sourceTree = "<group>"; };
 		9AD8332D27BD18D600506AE8 /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
 		9AD8333027BD18E200506AE8 /* Test3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3.swift; sourceTree = "<group>"; };
+		9AD8333327BDF9E400506AE8 /* Test4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test4.swift; sourceTree = "<group>"; };
+		9AD8333627BE148A00506AE8 /* ModifiedMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedMemoView.swift; sourceTree = "<group>"; };
+		9AD8333927BE2A2E00506AE8 /* ModifiedNewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedNewMemoView.swift; sourceTree = "<group>"; };
 		E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedFolderView.swift; sourceTree = "<group>"; };
 		E523DB3E27B86E4F00D8D78B /* BookmarkMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkMemoView.swift; sourceTree = "<group>"; };
 		E523DB4827BBF04900D8D78B /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
@@ -299,6 +309,9 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */,
+				9AD8333927BE2A2E00506AE8 /* ModifiedNewMemoView.swift */,
+				9AD8333627BE148A00506AE8 /* ModifiedMemoView.swift */,
 				9AD8330127BCF04100506AE8 /* MemoViewTest.swift */,
 				E523DB4827BBF04900D8D78B /* BackButton.swift */,
 				9AD832E227BBC1CD00506AE8 /* SearchView.swift */,
@@ -559,6 +572,7 @@
 			children = (
 				9AD8332A27BD18CB00506AE8 /* Test1.swift */,
 				9AD8332D27BD18D600506AE8 /* Test2.swift */,
+				9AD8333327BDF9E400506AE8 /* Test4.swift */,
 				9AD8333027BD18E200506AE8 /* Test3.swift */,
 			);
 			path = TextEditorTests;
@@ -720,6 +734,8 @@
 				9A046CC927B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */,
 				9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */,
 				9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */,
+				9AD8333727BE148A00506AE8 /* ModifiedMemoView.swift in Sources */,
+				9AD8333427BDF9E400506AE8 /* Test4.swift in Sources */,
 				E523DB4927BBF04900D8D78B /* BackButton.swift in Sources */,
 				9AC5D1FD278557D8007EAA28 /* UnitTestHelper.swift in Sources */,
 				E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
@@ -746,6 +762,7 @@
 				9AD832E327BBC1CD00506AE8 /* SearchView.swift in Sources */,
 				9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */,
 				9A3378012795736200805138 /* ColorExt.swift in Sources */,
+				9AD8333A27BE2A2E00506AE8 /* ModifiedNewMemoView.swift in Sources */,
 				9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */,
 				9AC5D12C27840939007EAA28 /* Memo+helper.swift in Sources */,
 				9A046CCC27B3A72E003169C7 /* CollapsingTest.swift in Sources */,
@@ -842,6 +859,7 @@
 				9AC5D21427857993007EAA28 /* CoreDataTestView.swift in Sources */,
 				9AC5D1F827854405007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
 				E596A6C627AD8D5000076E95 /* OrderViewModel.swift in Sources */,
+				9AD8333827BE148A00506AE8 /* ModifiedMemoView.swift in Sources */,
 				9A337899279A76AF00805138 /* FolderView2.swift in Sources */,
 				9A1D536627ACE454009294C1 /* MindMapView.swift in Sources */,
 				9A1D854627A24F9400B00156 /* SubFolderView.swift in Sources */,
@@ -857,6 +875,8 @@
 				9AC5D20227855C0B007EAA28 /* Persistence.swift in Sources */,
 				9A1D536327ACE2E3009294C1 /* SubFolderButtonImage.swift in Sources */,
 				9A1D536027A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */,
+				9AD8333B27BE2A2E00506AE8 /* ModifiedNewMemoView.swift in Sources */,
+				9AD8333527BDF9E400506AE8 /* Test4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

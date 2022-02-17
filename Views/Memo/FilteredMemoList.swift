@@ -43,7 +43,8 @@ struct FilteredMemoList: View {
                     ForEach(memosToShow, id: \.self) { memo in
                         
                         NavigationLink(destination:
-                                        MemoView(memo: memo, parent: memo.folder!)
+//                                        MemoView(memo: memo, parent: memo.folder!)
+                                       ModifiedMemoView(memo: memo, parent: memo.folder!)
 //                                       MemoViewTest(memo: memo, parent: memo.folder!)
                                         .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)

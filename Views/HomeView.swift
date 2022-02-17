@@ -39,21 +39,23 @@ struct HomeView: View { // top folder fetch
 //
 //                return EmptyView()
         
-//        return NavigationView {
-//            MindMapView(
-//                fastFolderWithLevelGroup:
-//                    FastFolderWithLevelGroup(
-//                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
-//                        archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
-//                    )
-//            )
-//        }
+        return NavigationView {
+            MindMapView(
+                fastFolderWithLevelGroup:
+                    FastFolderWithLevelGroup(
+                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
+                        archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
+                    )
+            )
+        }
         
         // TEXT EDITOR TESTS
 //        return MemoClone()
         
+
+//        return ContentView2()
         // This one looks hopeful..
-        return ContentView2()
+        //        return MemoClone()
         
 //        return SearchView(fastFolderWithLevelGroup:
 //                            FastFolderWithLevelGroup(

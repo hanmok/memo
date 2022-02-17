@@ -27,7 +27,7 @@ struct ContentView2: View {
                         })
                         .fixedSize(horizontal: false, vertical: true)
 //                    TextEditor(text: $text)
-                    CustomTextView(text: $text, textStyle: $textStyle)
+                    CustomTextView(text: $text)
 //                        .font(.custom("Courier", size: 24))
                         .padding(6)
                         .frame(height: textEditorHeight)
