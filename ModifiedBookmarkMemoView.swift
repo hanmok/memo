@@ -52,22 +52,20 @@ struct ModifiedBookmarkMemoView: View {
     
     func saveChanges() {
         print("save changes has triggered")
-        memo.title = title
+      
         
         memo.contents = contents
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if both title and contents are empty, delete memo
         if memo.contents == "" {
-            print("memo has deleted! title: \(), contents: \(contents)")
+            
             Memo.delete(memo)
-            print()
+         
         }
         
         parent.title += "" //
         
         context.saveCoreData()
-        print("memo has saved, title: \(title)")
-        print("parent's memos: ")
     }
     
     func togglePinMemo() {
@@ -95,103 +93,68 @@ struct ModifiedBookmarkMemoView: View {
                 editorFocusState = false
             }
         
-        //        return ScrollView {
-        return VStack(spacing: 0) {
-            //                ScrollViewProxy
-            TextField(initialTitle, text: $title)
-            
-                .font(.title2)
-                .submitLabel(.continue)
-                .disableAutocorrection(true)
-                .focused($focusState, equals: .title)
-                .padding(.bottom, Sizes.largePadding)
-                .padding(.horizontal, Sizes.overallPadding)
-                .onAppear(perform: {
-                    presentingView = true
-                    print("presentingView: \(presentingView)")
-                })
-                .onSubmit {
-                    focusState = .contents
+        return ZStack(alignment: .topLeading) {
+            VStack {
+                HStack {
+                    btnBack
+                    Spacer()
+                    
+                    HStack(spacing: 15) {
+                        Button(action: toggleBookMark) {
+                            ChangeableImage(
+                                imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",
+                                width: Sizes.regularButtonSize,
+                                height: Sizes.regularButtonSize)
+                        }
+                        
+                        // PIN Button
+                        Button(action: togglePinMemo) {
+                            ChangeableImage(
+                                imageSystemName: memo.pinned ? "pin.fill" : "pin",
+                                width: Sizes.regularButtonSize,
+                                height: Sizes.regularButtonSize)
+                        }
+                        
+                        // RELOCATE
+                        Button {
+                            showSelectingFolderView = true
+                            memoEditVM.dealWhenMemoSelected(memo)
+                        } label: {
+                            ChangeableImage(imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+                        }
+                        
+                        // REMOVE
+                        Button(action: removeMemo) {
+                            ChangeableImage(
+                                imageSystemName: "trash",
+                                width: Sizes.regularButtonSize,
+                                height: Sizes.regularButtonSize)
+                        }
+                    }
                 }
-            
-            // TextField Underline
-                .overlay {
-                    Divider()
-                        .padding(.init(top: 15 , leading: Sizes.overallPadding, bottom: 0, trailing: Sizes.overallPadding))
-                }
-            
-            // MARK: - Contents
-            
-            TextEditor(text: $contents)
-            
-                .frame(maxHeight: .infinity, alignment: .bottom)
-                .disableAutocorrection(true)
-                .padding(.horizontal, Sizes.overallPadding)
-                .focused($editorFocusState)
-                .focused($focusState, equals: .contents)
-            
-        } // end of VStack
-        .frame(maxHeight: .infinity, alignment: .bottom)
+                
+                CustomTextView(text: $contents)
+                    .padding(.top)
+                    .focused($editorFocusState)
+            }
+            .padding(.horizontal, Sizes.overallPadding)
+            .gesture(scroll)
+        }
+        .padding(.vertical)
+        .navigationBarHidden(true)
         
-        .gesture(scroll)
         .onAppear(perform: {
-            title = memo.title
+            presentingView = true
             contents = memo.contents
-            print("initial color: \(memo.colorAsInt)")
-            print("initial pin state: \(memo.pinned)")
-            print("memoView has appeared!")
-            print("title or memoView : \(title)")
         })
         
         // triggered after FolderView has appeared
         .onDisappear(perform: {
             presentingView = false
-
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
-
         })
-        .navigationBarItems(
-            trailing: HStack {
-                
-                Button(action: toggleBookMark) {
-                    ChangeableImage(
-                        imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",
-                        width: Sizes.regularButtonSize,
-                        height: Sizes.regularButtonSize)
-                }
-                
-                // pin Button
-                Button(action: togglePinMemo) {
-                    ChangeableImage(
-                        imageSystemName: memo.pinned ? "pin.fill" : "pin",
-                        width: Sizes.regularButtonSize,
-                        height: Sizes.regularButtonSize)
-                }
-                
-                Button {
-                    // RELOCATE
-                    showSelectingFolderView = true
-//                    memoEditVM.selectedMemos.update(with: memo)
-//                    memoEditVM.parentFolder = memo.folder
-                    memoEditVM.dealWhenMemoSelected(memo)
-                    
-                } label: {
-                    ChangeableImage(imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
-                }
-                
-                // trash Button
-                
-                Button(action: removeMemo) {
-                    ChangeableImage(
-                        imageSystemName: "trash",
-                        width: Sizes.regularButtonSize,
-                        height: Sizes.regularButtonSize)
-                }
-            })
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: btnBack)
         .sheet(isPresented: $showSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:

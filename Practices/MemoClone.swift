@@ -120,7 +120,9 @@ struct CustomTextView: UIViewRepresentable {
         }
         
         func textViewDidChange(_ textView: UITextView) {
-            self.text.wrappedValue = textView.text
+            DispatchQueue.main.async {
+                self.text.wrappedValue = textView.text
+            }
         }
         
         func textViewDidBeginEditing(_ textView: UITextView) {
@@ -137,11 +139,9 @@ struct CustomTextView: UIViewRepresentable {
     
     // simply returns an instance of Coordinator.
     func makeCoordinator() -> Coordinator {
-        //        return Coordinator(customTextView: self)
         Coordinator($text)
     }
     
-    //    typealias UIViewType = UITextView
     
     
 }

@@ -80,6 +80,10 @@
 		9A98E7522772C17500057A84 /* CustomTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7512772C17500057A84 /* CustomTextEditor.swift */; };
 		9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7542772D28C00057A84 /* ChangeableImage.swift */; };
 		9A98E7582773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
+		9AA266DE27BE32AE00AC75DB /* ModifiedBookmarkMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */; };
+		9AA266DF27BE32AE00AC75DB /* ModifiedBookmarkMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */; };
+		9AA266E127BE347C00AC75DB /* ModifiedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */; };
+		9AA266E227BE347C00AC75DB /* ModifiedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */; };
 		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */; };
@@ -218,6 +222,7 @@
 		9A98E7512772C17500057A84 /* CustomTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditor.swift; sourceTree = "<group>"; };
 		9A98E7542772D28C00057A84 /* ChangeableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableImage.swift; sourceTree = "<group>"; };
 		9A98E7572773021200057A84 /* ModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
+		9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedMemoBoxView.swift; sourceTree = "<group>"; };
 		9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCollapsibleFolder.swift; sourceTree = "<group>"; };
 		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind3.swift; sourceTree = "<group>"; };
 		9AC5D10B27840554007EAA28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -309,6 +314,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */,
 				9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */,
 				9AD8333927BE2A2E00506AE8 /* ModifiedNewMemoView.swift */,
 				9AD8333627BE148A00506AE8 /* ModifiedMemoView.swift */,
@@ -757,6 +763,7 @@
 				9AD8330227BCF04100506AE8 /* MemoViewTest.swift in Sources */,
 				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
 				9AD8332E27BD18D600506AE8 /* Test2.swift in Sources */,
+				9AA266DE27BE32AE00AC75DB /* ModifiedBookmarkMemoView.swift in Sources */,
 				9AC5D2192786F773007EAA28 /* HomeViewPrev.swift in Sources */,
 				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
 				9AD832E327BBC1CD00506AE8 /* SearchView.swift in Sources */,
@@ -806,6 +813,7 @@
 				9A0474B427715FB200571D66 /* MainTabView.swift in Sources */,
 				9A1D536227ACE2E3009294C1 /* SubFolderButtonImage.swift in Sources */,
 				9AC5D10C27840554007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
+				9AA266E127BE347C00AC75DB /* ModifiedMemoBoxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +853,7 @@
 				E523DB4A27BBF04900D8D78B /* BackButton.swift in Sources */,
 				9A013F6827BA135E00C612ED /* NewMemoView.swift in Sources */,
 				E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
+				9AA266DF27BE32AE00AC75DB /* ModifiedBookmarkMemoView.swift in Sources */,
 				9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */,
 				9A1D536727ACE516009294C1 /* DeeepMemoApp.swift in Sources */,
 				9AD8333227BD18E200506AE8 /* Test3.swift in Sources */,
@@ -862,6 +871,7 @@
 				9AD8333827BE148A00506AE8 /* ModifiedMemoView.swift in Sources */,
 				9A337899279A76AF00805138 /* FolderView2.swift in Sources */,
 				9A1D536627ACE454009294C1 /* MindMapView.swift in Sources */,
+				9AA266E227BE347C00AC75DB /* ModifiedMemoBoxView.swift in Sources */,
 				9A1D854627A24F9400B00156 /* SubFolderView.swift in Sources */,
 				9AC5D232278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */,
 				9A1D853A279FF32400B00156 /* DynamicFolderCell.swift in Sources */,

@@ -50,7 +50,8 @@ struct FilteredMemoList: View {
                                         .environmentObject(folderEditVM)
                         
                         ) {
-                            MemoBoxView(memo: memo)
+//                            MemoBoxView(memo: memo)
+                            ModifiedMemoBoxView(memo: memo)
                             
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }

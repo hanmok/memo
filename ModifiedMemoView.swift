@@ -52,9 +52,8 @@ struct ModifiedMemoView: View {
         if memo.contents == "" {
             Memo.delete(memo)
         }
-        
+
         parent.title += "" //
-        
         context.saveCoreData()
     }
     

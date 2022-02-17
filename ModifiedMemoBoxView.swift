@@ -1,17 +1,22 @@
 //
-//  BookMarkedMemoBoxView.swift
+//  MemoBoxView.swift
 //  DeeepMemo
 //
-//  Created by Mac mini on 2022/02/09.
+//  Created by Mac mini on 2021/12/29.
 //
 
 import SwiftUI
 
-struct BookmarkedMemoBoxView: View {
+// used only to show.
+struct ModifiedMemoBoxView: View {
     
-    @ObservedObject var memo: Memo
     @Environment(\.colorScheme) var colorScheme
     
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+    
+    @ObservedObject var memo: Memo
+    
+    // must have title.
     var title: String {
         if let firstIndex = memo.contents.firstIndex(of: "\n") {
             //            let index = memo.contents.distance(from: memo.contents.startIndex, to: firstIndex)
@@ -37,33 +42,36 @@ struct BookmarkedMemoBoxView: View {
         return nil
     }
     
-    
-    var frameSize = ( UIScreen.screenWidth - 5 * Sizes.properSpacing ) / 2
-    
     var body: some View {
+        
         VStack(alignment: .leading) {
-            
             Text(title)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
-                .lineLimit(2)
-                .multilineTextAlignment(.leading)
-                .frame(width: frameSize, alignment: .leading)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(5)
             
             if contents != nil {
-                Text(memo.contents)
+                Text(contents!)
                     .font(.caption)
                     .foregroundColor(.primary)
+                    .lineLimit(4)
                     .multilineTextAlignment(.leading)
-                    .frame(width: frameSize, alignment: .leading)
-                    .padding([.leading, .bottom], 5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.leading, .bottom], 5 )
             }
         }
         .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
-        .background(colorScheme == .dark ? Color(white: 33 / 255) : Color(white: 0.9))
-        
+        .padding(.horizontal, Sizes.smallSpacing)
+        .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
+        .background(Color(.sRGB, red: 242 / 255, green: 206 / 255, blue: 128 / 255))
+//        .background(Color(.sRGB, white: 0.5, opacity: 0.1))
         .cornerRadius(5)
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? Color(UIColor(named: "mainColor")!) : .clear, lineWidth: 2)
+        )
     }
 }
