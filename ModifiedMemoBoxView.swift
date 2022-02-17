@@ -23,7 +23,9 @@ struct ModifiedMemoBoxView: View {
             //            let newIndex = memo.contents.index(memo.contents.startIndex, offsetBy: index)
             //            let title = memo.contents[..<newIndex]
             let title = memo.contents[..<firstIndex]
-            return String(title)
+            
+            return String(String(title).dropLast())
+//            return String(title)
         } else {
             return memo.contents
         }
@@ -37,21 +39,22 @@ struct ModifiedMemoBoxView: View {
             
             //            let contents = memo.contents[newIndex ..< endIndex]
             let contents = memo.contents[firstIndex ..< endIndex]
-            return String(contents)
+//            return String(contents)
+            return String(String(contents).dropLast())
         }
         return nil
     }
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
             Text(title)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(5)
+                .padding(.leading, Sizes.smallSpacing)
             
             if contents != nil {
                 Text(contents!)
@@ -60,15 +63,15 @@ struct ModifiedMemoBoxView: View {
                     .lineLimit(4)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.leading, .bottom], 5 )
+                    .padding(.leading, Sizes.smallSpacing)
             }
         }
         .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
         .padding(.horizontal, Sizes.smallSpacing)
+        .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
         .background(Color(.sRGB, red: 242 / 255, green: 206 / 255, blue: 128 / 255))
-//        .background(Color(.sRGB, white: 0.5, opacity: 0.1))
-        .cornerRadius(5)
+        .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
                 .stroke(memoEditVM.selectedMemos.contains(memo) ? Color(UIColor(named: "mainColor")!) : .clear, lineWidth: 2)

@@ -84,7 +84,7 @@ struct ModifiedMemoView: View {
         
         return ZStack(alignment: .topLeading) {
             //            Text("Tab1View")
-            VStack {
+            VStack(spacing:0) {
                 HStack {
                     btnBack
                     Spacer()
@@ -122,6 +122,9 @@ struct ModifiedMemoView: View {
                         }
                     }
                 }
+                .padding(.bottom)
+                .ignoresSafeArea(edges: .horizontal)
+                .background(.brown)
                 
                 CustomTextView(text: $contents)
                     .padding(.top)

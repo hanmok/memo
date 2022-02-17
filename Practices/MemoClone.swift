@@ -52,8 +52,10 @@ struct CustomTextView: UIViewRepresentable {
         uiTextView.isSelectable = true
         uiTextView.isUserInteractionEnabled = true
         uiTextView.delegate = context.coordinator
+        // this line looks weird..
         uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
         uiTextView.text += ""
+        uiTextView.showsVerticalScrollIndicator = false
 //        uiTextView.text = "asjdi"
         return uiTextView
     }
@@ -108,6 +110,7 @@ struct CustomTextView: UIViewRepresentable {
         }
         
         uiView.selectedRange = preAttributedRange
+        
     }
     
     

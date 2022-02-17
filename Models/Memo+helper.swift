@@ -225,6 +225,7 @@ extension Memo: Comparable {
 //        case .alphabetical:
 //            return sortAlphabetOrder(lhs, rhs)
 //        }
-        return lhs.title < rhs.title
+//        return lhs.title < rhs.title
+        return lhs.creationDate < rhs.creationDate
     }
 }
