@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 extension Memo {
     
@@ -70,12 +71,30 @@ extension Memo {
         set { pinned_ = newValue }
     }
     
+    var color: UIColor? {
+        get {
+            guard let hex = colorAsHex else { return nil }
+            return UIColor(hex: hex)
+        }
+        set (newColor) {
+            if let newColor = newColor {
+                colorAsHex = newColor.toHex
+            }
+        }
+    }
+    
+    // Getting a Color
+//    let color = note.color
+    
+    // Setting a Color
+//    note.color = UIColor(hex: "FF5F5B")
+    
     
 
-    var colorAsInt: Int64 { // initialValue: 0
-        get { colorAsInt_ }
-        set { colorAsInt_ = newValue}
-    }
+//    var colorAsInt: Int64 { // initialValue: 0
+//        get { colorAsInt_ }
+//        set { colorAsInt_ = newValue}
+//    }
     
     
     static func fetch(_ predicate: NSPredicate) -> NSFetchRequest<Memo> {

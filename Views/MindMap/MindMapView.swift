@@ -68,6 +68,12 @@ struct MindMapView: View {
                     Spacer()
                     HStack {
                         // MARK: - Button For Test
+//                        Button {
+//
+//                        } label: {
+//                            ColorPickerView()
+//                        }
+
                         Button {
                             _ = fastFolderWithLevelGroup.folders.map {
                                 print("title: \($0.folder.title)")

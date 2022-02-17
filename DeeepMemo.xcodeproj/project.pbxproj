@@ -84,6 +84,12 @@
 		9AA266DF27BE32AE00AC75DB /* ModifiedBookmarkMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */; };
 		9AA266E127BE347C00AC75DB /* ModifiedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */; };
 		9AA266E227BE347C00AC75DB /* ModifiedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */; };
+		9AA2672C27BE45BD00AC75DB /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */; };
+		9AA2672D27BE45BD00AC75DB /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */; };
+		9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
+		9AA2673027BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
+		9AA2673227BE4E2900AC75DB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* Colors.swift */; };
+		9AA2673327BE4E2900AC75DB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* Colors.swift */; };
 		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */; };
@@ -223,6 +229,9 @@
 		9A98E7542772D28C00057A84 /* ChangeableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableImage.swift; sourceTree = "<group>"; };
 		9A98E7572773021200057A84 /* ModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
 		9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifiedMemoBoxView.swift; sourceTree = "<group>"; };
+		9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		9AA2673127BE4E2900AC75DB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCollapsibleFolder.swift; sourceTree = "<group>"; };
 		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind3.swift; sourceTree = "<group>"; };
 		9AC5D10B27840554007EAA28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -314,6 +323,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */,
 				9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */,
 				9A6FDFF327BE300B00B57496 /* ModifiedBookmarkMemoView.swift */,
 				9AD8333927BE2A2E00506AE8 /* ModifiedNewMemoView.swift */,
@@ -451,7 +461,9 @@
 				9AD6EEC9277C3E3E00866456 /* Extensions.swift */,
 				9A3377B2278FFF2D00805138 /* TextViewWrapper.swift */,
 				9A89582627717EB500E7B773 /* Sizes.swift */,
+				9AA2673127BE4E2900AC75DB /* Colors.swift */,
 				9A3378002795736200805138 /* ColorExt.swift */,
+				9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -762,6 +774,7 @@
 				9AC5D234278C3145007EAA28 /* MemoList2.swift in Sources */,
 				9AD8330227BCF04100506AE8 /* MemoViewTest.swift in Sources */,
 				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
+				9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */,
 				9AD8332E27BD18D600506AE8 /* Test2.swift in Sources */,
 				9AA266DE27BE32AE00AC75DB /* ModifiedBookmarkMemoView.swift in Sources */,
 				9AC5D2192786F773007EAA28 /* HomeViewPrev.swift in Sources */,
@@ -778,6 +791,7 @@
 				9AD8333127BD18E200506AE8 /* Test3.swift in Sources */,
 				9A3377B927900BF200805138 /* MemoListTest.swift in Sources */,
 				9AC5D225278834EC007EAA28 /* FolderLabelView3.swift in Sources */,
+				9AA2673227BE4E2900AC75DB /* Colors.swift in Sources */,
 				9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */,
 				E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
 				9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */,
@@ -803,6 +817,7 @@
 				9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */,
 				E523DB3F27B86E4F00D8D78B /* BookmarkMemoView.swift in Sources */,
 				9A33786D2799450100805138 /* HorCollapsibleMind.swift in Sources */,
+				9AA2672C27BE45BD00AC75DB /* UIColorExt.swift in Sources */,
 				9A3378072796A5CB00805138 /* FilteredMemoList.swift in Sources */,
 				9A013F6727BA135E00C612ED /* NewMemoView.swift in Sources */,
 				9A337893279A5C9600805138 /* HierarchyLabelView.swift in Sources */,
@@ -831,6 +846,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AC5D23E278D8435007EAA28 /* textFieldTestview.swift in Sources */,
+				9AA2673327BE4E2900AC75DB /* Colors.swift in Sources */,
 				9A1D535A27A925A1009294C1 /* TitleWithLevelView.swift in Sources */,
 				9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */,
 				9A33786B27993ACA00805138 /* FolderOverView.swift in Sources */,
@@ -839,6 +855,7 @@
 				E523DB4027B86E4F00D8D78B /* BookmarkMemoView.swift in Sources */,
 				9AD8332C27BD18CB00506AE8 /* Test1.swift in Sources */,
 				9A337897279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
+				9AA2672D27BE45BD00AC75DB /* UIColorExt.swift in Sources */,
 				9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
 				9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */,
 				9AD832E427BBC1CD00506AE8 /* SearchView.swift in Sources */,
@@ -866,6 +883,7 @@
 				9AC5D1EF27854267007EAA28 /* macOSMemo.xcdatamodeld in Sources */,
 				9AD8332427BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */,
 				9AC5D21427857993007EAA28 /* CoreDataTestView.swift in Sources */,
+				9AA2673027BE4D3700AC75DB /* ColorPickerView.swift in Sources */,
 				9AC5D1F827854405007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
 				E596A6C627AD8D5000076E95 /* OrderViewModel.swift in Sources */,
 				9AD8333827BE148A00506AE8 /* ModifiedMemoView.swift in Sources */,

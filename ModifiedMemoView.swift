@@ -90,6 +90,30 @@ struct ModifiedMemoView: View {
                     Spacer()
                     
                     HStack(spacing: 15) {
+                        
+//                        Button {
+//                            // apply changes
+////                            let color = memo.color
+////                            self.background(Color(uiColor: color!))
+////                            print("color saved: \(color?.toHex)")
+//                        } label: {
+//                            Image(systemName: "eyedropper")
+//                        }
+                       
+                        
+                        
+// get list of pastel colors !!
+                        Button {
+                            // save change
+//                            memo.color = UIColor(hex: "00FF00")
+//                            context.saveCoreData()
+
+                        } label: {
+//                            ChangeableImage(imageSystemName: "pencil.tip")
+                            ColorPickerView()
+                        }
+                        
+                        
                         Button(action: toggleBookMark) {
                             ChangeableImage(
                                 imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",
@@ -124,7 +148,7 @@ struct ModifiedMemoView: View {
                 }
                 .padding(.bottom)
                 .ignoresSafeArea(edges: .horizontal)
-                .background(.brown)
+//                .background(.brown)
                 
                 CustomTextView(text: $contents)
                     .padding(.top)
@@ -138,7 +162,7 @@ struct ModifiedMemoView: View {
         .navigationBarHidden(true)
         .onAppear(perform: {
             contents = memo.contents
-            print("initial color: \(memo.colorAsInt)")
+//            print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
         })

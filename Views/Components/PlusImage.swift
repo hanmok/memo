@@ -47,6 +47,9 @@ struct PlusImage2: View {
 
 
 
+
+
+
 struct PlusImage_Previews: PreviewProvider {
     static var previews: some View {
         PlusImage()

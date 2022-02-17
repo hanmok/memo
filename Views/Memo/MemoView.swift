@@ -140,7 +140,7 @@ struct MemoView: View {
         .onAppear(perform: {
             title = memo.title
             contents = memo.contents
-            print("initial color: \(memo.colorAsInt)")
+//            print("initial color: \(memo.colorAsInt)")
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
             print("title or memoView : \(title)")
@@ -155,6 +155,8 @@ struct MemoView: View {
         .navigationBarItems(
             trailing: HStack {
                 
+                
+
                 Button(action: toggleBookMark) {
                     ChangeableImage(
                         imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",

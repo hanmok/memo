@@ -70,7 +70,8 @@ struct ModifiedMemoBoxView: View {
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-        .background(Color(.sRGB, red: 242 / 255, green: 206 / 255, blue: 128 / 255))
+//        .background(Color(.sRGB, red: 242 / 255, green: 206 / 255, blue: 128 / 255))
+        .background(Color(white:0.9))
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 5)
