@@ -16,26 +16,35 @@ struct ModifiedMemoBoxView: View {
     
     @ObservedObject var memo: Memo
     
+    // can both be nil? nope.
     // must have title.
-    var title: String {
+    var title: String? {
         if let firstIndex = memo.contents.firstIndex(of: "\n") {
+            // if no title entered, means memo starts with "\n"
+            if firstIndex == memo.contents.index(memo.contents.startIndex, offsetBy: 0)  {
+                return nil
+            }
+            
             let title = memo.contents[..<firstIndex]
             
             return String(title)
+            // no "\n" entered.
         } else {
             return memo.contents
         }
     }
 
     var contents: String? {
-        if let firstIndex = memo.contents.firstIndex(of: "\n") {
+        if let firstEnterIndex = memo.contents.firstIndex(of: "\n") {
+            let firstEnterIndexInt = memo.contents.distance(from: memo.contents.startIndex, to: firstEnterIndex)
             var numOfEnters = 0
-            let indexInt = memo.contents.distance(from: memo.contents.startIndex, to: firstIndex)
-            while (memo.contents[memo.contents.index(memo.contents.startIndex, offsetBy: numOfEnters + indexInt)] == "\n" && numOfEnters + indexInt < memo.contents.count) {
+//            let endIndexInt = memo.contents.distance(from: memo.contents.startIndex, to: memo.contents.endIndex) // == count
+
+            while (memo.contents[memo.contents.index(memo.contents.startIndex, offsetBy: numOfEnters + firstEnterIndexInt)] == "\n" && numOfEnters + firstEnterIndexInt + 1 < memo.contents.count) {
                 numOfEnters += 1
             }
             
-            let startIndex = memo.contents.index(memo.contents.startIndex, offsetBy: numOfEnters + indexInt)
+            let startIndex = memo.contents.index(memo.contents.startIndex, offsetBy: numOfEnters + firstEnterIndexInt)
             let endIndex = memo.contents.endIndex
             
             let contents = memo.contents[startIndex ..< endIndex]
@@ -47,14 +56,15 @@ struct ModifiedMemoBoxView: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 0) {
-            Text(title)
+            if title != nil {
+            Text(title!)
                 .font(.headline)
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, Sizes.smallSpacing)
-            
+            }
             if contents != nil {
                 Text(contents!)
                     .font(.caption)

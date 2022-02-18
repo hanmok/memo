@@ -49,6 +49,7 @@ struct CustomTextView: UIViewRepresentable {
         let uiTextView = UITextView()
         //        uiTextView.font = UIFont.preferredFont(forTextStyle: textStyle)
         uiTextView.autocapitalizationType = .sentences
+        uiTextView.autocorrectionType = .no
         uiTextView.isSelectable = true
         uiTextView.isUserInteractionEnabled = true
         uiTextView.delegate = context.coordinator
@@ -66,6 +67,7 @@ struct CustomTextView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextView, context: Context) {
+        print("updateUIView triggered")
         if firstTime {
 //            uiView.text = text
             let attributedText = NSMutableAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
@@ -139,27 +141,35 @@ struct CustomTextView: UIViewRepresentable {
         }
         
         func textViewDidChange(_ textView: UITextView) {
+            print("textViewDidChange Triggered")
+
             DispatchQueue.main.async {
                 self.text.wrappedValue = textView.text
             }
             
             let preAttributedRange: NSRange = textView.selectedRange
 
+            
+            // Set initial font .body
             let attributedText = NSMutableAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
 
-            // cannot find any of \n
-
+            // are they.. included ? or not ?
             if let firstIndex = textView.text.firstIndex(of: "\n") {
+                print("flagggg ")
                 let distance = textView.text.distance(from: textView.text.startIndex, to: firstIndex)
+                print("flagggg distance: \(distance)")
                 attributedText.addAttributes([.font: UIFont.preferredFont(forTextStyle: .title1)], range: NSRange(location: 0, length: distance))
-                print("distance: \(distance)")
+//                print("distance: \(distance)")
+                print("flagggg range: \(NSRange(location:0, length: distance))")
+            } else {
+                let startToEndDistance = textView.text.distance(from: textView.text.startIndex, to: textView.text.endIndex)
+                
+                attributedText.addAttributes([.font: UIFont.preferredFont(forTextStyle: .title1)], range: NSRange(location: 0, length: startToEndDistance))
             }
 
             textView.attributedText = attributedText
 
             textView.selectedRange = preAttributedRange
-            
-            
         }
         
         func textViewDidBeginEditing(_ textView: UITextView) {

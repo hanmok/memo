@@ -87,6 +87,15 @@ struct ModifiedMemoView: View {
         
         return ZStack(alignment: .topLeading) {
             //            Text("Tab1View")
+            VStack {
+                Rectangle()
+                    .frame(width: UIScreen.screenWidth, height: 85)
+                    .foregroundColor(Color.pastelColors[selectedColorIndex])
+
+                Spacer()
+            }
+            .ignoresSafeArea(edges: .top)
+            
             VStack(spacing:0) {
                 HStack {
                     btnBack
@@ -133,6 +142,7 @@ struct ModifiedMemoView: View {
                         }
                     }
                 }
+//                .background(.pink)
                 .padding(.bottom)
 
                 
@@ -155,7 +165,7 @@ struct ModifiedMemoView: View {
             .offset(y: showColorPalette ? -35 : -300)
             .animation(.spring(), value: showColorPalette)
         }
-        .padding(.vertical)
+        .padding(.bottom)
         
         .navigationBarHidden(true)
         .onAppear(perform: {
