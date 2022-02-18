@@ -37,9 +37,6 @@ struct BookmarkedFolderView: View {
                                     ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
                                         
                                         NavigationLink(destination:
-//                                                        BookmarkMemoView(memo: bookMarkedMemo,
-//                                                                         parent: bookMarkedMemo.folder!,
-//                                                                         presentingView: $presentingView)
                                                        
                                                        ModifiedBookmarkMemoView(memo: bookMarkedMemo,
                                                                         parent: bookMarkedMemo.folder!,
@@ -49,8 +46,6 @@ struct BookmarkedFolderView: View {
                                                         .environmentObject(folderEditVM)
                                         ) {
                                             BookmarkedMemoBoxView(memo: bookMarkedMemo)
-//                                            ModifiedMemoBoxView(memo: bookMarkedMemo)
-//                                            ModifiedBookmarkMemoView(memo: bookMarkedMemo)
                                         }
                                     }
                                 } // end of HStack
@@ -70,7 +65,6 @@ struct BookmarkedFolderView: View {
                     // Another ZStack Element
                     // NEW MEMO
                     NavigationLink(destination:
-//                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                    ModifiedNewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)

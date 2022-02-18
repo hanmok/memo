@@ -18,6 +18,7 @@ struct MemosToolBarView: View {
 //    let spacingBetweenButtons: CGFloat = 12
     let spacingBetweenButtons: CGFloat = 16
     @Binding var showDeleteAlert: Bool
+    @Binding var showColorPalette: Bool
     
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
@@ -83,15 +84,17 @@ struct MemosToolBarView: View {
 //
 //
 //
-//            // CHANGE COLOR
-////            Button(action: {changeColorAction(sortedMemos)}) {
-//            Button(action: {
+            // CHANGE COLOR
+//            Button(action: {changeColorAction(sortedMemos)}) {
+            Button(action: {
+                showColorPalette = true
 //                memoEditVM.initSelectedMemos()
-//            }) {
+            }) {
 //                ChangeableImage(imageSystemName: "eyedropper.halffull",width: 20, height: 20)
-//            }
-//            .padding(5)
-//            .cornerRadius(5)
+                ColorPickerView()
+            }
+            .padding(5)
+            .cornerRadius(5)
             
             
             

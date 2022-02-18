@@ -32,8 +32,6 @@ struct ModifiedNewMemoView: View {
     
     let parent: Folder
 
-//    let initialTitle: String = "Enter Title"
-
     var backBtn : some View {
         Button(action: {
             self.presentingNewMemo = false
@@ -129,7 +127,6 @@ struct ModifiedNewMemoView: View {
                         
                         Button {
                             // RELOCATE MEMO
-//                            if title == "" && contents == "" {
                             if contents == "" {
                                 print("flag1")
                             } else {
@@ -176,12 +173,8 @@ struct ModifiedNewMemoView: View {
         .padding(.vertical)
         .navigationBarHidden(true)
         .onAppear(perform: {
-//            contents = memo.contents
-//            print("initial color: \(memo.colorAsInt)")
-//            print("initial pin state: \(memo.pinned)")
-//            print("memoView has appeared!")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-//                self.focusState = .title
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                /// Anything over 0.5 seems to work
                 self.editorFocusState = true
             }
         })
@@ -205,3 +198,22 @@ struct ModifiedNewMemoView: View {
         }
     }
 }
+
+
+
+
+//let preAttributedRange: NSRange = textView.selectedRange
+//
+//let attributedText = NSMutableAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
+//
+//// cannot find any of \n
+//
+//if let firstIndex = textView.text.firstIndex(of: "\n") {
+//    let distance = textView.text.distance(from: textView.text.startIndex, to: firstIndex)
+//    attributedText.addAttributes([.font: UIFont.preferredFont(forTextStyle: .title1)], range: NSRange(location: 0, length: distance))
+//    print("distance: \(distance)")
+//}
+//
+//textView.attributedText = attributedText
+//
+//textView.selectedRange = preAttributedRange

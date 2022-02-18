@@ -51,8 +51,6 @@ struct PersistenceController {
             let folder = Folder(title: "\(i) folder", context: viewContext)
             // create folder
         }
-//        Folder.nestedFolder(context: viewContext)
-//        Folder.nestedFolder
         
         do {
             try viewContext.save()

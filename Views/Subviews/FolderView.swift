@@ -33,6 +33,8 @@ struct FolderView: View {
     
     @State var allMemos: [Memo] = []
     
+    @State var showColorPalette = false
+    @State var selectedColorIndex = -1
     var btnBack : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -69,10 +71,12 @@ struct FolderView: View {
                             .font(.caption)
                             .frame(maxWidth: .infinity, alignment: .topLeading)
                             .padding(.leading, Sizes.overallPadding)
+                            .offset(y: -10)
                     }
                     ZStack {
                         if !currentFolder.memos.isEmpty {
                             MemoList()
+                                .padding(.top, 5)
                         }
                        
                     }
@@ -114,6 +118,7 @@ struct FolderView: View {
                 Spacer()
                 HStack {
                     Spacer()
+                  
                     if memoEditVM.selectedMemos.count == 0 {
                         VStack(spacing: Sizes.minimalSpacing) {
                             Button(action: addMemo) {
@@ -124,13 +129,28 @@ struct FolderView: View {
                     } else {
                         MemosToolBarView(
                             showSelectingFolderView: $showSelectingFolderView,
-                            showDeleteAlert: $showDeleteAlert)
-                            .padding([.trailing], Sizes.largePadding)
+                            showDeleteAlert: $showDeleteAlert,
+                            showColorPalette: $showColorPalette)
+                            .padding([.trailing], Sizes.overallPadding)
                             .padding(.bottom,Sizes.overallPadding )
                     }
                 } // end of HStack
             } // end of VStack
             
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    ColorPaletteView(
+                        showColorPalette: $showColorPalette)
+                        .environmentObject(memoEditVM)
+                        .offset(y: showColorPalette ? 0 : 200)
+                        .animation(.spring(), value: showColorPalette)
+                        .padding(.trailing, Sizes.overallPadding)
+                        .padding(.bottom, Sizes.overallPadding)
+                }
+            }
+            // Another ZStack Element Begins
             
             // When add folder pressed
             // overlay white background when Alert show up
@@ -168,16 +188,8 @@ struct FolderView: View {
                     shouldAddFolder = false
                 })
             // MARK: - ERROR!!!! SOURCE
-//            NavigationLink(
-//                destination:
-//                    MemoView(
-//                    memo: Memo(title: "", contents: "", context: context),
-//                    parent: currentFolder,
-//                    isNewMemo: true),
-//                isActive: $isAddingMemo) {}
             
             NavigationLink(destination:
-//                            NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
                            ModifiedNewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
             
             .environmentObject(folderEditVM)
@@ -282,7 +294,8 @@ struct FolderView: View {
                     Image(systemName: "star.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .tint(.yellow)
+//                        .tint(.yellow)
+                        .tint(colorScheme.adjustBlackAndWhite())
                 } else {
                     Image(systemName: "star")
                         .resizable()

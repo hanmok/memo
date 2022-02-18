@@ -28,7 +28,7 @@ struct TitleWithLevelView: View {
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
-                    .tint(.yellow) // why not working ?
+//                    .tint(.yellow) // why not working ?
             }
             
             Spacer()
@@ -63,7 +63,7 @@ struct CheckableFolderCell: View {
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
-                    .tint(.yellow) // why not working ?
+//                    .tint(.yellow) // why not working ?
             }
             
             Spacer()

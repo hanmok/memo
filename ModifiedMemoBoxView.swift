@@ -19,12 +19,8 @@ struct ModifiedMemoBoxView: View {
     // must have title.
     var title: String {
         if let firstIndex = memo.contents.firstIndex(of: "\n") {
-            //            let index = memo.contents.distance(from: memo.contents.startIndex, to: firstIndex)
-            //            let newIndex = memo.contents.index(memo.contents.startIndex, offsetBy: index)
-            //            let title = memo.contents[..<newIndex]
             let title = memo.contents[..<firstIndex]
             
-//            return String(String(title).dropLast())
             return String(title)
         } else {
             return memo.contents
@@ -35,7 +31,6 @@ struct ModifiedMemoBoxView: View {
         if let firstIndex = memo.contents.firstIndex(of: "\n") {
             var numOfEnters = 0
             let indexInt = memo.contents.distance(from: memo.contents.startIndex, to: firstIndex)
-//            var anotherEnterIndex = memo.contents.index(memo.contents.startIndex, offsetBy: numOfEnters)
             while (memo.contents[memo.contents.index(memo.contents.startIndex, offsetBy: numOfEnters + indexInt)] == "\n" && numOfEnters + indexInt < memo.contents.count) {
                 numOfEnters += 1
             }
@@ -78,9 +73,8 @@ struct ModifiedMemoBoxView: View {
         .background(Color.pastelColors[memo.colorIndex])
         .cornerRadius(10)
         .overlay(
-            RoundedRectangle(cornerRadius: 5)
-//                .stroke(memoEditVM.selectedMemos.contains(memo) ? Color(UIColor(named: "mainColor")!) : .clear, lineWidth: 2)
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? colorScheme.adjustMainColors() : .clear, lineWidth: 2)
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? .black : .clear, lineWidth: 1)
         )
     }
 }

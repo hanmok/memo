@@ -9,17 +9,38 @@ import SwiftUI
 import CoreData
 
 struct ColorPaletteView: View {
+    // closure should be here ?
     @Environment(\.colorScheme) var colorScheme
     @Binding var selectedColorIndex: Int
     @Environment(\.presentationMode) var presentationMode
     @Binding var showColorPalette: Bool
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+    @Environment(\.managedObjectContext) var context
+    @GestureState var isScrolled = false
     // How do I check Circle with checkMark here ??
+    
+    init(selectedColorIndex: Binding<Int> = .constant(-1), showColorPalette: Binding<Bool>) {
+        _selectedColorIndex = selectedColorIndex
+        _showColorPalette = showColorPalette
+    }
     var body: some View {
-        VStack {
+        let scroll = DragGesture(minimumDistance: 5, coordinateSpace: .local)
+            .updating($isScrolled) { _, _, _ in
+                DispatchQueue.main.async {
+                showColorPalette = false
+                }
+            }
+        
+        return VStack {
             HStack(spacing: 15) {
                 ForEach(0 ... 4, id: \.self) {i in
                     Button {
+
+                        _ = memoEditVM.selectedMemos.map { $0.colorIndex = i}
+                        context.saveCoreData()
                         selectedColorIndex = i
+//                        memoEditVM.initSelectedMemos()
+                        memoEditVM.selectedMemos.removeAll()
                         showColorPalette = false
                     } label: {
 //                        Circle()
@@ -33,8 +54,13 @@ struct ColorPaletteView: View {
             HStack(spacing: 15) {
                 ForEach(5 ... 9, id: \.self) {i in
                     Button {
+                        _ = memoEditVM.selectedMemos.map { $0.colorIndex = i}
+                        
+                        context.saveCoreData()
+//                        memoEditVM.initSelectedMemos()
+                        memoEditVM.selectedMemos.removeAll()
                         selectedColorIndex = i
-//                        presentationMode.wrappedValue.dismiss()
+
                         showColorPalette = false
                     } label: {
                         CircleWithTarget(targetIndex: selectedColorIndex, index: i, circleColor: Color.pastelColors[i], markColor: .black)
@@ -46,8 +72,11 @@ struct ColorPaletteView: View {
             HStack(spacing: 15) {
                 ForEach(10 ... 14, id: \.self) {i in
                     Button {
+                        _ = memoEditVM.selectedMemos.map { $0.colorIndex = i}
+                        context.saveCoreData()
+//                        memoEditVM.initSelectedMemos()
+                        memoEditVM.selectedMemos.removeAll()
                         selectedColorIndex = i
-//                        presentationMode.wrappedValue.dismiss()
                         showColorPalette = false
                     } label: {
                         CircleWithTarget(targetIndex: selectedColorIndex, index: i, circleColor: Color.pastelColors[i], markColor: .black)
@@ -55,22 +84,13 @@ struct ColorPaletteView: View {
                         .frame(width: 24, height: 24)
                 }
             }
-            
-            
         }
-        .padding()
-//        .background(colorScheme.adjustMainColors())
+        .gesture(scroll)
+        .padding(15)
         .background(Color(white: 0.8))
         .cornerRadius(10)
     }
 }
-
-//struct ColorTestView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ColorPaletteView()
-//    }
-//}
-
 
 
 struct CircleWithTarget: View {

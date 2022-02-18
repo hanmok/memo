@@ -91,7 +91,7 @@ extension Memo {
             colorIndex_ = Int64(newValue)
         }
     }
-    
+    // What do I need to do now .. ?
     // Getting a Color
 //    let color = note.color
     

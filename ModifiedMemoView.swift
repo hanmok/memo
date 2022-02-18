@@ -16,6 +16,7 @@ struct ModifiedMemoView: View {
     
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
+    
     @ObservedObject var memo: Memo
     
     @FocusState var editorFocusState: Bool
@@ -146,6 +147,7 @@ struct ModifiedMemoView: View {
                 HStack {
                     Spacer()
                     ColorPaletteView(selectedColorIndex: $selectedColorIndex, showColorPalette: $showColorPalette)
+                        .environmentObject(memoEditVM)
                         .padding(.top, Sizes.overallPadding)
                 }
                 Spacer()
@@ -160,7 +162,6 @@ struct ModifiedMemoView: View {
             contents = memo.contents
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
-//            memo.colorIndex = selectedColorIndex
             selectedColorIndex = memo.colorIndex
         })
         
