@@ -88,6 +88,8 @@
 		9AA2673027BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
 		9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
 		9AA2673327BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
+		9AA2673927BFA58800AC75DB /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673827BFA58800AC75DB /* SearchViewModel.swift */; };
+		9AA2673A27BFA58800AC75DB /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673827BFA58800AC75DB /* SearchViewModel.swift */; };
 		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */; };
@@ -215,6 +217,7 @@
 		9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
 		9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		9AA2673127BE4E2900AC75DB /* FavColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavColors.swift; sourceTree = "<group>"; };
+		9AA2673827BFA58800AC75DB /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCollapsibleFolder.swift; sourceTree = "<group>"; };
 		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind3.swift; sourceTree = "<group>"; };
 		9AC5D10B27840554007EAA28 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -298,6 +301,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9AA2673827BFA58800AC75DB /* SearchViewModel.swift */,
 				E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */,
 				9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */,
 				9AA266E027BE347C00AC75DB /* ModifiedMemoBoxView.swift */,
@@ -725,6 +729,7 @@
 				9A3378672799275E00805138 /* SubFolderPageView.swift in Sources */,
 				9A013F6A27BA535400C612ED /* DynamicTopFolderCell.swift in Sources */,
 				9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */,
+				9AA2673927BFA58800AC75DB /* SearchViewModel.swift in Sources */,
 				9A1D8539279FF32400B00156 /* DynamicFolderCell.swift in Sources */,
 				9A046D1B27B67508003169C7 /* OrderingAppStorage.swift in Sources */,
 				9A89582D2771BE1000E7B773 /* MemoView.swift in Sources */,
@@ -850,6 +855,7 @@
 				9AC5D235278C3145007EAA28 /* MemoList2.swift in Sources */,
 				9A337805279576CC00805138 /* testView.swift in Sources */,
 				9A337894279A5C9600805138 /* HierarchyLabelView.swift in Sources */,
+				9AA2673A27BFA58800AC75DB /* SearchViewModel.swift in Sources */,
 				9A1D536527ACE439009294C1 /* FolderView.swift in Sources */,
 				9AC5D20227855C0B007EAA28 /* Persistence.swift in Sources */,
 				9A1D536327ACE2E3009294C1 /* SubFolderButtonImage.swift in Sources */,

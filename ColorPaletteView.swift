@@ -39,8 +39,9 @@ struct ColorPaletteView: View {
                         _ = memoEditVM.selectedMemos.map { $0.colorIndex = i}
                         context.saveCoreData()
                         selectedColorIndex = i
+                        // temp
 //                        memoEditVM.initSelectedMemos()
-                        memoEditVM.selectedMemos.removeAll()
+//                        memoEditVM.selectedMemos.removeAll()
                         showColorPalette = false
                     } label: {
 //                        Circle()
@@ -57,8 +58,9 @@ struct ColorPaletteView: View {
                         _ = memoEditVM.selectedMemos.map { $0.colorIndex = i}
                         
                         context.saveCoreData()
+                        // temp
 //                        memoEditVM.initSelectedMemos()
-                        memoEditVM.selectedMemos.removeAll()
+//                        memoEditVM.selectedMemos.removeAll()
                         selectedColorIndex = i
 
                         showColorPalette = false
@@ -74,8 +76,9 @@ struct ColorPaletteView: View {
                     Button {
                         _ = memoEditVM.selectedMemos.map { $0.colorIndex = i}
                         context.saveCoreData()
+                        // temp
 //                        memoEditVM.initSelectedMemos()
-                        memoEditVM.selectedMemos.removeAll()
+//                        memoEditVM.selectedMemos.removeAll()
                         selectedColorIndex = i
                         showColorPalette = false
                     } label: {

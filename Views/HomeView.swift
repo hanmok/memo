@@ -77,6 +77,7 @@ class FastFolderWithLevelGroup: ObservableObject {
     
     @Published var folders: [FolderWithLevel]
     @Published var archives: [FolderWithLevel]
+//    @Published var allFolders: [FolderWithLevel]
     
     @Published var homeFolder: Folder
     @Published var archive: Folder
@@ -87,5 +88,6 @@ class FastFolderWithLevelGroup: ObservableObject {
         
         self.archives = Folder.getHierarchicalFolders(topFolder: archiveFolder)
         self.folders = Folder.getHierarchicalFolders(topFolder: homeFolder)
+//        self.allFolders = self.archives
     }
 }

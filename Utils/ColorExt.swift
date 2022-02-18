@@ -72,10 +72,22 @@ extension Color {
         Color(red: 197, green: 222, blue: 243),
         Color(red: 175, green: 194, blue: 225),
         Color(red: 229, green: 209, blue: 224),
-        Color(red: 198, green: 184, blue: 215),
-        Color(red: 221, green: 221, blue: 237),
-        Color(red: 226, green: 195, blue: 199)
+//        someIvorys
+        Color(red: 248, green: 250, blue: 230),
+        Color(red: 254, green: 253, blue: 246),
+        Color(red: 246, green: 244, blue: 232)
+        // original
+//        Color(red: 198, green: 184, blue: 215),
+//        Color(red: 221, green: 221, blue: 237),
+//        Color(red: 226, green: 195, blue: 199)
     ]
+    
+    static let someIvorys: [Color] = [
+        Color(red: 248, green: 250, blue: 230),
+        Color(red: 254, green: 253, blue: 246),
+        Color(red: 246, green: 244, blue: 232)
+    ]
+    
 //    static let ui: UIColor = UIColor(red:1, green: 1, blue: 1, withAlpha: 0)
     static let pastelUIColors = Color.convertToUIColors(colors: Color.pastelColors)
 }

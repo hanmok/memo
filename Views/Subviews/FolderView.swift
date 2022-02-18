@@ -85,7 +85,14 @@ struct FolderView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
                 .environmentObject(memoOrder)
+                
+                Rectangle()
+//                    .background()
+                    .frame(height: 100)
+                    .foregroundColor(.clear)
             } // end of scrollView
+// 갑자기 왜 .. 드래그가 이렇게 안되지 ??
+            
             
             VStack {
                 
@@ -137,19 +144,22 @@ struct FolderView: View {
                 } // end of HStack
             } // end of VStack
             
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ColorPaletteView(
-                        showColorPalette: $showColorPalette)
-                        .environmentObject(memoEditVM)
-                        .offset(y: showColorPalette ? 0 : 200)
-                        .animation(.spring(), value: showColorPalette)
-                        .padding(.trailing, Sizes.overallPadding)
-                        .padding(.bottom, Sizes.overallPadding)
-                }
-            }
+            
+            //
+//            VStack {
+//                Spacer()
+//                HStack {
+//                    Spacer()
+//                    ColorPaletteView(
+//                        showColorPalette: $showColorPalette)
+//                        .environmentObject(memoEditVM)
+//                        .offset(y: showColorPalette ? 0 : 200)
+//                        .animation(.spring(), value: showColorPalette)
+//                        .padding(.trailing, Sizes.overallPadding)
+//                        .padding(.bottom, Sizes.overallPadding)
+//                }
+//            }
+            
             // Another ZStack Element Begins
             
             // When add folder pressed

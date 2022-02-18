@@ -89,7 +89,7 @@ struct ModifiedMemoView: View {
             //            Text("Tab1View")
             VStack {
                 Rectangle()
-                    .frame(width: UIScreen.screenWidth, height: 85)
+                    .frame(width: UIScreen.screenWidth, height: 105)
                     .foregroundColor(Color.pastelColors[selectedColorIndex])
 
                 Spacer()
@@ -149,7 +149,11 @@ struct ModifiedMemoView: View {
                 CustomTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
+//                    .padding(.bottom, Sizes.largePadding * 2)
+//                Text("\n\n\n\n\n\n\n")
+//                    .padding(.bottom, 50)
             }
+            .padding(.top)
             .padding(.horizontal, Sizes.overallPadding)
             .gesture(scroll)
             

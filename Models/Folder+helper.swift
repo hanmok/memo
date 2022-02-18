@@ -893,6 +893,18 @@ extension Folder {
     }
 }
 
+extension Folder {
+    static func lookForResult(of keyword: String, target: [Folder]) -> [Folder] {
+        var resultFolders = [Folder]()
+        for eachFolder in target {
+            if eachFolder.title.lowercased().contains(keyword.lowercased()) {
+                resultFolders.append(eachFolder)
+            }
+        }
+        return resultFolders
+    }
+}
+
 
 extension NSManagedObjectContext {
     func saveCoreData() { // save to coreData
@@ -905,3 +917,5 @@ extension NSManagedObjectContext {
         }
     }
 }
+
+

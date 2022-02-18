@@ -33,7 +33,7 @@ struct ModifiedMemoBoxView: View {
             return memo.contents
         }
     }
-
+// 왜.. 중복이 생기지 ? 과거 데이터만 그러네..
     var contents: String? {
         if let firstEnterIndex = memo.contents.firstIndex(of: "\n") {
             let firstEnterIndexInt = memo.contents.distance(from: memo.contents.startIndex, to: firstEnterIndex)
