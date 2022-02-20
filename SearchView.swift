@@ -8,18 +8,18 @@
 import SwiftUI
 import CoreData
 
-enum SearchType {
-    case all
-    case current
+enum SearchType: String {
+    case all = "All"
+    case current = "Current"
 }
 
 /*
-struct ContainedMemos {
-    var folder: Folder
-    var memos: [Memo]
-    var memosCount: Int
-}
-*/
+ struct ContainedMemos {
+ var folder: Folder
+ var memos: [Memo]
+ var memosCount: Int
+ }
+ */
 
 //struct MemoAndContainer {
 //    var memo: Memo
@@ -37,18 +37,22 @@ struct SearchView: View {
     @StateObject var memoEditVM = MemoEditViewModel()
     // Memos Found , + Folder name of each memo
     
+    /*
     var matchedMemos: [Memo] {
+        
+        let allMemos: [Memo] = Memo.fetchAllmemos(context: context)
 
-        var allMemos: [Memo] = Memo.fetchAllmemos(context: context)
-//        fastFolderWithLevelGro
-        // fetch All Memos
+        var resultMemos = [Memo]()
         
-        // check if any memo has search Keyword
-        _ = allMemos.map { $0.contents.lowercased().contains(searchKeyword)}
-//        _ = allMemos.map { $0.title.contains(searchKeyword)}
+        for eachMemo in allMemos {
+            if eachMemo.contents.lowercased().contains(searchKeyword.lowercased()) {
+                resultMemos.append(eachMemo)
+            }
+        }
         
-        return allMemos
+        return resultMemos
     }
+    */
     
     var allFolders: [Folder] {
         var folders: [Folder] = []
@@ -56,6 +60,7 @@ struct SearchView: View {
         _ = fastFolderWithLevelGroup.archives.map { folders.append($0.folder)}
         return folders
     }
+    
     var allMemos: [Memo] {
         var memos: [Memo] = []
         
@@ -67,62 +72,101 @@ struct SearchView: View {
     
     // Folders Found
     var matchedFolders: [Folder] {
-
+        
         var allFolders = [Folder]()
         _ = fastFolderWithLevelGroup.folders.map { allFolders.append($0.folder)}
         _ = fastFolderWithLevelGroup.archives.map { allFolders.append($0.folder)}
-
+        
         for eachFolder in allFolders {
             if eachFolder.title.lowercased().contains(searchKeyword.lowercased()) {
                 allFolders.append(eachFolder)
             }
         }
+        _ = allFolders.map { print("contaiend Folders: \($0.title)")}
         return allFolders
     }
     
-//    var matchedFolders: [Folder] = []
+    //    var matchedFolders: [Folder] = []
     
     
     var body: some View {
         
         NavigationView {
+            
             VStack {
                 Picker("", selection: $searchTypeEnum) {
-                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(SearchType.all)
-                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(SearchType.current)
+                    Text(SearchType.all.rawValue).tag(SearchType.all)
+                    Text(SearchType.current.rawValue).tag(SearchType.current)
                 }
                 .pickerStyle(SegmentedPickerStyle())
-                List {
-                    Section(header: Text("Matched Folders")) {
-                        ForEach(                            SearchViewModel(folders: allFolders, memos: [], keyword: searchKeyword).returnMatchedFolders(), id: \.self) { matchedFolder in
-                            Text(matchedFolder.title)
-
+                ScrollView {
+                    VStack {
+                        Section(header:
+                                    HStack {
+                            Text("Matched Memos")
+                                .padding(.leading, Sizes.overallPadding)
+                            Spacer()
                         }
-                    }
-                    
-                    Section(header: Text("Matched Memos")) {
-                        ForEach(SearchViewModel(
-                            folders: allFolders, memos: allMemos, keyword: searchKeyword).returnMatchedMemos(), id: \.self) { matchedMemo in
-//                            Text(matchedMemo.contents)
-                            ModifiedMemoBoxView(memo: matchedMemo)
-                                .environmentObject(memoEditVM) // dummy..
+                        ) {
+                            ForEach(SearchViewModel(folders: allFolders, keyword: searchKeyword).returnMatchedMemos().nestedMemos,
+                                    id: \.self) { memoArray in
+                                Section(header:
+                                            HStack {
+                                    HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
+                                        .padding(.leading, Sizes.littleBigPadding)
+                                    Spacer()
+                                }
+                                ) {
+                                    ForEach(memoArray.memos, id: \.self) { eachMemo in
+                                        NavigationLink {
+                                            MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
+                                        } label: {
+                                            MemoBoxView(memo: eachMemo)
+                                                .environmentObject(memoEditVM)
+                                        }
+                                    }
+                                }
+                            }
                         }
+                        Rectangle()
+                            .background(.clear)
+                            .frame(height: 40)
+                        
+                        Section(header:
+                                    HStack {
+                            Text("Matched Folders")
+                                .padding(.leading, Sizes.overallPadding)
+                            Spacer()
+                        }
+                        ) {
+                            ForEach(SearchViewModel(folders: allFolders, keyword: searchKeyword).returnMatchedFolders(), id: \.self) { matchedFolder in
+                                Text(matchedFolder.title)
+                            }
+                        }
+                        // what if.. there's no matched folder or memo ?
                     }
                 }
-                
                 
                 
             }.searchable(text: $searchKeyword)
                 .onSubmit(of: .search) {
-           
-
+                    
+                    
                     
                 }
         }
         .onAppear(perform: {
-            print("allMatchedMemos: \(matchedMemos)")
             print("allMatchedFolders: \(matchedFolders)")
         })
         .navigationBarHidden(true)
     }
 }
+
+
+
+// Folder 를 위한 Boxiew 가 필요함.
+// 이동 시 FolderView 로 이동.
+// MemoView 도 Hierarchy 가 나오게끔 어떻게.. 해야겠는데 .. ?
+// 없을 때 .. 는 어떻게해 ??
+
+// 결과를 활용하지 않으면 시간이 엄청나게 걸리겠다.. 정말로....

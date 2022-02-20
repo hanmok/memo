@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct HierarchyLabelView: View {
+    @Environment(\.colorScheme) var colorScheme
     let currentFolder: Folder
     
     func getRoot(child: Folder) -> String {
         let hierarchy = getAllParents(child: child)
         
         if hierarchy.count == 1 {
-            return ""
+            if hierarchy.first!.title == FolderType.getFolderName(type: FolderTypeEnum.folder) {
+                return "Folder"
+            } else {
+                return "Archive"
+            }
         }
         
         var root = ""
@@ -42,6 +47,8 @@ struct HierarchyLabelView: View {
     var body: some View {
         ScrollView(.horizontal) {
             Text(getRoot(child:currentFolder))
+                .foregroundColor(colorScheme.adjustBlackAndWhite())
+                .font(.caption)
                 .opacity(0.5)
         }
     }

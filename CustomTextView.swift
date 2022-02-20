@@ -7,33 +7,6 @@
 
 import SwiftUI
 
-struct MemoClone: View {
-    @State private var title = "Title"
-    @State private var message = ""
-    @State private var textStyle = UIFont.TextStyle.body
-    
-        var customTextView: CustomTextView {
-    //        return CustomTextView(text: $message, textStyle: $textStyle)
-            return CustomTextView(text: $message)
-        }
-    
-    var body: some View {
-        //        ScrollView {
-        VStack {
-            //            TextField("Title", text: $title)
-            CustomTextView(text: $message)
-//            customTextView
-//                .onAppear {
-//                    customTextView.something()
-//                }
-            //            CustomTextView(text: $message, textStyle: $textStyle)
-            //            customTextView
-            //                .fixedSize(horizontal: false, vertical: true)
-        }
-        //        .fixedSize(horizontal: false, vertical: true)
-        //        }
-    }
-}
 
 // TextView .
 // UIView Representable

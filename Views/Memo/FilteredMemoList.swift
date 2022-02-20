@@ -43,13 +43,12 @@ struct FilteredMemoList: View {
                     ForEach(memosToShow, id: \.self) { memo in
                         
                         NavigationLink(destination:
-                                       ModifiedMemoView(memo: memo, parent: memo.folder!)
+                                        MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
                                         .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
                         
                         ) {
-//                            MemoBoxView(memo: memo)
-                            ModifiedMemoBoxView(memo: memo)
+                            MemoBoxView(memo: memo)
                             
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }
@@ -58,9 +57,7 @@ struct FilteredMemoList: View {
 //                        // MARK: - Tapped
                         .simultaneousGesture(TapGesture().onEnded{
                                 if !memoEditVM.hasNotLongSelected {
-
                                     memoEditVM.dealWhenMemoSelected(memo)
-
                                 }
                             
                             else { // if not long tapped

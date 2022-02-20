@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreData
 
+// 왜 여기서 스크롤이 잘 안되지 ? .. Search 에서는 잘만 되는데... ??
+
 struct FolderView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
@@ -87,11 +89,9 @@ struct FolderView: View {
                 .environmentObject(memoOrder)
                 
                 Rectangle()
-//                    .background()
                     .frame(height: 100)
                     .foregroundColor(.clear)
             } // end of scrollView
-// 갑자기 왜 .. 드래그가 이렇게 안되지 ??
             
             
             VStack {
@@ -145,20 +145,20 @@ struct FolderView: View {
             } // end of VStack
             
             
-            //
-//            VStack {
-//                Spacer()
-//                HStack {
-//                    Spacer()
-//                    ColorPaletteView(
-//                        showColorPalette: $showColorPalette)
-//                        .environmentObject(memoEditVM)
-//                        .offset(y: showColorPalette ? 0 : 200)
-//                        .animation(.spring(), value: showColorPalette)
-//                        .padding(.trailing, Sizes.overallPadding)
-//                        .padding(.bottom, Sizes.overallPadding)
-//                }
-//            }
+            
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    ColorPaletteView(
+                        showColorPalette: $showColorPalette)
+                        .environmentObject(memoEditVM)
+                        .offset(y: showColorPalette ? 0 : 200)
+                        .animation(.spring(), value: showColorPalette)
+                        .padding(.trailing, Sizes.overallPadding)
+                        .padding(.bottom, Sizes.overallPadding)
+                }
+            }
             
             // Another ZStack Element Begins
             
@@ -200,7 +200,7 @@ struct FolderView: View {
             // MARK: - ERROR!!!! SOURCE
             
             NavigationLink(destination:
-                           ModifiedNewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
+                           NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
             
             .environmentObject(folderEditVM)
             .environmentObject(memoEditVM)

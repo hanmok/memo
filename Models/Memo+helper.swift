@@ -56,6 +56,16 @@ extension Memo {
         set { contents_ = newValue}
     }
     
+    var titleToShow: String {
+        get { titleToShow_ ?? "" }
+        set { titleToShow_ = newValue }
+    }
+    
+    var contentsToShow: String {
+        get { contentsToShow_ ?? "" }
+        set { contentsToShow_ = newValue }
+    }
+    
     var overview: String {
         get { overview_ ?? "" }
         set { overview_ = newValue }
@@ -193,7 +203,45 @@ extension Memo {
     static let lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     
     static let longLorem = Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem
+
+    func saveTitleWithContentsToShow(context: NSManagedObjectContext) {
+        var title: String? {
+            if let firstIndex = self.contents.firstIndex(of: "\n") {
+                // if no title entered, means memo starts with "\n"
+                if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
+                    return nil
+                }
+                
+                let title = self.contents[..<firstIndex]
+                
+                return String(title)
+                // no "\n" entered.
+            } else {
+                return self.contents
+            }
+        }
+        if let validTitle = title {
+            self.titleToShow = validTitle
+        } else {
+            self.titleToShow = ""
+        }
+
+        let lastTitleIndex = self.titleToShow.endIndex
+        self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
+        
+        // remove spaces or enters from the very first part to use in MemoBoxView
+        while(contentsToShow != "") {
+            if contentsToShow.first! == " " || contentsToShow.first! == "\n"{
+                contentsToShow.removeFirst()
+            } else {
+                break
+            }
+        }
+        context.saveCoreData()
+    }
 }
+
+
 
 struct MemoProperties {
     static let id = "id_"

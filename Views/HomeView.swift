@@ -36,20 +36,20 @@ struct HomeView: View { // top folder fetch
 //                        }
 //                    }
 //                }
-//
+////
 //                return EmptyView()
         
 //        return ColorPaletteView(selectedColorIndex: .constant(4))
         
-        return NavigationView {
-            MindMapView(
-                fastFolderWithLevelGroup:
-                    FastFolderWithLevelGroup(
-                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
-                        archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
-                    )
-            )
-        }
+//        return NavigationView {
+//            MindMapView(
+//                fastFolderWithLevelGroup:
+//                    FastFolderWithLevelGroup(
+//                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
+//                        archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
+//                    )
+//            )
+//        }
         
         // TEXT EDITOR TESTS
 //        return MemoClone()
@@ -59,16 +59,16 @@ struct HomeView: View { // top folder fetch
         // This one looks hopeful..
         //        return MemoClone()
         
-//        return SearchView(fastFolderWithLevelGroup:
-//                            FastFolderWithLevelGroup(
-//                                homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
-//                                archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
-//                            ))
+        return SearchView(fastFolderWithLevelGroup:
+                            FastFolderWithLevelGroup(
+                                homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
+                                archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
+                            ))
         
         
         
     }
-}
+} 
 
 
 

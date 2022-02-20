@@ -38,9 +38,10 @@ struct BookmarkedFolderView: View {
                                         
                                         NavigationLink(destination:
                                                        
-                                                       ModifiedBookmarkMemoView(memo: bookMarkedMemo,
-                                                                        parent: bookMarkedMemo.folder!,
-                                                                        presentingView: $presentingView)
+//                                                       ModifiedBookmarkMemoView(memo: bookMarkedMemo,
+//                                                                        parent: bookMarkedMemo.folder!,
+//                                                                        presentingView: $presentingView)
+                                                       MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView)
                                                        
                                                         .environmentObject(memoEditVM)
                                                         .environmentObject(folderEditVM)
@@ -65,7 +66,8 @@ struct BookmarkedFolderView: View {
                     // Another ZStack Element
                     // NEW MEMO
                     NavigationLink(destination:
-                                   ModifiedNewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
+//                                   ModifiedNewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
+                                   NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                    ,isActive: $presentingNewMemo) {}
@@ -80,8 +82,6 @@ struct BookmarkedFolderView: View {
                         // BookMarked memos Text.
                         Rectangle()
                             .frame(width: UIScreen.screenWidth, height: 30)
-//                            .background(Color(UIColor(named: "subColor")!))
-//                            .foregroundColor(Color(UIColor(named: "subColor")!))
                             .background(colorScheme.adjustSecondSubColors())
                             .foregroundColor(colorScheme.adjustSecondSubColors())
                             .offset(y: -20)
