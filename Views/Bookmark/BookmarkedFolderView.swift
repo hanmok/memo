@@ -61,7 +61,7 @@ struct BookmarkedFolderView: View {
                     } // end of VStack
 //                    .background(Color(UIColor(named: "mainColor")!))
 //                    .background(Color.applyMainColor())
-                    .background(colorScheme.adjustMainColors())
+//                    .background(colorScheme.adjustMainColors())
 //                    .padding(.horizontal, Sizes.overallPadding)
                     // Another ZStack Element
                     // NEW MEMO
@@ -82,8 +82,10 @@ struct BookmarkedFolderView: View {
                         // BookMarked memos Text.
                         Rectangle()
                             .frame(width: UIScreen.screenWidth, height: 30)
-                            .background(colorScheme.adjustSecondSubColors())
-                            .foregroundColor(colorScheme.adjustSecondSubColors())
+//                            .background(colorScheme.adjustSecondSubColors())
+//                            .foregroundColor(colorScheme.adjustSecondSubColors())
+                            .background(colorScheme.adjustMainColors())
+                            .foregroundColor(colorScheme.adjustMainColors())
                             .offset(y: -20)
                         
                         HStack {
@@ -92,7 +94,9 @@ struct BookmarkedFolderView: View {
                             }
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+//                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+                            .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
+//                            .foregroundColor(colorScheme.ad)
                             .offset(y: presentingView || presentingNewMemo ? -100 : -20 )
                             .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                             

@@ -68,13 +68,7 @@ struct MindMapView: View {
                 HStack {
                     Spacer()
                     HStack {
-                        // MARK: - Button For Test
-//                        Button {
-//
-//                        } label: {
-//                            ColorPickerView()
-//                        }
-
+                        // MARK: - Button 1: SEARCH
                         Button {
                             _ = fastFolderWithLevelGroup.folders.map {
                                 print("title: \($0.folder.title)")
@@ -86,12 +80,12 @@ struct MindMapView: View {
                             ChangeableImage(imageSystemName: "magnifyingglass")
                         }
 
-                        // MARK: - Button 1: Folder Ordering
+                        // MARK: - Button 2: Folder Ordering
                         FolderOrderingMenu(folderOrder: folderOrder)
-                            .padding(.trailing, Sizes.smallSpacing)
+                            .padding(.horizontal, Sizes.smallSpacing)
                         
                         
-                        // MARK: - Button 2: Add new Folder to the top Folder
+                        // MARK: - Button 3: Add new Folder to the top Folder
                         Button {
                             showTextField = true
 //                            textFieldType = .newTopFolder
@@ -103,22 +97,24 @@ struct MindMapView: View {
                                 newFolderName = "\(fastFolderWithLevelGroup.archive.title)'s \(fastFolderWithLevelGroup.archive.subfolders.count + 1) th Folder"
                             }
 
-                        } label: {
+                        } label: { // original : 28
                             ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
-                            
+//                            ChangeableImage(imageSystemName: "folder.badge.plus")
                                 .foregroundColor(colorScheme.adjustBlackAndWhite())
                         }
                     }
                     .padding(.trailing, Sizes.overallPadding)
-                    .padding(.top, 5)
+                    .padding(.top, 8) // original " 12
                 }
                 .padding(.trailing, Sizes.overallPadding)
                 
                 
                 Picker("", selection: $selectionEnum) {
-                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(FolderTypeEnum.folder)
+                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
+                        .tag(FolderTypeEnum.folder)
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(FolderTypeEnum.archive)
                 }
+                .tint(.pink)
                 .id(selectionEnum)
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)

@@ -54,13 +54,12 @@ struct CustomSearchView: View {
     }
     
     @Binding var showingSearchView: Bool
-    @Binding var hidingNavBar: Bool
     
-    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, hidingNavBar: Binding<Bool>  = .constant(false)) {
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _showingSearchView = showingSearchView
-        _hidingNavBar = hidingNavBar
+      
     }
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
@@ -121,10 +120,8 @@ struct CustomSearchView: View {
             VStack {
                 HStack {
                     HStack(spacing: 0) {
-                        Image(systemName: "magnifyingglass")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 16)
+
+                        ChangeableImage(imageSystemName: "magnifyingglass", height: 16)
                             .foregroundColor(Color(white: 131 / 255))
                             .padding(.horizontal, 7)
 

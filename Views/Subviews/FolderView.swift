@@ -18,7 +18,7 @@ struct FolderView: View {
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     @Environment(\.colorScheme) var colorScheme
-    @State var hidingNavBar = false
+   
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
@@ -210,7 +210,7 @@ struct FolderView: View {
             .environmentObject(memoEditVM)
             
         } // end of ZStack
-        .navigationBarHidden(hidingNavBar)
+
         .frame(maxHeight: .infinity)
         
         // fetch both home Folder and Archive Folder Separately.
@@ -236,7 +236,7 @@ struct FolderView: View {
                 homeFolder: Folder.fetchHomeFolder(context: context)!,
                 archiveFolder: Folder.fetchHomeFolder(context: context,
                                                       fetchingHome: false)!),
-                currentFolder: currentFolder, showingSearchView: $showingSearchView, hidingNavBar: $hidingNavBar)
+                currentFolder: currentFolder, showingSearchView: $showingSearchView)
         })
         .animation(.spring(response: 0.2, dampingFraction: 1, blendDuration: 0.4), value: showingSearchView)
 
@@ -286,33 +286,14 @@ struct FolderView: View {
                 print("name of each memos: ")
                 print("number of memos contained: \(validMemos.count)")
                 
-//                for eachMemo in validMemos {
-//                    eachMemo.title += ""
-//
-//                    print(eachMemo.title)
-//                }
-                
-//                _ = validMemos.map { $0.title += "" }
-                
                 print("count : \(currentFolder.memos.count)")
-                // Show SearchView !
                 
-                 // does not go back
                 showingSearchView = true
-                hidingNavBar = true
+
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })
-            // MARK: - FOR TESTING !!
-//            Button {
-////                            print(Memo.fetchAllmemos(context: context))
-//                allMemos = Memo.fetchAllmemos(context: context)
-//                print("num of memos:  \(allMemos.count)")
-//                print("num of memos that has no parent: \(allMemos.filter { $0.folder == nil}.count)")
-//
-//            } label: {
-//                ChangeableImage(imageSystemName: "folder")
-//            }
+//                .padding(.trailing, )
             
             
             // favorite Button
@@ -323,8 +304,7 @@ struct FolderView: View {
                     Image(systemName: "star.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-//                        .tint(.yellow)
-                        .tint(colorScheme.adjustBlackAndWhite())
+                        .tint(colorScheme.adjustSubColors())
                 } else {
                     Image(systemName: "star")
                         .resizable()
@@ -332,6 +312,7 @@ struct FolderView: View {
                         .tint(colorScheme.adjustBlackAndWhite())
                 }
             })
+            
             MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
         })
     }

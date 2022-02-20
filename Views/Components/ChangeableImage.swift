@@ -22,3 +22,23 @@ struct ChangeableImage: View {
             .frame(width: width, height: height)
     }
 }
+
+struct UnchangeableImage: View {
+    
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    var imageSystemName: String
+    var width: CGFloat = 20
+    var height: CGFloat = 20
+    var body: some View {
+
+        Image(systemName: imageSystemName)
+            .resizable()
+            .aspectRatio( contentMode: .fit)
+//            .tint(colorScheme == .dark ? .white : .black)
+//            .tint(.black)
+            .tint(colorScheme.adjustInverseBlackAndWhite())
+            .frame(width: width, height: height)
+    }
+}
+
+

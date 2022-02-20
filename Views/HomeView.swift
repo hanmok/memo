@@ -19,6 +19,7 @@ struct HomeView: View { // top folder fetch
 //        @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
     
     @State var shouldExecuteOne = true
+    
     var body: some View {
         
         // MARK: - FOR TESTING
@@ -29,16 +30,17 @@ struct HomeView: View { // top folder fetch
 //                    if true {
 //                        if shouldExecuteOne {
 ////                            UnitTestHelpers.deletesAll2(context: context)
-//                            UnitTestHelpers.deletesAllMemos(context: context)
-//                            UnitTestHelpers.deletesAllFolders(context: context)
+////                            UnitTestHelpers.deletesAllMemos(context: context)
+////                            UnitTestHelpers.deletesAllFolders(context: context)
 //                            shouldExecuteOne.toggle()
 //                            Folder.returnSampleFolder3(context: context)
 //                        }
 //                    }
 //                }
-////
+//
 //                return EmptyView()
     
+        // 음 .. 처음부터,, FolderView 와 Archive 는 주어야하는데,, 어떻게 주지 ?
         
         return NavigationView {
             MindMapView(

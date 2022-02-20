@@ -15,15 +15,19 @@ struct SubFolderButtonImage: View {
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
             // FG and BG should be the same color
-//                .foregroundColor(Color(UIColor(named: "mainColor")!))
-//                .background(Color(UIColor(named: "mainColor")!))
-                .foregroundColor(colorScheme.adjustMainColors())
-                .background(colorScheme.adjustMainColors())
+//                .foregroundColor(colorScheme.adjustMainColors())
+//                .background(colorScheme.adjustMainColors())
+//                .foregroundColor(Color(red: 237, green: 233, blue: 204))
+//                .background(Color(red: 237, green: 233, blue: 204))
+            
+                .foregroundColor(Color(red: 232, green: 228, blue: 199))
+                .background(Color(red: 232, green: 228, blue: 199))
 
                 .clipShape(Circle())
-            ChangeableImage(imageSystemName: "folder")
+            UnchangeableImage(imageSystemName: "folder")
                 .frame(width: 25, height: 25)
-                .foregroundColor(colorScheme == .dark ? Color(white: 1) : Color(white: 0))
+//                .foregroundColor(colorScheme == .dark ? Color(white: 1) : Color(white: 0))
+                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
         }
     }
 }
