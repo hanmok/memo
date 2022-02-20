@@ -59,6 +59,7 @@ struct MindMapView: View {
     
     @State var showingDeleteAction = false
     @State var allMemos:[Memo] = []
+    @State var showingSearchView = false
     
     var body: some View {
         return ZStack {
@@ -79,10 +80,8 @@ struct MindMapView: View {
                                 print("title: \($0.folder.title)")
                                 print("level: \($0.level)")
                             }
-//                            for each in fastFolderWithLevelGroup.folders {
-//                                print("title: \(each.folder.title)")
-//                                print("level: \(each.level)")
-//                            }
+                            // show SearchView !
+                            showingSearchView = true
                         } label: {
                             ChangeableImage(imageSystemName: "magnifyingglass")
                         }
@@ -323,6 +322,12 @@ struct MindMapView: View {
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoOrder)
+            
+                
+            CustomSearchView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, showingSearchView: $showingSearchView)
+                .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
+                .animation(.spring(response: 0.2, dampingFraction: 1, blendDuration: 0.4), value: showingSearchView)
+                .padding(.horizontal, Sizes.overallPadding)
             
             
             // MARK: - rename is not currently working .

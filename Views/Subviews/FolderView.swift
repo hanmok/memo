@@ -18,7 +18,7 @@ struct FolderView: View {
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     @Environment(\.colorScheme) var colorScheme
-    
+    @State var hidingNavBar = false
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
@@ -37,6 +37,8 @@ struct FolderView: View {
     
     @State var showColorPalette = false
     @State var selectedColorIndex = -1
+    
+    @State var showingSearchView = false
     var btnBack : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -169,12 +171,14 @@ struct FolderView: View {
                     .opacity(0.8)
             }
             
-//            if shouldAddFolder {
-//                newSubFolderName = ""
-//            }
-            
-            
-            // instance. are they different instances ?
+//            SearchView(
+//                fastFolderWithLevelGroup: FastFolderWithLevelGroup(
+//                homeFolder: Folder.fetchHomeFolder(context: context)!,
+//                archiveFolder: Folder.fetchHomeFolder(context: context,
+//                                                      fetchingHome: false)!),
+//                currentFolder: currentFolder, showingSearchView: $showingSearchView, hidingNavBar: $hidingNavBar)
+//                .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
+//                .animation(.spring(), value: showingSearchView)
             
             //  Present TextFieldAlert when add folder pressed
             PrettyTextFieldAlert(
@@ -206,9 +210,11 @@ struct FolderView: View {
             .environmentObject(memoEditVM)
             
         } // end of ZStack
+        .navigationBarHidden(hidingNavBar)
         .frame(maxHeight: .infinity)
         
         // fetch both home Folder and Archive Folder Separately.
+        
         
         .sheet(isPresented: $showSelectingFolderView,
                content: {
@@ -224,6 +230,16 @@ struct FolderView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })
+        .fullScreenCover(isPresented: $showingSearchView, content: {
+            CustomSearchView(
+                fastFolderWithLevelGroup: FastFolderWithLevelGroup(
+                homeFolder: Folder.fetchHomeFolder(context: context)!,
+                archiveFolder: Folder.fetchHomeFolder(context: context,
+                                                      fetchingHome: false)!),
+                currentFolder: currentFolder, showingSearchView: $showingSearchView, hidingNavBar: $hidingNavBar)
+        })
+        .animation(.spring(response: 0.2, dampingFraction: 1, blendDuration: 0.4), value: showingSearchView)
+
         .alert(AlertMessages.alertDeleteMain, isPresented: $showDeleteAlert, actions: {
             // delete
             Button(role: .destructive) {
@@ -279,8 +295,11 @@ struct FolderView: View {
 //                _ = validMemos.map { $0.title += "" }
                 
                 print("count : \(currentFolder.memos.count)")
+                // Show SearchView !
                 
                  // does not go back
+                showingSearchView = true
+                hidingNavBar = true
             }, label: {
                 ChangeableImage(imageSystemName: "magnifyingglass")
             })

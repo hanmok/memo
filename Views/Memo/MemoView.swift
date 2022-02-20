@@ -92,6 +92,7 @@ struct MemoView: View {
     var body: some View {
         let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
             .updating($isScrolled) { _, _, _ in
+                print("is Scrolling : \(isScrolled)")
                 editorFocusState = false
             }
         

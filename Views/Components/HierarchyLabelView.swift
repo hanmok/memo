@@ -10,6 +10,7 @@ import SwiftUI
 struct HierarchyLabelView: View {
     @Environment(\.colorScheme) var colorScheme
     let currentFolder: Folder
+    var isNavigationLink: Bool = false
     
     func getRoot(child: Folder) -> String {
         let hierarchy = getAllParents(child: child)
@@ -46,10 +47,16 @@ struct HierarchyLabelView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
+            
+            if isNavigationLink {
+                Text(getRoot(child:currentFolder))
+                    .font(.caption)
+            } else {
             Text(getRoot(child:currentFolder))
                 .foregroundColor(colorScheme.adjustBlackAndWhite())
                 .font(.caption)
                 .opacity(0.5)
+            }
         }
     }
 }

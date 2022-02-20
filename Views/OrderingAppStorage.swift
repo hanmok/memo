@@ -7,7 +7,16 @@
 
 import SwiftUI
 
+class someClass: ObservableObject {
+    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
+}
 
+struct someStr: View {
+    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
+    var body: some View {
+        return EmptyView()
+    }
+}
 
 struct Ordering: Codable {
     var folderOrderType: String

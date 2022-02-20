@@ -12,9 +12,6 @@ import CoreData
 
 
 // MARK: - FOLDER ORDERING
-
-
-
 struct FolderOrderingButton: View {
     
     var type: OrderType

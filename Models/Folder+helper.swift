@@ -498,10 +498,6 @@ extension Folder {
             let tempFolders = folder.subfolders
             
             if !tempFolders.isEmpty {
-//                for eachFolder in tempFolders {
-//                    foldersContainer.append(eachFolder)
-//                    getAllFolders(folder: eachFolder)
-//                }
                 
                 _ = tempFolders.map {
                     foldersContainer.append($0)
@@ -513,21 +509,11 @@ extension Folder {
         
         func appendMemos(folder: Folder) {
             _ = folder.memos.map { memosContainer.append($0)}
-//            for eachMemo in folder.memos {
-//                memosContainer.append(eachMemo)
-//            }
         }
         
         appendMemos(folder: folder)
         
         getAllFolders(folder: folder)
-        
-        // get all memos from each of collected Folders
-//        for eachFolder in foldersContainer {
-//
-//            appendMemos(folder: eachFolder)
-//            print("memosContainer: \(memosContainer)")
-//        }
         
         _ = foldersContainer.map { appendMemos(folder: $0)}
         

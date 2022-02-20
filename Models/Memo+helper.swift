@@ -204,12 +204,13 @@ extension Memo {
     
     static let longLorem = Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem
 
+    // error has triggered HERE !! let TitleIndex = self.titleToShow.endIndex
     func saveTitleWithContentsToShow(context: NSManagedObjectContext) {
-        var title: String? {
+        var title: String {
             if let firstIndex = self.contents.firstIndex(of: "\n") {
                 // if no title entered, means memo starts with "\n"
                 if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
-                    return nil
+                    return ""
                 }
                 
                 let title = self.contents[..<firstIndex]
@@ -217,17 +218,23 @@ extension Memo {
                 return String(title)
                 // no "\n" entered.
             } else {
-                return self.contents
+                return ""
             }
         }
-        if let validTitle = title {
-            self.titleToShow = validTitle
-        } else {
-            self.titleToShow = ""
+        
+        self.titleToShow = title
+        
+        // what if .. titleToShow is Empty ?
+        // title is too long if no title detected.
+        
+        if titleToShow != "" {
+            let lastTitleIndex = self.titleToShow.endIndex
+            let distance = self.titleToShow.distance(from: self.titleToShow.startIndex, to: lastTitleIndex)
+            print("lastTitleIndex: \(distance)")
+            
+            print("contents: \(self.contents)")
+            self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
         }
-
-        let lastTitleIndex = self.titleToShow.endIndex
-        self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
         
         // remove spaces or enters from the very first part to use in MemoBoxView
         while(contentsToShow != "") {

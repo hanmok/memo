@@ -8,17 +8,17 @@
 import SwiftUI
 import CoreData
 
-enum SearchType: String {
-    case all = "All"
-    case current = "Current"
-}
+//enum SearchType: String {
+//    case all = "All"
+//    case current = "Current"
+//}
 
 // scrolling is not working well in search..
-struct SearchView: View {
+struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
     
-//    @GestureState var isScrolled = false
+    @GestureState var isScrolled = false
     
     @FocusState var focusState: Bool
     
@@ -109,10 +109,65 @@ struct SearchView: View {
 //                }
 //
 //            }
+        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
+            .updating($isScrolled) { _, _, _ in
+                print("is Scrolling : \(isScrolled)")
+                focusState = false
+            }
         
         return NavigationView {
-           
+            
+            
             VStack {
+                HStack {
+                    HStack(spacing: 0) {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 16)
+                            .foregroundColor(Color(white: 131 / 255))
+                            .padding(.horizontal, 7)
+
+                        TextField("Search2", text: $searchKeyword)
+                            .focused($focusState)
+                            .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
+                            .frame(height: 30)
+                            .focused($focusState)
+                        Spacer()
+                        Button{
+                            searchKeyword = ""
+                            focusState = false
+                        } label: {
+                            ZStack {
+                                Circle()
+                                    .frame(width: 18, height: 18)
+                                    .foregroundColor(Color(white: 0.75))
+
+                                Image(systemName: "multiply")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .tint(colorScheme.adjustBlackAndWhite())
+                                .frame(width: 8, height: 8)
+                            }
+                            .padding(.trailing, 10)
+                        }
+                    }
+                    .frame(height: 32)
+                    .frame(width: UIScreen.screenWidth - 5.1 * Sizes.overallPadding)
+                    .background(Color(white: 239 / 255 ))
+                    .cornerRadius(10)
+                    Spacer()
+                    
+                    Button("Cancel") {
+                        focusState = false
+                        searchKeyword = ""
+                        showingSearchView = false
+                    }
+                }
+                .padding(.horizontal, Sizes.overallPadding)
+            
+            
+                
                 Picker("", selection: $searchTypeEnum) {
                     Text(SearchType.all.rawValue).tag(SearchType.all)
                     Text(SearchType.current.rawValue).tag(SearchType.current)
@@ -199,26 +254,32 @@ struct SearchView: View {
                         } // nil
                     }
                 }
+                .gesture(scroll)
             }
-//            .gesture(scroll)
+//            Spacer()
+            .padding(.top)
+            .gesture(scroll)
 
-            .searchable(text: $searchKeyword)
+//            .searchable(text: $searchKeyword)
 //            .searchable(text: $searchKeyword, focus)
 //            .focused($focusState)
-            .onSubmit(of: .search) {
-            }.navigationBarItems(
-                trailing:
-                    Button(action: {
-                        showingSearchView = false
-                        hidingNavBar = false
-                    }, label: {
-//                        Image(systemName: "multiply")
-                        ChangeableImage(imageSystemName: "multiply")
-                            .foregroundColor(colorScheme.adjustBlackAndWhite())
-//                        Image(systemName: "").frame(height: 28)
-                    })
-//                    .padding(.trailing, Sizes.overallPadding)
-            )
+//            .onSubmit(of: .search) {
+//            }
+            
+//            .navigationBarItems(
+//                trailing:
+//                    Button(action: {
+//                        showingSearchView = false
+//                        hidingNavBar = false
+//                    }, label: {
+////                        Image(systemName: "multiply")
+//                        ChangeableImage(imageSystemName: "multiply")
+//                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+////                        Image(systemName: "").frame(height: 28)
+//                    })
+////                    .padding(.trailing, Sizes.overallPadding)
+//            )
+            .navigationBarHidden(true)
         }
     }
 }
