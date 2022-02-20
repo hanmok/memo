@@ -228,12 +228,30 @@ extension Memo {
         // title is too long if no title detected.
         
         if titleToShow != "" {
-            let lastTitleIndex = self.titleToShow.endIndex
-            let distance = self.titleToShow.distance(from: self.titleToShow.startIndex, to: lastTitleIndex)
-            print("lastTitleIndex: \(distance)")
+            var tempContentsToShow = self.contents
+            while ( tempContentsToShow.first != "\n") {
+                tempContentsToShow.removeFirst()
+            }
+            tempContentsToShow.removeFirst()
             
-            print("contents: \(self.contents)")
-            self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
+            self.contentsToShow = tempContentsToShow
+            
+//            let lastTitleIndex = self.titleToShow.endIndex
+//            let distance = self.titleToShow.distance(from: self.titleToShow.startIndex, to: lastTitleIndex)
+////            let distanceToInt = distance.
+//            let distanceToInt = self.titleToShow.
+//            print("lastTitleIndex: \(distance)")
+//
+//            print("contents: \(self.contents)")
+//            var contentsToShowSaved = self.contents
+//
+//            for _ in distance {
+//                contentsToShowSaved.removeFirst()
+//            }
+            
+//            self.contentsToShow = contentsToShowSaved
+            
+//            self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
         }
         
         // remove spaces or enters from the very first part to use in MemoBoxView
