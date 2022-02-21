@@ -24,7 +24,8 @@ struct MemoBoxView: View {
                 Text(memo.titleToShow)
                 .font(.headline)
                 .fontWeight(.bold)
-                .foregroundColor(.primary)
+//                .foregroundColor(.primary)
+                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, Sizes.smallSpacing)
@@ -32,13 +33,15 @@ struct MemoBoxView: View {
             if memo.contentsToShow != "" {
                 Text(memo.contentsToShow)
                     .font(.caption)
-                    .foregroundColor(.primary)
+//                    .foregroundColor(.primary)
+                    .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
                     .lineLimit(4)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, Sizes.smallSpacing)
             }
         }
+
 //        VStack {
 //        Text(memo.contents)
 //            Text("creationDate : \(memo.creationDate.timeIntervalSince1970)")
@@ -46,17 +49,18 @@ struct MemoBoxView: View {
 //        }
         
 //        .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
+
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
 //        .background(colorScheme.adjustSecondSubColors())
 //        .background(Color.pastelColors[memo.colorIndex])
-//        .background(Color.weekSubColor)
+
         .background(colorScheme.adjustMainColors())
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? .black : .clear, lineWidth: 1)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? .pink : .black) : .clear, lineWidth: 1)
         )
     }
 }

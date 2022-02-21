@@ -824,8 +824,9 @@ extension Folder {
     static func returnSampleFolder3(context: NSManagedObjectContext)  {
         
 //        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
-        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context, createdAt: Date(timeIntervalSince1970: 0))
+        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
 //        homeFolder.folderType = .home
+        context.saveCoreData()
         
         let subFolder1 = Folder(title: "Category 1", context: context)
         let subFolder2 = Folder(title: "Category 2", context: context)
@@ -855,7 +856,7 @@ extension Folder {
         
         
 //        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
-        let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context, createdAt: Date(timeIntervalSince1970: 1))
+        let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
         archive.title += ""
 //        archive.folderType = .archive
         context.saveCoreData()

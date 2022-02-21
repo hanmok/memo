@@ -286,6 +286,7 @@ extension Memo {
         
         if titleToShow != "" {
             var tempContentsToShow = self.contents
+
             
             let endIndex = self.titleToShow.endIndex
             
@@ -297,6 +298,7 @@ extension Memo {
             }
             
             self.contentsToShow = tempContentsToShow
+
         }
         
         // remove spaces or enters from the very first part to use in MemoBoxView

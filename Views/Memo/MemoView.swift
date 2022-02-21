@@ -114,6 +114,11 @@ struct MemoView: View {
                     
                     HStack(spacing: 15) {
                         
+//                        Button {
+//
+//                        } label: {
+//                        ChangeableImage(imageSystemName: "magnifyingglass")
+//                        }
                         Button {
                             showColorPalette = true
                         } label: {
