@@ -39,7 +39,13 @@ struct MemoBoxView: View {
                     .padding(.leading, Sizes.smallSpacing)
             }
         }
-        .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
+//        VStack {
+//        Text(memo.contents)
+//            Text("creationDate : \(memo.creationDate.timeIntervalSince1970)")
+//            Text("modificationDate: \(memo.modificationDate.timeIntervalSince1970)")
+//        }
+        
+//        .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)

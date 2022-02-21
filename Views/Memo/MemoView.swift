@@ -160,7 +160,7 @@ struct MemoView: View {
                     .padding(.top)
                     .focused($editorFocusState)
             }
-            .padding(.top)
+            .padding(.top, 10)
             .padding(.horizontal, Sizes.overallPadding)
             .gesture(scroll)
             

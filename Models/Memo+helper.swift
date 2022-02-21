@@ -204,36 +204,99 @@ extension Memo {
     
     static let longLorem = Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem
 
+    // 계속 수정해주어야 하는 코드..
     // error has triggered HERE !! let TitleIndex = self.titleToShow.endIndex
     func saveTitleWithContentsToShow(context: NSManagedObjectContext) {
+//        var title: String {
+//            if let firstIndex = self.contents.firstIndex(of: "\n") {
+//                // if no title entered, means memo starts with "\n"
+//                if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
+//                    return ""
+//                }
+//
+//                let title = self.contents[..<firstIndex]
+//
+//                return String(title)
+//                // no "\n" entered.
+//            } else {
+//                return ""
+//            }
+//        }
+//
+//        self.titleToShow = title
+//
+//        // what if .. titleToShow is Empty ?
+//        // title is too long if no title detected.
+//
+//        if titleToShow != "" {
+//            let lastTitleIndex = self.titleToShow.endIndex
+//            let distance = self.titleToShow.distance(from: self.titleToShow.startIndex, to: lastTitleIndex)
+//            print("lastTitleIndex: \(distance)")
+//
+//            print("contents: \(self.contents)")
+//            self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
+//        }
+//
+//        // remove spaces or enters from the very first part to use in MemoBoxView
+//        while(contentsToShow != "") {
+//            if contentsToShow.first! == " " || contentsToShow.first! == "\n"{
+//                contentsToShow.removeFirst()
+//            } else {
+//                break
+//            }
+//        }
+//        context.saveCoreData()
+        
         var title: String {
             if let firstIndex = self.contents.firstIndex(of: "\n") {
                 // if no title entered, means memo starts with "\n"
+                // 음.. 공백으로 이어지다가 Enter 가 나올수도 있음..
+                
+                
+                // very first character is "\n"
                 if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
                     return ""
+                    
+                } else {
+                    
+                    let offsetLimit = self.contents.distance(from: self.contents.startIndex, to: firstIndex)
+                    var offsetIndex = 0
+                    
+                    // if ..spaces continues to the first \n
+                    while (self.contents[self.contents.index(self.contents.startIndex, offsetBy: offsetIndex)] == " ") && offsetIndex < offsetLimit {
+                        offsetIndex += 1
+                    }
+                    
+                    if offsetIndex == offsetLimit {
+                        return ""
+                    } else {
+                        let title = self.contents[..<firstIndex]
+                        return String(title)
+                    }
                 }
                 
-                let title = self.contents[..<firstIndex]
-                
-                return String(title)
                 // no "\n" entered.
             } else {
-                return ""
+                return self.contents
             }
         }
         
         self.titleToShow = title
         
-        // what if .. titleToShow is Empty ?
-        // title is too long if no title detected.
         
         if titleToShow != "" {
-            let lastTitleIndex = self.titleToShow.endIndex
-            let distance = self.titleToShow.distance(from: self.titleToShow.startIndex, to: lastTitleIndex)
-            print("lastTitleIndex: \(distance)")
+            var tempContentsToShow = self.contents
             
-            print("contents: \(self.contents)")
-            self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
+            let endIndex = self.titleToShow.endIndex
+            
+            tempContentsToShow.removeSubrange(tempContentsToShow.startIndex ..< endIndex)
+            
+            // remove \n
+            if tempContentsToShow.first == "\n" {
+                tempContentsToShow.removeFirst()
+            }
+            
+            self.contentsToShow = tempContentsToShow
         }
         
         // remove spaces or enters from the very first part to use in MemoBoxView
