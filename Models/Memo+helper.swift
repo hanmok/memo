@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import UIKit
+import SwiftUI
 
 extension Memo {
     
@@ -323,6 +324,14 @@ extension Memo {
         case .alphabetical:
             return isAsc ? {$0.contents < $1.contents} : {$0.contents >= $1.contents}
         }
+    }
+    
+    static func sortMemos(memos: [Memo]) -> [Memo] {
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        
+        return memos.sorted(by: sortingMethod)
     }
 }
 

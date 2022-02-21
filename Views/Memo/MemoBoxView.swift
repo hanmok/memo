@@ -40,6 +40,8 @@ struct MemoBoxView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, Sizes.smallSpacing)
             }
+            Text("modifiedAt: \(memo.modificationDate.timeIntervalSince1970)")
+            Text("createdAt: \(memo.creationDate.timeIntervalSince1970)")
         }
 
 //        VStack {
