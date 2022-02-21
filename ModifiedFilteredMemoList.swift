@@ -1,87 +1,43 @@
 //
-//  FilteredMemoList.swift
+//  ModifiedFilteredMemoList.swift
 //  DeeepMemo
 //
-//  Created by Mac mini on 2022/01/18.
+//  Created by Mac mini on 2022/02/21.
 //
 
 import SwiftUI
 
-
-class MemosViewModel: ObservableObject {
+struct ModifiedFilteredMemolist: View {
     
-    @Published var allMemos: [Memo] = []
-    @Published var pinnedMemos: [Memo] = []
-    @Published var unpinnedMemos: [Memo] = []
-    @Published var currentFolder: Folder?
-    @Published var hasPinnedMemo: Bool
-    
-    init(folder: Folder) {
-        self.currentFolder = folder
-
-        let allMemos = Folder.getSortedMemos(folder: folder)
-        var pinned = [Memo]()
-        var unpinned = [Memo]()
-        
-        for each in allMemos {
-            if each.pinned {
-                pinned.append(each)
-            } else {
-                unpinned.append(each)
-            }
-        }
-        self.hasPinnedMemo = pinned.isEmpty ? false : true
-        self.allMemos = allMemos
-        self.pinnedMemos = pinned
-        self.unpinnedMemos = unpinned
-    }
-}
-
-enum MemoListType: String {
-    case pinned
-    case unpinned
-    case all
-}
-
-struct FilteredMemoList: View {
-        
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @ObservedObject var folder: Folder // not needed.
-    @State var hasNotLongSelected = false
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
     var listType: MemoListType
-
-    @AppStorage("mOrderType") var mOrderType = OrderType.modificationDate
-    @AppStorage("mOrderAsc") var mOrderAsc = false
-
-//    let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
-    @State var sortingMethod: (Memo, Memo) -> Bool = { _, _ in true }
+    @EnvironmentObject var memosVM: MemosViewModel
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @State var hasNotLongSelected = false
     
+//    var memos: [Memo]
+    var memos:[Memo] {
+        switch listType {
+        case .pinned: return memosVM.pinnedMemos
+        case .unpinned: return memosVM.unpinnedMemos
+        case .all: return memosVM.allMemos
+        }
+    }
     
+   
     var body: some View {
         DispatchQueue.main.async {
-            sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
-            print("Memo sortedMethod: \(mOrderType)") // 미친거야?
+            print("ModifiedFilteredMemoList triggered")
+            for each in memosVM.allMemos {
+                print(each.contents)
+            }
+//            print("MemosVm.pinnedMemos: \(memosVM.pinnedMemos)")
         }
-
-        
-        var memosToShow = [Memo]()
-        
-        switch listType {
-        case .pinned:
-            memosToShow = folder.memos.filter { $0.pinned == true}.sorted(by: sortingMethod)
-        case .unpinned:
-            memosToShow = folder.memos.filter { $0.pinned != true}.sorted(by: sortingMethod)
-            // why.. do i need it ??
-        case .all:
-            memosToShow = folder.memos.sorted(by: sortingMethod)
-        }
-        
         return ZStack {
             
             VStack { // without this, views stack on other memos
                 Section {
-                    ForEach(memosToShow, id: \.self) { memo in
+                    ForEach(memos, id: \.self) { memo in
                         
                         NavigationLink(destination:
                                         MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
@@ -150,5 +106,9 @@ struct FilteredMemoList: View {
                 }
             } // end of VStack
         } // end of ZStack
+        
+        
     }
 }
+
+

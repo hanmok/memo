@@ -56,7 +56,7 @@ struct MemoView: View {
         print("save changes has triggered")
         
         memo.contents = contents
-        memo.creationDate = Date()
+//        memo.creationDate = Date()
         memo.modificationDate = Date()
         
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked

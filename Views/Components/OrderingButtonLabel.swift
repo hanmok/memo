@@ -25,6 +25,7 @@ struct FolderOrderingButton: View {
 //            Folder.orderType = type
             Folder.updateTopFolders(context: context)
             folderOrderType = type
+            print("Folder orderType has changed to \(folderOrderType.rawValue)")
         } label: {
             HStack {
 //                if folderOrder.orderType == type {
@@ -68,10 +69,10 @@ struct FolderAscDecButton: View {
 
 
 struct MemoOrderingButton: View {
-
+    @Environment(\.managedObjectContext) var context
     var type: OrderType
     
-    @AppStorage(AppStorageKeys.fOrderType) var mOrderType = OrderType.creationDate
+    @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.creationDate
 
     @ObservedObject var parentFolder: Folder
     
@@ -79,8 +80,9 @@ struct MemoOrderingButton: View {
         
         Button {
             mOrderType = type
-            
-            parentFolder.title += "" // update parent
+            Folder.updateTopFolders(context: context)
+//            parentFolder.title += "" // update parent
+            print("Memo orderType has changed to \(mOrderType.rawValue)")
             print("memo Type has changed to \(mOrderType.rawValue)")
         } label: {
             HStack {
@@ -99,11 +101,11 @@ struct MemoAscDecButton: View {
     
     @AppStorage("mOrderAsc") var mOrderAsc = false
     @ObservedObject var parentFolder: Folder
-    
+    @Environment(\.managedObjectContext) var context
     var body: some View {
         Button {
             mOrderAsc = isAscending
-            parentFolder.title += ""
+            Folder.updateTopFolders(context: context)
         } label: {
             HStack {
                 if mOrderAsc == isAscending {
@@ -157,15 +159,20 @@ struct MemoOrderingMenu: View {
             MemoOrderingButton(type: .modificationDate, parentFolder: parentFolder)
             MemoOrderingButton(type: .creationDate, parentFolder: parentFolder)
             MemoOrderingButton(type: .alphabetical, parentFolder: parentFolder)
+//            MemoOrderingButton(type: .modificationDate)
+//            MemoOrderingButton(type: .creationDate)
+//            MemoOrderingButton(type: .alphabetical)
             
             Divider()
             
 //            MemoAscDecButtonLabel(isAscending: true, memoOrder: memoOrder, parentFolder: parentFolder)
             MemoAscDecButton(isAscending: true, parentFolder: parentFolder)
+//            MemoAscDecButton(isAscending: true)
 //            MemoAscDecButtonLabel(isAscending: true, parentFolder: parentFolder)
             
 //            MemoAscDecButtonLabel(isAscending: false, memoOrder: memoOrder, parentFolder: parentFolder)
             MemoAscDecButton(isAscending: false, parentFolder: parentFolder)
+//            MemoAscDecButton(isAscending: false)
 //            MemoAscDecButtonLabel(isAscending: false, parentFolder: parentFolder)
             
         } label: {

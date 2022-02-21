@@ -28,10 +28,12 @@ struct DynamicTopFolderCell: View {
     }
     
     var body: some View {
+        
         NavigationLink(destination: FolderView(currentFolder: folder)
                         .environmentObject(memoEditVM)
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)
+                        .environmentObject(MemosViewModel(folder: folder))
         ) {
             TitleWithLevelView(folder: folder, level: level)
         } // end of NavigationLink

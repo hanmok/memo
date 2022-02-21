@@ -18,7 +18,8 @@ struct FolderView: View {
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     @Environment(\.colorScheme) var colorScheme
-   
+//    @StateObject var memosVM = MemosViewModel(folder: currentFolder)
+    @EnvironmentObject var memosVM: MemosViewModel
     // 이거 넣으면, MemoView 가 작동하지 않음. 왜 ? 모름.
     
 //    @AppStorage("mOrderType") var mOrderType = OrderType.modificationDate
@@ -84,6 +85,7 @@ struct FolderView: View {
                     ZStack {
                         if !currentFolder.memos.isEmpty {
                             MemoList()
+//                                .environmentObject(MemosViewModel(folder: currentFolder))
                                 .padding(.top, 5)
                         }
                        
@@ -93,6 +95,7 @@ struct FolderView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
                 .environmentObject(memoOrder)
+                .environmentObject(memosVM)
                 
                 Rectangle()
                     .frame(height: 100)

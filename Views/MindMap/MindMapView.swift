@@ -152,6 +152,7 @@ struct MindMapView: View {
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                     .environmentObject(memoOrder)
+//                                    .environmentObject(MemosViewModel)
                                 // ADD Sub Folder
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                         Button {

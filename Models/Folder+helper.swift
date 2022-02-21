@@ -285,6 +285,23 @@ extension Folder {
     
 //    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
     
+    
+    // 이게.. 왜 안변하지 ?? 가 좀 이상하다.. ??
+    static func getSortedMemos(folder: Folder) -> [Memo] {
+        
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.creationDate
+        
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        // 뭐때문에 생긴 버그일까.. ?
+        print("getSortedMemos triggerd, mOrderType: \(mOrderType)")
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        
+        let allMemos = folder.memos.sorted(by: sortingMethod)
+        return allMemos
+    }
+    
+    
     static func getSortingMethod(type: OrderType, isAsc: Bool) -> (Folder, Folder) -> Bool {
         switch type {
         case .creationDate:
@@ -362,10 +379,11 @@ extension Folder {
         return folderWithLevelContainer
     }
     
+    
         static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
             @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
             @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
-    //        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
+            print("getHierarchicalFolders triggered, fOrderType : \(fOrderType.rawValue)")
             
             let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
             

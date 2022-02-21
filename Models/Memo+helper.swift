@@ -116,6 +116,7 @@ extension Memo {
 //    }
     
     
+    
     static func fetch(_ predicate: NSPredicate) -> NSFetchRequest<Memo> {
         let request = NSFetchRequest<Memo>(entityName: "Memo")
 //        request.sortDescriptors = [NSSortDescriptor(key: MemoProperties.order, ascending: true)]
