@@ -14,19 +14,27 @@ import CoreData
 // MARK: - FOLDER ORDERING
 struct FolderOrderingButton: View {
     
+    
+    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
+    
+    
+    
+    
     var type: OrderType
     @Environment(\.managedObjectContext) var context
-    @ObservedObject var folderOrder: FolderOrder
+//    @ObservedObject var folderOrder: FolderOrder
     
     var body: some View {
         
         Button {
-            folderOrder.orderType = type
-            Folder.orderType = type
+//            folderOrder.orderType = type
+            folderOrderType = type
+//            Folder.orderType = type
             Folder.updateTopFolders(context: context)
         } label: {
             HStack {
-                if folderOrder.orderType == type {
+//                if folderOrder.orderType == type {
+                if folderOrderType == type {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
                 Text(type.rawValue)
@@ -39,17 +47,22 @@ struct FolderOrderingButton: View {
 struct FolderAscDecButton: View {
     var isAscending: Bool
     
+    @AppStorage("fOrderAsc") var folderOrderAsc = false
+    
     @Environment(\.managedObjectContext) var context
-    @ObservedObject var folderOrder: FolderOrder
+//    @ObservedObject var folderOrder: FolderOrder
     
     var body: some View {
         Button {
-            folderOrder.isAscending = isAscending
-            Folder.isAscending = isAscending
+//            folderOrder.isAscending = isAscending
+            folderOrderAsc = isAscending
+//            Folder.isAscending = isAscending
             Folder.updateTopFolders(context: context)
+            
         } label: {
             HStack {
-                if folderOrder.isAscending == isAscending {
+//                if folderOrder.isAscending == isAscending {
+                if folderOrderAsc == isAscending {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
                 Text(isAscending ? "Ascending Order" : "Decending Order")
@@ -128,14 +141,20 @@ struct FolderOrderingMenu: View {
             Text("Folder Ordering")
                 .font(.title3)
             
-            FolderOrderingButton(type: .modificationDate, folderOrder: folderOrder)
-            FolderOrderingButton( type: .creationDate, folderOrder: folderOrder)
-            FolderOrderingButton(type: .alphabetical, folderOrder: folderOrder)
+//            FolderOrderingButton(type: .modificationDate, folderOrder: folderOrder)
+//            FolderOrderingButton( type: .creationDate, folderOrder: folderOrder)
+//            FolderOrderingButton(type: .alphabetical, folderOrder: folderOrder)
+            
+            FolderOrderingButton(type: .modificationDate)
+            FolderOrderingButton(type: .creationDate)
+            FolderOrderingButton(type: .alphabetical)
             
             Divider()
             
-            FolderAscDecButton(isAscending: true, folderOrder: folderOrder)
-            FolderAscDecButton(isAscending: false, folderOrder: folderOrder)
+//            FolderAscDecButton(isAscending: true, folderOrder: folderOrder)
+//            FolderAscDecButton(isAscending: false, folderOrder: folderOrder)
+            FolderAscDecButton(isAscending: true)
+            FolderAscDecButton(isAscending: false)
             
         } label: {
             ChangeableImage(imageSystemName: "arrow.up.arrow.down")

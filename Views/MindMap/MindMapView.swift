@@ -34,6 +34,10 @@ struct MindMapView: View {
     //    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
     
     //    @FetchRequ
+    
+//    @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+//    @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
@@ -43,7 +47,7 @@ struct MindMapView: View {
     @StateObject var memoOrder = MemoOrder()
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-    
+   
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
@@ -104,7 +108,9 @@ struct MindMapView: View {
                         }
                     }
                     .padding(.trailing, Sizes.overallPadding)
-                    .padding(.top, 8) // original " 12
+
+                    .padding(.top, 8)
+
                 }
                 .padding(.trailing, Sizes.overallPadding)
                 

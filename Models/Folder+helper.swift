@@ -287,12 +287,17 @@ extension Folder {
     
     static func getHierarchicalFolders(topFolders: [Folder]) -> [FolderWithLevel] {
         
+        @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+        @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
+        
+        let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
+        
         //        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
         //        var folderContainer = [currentFolder]
         var folderWithLevelContainer: [FolderWithLevel] = []
         var folderContainer: [Folder?] = []
         
-        for eachTop in topFolders.sorted() {
+        for eachTop in topFolders.sorted(by: sortingMethod) {
             
             
             
@@ -311,7 +316,7 @@ extension Folder {
             if currentFolder!.subfolders.count != 0 {
                 
                 // check if trashSet has contained Folder of arrayContainer2
-                for folder in currentFolder!.subfolders.sorted() {
+                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                     if !trashSet.contains(folder) && !folderContainer.contains(folder) {
                         //            if !trashSet.contains(folder) && !arrayContainer2 {
                         currentFolder = folder
@@ -347,8 +352,24 @@ extension Folder {
         return folderWithLevelContainer
     }
     
+    static func getSortingMethod(type: OrderType, isAsc: Bool) -> (Folder, Folder) -> Bool {
+        switch type {
+        case .creationDate:
+            return isAsc ? {$0.creationDate < $1.creationDate} : {$0.creationDate >= $1.creationDate}
+        case .modificationDate:
+            return isAsc ? {$0.modificationDate < $1.modificationDate} : {$0.modificationDate >= $1.modificationDate}
+        case .alphabetical:
+            return isAsc ? {$0.title < $1.title} : {$0.title >= $1.title}
+        }
+    }
+    
         static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
-    //        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
+            
+            @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+            @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
+            
+            let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
+            
             print(#function)
             print(#line)
             print("func in VM has called")
@@ -363,7 +384,7 @@ extension Folder {
                 if currentFolder!.subfolders.count != 0 {
     
                     // check if trashSet has contained Folder of arrayContainer2
-                    for folder in currentFolder!.subfolders.sorted() {
+                    for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                         if !trashSet.contains(folder) && !folderContainer.contains(folder) {
             //            if !trashSet.contains(folder) && !arrayContainer2 {
                             currentFolder = folder
@@ -397,6 +418,13 @@ extension Folder {
     
     static func getHierarchicalFolders(topFolder: Folder?) -> [FolderWithLevel] {
 //        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
+        
+        @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+        @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
+        
+        let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
+        
+        
         if topFolder == nil { return [] }
         print(#function)
         print(#line)
@@ -412,7 +440,7 @@ extension Folder {
             if currentFolder!.subfolders.count != 0 {
 
                 // check if trashSet has contained Folder of arrayContainer2
-                for folder in currentFolder!.subfolders.sorted() {
+                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                     if !trashSet.contains(folder) && !folderContainer.contains(folder) {
         //            if !trashSet.contains(folder) && !arrayContainer2 {
                         currentFolder = folder
