@@ -473,51 +473,56 @@ extension Folder {
         }
     
     
-    static func getSubFolders(topFolder: Folder) -> [Folder] {
-        print(#function)
-        print(#line)
-        print("func in VM has called")
-        var currentFolder: Folder? = topFolder
-        
-        var trashSet = Set<Folder>()
-        
-        var folderContainer1 = [currentFolder!]
-        var folderContainer = [currentFolder]
-        
-    whileLoop: while (currentFolder != nil) {
-        print(#line)
-        if currentFolder!.subfolders.count != 0 {
-            
-            // check if trashSet has contained Folder of arrayContainer2
-            for folder in currentFolder!.subfolders.sorted() {
-                if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-                    currentFolder = folder
-                    folderContainer.append(currentFolder!)
-                    folderContainer1.append(currentFolder!)
-                    continue whileLoop // this one..
-                }
-            }
-            // subFolders 가 모두 이미 고려된 경우.
-            trashSet.update(with: currentFolder!)
-        } else { // subfolder 가 Nil 인 경우
-            trashSet.update(with: currentFolder!)
-        }
-        
-        for i in 0 ..< folderContainer1.count {
-            if !trashSet.contains(folderContainer1[folderContainer1.count - i - 1]) {
-                currentFolder = folderContainer1[folderContainer1.count - i - 1]
-                break
-            }
-        }
-        
-        if folderContainer1.count == trashSet.count {
-            break whileLoop
-        }
-    }
-        return folderContainer1
-    }
+//    static func getSubFolders(topFolder: Folder) -> [Folder] {
+//        print(#function)
+//        print(#line)
+//        print("func in VM has called")
+//        var currentFolder: Folder? = topFolder
+//
+//        var trashSet = Set<Folder>()
+//
+//        var folderContainer1 = [currentFolder!]
+//        var folderContainer = [currentFolder]
+//
+//    whileLoop: while (currentFolder != nil) {
+//        print(#line)
+//        if currentFolder!.subfolders.count != 0 {
+//
+//            // check if trashSet has contained Folder of arrayContainer2
+//            for folder in currentFolder!.subfolders.sorted() {
+//                if !trashSet.contains(folder) && !folderContainer.contains(folder) {
+//                    currentFolder = folder
+//                    folderContainer.append(currentFolder!)
+//                    folderContainer1.append(currentFolder!)
+//                    continue whileLoop // this one..
+//                }
+//            }
+//            // subFolders 가 모두 이미 고려된 경우.
+//            trashSet.update(with: currentFolder!)
+//        } else { // subfolder 가 Nil 인 경우
+//            trashSet.update(with: currentFolder!)
+//        }
+//
+//        for i in 0 ..< folderContainer1.count {
+//            if !trashSet.contains(folderContainer1[folderContainer1.count - i - 1]) {
+//                currentFolder = folderContainer1[folderContainer1.count - i - 1]
+//                break
+//            }
+//        }
+//
+//        if folderContainer1.count == trashSet.count {
+//            break whileLoop
+//        }
+//    }
+//        return folderContainer1
+//    }
     
     static func returnContainedMemos(folder: Folder, onlyMarked: Bool = false ) -> [Memo] {
+        
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
         
         var foldersContainer = [Folder]()
         var memosContainer = [Memo]()
@@ -546,7 +551,7 @@ extension Folder {
         _ = foldersContainer.map { appendMemos(folder: $0)}
         
         if onlyMarked {
-            return memosContainer.filter { $0.isBookMarked == true}.sorted()
+            return memosContainer.filter { $0.isBookMarked == true}.sorted(by: sortingMethod)
         }
         
         return memosContainer

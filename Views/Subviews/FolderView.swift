@@ -282,9 +282,9 @@ struct FolderView: View {
                     print("parent's title has changed")
                 }
                 
-                let validMemos = currentFolder.memos.sorted()
-                print("name of each memos: ")
-                print("number of memos contained: \(validMemos.count)")
+//                let validMemos = currentFolder.memos.sorted()
+//                print("name of each memos: ")
+//                print("number of memos contained: \(validMemos.count)")
                 
                 print("count : \(currentFolder.memos.count)")
                 

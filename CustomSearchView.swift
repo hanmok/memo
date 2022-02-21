@@ -64,13 +64,18 @@ struct CustomSearchView: View {
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
         
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        
         print("returnMatchedMemos has triggered")
         var nestedMemos = [NestedMemo]()
         
         if keyword != "" {
             for eachFolder in targetFolders {
                 var matchedMemos = [Memo]()
-                for eachMemo in eachFolder.memos.sorted() {
+                for eachMemo in eachFolder.memos.sorted(by: sortingMethod) {
                     if eachMemo.contents.lowercased().contains(keyword.lowercased()) {
                         matchedMemos.append(eachMemo)
                     }
@@ -84,7 +89,7 @@ struct CustomSearchView: View {
         } else {
             for eachFolder in targetFolders {
                 var matchedMemos = [Memo]()
-                for eachMemo in eachFolder.memos.sorted() {
+                for eachMemo in eachFolder.memos.sorted(by: sortingMethod) {
                     matchedMemos.append(eachMemo)
                 }
                 
@@ -125,7 +130,7 @@ struct CustomSearchView: View {
                             .foregroundColor(Color(white: 131 / 255))
                             .padding(.horizontal, 7)
 
-                        TextField("Search2", text: $searchKeyword)
+                        TextField("Search", text: $searchKeyword)
                             .focused($focusState)
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
