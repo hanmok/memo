@@ -48,6 +48,7 @@ struct MemoBoxView: View {
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
 //        .background(colorScheme.adjustSecondSubColors())
 //        .background(Color.pastelColors[memo.colorIndex])
+
         .background(colorScheme.adjustMainColors())
         .cornerRadius(10)
         .overlay(

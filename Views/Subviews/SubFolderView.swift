@@ -93,11 +93,8 @@ struct SubFolderView: View {
 
         }
         .frame(width: UIScreen.screenWidth / 2.5)
-//            .background(Color.subColor)
         .background(Color.weekSubColor)
-//        .background(Color(uiColor(named)))
         .background(
-//            Color(UIColor(named: "mainColor")!)
             colorScheme.adjustMainColors()
         )
             .cornerRadius(10)

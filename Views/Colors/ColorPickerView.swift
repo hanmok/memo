@@ -21,7 +21,7 @@ struct ColorPickerView: View {
                 .frame(width: 24, height: 24)
                 .foregroundColor(.white)
                 .background(.white)
-                .clipShape(Circle())
+//                .clipShape(Circle())
                 
             ChangeableImage(imageSystemName: "circle")
                 .frame(width: 16, height: 16)
