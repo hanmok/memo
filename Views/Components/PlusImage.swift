@@ -15,16 +15,15 @@ struct PlusImage: View {
         
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-//                .foregroundColor(colorScheme == .dark ? Color.subColorDark : Color.subColor)
-//                .foregroundColor(Color(UIColor(named: "mainColor")!))
-                .foregroundColor(colorScheme.adjustMainColors())
-//            Color(UIColor(named: "mainColor")!)
-//                .background(Color(UIColor(named: "mainColor")!))
-                .background(colorScheme.adjustMainColors())
+//                .foregroundColor(colorScheme.adjustMainColors())
+//                .background(colorScheme.adjustMainColors())
+                .foregroundColor(Color(red: 232, green: 228, blue: 199))
+                .background(Color(red: 232, green: 228, blue: 199))
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "plus")
                 .frame(width: 25, height: 25)
-                .foregroundColor(colorScheme.adjustBlackAndWhite())
+//                .foregroundColor(colorScheme.adjustBlackAndWhite())
+                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
         }
     }
 }
@@ -37,12 +36,15 @@ struct PlusImage2: View {
         
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-                .foregroundColor(colorScheme.adjustMainColors())
-                .background(colorScheme.adjustMainColors())
+//                .foregroundColor(colorScheme.adjustMainColors())
+//                .background(colorScheme.adjustMainColors())
+                .foregroundColor(Color(red: 232, green: 228, blue: 199))
+                .background(Color(red: 232, green: 228, blue: 199))
                 .clipShape(Circle())
             ChangeableImage(imageSystemName: "plus")
                 .frame(width: 25, height: 25)
-                .foregroundColor(colorScheme.adjustBlackAndWhite())
+//                .foregroundColor(colorScheme.adjustBlackAndWhite())
+                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
         }
     }
 }
