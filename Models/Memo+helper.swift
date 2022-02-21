@@ -264,6 +264,17 @@ extension Memo {
         }
         context.saveCoreData()
     }
+    
+    static func getSortingMethod(type: OrderType, isAsc: Bool) -> (Memo, Memo) -> Bool {
+        switch type {
+        case .creationDate:
+            return isAsc ? {$0.creationDate < $1.creationDate} : {$0.creationDate >= $1.creationDate}
+        case .modificationDate:
+            return isAsc ? {$0.modificationDate < $1.modificationDate} : {$0.modificationDate >= $1.modificationDate}
+        case .alphabetical:
+            return isAsc ? {$0.contents < $1.contents} : {$0.contents >= $1.contents}
+        }
+    }
 }
 
 

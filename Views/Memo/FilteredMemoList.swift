@@ -22,18 +22,27 @@ struct FilteredMemoList: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     var listType: MemoListType
 
-    
+    @AppStorage("mOrderType") var mOrderType = OrderType.modificationDate
+    @AppStorage("mOrderAsc") var mOrderAsc = false
+
+//    let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+    @State var sortingMethod: (Memo, Memo) -> Bool = { _, _ in true }
     var body: some View {
+        DispatchQueue.main.async {
+            sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+            print("Memo sortedMethod: \(mOrderType)") // 미친거야?
+        }
+
         
         var memosToShow = [Memo]()
         
         switch listType {
         case .pinned:
-            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
+            memosToShow = folder.memos.filter { $0.pinned == true}.sorted(by: sortingMethod)
         case .unpinned:
-            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
+            memosToShow = folder.memos.filter { $0.pinned != true}.sorted(by: sortingMethod)
         case .all:
-            memosToShow = folder.memos.sorted()
+            memosToShow = folder.memos.sorted(by: sortingMethod)
         }
         
         return ZStack {
@@ -93,8 +102,6 @@ struct FilteredMemoList: View {
 // initialized.
                                 }
                             })
-                        
-                        
                     } // end of ForEach
                 } header: {
                     VStack {

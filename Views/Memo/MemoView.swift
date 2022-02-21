@@ -56,6 +56,8 @@ struct MemoView: View {
         print("save changes has triggered")
         
         memo.contents = contents
+        memo.creationDate = Date()
+        memo.modificationDate = Date()
         
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if contents are empty, delete memo
@@ -113,12 +115,7 @@ struct MemoView: View {
                     Spacer()
                     
                     HStack(spacing: 15) {
-                        
-//                        Button {
-//
-//                        } label: {
-//                        ChangeableImage(imageSystemName: "magnifyingglass")
-//                        }
+    
                         Button {
                             showColorPalette = true
                         } label: {

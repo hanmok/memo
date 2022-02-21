@@ -108,10 +108,10 @@ extension Folder {
         get { subfolders_ as? Set<Folder> ?? [] }
         set { subfolders_ = newValue as NSSet}
     }
-    
-    var children: [Folder]? {
-        get { subfolders.sorted() }
-    }
+    // 이걸.. 쓸일이.. ??
+//    var children: [Folder]? {
+//        get { subfolders.sorted() }
+//    }
     
 //    var id: UUID {
 //        get { UUID()}
@@ -285,14 +285,29 @@ extension Folder {
     
 //    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
     
+    static func getSortingMethod(type: OrderType, isAsc: Bool) -> (Folder, Folder) -> Bool {
+        switch type {
+        case .creationDate:
+            return isAsc ? {$0.creationDate < $1.creationDate} : {$0.creationDate >= $1.creationDate}
+        case .modificationDate:
+            return isAsc ? {$0.modificationDate < $1.modificationDate} : {$0.modificationDate >= $1.modificationDate}
+        case .alphabetical:
+            return isAsc ? {$0.title < $1.title} : {$0.title >= $1.title}
+        }
+    }
+    
     static func getHierarchicalFolders(topFolders: [Folder]) -> [FolderWithLevel] {
+        @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+        @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
+        
+        let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
         
         //        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
         //        var folderContainer = [currentFolder]
         var folderWithLevelContainer: [FolderWithLevel] = []
         var folderContainer: [Folder?] = []
         
-        for eachTop in topFolders.sorted() {
+        for eachTop in topFolders.sorted(by: sortingMethod) {
             
             
             
@@ -311,7 +326,7 @@ extension Folder {
             if currentFolder!.subfolders.count != 0 {
                 
                 // check if trashSet has contained Folder of arrayContainer2
-                for folder in currentFolder!.subfolders.sorted() {
+                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                     if !trashSet.contains(folder) && !folderContainer.contains(folder) {
                         //            if !trashSet.contains(folder) && !arrayContainer2 {
                         currentFolder = folder
@@ -348,7 +363,12 @@ extension Folder {
     }
     
         static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
+            @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+            @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
     //        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
+            
+            let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
+            
             print(#function)
             print(#line)
             print("func in VM has called")
@@ -363,7 +383,8 @@ extension Folder {
                 if currentFolder!.subfolders.count != 0 {
     
                     // check if trashSet has contained Folder of arrayContainer2
-                    for folder in currentFolder!.subfolders.sorted() {
+//                    for folder in currentFolder!.subfolders.sorted() {
+                    for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                         if !trashSet.contains(folder) && !folderContainer.contains(folder) {
             //            if !trashSet.contains(folder) && !arrayContainer2 {
                             currentFolder = folder
@@ -396,6 +417,9 @@ extension Folder {
             }
     
     static func getHierarchicalFolders(topFolder: Folder?) -> [FolderWithLevel] {
+        @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+        @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
+        let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
 //        print("getHierarchicalFolders triggered, sortingMemod : \(sortingMethod)")
         if topFolder == nil { return [] }
         print(#function)
@@ -412,7 +436,7 @@ extension Folder {
             if currentFolder!.subfolders.count != 0 {
 
                 // check if trashSet has contained Folder of arrayContainer2
-                for folder in currentFolder!.subfolders.sorted() {
+                for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                     if !trashSet.contains(folder) && !folderContainer.contains(folder) {
         //            if !trashSet.contains(folder) && !arrayContainer2 {
                         currentFolder = folder
@@ -445,51 +469,56 @@ extension Folder {
         }
     
     
-    static func getSubFolders(topFolder: Folder) -> [Folder] {
-        print(#function)
-        print(#line)
-        print("func in VM has called")
-        var currentFolder: Folder? = topFolder
-        
-        var trashSet = Set<Folder>()
-        
-        var folderContainer1 = [currentFolder!]
-        var folderContainer = [currentFolder]
-        
-    whileLoop: while (currentFolder != nil) {
-        print(#line)
-        if currentFolder!.subfolders.count != 0 {
-            
-            // check if trashSet has contained Folder of arrayContainer2
-            for folder in currentFolder!.subfolders.sorted() {
-                if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-                    currentFolder = folder
-                    folderContainer.append(currentFolder!)
-                    folderContainer1.append(currentFolder!)
-                    continue whileLoop // this one..
-                }
-            }
-            // subFolders 가 모두 이미 고려된 경우.
-            trashSet.update(with: currentFolder!)
-        } else { // subfolder 가 Nil 인 경우
-            trashSet.update(with: currentFolder!)
-        }
-        
-        for i in 0 ..< folderContainer1.count {
-            if !trashSet.contains(folderContainer1[folderContainer1.count - i - 1]) {
-                currentFolder = folderContainer1[folderContainer1.count - i - 1]
-                break
-            }
-        }
-        
-        if folderContainer1.count == trashSet.count {
-            break whileLoop
-        }
-    }
-        return folderContainer1
-    }
+//    static func getSubFolders(topFolder: Folder) -> [Folder] {
+//        print(#function)
+//        print(#line)
+//        print("func in VM has called")
+//        var currentFolder: Folder? = topFolder
+//
+//        var trashSet = Set<Folder>()
+//        
+//        var folderContainer1 = [currentFolder!]
+//        var folderContainer = [currentFolder]
+//
+//    whileLoop: while (currentFolder != nil) {
+//        print(#line)
+//        if currentFolder!.subfolders.count != 0 {
+//
+//            // check if trashSet has contained Folder of arrayContainer2
+//            for folder in currentFolder!.subfolders.sorted() {
+//                if !trashSet.contains(folder) && !folderContainer.contains(folder) {
+//                    currentFolder = folder
+//                    folderContainer.append(currentFolder!)
+//                    folderContainer1.append(currentFolder!)
+//                    continue whileLoop // this one..
+//                }
+//            }
+//            // subFolders 가 모두 이미 고려된 경우.
+//            trashSet.update(with: currentFolder!)
+//        } else { // subfolder 가 Nil 인 경우
+//            trashSet.update(with: currentFolder!)
+//        }
+//
+//        for i in 0 ..< folderContainer1.count {
+//            if !trashSet.contains(folderContainer1[folderContainer1.count - i - 1]) {
+//                currentFolder = folderContainer1[folderContainer1.count - i - 1]
+//                break
+//            }
+//        }
+//
+//        if folderContainer1.count == trashSet.count {
+//            break whileLoop
+//        }
+//    }
+//        return folderContainer1
+//    }
     
     static func returnContainedMemos(folder: Folder, onlyMarked: Bool = false ) -> [Memo] {
+        
+        @AppStorage("mOrderType") var mOrderType = OrderType.modificationDate
+        @AppStorage("mOrderAsc") var mOrderAsc = false
+
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
         
         var foldersContainer = [Folder]()
         var memosContainer = [Memo]()
@@ -518,7 +547,7 @@ extension Folder {
         _ = foldersContainer.map { appendMemos(folder: $0)}
         
         if onlyMarked {
-            return memosContainer.filter { $0.isBookMarked == true}.sorted()
+            return memosContainer.filter { $0.isBookMarked == true}.sorted(by: sortingMethod)
         }
         
         return memosContainer
@@ -795,8 +824,8 @@ extension Folder {
     
     static func returnSampleFolder3(context: NSManagedObjectContext)  {
         
-//        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
-        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
+        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
+//        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
 //        homeFolder.folderType = .home
         context.saveCoreData()
         
@@ -826,10 +855,30 @@ extension Folder {
         subFolder2.modificationDate = Date().advanced(by: 300)
         subFolder3.modificationDate = Date().advanced(by: 100)
         
+        // newMemo
+        let newMemo1 = Memo(contents: "abcd\nef", context: context)
+        let newMemo2 = Memo(contents: "bcd\nef", context: context)
+        let newMemo3 = Memo(contents: "cefb\nef", context: context)
         
-//        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
-        let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
-        archive.title += ""
+        subFolder1.add(memo: newMemo1)
+        subFolder1.add(memo: newMemo2)
+        subFolder1.add(memo: newMemo3)
+        newMemo1.folder = subFolder1
+        newMemo2.folder = subFolder1
+        newMemo3.folder = subFolder1
+        
+        newMemo1.creationDate = Date(timeIntervalSince1970: 22)
+        newMemo2.creationDate = Date(timeIntervalSince1970: 11)
+        newMemo3.creationDate = Date(timeIntervalSince1970: 33)
+        
+        newMemo1.modificationDate = Date(timeIntervalSince1970: 22)
+        newMemo2.modificationDate = Date(timeIntervalSince1970: 33)
+        newMemo3.modificationDate = Date(timeIntervalSince1970: 11)
+        context.saveCoreData()
+        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
+        
+//        let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
+//        archive.title += ""
 //        archive.folderType = .archive
         context.saveCoreData()
         // return TopFolders

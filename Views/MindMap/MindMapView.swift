@@ -34,6 +34,10 @@ struct MindMapView: View {
     //    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
     
     //    @FetchRequ
+    
+    @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.modificationDate
+    
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
@@ -62,12 +66,22 @@ struct MindMapView: View {
     @State var showingSearchView = false
     
     var body: some View {
+        DispatchQueue.main.async {
+            print("hi")
+        }
         return ZStack {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
                     Spacer()
                     HStack {
+                        
+                        Button {
+                            print("Folder OrderType: \(fOrderType)")
+                        } label: {
+                            Text("Test")
+                        }
+
                         // MARK: - Button 1: SEARCH
                         Button {
                             _ = fastFolderWithLevelGroup.folders.map {
@@ -81,7 +95,8 @@ struct MindMapView: View {
                         }
 
                         // MARK: - Button 2: Folder Ordering
-                        FolderOrderingMenu(folderOrder: folderOrder)
+//                        FolderOrderingMenu(folderOrder: folderOrder)
+                        FolderOrderingMenu()
                             .padding(.horizontal, Sizes.smallSpacing)
                         
                         

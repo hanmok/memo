@@ -19,29 +19,33 @@ struct MemoBoxView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 0) {
-            if memo.titleToShow != "" {
-                Text(memo.titleToShow)
-                .font(.headline)
-                .fontWeight(.bold)
-//                .foregroundColor(.primary)
-                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, Sizes.smallSpacing)
-            }
-            if memo.contentsToShow != "" {
-                Text(memo.contentsToShow)
-                    .font(.caption)
-//                    .foregroundColor(.primary)
-                    .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
-                    .lineLimit(4)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, Sizes.smallSpacing)
-            }
+//        VStack(alignment: .leading, spacing: 0) {
+//            if memo.titleToShow != "" {
+//                Text(memo.titleToShow)
+//                .font(.headline)
+//                .fontWeight(.bold)
+////                .foregroundColor(.primary)
+//                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
+//                .lineLimit(1)
+//                .frame(maxWidth: .infinity, alignment: .leading)
+//                .padding(.leading, Sizes.smallSpacing)
+//            }
+//            if memo.contentsToShow != "" {
+//                Text(memo.contentsToShow)
+//                    .font(.caption)
+////                    .foregroundColor(.primary)
+//                    .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
+//                    .lineLimit(4)
+//                    .multilineTextAlignment(.leading)
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.leading, Sizes.smallSpacing)
+//            }
+//        }
+        VStack {
+        Text(memo.contents)
+            Text("ModificationDate : \(memo.modificationDate.timeIntervalSince1970)")
+            Text("CreationDate : \(memo.creationDate.timeIntervalSince1970)")
         }
-//        .tint(colorScheme == .dark ? Color(white: 228 / 255) : Color(white: 1))
         .tint(colorScheme.adjustInverseBlackAndWhite())
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)

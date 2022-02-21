@@ -19,6 +19,10 @@ struct FolderView: View {
     @EnvironmentObject var memoOrder: MemoOrder
     @Environment(\.colorScheme) var colorScheme
    
+    // 이거 넣으면, MemoView 가 작동하지 않음. 왜 ? 모름.
+    
+//    @AppStorage("mOrderType") var mOrderType = OrderType.modificationDate
+    
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
@@ -103,6 +107,8 @@ struct FolderView: View {
                     
                     // Button Or SubFolderView
                     ZStack(alignment: .topTrailing) {
+                        
+
                         Button(action: {
                             isShowingSubFolderView = true
                         }, label: {
@@ -271,22 +277,29 @@ struct FolderView: View {
         .navigationTitle(currentFolder.title)
         .navigationBarItems(trailing:
                                 HStack {
+            
+//            Button {
+//                print("mOrderType: \(mOrderType.rawValue)")
+//            } label: {
+//                Text("Test")
+//            }
+
             // search Button
             Button(action: {
                 
                 // This Line makes memos . Why ?
                 currentFolder.title += "" // 이거 할 때마다 두개씩 memo 가 생김. 왜 ??
                 
-                if let validParent = currentFolder.parent {
-                    validParent.title += ""
-                    print("parent's title has changed")
-                }
+//                if let validParent = currentFolder.parent {
+//                    validParent.title += ""
+//                    print("parent's title has changed")
+//                }
                 
-                let validMemos = currentFolder.memos.sorted()
-                print("name of each memos: ")
-                print("number of memos contained: \(validMemos.count)")
-                
-                print("count : \(currentFolder.memos.count)")
+//                let validMemos = currentFolder.memos.sorted()
+//                print("name of each memos: ")
+//                print("number of memos contained: \(validMemos.count)")
+//
+//                print("count : \(currentFolder.memos.count)")
                 
                 showingSearchView = true
 
@@ -313,7 +326,8 @@ struct FolderView: View {
                 }
             })
             
-            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+//            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+            MemoOrderingMenu(parentFolder: currentFolder)
         })
     }
 
