@@ -44,7 +44,9 @@ struct MemoBoxView: View {
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
 //        .background(colorScheme.adjustSecondSubColors())
-        .background(Color.pastelColors[memo.colorIndex])
+//        .background(Color.pastelColors[memo.colorIndex])
+//        .background(Color.weekSubColor)
+        .background(colorScheme.adjustMainColors())
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)

@@ -49,6 +49,7 @@ struct FilteredMemoList: View {
                         
                         ) {
                             MemoBoxView(memo: memo)
+//                            BookmarkedMemoBoxView(memo: memo)
                             
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }
@@ -56,23 +57,24 @@ struct FilteredMemoList: View {
 
 //                        // MARK: - Tapped
                         .simultaneousGesture(TapGesture().onEnded{
+                            
                                 if !memoEditVM.hasNotLongSelected {
                                     memoEditVM.dealWhenMemoSelected(memo)
                                 }
-                            
+
                             else { // if not long tapped
                                     memoEditVM.navigateToMemo = memo
                                     memoEditVM.hasNotLongSelected = true
                                 }
-                            
+
                             hasNotLongSelected.toggle()
                             memoEditVM.someBool.toggle()
-                            
+
                             if memoEditVM.selectedMemos.isEmpty {
                                     memoEditVM.hasNotLongSelected = true
                                 }
                             })
-                        
+
 //                        // MARK: - LONG PRESSED
                             .simultaneousGesture(LongPressGesture().onEnded{_ in
                                 // if already long tapped
