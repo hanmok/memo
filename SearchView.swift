@@ -65,13 +65,18 @@ struct SearchView: View {
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
         
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        
         print("returnMatchedMemos has triggered")
         var nestedMemos = [NestedMemo]()
         
         if keyword != "" {
             for eachFolder in targetFolders {
                 var matchedMemos = [Memo]()
-                for eachMemo in eachFolder.memos.sorted() {
+                for eachMemo in eachFolder.memos.sorted(by: sortingMethod) {
                     if eachMemo.contents.lowercased().contains(keyword.lowercased()) {
                         matchedMemos.append(eachMemo)
                     }
@@ -85,7 +90,7 @@ struct SearchView: View {
         } else {
             for eachFolder in targetFolders {
                 var matchedMemos = [Memo]()
-                for eachMemo in eachFolder.memos.sorted() {
+                for eachMemo in eachFolder.memos.sorted(by: sortingMethod) {
                     matchedMemos.append(eachMemo)
                 }
                 

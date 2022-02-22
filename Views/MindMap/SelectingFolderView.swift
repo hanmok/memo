@@ -98,7 +98,7 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                             }
                         } else {
-                            _ = memoEditVM.selectedMemos.sorted().map { folderEditVM.folderToPaste!.add(memo: $0)}
+                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
 //                            for eachMemo in memoEditVM.selectedMemos.sorted() {
 //                                folderEditVM.folderToPaste!.add(memo: eachMemo)
 //                            }
@@ -141,7 +141,7 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                             }
                         } else {
-                            _ = memoEditVM.selectedMemos.sorted().map { folderEditVM.folderToPaste!.add(memo: $0)}
+                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
 //                            for eachMemo in memoEditVM.selectedMemos.sorted() {
 //                                folderEditVM.folderToPaste!.add(memo: eachMemo)
 //                            }

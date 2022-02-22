@@ -27,13 +27,25 @@ struct FilteredMemoList: View {
         
         var memosToShow = [Memo]()
         
+//        switch listType {
+//        case .pinned:
+//            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
+//        case .unpinned:
+//            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
+//        case .all:
+//            memosToShow = folder.memos.sorted()
+//        }
+        
         switch listType {
         case .pinned:
-            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
+//            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.pinned})
         case .unpinned:
-            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
+//            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.pinned == false})
         case .all:
-            memosToShow = folder.memos.sorted()
+//            memosToShow = folder.memos.sorted()
+            memosToShow = Memo.sortMemos(memos: folder.memos.sorted())
         }
         
         return ZStack {
