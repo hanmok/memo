@@ -24,7 +24,7 @@ struct TitleWithLevelView: View {
             }
             
             Text(folder.title)
-                .foregroundColor(colorScheme.adjustBlackAndWhite())
+                .foregroundColor(Color.blackAndWhite)
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
@@ -58,12 +58,13 @@ struct CheckableFolderCell: View {
             }
             
             Text(folder.title)
-                .foregroundColor(colorScheme.adjustBlackAndWhite())
+                .foregroundColor(Color.blackAndWhite)
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
 //                    .foregroundColor(colorScheme.adjustMainColors())
-                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+//                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+                    .foregroundColor(Color.blackAndWhite)
 //                    .tint(.yellow) // why not working ?
             }
             
@@ -71,11 +72,13 @@ struct CheckableFolderCell: View {
             if shouldCheck {
             Button {
             } label: {
-                ChangeableImage(imageSystemName: "checkmark")
+                SystemImage(imageSystemName: "checkmark")
+                
             }
 //            .tint(Color.subColor)
 //            .tint(Color(UIColor(named: "mainColor")!))
-            .tint(colorScheme.adjustMainColors())
+//            .tint(colorScheme.adjustMainColors())
+            .tint(Color.mainColor)
             }
         }
         

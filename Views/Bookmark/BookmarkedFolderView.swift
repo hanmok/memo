@@ -37,10 +37,6 @@ struct BookmarkedFolderView: View {
                                     ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
                                         
                                         NavigationLink(destination:
-                                                       
-//                                                       ModifiedBookmarkMemoView(memo: bookMarkedMemo,
-//                                                                        parent: bookMarkedMemo.folder!,
-//                                                                        presentingView: $presentingView)
                                                        MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView)
                                                        
                                                         .environmentObject(memoEditVM)
@@ -77,8 +73,11 @@ struct BookmarkedFolderView: View {
                         // BookMarked memos Text.
                         Rectangle()
                             .frame(width: UIScreen.screenWidth, height: 30)
-                            .background(colorScheme.adjustMainColors())
-                            .foregroundColor(colorScheme.adjustMainColors())
+//                            .background(Color.mainColor)
+//                            .foregroundColor(Color.mainColor)
+                        
+                            .background(Color.bookmarkBarColor)
+                            .foregroundColor(Color.bookmarkBarColor)
                             .offset(y: -20)
                         
                         HStack {
@@ -87,7 +86,7 @@ struct BookmarkedFolderView: View {
                             }
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+                            .foregroundColor(Color.blackAndWhite)
                             .offset(y: presentingView || presentingNewMemo ? -100 : -20 )
                             .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                             
@@ -98,7 +97,7 @@ struct BookmarkedFolderView: View {
                                 presentingNewMemo = true
                             } label:
                             {
-                                PlusImage2() // plus Image with subColor
+                                PlusImage() // plus Image with subColor
                             }
 //                            .padding(.trailing, Sizes.overallPadding)
                             .offset(y: presentingView || presentingNewMemo ? -100 : -35 ) // priv : -25

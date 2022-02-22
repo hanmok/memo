@@ -53,12 +53,6 @@ struct SelectingFolderView: View {
                             // MARK: - FOR TESTING
                             Spacer()
                             
-//                            Button {
-//                                _ = invalidFolderWithLevels.map { print("invalidFolder: \($0.folder.title)")}
-//
-//                            } label: {
-//                                ChangeableImage(imageSystemName: "star")
-//                            }
                             
                             
                             Button {
@@ -66,9 +60,10 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                                 memoEditVM.initSelectedMemos() // ?? should it be ?  yes.
                             } label: {
-                                ChangeableImage(imageSystemName: "multiply")
-                                    .foregroundColor(colorScheme.adjustBlackAndWhite())
-                                Image(systemName: "").frame(height: 28)
+                                SystemImage(imageSystemName: "multiply")
+                                    .foregroundColor(Color.blackAndWhite)
+                                Text("").frame(height: 28)
+
                             }
                         }
                         .padding(.trailing, Sizes.overallPadding)
@@ -77,7 +72,6 @@ struct SelectingFolderView: View {
                 }
             }
             .frame(height: 28)
-//            .padding(.vertical)
             .padding(.top, 5)
             
             Picker("", selection: $selectionEnum) {

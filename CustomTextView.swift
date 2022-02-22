@@ -47,7 +47,7 @@ struct CustomTextView: UIViewRepresentable {
                 string: text,
                 attributes:
                     [.font: UIFont.preferredFont(forTextStyle: .body),
-                     .foregroundColor: UIColor(named: "mainColor")!])
+                     .foregroundColor: UIColor.memoTextColor])
             
             // cannot find any of \n
             
@@ -55,7 +55,7 @@ struct CustomTextView: UIViewRepresentable {
                 let distance = text.distance(from: text.startIndex, to: firstIndex)
                 attributedText.addAttributes([
                     .font: UIFont.preferredFont(forTextStyle: .title1),
-                    .foregroundColor: UIColor(named: "mainColor")! ],
+                    .foregroundColor: UIColor.memoTextColor],
                                              range: NSRange(location: 0, length: distance))
                 print("distance: \(distance)")
             }
@@ -135,8 +135,7 @@ struct CustomTextView: UIViewRepresentable {
                 string: textView.text,
                 attributes: [
                     .font: UIFont.preferredFont(forTextStyle: .body),
-                    .foregroundColor: UIColor(named: "mainColor")!
-//                    .foregroundColor: UIColor.red
+                    .foregroundColor: UIColor.memoTextColor//                    .foregroundColor: UIColor.red
                 ])
 
             // are they.. included ? or not ?
@@ -146,7 +145,7 @@ struct CustomTextView: UIViewRepresentable {
                 print("flagggg distance: \(distance)")
                 attributedText.addAttributes([
                     .font: UIFont.preferredFont(forTextStyle: .title1),
-                    .foregroundColor: UIColor(named: "mainColor")!],
+                    .foregroundColor: UIColor.memoTextColor],
                                              range: NSRange(location: 0, length: distance))
                 
                 print("flagggg range: \(NSRange(location:0, length: distance))")
@@ -155,7 +154,7 @@ struct CustomTextView: UIViewRepresentable {
                 
                 attributedText.addAttributes(
                     [.font: UIFont.preferredFont(forTextStyle: .title1),
-                     .foregroundColor: UIColor(named: "mainColor")!],
+                     .foregroundColor: UIColor.memoTextColor],
                     range: NSRange(location: 0, length: startToEndDistance))
             }
             

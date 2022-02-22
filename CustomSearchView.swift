@@ -121,6 +121,7 @@ struct CustomSearchView: View {
                     HStack(spacing: 0) {
 
                         ChangeableImage(imageSystemName: "magnifyingglass", height: 16)
+//                            .tint(Color.)
                             .foregroundColor(Color(white: 131 / 255))
                             .padding(.horizontal, 7)
 
@@ -129,7 +130,8 @@ struct CustomSearchView: View {
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
                             .focused($focusState)
-                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+//                            .foregroundColor(colorScheme.adjustBlackAndWhite())
+                            .foregroundColor(Color.blackAndWhite)
                         Spacer()
                         Button{
                             searchKeyword = ""
@@ -143,7 +145,7 @@ struct CustomSearchView: View {
                                 Image(systemName: "multiply")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .tint(colorScheme.adjustBlackAndWhite())
+                                .tint(Color.blackAndWhite)
                                 .frame(width: 8, height: 8)
                             }
                             .padding(.trailing, 10)

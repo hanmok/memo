@@ -97,7 +97,8 @@ struct SubFolderView: View {
 //        .background(Color.weekSubColor)
         .background(
 //            colorScheme.adjustMainColors()
-            Color(red: 232, green: 228, blue: 199)
+//            Color(red: 232, green: 228, blue: 199)
+            Color.subColor
         )
             .cornerRadius(10)
     }

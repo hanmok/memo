@@ -20,7 +20,7 @@ struct BookmarkedMemoBoxView: View {
                 Text(memo.titleToShow)
                     .font(.headline)
                     .fontWeight(.bold)
-                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+                    .foregroundColor(Color.blackAndWhite)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
                     .frame(width: frameSize, alignment: .leading)
@@ -33,15 +33,17 @@ struct BookmarkedMemoBoxView: View {
             if memo.contentsToShow != "" {
                 Text(memo.contentsToShow)
                     .font(.caption)
-                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+                    .foregroundColor(Color.blackAndWhite)
                     .multilineTextAlignment(.leading)
                     .frame(width: frameSize, alignment: .leading)
                     .padding(.horizontal, Sizes.smallSpacing)
                     .padding(.bottom, 5)
             }
         }
-        .tint(colorScheme.adjustInverseBlackAndWhite())
-        .background(colorScheme.adjustMainColors())
+        .tint(Color.black)
+//        .background(colorScheme.adjustMainColors())
+//        .background(Color.mainColor)
+        .background(Color.memoBoxColor)
         .cornerRadius(7)
     }
 }

@@ -37,7 +37,7 @@ struct NewMemoView: View {
             self.presentingNewMemo = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            ChangeableImage(imageSystemName: "chevron.left")
+            SystemImage(imageSystemName: "chevron.left")
         }
     }
     
@@ -114,18 +114,18 @@ struct NewMemoView: View {
                     
                     HStack(spacing: 15) {
                         Button(action: toggleBookMark) {
-                            ChangeableImage(
+                            SystemImage(
                                 imageSystemName: isBookMarkedTemp ? "bookmark.fill" : "bookmark",
-                                width: Sizes.regularButtonSize,
-                                height: Sizes.regularButtonSize)
+                                size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                         
                         // PIN Button
                         Button(action: togglePinMemo) {
-                            ChangeableImage(
+                            SystemImage(
                                 imageSystemName: isPinned ? "pin.fill" : "pin",
-                                width: Sizes.regularButtonSize,
-                                height: Sizes.regularButtonSize)
+                                size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                         
                         Button {
@@ -150,18 +150,18 @@ struct NewMemoView: View {
                             showSelectingFolderView = true
 
                         } label: {
-                            ChangeableImage(
+                            SystemImage(
                                 imageSystemName: "folder",
-                                width: Sizes.regularButtonSize,
-                                height: Sizes.regularButtonSize)
+                                size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                         
                         // REMOVE
                         Button(action: removeMemo) {
-                            ChangeableImage(
+                            SystemImage(
                                 imageSystemName: "trash",
-                                width: Sizes.regularButtonSize,
-                                height: Sizes.regularButtonSize)
+                                size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                     }
                 }

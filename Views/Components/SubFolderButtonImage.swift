@@ -20,7 +20,8 @@ struct SubFolderButtonImage: View {
 //                .foregroundColor(.clear)
 
             
-            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
+//            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
+            SystemImage(imageSystemName: "circle", size: 50)
             // FG and BG should be the same color
 
 //                .foregroundColor(colorScheme.adjustMainColors())
@@ -31,15 +32,17 @@ struct SubFolderButtonImage: View {
 //                .foregroundColor(Color(red: 232, green: 228, blue: 199))
 //                .background(Color(red: 232, green: 228, blue: 199))
             
-                .foregroundColor(colorScheme.adjustSubColors())
-                .background(colorScheme.adjustSubColors())
+//                .foregroundColor(colorScheme.adjustSubColors())
+//                .background(colorScheme.adjustSubColors())
+                .foregroundColor(Color.subColor)
+                .background(Color.subColor)
 
                 .clipShape(Circle())
             UnchangeableImage(imageSystemName: "folder")
 
                 .frame(width: 25, height: 25)
 //                .foregroundColor(colorScheme == .dark ? Color(white: 1) : Color(white: 0))
-                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
+                .foregroundColor(Color.black)
         }
     }
 }

@@ -34,12 +34,12 @@ extension Color {
 //    static var mainColor = Color(.sRGB, red: 140/255, green: 180/255, blue: 140/255)
     
     // Those two are mainColors
-    static var subColor = Color(.sRGB, red: 100/255, green: 200/255, blue: 100/255)
+//    static var subColor = Color(.sRGB, red: 100/255, green: 200/255, blue: 100/255)
     
-    static var subColorDark = Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255)
+//    static var subColorDark = Color(.sRGB, red: 50/255, green: 150/255, blue: 50/255)
     
     // subColor
-    static var subColor2 = Color(.sRGB, red: 130/255, green: 230/255, blue: 130/255)
+//    static var subColor2 = Color(.sRGB, red: 130/255, green: 230/255, blue: 130/255)
 
     static var subColorDark2 = Color(.sRGB, red: 80/255, green: 180/255, blue: 80/255)
     
@@ -52,6 +52,7 @@ extension Color {
 //    static let ivory = Color(.sRGB, red: 214/255, green: 207/255, blue: 181/255)
     static let ivory = Color(red: 214, green: 207, blue: 181)
     
+    // MAIN COLOR
     static let cream = Color(red: 244, green: 240, blue: 211)
 
     static let bone = Color(red: 196, green: 192, blue: 175)
@@ -127,17 +128,11 @@ extension Color {
         Color(red: 246, green: 244, blue: 232)
     ]
     
-//    static let ui: UIColor = UIColor(red:1, green: 1, blue: 1, withAlpha: 0)
+
     static let pastelUIColors = Color.convertToUIColors(colors: Color.pastelColors)
 }
 
 extension UIColor {
-//    convenience init(red:Double, green: Double, blue: Double, withAlpha: Double = 1) {
-////    init(red:Double, green: Double, blue: Double, int: Bool) {
-//        self.init(red: red / 255.0, green: green / 255, blue: blue / 255)
-//    }
-    
-    
 }
 
 extension Color {
@@ -155,38 +150,63 @@ extension Color {
 }
 
 
-extension ColorScheme {
-     func adjustBlackAndWhite() -> Color {
-        return self == .dark ? .white : .black
-    }
+extension Color {
+    // Dark, Light 
+    static let mainColor = Color(UIColor.mainColor) // 244 240 211, white(29)
+    static let subColor = Color(UIColor.subColor) // 232 227 199
+    static let memoViewTextColor = Color(UIColor.memoTextColor) // white(0), white(0.8)
+    static let blackAndWhite = Color(UIColor.blackAndWhite) // white(0), white(1)
     
-    func adjustInverseBlackAndWhite() -> Color {
-//        return self == .dark ? .black : .white
-        return .black
-    }
- 
-    func adjustMainColors() -> Color {
-//        return self == .dark ? Color.cream : Color.cream
-//        return self == .dark ? Color(red: 144, green: 140, blue: 111) : Color.cream
-//        return self == .dark ? Color(red: 114, green: 110, blue: 71) : Color.cream
-        
-//        return self == .dark ? Color(red: 94, green: 90, blue: 41) : Color.cream
-        return self == .dark ? Color(red: 84, green: 80, blue: 31) : Color.cream
-    } // Color(red: 244, green: 240, blue: 211)
+    static let swipeBtnColor1 = Color(UIColor.swipeBtnColor1) // 232 227 199, 202 197 169 ( == subColor)
+    static let swipeBtnColor2 = Color(UIColor.swipeBtnColor2) // 212 207 179, 182 177 149
+    static let swipeBtnColor3 = Color(UIColor.swipeBtnColor3) // 192 187 159, 162 157 129
     
-    func adjustSubColors() -> Color {
-        return Color(red: 232, green: 228, blue: 199)
-    }
+    static let bookmarkBarColor = Color(UIColor.bookmarkBarColor) //212 207 179, 182 177 149 (== 3, 2)
     
-    func adjustSecondSubColors() -> Color {
-//        return self == .dark ? Color.ivory : Color.ivory
-        return Color(red: 232, green: 228, blue: 199)
-    }
+    static let memoBoxColor = Color(UIColor.memoBoxColor)
+
+    static let navBtnColor = Color(UIColor.navBtnColor)
+//    static let memoBtnColor = Color(UIColor.memoBtnColor)
+    static let selectedBoxStrokeColor = Color(UIColor.selectedBoxStrokeColor)
+    // cream, White(0.65)
 }
 
-extension Color {
-    static func applyMainColor() -> Color {
-        return Color(UIColor(named: "mainColor")!)
-    }
+extension UIColor {
+    static let mainColor = UIColor(named: ColorKeys.mainColor)!
+    static let subColor = UIColor(named: ColorKeys.subColor)!
+    static let memoTextColor = UIColor(named: ColorKeys.memoViewTextColor)!
+    static let blackAndWhite = UIColor(named: ColorKeys.blackAndWhite)!
+    
+    static let swipeBtnColor1 = UIColor(named: ColorKeys.swipeBtnColor1)!
+    static let swipeBtnColor2 = UIColor(named: ColorKeys.swipeBtnColor2)!
+    static let swipeBtnColor3 = UIColor(named: ColorKeys.swipeBtnColor3)!
+    
+    static let bookmarkBarColor = UIColor(named: ColorKeys.bookmarkBarColor)!
+    
+    static let memoBoxColor = UIColor(named: ColorKeys.memoBoxColor)!
+    // dark -> white(0.8, 0.8, 0.8), light -> .black
+    static let navBtnColor = UIColor(named: ColorKeys.navBtnColor)!
+//    static let memoBtnColor = UIColor(named: ColorKeys.memoBtnColor)!
+    static let selectedBoxStrokeColor = UIColor(named: ColorKeys.selectedBoxStrokeColor)!
+}
+
+struct ColorKeys {
+    static let mainColor = "mainColor"
+    static let subColor = "subColor"
+    static let memoViewTextColor = "memoViewTextColor"
+    static let blackAndWhite = "blackAndWhite"
+    
+    static let swipeBtnColor1 = "swipeBtnColor1"
+    static let swipeBtnColor2 = "swipeBtnColor2"
+    static let swipeBtnColor3 = "swipeBtnColor3"
+    
+    static let swipeBtnImageColor = "swipeBtnImageColor"
+    
+    static let bookmarkBarColor = "bookmarkBarColor"
+    
+    static let memoBoxColor = "memoBoxColor"
+    static let navBtnColor = "navBtnColor"
+//    static let memoBtnColor = "memoBtnColor"
+    static let selectedBoxStrokeColor = "selectedBoxStrokeColor"
 }
 

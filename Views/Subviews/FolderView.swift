@@ -43,7 +43,8 @@ struct FolderView: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            ChangeableImage(imageSystemName: "chevron.left")
+            SystemImage(imageSystemName: "chevron.left")
+                .tint(Color.navBtnColor)
         }
     }
     
@@ -292,7 +293,8 @@ struct FolderView: View {
                 showingSearchView = true
 
             }, label: {
-                ChangeableImage(imageSystemName: "magnifyingglass")
+                SystemImage(imageSystemName: "magnifyingglass")
+                    .tint(Color.navBtnColor)
             })
 //                .padding(.trailing, )
             
@@ -302,15 +304,22 @@ struct FolderView: View {
                 toggleFavorite()
             }, label: {
                 if currentFolder.isFavorite {
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .tint(colorScheme.adjustSubColors())
+//                    Image(systemName: "star.fill")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+////                        .tint(Color.subColor)
+//                        .tint(Color.navBtnColor)
+                    SystemImage(imageSystemName: "star.fill")
+                        .tint(Color.navBtnColor)
                 } else {
-                    Image(systemName: "star")
-                        .resizable()
-                        .aspectRatio( contentMode: .fit)
-                        .tint(colorScheme.adjustBlackAndWhite())
+                    
+//                    Image(systemName: "star")
+//                        .resizable()
+//                        .aspectRatio( contentMode: .fit)
+////                        .tint(Color.blackAndWhite)
+//                        .tint(Color.navBtnColor)
+                    SystemImage(imageSystemName: "star")
+                        .tint(Color.navBtnColor)
                 }
             })
             

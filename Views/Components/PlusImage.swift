@@ -15,39 +15,18 @@ struct PlusImage: View {
         
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-//                .foregroundColor(colorScheme.adjustMainColors())
-//                .background(colorScheme.adjustMainColors())
-                .foregroundColor(Color(red: 232, green: 228, blue: 199))
-                .background(Color(red: 232, green: 228, blue: 199))
+//            SystemImage(imageSystemName: "circle", size: 50)
+                .foregroundColor(Color.subColor)
+                .background(Color.subColor)
                 .clipShape(Circle())
-            ChangeableImage(imageSystemName: "plus")
+//            ChangeableImage(imageSystemName: "plus")
+            SystemImage(imageSystemName: "plus")
                 .frame(width: 25, height: 25)
-//                .foregroundColor(colorScheme.adjustBlackAndWhite())
-                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
+                .foregroundColor(Color.black)
         }
     }
 }
 
-struct PlusImage2: View {
-    
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
-    var body: some View {
-        
-        ZStack {
-            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-//                .foregroundColor(colorScheme.adjustMainColors())
-//                .background(colorScheme.adjustMainColors())
-                .foregroundColor(Color(red: 232, green: 228, blue: 199))
-                .background(Color(red: 232, green: 228, blue: 199))
-                .clipShape(Circle())
-            ChangeableImage(imageSystemName: "plus")
-                .frame(width: 25, height: 25)
-//                .foregroundColor(colorScheme.adjustBlackAndWhite())
-                .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
-        }
-    }
-}
 
 
 

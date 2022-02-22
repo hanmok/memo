@@ -24,7 +24,7 @@ struct MemoBoxView: View {
                 Text(memo.titleToShow)
                 .font(.headline)
                 .fontWeight(.bold)
-                .foregroundColor(colorScheme.adjustBlackAndWhite())
+                .foregroundColor(Color.blackAndWhite)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, Sizes.smallSpacing)
@@ -32,7 +32,7 @@ struct MemoBoxView: View {
             if memo.contentsToShow != "" {
                 Text(memo.contentsToShow)
                     .font(.caption)
-                    .foregroundColor(colorScheme.adjustBlackAndWhite())
+                    .foregroundColor(Color.blackAndWhite)
                     .lineLimit(4)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -44,12 +44,15 @@ struct MemoBoxView: View {
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-        .background(colorScheme.adjustMainColors())
+//        .background(colorScheme.adjustMainColors())
+//        .background(Color.mainColor)
+        .background(Color.memoBoxColor)
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
 //                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? .pink : .black) : .clear, lineWidth: 1)
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : .black) : .clear, lineWidth: 1)
+//                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : .black) : .clear, lineWidth: 1)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : Color(white: 0.65)) : .clear, lineWidth: 1)
         )
     }
 }

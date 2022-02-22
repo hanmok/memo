@@ -41,7 +41,8 @@ struct MemoView: View {
             self.presentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            ChangeableImage(imageSystemName: "chevron.left")
+            SystemImage(imageSystemName: "chevron.left")
+                .tint(Color.navBtnColor)
         }
     }
     
@@ -102,7 +103,8 @@ struct MemoView: View {
                 Rectangle()
                     .frame(width: UIScreen.screenWidth, height: 105)
 //                    .foregroundColor(Color.pastelColors[selectedColorIndex])
-                    .foregroundColor(colorScheme.adjustMainColors())
+//                    .foregroundColor(colorScheme.adjustMainColors())
+                    .foregroundColor(Color.mainColor)
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
@@ -124,20 +126,15 @@ struct MemoView: View {
 //                        }
                         
                         Button(action: toggleBookMark) {
-//                            UnchangeableImage(
-                            ChangeableImage(
-                                imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",
-                                width: Sizes.regularButtonSize,
-                                height: Sizes.regularButtonSize)
+
+                            SystemImage(imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                         
                         // PIN Button
                         Button(action: togglePinMemo) {
-//                            UnchangeableImage(
-                            ChangeableImage(
-                                imageSystemName: memo.pinned ? "pin.fill" : "pin",
-                                width: Sizes.regularButtonSize,
-                                height: Sizes.regularButtonSize)
+                            SystemImage(imageSystemName: memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                         
                         // RELOCATE
@@ -145,18 +142,14 @@ struct MemoView: View {
                             showSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
-//                            UnchangeableImage(
-                            ChangeableImage(
-                                imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+                            SystemImage(imageSystemName: "folder", size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                         
                         // REMOVE
                         Button(action: removeMemo) {
-//                            UnchangeableImage(
-                            ChangeableImage(
-                                imageSystemName: "trash",
-                                width: Sizes.regularButtonSize,
-                                height: Sizes.regularButtonSize)
+                            SystemImage(imageSystemName: "trash", size: Sizes.regularButtonSize)
+                                .tint(Color.navBtnColor)
                         }
                     }
                 }
@@ -233,10 +226,10 @@ struct HiddenNavigationBar: ViewModifier {
     }
 }
 
+//struct
+
 extension View {
     func hiddenNavigationBarStyle() -> some View {
         modifier( HiddenNavigationBar() )
     }
 }
-
-
