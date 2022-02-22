@@ -28,8 +28,11 @@ struct SubFolderButtonImage: View {
 //                .foregroundColor(Color(red: 237, green: 233, blue: 204))
 //                .background(Color(red: 237, green: 233, blue: 204))
             
-                .foregroundColor(Color(red: 232, green: 228, blue: 199))
-                .background(Color(red: 232, green: 228, blue: 199))
+//                .foregroundColor(Color(red: 232, green: 228, blue: 199))
+//                .background(Color(red: 232, green: 228, blue: 199))
+            
+                .foregroundColor(colorScheme.adjustSubColors())
+                .background(colorScheme.adjustSubColors())
 
                 .clipShape(Circle())
             UnchangeableImage(imageSystemName: "folder")

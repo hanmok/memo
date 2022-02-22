@@ -161,18 +161,15 @@ extension Memo {
     static func delete(_ memo: Memo) {
         if let context = memo.managedObjectContext {
             context.delete(memo)
-//            try? context.save()
             context.saveCoreData()
         }
     }
     
     static func copyMemo(target: Memo, context: NSManagedObjectContext) -> Memo {
-//        let newMemo = Memo(title: target.title, contents: target.contents, context: context)
         let newMemo = Memo(contents: target.contents, context: context)
         newMemo.modificationDate = target.modificationDate
-//        newMemo.pinned = target.pinned
         return newMemo
-//        return Memo(title: target.title, contents: target.contents, context: context)
+
     }
 }
 
@@ -208,51 +205,11 @@ extension Memo {
     // 계속 수정해주어야 하는 코드..
     // error has triggered HERE !! let TitleIndex = self.titleToShow.endIndex
     func saveTitleWithContentsToShow(context: NSManagedObjectContext) {
-//        var title: String {
-//            if let firstIndex = self.contents.firstIndex(of: "\n") {
-//                // if no title entered, means memo starts with "\n"
-//                if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
-//                    return ""
-//                }
-//
-//                let title = self.contents[..<firstIndex]
-//
-//                return String(title)
-//                // no "\n" entered.
-//            } else {
-//                return ""
-//            }
-//        }
-//
-//        self.titleToShow = title
-//
-//        // what if .. titleToShow is Empty ?
-//        // title is too long if no title detected.
-//
-//        if titleToShow != "" {
-//            let lastTitleIndex = self.titleToShow.endIndex
-//            let distance = self.titleToShow.distance(from: self.titleToShow.startIndex, to: lastTitleIndex)
-//            print("lastTitleIndex: \(distance)")
-//
-//            print("contents: \(self.contents)")
-//            self.contentsToShow = self.contents.replacingCharacters(in:  self.contents.startIndex ..< lastTitleIndex, with: "")
-//        }
-//
-//        // remove spaces or enters from the very first part to use in MemoBoxView
-//        while(contentsToShow != "") {
-//            if contentsToShow.first! == " " || contentsToShow.first! == "\n"{
-//                contentsToShow.removeFirst()
-//            } else {
-//                break
-//            }
-//        }
-//        context.saveCoreData()
         
         var title: String {
             if let firstIndex = self.contents.firstIndex(of: "\n") {
                 // if no title entered, means memo starts with "\n"
                 // 음.. 공백으로 이어지다가 Enter 가 나올수도 있음..
-                
                 
                 // very first character is "\n"
                 if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
@@ -267,7 +224,7 @@ extension Memo {
                     while (self.contents[self.contents.index(self.contents.startIndex, offsetBy: offsetIndex)] == " ") && offsetIndex < offsetLimit {
                         offsetIndex += 1
                     }
-                    
+                    // first line is filled with spaces.
                     if offsetIndex == offsetLimit {
                         return ""
                     } else {
@@ -285,14 +242,12 @@ extension Memo {
         self.titleToShow = title
         
         
-        if titleToShow != "" {
+        if self.titleToShow != "" {
             var tempContentsToShow = self.contents
-
-            
-            let endIndex = self.titleToShow.endIndex
-            
-            tempContentsToShow.removeSubrange(tempContentsToShow.startIndex ..< endIndex)
-            
+                        
+            for _ in 0 ..< self.titleToShow.count {
+                tempContentsToShow.removeFirst()
+            }
             // remove \n
             if tempContentsToShow.first == "\n" {
                 tempContentsToShow.removeFirst()
@@ -303,9 +258,9 @@ extension Memo {
         }
         
         // remove spaces or enters from the very first part to use in MemoBoxView
-        while(contentsToShow != "") {
-            if contentsToShow.first! == " " || contentsToShow.first! == "\n"{
-                contentsToShow.removeFirst()
+        while(self.contentsToShow != "") {
+            if self.contentsToShow.first! == " " || self.contentsToShow.first! == "\n"{
+                self.contentsToShow.removeFirst()
             } else {
                 break
             }

@@ -49,6 +49,7 @@ struct FolderView: View {
     
     func toggleFavorite() {
         currentFolder.isFavorite.toggle()
+        context.saveCoreData()
     }
     
     func showSubFolderView() {

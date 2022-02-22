@@ -13,7 +13,7 @@ import CoreData
 struct MemoView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     
@@ -35,7 +35,7 @@ struct MemoView: View {
     @State var selectedColorIndex = 0
     
     let parent: Folder
-    
+    @State var colorPickerSelection = Color.white
     var btnBack : some View {
         Button(action: {
             self.presentingView = false
@@ -101,8 +101,8 @@ struct MemoView: View {
             VStack {
                 Rectangle()
                     .frame(width: UIScreen.screenWidth, height: 105)
-                    .foregroundColor(Color.pastelColors[selectedColorIndex])
-
+//                    .foregroundColor(Color.pastelColors[selectedColorIndex])
+                    .foregroundColor(colorScheme.adjustMainColors())
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
@@ -114,19 +114,17 @@ struct MemoView: View {
                     
                     HStack(spacing: 15) {
                         
-//                        Button {
-//
-//                        } label: {
-//                        ChangeableImage(imageSystemName: "magnifyingglass")
-//                        }
-                        Button {
-                            showColorPalette = true
-                        } label: {
-                            ColorPickerView(selectedIndex: $selectedColorIndex)
-                        }
+
                         
+//                        Button {
+//                            showColorPalette = true
+//                        } label: {
+////                            ColorPickerView(selectedIndex: $selectedColorIndex)
+//                            ColorPicker("", selection: $colorPickerSelection)
+//                        }
                         
                         Button(action: toggleBookMark) {
+//                            UnchangeableImage(
                             ChangeableImage(
                                 imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark",
                                 width: Sizes.regularButtonSize,
@@ -135,6 +133,7 @@ struct MemoView: View {
                         
                         // PIN Button
                         Button(action: togglePinMemo) {
+//                            UnchangeableImage(
                             ChangeableImage(
                                 imageSystemName: memo.pinned ? "pin.fill" : "pin",
                                 width: Sizes.regularButtonSize,
@@ -146,11 +145,14 @@ struct MemoView: View {
                             showSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
-                            ChangeableImage(imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
+//                            UnchangeableImage(
+                            ChangeableImage(
+                                imageSystemName: "folder", width: Sizes.regularButtonSize, height: Sizes.regularButtonSize)
                         }
                         
                         // REMOVE
                         Button(action: removeMemo) {
+//                            UnchangeableImage(
                             ChangeableImage(
                                 imageSystemName: "trash",
                                 width: Sizes.regularButtonSize,
@@ -164,22 +166,24 @@ struct MemoView: View {
                 CustomTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
+//                    .foregroundColor(.primary)
+                    .foregroundColor(.white)
             }
             .padding(.top, 10)
             .padding(.horizontal, Sizes.overallPadding)
             .gesture(scroll)
             
-            VStack {
-                HStack {
-                    Spacer()
-                    ColorPaletteView(selectedColorIndex: $selectedColorIndex, showColorPalette: $showColorPalette)
-                        .environmentObject(memoEditVM)
-                        .padding(.top, Sizes.overallPadding)
-                }
-                Spacer()
-            }
-            .offset(y: showColorPalette ? -35 : -300)
-            .animation(.spring(), value: showColorPalette)
+//            VStack {
+//                HStack {
+//                    Spacer()
+//                    ColorPaletteView(selectedColorIndex: $selectedColorIndex, showColorPalette: $showColorPalette)
+//                        .environmentObject(memoEditVM)
+//                        .padding(.top, Sizes.overallPadding)
+//                }
+//                Spacer()
+//            }
+//            .offset(y: showColorPalette ? -35 : -300)
+//            .animation(.spring(), value: showColorPalette)
         }
         .padding(.bottom)
         

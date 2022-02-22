@@ -9,20 +9,22 @@ import SwiftUI
 import CoreData
 
 struct ColorPaletteView: View {
-    // closure should be here ?
     @Environment(\.colorScheme) var colorScheme
-    @Binding var selectedColorIndex: Int
     @Environment(\.presentationMode) var presentationMode
-    @Binding var showColorPalette: Bool
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
     @Environment(\.managedObjectContext) var context
+
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+
     @GestureState var isScrolled = false
-    // How do I check Circle with checkMark here ??
     
+    @Binding var selectedColorIndex: Int
+    @Binding var showColorPalette: Bool
+
     init(selectedColorIndex: Binding<Int> = .constant(-1), showColorPalette: Binding<Bool>) {
         _selectedColorIndex = selectedColorIndex
         _showColorPalette = showColorPalette
     }
+    
     var body: some View {
         let scroll = DragGesture(minimumDistance: 5, coordinateSpace: .local)
             .updating($isScrolled) { _, _, _ in

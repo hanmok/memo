@@ -52,12 +52,13 @@ struct SelectingFolderView: View {
                         HStack {
                             // MARK: - FOR TESTING
                             Spacer()
-                            Button {
-                                _ = invalidFolderWithLevels.map { print("invalidFolder: \($0.folder.title)")}
-                                
-                            } label: {
-                                ChangeableImage(imageSystemName: "star")
-                            }
+                            
+//                            Button {
+//                                _ = invalidFolderWithLevels.map { print("invalidFolder: \($0.folder.title)")}
+//
+//                            } label: {
+//                                ChangeableImage(imageSystemName: "star")
+//                            }
                             
                             
                             Button {

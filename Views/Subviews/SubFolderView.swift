@@ -32,7 +32,7 @@ struct SubFolderView: View {
                     // dismiss
                     isShowingSubFolderView = false
                 } label: {
-                    ChangeableImage(imageSystemName: "arrow.right")
+                    UnchangeableImage(imageSystemName: "arrow.right")
                 }
                 .padding(.leading, 12)
                 
@@ -41,7 +41,7 @@ struct SubFolderView: View {
                 Button {
                     isAddingFolder = true
                 } label: {
-                    ChangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
+                    UnchangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
                     
                 }
                 .padding(.trailing, 12)
@@ -63,7 +63,8 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                             .lineLimit(1)
-                            .adjustTintColor(scheme: colorScheme)
+//                            .adjustTintColor(scheme: colorScheme)
+                            .foregroundColor(.black)
                     }
 
                     .simultaneousGesture(TapGesture().onEnded{
@@ -93,9 +94,10 @@ struct SubFolderView: View {
 
         }
         .frame(width: UIScreen.screenWidth / 2.5)
-        .background(Color.weekSubColor)
+//        .background(Color.weekSubColor)
         .background(
-            colorScheme.adjustMainColors()
+//            colorScheme.adjustMainColors()
+            Color(red: 232, green: 228, blue: 199)
         )
             .cornerRadius(10)
     }

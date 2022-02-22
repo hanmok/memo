@@ -13,7 +13,7 @@ import SwiftUI
 // A wrapper for a UIKit view that you use to integrate that view into your SwiftUI view hierarchy.
 
 struct CustomTextView: UIViewRepresentable {
-    
+    @Environment(\.colorScheme) var colorSchme
     @Binding var text: String
     //    @Binding var textStyle: UIFont.TextStyle
     @State var firstTime = true
@@ -42,14 +42,21 @@ struct CustomTextView: UIViewRepresentable {
     func updateUIView(_ uiView: UITextView, context: Context) {
         print("updateUIView triggered")
         if firstTime {
-//            uiView.text = text
-            let attributedText = NSMutableAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
-
+            //            uiView.text = text
+            let attributedText = NSMutableAttributedString(
+                string: text,
+                attributes:
+                    [.font: UIFont.preferredFont(forTextStyle: .body),
+                     .foregroundColor: UIColor(named: "mainColor")!])
+            
             // cannot find any of \n
-
+            
             if let firstIndex = text.firstIndex(of: "\n") {
                 let distance = text.distance(from: text.startIndex, to: firstIndex)
-                attributedText.addAttributes([.font: UIFont.preferredFont(forTextStyle: .title1)], range: NSRange(location: 0, length: distance))
+                attributedText.addAttributes([
+                    .font: UIFont.preferredFont(forTextStyle: .title1),
+                    .foregroundColor: UIColor(named: "mainColor")! ],
+                                             range: NSRange(location: 0, length: distance))
                 print("distance: \(distance)")
             }
             DispatchQueue.main.async {
@@ -124,22 +131,34 @@ struct CustomTextView: UIViewRepresentable {
 
             
             // Set initial font .body
-            let attributedText = NSMutableAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
+            let attributedText = NSMutableAttributedString(
+                string: textView.text,
+                attributes: [
+                    .font: UIFont.preferredFont(forTextStyle: .body),
+                    .foregroundColor: UIColor(named: "mainColor")!
+//                    .foregroundColor: UIColor.red
+                ])
 
             // are they.. included ? or not ?
             if let firstIndex = textView.text.firstIndex(of: "\n") {
                 print("flagggg ")
                 let distance = textView.text.distance(from: textView.text.startIndex, to: firstIndex)
                 print("flagggg distance: \(distance)")
-                attributedText.addAttributes([.font: UIFont.preferredFont(forTextStyle: .title1)], range: NSRange(location: 0, length: distance))
-//                print("distance: \(distance)")
+                attributedText.addAttributes([
+                    .font: UIFont.preferredFont(forTextStyle: .title1),
+                    .foregroundColor: UIColor(named: "mainColor")!],
+                                             range: NSRange(location: 0, length: distance))
+                
                 print("flagggg range: \(NSRange(location:0, length: distance))")
             } else {
                 let startToEndDistance = textView.text.distance(from: textView.text.startIndex, to: textView.text.endIndex)
                 
-                attributedText.addAttributes([.font: UIFont.preferredFont(forTextStyle: .title1)], range: NSRange(location: 0, length: startToEndDistance))
+                attributedText.addAttributes(
+                    [.font: UIFont.preferredFont(forTextStyle: .title1),
+                     .foregroundColor: UIColor(named: "mainColor")!],
+                    range: NSRange(location: 0, length: startToEndDistance))
             }
-
+            
             textView.attributedText = attributedText
 
             textView.selectedRange = preAttributedRange

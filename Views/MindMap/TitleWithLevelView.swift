@@ -43,7 +43,6 @@ struct TitleWithLevelView: View {
 
 struct CheckableFolderCell: View {
 
-
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     @ObservedObject var folder: Folder
@@ -63,6 +62,8 @@ struct CheckableFolderCell: View {
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
+//                    .foregroundColor(colorScheme.adjustMainColors())
+                    .foregroundColor(colorScheme.adjustBlackAndWhite())
 //                    .tint(.yellow) // why not working ?
             }
             

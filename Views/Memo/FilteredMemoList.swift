@@ -27,24 +27,13 @@ struct FilteredMemoList: View {
         
         var memosToShow = [Memo]()
         
-//        switch listType {
-//        case .pinned:
-//            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
-//        case .unpinned:
-//            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
-//        case .all:
-//            memosToShow = folder.memos.sorted()
-//        }
         
         switch listType {
         case .pinned:
-//            memosToShow = folder.memos.filter { $0.pinned == true}.sorted()
             memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.pinned})
         case .unpinned:
-//            memosToShow = folder.memos.filter { $0.pinned != true}.sorted()
             memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.pinned == false})
         case .all:
-//            memosToShow = folder.memos.sorted()
             memosToShow = Memo.sortMemos(memos: folder.memos.sorted())
         }
         
@@ -58,18 +47,15 @@ struct FilteredMemoList: View {
                                         MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
                                         .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-                        
                         ) {
                             MemoBoxView(memo: memo)
-//                            BookmarkedMemoBoxView(memo: memo)
-                            
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }
                         .disabled(!memoEditVM.hasNotLongSelected)
 
 //                        // MARK: - Tapped
                         .simultaneousGesture(TapGesture().onEnded{
-                            
+
                                 if !memoEditVM.hasNotLongSelected {
                                     memoEditVM.dealWhenMemoSelected(memo)
                                 }
@@ -87,9 +73,11 @@ struct FilteredMemoList: View {
                                 }
                             })
 
-//                        // MARK: - LONG PRESSED
+                        // This Gesture makes errors ..
+                        // MARK: - LONG PRESSED
                             .simultaneousGesture(LongPressGesture().onEnded{_ in
                                 // if already long tapped
+
                                 if !memoEditVM.hasNotLongSelected { // if it has been long pressed
 
                                     memoEditVM.dealWhenMemoSelected(memo)
@@ -102,7 +90,6 @@ struct FilteredMemoList: View {
 
                                 if memoEditVM.selectedMemos.isEmpty {
                                     memoEditVM.hasNotLongSelected = true
-// initialized.
                                 }
                             })
                         

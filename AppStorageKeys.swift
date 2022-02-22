@@ -8,7 +8,6 @@
 import Foundation
 
 struct AppStorageKeys {
-//    AppStorageKeys.fOrderType
     static let fOrderType = "fOrderType"
     static let fOrderAsc = "fOrderAsc"
     

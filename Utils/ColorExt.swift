@@ -166,8 +166,13 @@ extension ColorScheme {
     }
  
     func adjustMainColors() -> Color {
-        return self == .dark ? Color.cream : Color.cream
-    }
+//        return self == .dark ? Color.cream : Color.cream
+//        return self == .dark ? Color(red: 144, green: 140, blue: 111) : Color.cream
+//        return self == .dark ? Color(red: 114, green: 110, blue: 71) : Color.cream
+        
+//        return self == .dark ? Color(red: 94, green: 90, blue: 41) : Color.cream
+        return self == .dark ? Color(red: 84, green: 80, blue: 31) : Color.cream
+    } // Color(red: 244, green: 240, blue: 211)
     
     func adjustSubColors() -> Color {
         return Color(red: 232, green: 228, blue: 199)

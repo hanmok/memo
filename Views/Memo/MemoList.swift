@@ -29,6 +29,7 @@ struct MemoList: View {
                     .frame(height: 1)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+                    .padding(.top, 5)
             }
             
             FilteredMemoList(folder: folder, listType: .unpinned)
@@ -38,3 +39,4 @@ struct MemoList: View {
     }
 }
 
+// 테두리.. 

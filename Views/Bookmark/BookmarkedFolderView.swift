@@ -59,14 +59,10 @@ struct BookmarkedFolderView: View {
                         
                         Spacer()
                     } // end of VStack
-//                    .background(Color(UIColor(named: "mainColor")!))
-//                    .background(Color.applyMainColor())
-//                    .background(colorScheme.adjustMainColors())
-//                    .padding(.horizontal, Sizes.overallPadding)
+                    
                     // Another ZStack Element
                     // NEW MEMO
                     NavigationLink(destination:
-//                                   ModifiedNewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
@@ -75,15 +71,12 @@ struct BookmarkedFolderView: View {
                 .navigationBarHidden(true)
             } // end of NavigationView, Another ZStack Element begins
             .padding(.horizontal, Sizes.overallPadding)
-            //            .navigationBarHidden(true)
             VStack {
                 HStack {
                     ZStack {
                         // BookMarked memos Text.
                         Rectangle()
                             .frame(width: UIScreen.screenWidth, height: 30)
-//                            .background(colorScheme.adjustSecondSubColors())
-//                            .foregroundColor(colorScheme.adjustSecondSubColors())
                             .background(colorScheme.adjustMainColors())
                             .foregroundColor(colorScheme.adjustMainColors())
                             .offset(y: -20)
@@ -94,9 +87,7 @@ struct BookmarkedFolderView: View {
                             }
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)
-//                            .foregroundColor(colorScheme.adjustBlackAndWhite())
-                            .foregroundColor(colorScheme.adjustInverseBlackAndWhite())
-//                            .foregroundColor(colorScheme.ad)
+                            .foregroundColor(colorScheme.adjustBlackAndWhite())
                             .offset(y: presentingView || presentingNewMemo ? -100 : -20 )
                             .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                             

@@ -29,7 +29,8 @@ struct MemosToolBarView: View {
 //                memoEditVM.selectedMemos.removeAll()
                 memoEditVM.initSelectedMemos()
             } label: {
-                ChangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+//                ChangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
             }
 
             
@@ -58,7 +59,8 @@ struct MemosToolBarView: View {
                 
                 memoEditVM.initSelectedMemos()
             }) {
-                ChangeableImage(imageSystemName: "pin", width: 20, height: 20)
+//                ChangeableImage(imageSystemName: "pin", width: 20, height: 20)
+                UnchangeableImage(imageSystemName: "pin", width: 20, height: 20)
             }
             .cornerRadius(5)
             
@@ -69,7 +71,8 @@ struct MemosToolBarView: View {
                 showSelectingFolderView = true
                 
             }) {
-                ChangeableImage(imageSystemName: "folder")
+//                ChangeableImage(imageSystemName: "folder")
+                UnchangeableImage(imageSystemName: "folder")
             }
 //            .padding(5)
             
@@ -86,15 +89,16 @@ struct MemosToolBarView: View {
 //
             // CHANGE COLOR
 //            Button(action: {changeColorAction(sortedMemos)}) {
-            Button(action: {
-                showColorPalette = true
-//                memoEditVM.initSelectedMemos()
-            }) {
-//                ChangeableImage(imageSystemName: "eyedropper.halffull",width: 20, height: 20)
-                ColorPickerView()
-            }
-            .padding(5)
-            .cornerRadius(5)
+            
+//            Button(action: {
+//                showColorPalette = true
+////                memoEditVM.initSelectedMemos()
+//            }) {
+////                ChangeableImage(imageSystemName: "eyedropper.halffull",width: 20, height: 20)
+//                ColorPickerView()
+//            }
+//            .padding(5)
+//            .cornerRadius(5)
             
             
             
@@ -103,7 +107,8 @@ struct MemosToolBarView: View {
 
                 showDeleteAlert = true
             }) {
-                ChangeableImage(imageSystemName: "trash", width: 20, height: 20)
+//                ChangeableImage(imageSystemName: "trash", width: 20, height: 20)
+                UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }
             .cornerRadius(5)
         } // end of HStack
