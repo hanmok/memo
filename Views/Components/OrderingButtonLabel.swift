@@ -47,7 +47,8 @@ struct FolderOrderingButton: View {
 struct FolderAscDecButton: View {
     var isAscending: Bool
     
-    @AppStorage("fOrderAsc") var folderOrderAsc = false
+//    @AppStorage("fOrderAsc") var folderOrderAsc = false
+    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
     
     @Environment(\.managedObjectContext) var context
 //    @ObservedObject var folderOrder: FolderOrder

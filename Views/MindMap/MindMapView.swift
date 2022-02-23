@@ -65,6 +65,10 @@ struct MindMapView: View {
     @State var allMemos:[Memo] = []
     @State var showingSearchView = false
     
+    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
+    
+    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
+    
     var body: some View {
         return ZStack {
             VStack(spacing: 0) {

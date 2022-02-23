@@ -137,6 +137,8 @@
 		9AD8333827BE148A00506AE8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* MemoView.swift */; };
 		9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE538F727C38E4300452999 /* AppStorageKeys.swift */; };
 		9AE538F927C38E4800452999 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE538F727C38E4300452999 /* AppStorageKeys.swift */; };
+		9AE5391B27C6374F00452999 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5391A27C6374F00452999 /* PlainTextView.swift */; };
+		9AE5391C27C6374F00452999 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5391A27C6374F00452999 /* PlainTextView.swift */; };
 		E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */; };
@@ -251,6 +253,7 @@
 		9AD8332627BD0B7300506AE8 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		9AD8333627BE148A00506AE8 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		9AE538F727C38E4300452999 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
+		9AE5391A27C6374F00452999 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedFolderView.swift; sourceTree = "<group>"; };
 		E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
 		E523DB5127C0073900D8D78B /* NewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
@@ -288,10 +291,8 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
-				9AE538F727C38E4300452999 /* AppStorageKeys.swift */,
-				9AC257D527C24A1600280DD2 /* CustomSearchView.swift */,
-				9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */,
 				9AD8332627BD0B7300506AE8 /* CustomTextView.swift */,
+				9AE5391A27C6374F00452999 /* PlainTextView.swift */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
 				9AC5D0F32782C59C007EAA28 /* ViewModels */,
@@ -321,6 +322,7 @@
 		9A0474B927716DBC00571D66 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9AC257D527C24A1600280DD2 /* CustomSearchView.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
@@ -346,6 +348,7 @@
 				9AC5D12B27840939007EAA28 /* Memo+helper.swift */,
 				9AC5D1FE278558AC007EAA28 /* NSPredicate+helper.swift */,
 				9A3377FC27915C2900805138 /* MemoMsg.swift */,
+				9AE538F727C38E4300452999 /* AppStorageKeys.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 		9AD6EF28277EC64A00866456 /* MindMap */ = {
 			isa = PBXGroup;
 			children = (
+				9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */,
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
 				9A1D8538279FF32400B00156 /* DynamicFolderCell.swift */,
 				9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */,
@@ -703,6 +707,7 @@
 			files = (
 				E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */,
 				9AD8332327BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */,
+				9AE5391B27C6374F00452999 /* PlainTextView.swift in Sources */,
 				9A98E7582773021200057A84 /* ModelTest.swift in Sources */,
 				9A1D856B27A3E98D00B00156 /* SelectingFolderView.swift in Sources */,
 				9A337804279576CC00805138 /* testView.swift in Sources */,
@@ -814,6 +819,7 @@
 				9AC5D22C278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */,
 				E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
 				9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */,
+				9AE5391C27C6374F00452999 /* PlainTextView.swift in Sources */,
 				9A1D536727ACE516009294C1 /* DeeepMemoApp.swift in Sources */,
 				9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */,
 				9A046CCD27B3A72E003169C7 /* CollapsingTest.swift in Sources */,

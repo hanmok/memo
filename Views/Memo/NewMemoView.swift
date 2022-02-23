@@ -166,9 +166,10 @@ struct NewMemoView: View {
                     }
                 }
                 
-                CustomTextView(text: $contents)
+//                CustomTextView(text: $contents)
+                PlainTextView(text: $contents)
                     .padding(.top)
-                    .focused($editorFocusState)
+//                    .focused($editorFocusState)
             }
             .padding(.horizontal, Sizes.overallPadding)
             .gesture(scroll)

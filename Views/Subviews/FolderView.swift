@@ -92,17 +92,13 @@ struct FolderView: View {
                             if memoEditVM.isSelectionMode {
                                 // make blinking animation.
                             // Cancel Selecting Image
-                                ZStack {
+                                ZStack(alignment: .topLeading) {
                                 SystemImage("checkmark")
                                         .tint(colorScheme == .dark ? Color.navBtnColor : Color.swipeBtnColor3)
-//                                        .opacity(0.5)
                                     SystemImage("line.diagonal")
                                         .rotationEffect(.degrees(90))
                                         .tint(Color.navBtnColor)
                                 }
-
-//                                    .opacity(memoEditVM.isSelectionMode ? 0.5 : 1)
-//                                    .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true), value: memoEditVM.isSelectionMode)
                             } else {
                                 SystemImage("checkmark")
                                     .tint(Color.navBtnColor)
