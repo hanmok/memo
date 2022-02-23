@@ -30,7 +30,8 @@ struct MemosToolBarView: View {
 //            }
             
             Button {
-                memoEditVM.selectedMemos.removeAll()
+//                memoEditVM.selectedMemos.removeAll()
+                memoEditVM.initSelectedMemos()
             } label: {
                 UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
             }

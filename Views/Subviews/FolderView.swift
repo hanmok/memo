@@ -61,7 +61,9 @@ struct FolderView: View {
     }
     
     func addMemo() {
+        if !memoEditVM.isSelectionMode {
         isAddingMemo = true
+        }
     }
     
     var body: some View {
@@ -245,12 +247,24 @@ struct FolderView: View {
                         HStack {
                             Spacer()
                             VStack(spacing: Sizes.minimalSpacing) {
+                                
                                 Button(action: addMemo) {
                                     PlusImage()
                                         .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
                                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)
                                 }
+                                .simultaneousGesture(
+
+                                    LongPressGesture(minimumDuration: 0.2).onEnded{_ in
+
+                                        // if already long tapped
+                                        print("long pressed!")
+                                        
+                                        memoEditVM.isSelectionMode = true
+//                                        isAddingMemo = false
+                                    }
+                                )
                             }
                         }
                         HStack {
@@ -288,10 +302,12 @@ struct FolderView: View {
             
             // When add folder pressed
             // overlay white background when Alert show up
-            if shouldAddFolder {
-                Color(.white)
-                    .opacity(0.8)
-            }
+            
+//            if shouldAddFolder {
+//                Color(.white)
+//                    .opacity(0.8)
+//            }
+            
             
             //            SearchView(
             //                fastFolderWithLevelGroup: FastFolderWithLevelGroup(

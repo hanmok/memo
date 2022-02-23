@@ -12,8 +12,13 @@ struct MemoList: View {
     @EnvironmentObject var folder: Folder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
+    
+//    var hasPinnedMemo: Bool {
+//        return folder.memos.contains { $0.pinned == true }
+//    }
+    
     var hasPinnedMemo: Bool {
-        return folder.memos.contains { $0.pinned == true }
+        return folder.memos.contains { $0.pinned == true || $0.isBookMarked == true}
     }
     
     // need to be modified to have plus button when there's no memo

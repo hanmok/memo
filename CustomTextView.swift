@@ -31,6 +31,8 @@ struct CustomTextView: UIViewRepresentable {
         uiTextView.text += ""
         uiTextView.showsVerticalScrollIndicator = false
         uiTextView.tintColor = UIColor.textViewTintColor
+//        uiTextView.tintColor = .red
+        
 //        uiTextView.keyboardDismissMode = .interactive
         uiTextView.keyboardDismissMode = .onDrag
 //        uiTextView.inputAccessoryView = uiView

@@ -168,6 +168,7 @@ struct MemoView: View {
                     .focused($editorFocusState)
 //                    .foregroundColor(.primary)
                     .foregroundColor(.white)
+//                    .keyboardShortcut(.end)
             }
             .padding(.top, 10)
             .padding(.horizontal, Sizes.overallPadding)

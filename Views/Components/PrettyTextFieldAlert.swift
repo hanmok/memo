@@ -58,7 +58,11 @@ struct PrettyTextFieldAlert: View {
                     .font(.callout)
                     .focused($focusState)
                     .background(colorScheme == .dark ? .black : .white)
-                    .tint(Color.textViewTintColor)
+//                    .tint(colorScheme == .dark ? Color.cream : Color.swipeBtnColor3)
+//                    .tint(Color.textViewTintColor)
+//                    .tint(.red)// not working .
+//                    .accentColor(Color.textViewTintColor)
+                    .accentColor(colorScheme == .dark ? Color.cream : Color.bookmarkBarColor)
                     .foregroundColor(Color.blackAndWhite)
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)
@@ -115,7 +119,8 @@ struct PrettyTextFieldAlert: View {
                         focusState = false
                     } label: {
                         Text("Done")
-                            .foregroundColor(colorScheme == .dark ? .white : .black)
+//                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .frame(alignment: .center)
                     }
                     .frame(width: screenSize.width * 0.32, alignment: .center)

@@ -21,8 +21,7 @@ struct FilteredMemoList: View {
     @State var hasNotLongSelected = false
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     var listType: MemoListType
-//    @State var isDragged = false
-//    @GestureState var draggedState = false
+
     var body: some View {
         
         var memosToShow = [Memo]()
@@ -30,9 +29,11 @@ struct FilteredMemoList: View {
         
         switch listType {
         case .pinned:
-            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.pinned})
+//            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.pinned })
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.pinned || $0.isBookMarked })
         case .unpinned:
-            memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.pinned == false})
+//            memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.pinned == false})
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.pinned == false && $0.isBookMarked == false})
         case .all:
             memosToShow = Memo.sortMemos(memos: folder.memos.sorted())
         }
@@ -122,11 +123,19 @@ struct FilteredMemoList: View {
                         HStack {
                             if listType == .pinned {
 //                                ChangeableImage(imageSystemName: "pin.fill", width: 16, height: 16)
+                                HStack {
+                                    SystemImage("bookmark.fill", size: 16)
+                                        .tint(Color.navBtnColor)
+                                        .frame(alignment: .topLeading)
+                                        .padding(.leading, Sizes.overallPadding + 4)
+                                    
                                 SystemImage("pin.fill", size: 16)
                                     .tint(Color.navBtnColor)
                                     .frame(alignment: .topLeading)
                                     .rotationEffect(.degrees(45))
-                                    .padding(.leading, Sizes.overallPadding + 4)
+//                                    .padding(.leading, Sizes.overallPadding + 4)
+//                                    .padding(.leading, Sizes.minimalSpacing)
+                                }
                             }
                             Spacer()
                         }

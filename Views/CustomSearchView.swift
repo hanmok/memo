@@ -128,6 +128,7 @@ struct CustomSearchView: View {
                         TextField("Search", text: $searchKeyword)
 //                            .tint(Color.textViewTintColor)
                             .accentColor(Color.textViewTintColor)
+                            
                             .focused($focusState)
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
@@ -160,11 +161,20 @@ struct CustomSearchView: View {
                     .cornerRadius(10)
                     Spacer()
                     
-                    Button("Cancel") {
+//                    Button("Cancel") {
+//                        focusState = false
+//                        searchKeyword = ""
+//                        showingSearchView = false
+//                    }
+                    Button {
                         focusState = false
                         searchKeyword = ""
                         showingSearchView = false
+                    } label: {
+                        Text("Cancel")
+                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                     }
+
                 }
                 .padding(.horizontal, Sizes.overallPadding)
             

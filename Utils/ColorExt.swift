@@ -154,7 +154,9 @@ extension Color {
     // Dark, Light 
     static let mainColor = Color(UIColor.mainColor) // 244 240 211, white(29)
     static let subColor = Color(UIColor.subColor) // 232 227 199
+    
     static let memoViewTextColor = Color(UIColor.memoTextColor) // white(0), white(0.8)
+    
     static let blackAndWhite = Color(UIColor.blackAndWhite) // white(0), white(1)
     
     static let swipeBtnColor1 = Color(UIColor.swipeBtnColor1) // 232 227 199, 202 197 169 ( == subColor)
