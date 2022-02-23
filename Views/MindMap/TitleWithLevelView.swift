@@ -72,7 +72,7 @@ struct CheckableFolderCell: View {
             if shouldCheck {
             Button {
             } label: {
-                SystemImage(imageSystemName: "checkmark")
+                SystemImage( "checkmark")
                 
             }
 //            .tint(Color.subColor)

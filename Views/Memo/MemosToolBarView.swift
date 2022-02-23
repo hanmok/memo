@@ -23,11 +23,14 @@ struct MemosToolBarView: View {
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
             
-
+//            Button {
+//                memoEditVM.initSelectedMemos()
+//            } label: {
+//                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
+//            }
+            
             Button {
-                // DESELECT ALL
-//                memoEditVM.selectedMemos.removeAll()
-                memoEditVM.initSelectedMemos()
+                memoEditVM.selectedMemos.removeAll()
             } label: {
                 UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
             }
@@ -67,9 +70,7 @@ struct MemosToolBarView: View {
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
                 showSelectingFolderView = true
-                
             }) {
-
                 UnchangeableImage(imageSystemName: "folder")
             }
 //            .padding(5)

@@ -60,7 +60,7 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                                 memoEditVM.initSelectedMemos() // ?? should it be ?  yes.
                             } label: {
-                                SystemImage(imageSystemName: "multiply")
+                                SystemImage( "multiply")
                                     .foregroundColor(Color.blackAndWhite)
                                 Text("").frame(height: 28)
 

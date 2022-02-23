@@ -20,7 +20,7 @@ struct PlusImage: View {
                 .background(Color.subColor)
                 .clipShape(Circle())
 //            ChangeableImage(imageSystemName: "plus")
-            SystemImage(imageSystemName: "plus")
+            SystemImage("plus")
                 .frame(width: 25, height: 25)
                 .foregroundColor(Color.black)
         }
