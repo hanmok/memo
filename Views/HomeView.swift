@@ -12,19 +12,14 @@ struct HomeView: View { // top folder fetch
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-    //    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
-    
     @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
     
-//        @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
     
     @State var shouldExecuteOne = true
     
     var body: some View {
         
-        // MARK: - FOR TESTING
-        
-        
+
         //   // MARK: - For Testing
 //                DispatchQueue.main.async {
 //                    if true {
@@ -37,10 +32,11 @@ struct HomeView: View { // top folder fetch
 //                        }
 //                    }
 //                }
-//
-//                return EmptyView()
+
     
         // 음 .. 처음부터,, FolderView 와 Archive 는 주어야하는데,, 어떻게 주지 ?
+        
+        
         
         return NavigationView {
             MindMapView(

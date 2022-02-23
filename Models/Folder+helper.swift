@@ -826,7 +826,7 @@ extension Folder {
 ////        return [newFolder1, newFolder2]
 //    }
     
-    static func returnSampleFolder3(context: NSManagedObjectContext)  {
+    static func returnSampleFolder3(context: NSManagedObjectContext) -> [Folder] {
         
 //        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
         let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
@@ -844,7 +844,7 @@ extension Folder {
 
         
         
-
+        
         homeFolder.add(subfolder: subFolder1)
         homeFolder.add(subfolder: subFolder2)
         homeFolder.add(subfolder: subFolder3)
@@ -859,12 +859,12 @@ extension Folder {
         subFolder2.modificationDate = Date().advanced(by: 300)
         subFolder3.modificationDate = Date().advanced(by: 100)
         
-        
-//        let archive = Folder(title: "Archive", context: context, createdAt: Date(timeIntervalSince1970: 1))
         let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
         archive.title += ""
 //        archive.folderType = .archive
         context.saveCoreData()
+        
+        return [homeFolder, archive]
         // return TopFolders
         // order
         // In Asc Order
