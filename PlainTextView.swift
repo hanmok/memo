@@ -8,10 +8,6 @@
 import SwiftUI
 
 
-// TextView .
-// UIView Representable
-// A wrapper for a UIKit view that you use to integrate that view into your SwiftUI view hierarchy.
-
 struct PlainTextView: UIViewRepresentable {
     @Environment(\.colorScheme) var colorSchme
     @Binding var text: String
@@ -26,13 +22,9 @@ struct PlainTextView: UIViewRepresentable {
         uiTextView.isSelectable = true
         uiTextView.isUserInteractionEnabled = true
         uiTextView.delegate = context.coordinator
-        // this line looks weird..
-//        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
-//        uiTextView.text += ""
         uiTextView.showsVerticalScrollIndicator = true
         uiTextView.keyboardDismissMode = .interactive
-//        uiTextView.text = "asjdi"
-        
+        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
         return uiTextView
     }
     
@@ -63,9 +55,8 @@ struct PlainTextView: UIViewRepresentable {
 //                    firstTime.toggle()
 //            }
 //        }
-        uiView.text = text
-        
-        
+//        uiView.text = text
+        uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
     }
     
     

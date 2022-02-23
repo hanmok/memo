@@ -30,7 +30,11 @@ struct CustomTextView: UIViewRepresentable {
         uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
         uiTextView.text += ""
         uiTextView.showsVerticalScrollIndicator = false
-//        uiTextView.text = "asjdi"
+        uiTextView.tintColor = UIColor.textViewTintColor
+//        uiTextView.keyboardDismissMode = .interactive
+        uiTextView.keyboardDismissMode = .onDrag
+//        uiTextView.inputAccessoryView = uiView
+//        uiTextView.allowsEditingTextAttributes = true
         
         return uiTextView
     }
@@ -65,50 +69,6 @@ struct CustomTextView: UIViewRepresentable {
                     firstTime.toggle()
             }
         }
-        // should apply page pattern into this text. and make hyperlink with blue foreground Color and underline.
-//        let preAttributedRange: NSRange = uiView.selectedRange
-//        // apply attributed string
-////        let attributedString:NSMutableAttributedString = NSMutableAttributedString(string: text)
-//
-//        print("updateUIView has triggered")
-//        if let firstIndex = text.firstIndex(of: "\n") {
-//            let index = text.distance(from: text.startIndex, to: firstIndex)
-//            print("index: ", index)   //index: 2
-//            let newIndex = text.index(text.startIndex, offsetBy: index)
-//
-//            let title = text[..<newIndex]
-//            print("title : \(title)")
-//
-//            let endIndex = text.endIndex
-//
-//            let others = text[newIndex ..< endIndex ]
-//            print("others: \(others)")
-//
-//            let attributedText = NSMutableAttributedString(
-//                string: String(title),
-//                attributes:
-//                    [.font: UIFont.preferredFont(forTextStyle: .title1),
-//                     NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
-//                     NSAttributedString.Key.underlineColor: UIColor(white: 0.8, alpha: 0.5)])
-//
-//            attributedText.append(NSAttributedString(string: String(others), attributes: [.font: UIFont.preferredFont(forTextStyle: .body)]))
-//
-//            uiView.attributedText = attributedText
-//
-//        }
-//        else {
-//            let attributedText = NSMutableAttributedString(
-//                string: uiView.text,
-//                attributes:
-//                    [.font: UIFont.preferredFont(forTextStyle: .title1),
-//                     NSAttributedString.Key.underlineStyle : NSUnderlineStyle.single.rawValue,
-//                     NSAttributedString.Key.underlineColor: UIColor(white: 0.8, alpha: 0.5)])
-//
-//            uiView.attributedText = attributedText
-//        }
-//
-//        uiView.selectedRange = preAttributedRange
-        
     }
     
     
@@ -121,6 +81,7 @@ struct CustomTextView: UIViewRepresentable {
         }
         
         func textViewDidChange(_ textView: UITextView) {
+            
             print("textViewDidChange Triggered")
 
             DispatchQueue.main.async {

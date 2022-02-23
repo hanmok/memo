@@ -200,9 +200,10 @@ struct FolderView: View {
                     .environmentObject(memoEditVM)
                     .environmentObject(memoOrder)
                     
-                    Rectangle()
-                        .frame(height: 100)
-                        .foregroundColor(.clear)
+//                    Rectangle()
+//                        .frame(height: 100)
+//                        .foregroundColor(.clear)
+                    
                 } // end of scrollView
             }
             .padding(.top, 12)
@@ -217,6 +218,8 @@ struct FolderView: View {
                             isShowingSubFolderView = true
                         }, label: {
                             SubFolderButtonImage()
+                                .offset(x: isShowingSubFolderView ? UIScreen.screenWidth : 0)
+                                .animation(.spring(), value: isShowingSubFolderView)
                         })
                             .padding(.trailing, Sizes.overallPadding )
                         
@@ -226,39 +229,43 @@ struct FolderView: View {
                             isAddingFolder: $shouldAddFolder)
                         
                         // offset x : trailingPadding
-                            .offset(x: isShowingSubFolderView ? -10 : UIScreen.screenWidth)
+                            .offset(x: isShowingSubFolderView ? -Sizes.overallPadding : UIScreen.screenWidth)
                             .animation(.spring(), value: isShowingSubFolderView)
                     } // end of ZStack
                 }
                 Spacer()
             }
-            .padding(.top, 60)
+            .padding(.top, 55)
             //            .padding(.trailing, Sizes.overallPadding)
             
             VStack {
-                
-                // ANOTHER ELEMENT IN VSTACK
                 Spacer()
-                HStack {
-                    Spacer()
-                    
-//                    if memoEditVM.selectedMemos.count == 0 {
-                    if !memoEditVM.isSelectionMode {
-                        VStack(spacing: Sizes.minimalSpacing) {
-                            Button(action: addMemo) {
-                                PlusImage()
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+//                HStack {
+                    ZStack {
+                        HStack {
+                            Spacer()
+                            VStack(spacing: Sizes.minimalSpacing) {
+                                Button(action: addMemo) {
+                                    PlusImage()
+                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+                                        .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
+                                        .animation(.spring(), value: memoEditVM.isSelectionMode)
+                                }
                             }
                         }
-                    } else {
-                        MemosToolBarView(
-                            showSelectingFolderView: $showSelectingFolderView,
-                            showDeleteAlert: $showDeleteAlert,
-                            showColorPalette: $showColorPalette)
-                            .padding([.trailing], Sizes.overallPadding)
-                            .padding(.bottom,Sizes.overallPadding )
+                        HStack {
+                            Spacer()
+                            MemosToolBarView(
+                                showSelectingFolderView: $showSelectingFolderView,
+                                showDeleteAlert: $showDeleteAlert,
+                                showColorPalette: $showColorPalette)
+                                .padding([.trailing], Sizes.overallPadding)
+                                .padding(.bottom,Sizes.overallPadding )
+                                .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
+                                .animation(.spring(), value: memoEditVM.isSelectionMode)
+                        }
                     }
-                } // end of HStack
+//                } // end of HStack
             } // end of VStack
             
             

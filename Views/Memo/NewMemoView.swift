@@ -38,6 +38,7 @@ struct NewMemoView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage( "chevron.left")
+                .tint(Color.navBtnColor)
         }
     }
     
@@ -166,10 +167,11 @@ struct NewMemoView: View {
                     }
                 }
                 
-//                CustomTextView(text: $contents)
-                PlainTextView(text: $contents)
+                CustomTextView(text: $contents)
+//                PlainTextView(text: $contents)
                     .padding(.top)
-//                    .focused($editorFocusState)
+                    .focused($editorFocusState)
+                    .foregroundColor(.white)
             }
             .padding(.horizontal, Sizes.overallPadding)
             .gesture(scroll)

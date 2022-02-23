@@ -169,6 +169,7 @@ extension Color {
 //    static let memoBtnColor = Color(UIColor.memoBtnColor)
     static let selectedBoxStrokeColor = Color(UIColor.selectedBoxStrokeColor)
     // cream, White(0.65)
+    static let textViewTintColor = Color(UIColor.textViewTintColor)
 }
 
 extension UIColor {
@@ -188,6 +189,9 @@ extension UIColor {
     static let navBtnColor = UIColor(named: ColorKeys.navBtnColor)!
 //    static let memoBtnColor = UIColor(named: ColorKeys.memoBtnColor)!
     static let selectedBoxStrokeColor = UIColor(named: ColorKeys.selectedBoxStrokeColor)!
+    
+    static let textViewTintColor = UIColor(named: ColorKeys.textViewTintColor)!
+    
 }
 
 struct ColorKeys {
@@ -208,5 +212,7 @@ struct ColorKeys {
     static let navBtnColor = "navBtnColor"
 //    static let memoBtnColor = "memoBtnColor"
     static let selectedBoxStrokeColor = "selectedBoxStrokeColor"
+    
+    static let textViewTintColor = "textViewTintColor"
 }
 

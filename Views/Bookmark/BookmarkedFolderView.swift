@@ -73,9 +73,6 @@ struct BookmarkedFolderView: View {
                         // BookMarked memos Text.
                         Rectangle()
                             .frame(width: UIScreen.screenWidth, height: 30)
-//                            .background(Color.mainColor)
-//                            .foregroundColor(Color.mainColor)
-                        
                             .background(Color.bookmarkBarColor)
                             .foregroundColor(Color.bookmarkBarColor)
                             .offset(y: -20)
@@ -114,6 +111,5 @@ struct BookmarkedFolderView: View {
         } // end of ZStack
         .offset(y: presentingView || presentingNewMemo ? 0 : UIScreen.screenHeight - 250)
         .animation(.spring(response: 0.1), value: presentingView || presentingNewMemo)
-        //        .ignoresSafeArea( edges: .horizontal)
     }
 }

@@ -91,11 +91,11 @@ struct MemoView: View {
     }
     
     var body: some View {
-        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
-            .updating($isScrolled) { _, _, _ in
-                print("is Scrolling : \(isScrolled)")
-                editorFocusState = false
-            }
+//        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
+//            .updating($isScrolled) { _, _, _ in
+//                print("is Scrolling : \(isScrolled)")
+//                editorFocusState = false
+//            }
         
         return ZStack(alignment: .topLeading) {
             //            Text("Tab1View")
@@ -156,15 +156,22 @@ struct MemoView: View {
                 .padding(.bottom)
 
     
-                CustomTextView(text: $contents)
+//                CustomTextView(text: $contents)
+//                PlainTextView(text: $contents)
+                TextEditor(text: $contents)
+                    .font(.body)
+//                    .tint(Color.textViewTintColor)
+                    .accentColor(Color.textViewTintColor)
                     .padding(.top)
+//                    .key
+//                    .keyboardType()
                     .focused($editorFocusState)
 //                    .foregroundColor(.primary)
                     .foregroundColor(.white)
             }
             .padding(.top, 10)
             .padding(.horizontal, Sizes.overallPadding)
-            .gesture(scroll)
+//            .gesture(scroll)
             
 //            VStack {
 //                HStack {

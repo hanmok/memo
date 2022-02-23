@@ -126,10 +126,13 @@ struct CustomSearchView: View {
                             .padding(.horizontal, 7)
 
                         TextField("Search", text: $searchKeyword)
+//                            .tint(Color.textViewTintColor)
+                            .accentColor(Color.textViewTintColor)
                             .focused($focusState)
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
-                            .focused($focusState)
+//                            .focused($focusState)
+
 //                            .foregroundColor(colorScheme.adjustBlackAndWhite())
                             .foregroundColor(Color.blackAndWhite)
                         Spacer()

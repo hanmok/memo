@@ -17,12 +17,12 @@ struct DeeepMemoApp: App {
     @AppStorage("isFirstLaunch") var isFirstLaunch = true
     
     var body: some Scene {
-        
-        if isFirstLaunch {
-            let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
-            print("newFolders: \(newFolders)")
-            isFirstLaunch = false
-        }
+        // for Publishing
+//        if isFirstLaunch {
+//            let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
+//            print("newFolders: \(newFolders)")
+//            isFirstLaunch = false
+//        }
         
         return WindowGroup {
             

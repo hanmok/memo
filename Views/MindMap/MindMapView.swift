@@ -227,13 +227,15 @@ struct MindMapView: View {
                     }
                     .listStyle(InsetGroupedListStyle())
                         
-                    Rectangle()
-//                            .foregroundColor(.clear)
-//                            .background(.clear)
-                            .foregroundColor(colorScheme == .dark ? .black : Color(white: 242 / 255))
-                            .background(colorScheme == .dark ? .black : Color(white: 242 / 255))
-//                            .frame(height: 150)
-                            .frame(height: 185)
+                        // What was this For ?
+//                    Rectangle()
+////                            .foregroundColor(.clear)
+////                            .background(.clear)
+//                            .foregroundColor(colorScheme == .dark ? .black : Color(white: 242 / 255))
+//                            .background(colorScheme == .dark ? .black : Color(white: 242 / 255))
+////                            .frame(height: 150)
+//                            .frame(height: 185)
+                        
                     }
                     
                     // Another ZStack Element
