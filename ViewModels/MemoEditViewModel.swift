@@ -6,7 +6,7 @@ class MemoEditViewModel: ObservableObject {
     
      var hasNotLongSelected = true
 
-    
+    @Published var isSelectionMode = false
      @Published var selectedMemos = Set<Memo>()
     
      var navigateToMemo: Memo? = nil
@@ -44,11 +44,14 @@ class MemoEditViewModel: ObservableObject {
     
     func initSelectedMemos() {
         self.selectedMemos.removeAll()
-        hasNotLongSelected = true
+//        hasNotLongSelected = true
+        isSelectionMode = false
         self.parentFolder = nil
     }
     
     func dealWhenMemoSelected(_ memo: Memo) {
+        // already contained -> delete from selected List
+        // else -> Add to selected List
         if selectedMemos.contains(memo) {
             erase(memo: memo)
         } else{

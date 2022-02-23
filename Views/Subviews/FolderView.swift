@@ -80,11 +80,33 @@ struct FolderView: View {
                     HStack(spacing: 16) {
                         
                         // check mark
+                        // how to make it blink when check mode ?
                         Button {
-                            // um.. you know ,,
+                            // press when checkMode -> deselect All
+                            if memoEditVM.isSelectionMode {
+                                memoEditVM.selectedMemos.removeAll()
+                            }
+                            memoEditVM.isSelectionMode.toggle()
+                            
                         } label: {
-                            SystemImage("checkmark")
-                                .tint(Color.navBtnColor)
+                            if memoEditVM.isSelectionMode {
+                                // make blinking animation.
+                            // Cancel Selecting Image
+                                ZStack {
+                                SystemImage("checkmark")
+                                        .tint(colorScheme == .dark ? Color.navBtnColor : Color.swipeBtnColor3)
+//                                        .opacity(0.5)
+                                    SystemImage("line.diagonal")
+                                        .rotationEffect(.degrees(90))
+                                        .tint(Color.navBtnColor)
+                                }
+
+//                                    .opacity(memoEditVM.isSelectionMode ? 0.5 : 1)
+//                                    .animation(Animation.easeInOut(duration: 2).repeatForever(autoreverses: true), value: memoEditVM.isSelectionMode)
+                            } else {
+                                SystemImage("checkmark")
+                                    .tint(Color.navBtnColor)
+                            }
                         }
 
                         
@@ -111,8 +133,6 @@ struct FolderView: View {
                             SystemImage("magnifyingglass")
                                 .tint(Color.navBtnColor)
                         })
-                        //                .padding(.trailing, )
-                        
                         
                         // favorite Button
                         Button(action: {
@@ -146,25 +166,31 @@ struct FolderView: View {
                 // navigationTitle
                 HStack {
                     // NavigationTitle
-                    Text(currentFolder.title)
-                        .font(.largeTitle)
-                        .fontWeight(Font.Weight.bold)
-                        .padding(.leading, 10)
-                    
-                    Spacer()
+                    ZStack(alignment: .topLeading) {
+                        HStack {
+                        Text(currentFolder.title)
+                            .font(.largeTitle)
+                            .fontWeight(Font.Weight.bold)
+                            .padding(.leading, 10)
+                        
+                        Spacer()
+                        }
+                        if currentFolder.parent != nil {
+                            HierarchyLabelView(currentFolder: currentFolder)
+                                .font(.caption)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
+//                                .padding(.leading, Sizes.overallPadding)
+                                .padding(.leading, 10)
+                                .offset(y: 40)
+                        }
+                    }
                 }
                 .padding(.top, 15.5)
                 .padding(.bottom, 8)
                 
                 ScrollView(.vertical) {
                     VStack(spacing: 0) {
-                        if currentFolder.parent != nil {
-                            HierarchyLabelView(currentFolder: currentFolder)
-                                .font(.caption)
-                                .frame(maxWidth: .infinity, alignment: .topLeading)
-                                .padding(.leading, Sizes.overallPadding)
-                                .offset(y: -10)
-                        }
+                        
                         ZStack {
                             if !currentFolder.memos.isEmpty {
                                 MemoList()
@@ -210,7 +236,7 @@ struct FolderView: View {
                 }
                 Spacer()
             }
-            .padding(.top, 45)
+            .padding(.top, 60)
             //            .padding(.trailing, Sizes.overallPadding)
             
             VStack {
@@ -220,7 +246,8 @@ struct FolderView: View {
                 HStack {
                     Spacer()
                     
-                    if memoEditVM.selectedMemos.count == 0 {
+//                    if memoEditVM.selectedMemos.count == 0 {
+                    if !memoEditVM.isSelectionMode {
                         VStack(spacing: Sizes.minimalSpacing) {
                             Button(action: addMemo) {
                                 PlusImage()

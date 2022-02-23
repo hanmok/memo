@@ -69,46 +69,53 @@ struct FilteredMemoList: View {
                             MemoBoxView(memo: memo)
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
                         }
-                        .disabled(!memoEditVM.hasNotLongSelected)
+//                        .disabled(!memoEditVM.hasNotLongSelected)
+                        .disabled(memoEditVM.isSelectionMode)
+                         // selecting Mode on / off
                         .simultaneousGesture(TapGesture().onEnded{
                             print("Tap pressed!")
-                            if !memoEditVM.hasNotLongSelected {
+                            // if long selected ( mode on)
+//                            if !memoEditVM.hasNotLongSelected {
+                            
+                            if memoEditVM.isSelectionMode {
+                                print("Tap gesture triggered!")
                                 memoEditVM.dealWhenMemoSelected(memo)
                             }
+                            // mode off
+//                            else { // if not long tapped
+//                                memoEditVM.navigateToMemo = memo
+//                                memoEditVM.hasNotLongSelected = true
+//                            }
 
-                            else { // if not long tapped
-                                memoEditVM.navigateToMemo = memo
-                                memoEditVM.hasNotLongSelected = true
-                            }
+//                            hasNotLongSelected.toggle()
+//                            memoEditVM.someBool.toggle()
 
-                            hasNotLongSelected.toggle()
-                            memoEditVM.someBool.toggle()
-
-                            if memoEditVM.selectedMemos.isEmpty {
-                                memoEditVM.hasNotLongSelected = true
-                            }
+//                            if memoEditVM.selectedMemos.isEmpty {
+//                                memoEditVM.hasNotLongSelected = true
+//                            }
+                            
                         })
-                        .simultaneousGesture(
-
-                            LongPressGesture(minimumDuration: 0.5).onEnded{_ in
-
-                                // if already long tapped
-                                print("long pressed!")
-                                if !memoEditVM.hasNotLongSelected { // if it has been long pressed
-
-                                    memoEditVM.dealWhenMemoSelected(memo)
-
-                                } else { // if not long tapped already
-                                    memoEditVM.hasNotLongSelected = false
-                                    memoEditVM.add(memo: memo)
-
-                                }
-
-                                if memoEditVM.selectedMemos.isEmpty {
-                                    memoEditVM.hasNotLongSelected = true
-                                }
-                            }
-                        )
+//                        .simultaneousGesture(
+//
+//                            LongPressGesture(minimumDuration: 0.5).onEnded{_ in
+//
+//                                // if already long tapped
+//                                print("long pressed!")
+//                                if !memoEditVM.hasNotLongSelected { // if it has been long pressed
+//
+//                                    memoEditVM.dealWhenMemoSelected(memo)
+//
+//                                } else { // if not long tapped already
+//                                    memoEditVM.hasNotLongSelected = false
+//                                    memoEditVM.add(memo: memo)
+//
+//                                }
+//
+//                                if memoEditVM.selectedMemos.isEmpty {
+//                                    memoEditVM.hasNotLongSelected = true
+//                                }
+//                            }
+//                        )
                     } // end of ForEach
                 } header: {
                     VStack {
