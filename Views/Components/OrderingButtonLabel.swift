@@ -166,7 +166,7 @@ struct FolderOrderingMenu: View {
             FolderAscDecButton(isAscending: false)
             
         } label: {
-            SystemImage(imageSystemName: "arrow.up.arrow.down")
+            SystemImage( "arrow.up.arrow.down")
                 .tint(Color.navBtnColor)
         }
     }
@@ -200,7 +200,7 @@ struct MemoOrderingMenu: View {
             MemoAscDecButton(isAscending: false, parentFolder: parentFolder)
             
         } label: {
-            SystemImage(imageSystemName: "arrow.up.arrow.down")
+            SystemImage( "arrow.up.arrow.down")
                 .tint(Color.navBtnColor)
         }
     }

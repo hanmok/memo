@@ -41,7 +41,7 @@ struct MemoView: View {
             self.presentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            SystemImage(imageSystemName: "chevron.left")
+            SystemImage( "chevron.left")
                 .tint(Color.navBtnColor)
         }
     }
@@ -127,13 +127,13 @@ struct MemoView: View {
                         
                         Button(action: toggleBookMark) {
 
-                            SystemImage(imageSystemName: (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
+                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
                         // PIN Button
                         Button(action: togglePinMemo) {
-                            SystemImage(imageSystemName: memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
+                            SystemImage( memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
@@ -142,13 +142,13 @@ struct MemoView: View {
                             showSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
-                            SystemImage(imageSystemName: "folder", size: Sizes.regularButtonSize)
+                            SystemImage( "folder", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
                         // REMOVE
                         Button(action: removeMemo) {
-                            SystemImage(imageSystemName: "trash", size: Sizes.regularButtonSize)
+                            SystemImage( "trash", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                     }

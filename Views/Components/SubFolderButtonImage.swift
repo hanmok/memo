@@ -21,7 +21,7 @@ struct SubFolderButtonImage: View {
 
             
 //            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-            SystemImage(imageSystemName: "circle", size: 50)
+            SystemImage("circle", size: 50)
             // FG and BG should be the same color
 
 //                .foregroundColor(colorScheme.adjustMainColors())

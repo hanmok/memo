@@ -39,11 +39,16 @@ struct UnchangeableImage: View {
 }
 
 struct SystemImage: View {
+    internal init(_ imageSystemName: String, size: CGFloat = 20) {
+        self.imageSystemName = imageSystemName
+        self.size = size
+    }
+    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var imageSystemName: String
 //    var width: CGFloat = 20
 //    var height: CGFloat = 20
-    var size: CGFloat = 20
+    var size: CGFloat
     var body: some View {
 
         Image(systemName: imageSystemName)

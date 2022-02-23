@@ -37,7 +37,7 @@ struct NewMemoView: View {
             self.presentingNewMemo = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            SystemImage(imageSystemName: "chevron.left")
+            SystemImage( "chevron.left")
         }
     }
     
@@ -115,7 +115,7 @@ struct NewMemoView: View {
                     HStack(spacing: 15) {
                         Button(action: toggleBookMark) {
                             SystemImage(
-                                imageSystemName: isBookMarkedTemp ? "bookmark.fill" : "bookmark",
+                                isBookMarkedTemp ? "bookmark.fill" : "bookmark",
                                 size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
@@ -123,7 +123,7 @@ struct NewMemoView: View {
                         // PIN Button
                         Button(action: togglePinMemo) {
                             SystemImage(
-                                imageSystemName: isPinned ? "pin.fill" : "pin",
+                                isPinned ? "pin.fill" : "pin",
                                 size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
@@ -151,7 +151,7 @@ struct NewMemoView: View {
 
                         } label: {
                             SystemImage(
-                                imageSystemName: "folder",
+                                "folder",
                                 size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
@@ -159,7 +159,7 @@ struct NewMemoView: View {
                         // REMOVE
                         Button(action: removeMemo) {
                             SystemImage(
-                                imageSystemName: "trash",
+                                "trash",
                                 size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }

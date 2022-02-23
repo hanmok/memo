@@ -115,7 +115,7 @@ struct FilteredMemoList: View {
                         HStack {
                             if listType == .pinned {
 //                                ChangeableImage(imageSystemName: "pin.fill", width: 16, height: 16)
-                                SystemImage(imageSystemName: "pin.fill", size: 16)
+                                SystemImage("pin.fill", size: 16)
                                     .tint(Color.navBtnColor)
                                     .frame(alignment: .topLeading)
                                     .rotationEffect(.degrees(45))

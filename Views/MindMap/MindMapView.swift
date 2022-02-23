@@ -82,7 +82,7 @@ struct MindMapView: View {
                             showingSearchView = true
                         } label: {
 
-                            SystemImage(imageSystemName: "magnifyingglass")
+                            SystemImage( "magnifyingglass")
                                 .tint(Color.navBtnColor)
                         }
 
@@ -105,7 +105,7 @@ struct MindMapView: View {
 
                         } label: { // original : 28
 
-                            SystemImage(imageSystemName: "folder.badge.plus", size: 28)
+                            SystemImage( "folder.badge.plus", size: 28)
                                 .foregroundColor(Color.navBtnColor)
                         }
                     }
@@ -154,7 +154,7 @@ struct MindMapView: View {
                                             newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
 
-                                            SystemImage(imageSystemName: "folder.badge.plus")
+                                            SystemImage("folder.badge.plus")
                                         }
 //                                        .tint(.blue)
                                         .tint(Color.swipeBtnColor1)
@@ -176,7 +176,7 @@ struct MindMapView: View {
                                             textFieldType = .newSubFolder
                                             newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
-                                            SystemImage(imageSystemName: "folder.badge.plus")
+                                            SystemImage("folder.badge.plus")
                                         }
 //                                        .tint(.blue)
                                         .tint(Color.swipeBtnColor1)
@@ -189,7 +189,7 @@ struct MindMapView: View {
                                             showingDeleteAction = true
                                             folderEditVM.folderToRemove = folderWithLevel.folder
                                         } label: {
-                                            SystemImage(imageSystemName: "trash")
+                                            SystemImage( "trash")
                                         }
                                         .tint(.red)
                                         
@@ -200,7 +200,7 @@ struct MindMapView: View {
                                             folderEditVM.shouldShowSelectingView = true
                                             folderEditVM.folderToCut = folderWithLevel.folder
                                         } label: {
-                                            SystemImage(imageSystemName: "folder")
+                                            SystemImage(  "folder")
                                         }
 //                                        .tint(.green)
                                         .tint(Color.swipeBtnColor3)
@@ -213,7 +213,7 @@ struct MindMapView: View {
                                                 newFolderName = folderWithLevel.folder.title
                                             }
                                         } label: {
-                                            SystemImage(imageSystemName: "pencil")
+                                            SystemImage(  "pencil")
                                         }
                                         .tint(Color.swipeBtnColor2)
                                     
@@ -251,7 +251,7 @@ struct MindMapView: View {
                                             textFieldType = .newSubFolder
                                             newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
-                                            SystemImage(imageSystemName: "folder.badge.plus")
+                                            SystemImage(  "folder.badge.plus")
                                         }
 //                                        .tint(.blue)
 //                                        .tint(colorScheme.adjustMainColors())
@@ -273,7 +273,7 @@ struct MindMapView: View {
                                             textFieldType = .newSubFolder
                                             newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
-                                            SystemImage(imageSystemName: "folder.badge.plus")
+                                            SystemImage(  "folder.badge.plus")
                                         }
 //                                        .tint(.blue)
                                         .tint(Color.swipeBtnColor1)
@@ -287,7 +287,7 @@ struct MindMapView: View {
                                             showingDeleteAction = true
                                             folderEditVM.folderToRemove = folderWithLevel.folder
                                         } label: {
-                                            SystemImage(imageSystemName: "trash")
+                                            SystemImage(  "trash")
                                         }
                                         .tint(.red)
                                         
@@ -298,7 +298,7 @@ struct MindMapView: View {
                                             folderEditVM.shouldShowSelectingView = true
                                             folderEditVM.folderToCut = folderWithLevel.folder
                                         } label: {
-                                            SystemImage(imageSystemName: "folder")
+                                            SystemImage(  "folder")
                                         }
                                         .tint(Color.swipeBtnColor3)
                                         
@@ -310,7 +310,7 @@ struct MindMapView: View {
                                                 newFolderName = folderWithLevel.folder.title
                                             }
                                         } label: {
-                                            SystemImage(imageSystemName: "pencil")
+                                            SystemImage(  "pencil")
                                         }
                                         .tint(Color.swipeBtnColor2)
                                     }
