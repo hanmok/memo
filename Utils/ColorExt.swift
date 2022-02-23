@@ -155,7 +155,7 @@ extension Color {
     static let mainColor = Color(UIColor.mainColor) // 244 240 211, white(29)
     static let subColor = Color(UIColor.subColor) // 232 227 199
     
-    static let memoViewTextColor = Color(UIColor.memoTextColor) // white(0), white(0.8)
+    static let memoTextColor = Color(UIColor.memoTextColor) // white(0), white(0.8)
     
     static let blackAndWhite = Color(UIColor.blackAndWhite) // white(0), white(1)
     
@@ -177,7 +177,7 @@ extension Color {
 extension UIColor {
     static let mainColor = UIColor(named: ColorKeys.mainColor)!
     static let subColor = UIColor(named: ColorKeys.subColor)!
-    static let memoTextColor = UIColor(named: ColorKeys.memoViewTextColor)!
+    static let memoTextColor = UIColor(named: ColorKeys.memoTextColor)!
     static let blackAndWhite = UIColor(named: ColorKeys.blackAndWhite)!
     
     static let swipeBtnColor1 = UIColor(named: ColorKeys.swipeBtnColor1)!
@@ -199,7 +199,7 @@ extension UIColor {
 struct ColorKeys {
     static let mainColor = "mainColor"
     static let subColor = "subColor"
-    static let memoViewTextColor = "memoViewTextColor"
+    static let memoTextColor = "memoViewTextColor"
     static let blackAndWhite = "blackAndWhite"
     
     static let swipeBtnColor1 = "swipeBtnColor1"

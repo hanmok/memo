@@ -58,5 +58,6 @@ struct HierarchyLabelView: View {
                 .opacity(0.5)
             }
         }
+        .background(colorScheme == .dark ? .black : .white)
     }
 }

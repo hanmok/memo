@@ -101,10 +101,11 @@ struct MemoView: View {
             //            Text("Tab1View")
             VStack {
                 Rectangle()
-                    .frame(width: UIScreen.screenWidth, height: 105)
+                    .frame(width: UIScreen.screenWidth, height: 90)
 //                    .foregroundColor(Color.pastelColors[selectedColorIndex])
 //                    .foregroundColor(colorScheme.adjustMainColors())
-                    .foregroundColor(Color.mainColor)
+//                    .foregroundColor(Color.mainColor)
+                    .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
@@ -167,7 +168,9 @@ struct MemoView: View {
 //                    .keyboardType()
                     .focused($editorFocusState)
 //                    .foregroundColor(.primary)
-                    .foregroundColor(.white)
+//                    .foregroundColor(.white)
+//                    .foregroundColor(Color.textViewTintColor)
+                    .foregroundColor(Color.memoTextColor)
 //                    .keyboardShortcut(.end)
             }
             .padding(.top, 10)

@@ -62,7 +62,7 @@ struct FolderView: View {
     
     func addMemo() {
         if !memoEditVM.isSelectionMode {
-        isAddingMemo = true
+            isAddingMemo = true
         }
     }
     
@@ -75,124 +75,131 @@ struct FolderView: View {
         }
         
         return ZStack {
-            VStack(spacing: 0) {
-                HStack {
-                    btnBack
+            VStack {
+                
+                
+                    Rectangle()
+                        .frame(width: UIScreen.screenWidth, height: 90)
+//                        .foregroundColor(Color.mainColor)
+//                        .background(Color.mainColor)
+                        .foregroundColor(colorScheme == .dark ? .black : .white)
+//                        .foregroundColor(Color.green)
+//                        .background(Color.blue)
                     Spacer()
-                    HStack(spacing: 16) {
+                
+            }.ignoresSafeArea(edges: .top)
+                    
+            VStack {
+                    
+                    HStack {
+                        btnBack
+                        Spacer()
                         
-                        // check mark
-                        // how to make it blink when check mode ?
-                        Button {
-                            // press when checkMode -> deselect All
-                            if memoEditVM.isSelectionMode {
-                                memoEditVM.selectedMemos.removeAll()
-                            }
-                            memoEditVM.isSelectionMode.toggle()
+                        HStack(spacing: 16) {
                             
-                        } label: {
-                            if memoEditVM.isSelectionMode {
-                                // make blinking animation.
-                            // Cancel Selecting Image
-                                ZStack(alignment: .topLeading) {
-                                SystemImage("checkmark")
-                                        .tint(colorScheme == .dark ? Color.navBtnColor : Color.swipeBtnColor3)
-                                    SystemImage("line.diagonal")
-                                        .rotationEffect(.degrees(90))
+                            // check mark
+                            // how to make it blink when check mode ?
+                            Button {
+                                // press when checkMode -> deselect All
+                                if memoEditVM.isSelectionMode {
+                                    memoEditVM.selectedMemos.removeAll()
+                                }
+                                memoEditVM.isSelectionMode.toggle()
+                                
+                            } label: {
+                                if memoEditVM.isSelectionMode {
+                                    // make blinking animation.
+                                    // Cancel Selecting Image
+                                    ZStack(alignment: .topLeading) {
+                                        SystemImage("checkmark")
+                                            .tint(colorScheme == .dark ? Color.navBtnColor : Color.swipeBtnColor3)
+                                        SystemImage("line.diagonal")
+                                            .rotationEffect(.degrees(90))
+                                            .tint(Color.navBtnColor)
+                                    }
+                                } else {
+                                    SystemImage("checkmark")
                                         .tint(Color.navBtnColor)
                                 }
-                            } else {
-                                SystemImage("checkmark")
-                                    .tint(Color.navBtnColor)
-                            }
-                        }
-
-                        
-                        // search Button
-                        Button(action: {
-                            
-                            // This Line makes memos . Why ?
-                            currentFolder.title += "" // 이거 할 때마다 두개씩 memo 가 생김. 왜 ??
-                            
-                            if let validParent = currentFolder.parent {
-                                validParent.title += ""
-                                print("parent's title has changed")
                             }
                             
-                            //                let validMemos = currentFolder.memos.sorted()
-                            //                print("name of each memos: ")
-                            //                print("number of memos contained: \(validMemos.count)")
                             
-                            print("count : \(currentFolder.memos.count)")
-                            
-                            showingSearchView = true
-                            
-                        }, label: {
-                            SystemImage("magnifyingglass")
-                                .tint(Color.navBtnColor)
-                        })
-                        
-                        // favorite Button
-                        Button(action: {
-                            toggleFavorite()
-                        }, label: {
-                            if currentFolder.isFavorite {
-                                //                    Image(systemName: "star.fill")
-                                //                        .resizable()
-                                //                        .aspectRatio(contentMode: .fit)
-                                ////                        .tint(Color.subColor)
-                                //                        .tint(Color.navBtnColor)
-                                SystemImage( "star.fill")
-                                    .tint(Color.navBtnColor)
-                            } else {
+                            // search Button
+                            Button(action: {
                                 
-                                //                    Image(systemName: "star")
-                                //                        .resizable()
-                                //                        .aspectRatio( contentMode: .fit)
-                                ////                        .tint(Color.blackAndWhite)
-                                //                        .tint(Color.navBtnColor)
-                                SystemImage("star")
+                                // This Line makes memos . Why ?
+                                currentFolder.title += "" // 이거 할 때마다 두개씩 memo 가 생김. 왜 ??
+                                
+                                if let validParent = currentFolder.parent {
+                                    validParent.title += ""
+                                    print("parent's title has changed")
+                                }
+                                
+                                
+                                print("count : \(currentFolder.memos.count)")
+                                
+                                showingSearchView = true
+                                
+                            }, label: {
+                                SystemImage("magnifyingglass")
                                     .tint(Color.navBtnColor)
-                            }
-                        })
-                        
-                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+                            })
+                            
+                            // favorite Button
+                            Button(action: {
+                                toggleFavorite()
+                            }, label: {
+                                if currentFolder.isFavorite {
+                                    SystemImage( "star.fill")
+                                        .tint(Color.navBtnColor)
+                                } else {
+                                    
+                                    SystemImage("star")
+                                        .tint(Color.navBtnColor)
+                                }
+                            })
+                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+                        }
                     }
-                }
-                .padding(.horizontal, 10)
+                    .padding(.horizontal, 10)
+                    .padding(.bottom, 7.5)
                 
-                // navigationTitle
-                HStack {
-                    // NavigationTitle
-                    ZStack(alignment: .topLeading) {
-                        HStack {
-                        Text(currentFolder.title)
-                            .font(.largeTitle)
-                            .fontWeight(Font.Weight.bold)
-                            .padding(.leading, 10)
-                        
-                        Spacer()
-                        }
-                        if currentFolder.parent != nil {
-                            HierarchyLabelView(currentFolder: currentFolder)
-                                .font(.caption)
-                                .frame(maxWidth: .infinity, alignment: .topLeading)
-//                                .padding(.leading, Sizes.overallPadding)
-                                .padding(.leading, 10)
-                                .offset(y: 40)
-                        }
-                    }
-                }
-                .padding(.top, 15.5)
-                .padding(.bottom, 8)
                 
                 ScrollView(.vertical) {
                     VStack(spacing: 0) {
                         
+                        // navigationTitle
+                        
+                        HStack {
+                            // NavigationTitle
+                            ZStack(alignment: .topLeading) {
+                                HStack {
+                                    Text(currentFolder.title)
+                                        .font(.largeTitle)
+                                        .fontWeight(Font.Weight.bold)
+                                        .padding(.leading, 10)
+                                    
+                                    Spacer()
+                                }
+                                if currentFolder.parent != nil {
+                                    HierarchyLabelView(currentFolder: currentFolder)
+                                        .font(.caption)
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                    //                                .padding(.leading, Sizes.overallPadding)
+                                        .padding(.leading, 10)
+                                        .offset(y: 40)
+                                }
+                            }
+                        }
+//                        .padding(.top, 15.5)
+                        .padding(.bottom, 8)
+                        
+                        
+                        
                         ZStack {
                             if !currentFolder.memos.isEmpty {
                                 MemoList()
-                                    .padding(.top, 5)
+                                    .padding(.top, 20)
                             }
                             
                         }
@@ -202,14 +209,18 @@ struct FolderView: View {
                     .environmentObject(memoEditVM)
                     .environmentObject(memoOrder)
                     
-//                    Rectangle()
-//                        .frame(height: 100)
-//                        .foregroundColor(.clear)
+                    //                    Rectangle()
+                    //                        .frame(height: 100)
+                    //                        .foregroundColor(.clear)
                     
                 } // end of scrollView
-            }
+            } // end of VStack
             .padding(.top, 12)
             .padding(.horizontal, Sizes.overallPadding)
+            
+            //            .padding
+            
+            
             
             // ANOTHER ELEMENT IN ZSTACK
             VStack {
@@ -242,44 +253,44 @@ struct FolderView: View {
             
             VStack {
                 Spacer()
-//                HStack {
-                    ZStack {
-                        HStack {
-                            Spacer()
-                            VStack(spacing: Sizes.minimalSpacing) {
-                                
-                                Button(action: addMemo) {
-                                    PlusImage()
-                                        .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
-                                        .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
-                                        .animation(.spring(), value: memoEditVM.isSelectionMode)
-                                }
-                                .simultaneousGesture(
-
-                                    LongPressGesture(minimumDuration: 0.2).onEnded{_ in
-
-                                        // if already long tapped
-                                        print("long pressed!")
-                                        
-                                        memoEditVM.isSelectionMode = true
-//                                        isAddingMemo = false
-                                    }
-                                )
+                //                HStack {
+                ZStack {
+                    HStack {
+                        Spacer()
+                        VStack(spacing: Sizes.minimalSpacing) {
+                            
+                            Button(action: addMemo) {
+                                PlusImage()
+                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+                                    .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
+                                    .animation(.spring(), value: memoEditVM.isSelectionMode)
                             }
-                        }
-                        HStack {
-                            Spacer()
-                            MemosToolBarView(
-                                showSelectingFolderView: $showSelectingFolderView,
-                                showDeleteAlert: $showDeleteAlert,
-                                showColorPalette: $showColorPalette)
-                                .padding([.trailing], Sizes.overallPadding)
-                                .padding(.bottom,Sizes.overallPadding )
-                                .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
-                                .animation(.spring(), value: memoEditVM.isSelectionMode)
+                            .simultaneousGesture(
+                                
+                                LongPressGesture(minimumDuration: 0.2).onEnded{_ in
+                                    
+                                    // if already long tapped
+                                    print("long pressed!")
+                                    
+                                    memoEditVM.isSelectionMode = true
+                                    //                                        isAddingMemo = false
+                                }
+                            )
                         }
                     }
-//                } // end of HStack
+                    HStack {
+                        Spacer()
+                        MemosToolBarView(
+                            showSelectingFolderView: $showSelectingFolderView,
+                            showDeleteAlert: $showDeleteAlert,
+                            showColorPalette: $showColorPalette)
+                            .padding([.trailing], Sizes.overallPadding)
+                            .padding(.bottom,Sizes.overallPadding )
+                            .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
+                            .animation(.spring(), value: memoEditVM.isSelectionMode)
+                    }
+                }
+                //                } // end of HStack
             } // end of VStack
             
             
@@ -303,10 +314,10 @@ struct FolderView: View {
             // When add folder pressed
             // overlay white background when Alert show up
             
-//            if shouldAddFolder {
-//                Color(.white)
-//                    .opacity(0.8)
-//            }
+            //            if shouldAddFolder {
+            //                Color(.white)
+            //                    .opacity(0.8)
+            //            }
             
             
             //            SearchView(
