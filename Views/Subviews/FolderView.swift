@@ -10,7 +10,7 @@
 import SwiftUI
 import CoreData
 
-// 왜 여기서 스크롤이 잘 안되지 ? .. Search 에서는 잘만 되는데... ??
+// Now.. it's Fine.
 
 struct FolderView: View {
     
