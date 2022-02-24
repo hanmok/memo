@@ -156,22 +156,12 @@ struct MemoView: View {
                 }
                 .padding(.bottom)
 
-    
-//                CustomTextView(text: $contents)
-//                PlainTextView(text: $contents)
                 TextEditor(text: $contents)
                     .font(.body)
-//                    .tint(Color.textViewTintColor)
                     .accentColor(Color.textViewTintColor)
                     .padding(.top)
-//                    .key
-//                    .keyboardType()
                     .focused($editorFocusState)
-//                    .foregroundColor(.primary)
-//                    .foregroundColor(.white)
-//                    .foregroundColor(Color.textViewTintColor)
                     .foregroundColor(Color.memoTextColor)
-//                    .keyboardShortcut(.end)
             }
             .padding(.top, 10)
             .padding(.horizontal, Sizes.overallPadding)
@@ -188,6 +178,7 @@ struct MemoView: View {
 //            }
 //            .offset(y: showColorPalette ? -35 : -300)
 //            .animation(.spring(), value: showColorPalette)
+            
         }
         .padding(.bottom)
         
