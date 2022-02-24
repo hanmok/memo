@@ -44,14 +44,10 @@ struct MemoBoxView: View {
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-//        .background(colorScheme.adjustMainColors())
-//        .background(Color.mainColor)
         .background(Color.memoBoxColor)
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-//                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? .pink : .black) : .clear, lineWidth: 1)
-//                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : .black) : .clear, lineWidth: 1)
                 .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : Color(white: 0.65)) : .clear, lineWidth: 1)
         )
     }

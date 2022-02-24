@@ -23,6 +23,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isBookMarked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="modificationDate_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="offset" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="overview_" optional="YES" attributeType="String"/>
         <attribute name="pinned_" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
@@ -32,6 +33,6 @@
     </entity>
     <elements>
         <element name="Folder" positionX="-216.10107421875" positionY="94.77685546875" width="128" height="209"/>
-        <element name="Memo" positionX="-36" positionY="45" width="128" height="239"/>
+        <element name="Memo" positionX="-36" positionY="45" width="128" height="254"/>
     </elements>
 </model>

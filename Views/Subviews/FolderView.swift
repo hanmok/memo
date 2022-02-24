@@ -99,29 +99,30 @@ struct FolderView: View {
                             
                             // check mark
                             // how to make it blink when check mode ?
-                            Button {
-                                // press when checkMode -> deselect All
-                                if memoEditVM.isSelectionMode {
-                                    memoEditVM.selectedMemos.removeAll()
-                                }
-                                memoEditVM.isSelectionMode.toggle()
-                                
-                            } label: {
-                                if memoEditVM.isSelectionMode {
-                                    // make blinking animation.
-                                    // Cancel Selecting Image
-                                    ZStack(alignment: .topLeading) {
-                                        SystemImage("checkmark")
-                                            .tint(colorScheme == .dark ? Color.navBtnColor : Color.swipeBtnColor3)
-                                        SystemImage("line.diagonal")
-                                            .rotationEffect(.degrees(90))
-                                            .tint(Color.navBtnColor)
-                                    }
-                                } else {
-                                    SystemImage("checkmark")
-                                        .tint(Color.navBtnColor)
-                                }
-                            }
+                            
+//                            Button {
+//                                // press when checkMode -> deselect All
+//                                if memoEditVM.isSelectionMode {
+//                                    memoEditVM.selectedMemos.removeAll()
+//                                }
+//                                memoEditVM.isSelectionMode.toggle()
+//
+//                            } label: {
+//                                if memoEditVM.isSelectionMode {
+//                                    // make blinking animation.
+//                                    // Cancel Selecting Image
+//                                    ZStack(alignment: .topLeading) {
+//                                        SystemImage("checkmark")
+//                                            .tint(colorScheme == .dark ? Color.navBtnColor : Color.swipeBtnColor3)
+//                                        SystemImage("line.diagonal")
+//                                            .rotationEffect(.degrees(90))
+//                                            .tint(Color.navBtnColor)
+//                                    }
+//                                } else {
+//                                    SystemImage("checkmark")
+//                                        .tint(Color.navBtnColor)
+//                                }
+//                            }
                             
                             
                             // search Button
@@ -265,17 +266,17 @@ struct FolderView: View {
                                     .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                     .animation(.spring(), value: memoEditVM.isSelectionMode)
                             }
-                            .simultaneousGesture(
-                                
-                                LongPressGesture(minimumDuration: 0.2).onEnded{_ in
-                                    
-                                    // if already long tapped
-                                    print("long pressed!")
-                                    
-                                    memoEditVM.isSelectionMode = true
-                                    //                                        isAddingMemo = false
-                                }
-                            )
+//                            .simultaneousGesture(
+//
+//                                LongPressGesture(minimumDuration: 0.2).onEnded{_ in
+//
+//                                    // if already long tapped
+//                                    print("long pressed!")
+//
+//                                    memoEditVM.isSelectionMode = true
+//                                    //                                        isAddingMemo = false
+//                                }
+//                            )
                         }
                     }
                     HStack {
