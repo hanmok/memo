@@ -46,8 +46,6 @@ struct SystemImage: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var imageSystemName: String
-//    var width: CGFloat = 20
-//    var height: CGFloat = 20
     var size: CGFloat
     var body: some View {
 

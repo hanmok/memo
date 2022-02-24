@@ -24,7 +24,8 @@ struct FilteredMemoList: View {
     @State var offsets: [CGFloat]
     var listType: MemoListType
     @GestureState var isDragging = false
-    
+    /// dragging flag end a little later than isDragging, to complete onEnd Action (for Better UX)
+    @State var isDraggingAction = false
     var memosToShow: [Memo]
     
     init(folder: Folder, listType: MemoListType){
@@ -75,37 +76,40 @@ struct FilteredMemoList: View {
                     ForEach(memosToShow.indices, id: \.self) { index in
                         
                             
-                            
-                            NavigationLink(destination:
-                                            MemoView(memo: memosToShow[index], parent: memosToShow[index].folder!, presentingView: .constant(false))
-                                            .environmentObject(memoEditVM)
-                                            .environmentObject(folderEditVM)
-                            ) {
-                                MemoBoxView(memo: memosToShow[index])
-                                    .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                    .offset(x: offsets[index])
-                                    .background {
-                                        ZStack {
-                                            Color(.subColor)
-                                                .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-                                                .cornerRadius(10)
+                        
+                        NavigationLink(destination:
+                                        MemoView(memo: memosToShow[index], parent: memosToShow[index].folder!, presentingView: .constant(false))
+                                        .environmentObject(memoEditVM)
+                                        .environmentObject(folderEditVM)
+                        ) {
+                            MemoBoxView(memo: memosToShow[index])
+                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+                                .offset(x: offsets[index])
+//                                .animation(.spring(), value: isDragging)
+                                .background {
+                                    ZStack {
+                                        Color(isDraggingAction ? .subColor : .black)
+//                                        Color(.subColor)
+                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
+                                            .cornerRadius(10)
                                         HStack {
-                                         Spacer()
+                                            Spacer()
                                             SystemImage("checkmark")
                                                 .frame(width: 65)
                                                 .foregroundColor(.black)
                                         }
-                                        }
-                                        .padding(.horizontal, Sizes.smallSpacing)
-                                        .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
                                     }
-                            .gesture(DragGesture()
-                                        .updating($isDragging, body: { value, state, _ in
-                                state = true
-                                onChanged(value: value, index: index)
-                            }).onEnded({ value in
-                                onEnd(value: value, index: index, memo: memosToShow[index])
-                            }))
+                                    .padding(.horizontal, Sizes.smallSpacing)
+                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
+                                }
+                            
+                                .gesture(DragGesture()
+                                            .updating($isDragging, body: { value, state, _ in
+                                    state = true
+                                    onChanged(value: value, index: index)
+                                }).onEnded({ value in
+                                    onEnd(value: value, index: index, memo: memosToShow[index])
+                                }))
                         } // end of ZStack
                             .disabled(memoEditVM.isSelectionMode)
                             .gesture(DragGesture()
@@ -118,21 +122,19 @@ struct FilteredMemoList: View {
                         
                         .simultaneousGesture(TapGesture().onEnded{
                             print("Tap pressed!")
-                            
+
                             if memoEditVM.isSelectionMode {
                                 print("Tap gesture triggered!")
                                 memoEditVM.dealWhenMemoSelected(memosToShow[index])
                             }
-                            
+
                         })
                         
                     } // end of ForEach
                 } header: {
                     VStack {
                         HStack {
-//                            if memosViewModel.listType == .pinned {
                             if listType == .pinned {
-                                //                                ChangeableImage(imageSystemName: "pin.fill", width: 16, height: 16)
                                 HStack {
                                     SystemImage("bookmark.fill", size: 16)
                                         .tint(Color.navBtnColor)
@@ -154,31 +156,51 @@ struct FilteredMemoList: View {
     }
     
     func onChanged(value: DragGesture.Value, index: Int) {
-        if value.translation.width < 0 && isDragging {
+        
+print("onChanged triggered")
+
+        if isDragging && value.translation.width < -5 {
             DispatchQueue.main.async {
-//                myoffset[index] = value.translation.width
-                offsets[index] = value.translation.width
+            isDraggingAction = true
             }
         }
+
+
+        if isDragging && value.translation.width < 0 {
+            
+            print("dragged value: \(value.translation.width)")
+            switch value.translation.width {
+            case let width where width <= -65:
+                DispatchQueue.main.async {
+                    offsets[index] = -65
+                }
+            default:
+                DispatchQueue.main.async {
+                    offsets[index] = value.translation.width
+                }
+            }
+        }
+        
     }
     
     func onEnd(value: DragGesture.Value, index: Int, memo: Memo) {
         withAnimation {
-            if -value.translation.width >= 70 {
-                memoEditVM.isSelectionMode = true
-                memoEditVM.dealWhenMemoSelected(memo)
-
-                offsets[index] = -65
-
-                print("turn offset Index to -65 : \(index)")
-                print(offsets[index])
-            } else {
-                offsets[index] = 0
-            }
-            if offsets[index] == -65 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    print("back to 0 ")
+            print("onEnd triggered")
+            if value.translation.width <= -65 {
+                
+                DispatchQueue.main.async {
+                    memoEditVM.isSelectionMode = true
+                    memoEditVM.dealWhenMemoSelected(memo)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     offsets[index] = 0
+                    isDraggingAction = false
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    offsets[index] = 0
+                    isDraggingAction = false
                 }
             }
         }

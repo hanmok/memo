@@ -17,7 +17,7 @@ class MemoEditViewModel: ObservableObject {
         get { selectedMemos.count }
         set { if newValue == 0 {
             self.parentFolder = nil
-            self.isSelectionMode = false
+//            self.isSelectionMode = false
             
         }}
     }

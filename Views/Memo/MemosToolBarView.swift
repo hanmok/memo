@@ -23,11 +23,6 @@ struct MemosToolBarView: View {
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
             
-//            Button {
-//                memoEditVM.initSelectedMemos()
-//            } label: {
-//                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
-//            }
             
             Button {
 //                memoEditVM.selectedMemos.removeAll()
@@ -70,7 +65,9 @@ struct MemosToolBarView: View {
             
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
+
                 showSelectingFolderView = true
+                
             }) {
                 UnchangeableImage(imageSystemName: "folder")
             }
@@ -106,6 +103,7 @@ struct MemosToolBarView: View {
             Button(action: {
 
                 showDeleteAlert = true
+                
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }
