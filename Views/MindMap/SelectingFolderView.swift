@@ -72,7 +72,7 @@ struct SelectingFolderView: View {
                 }
             }
             .frame(height: 28)
-            .padding(.top, 5)
+            .padding(.top, 7)
             
             Picker("", selection: $selectionEnum) {
                 Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(FolderTypeEnum.folder)
@@ -80,7 +80,7 @@ struct SelectingFolderView: View {
             }
             .id(selectionEnum)
             .pickerStyle(SegmentedPickerStyle())
-            .padding(.top, Sizes.overallPadding)
+            .padding(.top, Sizes.overallPadding + 1)
             
             if selectionEnum == .folder {
                 List(fastFolderWithLevelGroup.folders, id: \.self)  { folderWithLevel in
@@ -114,7 +114,7 @@ struct SelectingFolderView: View {
                         
                         if invalidFolderWithLevels.contains(folderWithLevel) {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
-                                .background(.red)
+//                                .background(.red)
                             
                         } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, shouldCheck: true)

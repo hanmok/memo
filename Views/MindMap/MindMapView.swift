@@ -133,6 +133,7 @@ struct MindMapView: View {
                 .id(selectionEnum)
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)
+                .padding(.horizontal, Sizes.overallPadding)
                 
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack

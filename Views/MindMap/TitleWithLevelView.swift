@@ -78,7 +78,8 @@ struct CheckableFolderCell: View {
 //            .tint(Color.subColor)
 //            .tint(Color(UIColor(named: "mainColor")!))
 //            .tint(colorScheme.adjustMainColors())
-            .tint(Color.mainColor)
+//            .tint(Color.mainColor)
+            .tint(.swipeBtnColor2)
             }
         }
         
