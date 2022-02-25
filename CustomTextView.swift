@@ -1,147 +1,62 @@
-//
-//  MemoClone.swift
-//  DeeepMemo
-//
-//  Created by Mac mini on 2022/02/16.
-//
-
 import SwiftUI
-
-
-// TextView .
-// UIView Representable
-// A wrapper for a UIKit view that you use to integrate that view into your SwiftUI view hierarchy.
+import Combine
 
 struct CustomTextView: UIViewRepresentable {
-    
-    @Environment(\.colorScheme) var colorSchme
     @Binding var text: String
-    //    @Binding var textStyle: UIFont.TextStyle
-    @State var firstTime = true
+    @Binding var keyboardRect: CGRect
+    
     func makeUIView(context: Context) -> UITextView {
-        print("makeUIView has triggered")
-        let uiTextView = UITextView()
-        //        uiTextView.font = UIFont.preferredFont(forTextStyle: textStyle)
-        uiTextView.autocapitalizationType = .sentences
-        uiTextView.autocorrectionType = .no
-        uiTextView.isSelectable = true
-        uiTextView.isUserInteractionEnabled = true
-        uiTextView.delegate = context.coordinator
-        // this line looks weird..
-
-        uiTextView.text += ""
-        uiTextView.showsVerticalScrollIndicator = false
-        uiTextView.tintColor = UIColor.textViewTintColor
-        //        uiTextView.tintColor = .red
+        let textView = UITextView()
         
-        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
+        textView.delegate = context.coordinator
         
-        //        uiTextView.keyboardDismissMode = .interactive
-        uiTextView.keyboardDismissMode = .onDrag
-        //        uiTextView.inputAccessoryView = uiView
-        //        uiTextView.allowsEditingTextAttributes = true
-        
-        return uiTextView
+        textView.font = UIFont.preferredFont(forTextStyle: .title3)
+        textView.keyboardDismissMode = .interactive
+        textView.showsVerticalScrollIndicator = false
+        textView.alwaysBounceVertical = true
+        textView.isScrollEnabled = true
+        textView.becomeFirstResponder()
+        textView.autocorrectionType = .no
+        return textView
     }
-    
-    func something() {
-        
-    }
-    
+ 
     func updateUIView(_ uiView: UITextView, context: Context) {
-        print("updateUIView triggered")
-        if firstTime {
-            //            uiView.text = text
-            let attributedText = NSMutableAttributedString(
-                string: text,
-                attributes:
-                    [.font: UIFont.preferredFont(forTextStyle: .body),
-                     .foregroundColor: UIColor.memoTextColor])
-            
-            // cannot find any of \n
-            
-            if let firstIndex = text.firstIndex(of: "\n") {
-                let distance = text.distance(from: text.startIndex, to: firstIndex)
-                attributedText.addAttributes([
-                    .font: UIFont.preferredFont(forTextStyle: .title1),
-                    .foregroundColor: UIColor.memoTextColor],
-                                             range: NSRange(location: 0, length: distance))
-                print("distance: \(distance)")
-            }
-            DispatchQueue.main.async {
-                uiView.attributedText = attributedText
-                firstTime.toggle()
-            }
-        }
+        uiView.text = text
+        uiView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardRect.height, right: 0)
     }
     
-    
-    final class Coordinator: NSObject, UITextViewDelegate {
-        
+    func makeCoordinator() -> Coordinator {
+        Coordinator($text)
+    }
+     
+    class Coordinator: NSObject, UITextViewDelegate {
         var text: Binding<String>
-        
+     
         init(_ text: Binding<String>) {
             self.text = text
         }
-        
+     
         func textViewDidChange(_ textView: UITextView) {
-            
-            print("textViewDidChange Triggered")
-            
-            DispatchQueue.main.async {
-                self.text.wrappedValue = textView.text
-            }
-            
-            let preAttributedRange: NSRange = textView.selectedRange
-            
-            
-            // Set initial font .body
-            let attributedText = NSMutableAttributedString(
-                string: textView.text,
-                attributes: [
-                    .font: UIFont.preferredFont(forTextStyle: .body),
-                    .foregroundColor: UIColor.memoTextColor//                    .foregroundColor: UIColor.red
-                ])
-            
-            // are they.. included ? or not ?
-            if let firstIndex = textView.text.firstIndex(of: "\n") {
-                print("flagggg ")
-                let distance = textView.text.distance(from: textView.text.startIndex, to: firstIndex)
-                print("flagggg distance: \(distance)")
-                attributedText.addAttributes([
-                    .font: UIFont.preferredFont(forTextStyle: .title1),
-                    .foregroundColor: UIColor.memoTextColor],
-                                             range: NSRange(location: 0, length: distance))
-                
-                print("flagggg range: \(NSRange(location:0, length: distance))")
-            } else {
-                let startToEndDistance = textView.text.distance(from: textView.text.startIndex, to: textView.text.endIndex)
-                
-                attributedText.addAttributes(
-                    [.font: UIFont.preferredFont(forTextStyle: .title1),
-                     .foregroundColor: UIColor.memoTextColor],
-                    range: NSRange(location: 0, length: startToEndDistance))
-            }
-            
-            textView.attributedText = attributedText
-            
-            textView.selectedRange = preAttributedRange
+            self.text.wrappedValue = textView.text
         }
+    }
+}
+
+
+extension Publishers {
+    static var keyboardRect: AnyPublisher<CGRect, Never> {
         
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            if textView.text == "" {
-                // Initial Setting, make cursor bigger.
-                textView.attributedText = NSMutableAttributedString(string: String(" "), attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
-                // retaining bigger Cursor, make it empty.
-                textView.attributedText = NSMutableAttributedString(string: String(""), attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
-                print("textViewDidBeginEditingTriggered")
-            }
-        }
+        let willShow = NotificationCenter.default.publisher(for: UIApplication.keyboardWillShowNotification).map {$0.keyboardRect}
+        
+        let willHide = NotificationCenter.default.publisher(for: UIApplication.keyboardWillHideNotification).map { _ in CGRect(x: 0, y: 0, width: 0, height: 0)}
+        
+        return MergeMany(willShow, willHide).eraseToAnyPublisher()
         
     }
-    
-    // simply returns an instance of Coordinator.
-    func makeCoordinator() -> Coordinator {
-        Coordinator($text)
+}
+
+extension Notification {
+    var keyboardRect: CGRect {
+        return (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect) ?? .zero
     }
 }

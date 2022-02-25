@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import CoreData
+import Introspect
 
 struct NewMemoView: View {
     
@@ -18,9 +19,11 @@ struct NewMemoView: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     
     @FocusState var editorFocusState: Bool
-    @GestureState var isScrolled = false
+//    @GestureState var isScrolled = false
     
     @State var contents: String = ""
+    
+    @State var keyboardRect: CGRect = CGRect()
     
     @State var isBookMarkedTemp: Bool = false
     @State var isPinned: Bool = false
@@ -30,6 +33,7 @@ struct NewMemoView: View {
     
     @State var memo: Memo? = nil
     
+
     let parent: Folder
 
     var backBtn : some View {
@@ -101,10 +105,14 @@ struct NewMemoView: View {
     }
     
     var body: some View {
-        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
-            .updating($isScrolled) { _, _, _ in
-                editorFocusState = false
-            }
+//        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
+//            .updating($isScrolled) { _, _, _ in
+////                keyboard
+////                editorFocusState = false
+//                UIApplication.shared.endEditing()
+//
+//
+//            }
         
         return ZStack(alignment: .topLeading) {
             //            Text("Tab1View")
@@ -166,6 +174,7 @@ struct NewMemoView: View {
                         }
                     }
                 }
+                .padding(.horizontal, Sizes.overallPadding)
                 
 
 //                PlainTextView(text: $contents)
@@ -182,16 +191,12 @@ struct NewMemoView: View {
 //                    .foregroundColor(Color.memoTextColor)
                 
                 PlainTextView(text: $contents)
-                
-//                    .font(.body)
-                    .accentColor(Color.textViewTintColor)
+                    .font(.title3)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
-                
+                    .padding(.leading, Sizes.overallPadding)
             }
-            .padding(.horizontal, Sizes.overallPadding)
-            .gesture(scroll)
         }
         .padding(.vertical)
         .navigationBarHidden(true)
@@ -199,6 +204,7 @@ struct NewMemoView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 /// Anything over 0.5 seems to work
                 self.editorFocusState = true
+                UIApplication.shared.startEditing()
             }
         })
         .onDisappear(perform: {
@@ -221,3 +227,18 @@ struct NewMemoView: View {
         }
     }
 }
+
+
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        
+        
+    }
+    
+    func startEditing() {
+        sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+

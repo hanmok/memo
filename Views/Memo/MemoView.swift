@@ -20,7 +20,7 @@ struct MemoView: View {
     @ObservedObject var memo: Memo
     
     @FocusState var editorFocusState: Bool
-    @GestureState var isScrolled = false
+//    @GestureState var isScrolled = false
     
     @State var showSelectingFolderView = false
     
@@ -96,7 +96,8 @@ struct MemoView: View {
 //        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
 //            .updating($isScrolled) { _, _, _ in
 //                print("is Scrolling : \(isScrolled)")
-//                editorFocusState = false
+////                editorFocusState = false
+//
 //            }
         
         return ZStack(alignment: .topLeading) {
@@ -118,16 +119,7 @@ struct MemoView: View {
                     Spacer()
                     
                     HStack(spacing: 15) {
-                        
-
-                        
-//                        Button {
-//                            showColorPalette = true
-//                        } label: {
-////                            ColorPickerView(selectedIndex: $selectedColorIndex)
-//                            ColorPicker("", selection: $colorPickerSelection)
-//                        }
-                        
+            
                         Button(action: toggleBookMark) {
 
                             SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
@@ -157,6 +149,7 @@ struct MemoView: View {
                     }
                 }
                 .padding(.bottom)
+                .padding(.horizontal, Sizes.overallPadding)
 
                  // has problem on TextViews
                 
@@ -166,17 +159,26 @@ struct MemoView: View {
 //                CustomTextView(text: $contents)
                 
 
-                PlainTextView(text: $contents)
+//                PlainTextView(text: $contents)
+//                TextEditor(text: $contents)
+//                PlainTextView(text: $contents)
+//                PlainTextView(text: $contents, doneButtonAction: {
+////                    saveChanges()
+////                    print("done button has pressed")
+//                })
                 
-//                    .font(.body)
-                    .accentColor(Color.textViewTintColor)
+                PlainTextView(text: $contents)
+                    .font(.title3)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
+                    .padding(.leading, Sizes.overallPadding)
             }
             .padding(.top, 10)
-            .padding(.horizontal, Sizes.overallPadding)
-//            .gesture(scroll)
+
+//            .padding(.horizontal, Sizes.overallPadding)
+//            .gesture(scroll) // 이거 달면.. focus 를 빼앗겨..
+            // 아니 이거 때문에 빼앗기는게 아니라, scroll 에 있는 focus 없애기때문에 빼앗김.
             
 //            VStack {
 //                HStack {
@@ -200,6 +202,11 @@ struct MemoView: View {
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
             selectedColorIndex = memo.colorIndex
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                /// Anything over 0.5 seems to work
+//                self.editorFocusState = true
+//                UIApplication.shared.startEditing()
+//            }
         })
         
         .onDisappear(perform: {

@@ -17,7 +17,8 @@ struct PlainTextView: UIViewRepresentable {
     
     @Environment(\.colorScheme) var colorSchme
     @Binding var text: String
-    // add save when done pressed ? ? ? 
+    // add save when done pressed ? ? ?
+//    var doneButtonAction: () -> Void = { }
     
     @State var firstTime = true
     func makeUIView(context: Context) -> UITextView {
@@ -31,16 +32,17 @@ struct PlainTextView: UIViewRepresentable {
         uiTextView.delegate = context.coordinator
         
         uiTextView.text += ""
-        //        uiTextView.showsVerticalScrollIndicator = true
+//                uiTextView.showsVerticalScrollIndicator = true
         uiTextView.showsVerticalScrollIndicator = false
         //        uiTextView.keyboardDismissMode = .interactive
         //        uiTextView.keyboardDismissMode = .interactive
         uiTextView.keyboardDismissMode = .onDrag
         
         
-        uiTextView.tintColor = UIColor.textViewTintColor
+//        uiTextView.tintColor = UIColor.textViewTintColor
+        uiTextView.tintColor = UIColor.swipeBtnColor2
         //        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
-        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
+        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3)])
         //        uiTextView.addd
         uiTextView.addDoneButtonOnKeyboard()
         return uiTextView
@@ -52,7 +54,7 @@ struct PlainTextView: UIViewRepresentable {
         if firstTime {
             //        uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
             DispatchQueue.main.async {
-                uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
+                uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3)])
                 firstTime.toggle()
             }
         }
@@ -71,6 +73,7 @@ struct PlainTextView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             DispatchQueue.main.async {
                 self.text.wrappedValue = textView.text
+                textView.attributedText = NSAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3)])
             }
         }
     }
@@ -97,6 +100,9 @@ extension UITextView {
     }
     
     @objc func doneButtonAction() {
-        self.resignFirstResponder()
+        DispatchQueue.main.async {
+            self.resignFirstResponder()
+        }
+//        doneButtonAction()
     }
 }
