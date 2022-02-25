@@ -17,6 +17,8 @@ struct PlainTextView: UIViewRepresentable {
     
     @Environment(\.colorScheme) var colorSchme
     @Binding var text: String
+    
+//    var font: UIFont = .preferredFont(forTextStyle: .)
     // add save when done pressed ? ? ?
 //    var doneButtonAction: () -> Void = { }
     
@@ -41,8 +43,8 @@ struct PlainTextView: UIViewRepresentable {
         
 //        uiTextView.tintColor = UIColor.textViewTintColor
         uiTextView.tintColor = UIColor.swipeBtnColor2
-        //        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
-        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3), .foregroundColor: UIColor.memoTextColor])
+        //        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body1)])
+        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: UIColor.memoTextColor])
         //        uiTextView.addd
         uiTextView.addDoneButtonOnKeyboard()
         return uiTextView
@@ -52,9 +54,9 @@ struct PlainTextView: UIViewRepresentable {
     func updateUIView(_ uiView: UITextView, context: Context) {
         //        print("updateUIView triggered")
         if firstTime {
-            //        uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
+            //        uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body1)])
             DispatchQueue.main.async {
-                uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3), .foregroundColor: UIColor.memoTextColor])
+                uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: UIColor.memoTextColor])
                 firstTime.toggle()
             }
         }
@@ -73,7 +75,7 @@ struct PlainTextView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             DispatchQueue.main.async {
                 self.text.wrappedValue = textView.text
-                textView.attributedText = NSAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3), .foregroundColor: UIColor.memoTextColor])
+                textView.attributedText = NSAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: UIColor.memoTextColor])
             }
         }
     }

@@ -172,7 +172,7 @@ struct MemoView: View {
 //                })
                 
                 PlainTextView(text: $contents)
-                    .font(.title3)
+//                    .font(.title3)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
