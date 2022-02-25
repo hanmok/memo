@@ -142,7 +142,4 @@ struct CustomTextView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator($text)
     }
-    
-    
-    
 }

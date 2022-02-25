@@ -265,6 +265,7 @@ extension Memo {
         }
         
         // remove spaces or enters from the very first part to use in MemoBoxView
+        
         while(self.contentsToShow != "") {
             if self.contentsToShow.first! == " " || self.contentsToShow.first! == "\n"{
                 self.contentsToShow.removeFirst()

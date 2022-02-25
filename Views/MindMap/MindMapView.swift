@@ -341,10 +341,13 @@ struct MindMapView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoOrder)
             
-                
-            CustomSearchView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, showingSearchView: $showingSearchView)
+            // animation 은 같지만 이건 ZStack 이기 때문에, 뭔가 차이가 생김.
+            // 얘를 fullscreen 으로 만들거나, ..
+            CustomSearchView(
+                fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, showingSearchView: $showingSearchView)
+            
                 .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
-                .animation(.spring(response: 0.2, dampingFraction: 1, blendDuration: 0.4), value: showingSearchView)
+                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
                 .padding(.horizontal, Sizes.overallPadding)
             
             

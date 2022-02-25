@@ -310,6 +310,20 @@ struct FolderView: View {
                 }
             }
             
+            
+            CustomSearchView(
+                fastFolderWithLevelGroup: FastFolderWithLevelGroup(
+                    homeFolder: Folder.fetchHomeFolder(context: context)!,
+                    archiveFolder: Folder.fetchHomeFolder(context: context,
+                                                          fetchingHome: false)!),
+                currentFolder: currentFolder, showingSearchView: $showingSearchView)
+            
+                .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
+                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
+//                .padding(.horizontal, Sizes.overallPadding)
+                .padding(.horizontal, Sizes.properSpacing)
+            
+            
             // Another ZStack Element Begins
             
             // When add folder pressed
@@ -351,13 +365,16 @@ struct FolderView: View {
                     newSubFolderName = ""
                     shouldAddFolder = false
                 })
-            // MARK: - ERROR!!!! SOURCE
             
             NavigationLink(destination:
                             NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
             
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
+            
+            
+            
+            
             
         } // end of ZStack
         
@@ -380,15 +397,6 @@ struct FolderView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })
-        .fullScreenCover(isPresented: $showingSearchView, content: {
-            CustomSearchView(
-                fastFolderWithLevelGroup: FastFolderWithLevelGroup(
-                    homeFolder: Folder.fetchHomeFolder(context: context)!,
-                    archiveFolder: Folder.fetchHomeFolder(context: context,
-                                                          fetchingHome: false)!),
-                currentFolder: currentFolder, showingSearchView: $showingSearchView)
-        })
-        .animation(.spring(response: 0.2, dampingFraction: 1, blendDuration: 0.4), value: showingSearchView)
         
         .alert(AlertMessages.alertDeleteMain, isPresented: $showDeleteAlert, actions: {
             // delete

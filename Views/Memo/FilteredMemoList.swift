@@ -23,24 +23,19 @@ class MemosViewModel : ObservableObject {
         var sortedMemos = [Memo]()
         switch type {
         case .pinned:
-//            self.memos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == true || $0.isBookMarked == true })
             sortedMemos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == true || $0.isBookMarked == true })
-//            self.memos = folder.memos.filter { $0.pinned == true || $0.isBookMarked == true }
             
         case .unpinned:
-//            self.memos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == false && $0.isBookMarked == false })
             sortedMemos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == false && $0.isBookMarked == false })
-//            self.memos = folder.memos.filter { $0.pinned == false && $0.isBookMarked == false }
+            
         case .all:
-//            self.memos = Memo.sortMemos(memos: folder.memos.sorted())
             sortedMemos = Memo.sortMemos(memos: folder.memos.sorted())
         }
         self.memos = sortedMemos
-        var empty = [CGFloat]()
-        for _ in 0 ..< sortedMemos.count {
-            empty.append(0)
-        }
-        self.offsets = empty
+        
+
+        
+        self.offsets = [CGFloat].init(repeating: 0, count: sortedMemos.count)
         
         
     }

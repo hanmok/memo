@@ -156,8 +156,9 @@ struct MemoView: View {
                 }
                 .padding(.bottom)
 
-                TextEditor(text: $contents)
-                    .font(.body)
+//                TextEditor(text: $contents)
+                PlainTextView(text: $contents)
+//                    .font(.body)
                     .accentColor(Color.textViewTintColor)
                     .padding(.top)
                     .focused($editorFocusState)
