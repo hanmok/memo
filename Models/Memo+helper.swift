@@ -67,10 +67,10 @@ extension Memo {
         set { contentsToShow_ = newValue }
     }
     
-    var overview: String {
-        get { overview_ ?? "" }
-        set { overview_ = newValue }
-    }
+//    var overview: String {
+//        get { overview_ ?? "" }
+//        set { overview_ = newValue }
+//    }
     
     var modificationDate: Date {
         get { modificationDate_ ?? Date() }
@@ -82,33 +82,34 @@ extension Memo {
         set { pinned_ = newValue }
     }
     
-    var offset: CGFloat {
-        get { CGFloat(offset_) }
-        set { offset_ = newValue }
-    }
+//    var offset: CGFloat {
+//        get { CGFloat(offset_) }
+//        set { offset_ = newValue }
+//    }
     
-    var color: UIColor? {
-        get {
-            guard let hex = colorAsHex else { return nil }
-            return UIColor(hex: hex)
-        }
-        set (newColor) {
-            if let newColor = newColor {
-                colorAsHex = newColor.toHex
-            }
-        }
-    }
+//    var color: UIColor? {
+//        get {
+//            guard let hex = colorAsHex else { return nil }
+//            return UIColor(hex: hex)
+//        }
+//        set (newColor) {
+//            if let newColor = newColor {
+//                colorAsHex = newColor.toHex
+//            }
+//        }
+//    }
     
 
     
-    var colorIndex: Int {
-        get {
-            Int(colorIndex_)
-        }
-        set (newValue) {
-            colorIndex_ = Int64(newValue)
-        }
-    }
+//    var colorIndex: Int {
+//        get {
+//            Int(colorIndex_)
+//        }
+//        set (newValue) {
+//            colorIndex_ = Int64(newValue)
+//        }
+//    }
+    
     // What do I need to do now .. ?
     // Getting a Color
 //    let color = note.color
@@ -190,7 +191,7 @@ extension Memo {
         print("memo.creationDate: \(self.creationDate)")
         print("memo.contents: \(self.contents)")
         print("memo.modificationDate: \(String(describing: self.modificationDate))")
-        print("memo.overview: \(self.overview)")
+//        print("memo.overview: \(self.overview)")
     }
     
     func setToSampleData() {

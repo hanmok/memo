@@ -55,7 +55,7 @@ struct FilteredMemoList: View {
         
         return ZStack {
             
-            VStack { // without this, views stack on other memos
+            LazyVStack { // without this, views stack on other memos
                 Section {
                     
 //                    ForEach(memosVM.memos, id: \.self) { memo in
@@ -75,7 +75,8 @@ struct FilteredMemoList: View {
 //                                .animation(.spring(), value: isDraggingAction)
                                 .background {
                                     ZStack {
-                                        Color(isDraggingAction ? .memoBoxSwipeBGColor : .blackAndWhite)
+//                                        Color(isDraggingAction ? .memoBoxSwipeBGColor : .blackAndWhite)
+                                        Color(isDraggingAction ? .memoBoxSwipeBGColor : .white)
                                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                                             .cornerRadius(10)
                                         HStack {
@@ -154,6 +155,7 @@ struct FilteredMemoList: View {
             print("onChanged triggered")
             
             if isDragging && value.translation.width < -5 {
+
                 DispatchQueue.main.async {
                     isDraggingAction = true
                 }
@@ -179,6 +181,7 @@ struct FilteredMemoList: View {
                     }
                 }
             }
+        print("isDraggingAction: \(isDraggingAction)")
         }
 //    }
     

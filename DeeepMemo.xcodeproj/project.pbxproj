@@ -150,6 +150,9 @@
 		E523DB5327C0073900D8D78B /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB5127C0073900D8D78B /* NewMemoView.swift */; };
 		E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
+		E54FE18327C9455B000FFA81 /* SyntaxHighlightTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18227C9455B000FFA81 /* SyntaxHighlightTextStorage.swift */; };
+		E54FE18527C94595000FFA81 /* NoteEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18427C94594000FFA81 /* NoteEditorViewController.swift */; };
+		E54FE18727C945DF000FFA81 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18627C945DF000FFA81 /* Note.swift */; };
 		E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596A6C427AD8D5000076E95 /* OrderViewModel.swift */; };
 		E596A6C627AD8D5000076E95 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596A6C427AD8D5000076E95 /* OrderViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -263,6 +266,9 @@
 		E523DB5127C0073900D8D78B /* NewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
 		E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemoVarsTestView.swift; sourceTree = "<group>"; };
 		E54FE17E27C7C896000FFA81 /* SwipeTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTestView.swift; sourceTree = "<group>"; };
+		E54FE18227C9455B000FFA81 /* SyntaxHighlightTextStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighlightTextStorage.swift; sourceTree = "<group>"; };
+		E54FE18427C94594000FFA81 /* NoteEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorViewController.swift; sourceTree = "<group>"; };
+		E54FE18627C945DF000FFA81 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		E596A6C427AD8D5000076E95 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -301,6 +307,7 @@
 				E54FE17E27C7C896000FFA81 /* SwipeTestView.swift */,
 				9AD8332627BD0B7300506AE8 /* CustomTextView1.swift */,
 				9AE5391A27C6374F00452999 /* PlainTextView.swift */,
+				E54FE18127C94539000FFA81 /* MemoTextView */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
 				9AC5D0F32782C59C007EAA28 /* ViewModels */,
@@ -576,6 +583,16 @@
 			path = Colors;
 			sourceTree = "<group>";
 		};
+		E54FE18127C94539000FFA81 /* MemoTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E54FE18227C9455B000FFA81 /* SyntaxHighlightTextStorage.swift */,
+				E54FE18427C94594000FFA81 /* NoteEditorViewController.swift */,
+				E54FE18627C945DF000FFA81 /* Note.swift */,
+			);
+			path = MemoTextView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -719,10 +736,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E54FE18327C9455B000FFA81 /* SyntaxHighlightTextStorage.swift in Sources */,
 				E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */,
 				9AD8332327BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */,
 				9AE5391B27C6374F00452999 /* PlainTextView.swift in Sources */,
 				9A98E7582773021200057A84 /* ModelTest.swift in Sources */,
+				E54FE18727C945DF000FFA81 /* Note.swift in Sources */,
 				9A1D856B27A3E98D00B00156 /* SelectingFolderView.swift in Sources */,
 				9A337804279576CC00805138 /* testView.swift in Sources */,
 				9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */,
@@ -761,6 +780,7 @@
 				9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */,
 				9A1D535C27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
 				9A3377B927900BF200805138 /* MemoListTest.swift in Sources */,
+				E54FE18527C94595000FFA81 /* NoteEditorViewController.swift in Sources */,
 				9AC5D225278834EC007EAA28 /* FolderLabelView3.swift in Sources */,
 				9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */,
 				9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */,
