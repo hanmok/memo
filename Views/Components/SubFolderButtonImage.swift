@@ -13,27 +13,7 @@ struct SubFolderButtonImage: View {
     
     var body: some View {
         ZStack {
-//            Circle()
-//                .stroke(.black, lineWidth: 2)
-//                .frame(width: 52, height: 52)
-//                .background(.clear)
-//                .foregroundColor(.clear)
-
-            
-//            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
             SystemImage("circle", size: 50)
-            // FG and BG should be the same color
-
-//                .foregroundColor(colorScheme.adjustMainColors())
-//                .background(colorScheme.adjustMainColors())
-//                .foregroundColor(Color(red: 237, green: 233, blue: 204))
-//                .background(Color(red: 237, green: 233, blue: 204))
-            
-//                .foregroundColor(Color(red: 232, green: 228, blue: 199))
-//                .background(Color(red: 232, green: 228, blue: 199))
-            
-//                .foregroundColor(colorScheme.adjustSubColors())
-//                .background(colorScheme.adjustSubColors())
                 .foregroundColor(Color.subColor)
                 .background(Color.subColor)
 
@@ -41,7 +21,6 @@ struct SubFolderButtonImage: View {
             UnchangeableImage(imageSystemName: "folder")
 
                 .frame(width: 25, height: 25)
-//                .foregroundColor(colorScheme == .dark ? Color(white: 1) : Color(white: 0))
                 .foregroundColor(Color.black)
         }
     }

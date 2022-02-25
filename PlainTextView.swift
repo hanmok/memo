@@ -52,9 +52,7 @@ struct PlainTextView: UIViewRepresentable {
     
     
     func updateUIView(_ uiView: UITextView, context: Context) {
-        //        print("updateUIView triggered")
         if firstTime {
-            //        uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body1)])
             DispatchQueue.main.async {
                 uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: UIColor.memoTextColor])
                 firstTime.toggle()

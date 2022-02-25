@@ -76,71 +76,24 @@ struct FolderView: View {
         
         return ZStack {
             VStack {
-                
-                
                     Rectangle()
                         .frame(width: UIScreen.screenWidth, height: 90)
-//                        .foregroundColor(Color.mainColor)
-//                        .background(Color.mainColor)
                         .foregroundColor(colorScheme == .dark ? .black : .white)
-//                        .foregroundColor(Color.green)
-//                        .background(Color.blue)
+                
                     Spacer()
                 
             }.ignoresSafeArea(edges: .top)
                     
             VStack {
-                    
                     HStack {
                         btnBack
                         Spacer()
                         
                         HStack(spacing: 16) {
                             
-                            // check mark
-                            // how to make it blink when check mode ?
-                            
-//                            Button {
-//                                // press when checkMode -> deselect All
-//                                if memoEditVM.isSelectionMode {
-//                                    memoEditVM.selectedMemos.removeAll()
-//                                }
-//                                memoEditVM.isSelectionMode.toggle()
-//
-//                            } label: {
-//                                if memoEditVM.isSelectionMode {
-//                                    // make blinking animation.
-//                                    // Cancel Selecting Image
-//                                    ZStack(alignment: .topLeading) {
-//                                        SystemImage("checkmark")
-//                                            .tint(colorScheme == .dark ? Color.navBtnColor : Color.swipeBtnColor3)
-//                                        SystemImage("line.diagonal")
-//                                            .rotationEffect(.degrees(90))
-//                                            .tint(Color.navBtnColor)
-//                                    }
-//                                } else {
-//                                    SystemImage("checkmark")
-//                                        .tint(Color.navBtnColor)
-//                                }
-//                            }
-                            
-                            
                             // search Button
                             Button(action: {
-                                
-                                // This Line makes memos . Why ?
-                                currentFolder.title += "" // 이거 할 때마다 두개씩 memo 가 생김. 왜 ??
-                                
-                                if let validParent = currentFolder.parent {
-                                    validParent.title += ""
-                                    print("parent's title has changed")
-                                }
-                                
-                                
-                                print("count : \(currentFolder.memos.count)")
-                                
                                 showingSearchView = true
-                                
                             }, label: {
                                 SystemImage("magnifyingglass")
                                     .tint(Color.navBtnColor)
@@ -186,16 +139,12 @@ struct FolderView: View {
                                     HierarchyLabelView(currentFolder: currentFolder)
                                         .font(.caption)
                                         .frame(maxWidth: .infinity, alignment: .topLeading)
-                                    //                                .padding(.leading, Sizes.overallPadding)
                                         .padding(.leading, 10)
                                         .offset(y: 40)
                                 }
                             }
                         }
-//                        .padding(.top, 15.5)
                         .padding(.bottom, 8)
-                        
-                        
                         
                         ZStack {
                             if !currentFolder.memos.isEmpty {
@@ -210,18 +159,10 @@ struct FolderView: View {
                     .environmentObject(memoEditVM)
                     .environmentObject(memoOrder)
                     
-                    //                    Rectangle()
-                    //                        .frame(height: 100)
-                    //                        .foregroundColor(.clear)
-                    
                 } // end of scrollView
             } // end of VStack
             .padding(.top, 12)
             .padding(.horizontal, Sizes.overallPadding)
-            
-            //            .padding
-            
-            
             
             // ANOTHER ELEMENT IN ZSTACK
             VStack {
@@ -250,11 +191,9 @@ struct FolderView: View {
                 Spacer()
             }
             .padding(.top, 55)
-            //            .padding(.trailing, Sizes.overallPadding)
-            
+
             VStack {
                 Spacer()
-                //                HStack {
                 ZStack {
                     HStack {
                         Spacer()
@@ -266,17 +205,6 @@ struct FolderView: View {
                                     .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                     .animation(.spring(), value: memoEditVM.isSelectionMode)
                             }
-//                            .simultaneousGesture(
-//
-//                                LongPressGesture(minimumDuration: 0.2).onEnded{_ in
-//
-//                                    // if already long tapped
-//                                    print("long pressed!")
-//
-//                                    memoEditVM.isSelectionMode = true
-//                                    //                                        isAddingMemo = false
-//                                }
-//                            )
                         }
                     }
                     HStack {
@@ -291,25 +219,21 @@ struct FolderView: View {
                             .animation(.spring(), value: memoEditVM.isSelectionMode)
                     }
                 }
-                //                } // end of HStack
             } // end of VStack
             
-            
-            
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    ColorPaletteView(
-                        showColorPalette: $showColorPalette)
-                        .environmentObject(memoEditVM)
-                        .offset(y: showColorPalette ? 0 : 200)
-                        .animation(.spring(), value: showColorPalette)
-                        .padding(.trailing, Sizes.overallPadding)
-                        .padding(.bottom, Sizes.overallPadding)
-                }
-            }
-            
+//            VStack {
+//                Spacer()
+//                HStack {
+//                    Spacer()
+//                    ColorPaletteView(
+//                        showColorPalette: $showColorPalette)
+//                        .environmentObject(memoEditVM)
+//                        .offset(y: showColorPalette ? 0 : 200)
+//                        .animation(.spring(), value: showColorPalette)
+//                        .padding(.trailing, Sizes.overallPadding)
+//                        .padding(.bottom, Sizes.overallPadding)
+//                }
+//            }
             
             CustomSearchView(
                 fastFolderWithLevelGroup: FastFolderWithLevelGroup(
@@ -320,35 +244,14 @@ struct FolderView: View {
             
                 .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
-//                .padding(.horizontal, Sizes.overallPadding)
                 .padding(.horizontal, Sizes.properSpacing)
             
             
-            // Another ZStack Element Begins
             
-            // When add folder pressed
-            // overlay white background when Alert show up
-            
-            //            if shouldAddFolder {
-            //                Color(.white)
-            //                    .opacity(0.8)
-            //            }
-            
-            
-            //            SearchView(
-            //                fastFolderWithLevelGroup: FastFolderWithLevelGroup(
-            //                homeFolder: Folder.fetchHomeFolder(context: context)!,
-            //                archiveFolder: Folder.fetchHomeFolder(context: context,
-            //                                                      fetchingHome: false)!),
-            //                currentFolder: currentFolder, showingSearchView: $showingSearchView, hidingNavBar: $hidingNavBar)
-            //                .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
-            //                .animation(.spring(), value: showingSearchView)
             
             //  Present TextFieldAlert when add folder pressed
             PrettyTextFieldAlert(
-                //                placeHolderText: "Enter new folder name",
                 type: .newSubFolder,
-                //                isPresented: $folderEditVM.shouldAddFolder,
                 isPresented: $shouldAddFolder,
                 text: $newSubFolderName,
                 focusState: _addFolderFocus,
@@ -368,24 +271,14 @@ struct FolderView: View {
             
             NavigationLink(destination:
                             NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
-            
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
-            
-            
-            
-            
-            
         } // end of ZStack
-        
         .frame(maxHeight: .infinity)
         
         // fetch both home Folder and Archive Folder Separately.
-        
-        
         .sheet(isPresented: $showSelectingFolderView,
                content: {
-            
             SelectingFolderView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
@@ -399,7 +292,7 @@ struct FolderView: View {
         })
         
         .alert(AlertMessages.alertDeleteMain, isPresented: $showDeleteAlert, actions: {
-            // delete
+            // DELETE
             Button(role: .destructive) {
                 _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
                 

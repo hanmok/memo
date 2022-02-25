@@ -26,8 +26,6 @@ struct BookmarkedMemoBoxView: View {
                     .frame(width: frameSize, alignment: .leading)
                     .padding(.horizontal, Sizes.smallSpacing)
                     .padding(.top, 5)
-                
-                
             }
             
             if memo.contentsToShow != "" {
@@ -39,10 +37,9 @@ struct BookmarkedMemoBoxView: View {
                     .padding(.horizontal, Sizes.smallSpacing)
                     .padding(.bottom, 5)
             }
+            Spacer()
         }
         .tint(Color.black)
-//        .background(colorScheme.adjustMainColors())
-//        .background(Color.mainColor)
         .background(Color.memoBoxColor)
         .cornerRadius(7)
     }

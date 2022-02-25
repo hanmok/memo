@@ -19,14 +19,10 @@ struct SelectingFolderView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
 
     @Environment(\.colorScheme) var colorScheme
-//    @State var invalidFolderWithLevels: [FolderWithLevel] = []
+    
     var invalidFolderWithLevels: [FolderWithLevel]
 
     @State var selectionEnum = FolderTypeEnum.folder // default value
-//    @Binding var selectionEnum: FolderTypeEnum // default value
-
-//    var onSubmitAction: () -> Void = { }
-//    var onCancelAction: () -> Void = { }
     var isFullScreen: Bool = false
   
     var body: some View {
@@ -52,8 +48,6 @@ struct SelectingFolderView: View {
                         HStack {
                             // MARK: - FOR TESTING
                             Spacer()
-                            
-                            
                             
                             Button {
                                 presentationMode.wrappedValue.dismiss()
@@ -95,9 +89,6 @@ struct SelectingFolderView: View {
                             }
                         } else {
                             _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
-//                            for eachMemo in memoEditVM.selectedMemos.sorted() {
-//                                folderEditVM.folderToPaste!.add(memo: eachMemo)
-//                            }
                             
                             memoEditVM.initSelectedMemos()
                         }
@@ -138,9 +129,6 @@ struct SelectingFolderView: View {
                             }
                         } else {
                             _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
-//                            for eachMemo in memoEditVM.selectedMemos.sorted() {
-//                                folderEditVM.folderToPaste!.add(memo: eachMemo)
-//                            }
                             memoEditVM.initSelectedMemos()
                         }
                         
@@ -161,8 +149,6 @@ struct SelectingFolderView: View {
                             
                         } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, shouldCheck: true)
-//                                .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
-//                                .background(colorScheme.adjustSubColors())
                         } else {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }

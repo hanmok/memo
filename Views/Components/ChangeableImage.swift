@@ -52,7 +52,6 @@ struct SystemImage: View {
         Image(systemName: imageSystemName)
             .resizable()
             .aspectRatio( contentMode: .fit)
-//            .tint(Color.black)
             .frame(width: size, height: size)
     }
 }

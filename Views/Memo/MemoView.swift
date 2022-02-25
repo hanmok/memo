@@ -20,7 +20,6 @@ struct MemoView: View {
     @ObservedObject var memo: Memo
     
     @FocusState var editorFocusState: Bool
-//    @GestureState var isScrolled = false
     
     @State var showSelectingFolderView = false
     
@@ -101,13 +100,9 @@ struct MemoView: View {
 //            }
         
         return ZStack(alignment: .topLeading) {
-            //            Text("Tab1View")
             VStack {
                 Rectangle()
                     .frame(width: UIScreen.screenWidth, height: 90)
-//                    .foregroundColor(Color.pastelColors[selectedColorIndex])
-//                    .foregroundColor(colorScheme.adjustMainColors())
-//                    .foregroundColor(Color.mainColor)
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }
@@ -122,14 +117,12 @@ struct MemoView: View {
             
                         Button(action: toggleBookMark) {
 
-//                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
                             SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark")
                                 .tint(Color.navBtnColor)
                         }
                         
                         // PIN Button
                         Button(action: togglePinMemo) {
-//                            SystemImage( memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
                             SystemImage( memo.pinned ? "pin.fill" : "pin")
                                 .tint(Color.navBtnColor)
                         }
@@ -139,14 +132,12 @@ struct MemoView: View {
                             showSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
-//                            SystemImage( "folder", size: Sizes.regularButtonSize)
                             SystemImage("folder")
                                 .tint(Color.navBtnColor)
                         }
                         
                         // REMOVE
                         Button(action: removeMemo) {
-//                            SystemImage( "trash", size: Sizes.regularButtonSize)
                             SystemImage("trash")
                                 .tint(Color.navBtnColor)
                         }
@@ -155,46 +146,14 @@ struct MemoView: View {
                 .padding(.bottom)
                 .padding(.horizontal, Sizes.overallPadding)
 
-                 // has problem on TextViews
-                
-//                TextEditor(text: $contents)
-                
-                //                PlainTextView 에 뭔가 문제가 있음.
-//                CustomTextView(text: $contents)
-                
-
-//                PlainTextView(text: $contents)
-//                TextEditor(text: $contents)
-//                PlainTextView(text: $contents)
-//                PlainTextView(text: $contents, doneButtonAction: {
-////                    saveChanges()
-////                    print("done button has pressed")
-//                })
                 
                 PlainTextView(text: $contents)
-//                    .font(.title3)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
                     .padding(.leading, Sizes.overallPadding)
             }
             .padding(.top, 10)
-
-//            .padding(.horizontal, Sizes.overallPadding)
-//            .gesture(scroll) // 이거 달면.. focus 를 빼앗겨..
-            // 아니 이거 때문에 빼앗기는게 아니라, scroll 에 있는 focus 없애기때문에 빼앗김.
-            
-//            VStack {
-//                HStack {
-//                    Spacer()
-//                    ColorPaletteView(selectedColorIndex: $selectedColorIndex, showColorPalette: $showColorPalette)
-//                        .environmentObject(memoEditVM)
-//                        .padding(.top, Sizes.overallPadding)
-//                }
-//                Spacer()
-//            }
-//            .offset(y: showColorPalette ? -35 : -300)
-//            .animation(.spring(), value: showColorPalette)
             
         }
         .padding(.bottom)
@@ -206,11 +165,6 @@ struct MemoView: View {
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
             selectedColorIndex = memo.colorIndex
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                /// Anything over 0.5 seems to work
-//                self.editorFocusState = true
-//                UIApplication.shared.startEditing()
-//            }
         })
         
         .onDisappear(perform: {

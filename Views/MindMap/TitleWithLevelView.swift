@@ -10,11 +10,11 @@ import SwiftUI
 struct TitleWithLevelView: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-
+    
     @ObservedObject var folder: Folder
     
     var level: Int
-
+    
     var shouldHideArrow = false
     
     var body: some View {
@@ -28,13 +28,12 @@ struct TitleWithLevelView: View {
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
-//                    .tint(.yellow) // why not working ?
             }
             
             Spacer()
             Text("\(folder.memos.count)")
                 .foregroundColor(.gray)
-                
+            
         }
         .frame(maxWidth: .infinity)
     }
@@ -42,11 +41,11 @@ struct TitleWithLevelView: View {
 
 
 struct CheckableFolderCell: View {
-
+    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-
+    
     @ObservedObject var folder: Folder
-
+    
     var level: Int
     
     var shouldHideArrow = false
@@ -62,27 +61,18 @@ struct CheckableFolderCell: View {
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
-//                    .foregroundColor(colorScheme.adjustMainColors())
-//                    .foregroundColor(colorScheme.adjustBlackAndWhite())
                     .foregroundColor(Color.blackAndWhite)
-//                    .tint(.yellow) // why not working ?
             }
             
             Spacer()
             if shouldCheck {
-            Button {
-            } label: {
-                SystemImage( "checkmark")
-                
-            }
-//            .tint(Color.subColor)
-//            .tint(Color(UIColor(named: "mainColor")!))
-//            .tint(colorScheme.adjustMainColors())
-//            .tint(Color.mainColor)
-            .tint(.swipeBtnColor2)
+                Button {
+                } label: {
+                    SystemImage( "checkmark")
+                    
+                }
+                .tint(.swipeBtnColor2)
             }
         }
-        
     }
-    
 }

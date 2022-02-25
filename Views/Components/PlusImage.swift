@@ -15,11 +15,10 @@ struct PlusImage: View {
         
         ZStack {
             ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
-//            SystemImage(imageSystemName: "circle", size: 50)
                 .foregroundColor(Color.subColor)
                 .background(Color.subColor)
                 .clipShape(Circle())
-//            ChangeableImage(imageSystemName: "plus")
+            
             SystemImage("plus")
                 .frame(width: 25, height: 25)
                 .foregroundColor(Color.black)

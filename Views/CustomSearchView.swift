@@ -121,21 +121,17 @@ struct CustomSearchView: View {
                     HStack(spacing: 0) {
 
                         ChangeableImage(imageSystemName: "magnifyingglass", height: 16)
-//                            .tint(Color.)
                             .foregroundColor(Color(white: 131 / 255))
                             .padding(.horizontal, 7)
 
                         TextField("Search", text: $searchKeyword)
-//                            .tint(Color.textViewTintColor)
                             .accentColor(Color.textViewTintColor)
                             
                             .focused($focusState)
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
-//                            .focused($focusState)
-
-//                            .foregroundColor(colorScheme.adjustBlackAndWhite())
                             .foregroundColor(Color.blackAndWhite)
+                        
                         Spacer()
                         Button{
                             searchKeyword = ""
@@ -159,13 +155,9 @@ struct CustomSearchView: View {
                     .frame(width: UIScreen.screenWidth - 5.1 * Sizes.overallPadding)
                     .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                     .cornerRadius(10)
+                    
                     Spacer()
                     
-//                    Button("Cancel") {
-//                        focusState = false
-//                        searchKeyword = ""
-//                        showingSearchView = false
-//                    }
                     Button {
                         focusState = false
                         searchKeyword = ""
@@ -201,7 +193,8 @@ struct CustomSearchView: View {
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
-                                                Spacer() // Spacer for aligning to the left.
+                                                Spacer()
+                                                
                                             } // end of HStack
                                             .padding(.top, 5)
                                             .offset(y: 5)
@@ -235,7 +228,7 @@ struct CustomSearchView: View {
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
-                                                Spacer() // Spacer for aligning to the left.
+                                                Spacer()
                                             } // end of HStack
                                             .padding(.top, 5)
                                             .offset(y: 5)

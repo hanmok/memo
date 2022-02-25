@@ -29,15 +29,6 @@ struct LevelAndCollapsed {
 
 struct MindMapView: View {
     
-    //    @AppStorage("ordering") private(set) var order: Ordering = Ordering(folderType: "Modification Date", memoType: "Creation Date", folderAsc: true, memoAsc: false)
-    
-    //    @FetchRequest(fetchRequest: Memo.bookMarkedFetchReq()) var memos: FetchedResults<Memo>
-    
-    //    @FetchRequ
-    
-//    @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
-//    @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
-    
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
@@ -92,13 +83,11 @@ struct MindMapView: View {
 
                         // MARK: - Button 2: Folder Ordering
                         FolderOrderingMenu(folderOrder: folderOrder)
-//                            .padding(.horizontal, Sizes.smallSpacing)
                             .padding(.leading, 16)
                         
                         // MARK: - Button 3: Add new Folder to the top Folder
                         Button {
                             showTextField = true
-//                            textFieldType = .newTopFolder
                             if selectionEnum == .folder {
                                 textFieldType = .newTopFolder
                                 newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)'s \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1) th Folder"
@@ -110,12 +99,10 @@ struct MindMapView: View {
                         } label: { // original : 28
 
                             SystemImage( "folder.badge.plus", size: 28)
-//                            SystemImage("folder.badge.plus")
                                 .foregroundColor(Color.navBtnColor)
                         }
                         .padding(.leading, 12)
                     }
-//                    .padding(.trailing, Sizes.overallPadding)
                     .padding(.horizontal, 20)
 
                     .padding(.top, 8)
@@ -129,7 +116,6 @@ struct MindMapView: View {
                         .tag(FolderTypeEnum.folder)
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(FolderTypeEnum.archive)
                 }
-//                .tint(.pink)
                 .id(selectionEnum)
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)
@@ -188,7 +174,6 @@ struct MindMapView: View {
                                                 .foregroundColor(.black)
                                             
                                         }
-//                                        .tint(.blue)
                                         .tint(Color.swipeBtnColor2)
                                     }
                                 // Change Folder Name
@@ -212,7 +197,6 @@ struct MindMapView: View {
                                         } label: {
                                             SystemImage(  "folder")
                                         }
-//                                        .tint(.green)
                                         .tint(Color.swipeBtnColor3)
                                     
                                         Button {
@@ -232,16 +216,6 @@ struct MindMapView: View {
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
-                        
-                        // What was this For ?
-//                    Rectangle()
-////                            .foregroundColor(.clear)
-////                            .background(.clear)
-//                            .foregroundColor(colorScheme == .dark ? .black : Color(white: 242 / 255))
-//                            .background(colorScheme == .dark ? .black : Color(white: 242 / 255))
-////                            .frame(height: 150)
-//                            .frame(height: 185)
-                        
                     }
                     
                     // Another ZStack Element
@@ -265,8 +239,6 @@ struct MindMapView: View {
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
-//                                        .tint(.blue)
-//                                        .tint(colorScheme.adjustMainColors())
                                         .tint(Color.swipeBtnColor2)
                                     }
                             } else {
@@ -287,7 +259,6 @@ struct MindMapView: View {
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
-//                                        .tint(.blue)
                                         .tint(Color.swipeBtnColor2)
                                     }
                                 // Change Folder Name
@@ -322,7 +293,7 @@ struct MindMapView: View {
                                                 newFolderName = folderWithLevel.folder.title
                                             }
                                         } label: {
-                                            SystemImage(  "pencil")
+                                            SystemImage("pencil")
                                         }
                                         .tint(Color.swipeBtnColor2)
                                     }

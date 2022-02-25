@@ -25,9 +25,6 @@ struct DeeepMemoApp: App {
         }
         
         return WindowGroup {
-            
-
-            
             HomeView()
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

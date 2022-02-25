@@ -10,13 +10,13 @@ import CoreData
 struct SubFolderView: View {
     
     @Environment(\.colorScheme) var colorScheme
-
+    
     @ObservedObject var folder: Folder
-
+    
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-
+    
     @Binding var isShowingSubFolderView: Bool
     @Binding var isAddingFolder: Bool
     
@@ -51,9 +51,9 @@ struct SubFolderView: View {
             
             
             VStack(alignment: .leading, spacing: 5) {
-            
+                
                 ForEach(subFolders) { subFolder in
-
+                    
                     NavigationLink {
                         FolderView(currentFolder: subFolder)
                             .environmentObject(folderEditVM)
@@ -63,10 +63,10 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                             .lineLimit(1)
-//                            .adjustTintColor(scheme: colorScheme)
+                        //                            .adjustTintColor(scheme: colorScheme)
                             .foregroundColor(.black)
                     }
-
+                    
                     .simultaneousGesture(TapGesture().onEnded{
                         // hide SubFolderView when navigate
                         isShowingSubFolderView = false
@@ -74,14 +74,12 @@ struct SubFolderView: View {
                         memoEditVM.initSelectedMemos()
                     })
                 } // end of ForEach
-                // 왜.. 빈공간이 생깁니까??
             } // end of VStack
             .padding(.leading, 12)
             .padding(.bottom, subFolders.count == 0 ? 0 : 10)
-//            .padding(.bottom, 10)
             
             if subFolders.count == 0 {
-               
+                
                 Button {
                     isAddingFolder = true
                 } label: {
@@ -91,16 +89,13 @@ struct SubFolderView: View {
                 .padding(.leading, 12)
                 .padding(.bottom, 10)
             }
-
+            
         }
         .frame(width: UIScreen.screenWidth / 2.5)
-//        .background(Color.weekSubColor)
         .background(
-//            colorScheme.adjustMainColors()
-//            Color(red: 232, green: 228, blue: 199)
             Color.subColor
         )
-            .cornerRadius(10)
+        .cornerRadius(10)
     }
 }
 

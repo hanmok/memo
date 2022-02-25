@@ -31,7 +31,7 @@ struct TextFieldStruct {
 }
 
 struct PrettyTextFieldAlert: View {
-//    let placeHolderText: String
+    
     let type: TextFieldAlertType
     
     @Environment(\.colorScheme) var colorScheme
@@ -42,7 +42,7 @@ struct PrettyTextFieldAlert: View {
     @Binding var text: String
     
     @FocusState var focusState: Bool
-    // working find..
+    
     var submitAction: (String) -> Void = { _ in }
     var cancelAction: () -> Void = { }
     
@@ -58,10 +58,6 @@ struct PrettyTextFieldAlert: View {
                     .font(.callout)
                     .focused($focusState)
                     .background(colorScheme == .dark ? .black : .white)
-//                    .tint(colorScheme == .dark ? Color.cream : Color.swipeBtnColor3)
-//                    .tint(Color.textViewTintColor)
-//                    .tint(.red)// not working .
-//                    .accentColor(Color.textViewTintColor)
                     .accentColor(colorScheme == .dark ? Color.cream : Color.bookmarkBarColor)
                     .foregroundColor(Color.blackAndWhite)
                     .cornerRadius(5)
@@ -72,8 +68,6 @@ struct PrettyTextFieldAlert: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.52) {  /// Anything over 0.5 seems to work
                                 textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
                             }
-                            
-//                            textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
                         }
                     }
                 
@@ -119,13 +113,11 @@ struct PrettyTextFieldAlert: View {
                         focusState = false
                     } label: {
                         Text("Done")
-//                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .frame(alignment: .center)
                     }
                     .frame(width: screenSize.width * 0.32, alignment: .center)
                 } // end of HStack
-
             }
 
             .frame(width: screenSize.width * 0.65, height: 132)

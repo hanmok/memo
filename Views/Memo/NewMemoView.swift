@@ -19,7 +19,6 @@ struct NewMemoView: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     
     @FocusState var editorFocusState: Bool
-//    @GestureState var isScrolled = false
     
     @State var contents: String = ""
     
@@ -115,7 +114,6 @@ struct NewMemoView: View {
 //            }
         
         return ZStack(alignment: .topLeading) {
-            //            Text("Tab1View")
             VStack {
                 HStack {
                     backBtn
@@ -176,22 +174,7 @@ struct NewMemoView: View {
                 }
                 .padding(.horizontal, Sizes.overallPadding)
                 
-
-//                PlainTextView(text: $contents)
-////                TextEditor(text: $contents)
-//                    .padding(.top)
-////                    .focused($editorFocusState)
-//                    .foregroundColor(Color.memoTextColor)
-                
-//                TextEditor(text: $contents)
-//                    .font(.body)
-//                    .accentColor(Color.textViewTintColor)
-//                    .padding(.top)
-//                    .focused($editorFocusState)
-//                    .foregroundColor(Color.memoTextColor)
-                
                 PlainTextView(text: $contents)
-//                    .font(.title3)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
@@ -204,7 +187,6 @@ struct NewMemoView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 /// Anything over 0.5 seems to work
                 self.editorFocusState = true
-//                UIApplication.shared.startEditing()
             }
         })
         .onDisappear(perform: {

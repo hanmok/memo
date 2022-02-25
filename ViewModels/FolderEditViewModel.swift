@@ -18,7 +18,6 @@ class FolderEditViewModel: ObservableObject {
     @Published var folderToRemove: Folder? = nil
     @Published var folderToPaste: Folder? = nil
     @Published var folderToCut: Folder? = nil
-//    @Published var folderToCut: [Folder] = []
     
     var selectedFolder: Folder? = nil
 

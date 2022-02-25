@@ -20,7 +20,8 @@ struct HomeView: View { // top folder fetch
     var body: some View {
         
 
-        //   // MARK: - For Testing
+        //   // MARK: - For Testing, erasing all the datas
+        
 //                DispatchQueue.main.async {
 //                    if true {
 //                        if shouldExecuteOne {
@@ -28,15 +29,11 @@ struct HomeView: View { // top folder fetch
 ////                            UnitTestHelpers.deletesAllMemos(context: context)
 ////                            UnitTestHelpers.deletesAllFolders(context: context)
 //                            shouldExecuteOne.toggle()
-//                            Folder.returnSampleFolder3(context: context)
+//                            let _ = Folder.returnSampleFolder3(context: context)
 //                        }
 //                    }
 //                }
 
-    
-        // 음 .. 처음부터,, FolderView 와 Archive 는 주어야하는데,, 어떻게 주지 ?
-        
-        
         
         return NavigationView {
             MindMapView(
@@ -47,21 +44,6 @@ struct HomeView: View { // top folder fetch
                     )
             )
         }
-        
-        
-        
-//        return SearchView(fastFolderWithLevelGroup:
-//                            FastFolderWithLevelGroup(
-//                                homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
-//                                archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
-//                            ), currentFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!, showingSearchView: .constant(true))
-         
-//        return CustomSearchView(fastFolderWithLevelGroup:
-//                            FastFolderWithLevelGroup(
-//                                homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
-//                                archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
-//                            ), currentFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!, showingSearchView: .constant(true))
-        
     }
 } 
 
@@ -72,7 +54,7 @@ class FastFolderWithLevelGroup: ObservableObject {
     
     @Published var folders: [FolderWithLevel]
     @Published var archives: [FolderWithLevel]
-//    @Published var allFolders: [FolderWithLevel]
+
     
     @Published var homeFolder: Folder
     @Published var archive: Folder
@@ -83,6 +65,5 @@ class FastFolderWithLevelGroup: ObservableObject {
         
         self.archives = Folder.getHierarchicalFolders(topFolder: archiveFolder)
         self.folders = Folder.getHierarchicalFolders(topFolder: homeFolder)
-//        self.allFolders = self.archives
     }
 }

@@ -17,8 +17,6 @@ class MemoEditViewModel: ObservableObject {
         get { selectedMemos.count }
         set { if newValue == 0 {
             self.parentFolder = nil
-//            self.isSelectionMode = false
-            
         }}
     }
     
@@ -28,10 +26,6 @@ class MemoEditViewModel: ObservableObject {
     }
     
     func add(memos: [Memo]) {
-        
-//        for eachMemo in memos {
-//            self.selectedMemos.update(with: eachMemo)
-//        }
 
         _ = memos.map { self.selectedMemos.update(with: $0)}
         
@@ -50,7 +44,6 @@ class MemoEditViewModel: ObservableObject {
     
     func initSelectedMemos() {
         self.selectedMemos.removeAll()
-//        hasNotLongSelected = true
         isSelectionMode = false
         self.parentFolder = nil
     }

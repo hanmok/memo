@@ -18,6 +18,7 @@ class MemosViewModel : ObservableObject {
     @Published var memos: [Memo]
     @Published var folder: Folder
     @Published var offsets: [CGFloat]
+    
     init(folder : Folder, type: MemoListType) {
         self.folder = folder
         var sortedMemos = [Memo]()
@@ -70,46 +71,46 @@ struct FilteredMemoList: View {
                         ) {
                             MemoBoxView(memo: memosVM.memos[index])
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-//                                .offset(x: memosVM.offsets[index])
-////                                .animation(.spring(), value: isDraggingAction)
-//                                .background {
-//                                    ZStack {
-//                                        Color(isDraggingAction ? .memoBoxSwipeBGColor : .blackAndWhite)
-//                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
-//                                            .cornerRadius(10)
-//                                        HStack {
-//                                            Spacer()
-//                                            SystemImage("checkmark")
-//                                                .frame(width: 65)
-//                                                .foregroundColor(.basicColors)
-//                                                .opacity(isDraggingAction ? 1 : 0)
-//                                        }
-//                                    }
-//                                    .padding(.horizontal, Sizes.smallSpacing)
-//                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
-//                                }
-//
-//                                .gesture(DragGesture()
-//                                            .updating($isDragging, body: { value, state, _ in
-//                                    state = true
-////                                    onChanged(value: value, memo: memo)
-//                                    onChanged(value: value, index: index)
-//                                }).onEnded({ value in
-////                                    onEnd(value: value, memo: memo)
-//                                    onEnd(value: value, index: index)
-//                                }))
+                                .offset(x: memosVM.offsets[index])
+//                                .animation(.spring(), value: isDraggingAction)
+                                .background {
+                                    ZStack {
+                                        Color(isDraggingAction ? .memoBoxSwipeBGColor : .blackAndWhite)
+                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
+                                            .cornerRadius(10)
+                                        HStack {
+                                            Spacer()
+                                            SystemImage("checkmark")
+                                                .frame(width: 65)
+                                                .foregroundColor(.basicColors)
+                                                .opacity(isDraggingAction ? 1 : 0)
+                                        }
+                                    }
+                                    .padding(.horizontal, Sizes.smallSpacing)
+                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
+                                }
+
+                                .gesture(DragGesture()
+                                            .updating($isDragging, body: { value, state, _ in
+                                    state = true
+//                                    onChanged(value: value, memo: memo)
+                                    onChanged(value: value, index: index)
+                                }).onEnded({ value in
+//                                    onEnd(value: value, memo: memo)
+                                    onEnd(value: value, index: index)
+                                }))
                         } // end of ZStack
-//                            .disabled(memoEditVM.isSelectionMode)
-//
-//                            .gesture(DragGesture()
-//                                        .updating($isDragging, body: { value, state, _ in
-//                                state = true
-//                                onChanged(value: value, index: index)
-////                                onChanged(value: value, memo: memo)
-//                            }).onEnded({ value in
-////                                onEnd(value: value, memo: memo)
-//                                onEnd(value: value, index: index)
-//                            }))
+                            .disabled(memoEditVM.isSelectionMode)
+
+                            .gesture(DragGesture()
+                                        .updating($isDragging, body: { value, state, _ in
+                                state = true
+                                onChanged(value: value, index: index)
+//                                onChanged(value: value, memo: memo)
+                            }).onEnded({ value in
+//                                onEnd(value: value, memo: memo)
+                                onEnd(value: value, index: index)
+                            }))
                         
                         .simultaneousGesture(TapGesture().onEnded{
                             print("Tap pressed!")

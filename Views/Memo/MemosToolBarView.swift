@@ -7,15 +7,14 @@
 
 import SwiftUI
 import CoreData
-// need connection to FolderView.
-// maybe.. onReive necessary.
+
 struct MemosToolBarView: View {
     
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @Environment(\.colorScheme) var colorScheme
     @Binding var showSelectingFolderView: Bool
-//    let spacingBetweenButtons: CGFloat = 12
+    
     let spacingBetweenButtons: CGFloat = 16
     @Binding var showDeleteAlert: Bool
     @Binding var showColorPalette: Bool
@@ -25,7 +24,6 @@ struct MemosToolBarView: View {
             
             
             Button {
-//                memoEditVM.selectedMemos.removeAll()
                 memoEditVM.initSelectedMemos()
             } label: {
                 UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
@@ -71,33 +69,6 @@ struct MemosToolBarView: View {
             }) {
                 UnchangeableImage(imageSystemName: "folder")
             }
-//            .padding(5)
-            
-            
-            // MARK: - 보류 : Combine , Change Color
-//            Button {
-//                // combine memos
-//                memoEditVM.initSelectedMemos()
-//            } label: {
-//                ChangeableImage(imageSystemName: "text.badge.plus")
-//            }
-//
-//
-//
-            // CHANGE COLOR
-//            Button(action: {changeColorAction(sortedMemos)}) {
-            
-//            Button(action: {
-//                showColorPalette = true
-////                memoEditVM.initSelectedMemos()
-//            }) {
-////                ChangeableImage(imageSystemName: "eyedropper.halffull",width: 20, height: 20)
-//                ColorPickerView()
-//            }
-//            .padding(5)
-//            .cornerRadius(5)
-            
-            
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
@@ -112,18 +83,7 @@ struct MemosToolBarView: View {
         .tint(.black)
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
-//        .background(colorScheme.adjustSubColors())
-//        .background(Color(UIColor(named: "mainColor")!))
-//        .background(colorScheme.adjustMainColors())
-//        .background(colorScheme.adjustSubColors())
         .background(Color.subColor)
         .cornerRadius(10)
     }
 }
-
-//struct MemosToolBarView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MemosToolBarView()
-//            .previewLayout(.sizeThatFits)
-//    }
-//}

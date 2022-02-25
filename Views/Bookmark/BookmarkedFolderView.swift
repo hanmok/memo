@@ -47,11 +47,11 @@ struct BookmarkedFolderView: View {
                                     }
                                 } // end of HStack
                                 .padding(.horizontal, Sizes.properSpacing)
-                                Spacer()
+//                                Spacer()
                             }
                         } // end of ScrollView
                         .frame(height: 150)
-                        .padding(.top, 10) // prev: 30
+                        .padding(.top, 10)
                         
                         Spacer()
                     } // end of VStack
@@ -96,7 +96,7 @@ struct BookmarkedFolderView: View {
                             {
                                 PlusImage() // plus Image with subColor
                             }
-//                            .padding(.trailing, Sizes.overallPadding)
+
                             .offset(y: presentingView || presentingNewMemo ? -100 : -35 ) // priv : -25
                             .animation(.spring(response: 0.2), value: presentingView || presentingNewMemo)
                         }
@@ -104,7 +104,6 @@ struct BookmarkedFolderView: View {
                     } // end of ZStack
                 }
                 .padding(.horizontal, Sizes.overallPadding)
-//                .background(Color(.sRGB, white: 0, opacity: 0.5))
                 .offset(y: presentingView || presentingNewMemo ? -100 : -20) // remove top bar when new Memo Presented.
                 Spacer()
             }
