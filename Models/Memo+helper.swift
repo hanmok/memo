@@ -82,6 +82,11 @@ extension Memo {
         set { pinned_ = newValue }
     }
     
+    var offset: CGFloat {
+        get { CGFloat(offset_) }
+        set { offset_ = newValue }
+    }
+    
     var color: UIColor? {
         get {
             guard let hex = colorAsHex else { return nil }
@@ -93,6 +98,8 @@ extension Memo {
             }
         }
     }
+    
+
     
     var colorIndex: Int {
         get {
@@ -282,6 +289,7 @@ extension Memo {
     }
     
     static func sortMemos(memos: [Memo]) -> [Memo] {
+        print("sortMemos has triggered!")
         @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
         @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
         let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)

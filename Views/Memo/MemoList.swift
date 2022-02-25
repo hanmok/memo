@@ -27,8 +27,8 @@ struct MemoList: View {
             
             if hasPinnedMemo {
                 
-                FilteredMemoList(folder: folder, listType: .pinned)
-//                FilteredMemoList(memosViewModel: MemosViewModel(folder: folder, type: .pinned))
+//                FilteredMemoList(folder: folder, listType: .pinned)
+                FilteredMemoList(folder: folder, memosVM: MemosViewModel(folder: folder, type: .pinned), listType: .pinned)
                 
                 // line between pinned / unpinned memos
                 Rectangle()
@@ -38,8 +38,8 @@ struct MemoList: View {
                     .padding(.top, 5)
             }
             
-            FilteredMemoList(folder: folder, listType: .unpinned)
-//            FilteredMemoList(memosViewModel: MemosViewModel(folder: folder, type: .unpinned))
+//            FilteredMemoList(folder: folder, listType: .unpinned)
+            FilteredMemoList(folder: folder, memosVM: MemosViewModel(folder: folder, type: .unpinned), listType: .unpinned)
         } // end of VStack
         .environmentObject(memoEditVM)
         .environmentObject(folderEditVM)
