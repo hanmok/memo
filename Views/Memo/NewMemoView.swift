@@ -204,7 +204,7 @@ struct NewMemoView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 /// Anything over 0.5 seems to work
                 self.editorFocusState = true
-                UIApplication.shared.startEditing()
+//                UIApplication.shared.startEditing()
             }
         })
         .onDisappear(perform: {
@@ -229,16 +229,16 @@ struct NewMemoView: View {
 }
 
 
-extension UIApplication {
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        
-        
-    }
-    
-    func startEditing() {
-        sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
+//extension UIApplication {
+//    func endEditing() {
+//        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+//
+//
+//    }
+//
+//    func startEditing() {
+//        sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
+//    }
+//}
 
 

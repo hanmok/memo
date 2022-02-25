@@ -118,17 +118,19 @@ struct MemoView: View {
                     btnBack
                     Spacer()
                     
-                    HStack(spacing: 15) {
+                    HStack(spacing: 16) {
             
                         Button(action: toggleBookMark) {
 
-                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
+//                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
+                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark")
                                 .tint(Color.navBtnColor)
                         }
                         
                         // PIN Button
                         Button(action: togglePinMemo) {
-                            SystemImage( memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
+//                            SystemImage( memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
+                            SystemImage( memo.pinned ? "pin.fill" : "pin")
                                 .tint(Color.navBtnColor)
                         }
                         
@@ -137,13 +139,15 @@ struct MemoView: View {
                             showSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
-                            SystemImage( "folder", size: Sizes.regularButtonSize)
+//                            SystemImage( "folder", size: Sizes.regularButtonSize)
+                            SystemImage("folder")
                                 .tint(Color.navBtnColor)
                         }
                         
                         // REMOVE
                         Button(action: removeMemo) {
-                            SystemImage( "trash", size: Sizes.regularButtonSize)
+//                            SystemImage( "trash", size: Sizes.regularButtonSize)
+                            SystemImage("trash")
                                 .tint(Color.navBtnColor)
                         }
                     }

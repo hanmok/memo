@@ -75,7 +75,7 @@ struct MindMapView: View {
                 // MARK: - TOP Views
                 HStack {
                     Spacer()
-                    HStack {
+                    HStack(spacing: 0) {
                         // MARK: - Button 1: SEARCH
                         Button {
                             _ = fastFolderWithLevelGroup.folders.map {
@@ -92,8 +92,8 @@ struct MindMapView: View {
 
                         // MARK: - Button 2: Folder Ordering
                         FolderOrderingMenu(folderOrder: folderOrder)
-                            .padding(.horizontal, Sizes.smallSpacing)
-                        
+//                            .padding(.horizontal, Sizes.smallSpacing)
+                            .padding(.leading, 16)
                         
                         // MARK: - Button 3: Add new Folder to the top Folder
                         Button {
@@ -110,10 +110,13 @@ struct MindMapView: View {
                         } label: { // original : 28
 
                             SystemImage( "folder.badge.plus", size: 28)
+//                            SystemImage("folder.badge.plus")
                                 .foregroundColor(Color.navBtnColor)
                         }
+                        .padding(.leading, 12)
                     }
-                    .padding(.trailing, Sizes.overallPadding)
+//                    .padding(.trailing, Sizes.overallPadding)
+                    .padding(.horizontal, 20)
 
                     .padding(.top, 8)
 

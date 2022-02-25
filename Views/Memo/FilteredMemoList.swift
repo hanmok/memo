@@ -79,17 +79,19 @@ struct FilteredMemoList: View {
                                 .background {
                                     ZStack {
                                         Color(isDraggingAction ? .memoBoxSwipeBGColor : .blackAndWhite)
-                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
+                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                                             .cornerRadius(10)
                                         HStack {
                                             Spacer()
                                             SystemImage("checkmark")
                                                 .frame(width: 65)
                                                 .foregroundColor(.basicColors)
+                                                .opacity(isDraggingAction ? 1 : 0)
                                         }
                                     }
                                     .padding(.horizontal, Sizes.smallSpacing)
-                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
+                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
+                                    
                                 }
                             
                                 .gesture(DragGesture()

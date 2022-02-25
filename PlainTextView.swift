@@ -37,12 +37,12 @@ struct PlainTextView: UIViewRepresentable {
         //        uiTextView.keyboardDismissMode = .interactive
         //        uiTextView.keyboardDismissMode = .interactive
         uiTextView.keyboardDismissMode = .onDrag
-        
+//        uiTextView.foreg
         
 //        uiTextView.tintColor = UIColor.textViewTintColor
         uiTextView.tintColor = UIColor.swipeBtnColor2
         //        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
-        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3)])
+        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3), .foregroundColor: UIColor.memoTextColor])
         //        uiTextView.addd
         uiTextView.addDoneButtonOnKeyboard()
         return uiTextView
@@ -54,7 +54,7 @@ struct PlainTextView: UIViewRepresentable {
         if firstTime {
             //        uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title1)])
             DispatchQueue.main.async {
-                uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3)])
+                uiView.attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3), .foregroundColor: UIColor.memoTextColor])
                 firstTime.toggle()
             }
         }
@@ -73,7 +73,7 @@ struct PlainTextView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             DispatchQueue.main.async {
                 self.text.wrappedValue = textView.text
-                textView.attributedText = NSAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3)])
+                textView.attributedText = NSAttributedString(string: textView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .title3), .foregroundColor: UIColor.memoTextColor])
             }
         }
     }
