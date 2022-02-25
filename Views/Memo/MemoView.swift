@@ -160,8 +160,13 @@ struct MemoView: View {
 
                  // has problem on TextViews
                 
-                TextEditor(text: $contents)
-//                PlainTextView(text: $contents)
+//                TextEditor(text: $contents)
+                
+                //                PlainTextView 에 뭔가 문제가 있음.
+//                CustomTextView(text: $contents)
+                
+
+                PlainTextView(text: $contents)
                 
 //                    .font(.body)
                     .accentColor(Color.textViewTintColor)

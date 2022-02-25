@@ -13,6 +13,7 @@ import SwiftUI
 // A wrapper for a UIKit view that you use to integrate that view into your SwiftUI view hierarchy.
 
 struct CustomTextView: UIViewRepresentable {
+    
     @Environment(\.colorScheme) var colorSchme
     @Binding var text: String
     //    @Binding var textStyle: UIFont.TextStyle
@@ -27,16 +28,18 @@ struct CustomTextView: UIViewRepresentable {
         uiTextView.isUserInteractionEnabled = true
         uiTextView.delegate = context.coordinator
         // this line looks weird..
-        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
+
         uiTextView.text += ""
         uiTextView.showsVerticalScrollIndicator = false
         uiTextView.tintColor = UIColor.textViewTintColor
-//        uiTextView.tintColor = .red
+        //        uiTextView.tintColor = .red
         
-//        uiTextView.keyboardDismissMode = .interactive
+        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
+        
+        //        uiTextView.keyboardDismissMode = .interactive
         uiTextView.keyboardDismissMode = .onDrag
-//        uiTextView.inputAccessoryView = uiView
-//        uiTextView.allowsEditingTextAttributes = true
+        //        uiTextView.inputAccessoryView = uiView
+        //        uiTextView.allowsEditingTextAttributes = true
         
         return uiTextView
     }
@@ -66,9 +69,8 @@ struct CustomTextView: UIViewRepresentable {
                 print("distance: \(distance)")
             }
             DispatchQueue.main.async {
-                
                 uiView.attributedText = attributedText
-                    firstTime.toggle()
+                firstTime.toggle()
             }
         }
     }
@@ -85,13 +87,13 @@ struct CustomTextView: UIViewRepresentable {
         func textViewDidChange(_ textView: UITextView) {
             
             print("textViewDidChange Triggered")
-
+            
             DispatchQueue.main.async {
                 self.text.wrappedValue = textView.text
             }
             
             let preAttributedRange: NSRange = textView.selectedRange
-
+            
             
             // Set initial font .body
             let attributedText = NSMutableAttributedString(
@@ -100,7 +102,7 @@ struct CustomTextView: UIViewRepresentable {
                     .font: UIFont.preferredFont(forTextStyle: .body),
                     .foregroundColor: UIColor.memoTextColor//                    .foregroundColor: UIColor.red
                 ])
-
+            
             // are they.. included ? or not ?
             if let firstIndex = textView.text.firstIndex(of: "\n") {
                 print("flagggg ")
@@ -122,17 +124,17 @@ struct CustomTextView: UIViewRepresentable {
             }
             
             textView.attributedText = attributedText
-
+            
             textView.selectedRange = preAttributedRange
         }
         
         func textViewDidBeginEditing(_ textView: UITextView) {
             if textView.text == "" {
-            // Initial Setting, make cursor bigger.
-            textView.attributedText = NSMutableAttributedString(string: String(" "), attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
-            // retaining bigger Cursor, make it empty.
-            textView.attributedText = NSMutableAttributedString(string: String(""), attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
-            print("textViewDidBeginEditingTriggered")
+                // Initial Setting, make cursor bigger.
+                textView.attributedText = NSMutableAttributedString(string: String(" "), attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
+                // retaining bigger Cursor, make it empty.
+                textView.attributedText = NSMutableAttributedString(string: String(""), attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
+                print("textViewDidBeginEditingTriggered")
             }
         }
         
