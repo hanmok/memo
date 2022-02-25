@@ -78,15 +78,14 @@ struct FilteredMemoList: View {
 //                                .animation(.spring(), value: isDraggingAction)
                                 .background {
                                     ZStack {
-                                        Color(isDraggingAction ? .subColor : .black)
-//                                        Color(.subColor)
+                                        Color(isDraggingAction ? .memoBoxSwipeBGColor : .blackAndWhite)
                                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
                                             .cornerRadius(10)
                                         HStack {
                                             Spacer()
                                             SystemImage("checkmark")
                                                 .frame(width: 65)
-                                                .foregroundColor(.black)
+                                                .foregroundColor(.basicColors)
                                         }
                                     }
                                     .padding(.horizontal, Sizes.smallSpacing)

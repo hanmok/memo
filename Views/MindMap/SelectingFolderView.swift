@@ -78,6 +78,7 @@ struct SelectingFolderView: View {
                 Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder)).tag(FolderTypeEnum.folder)
                 Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(FolderTypeEnum.archive)
             }
+            .id(selectionEnum)
             .pickerStyle(SegmentedPickerStyle())
             .padding(.top, Sizes.overallPadding)
             

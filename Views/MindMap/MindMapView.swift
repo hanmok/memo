@@ -126,7 +126,7 @@ struct MindMapView: View {
                         .tag(FolderTypeEnum.folder)
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(FolderTypeEnum.archive)
                 }
-                .tint(.pink)
+//                .tint(.pink)
                 .id(selectionEnum)
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.top, Sizes.overallPadding)

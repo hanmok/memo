@@ -168,10 +168,11 @@ struct NewMemoView: View {
                 }
                 
 //                CustomTextView(text: $contents)
-                PlainTextView(text: $contents)
+//                PlainTextView(text: $contents)
+                TextEditor(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.memoTextColor)
                 
 //                TextEditor(text: $contents)
 //                    .font(.body)

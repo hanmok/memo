@@ -68,6 +68,8 @@ struct MemoView: View {
         }
         
         parent.title += "" //
+        
+        print("savedContents: \(memo.contents)")
         context.saveCoreData()
     }
     
@@ -156,8 +158,11 @@ struct MemoView: View {
                 }
                 .padding(.bottom)
 
-//                TextEditor(text: $contents)
-                PlainTextView(text: $contents)
+                 // has problem on TextViews
+                
+                TextEditor(text: $contents)
+//                PlainTextView(text: $contents)
+                
 //                    .font(.body)
                     .accentColor(Color.textViewTintColor)
                     .padding(.top)

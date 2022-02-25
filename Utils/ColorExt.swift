@@ -172,6 +172,12 @@ extension Color {
     static let selectedBoxStrokeColor = Color(UIColor.selectedBoxStrokeColor)
     // cream, White(0.65)
     static let textViewTintColor = Color(UIColor.textViewTintColor)
+    
+    static let memoBoxSwipeBGColor = Color(UIColor.memoBoxSwipeBGColor)
+//    UIColor(named: ColorKeys.memoBoxSwipeBGColor)!
+    
+    static let basicColors = Color(UIColor.basicColors)
+    
 }
 
 extension UIColor {
@@ -193,7 +199,11 @@ extension UIColor {
     static let selectedBoxStrokeColor = UIColor(named: ColorKeys.selectedBoxStrokeColor)!
     
     static let textViewTintColor = UIColor(named: ColorKeys.textViewTintColor)!
+
+    static let memoBoxSwipeBGColor = UIColor(named: ColorKeys.memoBoxSwipeBGColor)!
     
+    static let basicColors = UIColor(named: ColorKeys.basicColors)!
+
 }
 
 struct ColorKeys {
@@ -216,5 +226,10 @@ struct ColorKeys {
     static let selectedBoxStrokeColor = "selectedBoxStrokeColor"
     
     static let textViewTintColor = "textViewTintColor"
+    
+    static let memoBoxSwipeBGColor = "memoBoxSwipeBGColor"
+    
+    static let basicColors = "basicColors"
+    
 }
 
