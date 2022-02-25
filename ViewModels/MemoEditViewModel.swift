@@ -15,7 +15,11 @@ class MemoEditViewModel: ObservableObject {
     
     public var count: Int {
         get { selectedMemos.count }
-        set { if newValue == 0 { self.parentFolder = nil }}
+        set { if newValue == 0 {
+            self.parentFolder = nil
+//            self.isSelectionMode = false
+            
+        }}
     }
     
     func add(memo: Memo) {
@@ -39,7 +43,9 @@ class MemoEditViewModel: ObservableObject {
     
     func erase(memo: Memo) {
         self.selectedMemos.remove(memo)
-        
+        if selectedMemos.isEmpty {
+            self.isSelectionMode = false
+        }
     }
     
     func initSelectedMemos() {

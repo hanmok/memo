@@ -160,8 +160,8 @@ struct MindMapView: View {
 
                                             SystemImage("folder.badge.plus")
                                         }
-//                                        .tint(.blue)
-                                        .tint(Color.swipeBtnColor1)
+
+                                        .tint(Color.swipeBtnColor2)
                                     }
                             }
                             else {
@@ -181,9 +181,11 @@ struct MindMapView: View {
                                             newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
                                         } label: {
                                             SystemImage("folder.badge.plus")
+                                                .foregroundColor(.black)
+                                            
                                         }
 //                                        .tint(.blue)
-                                        .tint(Color.swipeBtnColor1)
+                                        .tint(Color.swipeBtnColor2)
                                     }
                                 // Change Folder Name
                                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -261,7 +263,7 @@ struct MindMapView: View {
                                         }
 //                                        .tint(.blue)
 //                                        .tint(colorScheme.adjustMainColors())
-                                        .tint(Color.swipeBtnColor1)
+                                        .tint(Color.swipeBtnColor2)
                                     }
                             } else {
                                 DynamicFolderCell(
@@ -282,7 +284,7 @@ struct MindMapView: View {
                                             SystemImage(  "folder.badge.plus")
                                         }
 //                                        .tint(.blue)
-                                        .tint(Color.swipeBtnColor1)
+                                        .tint(Color.swipeBtnColor2)
                                     }
                                 // Change Folder Name
                                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {

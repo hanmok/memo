@@ -167,11 +167,19 @@ struct NewMemoView: View {
                     }
                 }
                 
-                CustomTextView(text: $contents)
-//                PlainTextView(text: $contents)
+//                CustomTextView(text: $contents)
+////                PlainTextView(text: $contents)
+//                    .padding(.top)
+//                    .focused($editorFocusState)
+//                    .foregroundColor(.white)
+                
+                TextEditor(text: $contents)
+                    .font(.body)
+                    .accentColor(Color.textViewTintColor)
                     .padding(.top)
                     .focused($editorFocusState)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.memoTextColor)
+                
             }
             .padding(.horizontal, Sizes.overallPadding)
             .gesture(scroll)

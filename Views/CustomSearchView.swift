@@ -149,7 +149,7 @@ struct CustomSearchView: View {
                                 Image(systemName: "multiply")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .tint(Color.blackAndWhite)
+                                .tint(.black)
                                 .frame(width: 8, height: 8)
                             }
                             .padding(.trailing, 10)

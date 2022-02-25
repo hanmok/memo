@@ -258,6 +258,7 @@
 		E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
 		E523DB5127C0073900D8D78B /* NewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
 		E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemoVarsTestView.swift; sourceTree = "<group>"; };
+		E54FE17E27C7C896000FFA81 /* SwipeTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTestView.swift; sourceTree = "<group>"; };
 		E596A6C427AD8D5000076E95 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -291,6 +292,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				E54FE17E27C7C896000FFA81 /* SwipeTestView.swift */,
 				9AD8332627BD0B7300506AE8 /* CustomTextView.swift */,
 				9AE5391A27C6374F00452999 /* PlainTextView.swift */,
 				9A0474B927716DBC00571D66 /* Views */,
