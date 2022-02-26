@@ -33,7 +33,9 @@ struct SubFolderView: View {
                     // dismiss
                     isShowingSubFolderView = false
                 } label: {
-                    UnchangeableImage(imageSystemName: "arrow.right")
+//                    UnchangeableImage(imageSystemName: "arrow.right")
+                    SystemImage("arrow.right")
+                        .foregroundColor(Color.blackAndWhite)
                 }
                 .padding(.leading, 12)
                 
@@ -42,7 +44,9 @@ struct SubFolderView: View {
                 Button {
                     isAddingFolder = true
                 } label: {
-                    UnchangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
+//                    UnchangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
+                    SystemImage("folder.badge.plus", size: 28)
+                        .foregroundColor(Color.blackAndWhite)
                     
                 }
                 .padding(.trailing, 12)
@@ -64,8 +68,7 @@ struct SubFolderView: View {
                         Text(subFolder.title)
                             .frame(alignment: .leading)
                             .lineLimit(1)
-                        //                            .adjustTintColor(scheme: colorScheme)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color.blackAndWhite)
                     }
                     
                     .simultaneousGesture(TapGesture().onEnded{
@@ -90,13 +93,14 @@ struct SubFolderView: View {
                 .padding(.leading, 12)
                 .padding(.bottom, 10)
             }
-            
         }
         .frame(width: UIScreen.screenWidth / 2.5)
-        .background(
-            Color.subColor
-        )
+        .background(Color.memoBoxColor)
         .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(colorScheme == .dark ? Color.subColor : .gray ,lineWidth: 1)
+        )
     }
 }
 

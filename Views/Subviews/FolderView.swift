@@ -99,6 +99,9 @@ struct FolderView: View {
                                     .tint(Color.navBtnColor)
                             })
                             
+
+                            
+                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
                             // favorite Button
                             Button(action: {
                                 toggleFavorite()
@@ -112,10 +115,12 @@ struct FolderView: View {
                                         .tint(Color.navBtnColor)
                                 }
                             })
-                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+                            
                         }
                     }
-                    .padding(.horizontal, 10)
+//                    .padding(.horizontal, Sizes.overallPadding)
+//                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 10 + Sizes.overallPadding)
                     .padding(.bottom, 7.5)
                 
                 
@@ -128,12 +133,23 @@ struct FolderView: View {
                             // NavigationTitle
                             ZStack(alignment: .topLeading) {
                                 HStack {
-                                    Text(currentFolder.title)
-                                        .font(.largeTitle)
-                                        .fontWeight(Font.Weight.bold)
-                                        .padding(.leading, 10)
-                                    
+                                    if currentFolder.title.count < 15 {
+                                        Text(currentFolder.title)
+                                            .font(.largeTitle)
+                                            .fontWeight(.bold)
+                                            .lineLimit(1)
+                                            .padding(.leading, 10)
+                                            .padding(.trailing, 45) // 80 .. 이 맞나 ??
+                                    } else {
+                                        Text(currentFolder.title)
+                                            .font(.title)
+                                            .fontWeight(.bold)
+                                            .lineLimit(1)
+                                            .padding(.leading, 10)
+                                            .padding(.trailing, 45) // 80 .. 이 맞나 ??
+                                    }
                                     Spacer()
+
                                 }
                                 if currentFolder.parent != nil {
                                     HierarchyLabelView(currentFolder: currentFolder)
@@ -144,14 +160,15 @@ struct FolderView: View {
                                 }
                             }
                         }
+                        .padding(.horizontal, Sizes.overallPadding)
                         .padding(.bottom, 8)
                         
                         ZStack {
                             if !currentFolder.memos.isEmpty {
                                 MemoList()
                                     .padding(.top, 20)
+                                    .ignoresSafeArea(edges: .trailing)
                             }
-                            
                         }
                     } // end of main VStack
                     .environmentObject(currentFolder)
@@ -162,7 +179,7 @@ struct FolderView: View {
                 } // end of scrollView
             } // end of VStack
             .padding(.top, 12)
-            .padding(.horizontal, Sizes.overallPadding)
+//            .padding(.horizontal, Sizes.overallPadding)
             
             // ANOTHER ELEMENT IN ZSTACK
             VStack {
