@@ -14,64 +14,79 @@ enum MemoListType: String {
     case all
 }
 
-class MemosViewModel : ObservableObject {
-    @Published var memos: [Memo]
-    @Published var folder: Folder
-    @Published var offsets: [CGFloat]
-    
-    init(folder : Folder, type: MemoListType) {
-        self.folder = folder
-        var sortedMemos = [Memo]()
-        switch type {
-        case .pinned:
-            sortedMemos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == true || $0.isBookMarked == true })
-            
-        case .unpinned:
-            sortedMemos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == false && $0.isBookMarked == false })
-            
-        case .all:
-            sortedMemos = Memo.sortMemos(memos: folder.memos.sorted())
-        }
-        self.memos = sortedMemos
-        
-        self.offsets = [CGFloat].init(repeating: 0, count: sortedMemos.count)
-    }
-}
+//class MemosViewModel : ObservableObject {
+//    @Published var memos: [Memo]
+//    @Published var folder: Folder
+//    @Published var offsets: [CGFloat]
+//
+//    init(folder : Folder, type: MemoListType) {
+//        self.folder = folder
+//        var sortedMemos = [Memo]()
+//        switch type {
+//        case .pinned:
+//            sortedMemos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == true || $0.isBookMarked == true })
+//
+//        case .unpinned:
+//            sortedMemos = Memo.sortMemos(memos: folder.memos.filter { $0.pinned == false && $0.isBookMarked == false })
+//
+//        case .all:
+//            sortedMemos = Memo.sortMemos(memos: folder.memos.sorted())
+//        }
+//        self.memos = sortedMemos
+//
+//        self.offsets = [CGFloat].init(repeating: 0, count: sortedMemos.count)
+//    }
+//}
 
 struct FilteredMemoList: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @ObservedObject var folder: Folder
-    @ObservedObject var memosVM: MemosViewModel
+//    @ObservedObject var memosVM: MemosViewModel
     var listType: MemoListType
     @GestureState var isDragging = false
     /// dragging flag end a little later than isDragging, to complete onEnd Action (for Better UX)
     @State var isDraggingAction = false
+    @State var draggingIndex = -1
+    @State var oneOffset: CGFloat = 0
     
     var body: some View {
         
-
+        var memosToShow = [Memo]()
+        
+        
+        switch listType {
+        case .pinned:
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.pinned || $0.isBookMarked })
+        case .unpinned:
+                memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.pinned == false && $0.isBookMarked == false})
+        case .all:
+            memosToShow = Memo.sortMemos(memos: folder.memos.sorted())
+        }
         
         return ZStack {
             
-            LazyVStack { // without this, views stack on other memos
+            VStack { // without this, views stack on other memos
                 Section {
                     
 //                    ForEach(memosVM.memos, id: \.self) { memo in
-                    ForEach(memosVM.memos.indices, id: \.self) { index in
+//                    ForEach(memosVM.memos.indices, id: \.self) { index in
+                    ForEach(memosToShow.indices, id: \.self) { index in
                     
                             
                         
                         NavigationLink(destination:
 //                                        MemoView(memo: memo, parent: memo.folder!, presentingView:
-                                       MemoView(memo: memosVM.memos[index], parent: memosVM.memos[index].folder!, presentingView:.constant(false))
+//                                       MemoView(memo: memosVM.memos[index], parent: memosVM.memos[index].folder!, presentingView:.constant(false))
+                                       MemoView(memo: memosToShow[index], parent: memosToShow[index].folder!, presentingView:.constant(false))
                                         .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
                         ) {
-                            MemoBoxView(memo: memosVM.memos[index])
+                            MemoBoxView(memo: memosToShow[index])
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                .offset(x: memosVM.offsets[index])
+//                                .offset(x: memosVM.offsets[index])
+                                .offset(x: index == draggingIndex ? oneOffset : 0)
 //                                .animation(.spring(), value: isDraggingAction)
                                 .background {
                                     ZStack {
@@ -98,7 +113,7 @@ struct FilteredMemoList: View {
                                     onChanged(value: value, index: index)
                                 }).onEnded({ value in
 //                                    onEnd(value: value, memo: memo)
-                                    onEnd(value: value, index: index)
+                                    onEnd(value: value, index: index, memo: memosToShow[index])
                                 }))
                         } // end of ZStack
                             .disabled(memoEditVM.isSelectionMode)
@@ -110,7 +125,7 @@ struct FilteredMemoList: View {
 //                                onChanged(value: value, memo: memo)
                             }).onEnded({ value in
 //                                onEnd(value: value, memo: memo)
-                                onEnd(value: value, index: index)
+                                onEnd(value: value, index: index, memo: memosToShow[index])
                             }))
                         
                         .simultaneousGesture(TapGesture().onEnded{
@@ -119,7 +134,7 @@ struct FilteredMemoList: View {
                             if memoEditVM.isSelectionMode {
                                 print("Tap gesture triggered!")
 //                                memoEditVM.dealWhenMemoSelected(memo)
-                                memoEditVM.dealWhenMemoSelected(memosVM.memos[index])
+                                memoEditVM.dealWhenMemoSelected(memosToShow[index])
                             }
 
                         })
@@ -152,6 +167,10 @@ struct FilteredMemoList: View {
 //    func onChanged(value: DragGesture.Value, memo: Memo) {
     func onChanged(value: DragGesture.Value, index: Int) {
 //        withAnimation {
+        DispatchQueue.main.async {
+            draggingIndex = index
+            
+        }
             print("onChanged triggered")
             
             if isDragging && value.translation.width < -5 {
@@ -170,13 +189,14 @@ struct FilteredMemoList: View {
                     DispatchQueue.main.async {
 
 //                        memo.offset = -65
-                        memosVM.offsets[index] = -65
-                        
+//                        memosVM.offsets[index] = -65
+                        oneOffset = -65
                     }
                 default:
                     DispatchQueue.main.async {
 //                        memo.offset = value.translation.width
-                        memosVM.offsets[index] = value.translation.width
+//                        memosVM.offsets[index] = value.translation.width
+                        oneOffset = value.translation.width
 //                        print("memo.offset: \(memo.offset)")
                     }
                 }
@@ -185,7 +205,7 @@ struct FilteredMemoList: View {
         }
 //    }
     
-    func onEnd(value: DragGesture.Value, index: Int) {
+    func onEnd(value: DragGesture.Value, index: Int, memo: Memo) {
 //    func onEnd(value: DragGesture.Value, memo: Memo) {
         withAnimation {
             print("onEnd triggered")
@@ -194,22 +214,29 @@ struct FilteredMemoList: View {
                 DispatchQueue.main.async {
                     memoEditVM.isSelectionMode = true
 //                    memoEditVM.dealWhenMemoSelected(memo)
-                    memoEditVM.dealWhenMemoSelected(memosVM.memos[index])
+                    memoEditVM.dealWhenMemoSelected(memo)
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                    memo.offset = 0
-                    memosVM.offsets[index] = 0
+                    
+//                    memosVM.offsets[index] = 0
+                    
+                    oneOffset = 0
+                    
                     isDraggingAction = false
                 }
                 
             } else {
                 DispatchQueue.main.async {
-//                    memo.offset = 0
-                    memosVM.offsets[index] = 0
+
+                    
+//                    memosVM.offsets[index] = 0
+                    oneOffset = 0
                     isDraggingAction = false
                 }
             }
         }
+        
+        draggingIndex = -1
     }
 }
 

@@ -147,7 +147,8 @@ struct MemoView: View {
                 .padding(.horizontal, Sizes.overallPadding)
 
                 
-                PlainTextView(text: $contents)
+//                PlainTextView(text: $contents)
+                CustomTextView1(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
