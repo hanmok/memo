@@ -164,12 +164,12 @@ struct MemoView: View {
             contents = memo.contents
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
-            selectedColorIndex = memo.colorIndex
+//            selectedColorIndex = memo.colorIndex
         })
         
         .onDisappear(perform: {
             presentingView = false
-            memo.colorIndex = selectedColorIndex
+//            memo.colorIndex = selectedColorIndex
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
