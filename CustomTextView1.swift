@@ -41,6 +41,7 @@ struct CustomTextView1: UIViewRepresentable {
         //        uiTextView.inputAccessoryView = uiView
         //        uiTextView.allowsEditingTextAttributes = true
 
+        uiTextView.addDoneButtonOnKeyboard()
         return uiTextView
     }
 

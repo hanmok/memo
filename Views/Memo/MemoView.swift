@@ -117,13 +117,13 @@ struct MemoView: View {
             
                         Button(action: toggleBookMark) {
 
-                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark")
+                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
                         // PIN Button
                         Button(action: togglePinMemo) {
-                            SystemImage( memo.pinned ? "pin.fill" : "pin")
+                            SystemImage( memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
@@ -132,12 +132,12 @@ struct MemoView: View {
                             showSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
-                            SystemImage("folder")
+                            SystemImage("folder", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
                         // REMOVE
-                        Button(action: removeMemo) {
+                        Button(action: removeMemo, size: Sizes.regularButtonSize) {
                             SystemImage("trash")
                                 .tint(Color.navBtnColor)
                         }
