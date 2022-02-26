@@ -21,7 +21,8 @@ struct SubFolderView: View {
     @Binding var isAddingFolder: Bool
     
     var body: some View {
-        let subFolders = folder.subfolders.sorted{ $0.title < $1.title}
+//        let subFolders = folder.subfolders.sorted{ $0.title < $1.title}
+        let subFolders = Folder.getSortedSubFolders(folder: folder)
         
         return VStack(alignment: .leading) {
             

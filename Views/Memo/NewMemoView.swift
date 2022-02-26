@@ -14,7 +14,7 @@ struct NewMemoView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
-    
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     
@@ -113,17 +113,36 @@ struct NewMemoView: View {
 //
 //            }
         
+//        return ZStack(alignment: .topLeading) {
+//            VStack {
+//                HStack {
+//                    backBtn
+//                    Spacer()
+//
+//                    HStack(spacing: 15) {
+        
         return ZStack(alignment: .topLeading) {
             VStack {
+                Rectangle()
+                    .frame(width: UIScreen.screenWidth, height: 90)
+                    .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
+                Spacer()
+            }
+            .ignoresSafeArea(edges: .top)
+            
+            VStack(spacing:0) {
                 HStack {
                     backBtn
                     Spacer()
                     
-                    HStack(spacing: 15) {
+                    HStack(spacing: 16) {
+                        
+                        
                         Button(action: toggleBookMark) {
-                            SystemImage(
-                                isBookMarkedTemp ? "bookmark.fill" : "bookmark",
-                                size: Sizes.regularButtonSize)
+//                            SystemImage(
+//                                isBookMarkedTemp ? "bookmark.fill" : "bookmark",
+//                                size: Sizes.regularButtonSize)
+                            SystemImage(isBookMarkedTemp ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
@@ -172,6 +191,7 @@ struct NewMemoView: View {
                         }
                     }
                 }
+                .padding(.bottom)
                 .padding(.horizontal, Sizes.overallPadding)
                 
 //                PlainTextView(text: $contents)
@@ -181,8 +201,10 @@ struct NewMemoView: View {
                     .foregroundColor(Color.memoTextColor)
                     .padding(.leading, Sizes.overallPadding)
             }
+            .padding(.top, 10)
         }
-        .padding(.vertical)
+//        .padding(.vertical)
+        .padding(.bottom)
         .navigationBarHidden(true)
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

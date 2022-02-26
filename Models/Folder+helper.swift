@@ -283,6 +283,15 @@ extension Folder {
 //        return parent
 //    }
     
+    static func getSortedSubFolders(folder: Folder) -> [Folder] {
+        @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
+        @AppStorage(AppStorageKeys.fOrderAsc) var fOrderAsc = false
+        
+        let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
+        
+        return folder.subfolders.sorted(by: sortingMethod)
+    }
+    
 //    static func getHierarchicalFolders(topFolder: Folder) -> [FolderWithLevel] {
     
     static func getHierarchicalFolders(topFolders: [Folder]) -> [FolderWithLevel] {
