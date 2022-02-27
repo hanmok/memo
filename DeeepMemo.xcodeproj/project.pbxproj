@@ -8,124 +8,73 @@
 
 /* Begin PBXBuildFile section */
 		9A013F6A27BA535400C612ED /* DynamicTopFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */; };
-		9A013F6B27BA535400C612ED /* DynamicTopFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */; };
 		9A046CC927B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */; };
-		9A046CCA27B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */; };
 		9A046CCC27B3A72E003169C7 /* CollapsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */; };
-		9A046CCD27B3A72E003169C7 /* CollapsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */; };
 		9A046D1B27B67508003169C7 /* OrderingAppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */; };
-		9A046D1C27B67508003169C7 /* OrderingAppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */; };
 		9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
 		9A0474A727715D1400571D66 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* MainView.swift */; };
 		9A0474A927715D1400571D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A04749727715D1300571D66 /* Assets.xcassets */; };
 		9A0474BD27716E0000571D66 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474BC27716E0000571D66 /* FolderView.swift */; };
 		9A0474C02771709D00571D66 /* OverallMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A0474BF2771709D00571D66 /* OverallMemo */; };
 		9A04BF2027C8CD2000F3972D /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04BF1F27C8CD2000F3972D /* CustomTextView.swift */; };
-		9A04BF2127C8CD2000F3972D /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04BF1F27C8CD2000F3972D /* CustomTextView.swift */; };
 		9A04BF2427C8CF4E00F3972D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 9A04BF2327C8CF4E00F3972D /* Introspect */; };
 		9A1D535927A925A1009294C1 /* TitleWithLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */; };
-		9A1D535A27A925A1009294C1 /* TitleWithLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */; };
 		9A1D535C27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */; };
-		9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */; };
 		9A1D535F27A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */; };
-		9A1D536027A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */; };
 		9A1D536227ACE2E3009294C1 /* SubFolderButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D536127ACE2E3009294C1 /* SubFolderButtonImage.swift */; };
-		9A1D536327ACE2E3009294C1 /* SubFolderButtonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D536127ACE2E3009294C1 /* SubFolderButtonImage.swift */; };
-		9A1D536527ACE439009294C1 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474BC27716E0000571D66 /* FolderView.swift */; };
-		9A1D536627ACE454009294C1 /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF25277EC5CF00866456 /* MindMapView.swift */; };
-		9A1D536727ACE516009294C1 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
 		9A1D8539279FF32400B00156 /* DynamicFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8538279FF32400B00156 /* DynamicFolderCell.swift */; };
-		9A1D853A279FF32400B00156 /* DynamicFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D8538279FF32400B00156 /* DynamicFolderCell.swift */; };
 		9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D853E27A16BE800B00156 /* SubMemoList.swift */; };
-		9A1D854027A16BE800B00156 /* SubMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D853E27A16BE800B00156 /* SubMemoList.swift */; };
 		9A1D854527A24F9400B00156 /* SubFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D854427A24F9400B00156 /* SubFolderView.swift */; };
-		9A1D854627A24F9400B00156 /* SubFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D854427A24F9400B00156 /* SubFolderView.swift */; };
 		9A1D856B27A3E98D00B00156 /* SelectingFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D856A27A3E98D00B00156 /* SelectingFolderView.swift */; };
 		9A3377B3278FFF2D00805138 /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B2278FFF2D00805138 /* TextViewWrapper.swift */; };
 		9A3377B52790039200805138 /* FolderViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B42790039200805138 /* FolderViewTest.swift */; };
 		9A3377B72790060100805138 /* MemosToolBarViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B62790060100805138 /* MemosToolBarViewTest.swift */; };
 		9A3377B927900BF200805138 /* MemoListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B827900BF200805138 /* MemoListTest.swift */; };
 		9A3377FD27915C2900805138 /* MemoMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377FC27915C2900805138 /* MemoMsg.swift */; };
-		9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377FC27915C2900805138 /* MemoMsg.swift */; };
 		9A3378012795736200805138 /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378002795736200805138 /* ColorExt.swift */; };
-		9A3378022795736200805138 /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378002795736200805138 /* ColorExt.swift */; };
 		9A337804279576CC00805138 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337803279576CC00805138 /* testView.swift */; };
-		9A337805279576CC00805138 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337803279576CC00805138 /* testView.swift */; };
 		9A3378072796A5CB00805138 /* FilteredMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378062796A5CB00805138 /* FilteredMemoList.swift */; };
-		9A3378082796A5CB00805138 /* FilteredMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378062796A5CB00805138 /* FilteredMemoList.swift */; };
 		9A33780A2796B10E00805138 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378092796B10E00805138 /* HomeView.swift */; };
-		9A33780B2796B10E00805138 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378092796B10E00805138 /* HomeView.swift */; };
 		9A3378272796DECA00805138 /* ProblemsAndSolutions in Resources */ = {isa = PBXBuildFile; fileRef = 9A3378262796DECA00805138 /* ProblemsAndSolutions */; };
-		9A3378282796DECA00805138 /* ProblemsAndSolutions in Resources */ = {isa = PBXBuildFile; fileRef = 9A3378262796DECA00805138 /* ProblemsAndSolutions */; };
 		9A33785D279817B700805138 /* FolderView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33785C279817B700805138 /* FolderView2.swift */; };
 		9A3378612798207800805138 /* SelectedMemoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378602798207800805138 /* SelectedMemoViewModel.swift */; };
 		9A3378642798277400805138 /* PinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378632798277400805138 /* PinViewModel.swift */; };
 		9A3378672799275E00805138 /* SubFolderPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378662799275E00805138 /* SubFolderPageView.swift */; };
 		9A33786A27993ACA00805138 /* FolderOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33786927993ACA00805138 /* FolderOverView.swift */; };
-		9A33786B27993ACA00805138 /* FolderOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33786927993ACA00805138 /* FolderOverView.swift */; };
 		9A33786D2799450100805138 /* HorCollapsibleMind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33786C2799450100805138 /* HorCollapsibleMind.swift */; };
 		9A337890279A56C500805138 /* FolderEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33788F279A56C500805138 /* FolderEditViewModel.swift */; };
-		9A337891279A56C500805138 /* FolderEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33788F279A56C500805138 /* FolderEditViewModel.swift */; };
 		9A337893279A5C9600805138 /* HierarchyLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337892279A5C9600805138 /* HierarchyLabelView.swift */; };
-		9A337894279A5C9600805138 /* HierarchyLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337892279A5C9600805138 /* HierarchyLabelView.swift */; };
 		9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337895279A6F3C00805138 /* MemoEditViewModel.swift */; };
-		9A337897279A6F3C00805138 /* MemoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337895279A6F3C00805138 /* MemoEditViewModel.swift */; };
-		9A337899279A76AF00805138 /* FolderView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33785C279817B700805138 /* FolderView2.swift */; };
-		9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B42790039200805138 /* FolderViewTest.swift */; };
-		9A33789B279A76B700805138 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* MainView.swift */; };
-		9A33789C279A76C300805138 /* FolderLabelView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D224278834EC007EAA28 /* FolderLabelView3.swift */; };
 		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
 		9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7542772D28C00057A84 /* ChangeableImage.swift */; };
 		9A98E7582773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
 		9AA266E127BE347C00AC75DB /* MemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA266E027BE347C00AC75DB /* MemoBoxView.swift */; };
-		9AA266E227BE347C00AC75DB /* MemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA266E027BE347C00AC75DB /* MemoBoxView.swift */; };
 		9AA2672C27BE45BD00AC75DB /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */; };
-		9AA2672D27BE45BD00AC75DB /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */; };
 		9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
-		9AA2673027BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
 		9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
-		9AA2673327BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
 		9AC257D627C24AB200280DD2 /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC257D527C24A1600280DD2 /* CustomSearchView.swift */; };
-		9AC257D727C24AB200280DD2 /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC257D527C24A1600280DD2 /* CustomSearchView.swift */; };
 		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
-		9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */; };
 		9AC5D10C27840554007EAA28 /* DeeepMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */; };
 		9AC5D1292784092F007EAA28 /* Folder+helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D1282784092F007EAA28 /* Folder+helper.swift */; };
 		9AC5D12C27840939007EAA28 /* Memo+helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D12B27840939007EAA28 /* Memo+helper.swift */; };
 		9AC5D13A278521F9007EAA28 /* Memo For Tips and Tricks in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D139278521F9007EAA28 /* Memo For Tips and Tricks */; };
 		9AC5D13D2785247D007EAA28 /* Terms in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D13C2785247D007EAA28 /* Terms */; };
-		9AC5D1DB2785415F007EAA28 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC5D1DA2785415F007EAA28 /* CloudKit.framework */; };
-		9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D1E227854266007EAA28 /* macOSMemoApp.swift */; };
-		9AC5D1E527854266007EAA28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D1E427854266007EAA28 /* ContentView.swift */; };
-		9AC5D1E727854267007EAA28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D1E627854267007EAA28 /* Assets.xcassets */; };
-		9AC5D1EA27854267007EAA28 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D1E927854267007EAA28 /* Preview Assets.xcassets */; };
-		9AC5D1EF27854267007EAA28 /* macOSMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D1ED27854267007EAA28 /* macOSMemo.xcdatamodeld */; };
-		9AC5D1F527854292007EAA28 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC5D1F427854292007EAA28 /* CloudKit.framework */; };
-		9AC5D1F827854405007EAA28 /* DeeepMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */; };
 		9AC5D1FD278557D8007EAA28 /* UnitTestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D1FC278557D8007EAA28 /* UnitTestHelper.swift */; };
 		9AC5D1FF278558AC007EAA28 /* NSPredicate+helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D1FE278558AC007EAA28 /* NSPredicate+helper.swift */; };
 		9AC5D20127855C0A007EAA28 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D12E278409FD007EAA28 /* Persistence.swift */; };
-		9AC5D20227855C0B007EAA28 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D12E278409FD007EAA28 /* Persistence.swift */; };
 		9AC5D20927856E7D007EAA28 /* FolderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D20827856E7D007EAA28 /* FolderTests.swift */; };
 		9AC5D20C27856F2F007EAA28 /* MemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D20B27856F2F007EAA28 /* MemoTests.swift */; };
 		9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21227857993007EAA28 /* CoreDataTestView.swift */; };
-		9AC5D21427857993007EAA28 /* CoreDataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D21227857993007EAA28 /* CoreDataTestView.swift */; };
 		9AC5D2192786F773007EAA28 /* HomeViewPrev.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2182786F773007EAA28 /* HomeViewPrev.swift */; };
-		9AC5D21A2786F773007EAA28 /* HomeViewPrev.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D2182786F773007EAA28 /* HomeViewPrev.swift */; };
 		9AC5D22227883475007EAA28 /* SubFolderPageView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D22127883475007EAA28 /* SubFolderPageView3.swift */; };
 		9AC5D225278834EC007EAA28 /* FolderLabelView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D224278834EC007EAA28 /* FolderLabelView3.swift */; };
 		9AC5D22B278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D22A278BCD54007EAA28 /* SubFoldersToolView.swift */; };
-		9AC5D22C278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D22A278BCD54007EAA28 /* SubFoldersToolView.swift */; };
 		9AC5D22E278BD8C6007EAA28 /* CurrentTodoLists in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */; };
-		9AC5D22F278BD8C6007EAA28 /* CurrentTodoLists in Resources */ = {isa = PBXBuildFile; fileRef = 9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */; };
 		9AC5D231278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D230278BE711007EAA28 /* ChangeFolderTitleTestView.swift */; };
-		9AC5D232278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D230278BE711007EAA28 /* ChangeFolderTitleTestView.swift */; };
 		9AC5D234278C3145007EAA28 /* MemoList2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D233278C3145007EAA28 /* MemoList2.swift */; };
-		9AC5D235278C3145007EAA28 /* MemoList2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D233278C3145007EAA28 /* MemoList2.swift */; };
 		9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */; };
-		9AC5D23E278D8435007EAA28 /* textFieldTestview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */; };
 		9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
 		9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC9277C3E3E00866456 /* Extensions.swift */; };
 		9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF10277D9DF100866456 /* MemoList.swift */; };
@@ -133,28 +82,19 @@
 		9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */; };
 		9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF25277EC5CF00866456 /* MindMapView.swift */; };
 		9AD8332327BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332227BD064A00506AE8 /* PhotoPickerPrac.swift */; };
-		9AD8332427BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332227BD064A00506AE8 /* PhotoPickerPrac.swift */; };
 		9AD8332727BD0B7300506AE8 /* CustomTextView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332627BD0B7300506AE8 /* CustomTextView1.swift */; };
-		9AD8332827BD0B7300506AE8 /* CustomTextView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332627BD0B7300506AE8 /* CustomTextView1.swift */; };
 		9AD8333727BE148A00506AE8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* MemoView.swift */; };
-		9AD8333827BE148A00506AE8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* MemoView.swift */; };
 		9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE538F727C38E4300452999 /* AppStorageKeys.swift */; };
-		9AE538F927C38E4800452999 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE538F727C38E4300452999 /* AppStorageKeys.swift */; };
 		9AE5391B27C6374F00452999 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5391A27C6374F00452999 /* PlainTextView.swift */; };
-		9AE5391C27C6374F00452999 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5391A27C6374F00452999 /* PlainTextView.swift */; };
 		E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
-		E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */; };
-		E523DB5027BE9A3000D8D78B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */; };
 		E523DB5227C0073900D8D78B /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB5127C0073900D8D78B /* NewMemoView.swift */; };
-		E523DB5327C0073900D8D78B /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB5127C0073900D8D78B /* NewMemoView.swift */; };
 		E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
-		E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
 		E54FE18327C9455B000FFA81 /* SyntaxHighlightTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18227C9455B000FFA81 /* SyntaxHighlightTextStorage.swift */; };
 		E54FE18527C94595000FFA81 /* NoteEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18427C94594000FFA81 /* NoteEditorViewController.swift */; };
 		E54FE18727C945DF000FFA81 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18627C945DF000FFA81 /* Note.swift */; };
+		E54FE1A427CBEA22000FFA81 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC5D1DA2785415F007EAA28 /* CloudKit.framework */; };
 		E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596A6C427AD8D5000076E95 /* OrderViewModel.swift */; };
-		E596A6C627AD8D5000076E95 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E596A6C427AD8D5000076E95 /* OrderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,7 +167,6 @@
 		9AC5D13C2785247D007EAA28 /* Terms */ = {isa = PBXFileReference; lastKnownFileType = text; path = Terms; sourceTree = "<group>"; };
 		9AC5D1D827854159007EAA28 /* DeeepMemo (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DeeepMemo (iOS).entitlements"; sourceTree = "<group>"; };
 		9AC5D1DA2785415F007EAA28 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
-		9AC5D1E027854266007EAA28 /* macOSMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOSMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AC5D1E227854266007EAA28 /* macOSMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOSMemoApp.swift; sourceTree = "<group>"; };
 		9AC5D1E427854266007EAA28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9AC5D1E627854267007EAA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -277,8 +216,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AC5D1DB2785415F007EAA28 /* CloudKit.framework in Frameworks */,
 				9A04BF2427C8CF4E00F3972D /* Introspect in Frameworks */,
+				E54FE1A427CBEA22000FFA81 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,14 +225,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9AC5D1DD27854266007EAA28 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9AC5D1F527854292007EAA28 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,7 +260,6 @@
 			children = (
 				9A04749C27715D1300571D66 /* DeeepMemo.app */,
 				9AC5D11527840609007EAA28 /* DeeepMemoTests.xctest */,
-				9AC5D1E027854266007EAA28 /* macOSMemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -634,23 +564,6 @@
 			productReference = 9AC5D11527840609007EAA28 /* DeeepMemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		9AC5D1DF27854266007EAA28 /* macOSMemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9AC5D1F127854268007EAA28 /* Build configuration list for PBXNativeTarget "macOSMemo" */;
-			buildPhases = (
-				9AC5D1DC27854266007EAA28 /* Sources */,
-				9AC5D1DD27854266007EAA28 /* Frameworks */,
-				9AC5D1DE27854266007EAA28 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = macOSMemo;
-			productName = macOSMemo;
-			productReference = 9AC5D1E027854266007EAA28 /* macOSMemo.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -668,9 +581,6 @@
 						CreatedOnToolsVersion = 13.2.1;
 						LastSwiftMigration = 1320;
 						TestTargetID = 9A04749B27715D1300571D66;
-					};
-					9AC5D1DF27854266007EAA28 = {
-						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
 			};
@@ -691,7 +601,6 @@
 			projectRoot = "";
 			targets = (
 				9A04749B27715D1300571D66 /* DeeepMemo (iOS) */,
-				9AC5D1DF27854266007EAA28 /* macOSMemo */,
 				9AC5D11427840609007EAA28 /* DeeepMemoTests */,
 			);
 		};
@@ -715,17 +624,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9AC5D1DE27854266007EAA28 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9AC5D1EA27854267007EAA28 /* Preview Assets.xcassets in Resources */,
-				9AC5D22F278BD8C6007EAA28 /* CurrentTodoLists in Resources */,
-				9A3378282796DECA00805138 /* ProblemsAndSolutions in Resources */,
-				9AC5D1E727854267007EAA28 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,68 +721,6 @@
 			files = (
 				9AC5D20927856E7D007EAA28 /* FolderTests.swift in Sources */,
 				9AC5D20C27856F2F007EAA28 /* MemoTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9AC5D1DC27854266007EAA28 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9AE538F927C38E4800452999 /* AppStorageKeys.swift in Sources */,
-				9AC5D23E278D8435007EAA28 /* textFieldTestview.swift in Sources */,
-				9AC257D727C24AB200280DD2 /* CustomSearchView.swift in Sources */,
-				E523DB5327C0073900D8D78B /* NewMemoView.swift in Sources */,
-				9AA2673327BE4E2900AC75DB /* FavColors.swift in Sources */,
-				9A1D535A27A925A1009294C1 /* TitleWithLevelView.swift in Sources */,
-				9A3377FE27915C2900805138 /* MemoMsg.swift in Sources */,
-				9A33786B27993ACA00805138 /* FolderOverView.swift in Sources */,
-				9AC5D1E527854266007EAA28 /* ContentView.swift in Sources */,
-				9A046CCA27B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */,
-				9A337897279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
-				E523DB5027BE9A3000D8D78B /* ColorPaletteView.swift in Sources */,
-				9AA2672D27BE45BD00AC75DB /* UIColorExt.swift in Sources */,
-				9A1D535D27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */,
-				9A33789A279A76B100805138 /* FolderViewTest.swift in Sources */,
-				9A33789B279A76B700805138 /* MainView.swift in Sources */,
-				9A04BF2127C8CD2000F3972D /* CustomTextView.swift in Sources */,
-				9A1D854027A16BE800B00156 /* SubMemoList.swift in Sources */,
-				9A337891279A56C500805138 /* FolderEditViewModel.swift in Sources */,
-				9A3378082796A5CB00805138 /* FilteredMemoList.swift in Sources */,
-				9A046D1C27B67508003169C7 /* OrderingAppStorage.swift in Sources */,
-				E545D1D7278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
-				9AC5D22C278BCD54007EAA28 /* SubFoldersToolView.swift in Sources */,
-				E523DB3D27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
-				9AC5D1E327854266007EAA28 /* macOSMemoApp.swift in Sources */,
-				9AE5391C27C6374F00452999 /* PlainTextView.swift in Sources */,
-				9A1D536727ACE516009294C1 /* DeeepMemoApp.swift in Sources */,
-				9AC3B0DF279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */,
-				9A046CCD27B3A72E003169C7 /* CollapsingTest.swift in Sources */,
-				9AC5D21A2786F773007EAA28 /* HomeViewPrev.swift in Sources */,
-				9A33789C279A76C300805138 /* FolderLabelView3.swift in Sources */,
-				9A013F6B27BA535400C612ED /* DynamicTopFolderCell.swift in Sources */,
-				9AC5D1EF27854267007EAA28 /* macOSMemo.xcdatamodeld in Sources */,
-				9AD8332427BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */,
-				9AC5D21427857993007EAA28 /* CoreDataTestView.swift in Sources */,
-				9AA2673027BE4D3700AC75DB /* ColorPickerView.swift in Sources */,
-				9AC5D1F827854405007EAA28 /* DeeepMemo.xcdatamodeld in Sources */,
-				E596A6C627AD8D5000076E95 /* OrderViewModel.swift in Sources */,
-				9AD8333827BE148A00506AE8 /* MemoView.swift in Sources */,
-				9A337899279A76AF00805138 /* FolderView2.swift in Sources */,
-				9A1D536627ACE454009294C1 /* MindMapView.swift in Sources */,
-				9AA266E227BE347C00AC75DB /* MemoBoxView.swift in Sources */,
-				9A1D854627A24F9400B00156 /* SubFolderView.swift in Sources */,
-				9AC5D232278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */,
-				9A1D853A279FF32400B00156 /* DynamicFolderCell.swift in Sources */,
-				9AD8332827BD0B7300506AE8 /* CustomTextView1.swift in Sources */,
-				9A33780B2796B10E00805138 /* HomeView.swift in Sources */,
-				9A3378022795736200805138 /* ColorExt.swift in Sources */,
-				9AC5D235278C3145007EAA28 /* MemoList2.swift in Sources */,
-				9A337805279576CC00805138 /* testView.swift in Sources */,
-				9A337894279A5C9600805138 /* HierarchyLabelView.swift in Sources */,
-				9A1D536527ACE439009294C1 /* FolderView.swift in Sources */,
-				9AC5D20227855C0B007EAA28 /* Persistence.swift in Sources */,
-				9A1D536327ACE2E3009294C1 /* SubFolderButtonImage.swift in Sources */,
-				9A1D536027A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1040,7 +876,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1074,7 +910,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1135,66 +971,6 @@
 			};
 			name = Release;
 		};
-		9AC5D1F227854268007EAA28 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOSMemo/macOSMemo.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"macOSMemo/Preview Content\"";
-				DEVELOPMENT_TEAM = F23GD77ZRK;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.macOSMemo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		9AC5D1F327854268007EAA28 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOSMemo/macOSMemo.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"macOSMemo/Preview Content\"";
-				DEVELOPMENT_TEAM = F23GD77ZRK;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.macOSMemo";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1221,15 +997,6 @@
 			buildConfigurations = (
 				9AC5D11C27840609007EAA28 /* Debug */,
 				9AC5D11D27840609007EAA28 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9AC5D1F127854268007EAA28 /* Build configuration list for PBXNativeTarget "macOSMemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9AC5D1F227854268007EAA28 /* Debug */,
-				9AC5D1F327854268007EAA28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

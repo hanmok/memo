@@ -54,6 +54,7 @@ struct FolderView: View {
     func toggleFavorite() {
         currentFolder.isFavorite.toggle()
         currentFolder.modificationDate = Date()
+        Folder.updateTopFolders(context: context)
         context.saveCoreData()
     }
     
