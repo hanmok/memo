@@ -167,12 +167,6 @@
 		9AC5D13C2785247D007EAA28 /* Terms */ = {isa = PBXFileReference; lastKnownFileType = text; path = Terms; sourceTree = "<group>"; };
 		9AC5D1D827854159007EAA28 /* DeeepMemo (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DeeepMemo (iOS).entitlements"; sourceTree = "<group>"; };
 		9AC5D1DA2785415F007EAA28 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.2.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
-		9AC5D1E227854266007EAA28 /* macOSMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOSMemoApp.swift; sourceTree = "<group>"; };
-		9AC5D1E427854266007EAA28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		9AC5D1E627854267007EAA28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9AC5D1E927854267007EAA28 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		9AC5D1EE27854267007EAA28 /* macOSMemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = macOSMemo.xcdatamodel; sourceTree = "<group>"; };
-		9AC5D1F027854267007EAA28 /* macOSMemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOSMemo.entitlements; sourceTree = "<group>"; };
 		9AC5D1F427854292007EAA28 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9AC5D1F727854387007EAA28 /* DeeepMemo--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DeeepMemo--iOS--Info.plist"; sourceTree = "<group>"; };
 		9AC5D1FC278557D8007EAA28 /* UnitTestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitTestHelper.swift; sourceTree = "<group>"; };
@@ -248,7 +242,6 @@
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
 				9AC5D1F727854387007EAA28 /* DeeepMemo--iOS--Info.plist */,
 				9AC5D1D827854159007EAA28 /* DeeepMemo (iOS).entitlements */,
-				9AC5D1E127854266007EAA28 /* macOSMemo */,
 				9A04749D27715D1300571D66 /* Products */,
 				9AC5D1D92785415F007EAA28 /* Frameworks */,
 				9AC5D20727856E7D007EAA28 /* DeeepMemoTests-Bridging-Header.h */,
@@ -408,27 +401,6 @@
 				9AC5D1DA2785415F007EAA28 /* CloudKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9AC5D1E127854266007EAA28 /* macOSMemo */ = {
-			isa = PBXGroup;
-			children = (
-				9AC5D1E227854266007EAA28 /* macOSMemoApp.swift */,
-				9AC5D1E427854266007EAA28 /* ContentView.swift */,
-				9AC5D1E627854267007EAA28 /* Assets.xcassets */,
-				9AC5D1F027854267007EAA28 /* macOSMemo.entitlements */,
-				9AC5D1ED27854267007EAA28 /* macOSMemo.xcdatamodeld */,
-				9AC5D1E827854267007EAA28 /* Preview Content */,
-			);
-			path = macOSMemo;
-			sourceTree = "<group>";
-		};
-		9AC5D1E827854267007EAA28 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				9AC5D1E927854267007EAA28 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		9AC5D2112785798A007EAA28 /* Tester */ = {
@@ -1030,16 +1002,6 @@
 			);
 			currentVersion = 9AC5D10B27840554007EAA28 /* Model.xcdatamodel */;
 			path = DeeepMemo.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		9AC5D1ED27854267007EAA28 /* macOSMemo.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				9AC5D1EE27854267007EAA28 /* macOSMemo.xcdatamodel */,
-			);
-			currentVersion = 9AC5D1EE27854267007EAA28 /* macOSMemo.xcdatamodel */;
-			path = macOSMemo.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
