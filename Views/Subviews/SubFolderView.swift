@@ -95,11 +95,12 @@ struct SubFolderView: View {
             }
         }
         .frame(width: UIScreen.screenWidth / 2.5)
-        .background(Color.memoBoxColor)
+//        .background(Color.memoBoxColor)
+        .background(colorScheme == .dark ? .black : .subColor)
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(colorScheme == .dark ? Color.subColor : .gray ,lineWidth: 1)
+                .stroke(colorScheme == .dark ? Color.subColor : Color.init(white: 0.8), lineWidth: 1)
         )
     }
 }

@@ -55,6 +55,10 @@ struct MemoView: View {
     func saveChanges() {
         print("save changes has triggered")
         
+        if contents != memo.contents {
+            memo.modificationDate = Date()
+        }
+        
         memo.contents = contents
         
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
@@ -67,7 +71,7 @@ struct MemoView: View {
         }
         
         parent.title += "" //
-        
+//        memo.modificationDate = Date()
         print("savedContents: \(memo.contents)")
         context.saveCoreData()
     }

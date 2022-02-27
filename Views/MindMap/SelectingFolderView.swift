@@ -86,10 +86,15 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
+                                folderEditVM.folderToCut!.modificationDate = Date()
                             }
+                            // no folder to cut, means memos are relocating.
                         } else {
-                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
-                            
+                            // paste memos to folder to paste, and change memo's modificationDate.
+                            _ = memoEditVM.selectedMemos.map {
+                                folderEditVM.folderToPaste!.add(memo: $0)
+                                $0.modificationDate = Date()
+                            }
                             memoEditVM.initSelectedMemos()
                         }
                         folderEditVM.folderToPaste = nil
@@ -126,9 +131,12 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
+                                folderEditVM.folderToCut!.modificationDate = Date()
                             }
                         } else {
-                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
+                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
+                                $0.modificationDate = Date()
+                            }
                             memoEditVM.initSelectedMemos()
                         }
                         

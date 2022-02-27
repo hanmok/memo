@@ -178,6 +178,8 @@ extension Color {
     
     static let basicColors = Color(UIColor.basicColors)
     
+    static let buttonTextColor = Color(UIColor.buttonTextColor)
+    
 }
 
 extension UIColor {
@@ -204,6 +206,7 @@ extension UIColor {
     
     static let basicColors = UIColor(named: ColorKeys.basicColors)!
 
+    static let buttonTextColor = UIColor(named: ColorKeys.buttonTextColor)!
 }
 
 struct ColorKeys {
@@ -230,6 +233,8 @@ struct ColorKeys {
     static let memoBoxSwipeBGColor = "memoBoxSwipeBGColor"
     
     static let basicColors = "basicColors"
+    
+    static let buttonTextColor = "buttonTextColor"
     
 }
 

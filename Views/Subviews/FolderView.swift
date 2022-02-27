@@ -53,6 +53,7 @@ struct FolderView: View {
     
     func toggleFavorite() {
         currentFolder.isFavorite.toggle()
+        currentFolder.modificationDate = Date()
         context.saveCoreData()
     }
     

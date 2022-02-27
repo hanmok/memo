@@ -356,6 +356,7 @@ struct MindMapView: View {
                     case .rename:
                         if folderToBeRenamed != nil {
                             folderToBeRenamed!.title = newName
+                            folderToBeRenamed!.modificationDate = Date()
                             folderToBeRenamed = nil
                             context.saveCoreData()
                         }
