@@ -261,7 +261,7 @@ struct FolderView: View {
             
                 .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
-                .padding(.horizontal, Sizes.properSpacing)
+//                .padding(.horizontal, Sizes.properSpacing)
             
             
             
