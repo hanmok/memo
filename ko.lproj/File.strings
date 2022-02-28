@@ -1,0 +1,23 @@
+/* 
+  File.strings
+  DeeepMemo
+
+  Created by Mac mini on 2022/03/01.
+  
+*/
+
+
+"removeAlertMsgMain" = "정말 제거하시겠습니까?";
+"removeAlertMsgSub" = "삭제 후에는 복원이 불가능합니다.";
+
+"Cancel" = "취소";
+"Delete" = "제거";
+
+"New Folder" = "새 폴더";
+"Rename Folder" = "폴더 이름 변경";
+
+"New Sub Folder" = "새 폴더 속 폴더";
+"Folder" = "폴더";
+"Archive" = "보관함";
+"Select Folder" = "이동할 위치를 선택해주세요.";
+
