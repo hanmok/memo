@@ -99,7 +99,8 @@ struct SubFolderView: View {
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(colorScheme == .dark ? Color.subColor : .gray ,lineWidth: 1)
+//                .stroke(colorScheme == .dark ? Color.subColor : .gray ,lineWidth: 1)
+                .stroke(colorScheme == .dark ? Color.subColor : Color.init(white: 0.85) ,lineWidth: 1)
         )
     }
 }

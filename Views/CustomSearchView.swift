@@ -164,7 +164,8 @@ struct CustomSearchView: View {
                         showingSearchView = false
                     } label: {
                         Text("Cancel")
-                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
+//                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
+                            .foregroundColor(.buttonTextColor)
                     }
 
                 }
