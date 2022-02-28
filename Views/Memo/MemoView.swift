@@ -43,6 +43,17 @@ struct MemoView: View {
 //            SystemImage( "chevron.left")
             SystemImage("chevron.left", size: 18)
                 .tint(Color.navBtnColor)
+                .background(.green)
+        }
+    }
+    
+    var hasSafeBottom: Bool {
+        if #available(iOS 13.0, *),
+           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
+//           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -106,8 +117,9 @@ struct MemoView: View {
         
         return ZStack(alignment: .topLeading) {
             VStack {
-                Rectangle()
-                    .frame(width: UIScreen.screenWidth, height: 90)
+                Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
+//                    .frame(width: UIScreen.screenWidth, height: 90)
+                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 50 : 90)
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }

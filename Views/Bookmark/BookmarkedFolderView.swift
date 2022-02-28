@@ -22,8 +22,10 @@ struct BookmarkedFolderView: View {
     @ObservedObject var folder: Folder
     @State var presentingNewMemo = false
     
+    var hasSafeBottom: Bool
+    
     var body: some View {
-        
+        print("hasSafeBottom: \(hasSafeBottom)")
         return ZStack {
             NavigationView {
                 ZStack(alignment: .topLeading) {
@@ -50,7 +52,8 @@ struct BookmarkedFolderView: View {
 //                                Spacer()
                             }
                         } // end of ScrollView
-                        .frame(height: 150)
+//                        .frame(height: 150)
+                        .frame(height: hasSafeBottom ? 150 : 125)
                         .padding(.top, 10)
                         
                         Spacer()
@@ -108,7 +111,7 @@ struct BookmarkedFolderView: View {
                 Spacer()
             }
         } // end of ZStack
-        .offset(y: presentingView || presentingNewMemo ? 0 : UIScreen.screenHeight - 250)
+        .offset(y: (presentingView || presentingNewMemo) ? 0 : (hasSafeBottom ? UIScreen.screenHeight - 250 : UIScreen.screenHeight - 170  ))
         .animation(.spring(response: 0.1), value: presentingView || presentingNewMemo)
     }
 }

@@ -131,7 +131,7 @@ struct FolderView: View {
 //                    .padding(.horizontal, 10 + Sizes.overallPadding)
                     .padding(.trailing, 10 + Sizes.overallPadding)
 //                    .padding(.leading, Sizes.overallPadding)
-                    .padding(.leading, 10)
+                    .padding(.leading, Sizes.navBtnLeadingSpacing)
                     .padding(.bottom, 7.5)
                 
                 
@@ -166,7 +166,7 @@ struct FolderView: View {
                                     HierarchyLabelView(currentFolder: currentFolder)
                                         .font(.caption)
                                         .frame(maxWidth: .infinity, alignment: .topLeading)
-                                        .padding(.leading, 10)
+//                                        .padding(.leading, 10)
                                         .offset(y: 40)
                                 }
                             }

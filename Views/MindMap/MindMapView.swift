@@ -57,11 +57,25 @@ struct MindMapView: View {
     @State var allMemos:[Memo] = []
     @State var showingSearchView = false
     
+    var hasSafeBottom: Bool {
+        if #available(iOS 13.0, *),
+           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
+//           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
     
     @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
     
     var body: some View {
+        
+        
+        
+        
         return ZStack {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
@@ -312,7 +326,7 @@ struct MindMapView: View {
                 // END
                 
             } // end of VStack , Inside ZStack.
-            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
+            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder, hasSafeBottom: hasSafeBottom)
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoOrder)

@@ -179,6 +179,7 @@
 		9A0474BF2771709D00571D66 /* OverallMemo */ = {isa = PBXFileReference; lastKnownFileType = text; path = OverallMemo; sourceTree = "<group>"; };
 		9A04BF1F27C8CD2000F3972D /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		9A15388B27CCC3F2009D8C6D /* BugCatcher */ = {isa = PBXFileReference; lastKnownFileType = text; path = BugCatcher; sourceTree = "<group>"; };
+		9A15388C27CCD73B009D8C6D /* Phone Sizes */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Phone Sizes"; sourceTree = "<group>"; };
 		9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithLevelView.swift; sourceTree = "<group>"; };
 		9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingButtonLabel.swift; sourceTree = "<group>"; };
 		9A1D535E27A93C51009294C1 /* PrettyTextFieldAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyTextFieldAlert.swift; sourceTree = "<group>"; };
@@ -303,6 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				9A15388B27CCC3F2009D8C6D /* BugCatcher */,
+				9A15388C27CCD73B009D8C6D /* Phone Sizes */,
 				9A04BF1F27C8CD2000F3972D /* CustomTextView.swift */,
 				E54FE17E27C7C896000FFA81 /* SwipeTestView.swift */,
 				9AD8332627BD0B7300506AE8 /* CustomTextView1.swift */,
