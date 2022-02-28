@@ -22,7 +22,6 @@
 		9A0474C02771709D00571D66 /* OverallMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A0474BF2771709D00571D66 /* OverallMemo */; };
 		9A04BF2027C8CD2000F3972D /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04BF1F27C8CD2000F3972D /* CustomTextView.swift */; };
 		9A04BF2127C8CD2000F3972D /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04BF1F27C8CD2000F3972D /* CustomTextView.swift */; };
-		9A04BF2427C8CF4E00F3972D /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 9A04BF2327C8CF4E00F3972D /* Introspect */; };
 		9A1D535927A925A1009294C1 /* TitleWithLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */; };
 		9A1D535A27A925A1009294C1 /* TitleWithLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535827A925A1009294C1 /* TitleWithLevelView.swift */; };
 		9A1D535C27A92F10009294C1 /* OrderingButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D535B27A92F10009294C1 /* OrderingButtonLabel.swift */; };
@@ -278,7 +277,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9AC5D1DB2785415F007EAA28 /* CloudKit.framework in Frameworks */,
-				9A04BF2427C8CF4E00F3972D /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,7 +608,6 @@
 			);
 			name = "DeeepMemo (iOS)";
 			packageProductDependencies = (
-				9A04BF2327C8CF4E00F3972D /* Introspect */,
 			);
 			productName = "DeeepMemo (iOS)";
 			productReference = 9A04749C27715D1300571D66 /* DeeepMemo.app */;
@@ -1246,14 +1243,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9A04BF2327C8CF4E00F3972D /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9A04BF2227C8CF4E00F3972D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */ = {

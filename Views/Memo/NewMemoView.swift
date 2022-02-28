@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 import CoreData
-import Introspect
+//import Introspect
 
 struct NewMemoView: View {
     
