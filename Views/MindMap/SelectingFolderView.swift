@@ -48,7 +48,7 @@ struct SelectingFolderView: View {
                         HStack {
                             // MARK: - FOR TESTING
                             Spacer()
-                            
+                            // CANCEL
                             Button {
                                 presentationMode.wrappedValue.dismiss()
                                 folderEditVM.folderToCut = nil
@@ -57,7 +57,6 @@ struct SelectingFolderView: View {
                                 SystemImage( "multiply")
                                     .foregroundColor(Color.blackAndWhite)
                                 Text("").frame(height: 28)
-
                             }
                         }
                         .padding(.trailing, Sizes.overallPadding)
@@ -86,12 +85,16 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
+                                folderEditVM.folderToCut!.modificationDate = Date()
                             }
                         } else {
-                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
+                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
+                                $0.modificationDate = Date()
+                            }
                             
                             memoEditVM.initSelectedMemos()
                         }
+                        
                         folderEditVM.folderToPaste = nil
                         presentationMode.wrappedValue.dismiss()
                         
@@ -126,9 +129,12 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
+                                folderEditVM.folderToCut!.modificationDate = Date()
                             }
                         } else {
-                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)}
+                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
+                                $0.modificationDate = Date()
+                            }
                             memoEditVM.initSelectedMemos()
                         }
                         

@@ -207,7 +207,7 @@ struct NewMemoView: View {
         .padding(.bottom)
         .navigationBarHidden(true)
         .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
                 /// Anything over 0.5 seems to work
                 self.editorFocusState = true
             }

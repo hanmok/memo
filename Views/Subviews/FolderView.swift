@@ -53,6 +53,9 @@ struct FolderView: View {
     
     func toggleFavorite() {
         currentFolder.isFavorite.toggle()
+        currentFolder.modificationDate = Date()
+        // 업데이트가 바로 안됨. 이럴땐 어떻게 해 ?
+        Folder.updateTopFolders(context: context) // 다시 잘되네..? ㅅㅂ;;  무슨..,, 이게 공학이냐....
         context.saveCoreData()
     }
     

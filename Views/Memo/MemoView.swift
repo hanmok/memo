@@ -55,6 +55,10 @@ struct MemoView: View {
     func saveChanges() {
         print("save changes has triggered")
         
+        if memo.contents != contents {
+            memo.modificationDate = Date()
+        }
+        
         memo.contents = contents
         
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
@@ -176,6 +180,7 @@ struct MemoView: View {
             print("data saved!")
 
         })
+        
         .sheet(isPresented: $showSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:

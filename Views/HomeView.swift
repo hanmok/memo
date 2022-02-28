@@ -34,6 +34,12 @@ struct HomeView: View { // top folder fetch
 //                    }
 //                }
 
+        if topFolders.count < 2 {
+            let _ = Folder.returnSampleFolder3(context: context)
+        } else if topFolders.count > 2 {
+            _ = topFolders.map { Folder.delete($0)}
+            let _ = Folder.returnSampleFolder3(context: context)
+        }
         
         return NavigationView {
             MindMapView(
