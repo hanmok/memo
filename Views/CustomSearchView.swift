@@ -163,7 +163,10 @@ struct CustomSearchView: View {
                         searchKeyword = ""
                         showingSearchView = false
                     } label: {
-                        Text("Cancel")
+//                        Text("Cancel")
+                        Text(LocalizedStringStorage.cancelInSearch)
+//                        Text(LocalizedStringStorage.cancel)
+                        
 //                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .foregroundColor(.buttonTextColor)
                     }
@@ -172,8 +175,10 @@ struct CustomSearchView: View {
                 .padding(.horizontal, Sizes.overallPadding)
             
                 Picker("", selection: $searchTypeEnum) {
-                    Text(SearchType.all.rawValue).tag(SearchType.all)
-                    Text(SearchType.current.rawValue).tag(SearchType.current)
+//                    Text(SearchType.all.rawValue).tag(SearchType.all)
+                    Text(LocalizedStringStorage.convertSearchTypeToStorage(type: .all)).tag(SearchType.all)
+//                    Text(SearchType.current.rawValue).tag(SearchType.current)
+                    Text(LocalizedStringStorage.convertSearchTypeToStorage(type: .current)).tag(SearchType.current)
                 }
                 .padding(.horizontal, Sizes.overallPadding)
                 .pickerStyle(SegmentedPickerStyle())
@@ -214,7 +219,9 @@ struct CustomSearchView: View {
                                         }
                                     }
                                 } else { // no  searchResult
-                                    Text("No Memo contains \"\(searchKeyword)\"")
+//                                    Text("No Memo contains \"\(searchKeyword)\"")
+                                    Spacer()
+                                    Text(LocalizedStringStorage.emptySearchResult)
                                 }
                             }// searchTypeEnum == .current
                             else {
@@ -248,7 +255,9 @@ struct CustomSearchView: View {
                                         }
                                     }
                                 } else { // no  searchResult
-                                    Text("No Memo contains \"\(searchKeyword)\" in \(currentFolder.title)")
+//                                    Text("No Memo contains \"\(searchKeyword)\" in \(currentFolder.title)")
+                                    Spacer()
+                                    Text(LocalizedStringStorage.emptySearchResult)
                                 }
                             } // searchTypeEnum == .current
                         } // nil

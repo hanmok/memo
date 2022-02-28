@@ -30,8 +30,8 @@ struct FolderType {
     
     static func getFolderName(type: FolderTypeEnum) -> String {
         switch type {
-        case .folder: return "Folder"
-        case .archive: return "Archive"
+        case .folder: return LocalizedStringStorage.folder
+        case .archive: return LocalizedStringStorage.archive
         }
     }
     
@@ -844,9 +844,9 @@ extension Folder {
 //        homeFolder.folderType = .home
         context.saveCoreData()
         
-        let subFolder1 = Folder(title: "Category 1", context: context)
-        let subFolder2 = Folder(title: "Category 2", context: context)
-        let subFolder3 = Folder(title: "Category 3", context: context)
+        let subFolder1 = Folder(title: LocalizedStringStorage.category1, context: context)
+        let subFolder2 = Folder(title: LocalizedStringStorage.category2, context: context)
+        let subFolder3 = Folder(title: LocalizedStringStorage.category3, context: context)
         
         subFolder1.creationDate = Date().advanced(by: 200)
         subFolder2.creationDate = Date().advanced(by: 100)
@@ -860,7 +860,7 @@ extension Folder {
         homeFolder.add(subfolder: subFolder2)
         homeFolder.add(subfolder: subFolder3)
         
-        let newFolder2 = Folder(title: "Sub Category 2", context: context)
+        let newFolder2 = Folder(title: LocalizedStringStorage.subCategory1, context: context)
         subFolder1.add(subfolder: newFolder2)
         
         newFolder2.creationDate = Date().advanced(by: 1)

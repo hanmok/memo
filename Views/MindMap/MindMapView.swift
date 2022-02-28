@@ -121,10 +121,10 @@ struct MindMapView: View {
                             showTextField = true
                             if selectionEnum == .folder {
                                 textFieldType = .newTopFolder
-                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)'s \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1) th Folder"
+                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                             } else {
                                 textFieldType = .newTopArchive
-                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)'s \(fastFolderWithLevelGroup.archive.subfolders.count + 1) th Folder"
+                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.archive.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                             }
 
                         } label: { // original : 28
@@ -176,7 +176,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
+                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                                         } label: {
 
                                             SystemImage("folder.badge.plus")
@@ -199,7 +199,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
+                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                                         } label: {
                                             SystemImage("folder.badge.plus")
                                                 .foregroundColor(.black)
@@ -266,7 +266,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
+                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
@@ -286,7 +286,7 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)'s \(folderWithLevel.folder.subfolders.count + 1) th Folder"
+                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1) \(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
@@ -407,7 +407,7 @@ struct MindMapView: View {
                 }
         } // end of ZStack
         
-        .alert(AlertMessages.alertDeleteMain, isPresented: $showingDeleteAction, actions: {
+        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showingDeleteAction, actions: {
             // delete
             Button(role: .destructive) {
                 if let validFolderToRemoved = folderEditVM.folderToRemove {
@@ -416,16 +416,16 @@ struct MindMapView: View {
                 }
                 context.saveCoreData()
             } label: {
-                Text(AlertMessages.deleteConfirm)
+                Text(LocalizedStringStorage.delete)
             }
             
             Button(role: .cancel) {
                 folderEditVM.folderToRemove = nil
             } label: {
-                Text(AlertMessages.cancel)
+                Text(LocalizedStringStorage.cancel)
             }
         }, message: {
-            Text(AlertMessages.alertDeleteSub).foregroundColor(.red)
+            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
         })
     
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
@@ -443,9 +443,9 @@ struct MindMapView: View {
     }
 }
 
-struct AlertMessages {
-    static let deleteConfirm = "Delete"
-    static let cancel = "Cancel"
-    static let alertDeleteMain = "Are you sure to delete?"
-    static let alertDeleteSub = "All deleted are NOT Recoverable. "
-}
+//struct AlertMessages {
+//    static let deleteConfirm = "Delete"
+//    static let cancel = "Cancel"
+//    static let alertDeleteMain = "Are you sure to delete?"
+//    static let alertDeleteSub = "All deleted are NOT Recoverable. "
+//}

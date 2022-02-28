@@ -90,7 +90,7 @@ extension UITextView {
         doneToolbar.barStyle = .default
         
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+        let done: UIBarButtonItem = UIBarButtonItem(title: LocalizedStringStorage.keyboardDone, style: .done, target: self, action: #selector(self.doneButtonAction))
         done.tintColor = .buttonTextColor
         
         let items = [flexSpace, done]
@@ -104,6 +104,5 @@ extension UITextView {
         DispatchQueue.main.async {
             self.resignFirstResponder()
         }
-//        doneButtonAction()
     }
 }

@@ -1,0 +1,52 @@
+/* 
+  File.strings
+  DeeepMemo
+
+  Created by Mac mini on 2022/03/01.
+  
+*/
+
+"done" = "Done";
+"keyboardDone" = "Done";
+
+"removeAlertMsgMain" = "Are you sure to delete?";
+"removeAlertMsgSub" = "All deleted are NOT Recoverable";
+
+"CancelInSearch" = "Cancel";
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+
+"New Folder" = "New Folder";
+"Rename Folder" = "Rename Folder";
+"New Sub Folder" = "New Sub Folder";
+"New Archive" = "New Folder in Archive";
+
+"Folder" = "Folder";
+"Archive" = "Archive";
+
+"Select Folder" = "Select Folder To Move To ";
+
+"category1" = "Category 1";
+"category2" = "Category 2";
+"category3" = "Category 3";
+
+"Sub Category 1" = "Sub Category 1";
+
+"th" = "th";
+"'s" = "'s";
+
+"Empty Search Result" = "No Memo contains that keyword";
+
+"All" = "All";
+"Current" = "Current";
+
+// Sorting
+"Folder Ordering" = "Folder Ordering";
+"Memo Ordering" = "Memo Ordering";
+
+"Modification Date" = "Modification Date";
+"Creation Date" = "Creation Date";
+"Alphabetical" = "Alphabetical";
+
+"Ascending Order" = "Ascending Order";
+"Decending Order" = "Decending Order";

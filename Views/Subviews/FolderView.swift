@@ -78,7 +78,7 @@ struct FolderView: View {
         
         if shouldAddFolder {
             DispatchQueue.main.async {
-                newSubFolderName = "\(currentFolder.title)'s \(currentFolder.subfolders.count + 1) th Folder"
+                newSubFolderName = "\(currentFolder.title)'s \(currentFolder.subfolders.count + 1) th \(LocalizedStringStorage.folder)"
             }
         }
         
@@ -319,7 +319,7 @@ struct FolderView: View {
                 .environmentObject(memoEditVM)
         })
         
-        .alert(AlertMessages.alertDeleteMain, isPresented: $showDeleteAlert, actions: {
+        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showDeleteAlert, actions: {
             // DELETE
             Button(role: .destructive) {
                 _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
@@ -327,16 +327,16 @@ struct FolderView: View {
                 context.saveCoreData()
                 memoEditVM.initSelectedMemos()
             } label: {
-                Text(AlertMessages.deleteConfirm)
+                Text(LocalizedStringStorage.delete)
             }
             
             Button(role: .cancel) {
                 // DO NOTHING
             } label: {
-                Text(AlertMessages.cancel)
+                Text(LocalizedStringStorage.cancel)
             }
         }, message: {
-            Text(AlertMessages.alertDeleteSub).foregroundColor(.red)
+            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
         })
         
         .onDisappear(perform: {

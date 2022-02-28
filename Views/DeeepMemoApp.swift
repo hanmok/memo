@@ -18,12 +18,27 @@ struct DeeepMemoApp: App {
     
     var body: some Scene {
         print("isFirstLaunch: \(isFirstLaunch)")
+        
+        
+        // For testing
+//        let foldersReq = Folder.fetch(.all)
+//
+//       if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
+//           _ = folders.map {
+//               print("Folder name to be deleted: \($0.title)")
+//               Folder.delete($0)}
+//           persistenceController.container.viewContext.saveCoreData()
+//       }
+        
         if isFirstLaunch {
+            
             let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
+            persistenceController.container.viewContext.saveCoreData()
             print("newFolders: \(newFolders)")
             isFirstLaunch = false
             
         }
+        
         
         return WindowGroup {
             HomeView()

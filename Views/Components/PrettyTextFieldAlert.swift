@@ -14,11 +14,11 @@ enum TextFieldAlertType: String {
     case newTopFolder = "New Folder"
     case newTopArchive = "New Archive"
 }
-
+// raw value -> Key -> Storage
 struct TextFieldStruct {
-    
+
     var textEnum: TextFieldAlertType
-    
+
     // Not Curretly using
     var placeHolder: String {
         switch textEnum {
@@ -49,11 +49,13 @@ struct PrettyTextFieldAlert: View {
     var body: some View {
         ZStack{
             VStack(spacing: 0) {
-                Text(type.rawValue)
+//                Text(type.rawValue)
+                Text(LocalizedStringStorage.convertTypeToStorage(type: type))
                     .font(.headline)
                     .padding(.vertical, 15)
                 
-                TextField(TextFieldStruct(textEnum: type).placeHolder, text: $text)
+//                TextField(TextFieldStruct(textEnum: type).placeHolder, text: $text)
+                TextField("", text: $text)
                     .disableAutocorrection(true)
                     .font(.callout)
                     .focused($focusState)
@@ -95,7 +97,8 @@ struct PrettyTextFieldAlert: View {
                         isPresented = false
                         focusState = false
                     } label: {
-                        Text("Cancel")
+//                        Text("Cancel")
+                        Text(LocalizedStringStorage.cancel)
                             .foregroundColor(.red)
                             .frame(alignment: .center)
                            
@@ -112,7 +115,8 @@ struct PrettyTextFieldAlert: View {
                         isPresented = false
                         focusState = false
                     } label: {
-                        Text("Done")
+//                        Text("Done")
+                        Text(LocalizedStringStorage.done)
                             .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .frame(alignment: .center)
                     }

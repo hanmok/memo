@@ -33,7 +33,8 @@ struct FolderOrderingButton: View {
                 if folderOrderType == type {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
-                Text(type.rawValue)
+//                Text(type.rawValue)
+                Text(LocalizedStringStorage.convertOrderTypeToStorage(type: type))
             }
         }
     }
@@ -57,7 +58,8 @@ struct FolderAscDecButton: View {
                 if folderOrderAsc == isAscending {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
-                Text(isAscending ? "Ascending Order" : "Decending Order")
+//                Text(isAscending ? "Ascending Order" : "Decending Order")
+                Text(isAscending ? LocalizedStringStorage.AscendingOrder : LocalizedStringStorage.DecendingOrder)
             }
         }
     }
@@ -87,7 +89,8 @@ struct MemoOrderingButton: View {
                 if mOrderType == type {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
-                Text(type.rawValue)
+//                Text(type.rawValue)
+                Text(LocalizedStringStorage.convertOrderTypeToStorage(type: type))
             }
         }
     }
@@ -114,7 +117,8 @@ struct MemoAscDecButton: View {
                 if mOrderAsc == isAscending {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
-                Text(isAscending ? "Ascending Order" : "Decending Order")
+//                Text(isAscending ? "Ascending Order" : "Decending Order")
+                Text(isAscending ? LocalizedStringStorage.AscendingOrder : LocalizedStringStorage.DecendingOrder)
             }
         }
     }
@@ -125,7 +129,8 @@ struct FolderOrderingMenu: View {
   
     var body: some View {
         Menu {
-            Text("Folder Ordering")
+//            Text("Folder Ordering")
+            Text(LocalizedStringStorage.folderOrdering)
                 .font(.title3)
             
             FolderOrderingButton(type: .modificationDate)
@@ -151,7 +156,8 @@ struct MemoOrderingMenu: View {
     
     var body: some View {
         Menu {
-            Text("Memo Ordering")
+//            Text("Memo Ordering")
+            Text(LocalizedStringStorage.memoOrdering)
             MemoOrderingButton(type: .modificationDate, parentFolder: parentFolder)
             MemoOrderingButton(type: .creationDate, parentFolder: parentFolder)
             MemoOrderingButton(type: .alphabetical, parentFolder: parentFolder)
