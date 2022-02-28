@@ -167,8 +167,8 @@ struct CustomSearchView: View {
 //                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .foregroundColor(.buttonTextColor)
                     }
+
                 }
-                
                 .padding(.horizontal, Sizes.overallPadding)
             
                 Picker("", selection: $searchTypeEnum) {
