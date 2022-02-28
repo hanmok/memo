@@ -58,13 +58,29 @@ struct MindMapView: View {
     @State var showingSearchView = false
     
     var hasSafeBottom: Bool {
-        if #available(iOS 13.0, *),
-           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
-//           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        if (window?.safeAreaInsets.bottom)! > 0 {
+            print("has safeArea!")
             return true
         } else {
+            print("does not have safeArea!")
             return false
         }
+        
+        
+//        if #available(iOS 13.0, *),
+//           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
+//
+////           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
+//            print(" it has safeBottom !")
+//            return true
+//        } else {
+//            print("It does not have safeBottom !")
+//            return false
+//        }
     }
     
     @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false

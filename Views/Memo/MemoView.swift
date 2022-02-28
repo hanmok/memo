@@ -43,16 +43,29 @@ struct MemoView: View {
 //            SystemImage( "chevron.left")
             SystemImage("chevron.left", size: 18)
                 .tint(Color.navBtnColor)
-                .background(.green)
+//                .background(.green)
         }
     }
     
+//    var hasSafeBottom: Bool {
+//        if #available(iOS 13.0, *),
+//           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
+////           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
+//            return true
+//        } else {
+//            return false
+//        }
+//    }
     var hasSafeBottom: Bool {
-        if #available(iOS 13.0, *),
-           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
-//           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        if (window?.safeAreaInsets.bottom)! > 0 {
+            print("has safeArea!")
             return true
         } else {
+            print("does not have safeArea!")
             return false
         }
     }
@@ -114,12 +127,15 @@ struct MemoView: View {
 ////                editorFocusState = false
 //
 //            }
+        print("has Safebottom ? \(hasSafeBottom)")
         
         return ZStack(alignment: .topLeading) {
             VStack {
                 Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
 //                    .frame(width: UIScreen.screenWidth, height: 90)
-                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 50 : 90)
+                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 90 : 70)
+//                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 5 : 30)
+                // what the frame height does here ?  ?
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }
@@ -129,9 +145,7 @@ struct MemoView: View {
                 HStack {
                     backBtn
                     Spacer()
-                    
                     HStack(spacing: 16) {
-            
                         Button(action: toggleBookMark) {
 
                             SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
@@ -230,4 +244,23 @@ extension View {
     func hiddenNavigationBarStyle() -> some View {
         modifier( HiddenNavigationBar() )
     }
+}
+
+
+
+extension UIApplication {
+    
+    var keyWindow: UIWindow? {
+        // Get connected scenes
+        return UIApplication.shared.connectedScenes
+            // Keep only active scenes, onscreen and visible to the user
+            .filter { $0.activationState == .foregroundActive }
+            // Keep only the first `UIWindowScene`
+            .first(where: { $0 is UIWindowScene })
+            // Get its associated windows
+            .flatMap({ $0 as? UIWindowScene })?.windows
+            // Finally, keep only the key window
+            .first(where: \.isKeyWindow)
+    }
+    
 }
