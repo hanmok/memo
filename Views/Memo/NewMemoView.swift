@@ -40,7 +40,7 @@ struct NewMemoView: View {
             self.presentingNewMemo = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            SystemImage( "chevron.left")
+            SystemImage( "chevron.left", size: 18)
                 .tint(Color.navBtnColor)
         }
     }
@@ -192,7 +192,9 @@ struct NewMemoView: View {
                     }
                 }
                 .padding(.bottom)
-                .padding(.horizontal, Sizes.overallPadding)
+//                .padding(.horizontal, Sizes.overallPadding)
+                .padding(.trailing, Sizes.overallPadding)
+                .padding(.leading, Sizes.navBtnLeadingSpacing)
                 
 //                PlainTextView(text: $contents)
                 CustomTextView1(text: $contents)

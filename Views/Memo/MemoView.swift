@@ -35,12 +35,13 @@ struct MemoView: View {
     
     let parent: Folder
     @State var colorPickerSelection = Color.white
-    var btnBack : some View {
+    var backBtn : some View {
         Button(action: {
             self.presentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            SystemImage( "chevron.left")
+//            SystemImage( "chevron.left")
+            SystemImage("chevron.left", size: 18)
                 .tint(Color.navBtnColor)
         }
     }
@@ -114,7 +115,7 @@ struct MemoView: View {
             
             VStack(spacing:0) {
                 HStack {
-                    btnBack
+                    backBtn
                     Spacer()
                     
                     HStack(spacing: 16) {
@@ -148,7 +149,8 @@ struct MemoView: View {
                     }
                 }
                 .padding(.bottom)
-                .padding(.horizontal, Sizes.overallPadding)
+                .padding(.trailing, Sizes.overallPadding)
+                .padding(.leading, Sizes.navBtnLeadingSpacing)
 
                 
 //                PlainTextView(text: $contents)

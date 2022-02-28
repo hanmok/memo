@@ -27,6 +27,7 @@ struct LevelAndCollapsed {
 }
 
 
+
 struct MindMapView: View {
     
     @Environment(\.managedObjectContext) var context

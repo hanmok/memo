@@ -258,10 +258,12 @@ extension Folder {
     
     static func updateTopFolders(context: NSManagedObjectContext) {
                 let request = Folder.topFolderFetchReq()
-                let result = try? context.fetch(request)
-        
-        _ = result!.map { $0.title += "" }
-
+        DispatchQueue.main.async {
+            let result = try? context.fetch(request)
+            _ = result!.map { $0.title += "" }
+        }
+            
+    
         //        for eachFolder in result! {
 //            eachFolder.title += ""
 //        }
