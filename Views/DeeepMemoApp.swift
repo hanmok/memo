@@ -14,15 +14,16 @@ struct DeeepMemoApp: App {
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
     
-//    @AppStorage("isFirstLaunch") var isFirstLaunch = true
+    @AppStorage("isFirstLaunch") var isFirstLaunch = true
     
     var body: some Scene {
-        
-//        if isFirstLaunch {
-//            let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
-//            print("newFolders: \(newFolders)")
-//            isFirstLaunch = false
-//        }
+        print("isFirstLaunch: \(isFirstLaunch)")
+        if isFirstLaunch {
+            let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
+            print("newFolders: \(newFolders)")
+            isFirstLaunch = false
+            
+        }
         
         return WindowGroup {
             HomeView()
