@@ -16,8 +16,10 @@ struct Sizes {
     static let overallPadding: CGFloat = 20
     /// 28
     static let littleBigPadding: CGFloat = 28
-    /// 10
+    /// 10, navBtn
     static let properSpacing: CGFloat = 10
+    
+    static let navBtnLeadingSpacing: CGFloat = 10
     /// 4
     static let minimalSpacing: CGFloat = 4
     /// 8

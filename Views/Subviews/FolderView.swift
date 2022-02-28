@@ -42,11 +42,16 @@ struct FolderView: View {
     
     @State var showingSearchView = false
     
-    var btnBack : some View {
+    var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            SystemImage("chevron.left")
+//            SystemImage("chevron.left")
+//            Image(systemName: "chevron.left")
+            SystemImage("chevron.left", size: 18)
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 18, height: 18)
                 .tint(Color.navBtnColor)
         }
     }
@@ -89,7 +94,7 @@ struct FolderView: View {
                     
             VStack {
                     HStack {
-                        btnBack
+                        backBtn
                         Spacer()
                         
                         HStack(spacing: 16) {
@@ -123,7 +128,10 @@ struct FolderView: View {
                     }
 //                    .padding(.horizontal, Sizes.overallPadding)
 //                    .padding(.horizontal, 10)
-                    .padding(.horizontal, 10 + Sizes.overallPadding)
+//                    .padding(.horizontal, 10 + Sizes.overallPadding)
+                    .padding(.trailing, 10 + Sizes.overallPadding)
+//                    .padding(.leading, Sizes.overallPadding)
+                    .padding(.leading, 10)
                     .padding(.bottom, 7.5)
                 
                 
@@ -141,19 +149,19 @@ struct FolderView: View {
                                             .font(.largeTitle)
                                             .fontWeight(.bold)
                                             .lineLimit(1)
-                                            .padding(.leading, 10)
+//                                            .padding(.leading, 10)
                                             .padding(.trailing, 45) // 80 .. 이 맞나 ??
                                     } else {
                                         Text(currentFolder.title)
                                             .font(.title)
                                             .fontWeight(.bold)
                                             .lineLimit(1)
-                                            .padding(.leading, 10)
+//                                            .padding(.leading, 10)
                                             .padding(.trailing, 45) // 80 .. 이 맞나 ??
                                     }
                                     Spacer()
-
                                 }
+                                
                                 if currentFolder.parent != nil {
                                     HierarchyLabelView(currentFolder: currentFolder)
                                         .font(.caption)
