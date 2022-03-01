@@ -21,6 +21,7 @@ enum SearchType: String {
 struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
+    @ObservedObject var trashBin: Folder
     
     @GestureState var isScrolled = false
     
@@ -59,11 +60,11 @@ struct CustomSearchView: View {
     
     @Binding var showingSearchView: Bool
     
-    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>) {
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, trashBin: Folder) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _showingSearchView = showingSearchView
-      
+        self.trashBin = trashBin
     }
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
@@ -192,7 +193,7 @@ struct CustomSearchView: View {
                                     ForEach( searchResultMemos!, id: \.self) { memoArray in
                                         Section(header:
                                                     NavigationLink(destination: {
-                                            FolderView(currentFolder: memoArray.memos.first!.folder!)
+                                            FolderView(trashBin: trashBin, currentFolder: memoArray.memos.first!.folder!)
                                                 .environmentObject(memoEditVM)
                                                 .environmentObject(FolderEditViewModel())
                                                 .environmentObject(MemoOrder())
@@ -209,7 +210,7 @@ struct CustomSearchView: View {
                                         ) {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
-                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
+                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false), trashbinFolder: trashBin)
                                                         .environmentObject(memoEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
@@ -229,7 +230,7 @@ struct CustomSearchView: View {
                                     ForEach( searchResultMemos!, id: \.self) { memoArray in
                                         Section(header:
                                                     NavigationLink(destination: {
-                                            FolderView(currentFolder: memoArray.memos.first!.folder!)
+                                            FolderView(trashBin: trashBin, currentFolder: memoArray.memos.first!.folder!)
                                                 .environmentObject(memoEditVM)
                                                 .environmentObject(FolderEditViewModel())
                                                 .environmentObject(MemoOrder())
@@ -245,7 +246,7 @@ struct CustomSearchView: View {
                                         ) {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
-                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
+                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false), trashbinFolder: trashBin)
                                                         .environmentObject(memoEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)

@@ -15,7 +15,7 @@ struct DynamicTopFolderCell: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    
+    @ObservedObject var trashBinFolder: Folder
     @ObservedObject var folder: Folder
     
     var level: Int
@@ -28,7 +28,7 @@ struct DynamicTopFolderCell: View {
     }
     
     var body: some View {
-        NavigationLink(destination: FolderView(currentFolder: folder)
+        NavigationLink(destination: FolderView(trashBin: trashBinFolder, currentFolder: folder)
                         .environmentObject(memoEditVM)
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)

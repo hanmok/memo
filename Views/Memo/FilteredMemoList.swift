@@ -42,6 +42,7 @@ struct FilteredMemoList: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @ObservedObject var trashBinFolder: Folder
     @ObservedObject var folder: Folder
 //    @ObservedObject var memosVM: MemosViewModel
     var listType: MemoListType
@@ -79,7 +80,7 @@ struct FilteredMemoList: View {
                         NavigationLink(destination:
 //                                        MemoView(memo: memo, parent: memo.folder!, presentingView:
 //                                       MemoView(memo: memosVM.memos[index], parent: memosVM.memos[index].folder!, presentingView:.constant(false))
-                                       MemoView(memo: memosToShow[index], parent: memosToShow[index].folder!, presentingView:.constant(false))
+                                       MemoView(memo: memosToShow[index], parent: memosToShow[index].folder!, presentingView:.constant(false), trashbinFolder: trashBinFolder)
                                         .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
                         ) {

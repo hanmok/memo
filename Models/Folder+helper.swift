@@ -250,13 +250,25 @@ extension Folder {
 //        }
 //    }
     
+    // 이거부터 수정해야겠는데.. ???
+    // Use bottom func instead of this.
     static func delete(_ folder: Folder) {
+        
         if let context = folder.managedObjectContext {
             context.delete(folder)
             
 //            try? context.save()
             context.saveCoreData()
             Folder.updateTopFolders(context: context)
+        }
+    }
+    
+    static func moveMemosToTrashAndDelete(from folder: Folder, to trash: Folder) {
+        _ = folder.memos.map { $0.folder = trash }
+        if let context = folder.managedObjectContext {
+            context.delete(folder)
+            context.saveCoreData()
+            
         }
     }
     

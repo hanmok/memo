@@ -16,6 +16,7 @@ import SwiftUI
 //  Created by Mac mini on 2021/12/21.
 //
 // Customized Version
+// TrashBin Env 로 넘겨야함.
 
 import SwiftUI
 import CoreData
@@ -36,7 +37,7 @@ struct TrashFolderView: View {
     
     @State var showSelectingFolderView = false
     
-    @ObservedObject var currentFolder: Folder
+    @ObservedObject var trashBinFolder: Folder
     
     @State var allMemos: [Memo] = []
     
@@ -53,8 +54,6 @@ struct TrashFolderView: View {
     
     
     var body: some View {
-        
-        
         return ZStack {
             VStack {
                 Rectangle()
@@ -80,7 +79,7 @@ struct TrashFolderView: View {
                                 .tint(Color.navBtnColor)
                         })
                         
-                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: trashBinFolder)
                     }
                 }
                 .padding(.trailing, 10 + Sizes.overallPadding)
@@ -96,7 +95,7 @@ struct TrashFolderView: View {
                             // NavigationTitle
                             ZStack(alignment: .topLeading) {
                                 HStack {
-                                    Text(currentFolder.title)
+                                    Text(trashBinFolder.title)
                                         .font(.largeTitle)
                                         .fontWeight(.bold)
                                         .lineLimit(1)
@@ -110,14 +109,14 @@ struct TrashFolderView: View {
                         .padding(.bottom, 8)
                         
                         ZStack {
-                            if !currentFolder.memos.isEmpty {
-                                MemoList()
+                            if !trashBinFolder.memos.isEmpty {
+                                MemoList(trashBinFolder: trashBinFolder)
                                     .padding(.top, 20)
                                     .ignoresSafeArea(edges: .trailing)
                             }
                         }
                     } // end of main VStack
-                    .environmentObject(currentFolder)
+                    .environmentObject(trashBinFolder)
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
                     .environmentObject(memoOrder)
@@ -132,7 +131,7 @@ struct TrashFolderView: View {
                 HStack {
                     Spacer()
                     MemosToolBarViewForTrash(
-                        currentFolder: currentFolder,
+                        currentFolder: trashBinFolder,
                         showSelectingFolderView: $showSelectingFolderView,
                         showDeleteAlert: $showDeleteAlert
                     )
@@ -147,7 +146,7 @@ struct TrashFolderView: View {
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
                     archiveFolder: Folder.fetchHomeFolder(context: context,
                                                           fetchingHome: false)!),
-                currentFolder: currentFolder, showingSearchView: $showingSearchView)
+                currentFolder: trashBinFolder, showingSearchView: $showingSearchView, trashBin: trashBinFolder)
             
                 .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)

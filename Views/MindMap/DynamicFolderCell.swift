@@ -15,7 +15,7 @@ struct DynamicFolderCell: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    
+    @ObservedObject var trashBin: Folder
     @ObservedObject var folder: Folder
     
     @State var showingDeleteAction = false
@@ -30,7 +30,7 @@ struct DynamicFolderCell: View {
 //    }
     
     var body: some View {
-        NavigationLink(destination: FolderView(currentFolder: folder)
+        NavigationLink(destination: FolderView(trashBin: trashBin, currentFolder: folder)
                         .environmentObject(memoEditVM)
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)
@@ -44,15 +44,21 @@ struct TrashBinCell: View {
     
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM: MemoEditViewModel
+    @EnvironmentObject var folderEditVM : FolderEditViewModel
+    @EnvironmentObject var memoOrder: MemoOrder
     @ObservedObject var folder: Folder
     
     var body: some View {
 //        Text("trash Bin")
-        NavigationLink(destination: TrashBinView(folder: folder)) {
-            
+//        NavigationLink(destination: TrashBinView(folder: folder)) {
+        NavigationLink(destination: TrashFolderView(trashBinFolder: folder)
+                        .environmentObject(folderEditVM)
+                        .environmentObject(memoOrder)
+                        .environmentObject(memoEditVM)
+        ) {
             HStack {
-            Text("Trash Bin").foregroundColor(.red)
-            Spacer()
+                Text("Trash Bin").foregroundColor(.red)
+                Spacer()
                 Text("\(folder.memos.count)")
                     .foregroundColor(.gray)
             }

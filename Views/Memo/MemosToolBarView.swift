@@ -15,9 +15,9 @@ struct MemosToolBarView: View {
     @ObservedObject var currentFolder: Folder
     @Environment(\.colorScheme) var colorScheme
     @Binding var showSelectingFolderView: Bool
-    
+    @ObservedObject var trashBinFolder: Folder
     let spacingBetweenButtons: CGFloat = 16
-    @Binding var showDeleteAlert: Bool
+//    @Binding var showDeleteAlert: Bool
 //    @Binding var showColorPalette: Bool
     
     var body: some View {
@@ -110,7 +110,9 @@ struct MemosToolBarView: View {
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-                showDeleteAlert = true
+//                showDeleteAlert = true
+                _ = memoEditVM.selectedMemos.map { Memo.moveToTrashBin($0, trashBinFolder)}
+                memoEditVM.initSelectedMemos()
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }

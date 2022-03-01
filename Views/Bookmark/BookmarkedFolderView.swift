@@ -16,7 +16,7 @@ struct BookmarkedFolderView: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    
+    @ObservedObject var trashBinFolder: Folder
     @State var newMemoPressed = false
     @State var presentingView = false
     @ObservedObject var folder: Folder
@@ -39,7 +39,7 @@ struct BookmarkedFolderView: View {
                                     ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
                                         
                                         NavigationLink(destination:
-                                                       MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView)
+                                                        MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView, trashbinFolder: trashBinFolder)
                                                        
                                                         .environmentObject(memoEditVM)
                                                         .environmentObject(folderEditVM)
@@ -62,7 +62,7 @@ struct BookmarkedFolderView: View {
                     // Another ZStack Element
                     // NEW MEMO
                     NavigationLink(destination:
-                                   NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
+                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo, trashBinFolder: trashBinFolder)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                    ,isActive: $presentingNewMemo) {}

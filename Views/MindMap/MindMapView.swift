@@ -165,7 +165,7 @@ struct MindMapView: View {
                             
                             if folderWithLevel.folder.parent == nil {
                                 DynamicTopFolderCell(
-                                    folder: folderWithLevel.folder,
+                                    trashBinFolder: trashBinFolder, folder: folderWithLevel.folder,
                                     level: folderWithLevel.level)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
@@ -187,7 +187,7 @@ struct MindMapView: View {
                             }
                             else {
                                 DynamicFolderCell(
-                                    folder: folderWithLevel.folder,
+                                    trashBin: trashBinFolder, folder: folderWithLevel.folder,
                                     level: folderWithLevel.level)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
@@ -255,7 +255,7 @@ struct MindMapView: View {
                         ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
                             if folderWithLevel.folder.parent == nil {
                                 DynamicTopFolderCell(
-                                    folder: folderWithLevel.folder,
+                                    trashBinFolder: trashBinFolder, folder: folderWithLevel.folder,
                                     level: folderWithLevel.level)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
@@ -274,7 +274,7 @@ struct MindMapView: View {
                                     }
                             } else {
                                 DynamicFolderCell(
-                                    folder: folderWithLevel.folder,
+                                    trashBin: trashBinFolder, folder: folderWithLevel.folder,
                                     level: folderWithLevel.level)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
@@ -332,8 +332,17 @@ struct MindMapView: View {
                         } // end of ForEach
                         TrashBinCell(folder: trashBinFolder)
                             .environmentObject(memoEditVM)
-                        
-                  
+                            .environmentObject(folderEditVM)
+                            .environmentObject(memoOrder)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                
+                                Button {
+                                    // DO NOTHING
+                                } label: {
+                                    ChangeableImage(imageSystemName: "multiply")
+                                }
+                                .tint(.gray)
+                            }
                     }// end of List
                     .listStyle(InsetGroupedListStyle())
                        
@@ -347,7 +356,7 @@ struct MindMapView: View {
                 // END
                 
             } // end of VStack , Inside ZStack.
-            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder, hasSafeBottom: hasSafeBottom)
+            BookmarkedFolderView(trashBinFolder: trashBinFolder, folder: fastFolderWithLevelGroup.homeFolder, hasSafeBottom: hasSafeBottom)
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoOrder)
@@ -355,7 +364,7 @@ struct MindMapView: View {
             // animation 은 같지만 이건 ZStack 이기 때문에, 뭔가 차이가 생김.
             // 얘를 fullscreen 으로 만들거나, ..
             CustomSearchView(
-                fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, showingSearchView: $showingSearchView)
+                fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, showingSearchView: $showingSearchView, trashBin: trashBinFolder)
             
                 .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
@@ -421,7 +430,9 @@ struct MindMapView: View {
             // delete
             Button(role: .destructive) {
                 if let validFolderToRemoved = folderEditVM.folderToRemove {
-                    Folder.delete(validFolderToRemoved)
+//                    Folder.delete(validFolderToRemoved)
+                    Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinFolder)
+//                    Folder.delete(validFolderToRemoved)
                     folderEditVM.folderToRemove = nil
                 }
                 context.saveCoreData()

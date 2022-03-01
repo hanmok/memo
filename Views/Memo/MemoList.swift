@@ -12,7 +12,7 @@ struct MemoList: View {
     @EnvironmentObject var folder: Folder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
-    
+    @ObservedObject var trashBinFolder: Folder
 //    var hasPinnedMemo: Bool {
 //        return folder.memos.contains { $0.pinned == true }
 //    }
@@ -29,7 +29,7 @@ struct MemoList: View {
                 
 //                FilteredMemoList(folder: folder, listType: .pinned)
 //                FilteredMemoList(folder: folder, memosVM: MemosViewModel(folder: folder, type: .pinned), listType: .pinned)
-                FilteredMemoList(folder: folder, listType: .pinned)
+                FilteredMemoList(trashBinFolder: trashBinFolder, folder: folder, listType: .pinned)
                 
                 // line between pinned / unpinned memos
                 Rectangle()
@@ -39,7 +39,7 @@ struct MemoList: View {
                     .padding(.top, 5)
             }
             
-            FilteredMemoList(folder: folder, listType: .unpinned)
+            FilteredMemoList(trashBinFolder: trashBinFolder, folder: folder, listType: .unpinned)
 //            FilteredMemoList(folder: folder, memosVM: MemosViewModel(folder: folder, type: .unpinned), listType: .unpinned)
         } // end of VStack
         .environmentObject(memoEditVM)

@@ -16,7 +16,7 @@ struct SubFolderView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    
+    @ObservedObject var trashFolder: Folder
     @Binding var isShowingSubFolderView: Bool
     @Binding var isAddingFolder: Bool
     
@@ -60,7 +60,7 @@ struct SubFolderView: View {
                 ForEach(subFolders) { subFolder in
                     
                     NavigationLink {
-                        FolderView(currentFolder: subFolder)
+                        FolderView(trashBin: trashFolder, currentFolder: subFolder)
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
                             .environmentObject(memoOrder)
