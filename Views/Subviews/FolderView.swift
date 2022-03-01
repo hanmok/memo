@@ -238,6 +238,7 @@ struct FolderView: View {
                     HStack {
                         Spacer()
                         MemosToolBarView(
+                            currentFolder: currentFolder,
                             showSelectingFolderView: $showSelectingFolderView,
                             showDeleteAlert: $showDeleteAlert,
                             showColorPalette: $showColorPalette)

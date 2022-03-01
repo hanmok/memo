@@ -15,6 +15,7 @@ enum TextFieldAlertType: String {
     case newTopArchive = "New Archive"
 }
 // raw value -> Key -> Storage
+
 struct TextFieldStruct {
 
     var textEnum: TextFieldAlertType
@@ -30,6 +31,11 @@ struct TextFieldStruct {
     }
 }
 
+enum ButtonType {
+    case cancel
+    case done
+}
+
 struct PrettyTextFieldAlert: View {
     
     let type: TextFieldAlertType
@@ -37,7 +43,8 @@ struct PrettyTextFieldAlert: View {
     @Environment(\.colorScheme) var colorScheme
     
     let screenSize = UIScreen.main.bounds
-    
+    @State var selectedColor = Color.cream
+    @State var selectedButton: ButtonType? = nil
     @Binding var isPresented: Bool
     @Binding var text: String
     
@@ -47,7 +54,7 @@ struct PrettyTextFieldAlert: View {
     var cancelAction: () -> Void = { }
     
     var body: some View {
-        ZStack{
+//        ZStack{
             VStack(spacing: 0) {
 //                Text(type.rawValue)
                 Text(LocalizedStringStorage.convertTypeToStorage(type: type))
@@ -90,45 +97,67 @@ struct PrettyTextFieldAlert: View {
                     .frame(height: 1)
                     .foregroundColor(colorScheme == .dark ? Color(white: 80 / 255) : Color(white: 205 / 255))
                 
-                HStack(alignment: .center) {
+//                HStack(alignment: .center) {
+                HStack(alignment: .center, spacing: 0){
                     
+                    // CANCEL
                     Button {
                         cancelAction()
                         isPresented = false
                         focusState = false
+                        selectedButton = .cancel
                     } label: {
-//                        Text("Cancel")
                         Text(LocalizedStringStorage.cancel)
                             .foregroundColor(.red)
-                            .frame(alignment: .center)
-                           
+                            .frame(width: screenSize.width * 0.32, alignment: .center)
+                            .frame(height: 50)
                     }
                     .frame(width: screenSize.width * 0.32, alignment: .center)
-
+                    .frame(height: 50)
+//                    .background(selectedButton == .cancel ? Color.black : Color.clear)
+                 
+                    // Bar between Cancel and Done
+                    
                     Rectangle()
                         .frame(width: 1)
                         .foregroundColor(colorScheme == .dark ? Color(white: 80 / 255) : Color(white: 205 / 255))
                     
-                    
+                    // DONE
                     Button {
                         submitAction(text)
                         isPresented = false
                         focusState = false
+                        selectedButton = .done
                     } label: {
-//                        Text("Done")
                         Text(LocalizedStringStorage.done)
                             .foregroundColor(colorScheme == .dark ? Color.cream : .black)
-                            .frame(alignment: .center)
+                            .frame(width: screenSize.width * 0.32, alignment: .center)
+                            .frame(height: 50)
+                            
                     }
                     .frame(width: screenSize.width * 0.32, alignment: .center)
+                    .frame(height: 50)
+//                    .background(selectedButton == .done ? Color.white : Color.clear)
                 } // end of HStack
-            }
-
-            .frame(width: screenSize.width * 0.65, height: 132)
+//                .background(.pink)
+//                .background(Color.cream)
+                
+                .frame(height: 50)
+            } // end of VStack
+            .frame(width: screenSize.width * 0.64, height: 132)
             .background(colorScheme == .dark ? Color(white: 50 / 255) : Color(white: 240 / 255))
             .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
             .offset(y: isPresented ? 0 : screenSize.height)
             .animation(.spring(), value: isPresented)
-        }
+//        } // end of ZStack ?
     }
 }
+
+
+
+//struct PrettyTextFieldAlert_Previews: PreviewProvider {
+//    @State static var text = "Hi"
+//    static var previews: some View {
+//        PrettyTextFieldAlert(type: .newSubFolder, isPresented: .constant(true), text: $text)
+//    }
+//}

@@ -31,7 +31,7 @@ struct LocalizedStringStorage {
     static let category2 = NSLocalizedString(LocalizedStringKeys.category2, comment: "a")
     static let category3 = NSLocalizedString(LocalizedStringKeys.category3, comment: "a")
     
-    static let subCategory1 = NSLocalizedString(LocalizedStringKeys.subCategory1, comment: "a")
+//    static let subCategory1 = NSLocalizedString(LocalizedStringKeys.subCategory1, comment: "a")
     
     static let done = NSLocalizedString(LocalizedStringKeys.done, comment: "done")
     static let keyboardDone = NSLocalizedString(LocalizedStringKeys.keyboardDone, comment: "done For keyBoard")
@@ -117,7 +117,7 @@ struct LocalizedStringKeys {
     static let category2 = "category2"
     static let category3 = "category3"
     
-    static let subCategory1 = "Sub Category 1"
+//    static let subCategory1 = "Sub Category 1"
     
     static let nth = "th"
     static let possessive = "'s"

@@ -45,7 +45,7 @@ struct HomeView: View { // top folder fetch
             MindMapView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
-                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
+                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder) || $0.title == FolderType.getFolderName(type: .folder)}.first!,
                         archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
                     )
             )

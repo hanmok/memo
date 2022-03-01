@@ -12,6 +12,7 @@ struct MemosToolBarView: View {
     
     @Environment(\.managedObjectContext) var context
     @EnvironmentObject var memoEditVM : MemoEditViewModel
+    @ObservedObject var currentFolder: Folder
     @Environment(\.colorScheme) var colorScheme
     @Binding var showSelectingFolderView: Bool
     
@@ -29,6 +30,45 @@ struct MemosToolBarView: View {
                 UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
             }
 
+            Button {
+                // select All
+                memoEditVM.add(memos: currentFolder.memos.sorted())
+                
+            } label: {
+                UnchangeableImage(imageSystemName: "plus.square.on.square", width: 20, height: 20)
+            }
+
+            
+            // BOOKMARK BUTTON, WORKS FINE
+            Button(action: {
+                // default: pin all.
+                // 만약 모든게 pin 되어있는 경우에만 모두 bookmark
+                var allBookmarked = true
+                
+                for each in memoEditVM.selectedMemos {
+                    if each.isBookMarked == false {
+                        allBookmarked = false
+                        break
+                    }
+                }
+
+                if !allBookmarked {
+                    _ = memoEditVM.selectedMemos.map { $0.isBookMarked = true}
+                    
+                } else {
+                    _ = memoEditVM.selectedMemos.map { $0.isBookMarked = false}
+                }
+                
+                context.saveCoreData()
+                print("pinned button pressed")
+                
+                memoEditVM.initSelectedMemos()
+                
+            }) {
+                UnchangeableImage(imageSystemName: "bookmark", width: 20, height: 20)
+            }
+            .cornerRadius(5)
+            
             
             // PIN BUTTON, WORKS FINE
             Button(action: {
@@ -63,18 +103,14 @@ struct MemosToolBarView: View {
             
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
-
                 showSelectingFolderView = true
-                
             }) {
                 UnchangeableImage(imageSystemName: "folder")
             }
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-
                 showDeleteAlert = true
-                
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }

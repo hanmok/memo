@@ -20,15 +20,15 @@
 "New Sub Folder" = "폴더 속 새 폴더";
 "New Archive" = "보관함 속 새 폴더";
 
-"Folder" = "폴더";
-"Archive" = "보관함";
+"Folder" = "Folder";
+"Archive" = "Archive";
 "Select Folder" = "이동할 위치를 선택해주세요.";
 
-"category1" = "폴더 속 폴더1";
-"category2" = "폴더 속 폴더2";
-"category3" = "폴더 속 폴더3";
+"category1" = "서브 폴더1";
+"category2" = "서브 폴더2";
+"category3" = "서브 폴더3";
 
-"Sub Category 1" = "폴더 속 폴더 속 폴더 1";
+//"Sub Category 1" = "폴더 속 폴더 속 폴더 1";
 
 "th" = "번째";
 "'s" = "의";
@@ -44,8 +44,8 @@
 
 "Modification Date" = "수정일";
 "Creation Date" = "생성일";
-"Alphabetical" = "가나다";
+"Alphabetical" = "제목";
 
-"Ascending Order" = "오름차순";
-"Decending Order" = "내림차순 (최근부터)";
+"Ascending Order" = "오래된 항목부터";
+"Decending Order" = "최근 항목부터";
 

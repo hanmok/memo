@@ -25,6 +25,10 @@ class MemoEditViewModel: ObservableObject {
         self.parentFolder = memo.folder
     }
     
+//    func addUnconditionally(memo: Memo) {
+//        self.selectedM
+//    }
+    
     func add(memos: [Memo]) {
 
         _ = memos.map { self.selectedMemos.update(with: $0)}
@@ -32,7 +36,6 @@ class MemoEditViewModel: ObservableObject {
         if memos.count != 0 {
             self.parentFolder = memos.first!.folder
         }
-
     }
     
     func erase(memo: Memo) {
