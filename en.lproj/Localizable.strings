@@ -9,7 +9,7 @@
 "done" = "Done";
 "keyboardDone" = "Done";
 
-"removeAlertMsgMain" = "Are you sure to delete?";
+"removeAlertMsgMain" = "Are you sure you want to delete?";
 "removeAlertMsgSub" = "All deleted are NOT Recoverable";
 
 "CancelInSearch" = "Cancel";

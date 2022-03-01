@@ -357,6 +357,11 @@ struct MindMapView: View {
                 .padding(.horizontal, Sizes.overallPadding)
             
             
+            if showTextField {
+                Color(.sRGB, white: colorScheme == .dark ? 0.2 : 0.8 , opacity: 0.5)
+                    .ignoresSafeArea()
+            }
+            
             // MARK: - rename is not currently working .
             
             PrettyTextFieldAlert(

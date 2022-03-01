@@ -25,10 +25,6 @@ class MemoEditViewModel: ObservableObject {
         self.parentFolder = memo.folder
     }
     
-//    func addUnconditionally(memo: Memo) {
-//        self.selectedM
-//    }
-    
     func add(memos: [Memo]) {
 
         _ = memos.map { self.selectedMemos.update(with: $0)}

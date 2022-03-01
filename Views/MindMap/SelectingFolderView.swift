@@ -42,7 +42,7 @@ struct SelectingFolderView: View {
             HStack {
                 Spacer()
                 HStack {
-                    Text("Select Folder ")
+                    Text(LocalizedStringStorage.selectFolder)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .overlay {
                         HStack {
