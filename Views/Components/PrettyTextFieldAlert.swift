@@ -60,7 +60,7 @@ struct PrettyTextFieldAlert: View {
                 Text(LocalizedStringStorage.convertTypeToStorage(type: type))
                     .font(.headline)
                     .padding(.vertical, 15)
-                
+                Spacer()
 //                TextField(TextFieldStruct(textEnum: type).placeHolder, text: $text)
                 TextField("", text: $text)
                     .disableAutocorrection(true)
@@ -144,7 +144,8 @@ struct PrettyTextFieldAlert: View {
                 
                 .frame(height: 50)
             } // end of VStack
-            .frame(width: screenSize.width * 0.64, height: 132)
+//            .frame(width: screenSize.width * 0.64, height: 132)
+            .frame(width: screenSize.width * 0.64, height: 150)
             .background(colorScheme == .dark ? Color(white: 50 / 255) : Color(white: 240 / 255))
             .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
             .offset(y: isPresented ? 0 : screenSize.height)

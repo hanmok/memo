@@ -240,8 +240,9 @@ struct FolderView: View {
                         MemosToolBarView(
                             currentFolder: currentFolder,
                             showSelectingFolderView: $showSelectingFolderView,
-                            showDeleteAlert: $showDeleteAlert,
-                            showColorPalette: $showColorPalette)
+                            showDeleteAlert: $showDeleteAlert
+//                            showColorPalette: $showColorPalette
+                        )
                             .padding([.trailing], Sizes.overallPadding)
                             .padding(.bottom,Sizes.overallPadding )
                             .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)

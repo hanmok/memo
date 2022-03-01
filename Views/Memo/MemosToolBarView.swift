@@ -18,7 +18,7 @@ struct MemosToolBarView: View {
     
     let spacingBetweenButtons: CGFloat = 16
     @Binding var showDeleteAlert: Bool
-    @Binding var showColorPalette: Bool
+//    @Binding var showColorPalette: Bool
     
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {

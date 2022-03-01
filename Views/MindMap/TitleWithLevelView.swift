@@ -33,7 +33,6 @@ struct TitleWithLevelView: View {
             Spacer()
             Text("\(folder.memos.count)")
                 .foregroundColor(.gray)
-            
         }
         .frame(maxWidth: .infinity)
     }

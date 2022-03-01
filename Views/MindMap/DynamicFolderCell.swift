@@ -21,13 +21,13 @@ struct DynamicFolderCell: View {
     @State var showingDeleteAction = false
     
     var level: Int
-    var numOfSubfolders: String{
-        
-        if folder.subfolders.count != 0 {
-            return "\(folder.subfolders.count)"
-        }
-        return ""
-    }
+//    var numOfSubfolders: String{
+//
+//        if folder.subfolders.count != 0 {
+//            return "\(folder.subfolders.count)"
+//        }
+//        return ""
+//    }
     
     var body: some View {
         NavigationLink(destination: FolderView(currentFolder: folder)
@@ -37,5 +37,35 @@ struct DynamicFolderCell: View {
         ) {
             TitleWithLevelView(folder: folder, level: level)
         } // end of NavigationLink
+    }
+}
+
+struct TrashBinCell: View {
+    
+    @Environment(\.managedObjectContext) var context
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
+    @ObservedObject var folder: Folder
+    
+    var body: some View {
+//        Text("trash Bin")
+        NavigationLink(destination: TrashBinView(folder: folder)) {
+            
+            HStack {
+            Text("Trash Bin").foregroundColor(.red)
+            Spacer()
+                Text("\(folder.memos.count)")
+                    .foregroundColor(.gray)
+            }
+            .frame(maxWidth: .infinity)
+        }
+    }
+}
+
+
+struct TrashBinView: View {
+    @ObservedObject var folder: Folder
+    
+    var body: some View {
+        Text(folder.title)
     }
 }

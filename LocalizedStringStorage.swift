@@ -24,6 +24,8 @@ struct LocalizedStringStorage {
     
     static let folder = NSLocalizedString(LocalizedStringKeys.folder, comment: "a")
     static let archive = NSLocalizedString(LocalizedStringKeys.archive, comment: "a")
+    static let trashbin = NSLocalizedString(LocalizedStringKeys.trashbin, comment: "a")
+    
     static let selectFolder = NSLocalizedString(LocalizedStringKeys.selectFolder, comment: "a")
     static let newArchive = NSLocalizedString(LocalizedStringKeys.newArchive, comment: "A")
     
@@ -110,7 +112,7 @@ struct LocalizedStringKeys {
     
     static let folder = "Folder"
     static let archive = "Archive"
-    
+    static let trashbin = "Trash Bin"
     static let selectFolder = "Select Folder"
     
     static let category1 = "category1"

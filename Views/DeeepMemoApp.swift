@@ -20,7 +20,8 @@ struct DeeepMemoApp: App {
         print("isFirstLaunch: \(isFirstLaunch)")
         
         
-//         For testing
+////         For testing
+//        // for Dev
 //        let foldersReq = Folder.fetch(.all)
 //
 //       if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
@@ -29,14 +30,22 @@ struct DeeepMemoApp: App {
 //               Folder.delete($0)}
 //           persistenceController.container.viewContext.saveCoreData()
 //       }
-    
-        if isFirstLaunch {
-            let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
-            persistenceController.container.viewContext.saveCoreData()
-            print("newFolders: \(newFolders)")
-            isFirstLaunch = false
+//
+//        if !isFirstLaunch {
+//            let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
+//            persistenceController.container.viewContext.saveCoreData()
+//            print("newFolders: \(newFolders)")
+//            isFirstLaunch = false
+//        }
             
-        }
+            // For Product
+            if isFirstLaunch {
+                let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
+                persistenceController.container.viewContext.saveCoreData()
+                print("newFolders: \(newFolders)")
+                isFirstLaunch = false
+            }
+            
         
         
         return WindowGroup {

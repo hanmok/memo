@@ -39,7 +39,7 @@ struct MindMapView: View {
     @StateObject var memoOrder = MemoOrder()
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-   
+    @ObservedObject var trashBinFolder: Folder
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
@@ -328,10 +328,15 @@ struct MindMapView: View {
                                         }
                                         .tint(Color.swipeBtnColor2)
                                     }
-                            } // end of ForEach
-                        }
-                    } // end of List
+                            } // end of Else Case
+                        } // end of ForEach
+                        TrashBinCell(folder: trashBinFolder)
+                            .environmentObject(memoEditVM)
+                        
+                  
+                    }// end of List
                     .listStyle(InsetGroupedListStyle())
+                       
                         EmptyView()
                             .frame(height: 250)
                     }
