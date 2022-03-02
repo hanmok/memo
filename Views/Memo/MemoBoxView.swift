@@ -30,7 +30,7 @@ struct MemoBoxView: View {
                 .padding(.leading, Sizes.smallSpacing)
             }
             if memo.contentsToShow != "" {
-                Text(memo.contentsToShow)
+                Text("\n\(memo.contentsToShow)")
                     .font(.caption)
                     .foregroundColor(Color.blackAndWhite)
                     .lineLimit(4)
@@ -38,9 +38,7 @@ struct MemoBoxView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, Sizes.smallSpacing)
             }
-
         }
-
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
@@ -49,6 +47,25 @@ struct MemoBoxView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : Color(white: 0.5)) : .clear, lineWidth: 1)
+        )
+        .overlay(
+            VStack {
+                HStack(spacing: 6) {
+                    Spacer()
+                    if memo.isBookMarked == true {
+                        SystemImage("bookmark.fill", size: 14)
+                            .tint(colorScheme == .dark ? Color.cream : .black)
+                    }
+                    if memo.pinned == true {
+                        SystemImage("pin.fill", size: 14)
+                            .rotationEffect(.degrees(45))
+                            .tint(colorScheme == .dark ? Color.cream : .black)
+                    }
+            }
+                .padding(.trailing, Sizes.properSpacing)
+                Spacer()
+            }
+                .padding(.top, Sizes.smallSpacing)
         )
     }
 }
