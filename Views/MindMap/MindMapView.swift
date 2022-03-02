@@ -26,8 +26,6 @@ struct LevelAndCollapsed {
     var collapsed: Bool
 }
 
-
-
 struct MindMapView: View {
     
     @Environment(\.managedObjectContext) var context
@@ -58,9 +56,9 @@ struct MindMapView: View {
     @State var showingDeleteAction = false
     @State var allMemos:[Memo] = []
     @State var showingSearchView = false
+    @State var isLoading = false
     
     var hasSafeBottom: Bool {
-        
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         let window = windowScene?.windows.first
@@ -71,18 +69,22 @@ struct MindMapView: View {
             print("does not have safeArea!")
             return false
         }
-        
-        
-//        if #available(iOS 13.0, *),
-//           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
-//
-////           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
-//            print(" it has safeBottom !")
-//            return true
-//        } else {
-//            print("It does not have safeBottom !")
-//            return false
-//        }
+    }
+    
+    func deleteFolder() {
+        DispatchQueue.main.async {
+        isLoading = true
+        }
+        if let validFolderToRemoved = folderEditVM.folderToRemove {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                isLoading = false
+            }
+//                    Folder.delete(validFolderToRemoved)
+            Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
+//                    Folder.delete(validFolderToRemoved)
+            folderEditVM.folderToRemove = nil
+        }
+        context.saveCoreData()
     }
     
     @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
@@ -123,10 +125,12 @@ struct MindMapView: View {
                             showTextField = true
                             if selectionEnum == .folder {
                                 textFieldType = .newTopFolder
-                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                newFolderName = ""
                             } else {
                                 textFieldType = .newTopArchive
-                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.archive.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.archive.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                newFolderName = ""
                             }
 
                         } label: { // original : 28
@@ -179,7 +183,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
 
                                             SystemImage("folder.badge.plus")
@@ -203,7 +208,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
                                             SystemImage("folder.badge.plus")
                                                 .foregroundColor(.black)
@@ -216,8 +222,10 @@ struct MindMapView: View {
                                         
                                         
                                         Button {
-                                            showingDeleteAction = true
+//                                            showingDeleteAction = true
                                             folderEditVM.folderToRemove = folderWithLevel.folder
+                                            isLoading = true
+                                            deleteFolder()
                                         } label: {
                                             SystemImage( "trash")
                                         }
@@ -270,7 +278,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
@@ -290,7 +299,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1) \(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1) \(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
@@ -298,14 +308,13 @@ struct MindMapView: View {
                                     }
                                 // Change Folder Name
                                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        
-                                        
                                         // DELETE FOLDER
                                         Button {
-                                            showingDeleteAction = true
+//                                            showingDeleteAction = true
                                             folderEditVM.folderToRemove = folderWithLevel.folder
+                                            deleteFolder()
                                         } label: {
-                                            SystemImage(  "trash")
+                                            SystemImage("trash")
                                         }
                                         .tint(.red)
                                         
@@ -361,6 +370,14 @@ struct MindMapView: View {
                 // END
                 
             } // end of VStack , Inside ZStack.
+            
+            if isLoading {
+                    ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(4)
+                    .tint(colorScheme == .dark ? .cream : .black)
+            }
+            
             BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder, hasSafeBottom: hasSafeBottom)
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
@@ -393,14 +410,18 @@ struct MindMapView: View {
                         
                     case .newTopFolder:
                         let newFolder = Folder(title: newName, context: context)
-
-                        fastFolderWithLevelGroup.folders.first(where: {$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
-
+                        
+                        fastFolderWithLevelGroup.folders.first(
+                            where:{FolderType.compareName($0.folder.title, with: .folder)})!.folder.add(subfolder: newFolder)
+//                            where:{$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
+                        
                     case .newTopArchive:
                         
                         let newFolder = Folder(title: newName, context: context)
 
-                        fastFolderWithLevelGroup.archives.first(where: {$0.folder.title == FolderType.getFolderName(type: .archive)})!.folder.add(subfolder: newFolder)
+                        fastFolderWithLevelGroup.archives.first(
+                            where: {FolderType.compareName($0.folder.title, with: .archive)})!.folder.add(subfolder: newFolder)
+//                            where: {$0.folder.title == FolderType.getFolderName(type: .archive)})!.folder.add(subfolder: newFolder)
                     
                     case .newSubFolder:
                         let newSubFolder = Folder(title: newName, context: context)
@@ -412,7 +433,7 @@ struct MindMapView: View {
                         if folderToBeRenamed != nil {
                             folderToBeRenamed!.title = newName
                             folderToBeRenamed!.modificationDate = Date()
-                            folderToBeRenamed = nil // sorry.. ^^_^
+                            folderToBeRenamed = nil
 
                             context.saveCoreData()
                         }
@@ -430,29 +451,29 @@ struct MindMapView: View {
                     showTextField = false
                 }
         } // end of ZStack
-        
-        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showingDeleteAction, actions: {
-            // delete
-            Button(role: .destructive) {
-                if let validFolderToRemoved = folderEditVM.folderToRemove {
-//                    Folder.delete(validFolderToRemoved)
-                    Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
-//                    Folder.delete(validFolderToRemoved)
-                    folderEditVM.folderToRemove = nil
-                }
-                context.saveCoreData()
-            } label: {
-                Text(LocalizedStringStorage.delete)
-            }
-            
-            Button(role: .cancel) {
-                folderEditVM.folderToRemove = nil
-            } label: {
-                Text(LocalizedStringStorage.cancel)
-            }
-        }, message: {
-            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
-        })
+        // remove it ..!!
+//        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showingDeleteAction, actions: {
+//            // delete
+//            Button(role: .destructive) {
+//                if let validFolderToRemoved = folderEditVM.folderToRemove {
+////                    Folder.delete(validFolderToRemoved)
+//                    Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
+////                    Folder.delete(validFolderToRemoved)
+//                    folderEditVM.folderToRemove = nil
+//                }
+//                context.saveCoreData()
+//            } label: {
+//                Text(LocalizedStringStorage.delete)
+//            }
+//
+//            Button(role: .cancel) {
+//                folderEditVM.folderToRemove = nil
+//            } label: {
+//                Text(LocalizedStringStorage.cancel)
+//            }
+//        }, message: {
+//            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
+//        })
     
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
