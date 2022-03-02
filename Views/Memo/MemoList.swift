@@ -76,26 +76,12 @@ struct TrashBinMemoList: View {
 
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
-    var hasPinnedMemo: Bool {
-        return trashBinVM.trashBinFolder.memos.contains { $0.pinned == true || $0.isBookMarked == true}
-    }
     
     // need to be modified to have plus button when there's no memo
     var body: some View {
         return VStack {
             
-            if hasPinnedMemo {
-                
-                FilteredMemoList(folder: trashBinVM.trashBinFolder, listType: .pinned)
-                
-                // line between pinned / unpinned memos
-                Rectangle()
-                    .frame(height: 1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
-                    .padding(.top, 5)
-            }
-                        FilteredMemoList(folder: trashBinVM.trashBinFolder, listType: .unpinned)
+            TrashBinSubMemoList(folder: trashBinVM.trashBinFolder)
         } // end of VStack
         .environmentObject(memoEditVM)
         .environmentObject(folderEditVM)
