@@ -60,7 +60,6 @@ struct MindMapView: View {
     @State var showingSearchView = false
     
     var hasSafeBottom: Bool {
-        
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         let window = windowScene?.windows.first
@@ -71,18 +70,16 @@ struct MindMapView: View {
             print("does not have safeArea!")
             return false
         }
-        
-        
-//        if #available(iOS 13.0, *),
-//           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
-//
-////           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
-//            print(" it has safeBottom !")
-//            return true
-//        } else {
-//            print("It does not have safeBottom !")
-//            return false
-//        }
+    }
+    
+    func deleteFolder() {
+        if let validFolderToRemoved = folderEditVM.folderToRemove {
+//                    Folder.delete(validFolderToRemoved)
+            Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
+//                    Folder.delete(validFolderToRemoved)
+            folderEditVM.folderToRemove = nil
+        }
+        context.saveCoreData()
     }
     
     @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
@@ -216,8 +213,9 @@ struct MindMapView: View {
                                         
                                         
                                         Button {
-                                            showingDeleteAction = true
+//                                            showingDeleteAction = true
                                             folderEditVM.folderToRemove = folderWithLevel.folder
+                                            deleteFolder()
                                         } label: {
                                             SystemImage( "trash")
                                         }
@@ -298,14 +296,13 @@ struct MindMapView: View {
                                     }
                                 // Change Folder Name
                                     .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        
-                                        
                                         // DELETE FOLDER
                                         Button {
-                                            showingDeleteAction = true
+//                                            showingDeleteAction = true
                                             folderEditVM.folderToRemove = folderWithLevel.folder
+                                            deleteFolder()
                                         } label: {
-                                            SystemImage(  "trash")
+                                            SystemImage("trash")
                                         }
                                         .tint(.red)
                                         
@@ -430,29 +427,29 @@ struct MindMapView: View {
                     showTextField = false
                 }
         } // end of ZStack
-        
-        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showingDeleteAction, actions: {
-            // delete
-            Button(role: .destructive) {
-                if let validFolderToRemoved = folderEditVM.folderToRemove {
-//                    Folder.delete(validFolderToRemoved)
-                    Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
-//                    Folder.delete(validFolderToRemoved)
-                    folderEditVM.folderToRemove = nil
-                }
-                context.saveCoreData()
-            } label: {
-                Text(LocalizedStringStorage.delete)
-            }
-            
-            Button(role: .cancel) {
-                folderEditVM.folderToRemove = nil
-            } label: {
-                Text(LocalizedStringStorage.cancel)
-            }
-        }, message: {
-            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
-        })
+        // remove it ..!!
+//        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showingDeleteAction, actions: {
+//            // delete
+//            Button(role: .destructive) {
+//                if let validFolderToRemoved = folderEditVM.folderToRemove {
+////                    Folder.delete(validFolderToRemoved)
+//                    Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
+////                    Folder.delete(validFolderToRemoved)
+//                    folderEditVM.folderToRemove = nil
+//                }
+//                context.saveCoreData()
+//            } label: {
+//                Text(LocalizedStringStorage.delete)
+//            }
+//
+//            Button(role: .cancel) {
+//                folderEditVM.folderToRemove = nil
+//            } label: {
+//                Text(LocalizedStringStorage.cancel)
+//            }
+//        }, message: {
+//            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
+//        })
     
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
