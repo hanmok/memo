@@ -5,9 +5,7 @@
 //  Created by Mac mini on 2021/12/21.
 //
 
-import Foundation
-//import UIKit
-import SwiftUI
+import UIKit
 
 struct Sizes {
     /// 40
@@ -36,6 +34,8 @@ struct Sizes {
     static let regularButtonSize: CGFloat = 24
     /// 6
     static let subFolderLeading: CGFloat = 6
+    /// 16
+    static let spacingBetweenButtons: CGFloat = 16
 }
 
 

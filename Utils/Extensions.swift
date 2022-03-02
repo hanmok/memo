@@ -24,36 +24,11 @@ extension Image {
 }
 
 extension View {
-    
-}
-
-extension View {
     // MARK: - TintColor
     func adjustTintColor(scheme: ColorScheme) -> some View {
         self
             .tint(scheme == .dark ? .white : .black)
     }
-    
-    // MARK: - Capture
-//    func snapshot() -> UIImage {
-//        let controller = UIHostingController(rootView: self)
-//        let view = controller.view
-//
-//        let targetSize = controller.view.intrinsicContentSize
-//        view?.bounds = CGRect(origin: .zero, size: targetSize)
-//        view?.backgroundColor = .clear
-//
-//        let renderer = UIGraphicsImageRenderer(size: targetSize)
-//
-//        return renderer.image { _ in
-//            view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
-//        }
-//    }
-//
-//    func saveInPhoto(img: UIImage) {
-//            UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil)
-//        }
-
 }
 
 
@@ -92,3 +67,57 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
+
+
+
+
+struct HiddenNavigationBar: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarHidden(true)
+    }
+}
+
+//struct
+
+extension View {
+    func hiddenNavigationBarStyle() -> some View {
+        modifier( HiddenNavigationBar() )
+    }
+}
+
+
+
+extension UIApplication {
+    
+    var keyWindow: UIWindow? {
+        // Get connected scenes
+        return UIApplication.shared.connectedScenes
+            // Keep only active scenes, onscreen and visible to the user
+            .filter { $0.activationState == .foregroundActive }
+            // Keep only the first `UIWindowScene`
+            .first(where: { $0 is UIWindowScene })
+            // Get its associated windows
+            .flatMap({ $0 as? UIWindowScene })?.windows
+            // Finally, keep only the key window
+            .first(where: \.isKeyWindow)
+    }
+    
+}
+
+
+
+//extension UIApplication {
+//    func endEditing() {
+//        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+//
+//
+//    }
+//
+//    func startEditing() {
+//        sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
+//    }
+//}
+
+

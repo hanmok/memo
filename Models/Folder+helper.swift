@@ -307,7 +307,6 @@ extension Folder {
         if let context = folder.managedObjectContext {
             context.delete(folder)
             
-//            try? context.save()
             context.saveCoreData()
             Folder.updateTopFolders(context: context)
         }

@@ -17,14 +17,14 @@ struct TrashBinSubMemoList: View {
     
     @GestureState var isDragging = false
 
-    @State var isDraggingAction = false
+    @State var isOnDraggingAction = false
 
     @State var draggingMemo: Memo? = nil
+    
     @State var oneOffset: CGFloat = 0
     
     var body: some View {
         
-
         let memosToShow = Memo.sortMemos(memos: folder.memos.sorted())
         
         return ZStack {
@@ -43,7 +43,7 @@ struct TrashBinSubMemoList: View {
                                 .offset(x: draggingMemo == memo ? oneOffset : 0)
                                 .background {
                                     ZStack {
-                                        Color(isDraggingAction ? .memoBoxSwipeBGColor : .white)
+                                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
                                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                                             .cornerRadius(10)
                                         HStack {
@@ -51,7 +51,7 @@ struct TrashBinSubMemoList: View {
                                             SystemImage("checkmark")
                                                 .frame(width: 65)
                                                 .foregroundColor(.basicColors)
-                                                .opacity(isDraggingAction ? 1 : 0)
+                                                .opacity(isOnDraggingAction ? 1 : 0)
                                         }
                                     }
                                     .padding(.horizontal, Sizes.smallSpacing)
@@ -102,7 +102,7 @@ struct TrashBinSubMemoList: View {
             if isDragging && value.translation.width < -5 {
 
                 DispatchQueue.main.async {
-                    isDraggingAction = true
+                    isOnDraggingAction = true
                 }
             }
             
@@ -121,7 +121,7 @@ struct TrashBinSubMemoList: View {
                     }
                 }
             }
-        print("isDraggingAction: \(isDraggingAction)")
+        print("isDraggingAction: \(isOnDraggingAction)")
         }
     
     func onEnd(value: DragGesture.Value, memo: Memo) {
@@ -137,13 +137,13 @@ struct TrashBinSubMemoList: View {
                     
                     oneOffset = 0
                     
-                    isDraggingAction = false
+                    isOnDraggingAction = false
                 }
                 
             } else {
                 DispatchQueue.main.async {
                     oneOffset = 0
-                    isDraggingAction = false
+                    isOnDraggingAction = false
                 }
             }
         }

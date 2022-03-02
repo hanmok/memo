@@ -29,11 +29,6 @@ struct MemoBoxView: View {
                 .padding(.leading, Sizes.smallSpacing)
             }
             if memo.contentsToShow != "" {
-//                Text("\n\(memo.contentsToShow)") // this line makes little error ..
-//                Text("\n")
-//                    .font(.caption)
-                
-//                    .font(.caption)
                 Text(memo.contentsToShow)
                     .font(.caption)
                     .foregroundColor(Color.blackAndWhite)

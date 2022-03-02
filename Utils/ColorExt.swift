@@ -224,7 +224,7 @@ struct ColorKeys {
     
     static let memoBoxColor = "memoBoxColor"
     static let navBtnColor = "navBtnColor"
-//    static let memoBtnColor = "memoBtnColor"
+
     static let selectedBoxStrokeColor = "selectedBoxStrokeColor"
     
     static let textViewTintColor = "textViewTintColor"

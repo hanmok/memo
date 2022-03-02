@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct HierarchyLabelView: View {
+    
     @Environment(\.colorScheme) var colorScheme
+    
     let currentFolder: Folder
     var isNavigationLink: Bool = false
     
     func getRoot(child: Folder) -> String {
         let hierarchy = getAllParents(child: child)
         
+        // compare hierarchy's title with topFolder title for both languages
+        
         if hierarchy.count == 1 {
-//            if hierarchy.first!.title == FolderType.getFolderName(type: FolderTypeEnum.folder) {
             if FolderType.compareName(hierarchy.first!.title, with: .folder) {
                 return "\(LocalizedStringStorage.folder)"
-//            } else if hierarchy.first!.title == FolderType.getFolderName(type: .archive){
             } else if FolderType.compareName(hierarchy.first!.title, with: .archive){
                 return "\(LocalizedStringStorage.archive)"
-//            } else {
             } else if FolderType.compareName(hierarchy.first!.title, with: .trashbin) {
                 return "\(LocalizedStringStorage.trashbin)"
-                
             }
         }
         

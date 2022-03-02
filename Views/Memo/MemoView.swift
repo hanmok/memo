@@ -11,52 +11,38 @@ import CoreData
 
 
 struct MemoView: View {
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-//    @ObservedObject var trashbinFolder: Folder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+    
     @ObservedObject var memo: Memo
+    
+    let parent: Folder
     
     @FocusState var editorFocusState: Bool
     
-    @State var showSelectingFolderView = false
+    @State var isShowingSelectingFolderView = false
     
     @State var contents: String = ""
-    
     @State var isBookMarkedTemp: Bool?
     
-    @Binding var presentingView: Bool
+    @Binding var isPresentingView: Bool
     
-    @State var showColorPalette = false
-    @State var memoColor = UIColor.magenta
-    @State var selectedColorIndex = 0
-    
-    let parent: Folder
-    @State var colorPickerSelection = Color.white
     var backBtn : some View {
         Button(action: {
-            self.presentingView = false
+            self.isPresentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-//            SystemImage( "chevron.left")
             SystemImage("chevron.left", size: 18)
                 .tint(Color.navBtnColor)
-//                .background(.green)
         }
     }
     
-//    var hasSafeBottom: Bool {
-//        if #available(iOS 13.0, *),
-//           UIApplication.shared.windows[0].safeAreaInsets.bottom > 0 {
-////           (UIApplication.UIWindowScene.window?.safeAreaInsets.bottom)! > 0 {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
     var hasSafeBottom: Bool {
         
         let scenes = UIApplication.shared.connectedScenes
@@ -74,8 +60,7 @@ struct MemoView: View {
     init(memo: Memo, parent: Folder, presentingView: Binding<Bool>) {
         self.memo = memo
         self.parent = parent
-        self._presentingView = presentingView
-//        self.trashbinFolder = trashbinFolder
+        self._isPresentingView = presentingView
     }
     
     
@@ -103,7 +88,7 @@ struct MemoView: View {
         context.saveCoreData()
     }
     
-    func togglePinMemo() {
+    func togglePin() {
         memo.pinned.toggle()
     }
     
@@ -118,33 +103,18 @@ struct MemoView: View {
     
     func removeMemo() {
         
-// if it is memo in Trash Bin, delete!
-//        if memo.folder!.parent == nil && memo.folder!.title == FolderType.getFolderName(type: .trashbin) {
-        if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
-            Memo.delete(memo)
-        } else {
             Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
-        }
         context.saveCoreData()
         presentationMode.wrappedValue.dismiss()
     }
     
     var body: some View {
-//        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
-//            .updating($isScrolled) { _, _, _ in
-//                print("is Scrolling : \(isScrolled)")
-////                editorFocusState = false
-//
-//            }
         print("has Safebottom ? \(hasSafeBottom)")
         
         return ZStack(alignment: .topLeading) {
             VStack {
                 Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
-//                    .frame(width: UIScreen.screenWidth, height: 90)
                     .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 90 : 70)
-//                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 5 : 30)
-                // what the frame height does here ?  ?
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }
@@ -162,14 +132,14 @@ struct MemoView: View {
                         }
                         
                         // PIN Button
-                        Button(action: togglePinMemo) {
+                        Button(action: togglePin) {
                             SystemImage( memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
                         // RELOCATE
                         Button {
-                            showSelectingFolderView = true
+                            isShowingSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
                             SystemImage("folder", size: Sizes.regularButtonSize)
@@ -188,8 +158,7 @@ struct MemoView: View {
                 .padding(.leading, Sizes.navBtnLeadingSpacing)
 
                 
-//                PlainTextView(text: $contents)
-                CustomTextView1(text: $contents)
+                MemoTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
@@ -202,23 +171,21 @@ struct MemoView: View {
         
         .navigationBarHidden(true)
         .onAppear(perform: {
-            presentingView = true
+            isPresentingView = true
             contents = memo.contents
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
-//            selectedColorIndex = memo.colorIndex
         })
         
         .onDisappear(perform: {
-            presentingView = false
-//            memo.colorIndex = selectedColorIndex
+            isPresentingView = false
             print("memoView has disappeared!")
             saveChanges()
             print("data saved!")
 
         })
         
-        .sheet(isPresented: $showSelectingFolderView) {
+        .sheet(isPresented: $isShowingSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
@@ -227,8 +194,7 @@ struct MemoView: View {
                             context: context,
                             fetchingHome: false)!
                     ),
-                invalidFolderWithLevels: [],
-                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: []
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
@@ -238,38 +204,3 @@ struct MemoView: View {
 
 
 
-
-struct HiddenNavigationBar: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
-    }
-}
-
-//struct
-
-extension View {
-    func hiddenNavigationBarStyle() -> some View {
-        modifier( HiddenNavigationBar() )
-    }
-}
-
-
-
-extension UIApplication {
-    
-    var keyWindow: UIWindow? {
-        // Get connected scenes
-        return UIApplication.shared.connectedScenes
-            // Keep only active scenes, onscreen and visible to the user
-            .filter { $0.activationState == .foregroundActive }
-            // Keep only the first `UIWindowScene`
-            .first(where: { $0 is UIWindowScene })
-            // Get its associated windows
-            .flatMap({ $0 as? UIWindowScene })?.windows
-            // Finally, keep only the key window
-            .first(where: \.isKeyWindow)
-    }
-    
-}

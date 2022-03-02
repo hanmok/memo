@@ -1,36 +1,37 @@
 //
-//  FastVerCollapsibleFolder.swift
-//  DeeepMemo
+//  TrashBinCell.swift
+//  DeeepMemo (iOS)
 //
-//  Created by Mac mini on 2022/01/25.
+//  Created by Mac mini on 2022/03/03.
 //
 
 import SwiftUI
-import CoreData
 
-struct DynamicTopFolderCell: View {
+struct TrashBinCell: View {
     
     @Environment(\.managedObjectContext) var context
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
-    @ObservedObject var folder: Folder
-    
-    var level: Int
-    
     var body: some View {
-        NavigationLink(destination: FolderView(currentFolder: folder)
-                        .environmentObject(memoEditVM)
+        NavigationLink(destination: TrashFolderView()
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)
+                        .environmentObject(memoEditVM)
                         .environmentObject(trashBinVM)
         ) {
-            TitleWithLevelView(folder: folder, level: level)
-        } // end of NavigationLink
-        
+            HStack {
+                Text(LocalizedStringStorage.trashbin)
+                    .foregroundColor(.red)
+                Spacer()
+                Text("\(trashBinVM.trashBinFolder.memos.count)")
+                    .foregroundColor(.gray)
+            }
+            .frame(maxWidth: .infinity)
+        }
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             
             Button {

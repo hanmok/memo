@@ -15,31 +15,31 @@ struct NewMemoView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
+
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
-//    @ObservedObject var trashBinFolder: Folder
+
     @FocusState var editorFocusState: Bool
     
     @State var contents: String = ""
     
-    @State var keyboardRect: CGRect = CGRect()
-    
     @State var isBookMarkedTemp: Bool = false
     @State var isPinned: Bool = false
-    @State var showSelectingFolderView = false
-    
-    @Binding var presentingNewMemo: Bool
+    @State var isShowingSelectingFolderView = false
     
     @State var memo: Memo? = nil
     
+    @Binding var isPresentingNewMemo: Bool
+    
 
+    
     let parent: Folder
 
     var backBtn : some View {
         Button(action: {
-            self.presentingNewMemo = false
+            self.isPresentingNewMemo = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage( "chevron.left", size: 18)
@@ -50,8 +50,7 @@ struct NewMemoView: View {
     
     init(parent: Folder, presentingNewMemo: Binding<Bool> ) {
         self.parent = parent
-            self._presentingNewMemo = presentingNewMemo
-//        self.trashBinFolder = trashBinFolder
+            self._isPresentingNewMemo = presentingNewMemo
     }
     
     func saveChanges() {
@@ -92,7 +91,7 @@ struct NewMemoView: View {
         }
     }
     
-    func togglePinMemo() {
+    func togglePin() {
         isPinned.toggle()
     }
 
@@ -130,38 +129,16 @@ struct NewMemoView: View {
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
                 
-//                parent.add(memo: memo!)
-//                memo!.folder = parent
-
                 memo!.saveTitleWithContentsToShow(context: context)
                 Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
                 parent.title += ""
             }
         }
-        
-        
-//        contents = ""
         presentationMode.wrappedValue.dismiss()
     }
     
     var body: some View {
-//        let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
-//            .updating($isScrolled) { _, _, _ in
-////                keyboard
-////                editorFocusState = false
-//                UIApplication.shared.endEditing()
-//
-//
-//            }
-        
-//        return ZStack(alignment: .topLeading) {
-//            VStack {
-//                HStack {
-//                    backBtn
-//                    Spacer()
-//
-//                    HStack(spacing: 15) {
         
         return ZStack(alignment: .topLeading) {
             VStack {
@@ -181,15 +158,12 @@ struct NewMemoView: View {
                         
                         
                         Button(action: toggleBookMark) {
-//                            SystemImage(
-//                                isBookMarkedTemp ? "bookmark.fill" : "bookmark",
-//                                size: Sizes.regularButtonSize)
                             SystemImage(isBookMarkedTemp ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
                         // PIN Button
-                        Button(action: togglePinMemo) {
+                        Button(action: togglePin) {
                             SystemImage(
                                 isPinned ? "pin.fill" : "pin",
                                 size: Sizes.regularButtonSize)
@@ -215,7 +189,7 @@ struct NewMemoView: View {
                                 print("flag2")
                             }
                             print("flag3")
-                            showSelectingFolderView = true
+                            isShowingSelectingFolderView = true
 
                         } label: {
                             SystemImage(
@@ -239,7 +213,8 @@ struct NewMemoView: View {
                 .padding(.leading, Sizes.navBtnLeadingSpacing)
                 
 //                PlainTextView(text: $contents)
-                CustomTextView1(text: $contents)
+//                CustomTextView1(text: $contents)
+                MemoTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
@@ -261,33 +236,18 @@ struct NewMemoView: View {
             saveChanges()
             print("data saved!")
         })
-        .sheet(isPresented: $showSelectingFolderView) {
+        .sheet(isPresented: $isShowingSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), invalidFolderWithLevels: [],
-                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder
+                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: []
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         }
     }
 }
-
-
-//extension UIApplication {
-//    func endEditing() {
-//        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//
-//
-//    }
-//
-//    func startEditing() {
-//        sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
-//    }
-//}
-
 

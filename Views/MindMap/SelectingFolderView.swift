@@ -12,33 +12,22 @@ struct SelectingFolderView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
 
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
 
-    @Environment(\.colorScheme) var colorScheme
+    @State var selectionEnum = FolderTypeEnum.folder // default value
+
+    @State var isValidAction = false
     
     var invalidFolderWithLevels: [FolderWithLevel]
-
-    @State var selectionEnum = FolderTypeEnum.folder // default value
-    
     var dismissAction: () -> Void = { }
     var isFullScreen: Bool = false
-  @State var isValidAction = false
+    
     var body: some View {
-        
-//        if folderEditVM.folderToCut != nil {
-//            DispatchQueue.main.async {
-////                invalidFolderWithLevels = Folder.getHierarchicalFolders(topFolders: [folderEditVM.folderToCut!])
-//                invalidFolderWithLevels = Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut!)
-//                for each in invalidFolderWithLevels {
-//                    print("invalidFolder: \(each.folder.title)")
-//                }
-//            }
-//        }
-        
         
         return VStack(spacing: 0) {
             HStack {
@@ -100,7 +89,6 @@ struct SelectingFolderView: View {
                         }
                         
                         folderEditVM.folderToPaste = nil
-//                        presentationMode.wrappedValue.dismiss()
                         
                         context.saveCoreData()
                         
@@ -115,12 +103,9 @@ struct SelectingFolderView: View {
                         
                         if invalidFolderWithLevels.contains(folderWithLevel) {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
-//                                .background(.red)
                             
                         } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, shouldCheck: true)
-//                                .tint(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.8))
-//                                .background(colorScheme.adjustSubColors())
                         } else {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }
@@ -149,7 +134,6 @@ struct SelectingFolderView: View {
                         }
                         
                         folderEditVM.folderToPaste = nil
-//                        presentationMode.wrappedValue.dismiss()
                         
                         context.saveCoreData()
                         

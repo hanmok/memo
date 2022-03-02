@@ -10,19 +10,19 @@ import CoreData
 
 struct MemosToolBarView: View {
     
-    @Environment(\.managedObjectContext) var context
-    @EnvironmentObject var memoEditVM : MemoEditViewModel
-    @ObservedObject var currentFolder: Folder
     @Environment(\.colorScheme) var colorScheme
-    @Binding var showSelectingFolderView: Bool
-//    @ObservedObject var trashBinFolder: Folder
+    @Environment(\.managedObjectContext) var context
+    
+    @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-    let spacingBetweenButtons: CGFloat = 16
-//    @Binding var showDeleteAlert: Bool
-//    @Binding var showColorPalette: Bool
+    
+    @ObservedObject var currentFolder: Folder
+    
+    @Binding var showSelectingFolderView: Bool
+    
     
     var body: some View {
-        HStack(spacing: spacingBetweenButtons) {
+        HStack(spacing: Sizes.spacingBetweenButtons) {
             
             
             Button {
@@ -111,7 +111,6 @@ struct MemosToolBarView: View {
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-//                showDeleteAlert = true
                 _ = memoEditVM.selectedMemos.map { Memo.moveToTrashBin($0, trashBinVM.trashBinFolder)}
                 memoEditVM.initSelectedMemos()
             }) {

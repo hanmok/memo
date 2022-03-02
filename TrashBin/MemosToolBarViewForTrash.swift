@@ -12,14 +12,16 @@ import CoreData
 struct MemosToolBarViewForTrash: View {
     
     @Environment(\.managedObjectContext) var context
+    @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @ObservedObject var currentFolder: Folder
-    @Environment(\.colorScheme) var colorScheme
-    @Binding var showSelectingFolderView: Bool
-    
-    let spacingBetweenButtons: CGFloat = 16
-    @Binding var showDeleteAlert: Bool
 
+    @Binding var isShowingSelectingFolderView: Bool
+    @Binding var isShowingDeleteAlert: Bool
+
+    let spacingBetweenButtons: CGFloat = 16
+    
     
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
@@ -42,14 +44,14 @@ struct MemosToolBarViewForTrash: View {
          
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
-                showSelectingFolderView = true
+                isShowingSelectingFolderView = true
             }) {
                 UnchangeableImage(imageSystemName: "folder")
             }
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-                showDeleteAlert = true
+                isShowingDeleteAlert = true
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }

@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-
-
-
-
-
-
 struct PlainTextView: UIViewRepresentable {
     
     @Environment(\.colorScheme) var colorSchme
@@ -34,18 +28,12 @@ struct PlainTextView: UIViewRepresentable {
         uiTextView.delegate = context.coordinator
         
         uiTextView.text += ""
-//                uiTextView.showsVerticalScrollIndicator = true
+
         uiTextView.showsVerticalScrollIndicator = false
-        //        uiTextView.keyboardDismissMode = .interactive
-        //        uiTextView.keyboardDismissMode = .interactive
         uiTextView.keyboardDismissMode = .onDrag
-//        uiTextView.foreg
         
-//        uiTextView.tintColor = UIColor.textViewTintColor
         uiTextView.tintColor = UIColor.swipeBtnColor2
-        //        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body1)])
         uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body), .foregroundColor: UIColor.memoTextColor])
-        //        uiTextView.addd
         uiTextView.addDoneButtonOnKeyboard()
         return uiTextView
     }

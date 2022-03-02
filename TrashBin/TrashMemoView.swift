@@ -11,41 +11,33 @@ import CoreData
 
 
 struct TrashMemoView: View {
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-//    @ObservedObject var trashbinFolder: Folder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+    
     @ObservedObject var memo: Memo
     
-//    @FocusState var editorFocusState: Bool
-    
-    @State var showSelectingFolderView = false
+    @State var isShowingSelectingFolderView = false
     
     @State var contents: String = ""
     
-    @State var showColorPalette = false
-    @State var memoColor = UIColor.magenta
-    @State var selectedColorIndex = 0
-    
     let parent: Folder
-    @State var colorPickerSelection = Color.white
+    
     var backBtn : some View {
         Button(action: {
-//            self.presentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-//            SystemImage( "chevron.left")
             SystemImage("chevron.left", size: 18)
                 .tint(Color.navBtnColor)
-//                .background(.green)
         }
     }
     
     var hasSafeBottom: Bool {
-        
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         let window = windowScene?.windows.first
@@ -77,11 +69,14 @@ struct TrashMemoView: View {
         
 // if it is memo in Trash Bin, delete!
 //        if memo.folder!.parent == nil && memo.folder!.title == FolderType.getFolderName(type: .trashbin) {
-        if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
+        
+        // 이 코드는,, 여기서 필요없음.
+//        if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
+            
             Memo.delete(memo)
-        } else {
-            Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
-        }
+//        } else {
+//            Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
+//        }
         context.saveCoreData()
         presentationMode.wrappedValue.dismiss()
     }
@@ -90,11 +85,9 @@ struct TrashMemoView: View {
         return ZStack(alignment: .topLeading) {
             VStack {
                 Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
-//                    .frame(width: UIScreen.screenWidth, height: 90)
                     .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 90 : 70)
-//                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 5 : 30)
-                // what the frame height does here ?  ?
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
+                
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
@@ -107,7 +100,7 @@ struct TrashMemoView: View {
                         
                         // RELOCATE
                         Button {
-                            showSelectingFolderView = true
+                            isShowingSelectingFolderView = true
                             memoEditVM.dealWhenMemoSelected(memo)
                         } label: {
                             SystemImage("folder", size: Sizes.regularButtonSize)
@@ -126,7 +119,7 @@ struct TrashMemoView: View {
                 .padding(.leading, Sizes.navBtnLeadingSpacing)
 
                 
-                CustomTextView1(text: $contents)
+                MemoTextView(text: $contents)
                     .disabled(true)
                     .padding(.top)
                     .foregroundColor(Color.memoTextColor)
@@ -139,23 +132,17 @@ struct TrashMemoView: View {
         
         .navigationBarHidden(true)
         .onAppear(perform: {
-//            presentingView = true
             contents = memo.contents
             print("initial pin state: \(memo.pinned)")
             print("memoView has appeared!")
-//            selectedColorIndex = memo.colorIndex
         })
         
         .onDisappear(perform: {
-//            presentingView = false
-//            memo.colorIndex = selectedColorIndex
             print("memoView has disappeared!")
-//            saveChanges()
             print("data saved!")
-
         })
         
-        .sheet(isPresented: $showSelectingFolderView) {
+        .sheet(isPresented: $isShowingSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
@@ -164,8 +151,7 @@ struct TrashMemoView: View {
                             context: context,
                             fetchingHome: false)!
                     ),
-                invalidFolderWithLevels: [],
-                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder,
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: [],
                 dismissAction: dismissMemoView
             )
                 .environmentObject(folderEditVM)

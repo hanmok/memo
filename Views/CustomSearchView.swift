@@ -21,22 +21,25 @@ enum SearchType: String {
 struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
-//    @ObservedObject var trashBin: Folder
+
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-    
-    @GestureState var isScrolled = false
-    
-    @FocusState var focusState: Bool
-    
-    //    @Environment(\.presentationMode) var presentationMode
+
+    @StateObject var memoEditVM = MemoEditViewModel()
+
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
     @ObservedObject var currentFolder: Folder
     
-    @StateObject var memoEditVM = MemoEditViewModel()
+
+    @GestureState var isScrolled = false
+    
+    @FocusState var focusState: Bool
     
     @State var searchKeyword = ""
     @State var searchTypeEnum: SearchType = .all
+    
+    @Binding var showingSearchView: Bool
+
     
     var allFolders: [Folder] {
         var folders: [Folder] = []
@@ -56,7 +59,7 @@ struct CustomSearchView: View {
         return folders
     }
     
-    var searchResultMemos: [NestedMemo]? {
+    var foundMemos: [NestedMemo]? {
         if searchTypeEnum == .all {
             return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
         } else {
@@ -64,9 +67,8 @@ struct CustomSearchView: View {
         }
     }
     
-    @Binding var showingSearchView: Bool
+
     
-//    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, trashBin: Folder) {
     init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
@@ -110,7 +112,6 @@ struct CustomSearchView: View {
             }
         }
         print("folder name of first element in nestedMemos: ")
-//        print(nestedMemos.first!.memos.first!.folder?.title)
         return nestedMemos
     }
     
@@ -172,11 +173,7 @@ struct CustomSearchView: View {
                         searchKeyword = ""
                         showingSearchView = false
                     } label: {
-//                        Text("Cancel")
                         Text(LocalizedStringStorage.cancelInSearch)
-//                        Text(LocalizedStringStorage.cancel)
-                        
-//                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .foregroundColor(.buttonTextColor)
                     }
 
@@ -184,10 +181,9 @@ struct CustomSearchView: View {
                 .padding(.horizontal, Sizes.overallPadding)
             
                 Picker("", selection: $searchTypeEnum) {
-//                    Text(SearchType.all.rawValue).tag(SearchType.all)
-                    Text(LocalizedStringStorage.convertSearchTypeToStorage(type: .all)).tag(SearchType.all)
-//                    Text(SearchType.current.rawValue).tag(SearchType.current)
-                    Text(LocalizedStringStorage.convertSearchTypeToStorage(type: .current)).tag(SearchType.current)
+                    Text(LocalizedStringStorage.convertSearchTypeToText(type: .all)).tag(SearchType.all)
+
+                    Text(LocalizedStringStorage.convertSearchTypeToText(type: .current)).tag(SearchType.current)
                 }
                 .padding(.horizontal, Sizes.overallPadding)
                 .pickerStyle(SegmentedPickerStyle())
@@ -195,10 +191,10 @@ struct CustomSearchView: View {
                 ScrollView {
                     VStack {
                         // ALL FOLDERS
-                        if searchResultMemos != nil {
+                        if foundMemos != nil {
                             if searchTypeEnum == .all {
-                                if searchResultMemos!.count != 0 {
-                                    ForEach( searchResultMemos!, id: \.self) { memoArray in
+                                if foundMemos!.count != 0 {
+                                    ForEach( foundMemos!, id: \.self) { memoArray in
                                         
                                         Section(header:
                                                     NavigationLink(destination: {
@@ -242,8 +238,8 @@ struct CustomSearchView: View {
                                 }
                             }// searchTypeEnum == .current
                             else {
-                                if searchResultMemos!.count != 0 {
-                                    ForEach( searchResultMemos!, id: \.self) { memoArray in
+                                if foundMemos!.count != 0 {
+                                    ForEach( foundMemos!, id: \.self) { memoArray in
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
@@ -274,7 +270,6 @@ struct CustomSearchView: View {
                                         }
                                     }
                                 } else { // no  searchResult
-//                                    Text("No Memo contains \"\(searchKeyword)\" in \(currentFolder.title)")
                                     Spacer()
                                     Text(LocalizedStringStorage.emptySearchResult)
                                 }

@@ -15,13 +15,11 @@ enum TextFieldAlertType: String {
     case newTopArchive = "New Archive"
 }
 
-// raw value -> Key -> Storage
-
 struct TextFieldStruct {
 
     var textEnum: TextFieldAlertType
 
-    // Not Curretly using
+    // place space before text, to make it more prettier.
     var placeHolder: String {
         switch textEnum {
         case .rename: return ""
