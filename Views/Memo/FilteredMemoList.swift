@@ -51,7 +51,8 @@ struct FilteredMemoList: View {
     @GestureState var isDragging = false
     /// dragging flag end a little later than isDragging, to complete onEnd Action (for Better UX)
     @State var isDraggingAction = false
-    @State var draggingIndex = -1
+//    @State var draggingIndex = -1
+    @State var draggingMemo: Memo? = nil
     @State var oneOffset: CGFloat = 0
     
     var body: some View {
@@ -75,21 +76,25 @@ struct FilteredMemoList: View {
                     
 //                    ForEach(memosVM.memos, id: \.self) { memo in
 //                    ForEach(memosVM.memos.indices, id: \.self) { index in
-                    ForEach(memosToShow.indices, id: \.self) { index in
+//                    ForEach(memosToShow.indices, id: \.self) { index in
+                    ForEach(memosToShow, id: \.self) { memo in
                     
                             
                         
                         NavigationLink(destination:
 //                                        MemoView(memo: memo, parent: memo.folder!, presentingView:
 //                                       MemoView(memo: memosVM.memos[index], parent: memosVM.memos[index].folder!, presentingView:.constant(false))
-                                       MemoView(memo: memosToShow[index], parent: memosToShow[index].folder!, presentingView:.constant(false))
+//                                       MemoView(memo: memosToShow[index], parent: memosToShow[index].folder!, presentingView:.constant(false))
+                                       MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
                                         .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
                         ) {
-                            MemoBoxView(memo: memosToShow[index])
+//                            MemoBoxView(memo: memosToShow[index])
+                            MemoBoxView(memo: memo)
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
 //                                .offset(x: memosVM.offsets[index])
-                                .offset(x: index == draggingIndex ? oneOffset : 0)
+//                                .offset(x: index == draggingIndex ? oneOffset : 0)
+                                .offset(x: draggingMemo == memo ? oneOffset : 0)
 //                                .animation(.spring(), value: isDraggingAction)
                                 .background {
                                     ZStack {
@@ -113,10 +118,12 @@ struct FilteredMemoList: View {
                                             .updating($isDragging, body: { value, state, _ in
                                     state = true
 //                                    onChanged(value: value, memo: memo)
-                                    onChanged(value: value, index: index)
+//                                    onChanged(value: value, index: index)
+                                    onChanged(value: value, memo: memo)
                                 }).onEnded({ value in
 //                                    onEnd(value: value, memo: memo)
-                                    onEnd(value: value, index: index, memo: memosToShow[index])
+//                                    onEnd(value: value, index: index, memo: memosToShow[index])
+                                    onEnd(value: value, memo: memo)
                                 }))
                         } // end of ZStack
                             .disabled(memoEditVM.isSelectionMode)
@@ -124,11 +131,13 @@ struct FilteredMemoList: View {
                             .gesture(DragGesture()
                                         .updating($isDragging, body: { value, state, _ in
                                 state = true
-                                onChanged(value: value, index: index)
+//                                onChanged(value: value, index: index)
+                                onChanged(value: value, memo: memo)
 //                                onChanged(value: value, memo: memo)
                             }).onEnded({ value in
 //                                onEnd(value: value, memo: memo)
-                                onEnd(value: value, index: index, memo: memosToShow[index])
+//                                onEnd(value: value, index: index, memo: memosToShow[index])
+                                onEnd(value: value, memo: memo)
                             }))
                         
                         .simultaneousGesture(TapGesture().onEnded{
@@ -137,7 +146,8 @@ struct FilteredMemoList: View {
                             if memoEditVM.isSelectionMode {
                                 print("Tap gesture triggered!")
 //                                memoEditVM.dealWhenMemoSelected(memo)
-                                memoEditVM.dealWhenMemoSelected(memosToShow[index])
+//                                memoEditVM.dealWhenMemoSelected(memosToShow[index])
+                                memoEditVM.dealWhenMemoSelected(memo)
                             }
 
                         })
@@ -168,10 +178,12 @@ struct FilteredMemoList: View {
     }
     
 //    func onChanged(value: DragGesture.Value, memo: Memo) {
-    func onChanged(value: DragGesture.Value, index: Int) {
+//    func onChanged(value: DragGesture.Value, index: Int) {
+    func onChanged(value: DragGesture.Value, memo: Memo) {
 //        withAnimation {
         DispatchQueue.main.async {
-            draggingIndex = index
+//            draggingIndex = index
+            draggingMemo = memo
             
         }
             print("onChanged triggered")
@@ -208,7 +220,8 @@ struct FilteredMemoList: View {
         }
 //    }
     
-    func onEnd(value: DragGesture.Value, index: Int, memo: Memo) {
+//    func onEnd(value: DragGesture.Value, index: Int, memo: Memo) {
+    func onEnd(value: DragGesture.Value, memo: Memo) {
 //    func onEnd(value: DragGesture.Value, memo: Memo) {
         withAnimation {
             print("onEnd triggered")
@@ -239,7 +252,8 @@ struct FilteredMemoList: View {
             }
         }
         
-        draggingIndex = -1
+//        draggingIndex = -1
+        draggingMemo = nil
     }
 }
 
