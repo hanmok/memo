@@ -20,6 +20,27 @@ enum FolderTypeEnum {
     case trashbin
 }
 
+struct FolderNames {
+    var korName: String
+    var engName: String
+//    var type: FolderType
+    
+    init(type: FolderTypeEnum) {
+        switch type {
+        case .folder:
+            self.korName = "폴더"
+            self.engName = "Folder"
+          
+        case .archive:
+            self.korName = "보관함"
+            self.engName = "Archive"
+        case .trashbin:
+            self.korName = "삭제된 메모"
+            self.engName = "Deleted Memos"
+        }
+    }
+}
+
 struct ContainedMemos {
     var folder: Folder
     var memos: [Memo]
@@ -44,6 +65,32 @@ struct FolderType {
         case .trashbin: return "trash"
         }
     }
+    
+//    enum
+    
+    static func compareName(_ target: String, with type: FolderTypeEnum) -> Bool {
+        switch type {
+            
+        case .folder:
+//            if target == "Folder" || target == "폴더" {
+            if target == FolderNames(type: .folder).engName || target == FolderNames(type: .folder).korName {
+                return true
+            }
+        case .archive:
+//            if target == "Archive" || target == "보관함" {
+            if target == FolderNames(type: .archive).engName || target == FolderNames(type: .archive).korName {
+                return true
+            }
+        case .trashbin:
+//            if target == "Deleted Memos" || target == "삭제된 메모"{
+            if target == FolderNames(type: .trashbin).engName || target == FolderNames(type: .trashbin).korName {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
 }
 
 
@@ -227,10 +274,13 @@ extension Folder {
 //            return result.last!
             switch folderType {
 ////                // Found Nil !
-            case .folder: return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
+//            case .folder: return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
+            case .folder: return result.filter { FolderType.compareName($0.title, with: .folder)}.first!
 //            case .folder: return result.first(where: title == FolderType.getFolderName(type: .folder))
-            case .archive: return result.filter { $0.title == FolderType.getFolderName(type: .archive)}.first!
-            case .trashbin: return result.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!
+            case .archive: return result.filter { FolderType.compareName($0.title, with: .archive)}.first!
+                //            case .archive: return result.filter { $0.title == FolderType.getFolderName(type: .archive)}.first!
+//            case .trashbin: return result.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!
+            case .trashbin: return result.filter { FolderType.compareName($0.title, with: .trashbin)}.first!
             }
             
         } else {
@@ -942,7 +992,8 @@ extension Folder {
             folder = folder!.parent
         }
         
-        if folder!.title == FolderType.getFolderName(type: .folder) {
+//        if folder!.title == FolderType.getFolderName(type: .folder) {
+        if FolderType.compareName(folder!.title, with: .folder){
             return false
         }
         return true

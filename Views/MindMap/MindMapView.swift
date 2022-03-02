@@ -26,8 +26,6 @@ struct LevelAndCollapsed {
     var collapsed: Bool
 }
 
-
-
 struct MindMapView: View {
     
     @Environment(\.managedObjectContext) var context
@@ -58,6 +56,7 @@ struct MindMapView: View {
     @State var showingDeleteAction = false
     @State var allMemos:[Memo] = []
     @State var showingSearchView = false
+    @State var isLoading = false
     
     var hasSafeBottom: Bool {
         let scenes = UIApplication.shared.connectedScenes
@@ -73,7 +72,13 @@ struct MindMapView: View {
     }
     
     func deleteFolder() {
+        DispatchQueue.main.async {
+        isLoading = true
+        }
         if let validFolderToRemoved = folderEditVM.folderToRemove {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                isLoading = false
+            }
 //                    Folder.delete(validFolderToRemoved)
             Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
 //                    Folder.delete(validFolderToRemoved)
@@ -120,10 +125,12 @@ struct MindMapView: View {
                             showTextField = true
                             if selectionEnum == .folder {
                                 textFieldType = .newTopFolder
-                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                newFolderName = ""
                             } else {
                                 textFieldType = .newTopArchive
-                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.archive.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.archive.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                newFolderName = ""
                             }
 
                         } label: { // original : 28
@@ -176,7 +183,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
 
                                             SystemImage("folder.badge.plus")
@@ -200,7 +208,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
                                             SystemImage("folder.badge.plus")
                                                 .foregroundColor(.black)
@@ -215,6 +224,7 @@ struct MindMapView: View {
                                         Button {
 //                                            showingDeleteAction = true
                                             folderEditVM.folderToRemove = folderWithLevel.folder
+                                            isLoading = true
                                             deleteFolder()
                                         } label: {
                                             SystemImage( "trash")
@@ -268,7 +278,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
@@ -288,7 +299,8 @@ struct MindMapView: View {
                                             folderToAddSubFolder = folderWithLevel.folder
                                             showTextField = true
                                             textFieldType = .newSubFolder
-                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1) \(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1) \(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
+                                            newFolderName = ""
                                         } label: {
                                             SystemImage(  "folder.badge.plus")
                                         }
@@ -358,6 +370,14 @@ struct MindMapView: View {
                 // END
                 
             } // end of VStack , Inside ZStack.
+            
+            if isLoading {
+                    ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .scaleEffect(4)
+                    .tint(colorScheme == .dark ? .cream : .black)
+            }
+            
             BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder, hasSafeBottom: hasSafeBottom)
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
@@ -390,14 +410,18 @@ struct MindMapView: View {
                         
                     case .newTopFolder:
                         let newFolder = Folder(title: newName, context: context)
-
-                        fastFolderWithLevelGroup.folders.first(where: {$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
-
+                        
+                        fastFolderWithLevelGroup.folders.first(
+                            where:{FolderType.compareName($0.folder.title, with: .folder)})!.folder.add(subfolder: newFolder)
+//                            where:{$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
+                        
                     case .newTopArchive:
                         
                         let newFolder = Folder(title: newName, context: context)
 
-                        fastFolderWithLevelGroup.archives.first(where: {$0.folder.title == FolderType.getFolderName(type: .archive)})!.folder.add(subfolder: newFolder)
+                        fastFolderWithLevelGroup.archives.first(
+                            where: {FolderType.compareName($0.folder.title, with: .archive)})!.folder.add(subfolder: newFolder)
+//                            where: {$0.folder.title == FolderType.getFolderName(type: .archive)})!.folder.add(subfolder: newFolder)
                     
                     case .newSubFolder:
                         let newSubFolder = Folder(title: newName, context: context)
@@ -409,7 +433,7 @@ struct MindMapView: View {
                         if folderToBeRenamed != nil {
                             folderToBeRenamed!.title = newName
                             folderToBeRenamed!.modificationDate = Date()
-                            folderToBeRenamed = nil // sorry.. ^^_^
+                            folderToBeRenamed = nil
 
                             context.saveCoreData()
                         }

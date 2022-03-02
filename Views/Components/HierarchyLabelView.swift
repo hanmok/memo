@@ -16,11 +16,14 @@ struct HierarchyLabelView: View {
         let hierarchy = getAllParents(child: child)
         
         if hierarchy.count == 1 {
-            if hierarchy.first!.title == FolderType.getFolderName(type: FolderTypeEnum.folder) {
+//            if hierarchy.first!.title == FolderType.getFolderName(type: FolderTypeEnum.folder) {
+            if FolderType.compareName(hierarchy.first!.title, with: .folder) {
                 return "\(LocalizedStringStorage.folder)"
-            } else if hierarchy.first!.title == FolderType.getFolderName(type: .archive){
+//            } else if hierarchy.first!.title == FolderType.getFolderName(type: .archive){
+            } else if FolderType.compareName(hierarchy.first!.title, with: .archive){
                 return "\(LocalizedStringStorage.archive)"
-            } else {
+//            } else {
+            } else if FolderType.compareName(hierarchy.first!.title, with: .trashbin) {
                 return "\(LocalizedStringStorage.trashbin)"
                 
             }

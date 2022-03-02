@@ -76,7 +76,8 @@ struct TrashMemoView: View {
     func removeMemo() {
         
 // if it is memo in Trash Bin, delete!
-        if memo.folder!.parent == nil && memo.folder!.title == FolderType.getFolderName(type: .trashbin) {
+//        if memo.folder!.parent == nil && memo.folder!.title == FolderType.getFolderName(type: .trashbin) {
+        if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
             Memo.delete(memo)
         } else {
             Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)

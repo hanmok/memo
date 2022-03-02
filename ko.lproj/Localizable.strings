@@ -20,9 +20,9 @@
 "New Sub Folder" = "새 폴더";
 "New Archive" = "보관함 속 새 폴더";
 
-"Folder" = "Folder";
-"Archive" = "Archive";
-"Trash Bin" = "Trash Bin";
+"Folder" = "폴더";
+"Archive" = "보관함";
+"Trash Bin" = "삭제된 메모";
 
 "Select Folder" = "이동시킬 위치를 선택해주세요";
 

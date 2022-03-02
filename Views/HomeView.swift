@@ -45,11 +45,18 @@ struct HomeView: View { // top folder fetch
             MindMapView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
-                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
-                        archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
+//                        homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
+//                        homeFolder: topFolders.filter{ $0.title == "폴더" || $0.title == "Folder"}.first!,
+                        homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!,
+//                        archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
+//                        archiveFolder: topFolders.filter{$0.title == "보관함" || $0.title == "Archive"}.first!
+                        archiveFolder: topFolders.filter{FolderType.compareName($0.title, with: .archive)}.first!
                     )
             )
-                .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!))
+//                .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!))
+                .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter {
+                    FolderType.compareName($0.title, with: .trashbin)}.first!))
+//                    $0.title == "삭제된 메모" || $0.title == "Deleted Memos"}.first!))
         }
     }
 } 
