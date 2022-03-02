@@ -21,7 +21,7 @@ struct SubFolderButtonImage: View {
             
                 .clipShape(Circle())
                 .overlay(Circle()
-                            .stroke( Color.subColor, lineWidth: 2))
+                            .stroke( Color.subColor, lineWidth: 3))
 //            UnchangeableImage(imageSystemName: "folder")
             
             SystemImage("folder")

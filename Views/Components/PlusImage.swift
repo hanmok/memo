@@ -23,7 +23,7 @@ struct PlusImage: View {
                 .clipShape(Circle())
             
                 .overlay(Circle()
-                            .stroke( Color.subColor, lineWidth: 2))
+                            .stroke( Color.subColor, lineWidth: 3))
             
             SystemImage("plus")
                 .frame(width: 25, height: 25)
@@ -37,11 +37,3 @@ struct PlusImage: View {
 
 
 
-
-
-struct PlusImage_Previews: PreviewProvider {
-    static var previews: some View {
-        PlusImage()
-            .previewLayout(.sizeThatFits)
-    }
-}
