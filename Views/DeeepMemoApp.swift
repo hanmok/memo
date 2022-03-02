@@ -22,6 +22,7 @@ struct DeeepMemoApp: App {
         
 ////         For testing
 //        // for Dev
+        
 //        let foldersReq = Folder.fetch(.all)
 //
 //       if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
