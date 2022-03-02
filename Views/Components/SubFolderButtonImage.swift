@@ -14,14 +14,20 @@ struct SubFolderButtonImage: View {
     var body: some View {
         ZStack {
             SystemImage("circle", size: 50)
-                .foregroundColor(Color.subColor)
-                .background(Color.subColor)
-
+//                .foregroundColor(Color.subColor)
+//                .background(Color.subColor)
+                .foregroundColor(colorScheme == .dark ? Color.black : Color.subColor)
+                .background(colorScheme == .dark ? Color.black : Color.subColor)
+            
                 .clipShape(Circle())
-            UnchangeableImage(imageSystemName: "folder")
-
+                .overlay(Circle()
+                            .stroke( Color.subColor, lineWidth: 2))
+//            UnchangeableImage(imageSystemName: "folder")
+            
+            SystemImage("folder")
                 .frame(width: 25, height: 25)
-                .foregroundColor(Color.black)
+//                .foregroundColor(Color.black)
+                .foregroundColor(colorScheme == .dark ? Color.subColor : Color.black)
         }
     }
 }
