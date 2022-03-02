@@ -18,8 +18,11 @@ struct HierarchyLabelView: View {
         if hierarchy.count == 1 {
             if hierarchy.first!.title == FolderType.getFolderName(type: FolderTypeEnum.folder) {
                 return "\(LocalizedStringStorage.folder)"
-            } else {
+            } else if hierarchy.first!.title == FolderType.getFolderName(type: .archive){
                 return "\(LocalizedStringStorage.archive)"
+            } else {
+                return "\(LocalizedStringStorage.trashbin)"
+                
             }
         }
         

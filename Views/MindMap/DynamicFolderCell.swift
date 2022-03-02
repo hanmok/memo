@@ -15,28 +15,30 @@ struct DynamicFolderCell: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    @ObservedObject var trashBin: Folder
+//    @ObservedObject var trashBin: Folder
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     @ObservedObject var folder: Folder
     
     @State var showingDeleteAction = false
     
     var level: Int
-//    var numOfSubfolders: String{
-//
-//        if folder.subfolders.count != 0 {
-//            return "\(folder.subfolders.count)"
-//        }
-//        return ""
-//    }
     
     var body: some View {
-        NavigationLink(destination: FolderView(trashBin: trashBin, currentFolder: folder)
+        NavigationLink(destination: FolderView(currentFolder: folder)
                         .environmentObject(memoEditVM)
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)
+                        .environmentObject(trashBinVM)
         ) {
             TitleWithLevelView(folder: folder, level: level)
         } // end of NavigationLink
+    }
+}
+
+class TrashBinViewModel: ObservableObject {
+    @Published var trashBinFolder: Folder
+    init(trashBinFolder: Folder) {
+        self.trashBinFolder = trashBinFolder
     }
 }
 
@@ -46,20 +48,19 @@ struct TrashBinCell: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    @ObservedObject var folder: Folder
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     var body: some View {
-//        Text("trash Bin")
-//        NavigationLink(destination: TrashBinView(folder: folder)) {
-        NavigationLink(destination: TrashFolderView(trashBinFolder: folder)
+        NavigationLink(destination: TrashFolderView()
                         .environmentObject(folderEditVM)
                         .environmentObject(memoOrder)
                         .environmentObject(memoEditVM)
+                        .environmentObject(trashBinVM)
         ) {
             HStack {
                 Text("Trash Bin").foregroundColor(.red)
                 Spacer()
-                Text("\(folder.memos.count)")
+                Text("\(trashBinVM.trashBinFolder.memos.count)")
                     .foregroundColor(.gray)
             }
             .frame(maxWidth: .infinity)

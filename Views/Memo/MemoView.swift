@@ -16,7 +16,8 @@ struct MemoView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @ObservedObject var trashbinFolder: Folder
+//    @ObservedObject var trashbinFolder: Folder
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     @ObservedObject var memo: Memo
     
     @FocusState var editorFocusState: Bool
@@ -70,11 +71,11 @@ struct MemoView: View {
         }
     }
     
-    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>, trashbinFolder: Folder) {
+    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>) {
         self.memo = memo
         self.parent = parent
         self._presentingView = presentingView
-        self.trashbinFolder = trashbinFolder
+//        self.trashbinFolder = trashbinFolder
     }
     
     
@@ -121,7 +122,7 @@ struct MemoView: View {
         if memo.folder!.parent == nil && memo.folder!.title == FolderType.getFolderName(type: .trashbin) {
             Memo.delete(memo)
         } else {
-            Memo.moveToTrashBin(memo, trashbinFolder)
+            Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
         }
         context.saveCoreData()
         presentationMode.wrappedValue.dismiss()

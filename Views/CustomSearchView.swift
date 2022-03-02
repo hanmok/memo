@@ -21,7 +21,8 @@ enum SearchType: String {
 struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
-    @ObservedObject var trashBin: Folder
+//    @ObservedObject var trashBin: Folder
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @GestureState var isScrolled = false
     
@@ -41,12 +42,17 @@ struct CustomSearchView: View {
         var folders: [Folder] = []
         _ = fastFolderWithLevelGroup.folders.map { folders.append($0.folder)}
         _ = fastFolderWithLevelGroup.archives.map { folders.append($0.folder)}
+        folders.append(trashBinVM.trashBinFolder)
         return folders
     }
     
     var currentFolders: [Folder] {
         var folders: [Folder] = []
         _ = Folder.getHierarchicalFolders(topFolder: currentFolder).map { folders.append($0.folder)}
+        print("appended Folders in currnetFolders: \(folders)")
+        
+        _ = folders.map { print($0.title)}
+        
         return folders
     }
     
@@ -60,11 +66,11 @@ struct CustomSearchView: View {
     
     @Binding var showingSearchView: Bool
     
-    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, trashBin: Folder) {
+//    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, trashBin: Folder) {
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _showingSearchView = showingSearchView
-        self.trashBin = trashBin
     }
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
@@ -103,6 +109,8 @@ struct CustomSearchView: View {
                 }
             }
         }
+        print("folder name of first element in nestedMemos: ")
+//        print(nestedMemos.first!.memos.first!.folder?.title)
         return nestedMemos
     }
     
@@ -191,12 +199,14 @@ struct CustomSearchView: View {
                             if searchTypeEnum == .all {
                                 if searchResultMemos!.count != 0 {
                                     ForEach( searchResultMemos!, id: \.self) { memoArray in
+                                        
                                         Section(header:
                                                     NavigationLink(destination: {
-                                            FolderView(trashBin: trashBin, currentFolder: memoArray.memos.first!.folder!)
+                                            FolderView(currentFolder: memoArray.memos.first!.folder!)
                                                 .environmentObject(memoEditVM)
                                                 .environmentObject(FolderEditViewModel())
                                                 .environmentObject(MemoOrder())
+                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
@@ -207,14 +217,19 @@ struct CustomSearchView: View {
                                             .offset(y: 5)
                                             .padding(.leading, Sizes.overallPadding + 5)
                                         }) // end of NavigationLink
+                                                
                                         ) {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
-                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false), trashbinFolder: trashBin)
+                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
+                                                        .environmentObject(trashBinVM)
                                                         .environmentObject(memoEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
                                                         .environmentObject(memoEditVM)
+                                                        .onAppear {
+                                                            print("memo's parent: \(eachMemo.folder!.title)")
+                                                        }
                                                 }
                                             }
                                         }
@@ -230,10 +245,11 @@ struct CustomSearchView: View {
                                     ForEach( searchResultMemos!, id: \.self) { memoArray in
                                         Section(header:
                                                     NavigationLink(destination: {
-                                            FolderView(trashBin: trashBin, currentFolder: memoArray.memos.first!.folder!)
+                                            FolderView(currentFolder: memoArray.memos.first!.folder!)
                                                 .environmentObject(memoEditVM)
                                                 .environmentObject(FolderEditViewModel())
                                                 .environmentObject(MemoOrder())
+                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
@@ -246,7 +262,8 @@ struct CustomSearchView: View {
                                         ) {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
-                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false), trashbinFolder: trashBin)
+                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
+                                                        .environmentObject(trashBinVM)
                                                         .environmentObject(memoEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)

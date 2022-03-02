@@ -16,12 +16,12 @@ struct BookmarkedFolderView: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    @ObservedObject var trashBinFolder: Folder
+//    @ObservedObject var trashBinFolder: Folder
     @State var newMemoPressed = false
     @State var presentingView = false
     @ObservedObject var folder: Folder
     @State var presentingNewMemo = false
-    
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     var hasSafeBottom: Bool
     
     var body: some View {
@@ -39,10 +39,11 @@ struct BookmarkedFolderView: View {
                                     ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
                                         
                                         NavigationLink(destination:
-                                                        MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView, trashbinFolder: trashBinFolder)
+                                                        MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $presentingView )
                                                        
                                                         .environmentObject(memoEditVM)
                                                         .environmentObject(folderEditVM)
+                                                        .environmentObject(trashBinVM)
                                         ) {
                                             BookmarkedMemoBoxView(memo: bookMarkedMemo)
                                         }
@@ -62,7 +63,8 @@ struct BookmarkedFolderView: View {
                     // Another ZStack Element
                     // NEW MEMO
                     NavigationLink(destination:
-                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo, trashBinFolder: trashBinFolder)
+                                    NewMemoView(parent: folder, presentingNewMemo: $presentingNewMemo)
+                                    .environmentObject(trashBinVM)
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                    ,isActive: $presentingNewMemo) {}

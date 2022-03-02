@@ -17,7 +17,9 @@ struct NewMemoView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @ObservedObject var trashBinFolder: Folder
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
+    
+//    @ObservedObject var trashBinFolder: Folder
     @FocusState var editorFocusState: Bool
     
     @State var contents: String = ""
@@ -46,10 +48,10 @@ struct NewMemoView: View {
     }
     
     
-    init(parent: Folder, presentingNewMemo: Binding<Bool>, trashBinFolder: Folder ) {
+    init(parent: Folder, presentingNewMemo: Binding<Bool> ) {
         self.parent = parent
             self._presentingNewMemo = presentingNewMemo
-        self.trashBinFolder = trashBinFolder
+//        self.trashBinFolder = trashBinFolder
     }
     
     func saveChanges() {
@@ -116,7 +118,7 @@ struct NewMemoView: View {
                 memo!.modificationDate = Date()
                 
                 memo!.saveTitleWithContentsToShow(context: context)
-                Memo.moveToTrashBin(memo!, trashBinFolder)
+                Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
                 
                 // memo is not created yet.
@@ -132,7 +134,7 @@ struct NewMemoView: View {
 //                memo!.folder = parent
 
                 memo!.saveTitleWithContentsToShow(context: context)
-                Memo.moveToTrashBin(memo!, trashBinFolder)
+                Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
                 parent.title += ""
             }

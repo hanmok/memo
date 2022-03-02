@@ -47,8 +47,9 @@ struct HomeView: View { // top folder fetch
                     FastFolderWithLevelGroup(
                         homeFolder: topFolders.filter{ $0.title == FolderType.getFolderName(type: .folder)}.first!,
                         archiveFolder: topFolders.filter{$0.title == FolderType.getFolderName(type: .archive)}.first!
-                    ), trashBinFolder: topFolders.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!
+                    )
             )
+                .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!))
         }
     }
 } 

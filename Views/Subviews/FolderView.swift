@@ -20,7 +20,8 @@ struct FolderView: View {
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var trashBin: Folder
+//    @ObservedObject var trashBin: Folder
+    @EnvironmentObject var  trashBinVM: TrashBinViewModel
     @State var isShowingSubFolderView = false
     @State var isAddingMemo = false
     @State var shouldAddFolder = false
@@ -176,7 +177,7 @@ struct FolderView: View {
                         
                         ZStack {
                             if !currentFolder.memos.isEmpty {
-                                MemoList(trashBinFolder: trashBin)
+                                MemoList()
                                     .padding(.top, 20)
                                     .ignoresSafeArea(edges: .trailing)
                             }
@@ -186,7 +187,7 @@ struct FolderView: View {
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
                     .environmentObject(memoOrder)
-                    
+                    .environmentObject(trashBinVM)
                 } // end of scrollView
             } // end of VStack
             .padding(.top, 12)
@@ -208,7 +209,7 @@ struct FolderView: View {
                         
                         SubFolderView(
                             folder: currentFolder,
-                            trashFolder: trashBin, isShowingSubFolderView: $isShowingSubFolderView,
+                            isShowingSubFolderView: $isShowingSubFolderView,
                             isAddingFolder: $shouldAddFolder)
                         
                         // offset x : trailingPadding
@@ -239,8 +240,7 @@ struct FolderView: View {
                         Spacer()
                         MemosToolBarView(
                             currentFolder: currentFolder,
-                            showSelectingFolderView: $showSelectingFolderView,
-                            trashBinFolder: trashBin
+                            showSelectingFolderView: $showSelectingFolderView
 //                            , showDeleteAlert: $showDeleteAlert
 //                            showColorPalette: $showColorPalette
                         )
@@ -271,7 +271,7 @@ struct FolderView: View {
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
                     archiveFolder: Folder.fetchHomeFolder(context: context,
                                                           fetchingHome: false)!),
-                currentFolder: currentFolder, showingSearchView: $showingSearchView, trashBin: trashBin)
+                currentFolder: currentFolder, showingSearchView: $showingSearchView)
             
                 .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
@@ -301,9 +301,10 @@ struct FolderView: View {
                 })
             
             NavigationLink(destination:
-                            NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false), trashBinFolder: trashBin), isActive: $isAddingMemo) {}
+                            NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
+                            .environmentObject(trashBinVM)
         } // end of ZStack
         .frame(maxHeight: .infinity)
         

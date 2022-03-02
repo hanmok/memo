@@ -31,13 +31,13 @@ struct TrashFolderView: View {
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     @Environment(\.colorScheme) var colorScheme
-    
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @State var showDeleteAlert = false
     
     @State var showSelectingFolderView = false
     
-    @ObservedObject var trashBinFolder: Folder
+//    @ObservedObject var trashBinFolder: Folder
     
     @State var allMemos: [Memo] = []
     
@@ -79,7 +79,8 @@ struct TrashFolderView: View {
                                 .tint(Color.navBtnColor)
                         })
                         
-                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: trashBinFolder)
+//                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: trashBinFolder)
+                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: trashBinVM.trashBinFolder)
                     }
                 }
                 .padding(.trailing, 10 + Sizes.overallPadding)
@@ -95,7 +96,7 @@ struct TrashFolderView: View {
                             // NavigationTitle
                             ZStack(alignment: .topLeading) {
                                 HStack {
-                                    Text(trashBinFolder.title)
+                                    Text(trashBinVM.trashBinFolder.title)
                                         .font(.largeTitle)
                                         .fontWeight(.bold)
                                         .lineLimit(1)
@@ -109,29 +110,30 @@ struct TrashFolderView: View {
                         .padding(.bottom, 8)
                         
                         ZStack {
-                            if !trashBinFolder.memos.isEmpty {
-                                MemoList(trashBinFolder: trashBinFolder)
+                            if !trashBinVM.trashBinFolder.memos.isEmpty {
+                                TrashBinMemoList()
+                                    
                                     .padding(.top, 20)
                                     .ignoresSafeArea(edges: .trailing)
                             }
                         }
                     } // end of main VStack
-                    .environmentObject(trashBinFolder)
+                    .environmentObject(trashBinVM)
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
                     .environmentObject(memoOrder)
                     
+                    
                 } // end of scrollView
             } // end of VStack
             .padding(.top, 12)
-            //            .padding(.horizontal, Sizes.overallPadding)
             
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
                     MemosToolBarViewForTrash(
-                        currentFolder: trashBinFolder,
+                        currentFolder: trashBinVM.trashBinFolder,
                         showSelectingFolderView: $showSelectingFolderView,
                         showDeleteAlert: $showDeleteAlert
                     )
@@ -146,8 +148,9 @@ struct TrashFolderView: View {
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
                     archiveFolder: Folder.fetchHomeFolder(context: context,
                                                           fetchingHome: false)!),
-                currentFolder: trashBinFolder, showingSearchView: $showingSearchView, trashBin: trashBinFolder)
-            
+//                currentFolder: trashBinVM.trashBinFolder, showingSearchView: $showingSearchView, trashBin: trashBinFolder)
+                currentFolder: trashBinVM.trashBinFolder, showingSearchView: $showingSearchView)
+                .environmentObject(trashBinVM)
                 .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
         } // end of ZStack
