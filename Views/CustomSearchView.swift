@@ -205,7 +205,7 @@ struct CustomSearchView: View {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
                                                 .environmentObject(memoEditVM)
                                                 .environmentObject(FolderEditViewModel())
-                                                .environmentObject(MemoOrder())
+                                                .environmentObject(MemoOrder()) // 왜.. 새로운 object 를 여기서 만들었지 ?
                                                 .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
@@ -227,9 +227,10 @@ struct CustomSearchView: View {
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
                                                         .environmentObject(memoEditVM)
-                                                        .onAppear {
-                                                            print("memo's parent: \(eachMemo.folder!.title)")
-                                                        }
+                                                    // 애초에 force unwrap 을 시킬 경우를 만들지 말아야하나 ?
+//                                                        .onAppear {
+//                                                            print("memo's parent: \(eachMemo.folder!.title)")
+//                                                        }
                                                 }
                                             }
                                         }

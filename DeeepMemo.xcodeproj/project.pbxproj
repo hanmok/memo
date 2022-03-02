@@ -89,6 +89,8 @@
 		9AB724D727CD2D17006A825C /* LocalizedStringStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */; };
 		9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D927CE79EC006A825C /* TrashFolderView.swift */; };
 		9AB724DC27CE7B18006A825C /* MemosToolBarViewForTrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724DB27CE7B18006A825C /* MemosToolBarViewForTrash.swift */; };
+		9AB724E027CF9FEA006A825C /* TrashBinSubMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724DF27CF9FEA006A825C /* TrashBinSubMemoList.swift */; };
+		9AB724E227CFA181006A825C /* TrashMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724E127CFA181006A825C /* TrashMemoView.swift */; };
 		9AC257D627C24AB200280DD2 /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC257D527C24A1600280DD2 /* CustomSearchView.swift */; };
 		9AC257D727C24AB200280DD2 /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC257D527C24A1600280DD2 /* CustomSearchView.swift */; };
 		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
@@ -226,6 +228,8 @@
 		9AB724D827CE5ECD006A825C /* randomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = randomView.swift; sourceTree = "<group>"; };
 		9AB724D927CE79EC006A825C /* TrashFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashFolderView.swift; sourceTree = "<group>"; };
 		9AB724DB27CE7B18006A825C /* MemosToolBarViewForTrash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarViewForTrash.swift; sourceTree = "<group>"; };
+		9AB724DF27CF9FEA006A825C /* TrashBinSubMemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinSubMemoList.swift; sourceTree = "<group>"; };
+		9AB724E127CFA181006A825C /* TrashMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashMemoView.swift; sourceTree = "<group>"; };
 		9AC257D527C24A1600280DD2 /* CustomSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchView.swift; sourceTree = "<group>"; };
 		9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCollapsibleFolder.swift; sourceTree = "<group>"; };
 		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind3.swift; sourceTree = "<group>"; };
@@ -315,6 +319,8 @@
 			children = (
 				9AB724DB27CE7B18006A825C /* MemosToolBarViewForTrash.swift */,
 				9AB724D927CE79EC006A825C /* TrashFolderView.swift */,
+				9AB724DF27CF9FEA006A825C /* TrashBinSubMemoList.swift */,
+				9AB724E127CFA181006A825C /* TrashMemoView.swift */,
 				9AB724D827CE5ECD006A825C /* randomView.swift */,
 				9AB724D427CD2C6B006A825C /* Localizable.strings */,
 				9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */,
@@ -787,8 +793,10 @@
 				9A04BF2027C8CD2000F3972D /* CustomTextView.swift in Sources */,
 				9A1D854527A24F9400B00156 /* SubFolderView.swift in Sources */,
 				9AC5D234278C3145007EAA28 /* MemoList2.swift in Sources */,
+				9AB724E227CFA181006A825C /* TrashMemoView.swift in Sources */,
 				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
 				9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */,
+				9AB724E027CF9FEA006A825C /* TrashBinSubMemoList.swift in Sources */,
 				9AC5D2192786F773007EAA28 /* HomeViewPrev.swift in Sources */,
 				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
 				9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */,

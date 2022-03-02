@@ -23,8 +23,10 @@ struct SelectingFolderView: View {
     var invalidFolderWithLevels: [FolderWithLevel]
 
     @State var selectionEnum = FolderTypeEnum.folder // default value
+    
+    var dismissAction: () -> Void = { }
     var isFullScreen: Bool = false
-  
+  @State var isValidAction = false
     var body: some View {
         
 //        if folderEditVM.folderToCut != nil {
@@ -86,22 +88,27 @@ struct SelectingFolderView: View {
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
+                                isValidAction = true
                             }
                         } else {
                             _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
                             }
+                            isValidAction = true
                             
                             memoEditVM.initSelectedMemos()
                         }
                         
                         folderEditVM.folderToPaste = nil
-                        presentationMode.wrappedValue.dismiss()
+//                        presentationMode.wrappedValue.dismiss()
                         
                         context.saveCoreData()
                         
                         folderEditVM.folderToPaste = nil
-        
+                        if isValidAction {
+                            dismissAction()
+                        }
+
                         presentationMode.wrappedValue.dismiss()
                         
                     } label: {
@@ -130,21 +137,27 @@ struct SelectingFolderView: View {
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
+                                isValidAction = true
                             }
                         } else {
                             _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
                             }
+                            isValidAction = true
+                            
                             memoEditVM.initSelectedMemos()
                         }
                         
                         folderEditVM.folderToPaste = nil
-                        presentationMode.wrappedValue.dismiss()
+//                        presentationMode.wrappedValue.dismiss()
                         
                         context.saveCoreData()
                         
                         folderEditVM.folderToPaste = nil
-        
+                        
+                        if isValidAction {
+                            dismissAction()
+                        }
                         presentationMode.wrappedValue.dismiss()
                         
                     } label: {
