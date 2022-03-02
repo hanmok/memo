@@ -173,6 +173,13 @@ extension Memo {
         }
     }
     
+    static func moveToTrashBin(_ memo: Memo, _ trash: Folder) {
+        if let context = memo.managedObjectContext {
+            memo.folder = trash
+            context.saveCoreData()
+        }
+    }
+    
     static func copyMemo(target: Memo, context: NSManagedObjectContext) -> Memo {
         let newMemo = Memo(contents: target.contents, context: context)
         newMemo.modificationDate = target.modificationDate

@@ -37,9 +37,11 @@ struct MindMapView: View {
     @StateObject var folderEditVM = FolderEditViewModel()
     @StateObject var folderOrder = FolderOrder()
     @StateObject var memoOrder = MemoOrder()
+//    @StateObject var
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-   
+//    @ObservedObject var trashBinFolder: Folder
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
@@ -170,6 +172,7 @@ struct MindMapView: View {
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                     .environmentObject(memoOrder)
+                                    .environmentObject(trashBinVM)
                                 // ADD Sub Folder
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                         Button {
@@ -192,6 +195,7 @@ struct MindMapView: View {
                                     .environmentObject(memoEditVM)
                                     .environmentObject(folderEditVM)
                                     .environmentObject(memoOrder)
+                                    .environmentObject(trashBinVM)
                                 
                                 // ADD Sub Folder
                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
@@ -328,10 +332,25 @@ struct MindMapView: View {
                                         }
                                         .tint(Color.swipeBtnColor2)
                                     }
-                            } // end of ForEach
-                        }
-                    } // end of List
+                            } // end of Else Case
+                        } // end of ForEach
+//                        TrashBinCell(folder: trashBinFolder)
+                        TrashBinCell()
+                            .environmentObject(memoEditVM)
+                            .environmentObject(folderEditVM)
+                            .environmentObject(memoOrder)
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                
+                                Button {
+                                    // DO NOTHING
+                                } label: {
+                                    ChangeableImage(imageSystemName: "multiply")
+                                }
+                                .tint(.gray)
+                            }
+                    }// end of List
                     .listStyle(InsetGroupedListStyle())
+                       
                         EmptyView()
                             .frame(height: 250)
                     }
@@ -416,7 +435,9 @@ struct MindMapView: View {
             // delete
             Button(role: .destructive) {
                 if let validFolderToRemoved = folderEditVM.folderToRemove {
-                    Folder.delete(validFolderToRemoved)
+//                    Folder.delete(validFolderToRemoved)
+                    Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
+//                    Folder.delete(validFolderToRemoved)
                     folderEditVM.folderToRemove = nil
                 }
                 context.saveCoreData()

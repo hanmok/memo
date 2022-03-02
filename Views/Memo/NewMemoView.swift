@@ -17,7 +17,9 @@ struct NewMemoView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     
+//    @ObservedObject var trashBinFolder: Folder
     @FocusState var editorFocusState: Bool
     
     @State var contents: String = ""
@@ -49,6 +51,7 @@ struct NewMemoView: View {
     init(parent: Folder, presentingNewMemo: Binding<Bool> ) {
         self.parent = parent
             self._presentingNewMemo = presentingNewMemo
+//        self.trashBinFolder = trashBinFolder
     }
     
     func saveChanges() {
@@ -99,7 +102,46 @@ struct NewMemoView: View {
     
     func removeMemo() {
         // nothing has been saved yet.
-        contents = ""
+        
+        if contents == ""  {
+        // none is typed -> Do nothing. Cause memo is not created yet.
+        } else {
+            if memo != nil {
+                if memo!.folder == parent {
+                    parent.modificationDate = Date()
+                }
+
+                memo!.contents = contents
+                memo!.isBookMarked = isBookMarkedTemp
+                memo!.pinned = isPinned
+                memo!.creationDate = Date()
+                memo!.modificationDate = Date()
+                
+                memo!.saveTitleWithContentsToShow(context: context)
+                Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
+                context.saveCoreData()
+                
+                // memo is not created yet.
+            } else {
+
+                memo = Memo(contents: contents, context: context)
+                memo!.isBookMarked = isBookMarkedTemp
+                memo!.pinned = isPinned
+                memo!.creationDate = Date()
+                memo!.modificationDate = Date()
+                
+//                parent.add(memo: memo!)
+//                memo!.folder = parent
+
+                memo!.saveTitleWithContentsToShow(context: context)
+                Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
+                context.saveCoreData()
+                parent.title += ""
+            }
+        }
+        
+        
+//        contents = ""
         presentationMode.wrappedValue.dismiss()
     }
     

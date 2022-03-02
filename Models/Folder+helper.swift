@@ -17,6 +17,7 @@ protocol Archive: Folder {
 enum FolderTypeEnum {
     case folder
     case archive
+    case trashbin
 }
 
 struct ContainedMemos {
@@ -32,6 +33,7 @@ struct FolderType {
         switch type {
         case .folder: return LocalizedStringStorage.folder
         case .archive: return LocalizedStringStorage.archive
+        case .trashbin: return LocalizedStringStorage.trashbin
         }
     }
     
@@ -39,6 +41,7 @@ struct FolderType {
         switch type {
         case .folder: return "folder"
         case .archive: return "tray"
+        case .trashbin: return "trash"
         }
     }
 }
@@ -227,6 +230,7 @@ extension Folder {
             case .folder: return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
 //            case .folder: return result.first(where: title == FolderType.getFolderName(type: .folder))
             case .archive: return result.filter { $0.title == FolderType.getFolderName(type: .archive)}.first!
+            case .trashbin: return result.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!
             }
             
         } else {
@@ -246,13 +250,25 @@ extension Folder {
 //        }
 //    }
     
+    // 이거부터 수정해야겠는데.. ???
+    // Use bottom func instead of this.
     static func delete(_ folder: Folder) {
+        
         if let context = folder.managedObjectContext {
             context.delete(folder)
             
 //            try? context.save()
             context.saveCoreData()
             Folder.updateTopFolders(context: context)
+        }
+    }
+    
+    static func moveMemosToTrashAndDelete(from folder: Folder, to trash: Folder) {
+        _ = folder.memos.map { $0.folder = trash }
+        if let context = folder.managedObjectContext {
+            context.delete(folder)
+            context.saveCoreData()
+            
         }
     }
     
@@ -880,9 +896,11 @@ extension Folder {
         let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
         archive.title += ""
 //        archive.folderType = .archive
-        context.saveCoreData()
+       
         
-        return [homeFolder, archive]
+        let trashBin = Folder(title: FolderType.getFolderName(type: .trashbin), context: context)
+        context.saveCoreData()
+        return [homeFolder, archive, trashBin]
         // return TopFolders
         // order
         // In Asc Order

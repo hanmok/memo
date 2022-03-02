@@ -42,6 +42,9 @@ struct FilteredMemoList: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
+    
+//    @ObservedObject var trashBinFolder: Folder
     @ObservedObject var folder: Folder
 //    @ObservedObject var memosVM: MemosViewModel
     var listType: MemoListType
