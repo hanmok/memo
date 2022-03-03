@@ -334,8 +334,12 @@ struct MindMapView: View {
             
             // animation 은 같지만 이건 ZStack 이기 때문에, 뭔가 차이가 생김.
             // 얘를 fullscreen 으로 만들거나, ..
+            
             CustomSearchView(
-                fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, showingSearchView: $isShowingSearchView)
+                fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, // 애매하네..
+                showingSearchView: $isShowingSearchView,
+            shouldShowAll: true,
+                shouldIncludeTrash: selectionEnum == .archive)
             
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)

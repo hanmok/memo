@@ -54,7 +54,7 @@ struct LocalizedStringStorage {
     static let AscendingOrder = NSLocalizedString(LocalizedStringKeys.AscendingOrder, comment: "a")
     static let DecendingOrder = NSLocalizedString(LocalizedStringKeys.DecendingOrder, comment: "a")
     
-    
+    static let searchPlaceholder = NSLocalizedString(LocalizedStringKeys.searchPlaceholder, comment: "a")
     
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
@@ -136,5 +136,6 @@ struct LocalizedStringKeys {
     
     static let AscendingOrder = "Ascending Order"
     static let DecendingOrder = "Decending Order"
-    
+ 
+    static let searchPlaceholder = "Search Placeholder"
 }

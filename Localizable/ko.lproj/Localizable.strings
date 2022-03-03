@@ -11,7 +11,7 @@
 
 "removeAlertMsgMain" = "정말 제거하시겠습니까?";
 "removeAlertMsgSub" = "삭제 후에는 복원이 불가능합니다";
-"CancelInSearch" = "Cancel";
+"CancelInSearch" = "취소";
 "Cancel" = "취 소";
 "Delete" = "제거";
 
@@ -51,3 +51,4 @@
 "Ascending Order" = "오래된 항목부터";
 "Decending Order" = "최근 항목부터";
 
+"Search Placeholder" = "검색";
