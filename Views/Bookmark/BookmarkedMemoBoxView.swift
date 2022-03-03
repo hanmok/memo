@@ -15,7 +15,7 @@ struct BookmarkedMemoBoxView: View {
     var frameSize = ( UIScreen.screenWidth - 6 * Sizes.properSpacing ) / 2
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 7) {
             if memo.titleToShow != "" {
                 Text(memo.titleToShow)
                     .font(.headline)

@@ -75,11 +75,16 @@ struct MemoView: View {
         
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if contents are empty, delete memo
+        
+        // two step confirmatio for empty contents.
         if memo.contents == "" {
             Memo.delete(memo)
             // save titleToShow and contentsToShow. to work with memoboxView
         } else {
             memo.saveTitleWithContentsToShow(context: context)
+            if memo.contentsToShow == "" && memo.titleToShow == "" {
+                Memo.delete(memo)
+            }
         }
         
         parent.title += "" //
@@ -175,6 +180,8 @@ struct MemoView: View {
             contents = memo.contents
             print("initial pin state: \(memo.isPinned)")
             print("memoView has appeared!")
+            print("titleToShow: \(memo.titleToShow)")
+            print("contentsToShow: \(memo.contentsToShow)")
         })
         
         .onDisappear(perform: {
