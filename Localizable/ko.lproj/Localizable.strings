@@ -11,7 +11,7 @@
 
 "removeAlertMsgMain" = "정말 제거하시겠습니까?";
 "removeAlertMsgSub" = "삭제 후에는 복원이 불가능합니다";
-"CancelInSearch" = "Cancel";
+"CancelInSearch" = "취소";
 "Cancel" = "취 소";
 "Delete" = "제거";
 
@@ -32,13 +32,13 @@
 
 //"Sub Category 1" = "폴더 속 폴더 속 폴더 1";
 
-"th" = "번째";
-"'s" = "의";
+//"th" = "번째";
+//"'s" = "의";
 
 "Empty Search Result" = "해당 키워드를 포함한 메모가 없습니다.";
 
-"All" = "전체";
-"Current" = "현재 위치";
+"All location" = "전체";
+"Current location" = "현재 위치";
 
 // Sorting
 "Folder Ordering" = "폴더 정렬 순서";
@@ -51,3 +51,4 @@
 "Ascending Order" = "오래된 항목부터";
 "Decending Order" = "최근 항목부터";
 
+"Search Placeholder" = "검색";

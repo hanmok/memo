@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
-
+/// white for dark, black for light mode size of 20
 struct ChangeableImage: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var imageSystemName: String
+    
     var width: CGFloat = 20
     var height: CGFloat = 20
+    
     var body: some View {
 
         Image(systemName: imageSystemName)
@@ -22,12 +25,16 @@ struct ChangeableImage: View {
     }
 }
 
+/// black color size of 20
 struct UnchangeableImage: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     var imageSystemName: String
+    
     var width: CGFloat = 20
     var height: CGFloat = 20
+    
     var body: some View {
 
         Image(systemName: imageSystemName)
@@ -35,24 +42,6 @@ struct UnchangeableImage: View {
             .aspectRatio( contentMode: .fit)
             .tint(Color.black)
             .frame(width: width, height: height)
-    }
-}
-
-struct SystemImage: View {
-    internal init(_ imageSystemName: String, size: CGFloat = 20) {
-        self.imageSystemName = imageSystemName
-        self.size = size
-    }
-    
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    var imageSystemName: String
-    var size: CGFloat
-    var body: some View {
-
-        Image(systemName: imageSystemName)
-            .resizable()
-            .aspectRatio( contentMode: .fit)
-            .frame(width: size, height: size)
     }
 }
 

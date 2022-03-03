@@ -16,13 +16,13 @@ struct SubFolderView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-//    @ObservedObject var trashFolder: Folder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+    
     @Binding var isShowingSubFolderView: Bool
     @Binding var isAddingFolder: Bool
     
     var body: some View {
-//        let subFolders = folder.subfolders.sorted{ $0.title < $1.title}
+        
         let subFolders = Folder.getSortedSubFolders(folder: folder)
         
         return VStack(alignment: .leading) {
@@ -34,7 +34,6 @@ struct SubFolderView: View {
                     // dismiss
                     isShowingSubFolderView = false
                 } label: {
-//                    UnchangeableImage(imageSystemName: "arrow.right")
                     SystemImage("arrow.right")
                         .foregroundColor(Color.blackAndWhite)
                 }
@@ -45,7 +44,6 @@ struct SubFolderView: View {
                 Button {
                     isAddingFolder = true
                 } label: {
-//                    UnchangeableImage(imageSystemName: "folder.badge.plus", width: 28, height: 28)
                     SystemImage("folder.badge.plus", size: 28)
                         .foregroundColor(Color.blackAndWhite)
                     
@@ -100,7 +98,6 @@ struct SubFolderView: View {
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-//                .stroke(colorScheme == .dark ? Color.subColor : .gray ,lineWidth: 1)
                 .stroke(colorScheme == .dark ? Color.subColor : Color.init(white: 0.85) ,lineWidth: 1)
         )
     }

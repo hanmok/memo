@@ -7,26 +7,10 @@
 
 import SwiftUI
 
-struct FolderWithLevel: Hashable {
-    var folder: Folder
-    var level: Int
-    var isCollapsed: Bool = false
-    var isShowing: Bool = true
-}
-
-class FolderGroup: ObservableObject {
-    @Published var realFolders: [Folder]
-    init(targetFolders: [Folder]) {
-        self.realFolders = targetFolders
-    }
-}
-
-struct LevelAndCollapsed {
-    var level: Int
-    var collapsed: Bool
-}
-
 struct MindMapView: View {
+    
+    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
+    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
@@ -35,27 +19,25 @@ struct MindMapView: View {
     @StateObject var folderEditVM = FolderEditViewModel()
     @StateObject var folderOrder = FolderOrder()
     @StateObject var memoOrder = MemoOrder()
-//    @StateObject var
+    
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-//    @ObservedObject var trashBinFolder: Folder
+    
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
-    @State var showTextField = false
+    @State var isShowingTextField = false
     @State var textFieldType: TextFieldAlertType? = nil
     
     @State var folderToAddSubFolder : Folder? = nil
-    @State var showSelectingFolderView = false
+    @State var isShowingSelectingFolderView = false
     @State var folderToBeRenamed : Folder? = nil
     
     @State var selectionEnum = FolderTypeEnum.folder // default value
     @State var foldersToShow: [Folder] = []
     
-    @State var showingDeleteAction = false
-    @State var allMemos:[Memo] = []
-    @State var showingSearchView = false
+    @State var isShowingSearchView = false
     @State var isLoading = false
     
     var hasSafeBottom: Bool {
@@ -73,28 +55,20 @@ struct MindMapView: View {
     
     func deleteFolder() {
         DispatchQueue.main.async {
-        isLoading = true
+            isLoading = true
         }
         if let validFolderToRemoved = folderEditVM.folderToRemove {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 isLoading = false
             }
-//                    Folder.delete(validFolderToRemoved)
             Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
-//                    Folder.delete(validFolderToRemoved)
+            
             folderEditVM.folderToRemove = nil
         }
         context.saveCoreData()
     }
     
-    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
-    
-    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
-    
     var body: some View {
-        
-        
-        
         
         return ZStack {
             VStack(spacing: 0) {
@@ -109,41 +83,36 @@ struct MindMapView: View {
                                 print("level: \($0.level)")
                             }
                             // show SearchView !
-                            showingSearchView = true
+                            isShowingSearchView = true
                         } label: {
-
                             SystemImage( "magnifyingglass")
                                 .tint(Color.navBtnColor)
                         }
-
+                        
                         // MARK: - Button 2: Folder Ordering
                         FolderOrderingMenu(folderOrder: folderOrder)
                             .padding(.leading, 16)
                         
                         // MARK: - Button 3: Add new Folder to the top Folder
                         Button {
-                            showTextField = true
+                            isShowingTextField = true
                             if selectionEnum == .folder {
                                 textFieldType = .newTopFolder
-//                                newFolderName = "\(fastFolderWithLevelGroup.homeFolder.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.homeFolder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                                 newFolderName = ""
                             } else {
                                 textFieldType = .newTopArchive
-//                                newFolderName = "\(fastFolderWithLevelGroup.archive.title)\(LocalizedStringStorage.possessive) \(fastFolderWithLevelGroup.archive.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
                                 newFolderName = ""
                             }
-
+                            
                         } label: { // original : 28
-
+                            
                             SystemImage( "folder.badge.plus", size: 28)
                                 .foregroundColor(Color.navBtnColor)
                         }
                         .padding(.leading, 12)
                     }
                     .padding(.horizontal, 20)
-
                     .padding(.top, 8)
-
                 }
                 .padding(.trailing, Sizes.overallPadding)
                 
@@ -163,203 +132,183 @@ struct MindMapView: View {
                 
                 
                 // MARK: - Start
-
+                
                 ZStack {
                     VStack(spacing: 0) {
-                    List {
-                        ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
-                            
-                            if folderWithLevel.folder.parent == nil {
-                                DynamicTopFolderCell(
-                                    folder: folderWithLevel.folder,
-                                    level: folderWithLevel.level)
-                                    .environmentObject(memoEditVM)
-                                    .environmentObject(folderEditVM)
-                                    .environmentObject(memoOrder)
-                                    .environmentObject(trashBinVM)
-                                // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            showTextField = true
-                                            textFieldType = .newSubFolder
-//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
-                                            newFolderName = ""
-                                        } label: {
-
-                                            SystemImage("folder.badge.plus")
-                                        }
-
-                                        .tint(Color.swipeBtnColor2)
-                                    }
-                            }
-                            else {
-                                DynamicFolderCell(
-                                    folder: folderWithLevel.folder,
-                                    level: folderWithLevel.level)
-                                    .environmentObject(memoEditVM)
-                                    .environmentObject(folderEditVM)
-                                    .environmentObject(memoOrder)
-                                    .environmentObject(trashBinVM)
+                        List {
+                            ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
                                 
-                                // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            showTextField = true
-                                            textFieldType = .newSubFolder
-//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
-                                            newFolderName = ""
-                                        } label: {
-                                            SystemImage("folder.badge.plus")
-                                                .foregroundColor(.black)
+                                if folderWithLevel.folder.parent == nil {
+                                    DynamicTopFolderCell(
+                                        folder: folderWithLevel.folder,
+                                        level: folderWithLevel.level)
+                                        .environmentObject(memoEditVM)
+                                        .environmentObject(folderEditVM)
+                                        .environmentObject(memoOrder)
+                                        .environmentObject(trashBinVM)
+                                    // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
+                                                isShowingTextField = true
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage("folder.badge.plus")
+                                            }
+                                            .tint(Color.swipeBtnColor2)
+                                        }
+                                }
+                                else {
+                                    DynamicFolderCell(
+                                        folder: folderWithLevel.folder,
+                                        level: folderWithLevel.level)
+                                        .environmentObject(memoEditVM)
+                                        .environmentObject(folderEditVM)
+                                        .environmentObject(memoOrder)
+                                        .environmentObject(trashBinVM)
+                                    
+                                    // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
+                                                isShowingTextField = true
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage("folder.badge.plus")
+                                                    .foregroundColor(.black)
+                                            }
+                                            .tint(Color.swipeBtnColor2)
+                                        }
+                                    // Change Folder Name
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                            
+                                            Button {
+                                                folderEditVM.folderToRemove = folderWithLevel.folder
+                                                isLoading = true
+                                                deleteFolder()
+                                            } label: {
+                                                SystemImage( "trash")
+                                            }
+                                            .tint(.red)
+                                            
+                                            
+                                            // RELOCATE FOLDER
+                                            Button {
+                                                UIView.setAnimationsEnabled(false)
+                                                folderEditVM.shouldShowSelectingView = true
+                                                folderEditVM.folderToCut = folderWithLevel.folder
+                                            } label: {
+                                                SystemImage("folder")
+                                            }
+                                            .tint(Color.swipeBtnColor3)
+                                            
+                                            Button {
+                                                if folderWithLevel.folder.parent != nil {
+                                                    isShowingTextField = true
+                                                    textFieldType = .rename
+                                                    folderToBeRenamed = folderWithLevel.folder
+                                                    newFolderName = folderWithLevel.folder.title
+                                                }
+                                            } label: {
+                                                SystemImage("pencil")
+                                            }
+                                            .tint(Color.swipeBtnColor2)
                                             
                                         }
-                                        .tint(Color.swipeBtnColor2)
-                                    }
-                                // Change Folder Name
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        
-                                        
-                                        Button {
-//                                            showingDeleteAction = true
-                                            folderEditVM.folderToRemove = folderWithLevel.folder
-                                            isLoading = true
-                                            deleteFolder()
-                                        } label: {
-                                            SystemImage( "trash")
-                                        }
-                                        .tint(.red)
-                                        
-                                        
-                                        // RELOCATE FOLDER
-                                        Button {
-                                            UIView.setAnimationsEnabled(false)
-                                            folderEditVM.shouldShowSelectingView = true
-                                            folderEditVM.folderToCut = folderWithLevel.folder
-                                        } label: {
-                                            SystemImage(  "folder")
-                                        }
-                                        .tint(Color.swipeBtnColor3)
-                                    
-                                        Button {
-                                            if folderWithLevel.folder.parent != nil {
-                                                showTextField = true
-                                                textFieldType = .rename
-                                                folderToBeRenamed = folderWithLevel.folder
-                                                newFolderName = folderWithLevel.folder.title
-                                            }
-                                        } label: {
-                                            SystemImage(  "pencil")
-                                        }
-                                        .tint(Color.swipeBtnColor2)
-                                    
-                                    }
-                            } // end of ForEach
+                                } // end of ForEach
+                            }
                         }
-                    }
-                    .listStyle(InsetGroupedListStyle())
+                        .listStyle(InsetGroupedListStyle())
                     }
                     
                     // Another ZStack Element
                     VStack {
-                    List {
-                        ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
-                            if folderWithLevel.folder.parent == nil {
-                                DynamicTopFolderCell(
-                                    folder: folderWithLevel.folder,
-                                    level: folderWithLevel.level)
-                                    .environmentObject(memoEditVM)
-                                    .environmentObject(folderEditVM)
-                                    .environmentObject(memoOrder)
-                                // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            showTextField = true
-                                            textFieldType = .newSubFolder
-//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1)\(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
-                                            newFolderName = ""
-                                        } label: {
-                                            SystemImage(  "folder.badge.plus")
-                                        }
-                                        .tint(Color.swipeBtnColor2)
-                                    }
-                            } else {
-                                DynamicFolderCell(
-                                    folder: folderWithLevel.folder,
-                                    level: folderWithLevel.level)
-                                    .environmentObject(memoEditVM)
-                                    .environmentObject(folderEditVM)
-                                    .environmentObject(memoOrder)
-
-                                // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            showTextField = true
-                                            textFieldType = .newSubFolder
-//                                            newFolderName = "\(folderWithLevel.folder.title)\(LocalizedStringStorage.possessive) \(folderWithLevel.folder.subfolders.count + 1) \(LocalizedStringStorage.nth) \(LocalizedStringStorage.folder)"
-                                            newFolderName = ""
-                                        } label: {
-                                            SystemImage(  "folder.badge.plus")
-                                        }
-                                        .tint(Color.swipeBtnColor2)
-                                    }
-                                // Change Folder Name
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        // DELETE FOLDER
-                                        Button {
-//                                            showingDeleteAction = true
-                                            folderEditVM.folderToRemove = folderWithLevel.folder
-                                            deleteFolder()
-                                        } label: {
-                                            SystemImage("trash")
-                                        }
-                                        .tint(.red)
-                                        
-                                        
-                                        // RELOCATE FOLDER
-                                        Button {
-                                            UIView.setAnimationsEnabled(false)
-                                            folderEditVM.shouldShowSelectingView = true
-                                            folderEditVM.folderToCut = folderWithLevel.folder
-                                        } label: {
-                                            SystemImage(  "folder")
-                                        }
-                                        .tint(Color.swipeBtnColor3)
-                                        
-                                        Button {
-                                            if folderWithLevel.folder.parent != nil {
-                                                showTextField = true
-                                                textFieldType = .rename
-                                                folderToBeRenamed = folderWithLevel.folder
-                                                newFolderName = folderWithLevel.folder.title
+                        List {
+                            ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
+                                if folderWithLevel.folder.parent == nil {
+                                    DynamicTopFolderCell(
+                                        folder: folderWithLevel.folder,
+                                        level: folderWithLevel.level)
+                                        .environmentObject(memoEditVM)
+                                        .environmentObject(folderEditVM)
+                                        .environmentObject(memoOrder)
+                                    // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
+                                                isShowingTextField = true
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage(  "folder.badge.plus")
                                             }
-                                        } label: {
-                                            SystemImage("pencil")
+                                            .tint(Color.swipeBtnColor2)
                                         }
-                                        .tint(Color.swipeBtnColor2)
-                                    }
-                            } // end of Else Case
-                        } // end of ForEach
-//                        TrashBinCell(folder: trashBinFolder)
-                        TrashBinCell()
-                            .environmentObject(memoEditVM)
-                            .environmentObject(folderEditVM)
-                            .environmentObject(memoOrder)
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                
-                                Button {
-                                    // DO NOTHING
-                                } label: {
-                                    ChangeableImage(imageSystemName: "multiply")
-                                }
-                                .tint(.gray)
-                            }
-                    }// end of List
-                    .listStyle(InsetGroupedListStyle())
-                       
+                                } else {
+                                    DynamicFolderCell(
+                                        folder: folderWithLevel.folder,
+                                        level: folderWithLevel.level)
+                                        .environmentObject(memoEditVM)
+                                        .environmentObject(folderEditVM)
+                                        .environmentObject(memoOrder)
+                                    
+                                    // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
+                                                isShowingTextField = true
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage(  "folder.badge.plus")
+                                            }
+                                            .tint(Color.swipeBtnColor2)
+                                        }
+                                    // Change Folder Name
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                            // DELETE FOLDER
+                                            Button {
+                                                folderEditVM.folderToRemove = folderWithLevel.folder
+                                                deleteFolder()
+                                            } label: {
+                                                SystemImage("trash")
+                                            }
+                                            .tint(.red)
+                                            
+                                            
+                                            // RELOCATE FOLDER
+                                            Button {
+                                                UIView.setAnimationsEnabled(false)
+                                                folderEditVM.shouldShowSelectingView = true
+                                                folderEditVM.folderToCut = folderWithLevel.folder
+                                            } label: {
+                                                SystemImage(  "folder")
+                                            }
+                                            .tint(Color.swipeBtnColor3)
+                                            
+                                            Button {
+                                                if folderWithLevel.folder.parent != nil {
+                                                    isShowingTextField = true
+                                                    textFieldType = .rename
+                                                    folderToBeRenamed = folderWithLevel.folder
+                                                    newFolderName = folderWithLevel.folder.title
+                                                }
+                                            } label: {
+                                                SystemImage("pencil")
+                                            }
+                                            .tint(Color.swipeBtnColor2)
+                                        }
+                                } // end of Else Case
+                            } // end of ForEach
+                            TrashBinCell()
+                                .environmentObject(memoEditVM)
+                                .environmentObject(folderEditVM)
+                                .environmentObject(memoOrder)
+                        }// end of List
+                        .listStyle(InsetGroupedListStyle())
+                        
                         EmptyView()
                             .frame(height: 250)
                     }
@@ -372,9 +321,9 @@ struct MindMapView: View {
             } // end of VStack , Inside ZStack.
             
             if isLoading {
-                    ProgressView()
+                ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
-                    .scaleEffect(4)
+                    .scaleEffect(2)
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
@@ -385,15 +334,19 @@ struct MindMapView: View {
             
             // animation 은 같지만 이건 ZStack 이기 때문에, 뭔가 차이가 생김.
             // 얘를 fullscreen 으로 만들거나, ..
-            CustomSearchView(
-                fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, showingSearchView: $showingSearchView)
             
-                .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
-                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
+            CustomSearchView(
+                fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, // 애매하네..
+                showingSearchView: $isShowingSearchView,
+            shouldShowAll: true,
+                shouldIncludeTrash: selectionEnum == .archive)
+            
+                .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
+                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
                 .padding(.horizontal, Sizes.overallPadding)
             
             
-            if showTextField {
+            if isShowingTextField {
                 Color(.sRGB, white: colorScheme == .dark ? 0.2 : 0.8 , opacity: 0.5)
                     .ignoresSafeArea()
             }
@@ -402,7 +355,7 @@ struct MindMapView: View {
             
             PrettyTextFieldAlert(
                 type: textFieldType ?? .rename,
-                isPresented: $showTextField,
+                isPresented: $isShowingTextField,
                 text: $newFolderName, //
                 focusState: _textFieldFocus) { newName in
                     // MARK: - submit Actions
@@ -413,16 +366,16 @@ struct MindMapView: View {
                         
                         fastFolderWithLevelGroup.folders.first(
                             where:{FolderType.compareName($0.folder.title, with: .folder)})!.folder.add(subfolder: newFolder)
-//                            where:{$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
+                        //                            where:{$0.folder.title == FolderType.getFolderName(type: .folder)})!.folder.add(subfolder: newFolder)
                         
                     case .newTopArchive:
                         
                         let newFolder = Folder(title: newName, context: context)
-
+                        
                         fastFolderWithLevelGroup.archives.first(
                             where: {FolderType.compareName($0.folder.title, with: .archive)})!.folder.add(subfolder: newFolder)
-//                            where: {$0.folder.title == FolderType.getFolderName(type: .archive)})!.folder.add(subfolder: newFolder)
-                    
+                        //                            where: {$0.folder.title == FolderType.getFolderName(type: .archive)})!.folder.add(subfolder: newFolder)
+                        
                     case .newSubFolder:
                         let newSubFolder = Folder(title: newName, context: context)
                         if let validSubFolder = folderToAddSubFolder {
@@ -434,7 +387,7 @@ struct MindMapView: View {
                             folderToBeRenamed!.title = newName
                             folderToBeRenamed!.modificationDate = Date()
                             folderToBeRenamed = nil
-
+                            
                             context.saveCoreData()
                         }
                     }
@@ -444,43 +397,19 @@ struct MindMapView: View {
                     
                     newFolderName = ""
                     textFieldType = nil
-                    showTextField = false
+                    isShowingTextField = false
                 } cancelAction: {
                     newFolderName = ""
                     textFieldType = nil
-                    showTextField = false
+                    isShowingTextField = false
                 }
         } // end of ZStack
-        // remove it ..!!
-//        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showingDeleteAction, actions: {
-//            // delete
-//            Button(role: .destructive) {
-//                if let validFolderToRemoved = folderEditVM.folderToRemove {
-////                    Folder.delete(validFolderToRemoved)
-//                    Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
-////                    Folder.delete(validFolderToRemoved)
-//                    folderEditVM.folderToRemove = nil
-//                }
-//                context.saveCoreData()
-//            } label: {
-//                Text(LocalizedStringStorage.delete)
-//            }
-//
-//            Button(role: .cancel) {
-//                folderEditVM.folderToRemove = nil
-//            } label: {
-//                Text(LocalizedStringStorage.cancel)
-//            }
-//        }, message: {
-//            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
-//        })
-    
+        
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-                                    invalidFolderWithLevels:
+                                    selectionEnum: selectionEnum, invalidFolderWithLevels:
                                         Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
-                                    selectionEnum: selectionEnum,
                                     isFullScreen: true)
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
@@ -489,10 +418,3 @@ struct MindMapView: View {
         .navigationBarHidden(true)
     }
 }
-
-//struct AlertMessages {
-//    static let deleteConfirm = "Delete"
-//    static let cancel = "Cancel"
-//    static let alertDeleteMain = "Are you sure to delete?"
-//    static let alertDeleteSub = "All deleted are NOT Recoverable. "
-//}

@@ -10,17 +10,11 @@ import CoreData
 
 
 class FolderEditViewModel: ObservableObject {
-    
-    @Published var shouldChangeFolderName = false
-    
+
     @Published var shouldShowSelectingView = false
     
     @Published var folderToRemove: Folder? = nil
     @Published var folderToPaste: Folder? = nil
     @Published var folderToCut: Folder? = nil
-    
-    var selectedFolder: Folder? = nil
-
-
 }
 

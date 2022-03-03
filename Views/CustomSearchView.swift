@@ -21,22 +21,25 @@ enum SearchType: String {
 struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
-//    @ObservedObject var trashBin: Folder
+
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+
+    @StateObject var memoEditVM = MemoEditViewModel()
+
+    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
+    
+    @ObservedObject var currentFolder: Folder
     
     @GestureState var isScrolled = false
     
     @FocusState var focusState: Bool
     
-    //    @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-    
-    @ObservedObject var currentFolder: Folder
-    
-    @StateObject var memoEditVM = MemoEditViewModel()
-    
     @State var searchKeyword = ""
-    @State var searchTypeEnum: SearchType = .all
+//    @State var searchTypeEnum: SearchType = .all
+    @State var searchTypeEnum: SearchType
+    
+    @Binding var showingSearchView: Bool
+    var shouldIncludeTrash: Bool
     
     var allFolders: [Folder] {
         var folders: [Folder] = []
@@ -45,10 +48,13 @@ struct CustomSearchView: View {
         folders.append(trashBinVM.trashBinFolder)
         return folders
     }
-    
+    // 여기다..
     var currentFolders: [Folder] {
         var folders: [Folder] = []
         _ = Folder.getHierarchicalFolders(topFolder: currentFolder).map { folders.append($0.folder)}
+        if shouldIncludeTrash {
+            folders.append(trashBinVM.trashBinFolder)
+        }
         print("appended Folders in currnetFolders: \(folders)")
         
         _ = folders.map { print($0.title)}
@@ -56,7 +62,7 @@ struct CustomSearchView: View {
         return folders
     }
     
-    var searchResultMemos: [NestedMemo]? {
+    var foundMemos: [NestedMemo]? {
         if searchTypeEnum == .all {
             return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
         } else {
@@ -64,13 +70,15 @@ struct CustomSearchView: View {
         }
     }
     
-    @Binding var showingSearchView: Bool
+
     
-//    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, trashBin: Folder) {
-    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>) {
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, shouldShowAll: Bool = false, shouldIncludeTrash: Bool = false ) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _showingSearchView = showingSearchView
+        // initialize state value
+        _searchTypeEnum = State(initialValue: shouldShowAll ? .all : .current)
+        self.shouldIncludeTrash = shouldIncludeTrash
     }
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
@@ -110,7 +118,6 @@ struct CustomSearchView: View {
             }
         }
         print("folder name of first element in nestedMemos: ")
-//        print(nestedMemos.first!.memos.first!.folder?.title)
         return nestedMemos
     }
     
@@ -125,7 +132,7 @@ struct CustomSearchView: View {
         return NavigationView {
             
             
-            VStack {
+            VStack(alignment: .leading) {
                 HStack {
                     HStack(spacing: 0) {
 
@@ -133,7 +140,7 @@ struct CustomSearchView: View {
                             .foregroundColor(Color(white: 131 / 255))
                             .padding(.horizontal, 7)
 
-                        TextField("Search", text: $searchKeyword)
+                        TextField(LocalizedStringStorage.searchPlaceholder, text: $searchKeyword)
                             .accentColor(Color.textViewTintColor)
                             
                             .focused($focusState)
@@ -142,6 +149,7 @@ struct CustomSearchView: View {
                             .foregroundColor(Color.blackAndWhite)
                         
                         Spacer()
+                        
                         Button{
                             searchKeyword = ""
                             focusState = false
@@ -172,22 +180,17 @@ struct CustomSearchView: View {
                         searchKeyword = ""
                         showingSearchView = false
                     } label: {
-//                        Text("Cancel")
                         Text(LocalizedStringStorage.cancelInSearch)
-//                        Text(LocalizedStringStorage.cancel)
-                        
-//                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .foregroundColor(.buttonTextColor)
+                            .frame(maxWidth: .infinity, alignment: .center)
                     }
-
                 }
                 .padding(.horizontal, Sizes.overallPadding)
             
                 Picker("", selection: $searchTypeEnum) {
-//                    Text(SearchType.all.rawValue).tag(SearchType.all)
-                    Text(LocalizedStringStorage.convertSearchTypeToStorage(type: .all)).tag(SearchType.all)
-//                    Text(SearchType.current.rawValue).tag(SearchType.current)
-                    Text(LocalizedStringStorage.convertSearchTypeToStorage(type: .current)).tag(SearchType.current)
+                    Text(LocalizedStringStorage.convertSearchTypeToText(type: .all)).tag(SearchType.all)
+
+                    Text(LocalizedStringStorage.convertSearchTypeToText(type: .current)).tag(SearchType.current)
                 }
                 .padding(.horizontal, Sizes.overallPadding)
                 .pickerStyle(SegmentedPickerStyle())
@@ -195,10 +198,10 @@ struct CustomSearchView: View {
                 ScrollView {
                     VStack {
                         // ALL FOLDERS
-                        if searchResultMemos != nil {
+                        if foundMemos != nil {
                             if searchTypeEnum == .all {
-                                if searchResultMemos!.count != 0 {
-                                    ForEach( searchResultMemos!, id: \.self) { memoArray in
+                                if foundMemos!.count != 0 {
+                                    ForEach( foundMemos!, id: \.self) { memoArray in
                                         
                                         Section(header:
                                                     NavigationLink(destination: {
@@ -239,11 +242,12 @@ struct CustomSearchView: View {
 //                                    Text("No Memo contains \"\(searchKeyword)\"")
                                     Spacer()
                                     Text(LocalizedStringStorage.emptySearchResult)
+                                        .frame(maxWidth: .infinity, alignment: .center)
                                 }
                             }// searchTypeEnum == .current
                             else {
-                                if searchResultMemos!.count != 0 {
-                                    ForEach( searchResultMemos!, id: \.self) { memoArray in
+                                if foundMemos!.count != 0 {
+                                    ForEach( foundMemos!, id: \.self) { memoArray in
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
@@ -274,9 +278,9 @@ struct CustomSearchView: View {
                                         }
                                     }
                                 } else { // no  searchResult
-//                                    Text("No Memo contains \"\(searchKeyword)\" in \(currentFolder.title)")
                                     Spacer()
                                     Text(LocalizedStringStorage.emptySearchResult)
+                                        .frame(maxWidth: .infinity, alignment: .center)
                                 }
                             } // searchTypeEnum == .current
                         } // nil

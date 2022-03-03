@@ -29,11 +29,6 @@ struct MemoBoxView: View {
                 .padding(.leading, Sizes.smallSpacing)
             }
             if memo.contentsToShow != "" {
-//                Text("\n\(memo.contentsToShow)") // this line makes little error ..
-//                Text("\n")
-//                    .font(.caption)
-                
-//                    .font(.caption)
                 Text(memo.contentsToShow)
                     .font(.caption)
                     .foregroundColor(Color.blackAndWhite)
@@ -60,7 +55,7 @@ struct MemoBoxView: View {
                         SystemImage("bookmark.fill", size: 14)
                             .tint(colorScheme == .dark ? Color.cream : .black)
                     }
-                    if memo.pinned == true {
+                    if memo.isPinned == true {
                         SystemImage("pin.fill", size: 14)
                             .rotationEffect(.degrees(45))
                             .tint(colorScheme == .dark ? Color.cream : .black)

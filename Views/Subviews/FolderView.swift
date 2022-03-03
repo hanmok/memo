@@ -16,43 +16,34 @@ struct FolderView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    @Environment(\.colorScheme) var colorScheme
-//    @ObservedObject var trashBin: Folder
     @EnvironmentObject var  trashBinVM: TrashBinViewModel
-    @State var isShowingSubFolderView = false
-    @State var isAddingMemo = false
-    @State var shouldAddFolder = false
-    
-//    @State var showDeleteAlert = false
-    
-    @State var newSubFolderName = ""
-    
-    @State var showSelectingFolderView = false
     
     @ObservedObject var currentFolder: Folder
     
     @FocusState var addFolderFocus: Bool
     
+    @State var isShowingSubFolderView = false
+    @State var isAddingMemo = false
+    @State var isAddingFolder = false
+    
+    @State var newSubFolderName = ""
+    
+    @State var isShowingSelectingFolderView = false
+    
     @State var allMemos: [Memo] = []
-    
-    @State var showColorPalette = false
-    @State var selectedColorIndex = -1
-    
-    @State var showingSearchView = false
+        
+    @State var isShowingSearchView = false
     
     var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-//            SystemImage("chevron.left")
-//            Image(systemName: "chevron.left")
             SystemImage("chevron.left", size: 18)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 18, height: 18)
                 .tint(Color.navBtnColor)
         }
     }
@@ -61,7 +52,7 @@ struct FolderView: View {
         currentFolder.isFavorite.toggle()
         currentFolder.modificationDate = Date()
         // 업데이트가 바로 안됨. 이럴땐 어떻게 해 ?
-        Folder.updateTopFolders(context: context) // 다시 잘되네..? ㅅㅂ;;  무슨..,, 이게 공학이냐....
+        Folder.updateTopFolders(context: context)
         context.saveCoreData()
     }
     
@@ -77,7 +68,7 @@ struct FolderView: View {
     
     var body: some View {
         
-        if shouldAddFolder {
+        if isAddingFolder {
             DispatchQueue.main.async {
                 newSubFolderName = "\(currentFolder.title)'s \(currentFolder.subfolders.count + 1) th \(LocalizedStringStorage.folder)"
             }
@@ -102,13 +93,11 @@ struct FolderView: View {
                             
                             // search Button
                             Button(action: {
-                                showingSearchView = true
+                                isShowingSearchView = true
                             }, label: {
                                 SystemImage("magnifyingglass")
                                     .tint(Color.navBtnColor)
                             })
-                            
-
                             
                             MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
                             // favorite Button
@@ -127,11 +116,7 @@ struct FolderView: View {
                             
                         }
                     }
-//                    .padding(.horizontal, Sizes.overallPadding)
-//                    .padding(.horizontal, 10)
-//                    .padding(.horizontal, 10 + Sizes.overallPadding)
                     .padding(.trailing, 10 + Sizes.overallPadding)
-//                    .padding(.leading, Sizes.overallPadding)
                     .padding(.leading, Sizes.navBtnLeadingSpacing)
                     .padding(.bottom, 7.5)
                 
@@ -150,15 +135,13 @@ struct FolderView: View {
                                             .font(.largeTitle)
                                             .fontWeight(.bold)
                                             .lineLimit(1)
-//                                            .padding(.leading, 10)
-                                            .padding(.trailing, 45) // 80 .. 이 맞나 ??
+                                            .padding(.trailing, 45)
                                     } else {
                                         Text(currentFolder.title)
                                             .font(.title)
                                             .fontWeight(.bold)
                                             .lineLimit(1)
-//                                            .padding(.leading, 10)
-                                            .padding(.trailing, 45) // 80 .. 이 맞나 ??
+                                            .padding(.trailing, 45)
                                     }
                                     Spacer()
                                 }
@@ -167,7 +150,6 @@ struct FolderView: View {
                                     HierarchyLabelView(currentFolder: currentFolder)
                                         .font(.caption)
                                         .frame(maxWidth: .infinity, alignment: .topLeading)
-//                                        .padding(.leading, 10)
                                         .offset(y: 40)
                                 }
                             }
@@ -191,7 +173,6 @@ struct FolderView: View {
                 } // end of scrollView
             } // end of VStack
             .padding(.top, 12)
-//            .padding(.horizontal, Sizes.overallPadding)
             
             // ANOTHER ELEMENT IN ZSTACK
             VStack {
@@ -210,7 +191,7 @@ struct FolderView: View {
                         SubFolderView(
                             folder: currentFolder,
                             isShowingSubFolderView: $isShowingSubFolderView,
-                            isAddingFolder: $shouldAddFolder)
+                            isAddingFolder: $isAddingFolder)
                         
                         // offset x : trailingPadding
                             .offset(x: isShowingSubFolderView ? -Sizes.overallPadding : UIScreen.screenWidth)
@@ -240,9 +221,7 @@ struct FolderView: View {
                         Spacer()
                         MemosToolBarView(
                             currentFolder: currentFolder,
-                            showSelectingFolderView: $showSelectingFolderView
-//                            , showDeleteAlert: $showDeleteAlert
-//                            showColorPalette: $showColorPalette
+                            showSelectingFolderView: $isShowingSelectingFolderView
                         )
                             .padding([.trailing], Sizes.overallPadding)
                             .padding(.bottom,Sizes.overallPadding )
@@ -252,38 +231,20 @@ struct FolderView: View {
                 }
             } // end of VStack
             
-//            VStack {
-//                Spacer()
-//                HStack {
-//                    Spacer()
-//                    ColorPaletteView(
-//                        showColorPalette: $showColorPalette)
-//                        .environmentObject(memoEditVM)
-//                        .offset(y: showColorPalette ? 0 : 200)
-//                        .animation(.spring(), value: showColorPalette)
-//                        .padding(.trailing, Sizes.overallPadding)
-//                        .padding(.bottom, Sizes.overallPadding)
-//                }
-//            }
-            
             CustomSearchView(
                 fastFolderWithLevelGroup: FastFolderWithLevelGroup(
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
                     archiveFolder: Folder.fetchHomeFolder(context: context,
                                                           fetchingHome: false)!),
-                currentFolder: currentFolder, showingSearchView: $showingSearchView)
+                currentFolder: currentFolder, showingSearchView: $isShowingSearchView)
             
-                .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
-                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
-//                .padding(.horizontal, Sizes.properSpacing)
-            
-            
-            
+                .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
+                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
             
             //  Present TextFieldAlert when add folder pressed
             PrettyTextFieldAlert(
                 type: .newSubFolder,
-                isPresented: $shouldAddFolder,
+                isPresented: $isAddingFolder,
                 text: $newSubFolderName,
                 focusState: _addFolderFocus,
                 submitAction: { subfolderName in
@@ -294,10 +255,10 @@ struct FolderView: View {
                     )
                     
                     newSubFolderName = ""
-                    shouldAddFolder = false
+                    isAddingFolder = false
                 }, cancelAction: {
                     newSubFolderName = ""
-                    shouldAddFolder = false
+                    isAddingFolder = false
                 })
             
             NavigationLink(destination:
@@ -309,7 +270,7 @@ struct FolderView: View {
         .frame(maxHeight: .infinity)
         
         // fetch both home Folder and Archive Folder Separately.
-        .sheet(isPresented: $showSelectingFolderView,
+        .sheet(isPresented: $isShowingSelectingFolderView,
                content: {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
@@ -322,27 +283,6 @@ struct FolderView: View {
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })
-        
-//        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showDeleteAlert, actions: {
-//            // DELETE
-//            Button(role: .destructive) {
-////                _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
-//                _ = memoEditVM.selectedMemos.map {  Memo.moveToTrashBin($0, trashBin)}
-//
-//                context.saveCoreData()
-//                memoEditVM.initSelectedMemos()
-//            } label: {
-//                Text(LocalizedStringStorage.delete)
-//            }
-//
-//            Button(role: .cancel) {
-//                // DO NOTHING
-//            } label: {
-//                Text(LocalizedStringStorage.cancel)
-//            }
-//        }, message: {
-//            Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)
-//        })
         
         .onDisappear(perform: {
             newSubFolderName = ""

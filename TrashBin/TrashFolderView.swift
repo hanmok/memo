@@ -15,33 +15,25 @@ import SwiftUI
 //
 //  Created by Mac mini on 2021/12/21.
 //
-// Customized Version
-// TrashBin Env 로 넘겨야함.
 
 import SwiftUI
 import CoreData
 
-// Now.. it's Fine.
 
 struct TrashFolderView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
+    
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
-    @State var showDeleteAlert = false
-    
-    @State var showSelectingFolderView = false
-    
-//    @ObservedObject var trashBinFolder: Folder
-    
-    @State var allMemos: [Memo] = []
-    
-    @State var showingSearchView = false
+    @State var isShowingDeleteAlert = false
+    @State var isShowingSelectingFolderView = false
+    @State var isShowingSearchView = false
     
     var backBtn : some View {
         Button(action: {
@@ -51,7 +43,6 @@ struct TrashFolderView: View {
                 .tint(Color.navBtnColor)
         }
     }
-    
     
     var body: some View {
         return ZStack {
@@ -73,13 +64,12 @@ struct TrashFolderView: View {
                         
                         // search Button
                         Button(action: {
-                            showingSearchView = true
+                            isShowingSearchView = true
                         }, label: {
                             SystemImage("magnifyingglass")
                                 .tint(Color.navBtnColor)
                         })
                         
-//                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: trashBinFolder)
                         MemoOrderingMenu(memoOrder: memoOrder, parentFolder: trashBinVM.trashBinFolder)
                     }
                 }
@@ -103,7 +93,6 @@ struct TrashFolderView: View {
                                         .padding(.trailing, 45)
                                     Spacer()
                                 }
-                                
                             }
                         }
                         .padding(.horizontal, Sizes.overallPadding)
@@ -134,8 +123,8 @@ struct TrashFolderView: View {
                     Spacer()
                     MemosToolBarViewForTrash(
                         currentFolder: trashBinVM.trashBinFolder,
-                        showSelectingFolderView: $showSelectingFolderView,
-                        showDeleteAlert: $showDeleteAlert
+                        isShowingSelectingFolderView: $isShowingSelectingFolderView,
+                        isShowingDeleteAlert: $isShowingDeleteAlert
                     )
                         .padding([.trailing], Sizes.overallPadding)
                         .padding(.bottom,Sizes.overallPadding )
@@ -148,16 +137,15 @@ struct TrashFolderView: View {
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
                     archiveFolder: Folder.fetchHomeFolder(context: context,
                                                           fetchingHome: false)!),
-//                currentFolder: trashBinVM.trashBinFolder, showingSearchView: $showingSearchView, trashBin: trashBinFolder)
-                currentFolder: trashBinVM.trashBinFolder, showingSearchView: $showingSearchView)
+                currentFolder: trashBinVM.trashBinFolder, showingSearchView: $isShowingSearchView)
                 .environmentObject(trashBinVM)
-                .offset(y: showingSearchView ? 0 : -UIScreen.screenHeight)
-                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: showingSearchView)
+                .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
+                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
         } // end of ZStack
         .frame(maxHeight: .infinity)
         
         // fetch both home Folder and Archive Folder Separately.
-        .sheet(isPresented: $showSelectingFolderView,
+        .sheet(isPresented: $isShowingSelectingFolderView,
                content: {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
@@ -171,7 +159,7 @@ struct TrashFolderView: View {
                 .environmentObject(memoEditVM)
         })
         
-        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $showDeleteAlert, actions: {
+        .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $isShowingDeleteAlert, actions: {
             // DELETE
             Button(role: .destructive) {
                 _ = memoEditVM.selectedMemos.map { Memo.delete($0)}

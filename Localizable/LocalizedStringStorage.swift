@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 struct LocalizedStringStorage {
     
     static let removeAlertMsgMain = NSLocalizedString(LocalizedStringKeys.removeAlertMsgMain, comment: "Remove Main Message")
@@ -33,13 +31,13 @@ struct LocalizedStringStorage {
     static let category2 = NSLocalizedString(LocalizedStringKeys.category2, comment: "a")
     static let category3 = NSLocalizedString(LocalizedStringKeys.category3, comment: "a")
     
-//    static let subCategory1 = NSLocalizedString(LocalizedStringKeys.subCategory1, comment: "a")
+    //    static let subCategory1 = NSLocalizedString(LocalizedStringKeys.subCategory1, comment: "a")
     
     static let done = NSLocalizedString(LocalizedStringKeys.done, comment: "done")
     static let keyboardDone = NSLocalizedString(LocalizedStringKeys.keyboardDone, comment: "done For keyBoard")
     
-    static let nth = NSLocalizedString(LocalizedStringKeys.nth, comment: "nth")
-    static let possessive = NSLocalizedString(LocalizedStringKeys.possessive, comment: "possessive")
+//    static let nth = NSLocalizedString(LocalizedStringKeys.nth, comment: "nth")
+//    static let possessive = NSLocalizedString(LocalizedStringKeys.possessive, comment: "possessive")
     
     static let emptySearchResult = NSLocalizedString(LocalizedStringKeys.emptySearchResult, comment: "a")
     
@@ -56,7 +54,7 @@ struct LocalizedStringStorage {
     static let AscendingOrder = NSLocalizedString(LocalizedStringKeys.AscendingOrder, comment: "a")
     static let DecendingOrder = NSLocalizedString(LocalizedStringKeys.DecendingOrder, comment: "a")
     
-    
+    static let searchPlaceholder = NSLocalizedString(LocalizedStringKeys.searchPlaceholder, comment: "a")
     
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
@@ -67,7 +65,7 @@ struct LocalizedStringStorage {
         }
     }
     
-    static func convertSearchTypeToStorage(type: SearchType) -> String {
+    static func convertSearchTypeToText(type: SearchType) -> String {
         switch type {
         case .all:
             return LocalizedStringStorage.all
@@ -85,11 +83,11 @@ struct LocalizedStringStorage {
         case .alphabetical:
             return LocalizedStringStorage.Alphabetical
         }
-        }
+    }
 }
-    
-    
-   
+
+
+
 
 //LocalizedStringStorage.
 struct LocalizedStringKeys {
@@ -97,7 +95,6 @@ struct LocalizedStringKeys {
     static let done = "done"
     static let keyboardDone = "keyboardDone"
     
-
     static let removeAlertMsgMain = "removeAlertMsgMain"
     static let removeAlertMsgSub = "removeAlertMsgSub"
     
@@ -113,21 +110,22 @@ struct LocalizedStringKeys {
     static let folder = "Folder"
     static let archive = "Archive"
     static let trashbin = "Trash Bin"
+    
     static let selectFolder = "Select Folder"
     
     static let category1 = "category1"
     static let category2 = "category2"
     static let category3 = "category3"
     
-//    static let subCategory1 = "Sub Category 1"
+    //    static let subCategory1 = "Sub Category 1"
     
-    static let nth = "th"
-    static let possessive = "'s"
-//    static let
+//    static let nth = "th"
+//    static let possessive = "'s"
+    
     static let emptySearchResult = "Empty Search Result"
     
-    static let all = "All"
-    static let current = "Current"
+    static let all = "All location"
+    static let current = "Current location"
     
     static let folderOrdering = "Folder Ordering"
     static let memoOrdering = "Memo Ordering"
@@ -138,5 +136,6 @@ struct LocalizedStringKeys {
     
     static let AscendingOrder = "Ascending Order"
     static let DecendingOrder = "Decending Order"
-    
+ 
+    static let searchPlaceholder = "Search Placeholder"
 }

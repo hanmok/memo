@@ -14,7 +14,6 @@ extension Memo {
     
     convenience init(title: String, contents: String, context: NSManagedObjectContext) {
         self.init(context: context)
-//        self.title = title
         self.creationDate = Date()
         self.contents = contents
         self.modificationDate = Date()
@@ -47,11 +46,6 @@ extension Memo {
         set { creationDate_ = newValue }
     }
     
-//    var title: String {
-//        get { title_ ?? "" }
-//        set { title_ = newValue }
-//    }
-    
     var contents: String {
         get { contents_ ?? ""}
         set { contents_ = newValue}
@@ -67,63 +61,16 @@ extension Memo {
         set { contentsToShow_ = newValue }
     }
     
-//    var overview: String {
-//        get { overview_ ?? "" }
-//        set { overview_ = newValue }
-//    }
     
     var modificationDate: Date {
         get { modificationDate_ ?? Date() }
         set { modificationDate_ = newValue }
     }
     
-    var pinned: Bool { // initialValue: false
-        get { pinned_ }
-        set { pinned_ = newValue }
+    var isPinned: Bool { // initialValue: false
+        get { isPinned_ }
+        set { isPinned_ = newValue }
     }
-    
-//    var offset: CGFloat {
-//        get { CGFloat(offset_) }
-//        set { offset_ = newValue }
-//    }
-    
-//    var color: UIColor? {
-//        get {
-//            guard let hex = colorAsHex else { return nil }
-//            return UIColor(hex: hex)
-//        }
-//        set (newColor) {
-//            if let newColor = newColor {
-//                colorAsHex = newColor.toHex
-//            }
-//        }
-//    }
-    
-
-    
-//    var colorIndex: Int {
-//        get {
-//            Int(colorIndex_)
-//        }
-//        set (newValue) {
-//            colorIndex_ = Int64(newValue)
-//        }
-//    }
-    
-    // What do I need to do now .. ?
-    // Getting a Color
-//    let color = note.color
-    
-    // Setting a Color
-//    note.color = UIColor(hex: "FF5F5B")
-    
-    
-
-//    var colorAsInt: Int64 { // initialValue: 0
-//        get { colorAsInt_ }
-//        set { colorAsInt_ = newValue}
-//    }
-    
     
     static func fetch(_ predicate: NSPredicate) -> NSFetchRequest<Memo> {
         let request = NSFetchRequest<Memo>(entityName: "Memo")
@@ -142,28 +89,6 @@ extension Memo {
             print("Error fetching all Memos")
             return []
         }
-        
-    }
-    
-    static func bookMarkedFetchReq() -> NSFetchRequest<Memo> {
-        let req = NSFetchRequest<Memo>(entityName: "Memo")
-        
-        req.sortDescriptors = [NSSortDescriptor(key: MemoProperties.modificationDate, ascending: false)]
-        
-        let format = MemoProperties.isBookMarked + " = true"
-        req.predicate = NSPredicate(format: format)
-        return req
-    }
-    
-    static func fetchBookMarked(context: NSManagedObjectContext) -> [Memo] {
-        let req = bookMarkedFetchReq()
-        
-        if let result = try? context.fetch(req) {
-            return result
-        } else {
-            print("Error fetching bookMarked Memos")
-            return []
-        }
     }
     
     static func delete(_ memo: Memo) {
@@ -179,13 +104,6 @@ extension Memo {
             context.saveCoreData()
         }
     }
-    
-    static func copyMemo(target: Memo, context: NSManagedObjectContext) -> Memo {
-        let newMemo = Memo(contents: target.contents, context: context)
-        newMemo.modificationDate = target.modificationDate
-        return newMemo
-
-    }
 }
 
 
@@ -194,25 +112,16 @@ extension Memo {
     func getMemoInfo() {
         print("getMemoInfo")
         print("memo.uuid: \(self.uuid)")
-//        print("memo.title: \(self.title)")
         print("memo.creationDate: \(self.creationDate)")
         print("memo.contents: \(self.contents)")
         print("memo.modificationDate: \(String(describing: self.modificationDate))")
-//        print("memo.overview: \(self.overview)")
     }
     
-    func setToSampleData() {
-        UnitTestHelpers.deletesAllMemos(context: PersistenceController().container.viewContext)
-        
-    }
-    func createSampleData() {
-        
-    }
+//    func setToSampleData() {
+//        UnitTestHelpers.deletesAllMemos(context: PersistenceController().container.viewContext)
+//    }
     
-    func removeAll() {
-        
-    }
-    
+
     static let lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     
     static let longLorem = Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem + Memo.lorem
@@ -286,6 +195,7 @@ extension Memo {
 }
 
 extension Memo {
+    
     static func getSortingMethod(type: OrderType, isAsc: Bool) -> (Memo, Memo) -> Bool {
         switch type {
         case .creationDate:
@@ -369,6 +279,7 @@ extension Memo: Comparable {
 //            return sortAlphabetOrder(lhs, rhs)
 //        }
 //        return lhs.title < rhs.title
+        
         return lhs.creationDate < rhs.creationDate
     }
 }

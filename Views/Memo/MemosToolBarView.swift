@@ -10,25 +10,26 @@ import CoreData
 
 struct MemosToolBarView: View {
     
-    @Environment(\.managedObjectContext) var context
-    @EnvironmentObject var memoEditVM : MemoEditViewModel
-    @ObservedObject var currentFolder: Folder
     @Environment(\.colorScheme) var colorScheme
-    @Binding var showSelectingFolderView: Bool
-//    @ObservedObject var trashBinFolder: Folder
+    @Environment(\.managedObjectContext) var context
+    
+    @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-    let spacingBetweenButtons: CGFloat = 16
-//    @Binding var showDeleteAlert: Bool
-//    @Binding var showColorPalette: Bool
+    
+    @ObservedObject var currentFolder: Folder
+    
+    @Binding var showSelectingFolderView: Bool
+    
     
     var body: some View {
-        HStack(spacing: spacingBetweenButtons) {
+        HStack(spacing: Sizes.spacingBetweenButtons) {
             
             
             Button {
                 memoEditVM.initSelectedMemos()
             } label: {
-                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+//                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
             }
 
             Button {
@@ -36,7 +37,15 @@ struct MemosToolBarView: View {
                 memoEditVM.add(memos: currentFolder.memos.sorted())
                 
             } label: {
-                UnchangeableImage(imageSystemName: "plus.square.on.square", width: 20, height: 20)
+//                UnchangeableImage(imageSystemName: "plus.square.on.square", width: 20, height: 20)
+                ZStack {
+                        
+                    Text("All")
+                        .font(.headline)
+                    
+
+
+                }
             }
 
             
@@ -78,17 +87,17 @@ struct MemosToolBarView: View {
                 var allPinned = true
                 
                 for each in memoEditVM.selectedMemos {
-                    if each.pinned == false {
+                    if each.isPinned == false {
                         allPinned = false
                         break
                     }
                 }
 
                 if !allPinned {
-                    _ = memoEditVM.selectedMemos.map { $0.pinned = true}
+                    _ = memoEditVM.selectedMemos.map { $0.isPinned = true}
                     
                 } else {
-                    _ = memoEditVM.selectedMemos.map { $0.pinned = false}
+                    _ = memoEditVM.selectedMemos.map { $0.isPinned = false}
                 }
                 
                 context.saveCoreData()
@@ -111,7 +120,6 @@ struct MemosToolBarView: View {
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-//                showDeleteAlert = true
                 _ = memoEditVM.selectedMemos.map { Memo.moveToTrashBin($0, trashBinVM.trashBinFolder)}
                 memoEditVM.initSelectedMemos()
             }) {

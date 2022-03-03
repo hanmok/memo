@@ -1,13 +1,14 @@
 //
-//  TItleWithLavelView.swift
-//  DeeepMemo
+//  CheckableFolderCell.swift
+//  DeeepMemo (iOS)
 //
-//  Created by Mac mini on 2022/02/01.
+//  Created by Mac mini on 2022/03/03.
 //
 
 import SwiftUI
 
-struct TitleWithLevelView: View {
+
+struct CheckableFolderCell: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
@@ -15,7 +16,7 @@ struct TitleWithLevelView: View {
     
     var level: Int
     
-    var shouldHideArrow = false
+    var shouldCheck = false
     
     var body: some View {
         HStack {
@@ -28,12 +29,19 @@ struct TitleWithLevelView: View {
             
             if folder.isFavorite {
                 Text(Image(systemName: "star.fill"))
+                    .foregroundColor(Color.blackAndWhite)
             }
             
             Spacer()
-            Text("\(folder.memos.count)")
-                .foregroundColor(.gray)
+            if shouldCheck {
+                Button {
+                } label: {
+                    SystemImage( "checkmark")
+                    
+                }
+                .tint(.swipeBtnColor2)
+            }
         }
-        .frame(maxWidth: .infinity)
     }
 }
+

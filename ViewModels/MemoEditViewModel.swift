@@ -2,16 +2,16 @@ import SwiftUI
 
 class MemoEditViewModel: ObservableObject {
     
+    @Published var isSelectionMode = false
+    @Published var selectedMemos = Set<Memo>()
+    
     var parentFolder: Folder? = nil
     
-     var hasNotLongSelected = true
-
-    @Published var isSelectionMode = false
-     @Published var selectedMemos = Set<Memo>()
+    var hasNotLongSelected = true
     
-     var navigateToMemo: Memo? = nil
+    var navigateToMemo: Memo? = nil
     
-     var someBool: Bool = false
+    var someBool: Bool = false
     
     public var count: Int {
         get { selectedMemos.count }
@@ -26,7 +26,6 @@ class MemoEditViewModel: ObservableObject {
     }
     
     func add(memos: [Memo]) {
-
         _ = memos.map { self.selectedMemos.update(with: $0)}
         
         if memos.count != 0 {

@@ -33,13 +33,13 @@
 
 //"Sub Category 1" = "Sub Category 1";
 
-"th" = "th";
-"'s" = "'s";
+//"th" = "th";
+//"'s" = "'s";
 
 "Empty Search Result" = "No Memo contains that keyword";
 
-"All" = "All";
-"Current" = "Current";
+"All location" = "All";
+"Current location" = "Current";
 
 // Sorting
 "Folder Ordering" = "Folder Ordering";
@@ -51,3 +51,5 @@
 
 "Ascending Order" = "Ascending Order";
 "Decending Order" = "Decending Order";
+
+"Search Placeholder" = "Search";

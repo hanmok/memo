@@ -12,26 +12,19 @@ struct MemoList: View {
     @EnvironmentObject var folder: Folder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
-//    @ObservedObject var trashBinFolder: Folder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-//    var hasPinnedMemo: Bool {
-//        return folder.memos.contains { $0.pinned == true }
-//    }
     
-    var hasPinnedMemo: Bool {
-        return folder.memos.contains { $0.pinned == true || $0.isBookMarked == true}
+    var hasPinnedOrBookmarkedMemo: Bool {
+        return folder.memos.contains { $0.isPinned == true || $0.isBookMarked == true}
     }
     
     // need to be modified to have plus button when there's no memo
     var body: some View {
         return VStack {
             
-            if hasPinnedMemo {
+            if hasPinnedOrBookmarkedMemo {
                 
-//                FilteredMemoList(folder: folder, listType: .pinned)
-//                FilteredMemoList(folder: folder, memosVM: MemosViewModel(folder: folder, type: .pinned), listType: .pinned)
-//                FilteredMemoList(trashBinFolder: trashBinFolder, folder: folder, listType: .pinned)
-                FilteredMemoList(folder: folder, listType: .pinned)
+                FilteredMemoList(folder: folder, listType: .pinnedOrBookmarked)
                 
                 // line between pinned / unpinned memos
                 Rectangle()
@@ -41,17 +34,13 @@ struct MemoList: View {
                     .padding(.top, 5)
             }
             
-//            FilteredMemoList(trashBinFolder: trashBinFolder, folder: folder, listType: .unpinned)
-            FilteredMemoList(folder: folder, listType: .unpinned)
-//            FilteredMemoList(folder: folder, memosVM: MemosViewModel(folder: folder, type: .unpinned), listType: .unpinned)
+            FilteredMemoList(folder: folder, listType: .plain)
         } // end of VStack
         .environmentObject(memoEditVM)
         .environmentObject(folderEditVM)
         .environmentObject(trashBinVM)
     }
 }
-
-// 테두리.. 
 
 
 
@@ -65,28 +54,5 @@ struct MemoList: View {
 //
 //  Created by Mac mini on 2021/12/30.
 //
-
-import SwiftUI
-
-struct TrashBinMemoList: View {
-    
-    @EnvironmentObject var folder: Folder
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
-
-    @EnvironmentObject var trashBinVM: TrashBinViewModel
-    
-    
-    // need to be modified to have plus button when there's no memo
-    var body: some View {
-        return VStack {
-            
-            TrashBinSubMemoList(folder: trashBinVM.trashBinFolder)
-        } // end of VStack
-        .environmentObject(memoEditVM)
-        .environmentObject(folderEditVM)
-        .environmentObject(trashBinVM)
-    }
-}
 
 // 테두리..
