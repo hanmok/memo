@@ -14,5 +14,4 @@ class TrashBinViewModel: ObservableObject {
     init(trashBinFolder: Folder) {
         self.trashBinFolder = trashBinFolder
     }
-    
 }

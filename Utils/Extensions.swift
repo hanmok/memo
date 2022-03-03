@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreData
 
 extension Image {
     func setupAdditional(scheme: ColorScheme, size: CGFloat = 20) -> some View {
@@ -24,37 +25,21 @@ extension Image {
 }
 
 extension View {
+    
     // MARK: - TintColor
     func adjustTintColor(scheme: ColorScheme) -> some View {
         self
             .tint(scheme == .dark ? .white : .black)
     }
-}
-
-
-
-
-func convertSetToArray(set: Set<Memo>) -> Array<Memo> {
     
-    var emptyMemo: [Memo] = []
-    _ = set.map { emptyMemo.append($0)}
-    
-    return emptyMemo
-}
-
-func convertSetToArray(set: Set<Folder>) -> Array<Folder> {
-    var emptyFolder: [Folder] = []
-    
-    _ = set.map { emptyFolder.append($0)}
-    
-    return emptyFolder
-}
-
-
-extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
             clipShape( RoundedCorner(radius: radius, corners: corners) )
         }
+    
+    func hiddenNavigationBarStyle() -> some View {
+        modifier( HiddenNavigationBar() )
+    }
+    
 }
 
 struct RoundedCorner: Shape {
@@ -69,6 +54,17 @@ struct RoundedCorner: Shape {
 }
 
 
+extension NSManagedObjectContext {
+    func saveCoreData() { // save to coreData
+        DispatchQueue.main.async {
+            do {
+                try self.save()
+            } catch {
+                print("error occurred druing saving to CoreData \(error)")
+            }
+        }
+    }
+}
 
 
 struct HiddenNavigationBar: ViewModifier {
@@ -78,15 +74,6 @@ struct HiddenNavigationBar: ViewModifier {
             .navigationBarHidden(true)
     }
 }
-
-//struct
-
-extension View {
-    func hiddenNavigationBarStyle() -> some View {
-        modifier( HiddenNavigationBar() )
-    }
-}
-
 
 
 extension UIApplication {
@@ -108,6 +95,7 @@ extension UIApplication {
 
 
 
+
 //extension UIApplication {
 //    func endEditing() {
 //        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -119,5 +107,10 @@ extension UIApplication {
 //        sendAction(#selector(UIResponder.becomeFirstResponder), to: nil, from: nil, for: nil)
 //    }
 //}
+
+
+
+
+
 
 

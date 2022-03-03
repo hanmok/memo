@@ -55,7 +55,7 @@ struct MemoBoxView: View {
                         SystemImage("bookmark.fill", size: 14)
                             .tint(colorScheme == .dark ? Color.cream : .black)
                     }
-                    if memo.pinned == true {
+                    if memo.isPinned == true {
                         SystemImage("pin.fill", size: 14)
                             .rotationEffect(.degrees(45))
                             .tint(colorScheme == .dark ? Color.cream : .black)

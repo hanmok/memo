@@ -55,8 +55,16 @@ struct HierarchyLabelView: View {
         ScrollView(.horizontal) {
             
             if isNavigationLink {
-                Text(getRoot(child:currentFolder))
-                    .font(.caption)
+                if FolderType.compareName(currentFolder.title, with: .trashbin) {
+                    Text(getRoot(child:currentFolder))
+                        .font(.caption)
+                        .foregroundColor(.red)
+                } else {
+                    Text(getRoot(child:currentFolder))
+                        .font(.caption)
+                }
+
+                
             } else {
             Text(getRoot(child:currentFolder))
                     .foregroundColor(Color.blackAndWhite)

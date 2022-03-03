@@ -124,8 +124,8 @@ struct LocalizedStringKeys {
     
     static let emptySearchResult = "Empty Search Result"
     
-    static let all = "All"
-    static let current = "Current"
+    static let all = "All location"
+    static let current = "Current location"
     
     static let folderOrdering = "Folder Ordering"
     static let memoOrdering = "Memo Ordering"

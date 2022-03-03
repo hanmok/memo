@@ -28,7 +28,8 @@ struct MemosToolBarView: View {
             Button {
                 memoEditVM.initSelectedMemos()
             } label: {
-                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+//                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
             }
 
             Button {
@@ -36,7 +37,15 @@ struct MemosToolBarView: View {
                 memoEditVM.add(memos: currentFolder.memos.sorted())
                 
             } label: {
-                UnchangeableImage(imageSystemName: "plus.square.on.square", width: 20, height: 20)
+//                UnchangeableImage(imageSystemName: "plus.square.on.square", width: 20, height: 20)
+                ZStack {
+                        
+                    Text("All")
+                        .font(.headline)
+                    
+
+
+                }
             }
 
             
@@ -78,17 +87,17 @@ struct MemosToolBarView: View {
                 var allPinned = true
                 
                 for each in memoEditVM.selectedMemos {
-                    if each.pinned == false {
+                    if each.isPinned == false {
                         allPinned = false
                         break
                     }
                 }
 
                 if !allPinned {
-                    _ = memoEditVM.selectedMemos.map { $0.pinned = true}
+                    _ = memoEditVM.selectedMemos.map { $0.isPinned = true}
                     
                 } else {
-                    _ = memoEditVM.selectedMemos.map { $0.pinned = false}
+                    _ = memoEditVM.selectedMemos.map { $0.isPinned = false}
                 }
                 
                 context.saveCoreData()

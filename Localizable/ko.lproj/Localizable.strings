@@ -37,8 +37,8 @@
 
 "Empty Search Result" = "해당 키워드를 포함한 메모가 없습니다.";
 
-"All" = "전체";
-"Current" = "현재 위치";
+"All location" = "전체";
+"Current location" = "현재 위치";
 
 // Sorting
 "Folder Ordering" = "폴더 정렬 순서";

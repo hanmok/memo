@@ -38,9 +38,9 @@ struct FilteredMemoList: View {
         
         switch listType {
         case .pinnedOrBookmarked:
-            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.pinned || $0.isBookMarked })
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.isPinned || $0.isBookMarked })
         case .plain:
-                memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.pinned == false && $0.isBookMarked == false})
+                memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.isPinned == false && $0.isBookMarked == false})
         case .all:
             memosToShow = Memo.sortMemos(memos: folder.memos.sorted())
         }
@@ -58,6 +58,7 @@ struct FilteredMemoList: View {
                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
                                         .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
+                                        .environmentObject(trashBinVM)
                         ) {
                             MemoBoxView(memo: memo)
                                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)

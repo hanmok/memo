@@ -38,8 +38,8 @@
 
 "Empty Search Result" = "No Memo contains that keyword";
 
-"All" = "All";
-"Current" = "Current";
+"All location" = "All";
+"Current location" = "Current";
 
 // Sorting
 "Folder Ordering" = "Folder Ordering";

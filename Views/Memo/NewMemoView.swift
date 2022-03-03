@@ -66,7 +66,7 @@ struct NewMemoView: View {
 
                 memo!.contents = contents
                 memo!.isBookMarked = isBookMarkedTemp
-                memo!.pinned = isPinned
+                memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
                 
@@ -78,7 +78,7 @@ struct NewMemoView: View {
 
                 memo = Memo(contents: contents, context: context)
                 memo!.isBookMarked = isBookMarkedTemp
-                memo!.pinned = isPinned
+                memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
                 
@@ -112,7 +112,7 @@ struct NewMemoView: View {
 
                 memo!.contents = contents
                 memo!.isBookMarked = isBookMarkedTemp
-                memo!.pinned = isPinned
+                memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
                 
@@ -125,7 +125,7 @@ struct NewMemoView: View {
 
                 memo = Memo(contents: contents, context: context)
                 memo!.isBookMarked = isBookMarkedTemp
-                memo!.pinned = isPinned
+                memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
                 
@@ -177,7 +177,7 @@ struct NewMemoView: View {
                             } else {
                                 memo = Memo(contents: contents, context: context)
                                 memo!.isBookMarked = isBookMarkedTemp
-                                memo!.pinned = isPinned
+                                memo!.isPinned = isPinned
                                 memo!.creationDate = Date()
                                 memo!.modificationDate = Date()
                                 parent.add(memo: memo!)

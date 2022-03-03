@@ -89,7 +89,7 @@ struct MemoView: View {
     }
     
     func togglePin() {
-        memo.pinned.toggle()
+        memo.isPinned.toggle()
     }
     
     func toggleBookMark() {
@@ -133,7 +133,7 @@ struct MemoView: View {
                         
                         // PIN Button
                         Button(action: togglePin) {
-                            SystemImage( memo.pinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
+                            SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
                         }
                         
@@ -173,7 +173,7 @@ struct MemoView: View {
         .onAppear(perform: {
             isPresentingView = true
             contents = memo.contents
-            print("initial pin state: \(memo.pinned)")
+            print("initial pin state: \(memo.isPinned)")
             print("memoView has appeared!")
         })
         

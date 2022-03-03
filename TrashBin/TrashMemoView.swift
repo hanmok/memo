@@ -133,7 +133,7 @@ struct TrashMemoView: View {
         .navigationBarHidden(true)
         .onAppear(perform: {
             contents = memo.contents
-            print("initial pin state: \(memo.pinned)")
+            print("initial pin state: \(memo.isPinned)")
             print("memoView has appeared!")
         })
         

@@ -141,7 +141,7 @@ extension Folder {
     }
     
     var modificationDate: Date {
-        get { return modificationDate_ ?? Date() }
+        get { modificationDate_ ?? Date() }
         set { modificationDate_ = newValue }
     }
     
@@ -163,44 +163,12 @@ extension Folder {
         get { subfolders.sorted() }
     }
     
-//    var id: UUID {
-//        get { UUID()}
-//    }
-//    var isCollased: Bool {
-//        get { isCollased}
-//    }
-    
-//    var isFavorite: Bool {
-//        get { return isFavorite_ ?? false}
-//        set { isFavorite_ = newValue }
-//    }
-    
-//    var modificationDate: Date {
-//        get { modificationDate_ ?? Date() }
-//        set { modificationDate_ = newValue }
-//    }
-    
     
     
     // order should be starting from 1, cause user decide.
     // 5 1 3 4 2 , say some memo want order of 3
-    func add(memo: Memo, at index: Int64? = nil) {
-//        let sortedOldMemos = self.memos.sorted()
-//        // old original memos according to 'order'
-//
-//        // 3
-//        if let index = index {
-//            memo.order = Int64(index)
-//            // set new memo's order to index ( -> 3)
-//            // 5 1 3 4 2 -> filter memo order of 3, 4 and 5
-//            let changeMemos = sortedOldMemos.filter { $0.order >= index }
-//            for memo in changeMemos {
-//                memo.order += 1
-//            }
-//            // 6 1 4 5 2 , and new memo of order 3
-//        } else {
-//            memo.order = ( sortedOldMemos.last?.order ?? 0 ) + 1
-//        }
+//    func add(memo: Memo, at index: Int64? = nil) {
+    func add(memo: Memo) {
         memo.folder = self
         memo.modificationDate = Date()
     }
@@ -212,18 +180,9 @@ extension Folder {
     
     
     // not modified like above to check which one is correct.
-    func add(subfolder: Folder, at index: Int64? = nil) {
-//        let oldFolders = self.subfolders.sorted()
-        
-//        if let index = index {
-//            subfolder.order = index + 1
-//            let changeFolders = oldFolders.filter { $0.order > index }
-//            for folder in changeFolders {
-//                folder.order += 1
-//            }
-//        } else {
-//            subfolder.order = (oldFolders.last?.order ?? 0) + 1
-//        }
+//    func add(subfolder: Folder, at index: Int64? = nil) {
+    
+    func add(subfolder: Folder) {
         
         subfolder.parent = self
         self.modificationDate = Date() // update
@@ -267,19 +226,9 @@ extension Folder {
         
         if let result = try? context.fetch(req) {
             
-//            result.map {
-//                print($0.title)
-//            }
-//            result.removeFirst()
-//            return result.last!
             switch folderType {
-////                // Found Nil !
-//            case .folder: return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
             case .folder: return result.filter { FolderType.compareName($0.title, with: .folder)}.first!
-//            case .folder: return result.first(where: title == FolderType.getFolderName(type: .folder))
             case .archive: return result.filter { FolderType.compareName($0.title, with: .archive)}.first!
-                //            case .archive: return result.filter { $0.title == FolderType.getFolderName(type: .archive)}.first!
-//            case .trashbin: return result.filter { $0.title == FolderType.getFolderName(type: .trashbin)}.first!
             case .trashbin: return result.filter { FolderType.compareName($0.title, with: .trashbin)}.first!
             }
             
@@ -288,17 +237,6 @@ extension Folder {
             return nil
         }
     }
-    
-//    static func fetchArchiveFolder(context: NSManagedObjectContext) -> Folder? {
-//        let req = Folder.topFolderFetchReq()
-//        // MARK: - recommend using guard
-//        if let result = try? context.fetch(req) {
-//            return result.filter { $0.title == FolderType.getFolderName(type: .folder)}.first!
-//        } else {
-//            print("error fetching top Folders !!")
-//            return nil
-//        }
-//    }
     
     // 이거부터 수정해야겠는데.. ???
     // Use bottom func instead of this.
@@ -327,28 +265,10 @@ extension Folder {
             let result = try? context.fetch(request)
             _ = result!.map { $0.title += "" }
         }
-            
-    
-        //        for eachFolder in result! {
-//            eachFolder.title += ""
-//        }
         
         context.saveCoreData()
     }
     
-//    static func nestedFolder(context: NSManagedObjectContext) -> Folder {
-//        let parent = Folder(title: "parent", context: context)
-//        let child1 = Folder(title: "child1", context: context)
-//        let child2 = Folder(title: "child2", context: context)
-//        let child3 = Folder(title: "child3", context: context)
-//
-//        parent.add(subfolder: child1)
-//        parent.add(subfolder: child2)
-//        child2.add(subfolder: child3)
-//
-//        context.saveCoreData()
-//        return parent
-//    }
     
     static func getSortedSubFolders(folder: Folder) -> [Folder] {
         @AppStorage(AppStorageKeys.fOrderType) var fOrderType = OrderType.creationDate
@@ -368,21 +288,15 @@ extension Folder {
         
         let sortingMethod = Folder.getSortingMethod(type: fOrderType, isAsc: fOrderAsc)
         
-        //        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
-        //        var folderContainer = [currentFolder]
         var folderWithLevelContainer: [FolderWithLevel] = []
         var folderContainer: [Folder?] = []
         
         for eachTop in topFolders.sorted(by: sortingMethod) {
             
-            
-            
-            //        var currentFolder: Folder? = topFolder
             var currentFolder: Folder? = eachTop
             var level = 0
             var trashSet = Set<Folder>()
-            //        var folderWithLevelContainer = [FolderWithLevel(folder: currentFolder!, level: level)]
-            //        var folderContainer = [currentFolder]
+            
             folderWithLevelContainer.append(FolderWithLevel(folder: currentFolder!, level: level))
             folderContainer.append(currentFolder)
             
@@ -462,7 +376,6 @@ extension Folder {
                     // check if trashSet has contained Folder of arrayContainer2
                     for folder in currentFolder!.subfolders.sorted(by: sortingMethod) {
                         if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-            //            if !trashSet.contains(folder) && !arrayContainer2 {
                             currentFolder = folder
                             level += 1
                             folderContainer.append(currentFolder!)
@@ -548,51 +461,6 @@ extension Folder {
             return folderWithLevelContainer
         }
     
-    
-//    static func getSubFolders(topFolder: Folder) -> [Folder] {
-//        print(#function)
-//        print(#line)
-//        print("func in VM has called")
-//        var currentFolder: Folder? = topFolder
-//
-//        var trashSet = Set<Folder>()
-//
-//        var folderContainer1 = [currentFolder!]
-//        var folderContainer = [currentFolder]
-//
-//    whileLoop: while (currentFolder != nil) {
-//        print(#line)
-//        if currentFolder!.subfolders.count != 0 {
-//
-//            // check if trashSet has contained Folder of arrayContainer2
-//            for folder in currentFolder!.subfolders.sorted() {
-//                if !trashSet.contains(folder) && !folderContainer.contains(folder) {
-//                    currentFolder = folder
-//                    folderContainer.append(currentFolder!)
-//                    folderContainer1.append(currentFolder!)
-//                    continue whileLoop // this one..
-//                }
-//            }
-//            // subFolders 가 모두 이미 고려된 경우.
-//            trashSet.update(with: currentFolder!)
-//        } else { // subfolder 가 Nil 인 경우
-//            trashSet.update(with: currentFolder!)
-//        }
-//
-//        for i in 0 ..< folderContainer1.count {
-//            if !trashSet.contains(folderContainer1[folderContainer1.count - i - 1]) {
-//                currentFolder = folderContainer1[folderContainer1.count - i - 1]
-//                break
-//            }
-//        }
-//
-//        if folderContainer1.count == trashSet.count {
-//            break whileLoop
-//        }
-//    }
-//        return folderContainer1
-//    }
-    
     static func returnContainedMemos(folder: Folder, onlyMarked: Bool = false ) -> [Memo] {
         
         @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
@@ -607,12 +475,10 @@ extension Folder {
             let tempFolders = folder.subfolders
             
             if !tempFolders.isEmpty {
-                
                 _ = tempFolders.map {
                     foldersContainer.append($0)
                     getAllFolders(folder: $0)
                 }
-                
             }
         }
         
@@ -633,58 +499,8 @@ extension Folder {
         return memosContainer
     }
     
-//    static func returnContainedMemosWithFolder(folder: Folder, onlyMarked: Bool = false ) -> [ContainedMemos] {
-//
-//        var foldersContainer = [Folder]()
-//        var memosContainer = [Memo]()
-//
-//        func getAllFolders(folder: Folder)  {
-//            let tempFolders = folder.subfolders
-//
-//            if !tempFolders.isEmpty {
-//                for eachFolder in tempFolders {
-//                    foldersContainer.append(eachFolder)
-//                    getAllFolders(folder: eachFolder)
-//                }
-//            }
-//        }
-//
-//        func appendMemos(folder: Folder) {
-//            for eachMemo in folder.memos {
-//                memosContainer.append(eachMemo)
-////                memosCount += 1
-//            }
-//        }
-//
-//        appendMemos(folder: folder)
-//
-//        getAllFolders(folder: folder)
-//
-//        // get all memos from each of collected Folders
-//        for eachFolder in foldersContainer {
-//
-//            appendMemos(folder: eachFolder)
-//            print("memosContainer: \(memosContainer)")
-//        }
-//
-//        if onlyMarked {
-//            return memosContainer.filter { $0.isBookMarked == true}.sorted()
-//        }
-//
-//        return memosContainer
-//    }
-    
-    func checkIfHasMemo() -> Bool {
-        return false
-    }
-    
-    
     static func convertLevelIntoFolder(_ withLevels: [FolderWithLevel]) -> [Folder] {
         var folders: [Folder] = []
-
-//        for eachLevel in withLevels {
-//            folders.append(eachLevel.folder)
-//        }
         
         _ = withLevels.map { folders.append($0.folder)}
         return folders
@@ -692,6 +508,7 @@ extension Folder {
 }
 
 struct FolderProperties {
+    
     static let id = "id"
     static let creationDate = "creationDate_"
     static let modificationDate = "modificationDate_"
@@ -732,6 +549,7 @@ extension Folder {
             return lhs.title >= rhs.title
         }
     }
+    
 }
 
 extension Folder : Comparable {
@@ -739,7 +557,8 @@ extension Folder : Comparable {
     public static func < (lhs: Folder, rhs: Folder) -> Bool {
         
         switch Folder.orderType {
-        case .modificationDate : return sortModifiedDate(lhs, rhs)
+        case .modificationDate:
+            return sortModifiedDate(lhs, rhs)
         case .creationDate:
             return sortCreatedDate(lhs, rhs)
         case .alphabetical:
@@ -748,174 +567,19 @@ extension Folder : Comparable {
     }
 }
 
-//extension Folder {
-//
-//    static var isAscending: Bool = true
-//    static var orderType: OrderType = .creationDate
-//
-//    static func sortModifiedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
-//        if Folder.isAscending {
-//            return lhs.modificationDate! < rhs.modificationDate!
-//        } else {
-//            return lhs.modificationDate! >= rhs.modificationDate!
-//        }
-//    }
-//
-//    static func sortCreatedDate(_ lhs: Folder, _ rhs: Folder) -> Bool {
-//        if Folder.isAscending {
-//            return lhs.creationDate < rhs.creationDate
-//        } else {
-//            return lhs.creationDate >= rhs.creationDate
-//        }
-//    }
-//
-//    static func sortAlphabetOrder(_ lhs: Folder, _ rhs: Folder) -> Bool {
-//        if Folder.isAscending {
-//            return lhs.title < rhs.title
-//        } else {
-//            return lhs.title >= rhs.title
-//        }
-//    }
-//
-//
-//}
-
-//extension Folder : Comparable {
-//
-//    public static func < (lhs: Folder, rhs: Folder) -> Bool {
-//
-//        lhs.creationDate > rhs.creationDate
-//
-////        switch Folder.orderType {
-////        case .modificationDate:
-////            return sortModifiedDate(lhs, rhs)
-////        case .creationDate:
-////            return sortCreatedDate(lhs, rhs)
-////        case .alphabetical:
-////            return sortAlphabetOrder(lhs, rhs)
-////        }
-//
-////        return true
-//    }
-//}
 
 extension Folder {
     
-//    static func createHomeFolder(context: NSManagedObjectContext) -> Folder {
-//        let home = Folder(title: "Home Folder", context: context)
-//        context.saveCoreData()
-//
-//        return home
-//    }
-    
-    
-    
-//    static func returnSampleFolder(context: NSManagedObjectContext) -> Folder {
-//
-//        let homeFolder = Folder(title: "Home Folder", context: context,createdAt: Date(timeIntervalSinceNow: 1))
-//        let firstChildFolder = Folder(title: "child1", context: context,createdAt: Date(timeIntervalSinceNow: 2))
-//        let secondChildFolder = Folder(title: "child2", context: context,createdAt: Date(timeIntervalSinceNow: 3))
-//        let thirdChildFolder = Folder(title: "child3", context: context,createdAt: Date(timeIntervalSinceNow: 4))
-//        let fourthChildFolder = Folder(title: "child4", context: context,createdAt: Date(timeIntervalSinceNow: 5))
-//
-//        homeFolder.add(subfolder: firstChildFolder)
-//        homeFolder.add(subfolder: secondChildFolder)
-//        homeFolder.add(subfolder: thirdChildFolder)
-//        homeFolder.add(subfolder: fourthChildFolder)
-//
-//        let memo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
-//        let memo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
-//        let memo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
-//        let memo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
-//        let memo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
-//        let memo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
-//        let memo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
-//        let memo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
-//        let memo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
-//
-//        let hmemo1 = Memo(title: "First Memo", contents: "Memo Contents1", context: context,modifiedAt: Date(timeIntervalSinceNow: 1))
-//        let hmemo2 = Memo(title: "Second Memo", contents: "Memo Contents2", context: context,modifiedAt: Date(timeIntervalSinceNow: 2))
-//        let hmemo3 = Memo(title: "Third Memo", contents: "Memo Contents3", context: context,modifiedAt: Date(timeIntervalSinceNow: 3))
-//        let hmemo4 = Memo(title: "Fourth Memo", contents: "Memo Contents4", context: context,modifiedAt: Date(timeIntervalSinceNow: 4))
-//        let hmemo5 = Memo(title: "Fifth Memo", contents: "Memo Contents5", context: context,modifiedAt: Date(timeIntervalSinceNow: 5))
-//        let hmemo6 = Memo(title: "Sixth Memo", contents: "Memo Contents6", context: context,modifiedAt: Date(timeIntervalSinceNow: 6))
-//        let hmemo7 = Memo(title: "Seventh Memo", contents: "Memo Contents7", context: context,modifiedAt: Date(timeIntervalSinceNow: 7))
-//        let hmemo8 = Memo(title: "Eighth Memo", contents: "Memo Contents8", context: context,modifiedAt: Date(timeIntervalSinceNow: 8))
-//        let hmemo9 = Memo(title: "Ninth Memo", contents: "Memo Contents9", context: context,modifiedAt: Date(timeIntervalSinceNow: 9))
-//
-//        firstChildFolder.add(memo: memo1)
-//        firstChildFolder.add(memo: memo2)
-//        firstChildFolder.add(memo: memo3)
-//        firstChildFolder.add(memo: memo4)
-//        firstChildFolder.add(memo: memo5)
-//        firstChildFolder.add(memo: memo6)
-//        firstChildFolder.add(memo: memo7)
-//        firstChildFolder.add(memo: memo8)
-//        firstChildFolder.add(memo: memo9)
-//
-//        homeFolder.add(memo: hmemo1)
-//        homeFolder.add(memo: hmemo2)
-//        homeFolder.add(memo: hmemo3)
-//        homeFolder.add(memo: hmemo4)
-//        homeFolder.add(memo: hmemo5)
-//        homeFolder.add(memo: hmemo6)
-//        homeFolder.add(memo: hmemo7)
-//        homeFolder.add(memo: hmemo8)
-//        homeFolder.add(memo: hmemo9)
-//
-//        context.saveCoreData()
-//
-//        return homeFolder
-//    }
-    
-//    static func returnSampleFolder2(context: NSManagedObjectContext)  {
-//
-//        let newFolder1 = Folder(title: "Category 1", context: context)
-//
-//        newFolder1.creationDate = Date().advanced(by: 2)
-//
-//        let subFolder1 = Folder(title: "SubCategory 1", context: context)
-//        let subFolder2 = Folder(title: "SubCategory 2", context: context)
-//        let subFolder3 = Folder(title: "SubCategory 3", context: context)
-//
-//        subFolder1.creationDate = Date().advanced(by: 2)
-//        subFolder2.creationDate = Date().advanced(by: 1)
-//        subFolder3.creationDate = Date().advanced(by: 3)
-//
-//        subFolder1.modificationDate = Date().advanced(by: 2)
-//        subFolder2.modificationDate = Date().advanced(by: 3)
-//        subFolder3.modificationDate = Date().advanced(by: 1)
-//
-//        let newFolder2 = Folder(title: "Category 2", context: context)
-//
-//        newFolder1.add(subfolder: subFolder1)
-//        newFolder1.add(subfolder: subFolder2)
-//        newFolder1.add(subfolder: subFolder3)
-//
-//        newFolder2.creationDate = Date().advanced(by: 1)
-//        // return TopFolders
-//        // order
-//        // 1. Alphabetical : SubCategory 1 > 2 > 3
-//        // 1. Creation : SubCategory 2 > 1 > 3
-//        // 1. Modification : SubCategory 3 > 1 > 2
-//
-////        return [newFolder1, newFolder2]
-//    }
-    
     static func returnSampleFolder3(context: NSManagedObjectContext) -> [Folder] {
         
-//        let homeFolder = Folder(title: "Home Folder", context: context, createdAt: Date(timeIntervalSince1970: 0))
         let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
-//        homeFolder.folderType = .home
+        
         context.saveCoreData()
         
         let subFolder1 = Folder(title: LocalizedStringStorage.category1, context: context)
         let subFolder2 = Folder(title: LocalizedStringStorage.category2, context: context)
         let subFolder3 = Folder(title: LocalizedStringStorage.category3, context: context)
         
-//        subFolder1.creationDate = Date().advanced(by: 200)
-//        subFolder2.creationDate = Date().advanced(by: 100)
-//        subFolder3.creationDate = Date().advanced(by: 300)
         subFolder1.creationDate = Date().advanced(by: 100)
         subFolder2.creationDate = Date().advanced(by: 200)
         subFolder3.creationDate = Date().advanced(by: 300)
@@ -928,36 +592,17 @@ extension Folder {
         homeFolder.add(subfolder: subFolder2)
         homeFolder.add(subfolder: subFolder3)
         
-//        let newFolder2 = Folder(title: LocalizedStringStorage.subCategory1, context: context)
-//        subFolder1.add(subfolder: newFolder2)
-        
-//        newFolder2.creationDate = Date().advanced(by: 1)
-        
-        
-//        subFolder1.modificationDate = Date().advanced(by: 200)
-//        subFolder2.modificationDate = Date().advanced(by: 300)
-//        subFolder3.modificationDate = Date().advanced(by: 100)
-        
         subFolder1.modificationDate = Date().advanced(by: 100)
         subFolder2.modificationDate = Date().advanced(by: 200)
         subFolder3.modificationDate = Date().advanced(by: 300)
         
         let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
         archive.title += ""
-//        archive.folderType = .archive
        
         
         let trashBin = Folder(title: FolderType.getFolderName(type: .trashbin), context: context)
         context.saveCoreData()
         return [homeFolder, archive, trashBin]
-        // return TopFolders
-        // order
-        // In Asc Order
-        // 1. Alphabetical : SubCategory 1 > 2 > 3
-        // 1. Creation : SubCategory 2 > 1 > 3
-        // 1. Modification : SubCategory 3 > 1 > 2
-        
-//        return [newFolder1, newFolder2]
     }
 }
 
@@ -969,18 +614,12 @@ extension Folder {
         print("Folder.title: \(self.title)")
         print("Folder.creationDate: \(self.creationDate)")
         
-//        for eachFolder in self.subfolders {
-//            print(eachFolder.title)
-//        }
         _ = self.subfolders.map { print($0.title)}
         print("number of subfolders: \(self.subfolders.count)")
         print("parent: \(String(describing: self.parent?.title))")
         
         print("number of memos: \(self.memos.count)")
-//        for eachMemo in self.memos {
-//            print("memo info: ")
-//            eachMemo.getMemoInfo()
-//        }
+        
         _ = self.memos.map { $0.getMemoInfo()}
     }
     
@@ -991,7 +630,6 @@ extension Folder {
             folder = folder!.parent
         }
         
-//        if folder!.title == FolderType.getFolderName(type: .folder) {
         if FolderType.compareName(folder!.title, with: .folder){
             return false
         }
@@ -999,29 +637,15 @@ extension Folder {
     }
 }
 
-extension Folder {
-    static func lookForResult(of keyword: String, target: [Folder]) -> [Folder] {
-        var resultFolders = [Folder]()
-        for eachFolder in target {
-            if eachFolder.title.lowercased().contains(keyword.lowercased()) {
-                resultFolders.append(eachFolder)
-            }
-        }
-        return resultFolders
-    }
-}
-
-
-extension NSManagedObjectContext {
-    func saveCoreData() { // save to coreData
-        DispatchQueue.main.async {
-            do {
-                try self.save()
-            } catch {
-                print("error occurred druing saving to CoreData \(error)")
-            }
-        }
-    }
-}
-
+//extension Folder {
+//    static func lookForResult(of keyword: String, target: [Folder]) -> [Folder] {
+//        var resultFolders = [Folder]()
+//        for eachFolder in target {
+//            if eachFolder.title.lowercased().contains(keyword.lowercased()) {
+//                resultFolders.append(eachFolder)
+//            }
+//        }
+//        return resultFolders
+//    }
+//}
 

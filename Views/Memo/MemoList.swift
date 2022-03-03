@@ -15,7 +15,7 @@ struct MemoList: View {
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     var hasPinnedOrBookmarkedMemo: Bool {
-        return folder.memos.contains { $0.pinned == true || $0.isBookMarked == true}
+        return folder.memos.contains { $0.isPinned == true || $0.isBookMarked == true}
     }
     
     // need to be modified to have plus button when there's no memo

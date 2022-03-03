@@ -28,7 +28,6 @@
 		9A3377B52790039200805138 /* FolderViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B42790039200805138 /* FolderViewTest.swift */; };
 		9A3377B72790060100805138 /* MemosToolBarViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B62790060100805138 /* MemosToolBarViewTest.swift */; };
 		9A3377B927900BF200805138 /* MemoListTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B827900BF200805138 /* MemoListTest.swift */; };
-		9A3377FD27915C2900805138 /* MemoMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377FC27915C2900805138 /* MemoMsg.swift */; };
 		9A3378012795736200805138 /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378002795736200805138 /* ColorExt.swift */; };
 		9A337804279576CC00805138 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337803279576CC00805138 /* testView.swift */; };
 		9A3378072796A5CB00805138 /* FilteredMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3378062796A5CB00805138 /* FilteredMemoList.swift */; };
@@ -148,7 +147,6 @@
 		9A3377B42790039200805138 /* FolderViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewTest.swift; sourceTree = "<group>"; };
 		9A3377B62790060100805138 /* MemosToolBarViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarViewTest.swift; sourceTree = "<group>"; };
 		9A3377B827900BF200805138 /* MemoListTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTest.swift; sourceTree = "<group>"; };
-		9A3377FC27915C2900805138 /* MemoMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoMsg.swift; sourceTree = "<group>"; };
 		9A3378002795736200805138 /* ColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExt.swift; sourceTree = "<group>"; };
 		9A337803279576CC00805138 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		9A3378062796A5CB00805138 /* FilteredMemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredMemoList.swift; sourceTree = "<group>"; };
@@ -313,7 +311,6 @@
 				9AC5D1FC278557D8007EAA28 /* UnitTestHelper.swift */,
 				9AC5D12B27840939007EAA28 /* Memo+helper.swift */,
 				9AC5D1FE278558AC007EAA28 /* NSPredicate+helper.swift */,
-				9A3377FC27915C2900805138 /* MemoMsg.swift */,
 				9AE538F727C38E4300452999 /* AppStorageKeys.swift */,
 			);
 			path = Models;
@@ -760,7 +757,6 @@
 				9A3378612798207800805138 /* SelectedMemoViewModel.swift in Sources */,
 				9AB7250727D00F24006A825C /* MemoOrderingButton.swift in Sources */,
 				9A33786A27993ACA00805138 /* FolderOverView.swift in Sources */,
-				9A3377FD27915C2900805138 /* MemoMsg.swift in Sources */,
 				9A3377B72790060100805138 /* MemosToolBarViewTest.swift in Sources */,
 				E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */,
 				9A33785D279817B700805138 /* FolderView2.swift in Sources */,

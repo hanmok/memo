@@ -16,7 +16,7 @@ struct FolderOrderingMenu: View {
             Text(LocalizedStringStorage.folderOrdering)
                 .font(.title3)
             
-            FolderOrderingButton(type: .modificationDate)
+//            FolderOrderingButton(type: .modificationDate)
             FolderOrderingButton(type: .creationDate)
             FolderOrderingButton(type: .alphabetical)
             
