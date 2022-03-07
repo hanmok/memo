@@ -69,6 +69,7 @@
 		9AB7251527D01186006A825C /* FastFolderWithLevelGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7251427D01186006A825C /* FastFolderWithLevelGroup.swift */; };
 		9AB7251727D01B21006A825C /* CheckableFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7251627D01B21006A825C /* CheckableFolderCell.swift */; };
 		9AB7251927D02045006A825C /* SystemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7251827D02045006A825C /* SystemImage.swift */; };
+		9AB7253F27D3B3E3006A825C /* MemoTextView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7253E27D3B3E3006A825C /* MemoTextView1.swift */; };
 		9AC257D627C24AB200280DD2 /* CustomSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC257D527C24A1600280DD2 /* CustomSearchView.swift */; };
 		9AC3B0DE279BCDAC008D378B /* VerCollapsibleFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */; };
 		9AC5D0F12782BBEB007EAA28 /* HorCollapsibleMind3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */; };
@@ -188,6 +189,9 @@
 		9AB7251427D01186006A825C /* FastFolderWithLevelGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastFolderWithLevelGroup.swift; sourceTree = "<group>"; };
 		9AB7251627D01B21006A825C /* CheckableFolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckableFolderCell.swift; sourceTree = "<group>"; };
 		9AB7251827D02045006A825C /* SystemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImage.swift; sourceTree = "<group>"; };
+		9AB7253C27D39EAC006A825C /* RegexPrac.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RegexPrac.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9AB7253D27D3A120006A825C /* Regex Tips */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Regex Tips"; sourceTree = "<group>"; };
+		9AB7253E27D3B3E3006A825C /* MemoTextView1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView1.swift; sourceTree = "<group>"; };
 		9AC257D527C24A1600280DD2 /* CustomSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchView.swift; sourceTree = "<group>"; };
 		9AC3B0DD279BCDAC008D378B /* VerCollapsibleFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerCollapsibleFolder.swift; sourceTree = "<group>"; };
 		9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorCollapsibleMind3.swift; sourceTree = "<group>"; };
@@ -262,7 +266,6 @@
 			children = (
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
-				9AD8332627BD0B7300506AE8 /* MemoTextView.swift */,
 				9AB7250027D00E16006A825C /* TrashBin */,
 				9AB724FD27D00D9A006A825C /* Prev */,
 				9A0474B927716DBC00571D66 /* Views */,
@@ -410,7 +413,6 @@
 				9A04BF1F27C8CD2000F3972D /* CustomTextView.swift */,
 				9A337898279A76A500805138 /* PreviousViews */,
 				9A1D536427ACE3A2009294C1 /* Tests */,
-				E54FE18127C94539000FFA81 /* MemoTextView */,
 			);
 			path = Prev;
 			sourceTree = "<group>";
@@ -448,6 +450,16 @@
 				9AB7250427D00F03006A825C /* FolderAscDecButton.swift */,
 			);
 			path = Ordering;
+			sourceTree = "<group>";
+		};
+		9AB7253B27D39E99006A825C /* TextViews */ = {
+			isa = PBXGroup;
+			children = (
+				9AB7253C27D39EAC006A825C /* RegexPrac.playground */,
+				9AB7253D27D3A120006A825C /* Regex Tips */,
+				E54FE18127C94539000FFA81 /* MemoTextView */,
+			);
+			path = TextViews;
 			sourceTree = "<group>";
 		};
 		9AC5D0F32782C59C007EAA28 /* ViewModels */ = {
@@ -496,6 +508,9 @@
 		9AD6EF13277D9EE200866456 /* Memo */ = {
 			isa = PBXGroup;
 			children = (
+				9AD8332627BD0B7300506AE8 /* MemoTextView.swift */,
+				9AB7253E27D3B3E3006A825C /* MemoTextView1.swift */,
+				9AB7253B27D39E99006A825C /* TextViews */,
 				9AD8333627BE148A00506AE8 /* MemoView.swift */,
 				E523DB5127C0073900D8D78B /* NewMemoView.swift */,
 				9AA266E027BE347C00AC75DB /* MemoBoxView.swift */,
@@ -713,6 +728,7 @@
 				9A013F6A27BA535400C612ED /* DynamicTopFolderCell.swift in Sources */,
 				9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */,
 				9A1D8539279FF32400B00156 /* DynamicFolderCell.swift in Sources */,
+				9AB7253F27D3B3E3006A825C /* MemoTextView1.swift in Sources */,
 				9A046D1B27B67508003169C7 /* OrderingAppStorage.swift in Sources */,
 				9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */,
 				9AC5D22227883475007EAA28 /* SubFolderPageView3.swift in Sources */,

@@ -1,0 +1,53 @@
+* : a metacharacter for zero or more instances of the preceding character. Without regular expressions, the asterisk is a wildcard, for zero or more instances of any character.
+
+. : matches any character. `p.p` matches pop, pup, pmp, p@p, and so on.
+
+`p.p` matches pop, pup, pmp, p@p, and so on.
+
+
+
+\w : matches any 'word-like' character which includes the set of numbers, letters, and underscore, but does not match punctuation or other symbols.
+
+`hello\w` will match "hello_9" and "helloo" but not "hello!"
+
+
+\d :  matches a numeric digit, which in most cases means `[0-9]`. `\d\d?:\d\d` will match strings in time format, such as "9:30" and "12:45".
+
+
+\b : matches word boundary characters such as spaces and punctuation. `to\b` will match the "to" in "to the moon" and "to!", but it will not match "tomorrow". `\b` is handy for "whole word" type matching.
+
+\s : matches whitespace characters such as spaces, tabs, and newlines. `hello\s` will match "hello " in "Well, hello there!".
+
+
+^ : matches at the beginning of a line. Note that this particular ^ is different from ^ inside of the square brackets! For example, `^Hello` will match against the string "Hello there", but not "He said Hello".
+
+$ : matches at the end of a line. For example, `the end$` will match against "It was the end" but not "the end was near"
+
+* : matches the previous element 0 or more times. `12*3` will match 13, 123, 1223, 122223, and 1222222223.
+
++ : matches the previous element 1 or more times. `12+3` will match 123, 1223, 122223, 1222222223, but not 13.
+
+? : matches the previous element 0 or 1 times. `12?3` will match 13 or 123, but not 1223.
+
+{ } : contain the minimum and maximum number of matches. For example, `10{1,2}1` will match both "101" and "1001" but not "10001" as the minimum number of matches is 1 and the maximum number of matches is 2. `He[Ll]{2,}o` will match "HeLLo" and "HellLLLllo" and any such silly variation of "hello" with lots of L’s, since the minimum number of matches is 2 but the maximum number of matches is not set — and therefore unlimited!
+
+( ) : are used to group part of a pattern. For example, `3 (pm|am)` would match the text "3 pm" as well as the text "3 am". The pipe character here (|) acts like an OR operator.
+
+[ ] :
+//: Character classes represent a set of possible single-character matches. Character classes appear between square brackets **[ ]**.
+//: As an example, the regular expression `t[aeiou]` will match "ta", "te", "ti", "to", or "tu". You can have as many character possibilities inside the square brackets as you like, but remember that any single character in the set will match. `[aeiou]` _looks_ like five characters, but it actually means "a" or "e" or "i" or "o" or "u".
+
+
+[ - ] :
+//: You can also define a range in a character class if the characters appear consecutively. For example, to search for a number between 100 to 109, the pattern would be `10[0-9]`. This returns the same results as `10[0123456789]`, but using ranges makes your regular expressions much cleaner and easier to understand. Ranges can also be used for characters - for example, `[a-z]` matches all lowercase characters, or `[a-zA-Z]` matches all upper and lower case.
+
+[ ^ ] : exclude
+//: Character classes usually contain the characters you _want_ to match, but what if you want to explicitly _not match_ a character? You can also define negated character classes, which use the `^` character. For example, the pattern `t[^o]` will match any combination of "t" and one other character _except_ for the single instance of "to".
+
+
+\n : new line character.
+첫번째 line.
+흐음.. how.. ?
+
+첫 라인
+...???

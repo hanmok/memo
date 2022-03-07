@@ -163,7 +163,8 @@ struct MemoView: View {
                 .padding(.leading, Sizes.navBtnLeadingSpacing)
 
                 
-                MemoTextView(text: $contents)
+//                MemoTextView(text: $contents)
+                PlainTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)

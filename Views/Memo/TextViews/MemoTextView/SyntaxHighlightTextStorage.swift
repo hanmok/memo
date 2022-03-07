@@ -139,7 +139,7 @@ class SyntaxHighlightTextStorage: NSTextStorage {
             let descriptorWithTrait = fontDescriptor.withSymbolicTraits(trait)
             // force UIFont to return a size that matches the user's current font size preferences.
             let font = UIFont(descriptor: descriptorWithTrait!, size: 0)
-            
+
             return [.font: font]
         }
     
@@ -157,9 +157,9 @@ class SyntaxHighlightTextStorage: NSTextStorage {
          let redTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.red]
         
         replacements = [
-            "(\\*\\w+(\\s\\w+)*\\*)": boldAttributes,
-            "(_\\w+(\\s\\w+)*_)": italicAttributes,
-            "([0-9]+\\.)\\s": boldAttributes,
+//            "(\\*\\w+(\\s\\w+)*\\*)": boldAttributes,
+//            "(_\\w+(\\s\\w+)*_)": italicAttributes,
+//            "([0-9]+\\.)\\s": boldAttributes,
             "(-\\w+(\\s\\w+)*-)": strikeThroughAttributes,
             "(~\\w+(\\s\\w+)*~)": scriptAttributes,
             "\\s([A-Z]{2,})\\s": redTextAttributes
