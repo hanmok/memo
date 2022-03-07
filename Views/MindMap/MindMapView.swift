@@ -147,7 +147,7 @@ struct MindMapView: View {
                                         .environmentObject(memoOrder)
                                         .environmentObject(trashBinVM)
                                     // ADD Sub Folder
-                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
                                                 isShowingTextField = true
@@ -169,7 +169,7 @@ struct MindMapView: View {
                                         .environmentObject(trashBinVM)
                                     
                                     // ADD Sub Folder
-                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
                                                 isShowingTextField = true
@@ -182,7 +182,7 @@ struct MindMapView: View {
                                             .tint(Color.swipeBtnColor2)
                                         }
                                     // Change Folder Name
-                                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                             
                                             Button {
                                                 folderEditVM.folderToRemove = folderWithLevel.folder
@@ -235,7 +235,7 @@ struct MindMapView: View {
                                         .environmentObject(folderEditVM)
                                         .environmentObject(memoOrder)
                                     // ADD Sub Folder
-                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
                                                 isShowingTextField = true
@@ -255,7 +255,7 @@ struct MindMapView: View {
                                         .environmentObject(memoOrder)
                                     
                                     // ADD Sub Folder
-                                        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
                                                 isShowingTextField = true
@@ -267,7 +267,7 @@ struct MindMapView: View {
                                             .tint(Color.swipeBtnColor2)
                                         }
                                     // Change Folder Name
-                                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                             // DELETE FOLDER
                                             Button {
                                                 folderEditVM.folderToRemove = folderWithLevel.folder
