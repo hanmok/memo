@@ -37,17 +37,10 @@ struct MemosToolBarView: View {
                 memoEditVM.add(memos: currentFolder.memos.sorted())
                 
             } label: {
-//                UnchangeableImage(imageSystemName: "plus.square.on.square", width: 20, height: 20)
-                ZStack {
-                        
-                    Text("All")
-                        .font(.headline)
-                    
-
-
-                }
+                Text("All")
+                    .font(.headline)
             }
-
+            
             
             // BOOKMARK BUTTON, WORKS FINE
             Button(action: {

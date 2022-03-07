@@ -235,6 +235,7 @@ struct CustomSearchView: View {
 //                                                            print("memo's parent: \(eachMemo.folder!.title)")
 //                                                        }
                                                 }
+                                                .padding(.bottom, Sizes.spacingBetweenMemoBox)
                                             }
                                         }
                                     }

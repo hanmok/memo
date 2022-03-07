@@ -31,15 +31,17 @@ struct MemoTextView: UIViewRepresentable {
         uiTextView.tintColor = UIColor.textViewTintColor
         
         uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
+
+        
+//        uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.preferredFont(forTextStyle: .body)])
+
+        
         
         uiTextView.keyboardDismissMode = .onDrag
         uiTextView.addDoneButtonOnKeyboard()
         return uiTextView
     }
-    
-    func something() {
-        
-    }
+
     
     func updateUIView(_ uiView: UITextView, context: Context) {
         print("updateUIView triggered")

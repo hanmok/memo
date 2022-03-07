@@ -18,7 +18,7 @@ struct MemoBoxView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 5) {
             if memo.titleToShow != "" {
                 Text(memo.titleToShow)
                 .font(.headline)
@@ -29,6 +29,15 @@ struct MemoBoxView: View {
                 .padding(.leading, Sizes.smallSpacing)
             }
             if memo.contentsToShow != "" {
+//                Text("\n")
+//                    .font(UIFont(name: "", size: 1))
+//                    .frame(height: 2)
+//                if memo.titleToShow != "" {
+////                    Spacer(minLength: 3)
+//                    EmptyView()
+//                        .frame(height: 10)
+//                }
+                
                 Text(memo.contentsToShow)
                     .font(.caption)
                     .foregroundColor(Color.blackAndWhite)
@@ -60,11 +69,15 @@ struct MemoBoxView: View {
                             .rotationEffect(.degrees(45))
                             .tint(colorScheme == .dark ? Color.cream : .black)
                     }
-            }
+                }
                 .padding(.trailing, Sizes.properSpacing)
                 Spacer()
             }
-                .padding(.top, Sizes.smallSpacing)
+            .padding(.top, Sizes.smallSpacing)
         )
+        .onAppear {
+            print("title : \(memo.titleToShow)")
+            print("contents: \(memo.contentsToShow)")
+        }
     }
 }

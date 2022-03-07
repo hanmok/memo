@@ -24,5 +24,4 @@ class Note {
     contents = text
     timestamp = Date()
   }
-  
 }

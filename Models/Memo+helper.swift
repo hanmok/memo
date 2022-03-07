@@ -128,70 +128,171 @@ extension Memo {
 
     // 계속 수정해주어야 하는 코드..
     // error has triggered HERE !! let TitleIndex = self.titleToShow.endIndex
+    
+    
+    // 여기 함수에 뭔가 문제가 있구나? 하아....
+//    func saveTitleWithContentsToShow(context: NSManagedObjectContext) {
+//
+//        var title: String {
+//            if let firstIndex = self.contents.firstIndex(of: "\n") {
+//                // if no title entered, means memo starts with "\n"
+//                // 음.. 공백으로 이어지다가 Enter 가 나올수도 있음..
+//
+//                // very first character is "\n"
+//                if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
+//                    return ""
+//
+//                } else {
+//
+//                    let offsetLimit = self.contents.distance(from: self.contents.startIndex, to: firstIndex)
+//                    var offsetIndex = 0
+//
+//                    // if ..spaces continues to the first \n
+//                    while (self.contents[self.contents.index(self.contents.startIndex, offsetBy: offsetIndex)] == " ") && offsetIndex < offsetLimit {
+//                        offsetIndex += 1
+//                    }
+//                    // first line is filled with spaces.
+//                    if offsetIndex == offsetLimit {
+//                        return ""
+//                    } else {
+//                        let title = self.contents[..<firstIndex]
+//                        return String(title)
+//                    }
+//                }
+//
+//                // no "\n" entered.
+//            } else {
+//                return self.contents
+//            }
+//        }
+//
+//        self.titleToShow = title
+//
+//
+//        if self.titleToShow != "" {
+//            var tempContentsToShow = self.contents
+//
+//            for _ in 0 ..< self.titleToShow.count {
+//                tempContentsToShow.removeFirst()
+//            }
+//            // remove \n
+//            if tempContentsToShow.first == "\n" {
+//                tempContentsToShow.removeFirst()
+//            }
+//
+//            self.contentsToShow = tempContentsToShow
+//        }
+//
+//        // remove spaces or enters from the very first part to use in MemoBoxView
+//
+//        while(self.contentsToShow != "") {
+//            if self.contentsToShow.first! == " " || self.contentsToShow.first! == "\n"{
+//                self.contentsToShow.removeFirst()
+//            } else {
+//                break
+//            }
+//        }
+//        context.saveCoreData()
+//    }
+    
     func saveTitleWithContentsToShow(context: NSManagedObjectContext) {
-        
-        var title: String {
-            if let firstIndex = self.contents.firstIndex(of: "\n") {
-                // if no title entered, means memo starts with "\n"
-                // 음.. 공백으로 이어지다가 Enter 가 나올수도 있음..
-                
-                // very first character is "\n"
-                if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
-                    return ""
+            
+            var title: String {
+                if let firstIndex = self.contents.firstIndex(of: "\n") {
                     
-                } else {
-                    
-                    let offsetLimit = self.contents.distance(from: self.contents.startIndex, to: firstIndex)
-                    var offsetIndex = 0
-                    
-                    // if ..spaces continues to the first \n
-                    while (self.contents[self.contents.index(self.contents.startIndex, offsetBy: offsetIndex)] == " ") && offsetIndex < offsetLimit {
-                        offsetIndex += 1
-                    }
-                    // first line is filled with spaces.
-                    if offsetIndex == offsetLimit {
+                    // if no title entered, means memo starts with "\n"
+                    // very first character is "\n"
+                    // case 3
+                    if firstIndex == self.contents.index(self.contents.startIndex, offsetBy: 0)  {
                         return ""
-                    } else {
-                        let title = self.contents[..<firstIndex]
-                        return String(title)
-                    }
-                }
-                
-                // no "\n" entered.
-            } else {
-                return self.contents
-            }
-        }
-        
-        self.titleToShow = title
-        
-        
-        if self.titleToShow != "" {
-            var tempContentsToShow = self.contents
                         
-            for _ in 0 ..< self.titleToShow.count {
-                tempContentsToShow.removeFirst()
-            }
-            // remove \n
-            if tempContentsToShow.first == "\n" {
-                tempContentsToShow.removeFirst()
+                        // 공백으로 이어지다가 Enter 가 나올수도 있음..
+                    } else {
+                        let offsetLimit = self.contents.distance(from: self.contents.startIndex, to: firstIndex)
+                        var offsetIndex = 0
+                        
+                        // if ..spaces continues to the first \n
+                        while (self.contents[self.contents.index(self.contents.startIndex, offsetBy: offsetIndex)] == " ") && offsetIndex < offsetLimit {
+                            offsetIndex += 1
+                        }
+                        // first line is filled with only spaces.
+                        if offsetIndex == offsetLimit {
+                            return ""
+                        } else { // \n 가 나오기 전까지를 title로, case 1 and 2
+                            let title = self.contents[..<firstIndex]
+                            return String(title)
+                        }
+                    }
+                    // case 2
+                    // no "\n" entered.
+                } else {
+                    return self.contents
+                }
             }
             
-            self.contentsToShow = tempContentsToShow
-
-        }
-        
-        // remove spaces or enters from the very first part to use in MemoBoxView
-        
-        while(self.contentsToShow != "") {
-            if self.contentsToShow.first! == " " || self.contentsToShow.first! == "\n"{
-                self.contentsToShow.removeFirst()
+            self.titleToShow = title
+            
+            
+            if self.titleToShow != "" {
+                var tempContentsToShow = self.contents
+                // Title 글자만큼 tempContentsToShow 글자 제거.
+                for _ in 0 ..< self.titleToShow.count {
+                    tempContentsToShow.removeFirst()
+                }
+                // remove \n
+                if tempContentsToShow.first == "\n" {
+                    tempContentsToShow.removeFirst()
+                }
+                self.contentsToShow = tempContentsToShow
+            } else { // titleToShow == ""
+                contentsToShow = contents
+            }
+            // 현재 ContentsToShow 의 첫부분에 공백이 끼어있을 수 있음.
+            
+            // remove spaces or enters from the very first part to use in MemoBoxView
+            // 스페이스와 \n 이 골고루 섞여있는 경우,, 판별을 어떻게 할것인가?  해당 라인에 Contents 가 포함되어있는지.. 를 봐야하는데...
+           
+            var emptySpacesTillEnter = 0
+            
+            // 만약,, 모두 space, \n 으로 이루어져 있는 경우, 에러가 생긴다.
+            // 카운트가 필요함.
+            
+            while(self.contentsToShow.count > emptySpacesTillEnter){
+                print("loops continues.. ")
+                print("count: \(self.contentsToShow.count)")
+                print("emptySpaces: \(emptySpacesTillEnter)")
+            if self.contentsToShow[self.contentsToShow.index(self.contentsToShow.startIndex, offsetBy: emptySpacesTillEnter)] == " "{
+                
+                emptySpacesTillEnter += 1
+                
+            } else if self.contentsToShow[self.contentsToShow.index(self.contentsToShow.startIndex, offsetBy: emptySpacesTillEnter)] == "\n" {
+                
+                if emptySpacesTillEnter != 0 {
+                for _ in 0 ..< emptySpacesTillEnter {
+                    self.contentsToShow.removeFirst()
+                }
+                } else {
+                    self.contentsToShow.removeFirst()
+                }
+                
+                emptySpacesTillEnter = 0
+                
             } else {
                 break
             }
+            
         }
-        context.saveCoreData()
-    }
+            
+//            while(self.contentsToShow != "") {
+//                if self.contentsToShow.first! == " " || self.contentsToShow.first! == "\n"{
+//                    //            if self.contentsToShow.first! == "\n"{
+//                    self.contentsToShow.removeFirst()
+//                } else {
+//                    break
+//                }
+//            }
+            context.saveCoreData()
+        }
 }
 
 extension Memo {

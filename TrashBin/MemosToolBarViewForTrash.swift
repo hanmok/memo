@@ -30,7 +30,7 @@ struct MemosToolBarViewForTrash: View {
             Button {
                 memoEditVM.initSelectedMemos()
             } label: {
-                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
+                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
             }
 
             Button {
@@ -38,7 +38,8 @@ struct MemosToolBarViewForTrash: View {
                 memoEditVM.add(memos: currentFolder.memos.sorted())
                 
             } label: {
-                UnchangeableImage(imageSystemName: "plus.square.on.square", width: 20, height: 20)
+                Text("All")
+                    .font(.headline)
             }
 
          

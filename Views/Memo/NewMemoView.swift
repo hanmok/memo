@@ -60,23 +60,34 @@ struct NewMemoView: View {
         // none is typed -> Do nothing. Cause memo is not created yet.
         } else {
             if memo != nil {
-                if memo!.folder == parent {
-                    parent.modificationDate = Date()
-                }
-
+                
                 memo!.contents = contents
-                memo!.isBookMarked = isBookMarkedTemp
-                memo!.isPinned = isPinned
-                memo!.creationDate = Date()
-                memo!.modificationDate = Date()
-                
                 memo!.saveTitleWithContentsToShow(context: context)
-                context.saveCoreData()
                 
+                if memo!.contentsToShow == "" && memo!.titleToShow == "" {
+                    Memo.delete(memo!)
+                } else {
+                    if memo!.folder == parent {
+                        parent.modificationDate = Date()
+                    }
+                    
+                    
+                    memo!.isBookMarked = isBookMarkedTemp
+                    memo!.isPinned = isPinned
+                    memo!.creationDate = Date()
+                    memo!.modificationDate = Date()
+                    
+                    
+                    context.saveCoreData()
+                }
                 // memo is not created yet.
-            } else {
+            } else { // and contents is not empty.
 
                 memo = Memo(contents: contents, context: context)
+                memo!.saveTitleWithContentsToShow(context: context)
+                if memo!.titleToShow == "" && memo!.contentsToShow == "" {
+                    Memo.delete(memo!)
+                } else {
                 memo!.isBookMarked = isBookMarkedTemp
                 memo!.isPinned = isPinned
                 memo!.creationDate = Date()
@@ -84,9 +95,10 @@ struct NewMemoView: View {
                 
                 parent.add(memo: memo!)
                 memo!.folder = parent
-                memo!.saveTitleWithContentsToShow(context: context)
+
                 context.saveCoreData()
                 parent.title += ""
+                }
             }
         }
     }
@@ -215,6 +227,8 @@ struct NewMemoView: View {
 //                PlainTextView(text: $contents)
 //                CustomTextView1(text: $contents)
                 MemoTextView(text: $contents)
+//                MemoTextViewTest1(text: $contents)
+//                PlainTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)

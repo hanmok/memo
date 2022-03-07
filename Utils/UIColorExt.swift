@@ -69,6 +69,3 @@ extension UIColor {
             return hex
         }
 }
-
-
-
