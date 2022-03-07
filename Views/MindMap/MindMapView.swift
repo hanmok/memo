@@ -40,18 +40,18 @@ struct MindMapView: View {
     @State var isShowingSearchView = false
     @State var isLoading = false
     
-    var hasSafeBottom: Bool {
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        if (window?.safeAreaInsets.bottom)! > 0 {
-            print("has safeArea!")
-            return true
-        } else {
-            print("does not have safeArea!")
-            return false
-        }
-    }
+//    var hasSafeBottom: Bool {
+//        let scenes = UIApplication.shared.connectedScenes
+//        let windowScene = scenes.first as? UIWindowScene
+//        let window = windowScene?.windows.first
+//        if (window?.safeAreaInsets.bottom)! > 0 {
+//            print("has safeArea!")
+//            return true
+//        } else {
+//            print("does not have safeArea!")
+//            return false
+//        }
+//    }
     
     func deleteFolder() {
         DispatchQueue.main.async {
@@ -328,7 +328,10 @@ struct MindMapView: View {
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
-            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder, hasSafeBottom: hasSafeBottom)
+            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder
+//                                 ,
+//                                 hasSafeBottom: hasSafeBottom
+            )
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoOrder)

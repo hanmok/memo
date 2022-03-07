@@ -33,19 +33,19 @@ struct NewMemoView: View {
     
     @Binding var isPresentingNewMemo: Bool
     
-    var hasSafeBottom: Bool {
-        
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        if (window?.safeAreaInsets.bottom)! > 0 {
-            print("has safeArea!")
-            return true
-        } else {
-            print("does not have safeArea!")
-            return false
-        }
-    }
+//    var hasSafeBottom: Bool {
+//        
+//        let scenes = UIApplication.shared.connectedScenes
+//        let windowScene = scenes.first as? UIWindowScene
+//        let window = windowScene?.windows.first
+//        if (window?.safeAreaInsets.bottom)! > 0 {
+//            print("has safeArea!")
+//            return true
+//        } else {
+//            print("does not have safeArea!")
+//            return false
+//        }
+//    }
     
     let parent: Folder
 
@@ -168,7 +168,7 @@ struct NewMemoView: View {
             VStack {
                 Rectangle()
 //                    .frame(width: UIScreen.screenWidth, height: 90)
-                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 90 : 70)
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }

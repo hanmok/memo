@@ -45,4 +45,17 @@ extension UIScreen {
     static let screenWidth = UIScreen.main.bounds.size.width
     static let screenHeight = UIScreen.main.bounds.size.height
     static let screenSize = UIScreen.main.bounds.size
+    
+    static var hasSafeBottom: Bool {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let window = windowScenes?.windows.first
+        if (window?.safeAreaInsets.bottom)! > 0 {
+            print("has safeArea!")
+            return true
+        } else {
+            print("does not have safeArea!")
+            return false
+        }
+    }
 }
