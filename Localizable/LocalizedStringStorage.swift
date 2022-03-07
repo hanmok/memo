@@ -56,6 +56,9 @@ struct LocalizedStringStorage {
     
     static let searchPlaceholder = NSLocalizedString(LocalizedStringKeys.searchPlaceholder, comment: "a")
     
+    static let newFolderPlaceHolder = NSLocalizedString(LocalizedStringKeys.newFolderPlaceHolder, comment: "a")
+    static let newArchivePlaceHolder = NSLocalizedString(LocalizedStringKeys.newArchivePlaceHolder, comment: "a")
+    
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
         case .newSubFolder: return LocalizedStringStorage.newSubFolder
@@ -138,4 +141,9 @@ struct LocalizedStringKeys {
     static let DecendingOrder = "Decending Order"
  
     static let searchPlaceholder = "Search Placeholder"
+    
+    static let newFolderPlaceHolder = "New Folder PlaceHolder"
+    static let newArchivePlaceHolder = "New Archive PlaceHolder"
+    
+    
 }

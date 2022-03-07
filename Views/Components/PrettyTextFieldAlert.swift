@@ -23,9 +23,12 @@ struct TextFieldStruct {
     var placeHolder: String {
         switch textEnum {
         case .rename: return ""
-        case .newSubFolder: return " Folder Name"
-        case .newTopFolder: return " Folder Name"
-        case .newTopArchive: return " Archive Name"
+//        case .newSubFolder: return "Folder Name"
+        case .newSubFolder: return LocalizedStringStorage.newFolderPlaceHolder
+//        case .newTopFolder: return "Folder Name"
+        case .newTopFolder: return LocalizedStringStorage.newFolderPlaceHolder
+//        case .newTopArchive: return "Folder Name"
+        case .newTopArchive: return LocalizedStringStorage.newFolderPlaceHolder
         }
     }
 }

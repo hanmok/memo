@@ -19,7 +19,8 @@
 "Rename Folder" = "폴더 이름 변경";
 "New Sub Folder" = "새 폴더";
 "New Archive" = "보관함 속 새 폴더";
-
+"New Folder PlaceHolder" = "폴더 이름";
+"New Archive PlaceHolder" = "폴더 이름";
 "Folder" = "폴더";
 "Archive" = "보관함";
 "Trash Bin" = "삭제된 메모";

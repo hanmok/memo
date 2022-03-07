@@ -20,6 +20,8 @@
 "Rename Folder" = "Rename Folder";
 "New Sub Folder" = "New Sub Folder";
 "New Archive" = "New Folder in Archive";
+"New Folder PlaceHolder" = "Folder Name";
+"New Archive PlaceHolder" = "Folder Name";
 
 "Folder" = "Folder";
 "Archive" = "Archive";
