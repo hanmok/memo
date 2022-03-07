@@ -182,7 +182,7 @@ struct MindMapView: View {
                                             .tint(Color.swipeBtnColor2)
                                         }
                                     // Change Folder Name
-                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                             
                                             Button {
                                                 folderEditVM.folderToRemove = folderWithLevel.folder
@@ -267,7 +267,7 @@ struct MindMapView: View {
                                             .tint(Color.swipeBtnColor2)
                                         }
                                     // Change Folder Name
-                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                                             // DELETE FOLDER
                                             Button {
                                                 folderEditVM.folderToRemove = folderWithLevel.folder

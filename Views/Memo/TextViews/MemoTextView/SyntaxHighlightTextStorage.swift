@@ -165,7 +165,7 @@ class SyntaxHighlightTextStorage: NSTextStorage {
             "\\s([A-Z]{2,})\\s": redTextAttributes
           ]
     }
-    
+//    app record creation failed due to an invalid attribute. request failed with error code "ENTITY_ERROR>ATTRIBUTE>INVALID>DUPLICATE",
     override init() {
         super.init()
         createHighlightPatterns()

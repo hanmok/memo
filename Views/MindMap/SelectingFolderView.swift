@@ -71,8 +71,9 @@ struct SelectingFolderView: View {
                 List(fastFolderWithLevelGroup.folders, id: \.self)  { folderWithLevel in
                     Button {
                         folderEditVM.folderToPaste = folderWithLevel.folder
-                        
+                        // 폴더 옮기는 과정.
                         if folderEditVM.folderToCut != nil {
+                            // 본인 아래의 Hierarchy 로 옮기는 경우 무효처리
                             if Folder.convertLevelIntoFolder(invalidFolderWithLevels).contains(folderEditVM.folderToPaste!) {
                                 folderEditVM.folderToCut = nil
                             } else {
@@ -80,6 +81,7 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 isValidAction = true
                             }
+                            // 메모 이동.
                         } else {
                             _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
@@ -163,9 +165,10 @@ struct SelectingFolderView: View {
         .onAppear{
             print("invalidFolderWithLevels : \(invalidFolderWithLevels)")
         }
+        
         .onDisappear {
             UIView.setAnimationsEnabled(true)
-            
+            Folder.updateTopFolders(context: context)
         }
         .navigationBarHidden(true)
     }

@@ -11,18 +11,33 @@ struct PlusImage: View {
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
+    var hasSafeBottom: Bool {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        if (window?.safeAreaInsets.bottom)! > 0 {
+            print("has safeArea!")
+            return true
+        } else {
+            print("does not have safeArea!")
+            return false
+        }
+    }
+    
     var body: some View {
         
         ZStack {
-            ChangeableImage(imageSystemName: "circle", width: 50, height: 50)
+            SystemImage("circle", size: hasSafeBottom ? 50 : 40)
                 .foregroundColor(colorScheme == .dark ? Color.black : Color.subColor)
                 .background(colorScheme == .dark ? Color.black : Color.subColor)
                 .clipShape(Circle())
                 .overlay(Circle()
                             .stroke( Color.subColor, lineWidth: 3))
             
+//            SystemImage("plus", size: hasSafeBottom ? 25 : 18)
             SystemImage("plus")
-                .frame(width: 25, height: 25)
+//            SystemImage("plus", size: hasSafeBottom ? 30 : 18)
+                .frame(width: hasSafeBottom ? 25 : 18, height: hasSafeBottom ? 25 : 18)
                 .foregroundColor(colorScheme == .dark ? Color.subColor : Color.black)
         }
     }

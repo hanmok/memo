@@ -18,8 +18,8 @@ struct DeeepMemoApp: App {
     
     var body: some Scene {
         print("isFirstLaunch: \(isFirstLaunch)")
-        
-        
+
+
 ////         For testing
 //        // for Dev
         
@@ -33,13 +33,13 @@ struct DeeepMemoApp: App {
 //       }
 //
 //        if !isFirstLaunch {
-//            let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
+//            let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
 //            persistenceController.container.viewContext.saveCoreData()
 //            print("newFolders: \(newFolders)")
 //            isFirstLaunch = false
 //        }
             
-            // For Product
+//            // For Product
             if isFirstLaunch {
                 let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
                 persistenceController.container.viewContext.saveCoreData()

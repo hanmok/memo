@@ -275,6 +275,7 @@ struct CustomSearchView: View {
                                                     MemoBoxView(memo: eachMemo)
                                                         .environmentObject(memoEditVM)
                                                 }
+                                                .padding(.bottom, Sizes.spacingBetweenMemoBox)
                                             }
                                         }
                                     }

@@ -80,7 +80,7 @@ struct BookmarkedFolderView: View {
                             .frame(width: UIScreen.screenWidth, height: 30)
                             .background(Color.bookmarkBarColor)
                             .foregroundColor(Color.bookmarkBarColor)
-                            .offset(y: -20)
+                            .offset(y: hasSafeBottom ? -20 : -15)
                         
                         HStack {
                             HStack {
@@ -89,7 +89,7 @@ struct BookmarkedFolderView: View {
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundColor(Color.blackAndWhite)
-                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : -20 )
+                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : hasSafeBottom ? -20 : -15)
                             .animation(.spring(response: 0.2), value: isPresentingMemoView || isPresentingNewMemoView)
                             
                             Spacer()
@@ -102,7 +102,7 @@ struct BookmarkedFolderView: View {
                                 PlusImage() // plus Image with subColor
                             }
 
-                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : -35 ) // priv : -25
+                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : hasSafeBottom ? -35: -30 ) // priv : -25
                             .animation(.spring(response: 0.2), value: isPresentingMemoView || isPresentingNewMemoView)
                         }
                         .padding(.horizontal, Sizes.overallPadding)
