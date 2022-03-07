@@ -39,18 +39,33 @@ struct DeeepMemoApp: App {
 //            isFirstLaunch = false
 //        }
             
-//            // For Product
-            if isFirstLaunch {
-                let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
-                persistenceController.container.viewContext.saveCoreData()
-                print("newFolders: \(newFolders)")
-                print("newFolders.count: \(newFolders.count)")
-                _ = newFolders.map { print($0.title)}
-                isFirstLaunch = false
-            } else {
-                print("no newFolders. it's not first launch! ")
+        //            // For Product
+        // how do i.. know..?
+        
+        // two steps for not providing more folders than 3
+        if isFirstLaunch {
+            let folderReq = Folder.fetch(.all)
+            if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
+                if folders.count == 0 {
+                    let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
+                    persistenceController.container.viewContext.saveCoreData()
+                    print("newFolders: \(newFolders.count)")
+                } else if folders.count < 3 {
+                    _ = folders.map { Folder.delete($0)}
+                    let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
+                    persistenceController.container.viewContext.saveCoreData()
+                    print("newFolders: \(newFolders.count)")
+                }
             }
             
+            //                print("newFolders: \(newFolders)")
+            //                print("newFolders.count: \(newFolders.count)")
+            //                _ = newFolders.map { print($0.title)}
+            isFirstLaunch = false
+        } else {
+            print("no newFolders. it's not first launch! ")
+        }
+        
         
         
         return WindowGroup {
