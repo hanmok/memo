@@ -299,3 +299,7 @@ Demensions Available for uploding
 
 
 calie's privacy policy
+
+git commit -m "Add ModificationDate to MemoBoxView, change ModificationDate when deleted(to static func)"
+
+

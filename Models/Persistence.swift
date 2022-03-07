@@ -12,9 +12,11 @@ struct PersistenceController {
     
 //    let container: NSPersistentCloudKitContainer
     let container: NSPersistentCloudKitContainer
+//    let container: NSPersistentContainer
     
     init(inMemory: Bool = false) {
         container = NSPersistentCloudKitContainer(name:"DeeepMemo" )
+//        container = NSPersistentContainer(name: "DeeepMemo")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }

@@ -321,6 +321,7 @@ struct MindMapView: View {
             } // end of VStack , Inside ZStack.
             
             if isLoading {
+                Color(.clear)
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
                     .scaleEffect(2)

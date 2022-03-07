@@ -43,6 +43,7 @@ struct DeeepMemoApp: App {
         // how do i.. know..?
         
         // two steps for not providing more folders than 3
+        
         if isFirstLaunch {
             let folderReq = Folder.fetch(.all)
             if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
@@ -57,7 +58,7 @@ struct DeeepMemoApp: App {
                     print("newFolders: \(newFolders.count)")
                 }
             }
-            
+
             //                print("newFolders: \(newFolders)")
             //                print("newFolders.count: \(newFolders.count)")
             //                _ = newFolders.map { print($0.title)}

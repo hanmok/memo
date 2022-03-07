@@ -100,6 +100,7 @@ extension Memo {
     
     static func moveToTrashBin(_ memo: Memo, _ trash: Folder) {
         if let context = memo.managedObjectContext {
+            memo.modificationDate = Date()
             memo.folder = trash
             context.saveCoreData()
         }

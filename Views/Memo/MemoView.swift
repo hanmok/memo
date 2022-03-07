@@ -107,7 +107,7 @@ struct MemoView: View {
     }
     
     func removeMemo() {
-        
+//        memo.modificationDate = Date()
             Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
         context.saveCoreData()
         presentationMode.wrappedValue.dismiss()
