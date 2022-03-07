@@ -76,11 +76,13 @@ struct FolderType {
             if target == FolderNames(type: .folder).engName || target == FolderNames(type: .folder).korName {
                 return true
             }
+            
         case .archive:
 //            if target == "Archive" || target == "보관함" {
             if target == FolderNames(type: .archive).engName || target == FolderNames(type: .archive).korName {
                 return true
             }
+            
         case .trashbin:
 //            if target == "Deleted Memos" || target == "삭제된 메모"{
             if target == FolderNames(type: .trashbin).engName || target == FolderNames(type: .trashbin).korName {
@@ -570,7 +572,7 @@ extension Folder : Comparable {
 
 extension Folder {
     
-    static func returnSampleFolder3(context: NSManagedObjectContext) -> [Folder] {
+    static func provideInitialFolders(context: NSManagedObjectContext) -> [Folder] {
         
         let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
         
@@ -583,9 +585,6 @@ extension Folder {
         subFolder1.creationDate = Date().advanced(by: 100)
         subFolder2.creationDate = Date().advanced(by: 200)
         subFolder3.creationDate = Date().advanced(by: 300)
-        
-
-        
         
         
         homeFolder.add(subfolder: subFolder1)
@@ -601,6 +600,7 @@ extension Folder {
        
         
         let trashBin = Folder(title: FolderType.getFolderName(type: .trashbin), context: context)
+        
         context.saveCoreData()
         return [homeFolder, archive, trashBin]
     }

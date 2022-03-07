@@ -49,7 +49,7 @@
 "Creation Date" = "Creation Date";
 "Alphabetical" = "Alphabetical";
 
-"Ascending Order" = "Ascending Order";
-"Decending Order" = "Decending Order";
+"Ascending Order" = "Oldest to Newest";
+"Decending Order" = "Newset to Oldest";
 
 "Search Placeholder" = "Search";

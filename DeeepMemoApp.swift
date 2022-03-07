@@ -41,10 +41,14 @@ struct DeeepMemoApp: App {
             
             // For Product
             if isFirstLaunch {
-                let newFolders = Folder.returnSampleFolder3(context: persistenceController.container.viewContext)
+                let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
                 persistenceController.container.viewContext.saveCoreData()
                 print("newFolders: \(newFolders)")
+                print("newFolders.count: \(newFolders.count)")
+                _ = newFolders.map { print($0.title)}
                 isFirstLaunch = false
+            } else {
+                print("no newFolders. it's not first launch! ")
             }
             
         
