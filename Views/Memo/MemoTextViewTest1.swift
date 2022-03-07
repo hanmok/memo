@@ -122,7 +122,7 @@ class AttributedStringManager {
     }
 }
 
-struct MemoTextView1: UIViewRepresentable {
+struct MemoTextViewTest1: UIViewRepresentable {
     
     @Environment(\.colorScheme) var colorSchme
     @Binding var text: String

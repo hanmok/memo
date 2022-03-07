@@ -226,9 +226,9 @@ struct NewMemoView: View {
                 
 //                PlainTextView(text: $contents)
 //                CustomTextView1(text: $contents)
-//                MemoTextView(text: $contents)
-//                MemoTextView1(text: $contents)
-                PlainTextView(text: $contents)
+                MemoTextView(text: $contents)
+//                MemoTextViewTest1(text: $contents)
+//                PlainTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)

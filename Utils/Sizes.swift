@@ -20,6 +20,8 @@ struct Sizes {
     static let navBtnLeadingSpacing: CGFloat = 10
     /// 4
     static let minimalSpacing: CGFloat = 4
+    /// 4
+    static let spacingBetweenMemoBox: CGFloat = 4
     /// 8
     static let smallSpacing: CGFloat = 8
     /// 12

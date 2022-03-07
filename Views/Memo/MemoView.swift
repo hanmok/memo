@@ -163,8 +163,8 @@ struct MemoView: View {
                 .padding(.leading, Sizes.navBtnLeadingSpacing)
 
                 
-//                MemoTextView(text: $contents)
-                PlainTextView(text: $contents)
+                MemoTextView(text: $contents)
+//                PlainTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
@@ -189,6 +189,8 @@ struct MemoView: View {
             isPresentingView = false
             print("memoView has disappeared!")
             saveChanges()
+            // Update BookmarkFolder memoList after deselecting bookmark
+            Folder.updateTopFolders(context: context)
             print("data saved!")
 
         })

@@ -66,7 +66,7 @@ struct TrashBinSubMemoList: View {
                                     onEnd(value: value, memo: memo)
                                 }))
                         } // end of ZStack
-                        .padding(.bottom, 8)
+                        .padding(.bottom, Sizes.spacingBetweenMemoBox)
                             .disabled(memoEditVM.isSelectionMode)
 
                             .gesture(DragGesture()
