@@ -27,9 +27,9 @@ struct LocalizedStringStorage {
     static let selectFolder = NSLocalizedString(LocalizedStringKeys.selectFolder, comment: "a")
     static let newArchive = NSLocalizedString(LocalizedStringKeys.newArchive, comment: "A")
     
-    static let category1 = NSLocalizedString(LocalizedStringKeys.category1, comment: "a")
-    static let category2 = NSLocalizedString(LocalizedStringKeys.category2, comment: "a")
-    static let category3 = NSLocalizedString(LocalizedStringKeys.category3, comment: "a")
+//    static let category1 = NSLocalizedString(LocalizedStringKeys.category1, comment: "a")
+//    static let category2 = NSLocalizedString(LocalizedStringKeys.category2, comment: "a")
+//    static let category3 = NSLocalizedString(LocalizedStringKeys.category3, comment: "a")
     
     //    static let subCategory1 = NSLocalizedString(LocalizedStringKeys.subCategory1, comment: "a")
     
@@ -116,9 +116,9 @@ struct LocalizedStringKeys {
     
     static let selectFolder = "Select Folder"
     
-    static let category1 = "category1"
-    static let category2 = "category2"
-    static let category3 = "category3"
+//    static let category1 = "category1"
+//    static let category2 = "category2"
+//    static let category3 = "category3"
     
     //    static let subCategory1 = "Sub Category 1"
     

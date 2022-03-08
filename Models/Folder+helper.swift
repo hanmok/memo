@@ -576,24 +576,24 @@ extension Folder {
         
         let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
         
-        context.saveCoreData()
+//        context.saveCoreData()
         
-        let subFolder1 = Folder(title: LocalizedStringStorage.category1, context: context)
-        let subFolder2 = Folder(title: LocalizedStringStorage.category2, context: context)
-        let subFolder3 = Folder(title: LocalizedStringStorage.category3, context: context)
-        
-        subFolder1.creationDate = Date().advanced(by: 100)
-        subFolder2.creationDate = Date().advanced(by: 200)
-        subFolder3.creationDate = Date().advanced(by: 300)
-        
-        
-        homeFolder.add(subfolder: subFolder1)
-        homeFolder.add(subfolder: subFolder2)
-        homeFolder.add(subfolder: subFolder3)
-        
-        subFolder1.modificationDate = Date().advanced(by: 100)
-        subFolder2.modificationDate = Date().advanced(by: 200)
-        subFolder3.modificationDate = Date().advanced(by: 300)
+//        let subFolder1 = Folder(title: LocalizedStringStorage.category1, context: context)
+//        let subFolder2 = Folder(title: LocalizedStringStorage.category2, context: context)
+//        let subFolder3 = Folder(title: LocalizedStringStorage.category3, context: context)
+//
+//        subFolder1.creationDate = Date().advanced(by: 100)
+//        subFolder2.creationDate = Date().advanced(by: 200)
+//        subFolder3.creationDate = Date().advanced(by: 300)
+//
+//
+//        homeFolder.add(subfolder: subFolder1)
+//        homeFolder.add(subfolder: subFolder2)
+//        homeFolder.add(subfolder: subFolder3)
+//
+//        subFolder1.modificationDate = Date().advanced(by: 100)
+//        subFolder2.modificationDate = Date().advanced(by: 200)
+//        subFolder3.modificationDate = Date().advanced(by: 300)
         
         let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
         archive.title += ""

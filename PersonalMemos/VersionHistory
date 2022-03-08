@@ -37,3 +37,10 @@ prob: subfolder 내에서 같은 행동을 하면 위 folder 로 이동함.
 solution: memoView 에 있는 Folder.updateTOpFolders 를 folderView 내에서는 호출하지 않도록 함.
 parameter: calledFromMainView
 
+
+
+
+1.0.5 ->
+
+git commit -m "Remove PlaceHolder Folders"
+
