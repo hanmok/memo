@@ -50,6 +50,7 @@
 		9AA2672C27BE45BD00AC75DB /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672B27BE45BD00AC75DB /* UIColorExt.swift */; };
 		9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */; };
 		9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
+		9AA65B3627D6BA8F00C1F383 /* VersionHistory in Resources */ = {isa = PBXBuildFile; fileRef = 9AA65B3527D6BA8F00C1F383 /* VersionHistory */; };
 		9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AB724D427CD2C6B006A825C /* Localizable.strings */; };
 		9AB724D727CD2D17006A825C /* LocalizedStringStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */; };
 		9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D927CE79EC006A825C /* TrashFolderView.swift */; };
@@ -171,6 +172,7 @@
 		9AA2672E27BE4D3700AC75DB /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		9AA2673127BE4E2900AC75DB /* FavColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavColors.swift; sourceTree = "<group>"; };
 		9AA65B3427D6A29A00C1F383 /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9AA65B3527D6BA8F00C1F383 /* VersionHistory */ = {isa = PBXFileReference; lastKnownFileType = text; path = VersionHistory; sourceTree = "<group>"; };
 		9AB724D327CD2C6B006A825C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D527CD2C9B006A825C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringStorage.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				9AC5D13C2785247D007EAA28 /* Terms */,
 				9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */,
 				9AA65B3427D6A29A00C1F383 /* Testing.playground */,
+				9AA65B3527D6BA8F00C1F383 /* VersionHistory */,
 			);
 			path = PersonalMemos;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				9A3378272796DECA00805138 /* ProblemsAndSolutions in Resources */,
 				9A0474C02771709D00571D66 /* OverallMemo in Resources */,
 				9A0474A927715D1400571D66 /* Assets.xcassets in Resources */,
+				9AA65B3627D6BA8F00C1F383 /* VersionHistory in Resources */,
 				9AC5D22E278BD8C6007EAA28 /* CurrentTodoLists in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

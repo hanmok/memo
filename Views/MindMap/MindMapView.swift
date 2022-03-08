@@ -343,7 +343,8 @@ struct MindMapView: View {
                 fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, // 애매하네..
                 showingSearchView: $isShowingSearchView,
             shouldShowAll: true,
-                shouldIncludeTrash: selectionEnum == .archive)
+                shouldIncludeTrashOnCurrent: selectionEnum == .archive,
+            shouldIncludeTrashOverall: true)
             
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
@@ -417,6 +418,18 @@ struct MindMapView: View {
                                     isFullScreen: true)
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
+            }
+        })
+        .onAppear(perform: {
+            print("MindMapView has Appeared!")
+            let allMemosReq = Memo.fetch(.all)
+            
+            if let allMemos = try? context.fetch(allMemosReq) {
+                _ = allMemos.map {
+                    if $0.folder == nil {
+                        $0.folder = trashBinVM.trashBinFolder
+                    }
+                }
             }
         })
         .navigationBarHidden(true)

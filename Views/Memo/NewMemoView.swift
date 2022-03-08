@@ -156,7 +156,7 @@ struct NewMemoView: View {
                 memo!.saveTitleWithContentsToShow(context: context)
                 Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
-                parent.title += ""
+//                parent.title += ""
             }
         }
         presentationMode.wrappedValue.dismiss()

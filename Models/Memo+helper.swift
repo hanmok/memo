@@ -97,11 +97,17 @@ extension Memo {
             context.saveCoreData()
         }
     }
-    
+    // topFolder 가 업데이트되면, Folder 로 이동.. 어떻게 해결하지..?
+        // 1. trashBin 이 Folder 가 아니면 됨.
+    // 2.
+    // this function makes bug.. why??
     static func moveToTrashBin(_ memo: Memo, _ trash: Folder) {
         if let context = memo.managedObjectContext {
-            memo.modificationDate = Date()
-            memo.folder = trash
+            memo.modificationDate = Date() // it's not the problem..
+            memo.folder = nil
+            // make topFolder update, which navigate to prev Folder for subFolder
+//            memo.folder = trash
+
             context.saveCoreData()
         }
     }
