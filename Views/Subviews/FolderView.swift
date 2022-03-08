@@ -21,8 +21,8 @@ struct FolderView: View {
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var folderEditVM : FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    @EnvironmentObject var  trashBinVM: TrashBinViewModel
-    
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
+    // TrashBinViewModel
     @ObservedObject var currentFolder: Folder
     
     @FocusState var addFolderFocus: Bool
@@ -52,10 +52,11 @@ struct FolderView: View {
         currentFolder.isFavorite.toggle()
         currentFolder.modificationDate = Date()
         // 업데이트가 바로 안됨. 이럴땐 어떻게 해 ?
-        Folder.updateTopFolders(context: context)
+        // this line make folder to go back.
+//        Folder.updateTopFolders(context: context) // .. topFolder 가 업데이트 되서 그런거야 ?
         context.saveCoreData()
     }
-    
+
     func showSubFolderView() {
         isShowingSubFolderView = true
     }
@@ -70,7 +71,8 @@ struct FolderView: View {
         
         if isAddingFolder {
             DispatchQueue.main.async {
-                newSubFolderName = "\(currentFolder.title)'s \(currentFolder.subfolders.count + 1) th \(LocalizedStringStorage.folder)"
+//                newSubFolderName = "\(currentFolder.title)'s \(currentFolder.subfolders.count + 1) th \(LocalizedStringStorage.folder)"
+                newSubFolderName = ""
             }
         }
         
@@ -192,6 +194,10 @@ struct FolderView: View {
                             folder: currentFolder,
                             isShowingSubFolderView: $isShowingSubFolderView,
                             isAddingFolder: $isAddingFolder)
+                            .environmentObject(folderEditVM)
+                            .environmentObject(memoEditVM)
+                            .environmentObject(memoOrder)
+                            .environmentObject(trashBinVM)
                         
                         // offset x : trailingPadding
                             .offset(x: isShowingSubFolderView ? -Sizes.overallPadding : UIScreen.screenWidth)
@@ -262,10 +268,12 @@ struct FolderView: View {
                 })
             
             NavigationLink(destination:
-                            NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)), isActive: $isAddingMemo) {}
+                            NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false))
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
-                            .environmentObject(trashBinVM)
+                            .environmentObject(trashBinVM),
+                           isActive: $isAddingMemo) {}
+                            
         } // end of ZStack
         .frame(maxHeight: .infinity)
         

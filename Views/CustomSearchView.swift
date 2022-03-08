@@ -39,20 +39,23 @@ struct CustomSearchView: View {
     @State var searchTypeEnum: SearchType
     
     @Binding var showingSearchView: Bool
-    var shouldIncludeTrash: Bool
     
+    var shouldIncludeTrashOnCurrent: Bool
+    var shouldIncludeTrashOverall: Bool
     var allFolders: [Folder] {
         var folders: [Folder] = []
         _ = fastFolderWithLevelGroup.folders.map { folders.append($0.folder)}
         _ = fastFolderWithLevelGroup.archives.map { folders.append($0.folder)}
+        if shouldIncludeTrashOverall {
         folders.append(trashBinVM.trashBinFolder)
+        }
         return folders
     }
     // 여기다..
     var currentFolders: [Folder] {
         var folders: [Folder] = []
         _ = Folder.getHierarchicalFolders(topFolder: currentFolder).map { folders.append($0.folder)}
-        if shouldIncludeTrash {
+        if shouldIncludeTrashOnCurrent {
             folders.append(trashBinVM.trashBinFolder)
         }
         print("appended Folders in currnetFolders: \(folders)")
@@ -72,13 +75,15 @@ struct CustomSearchView: View {
     
 
     
-    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, shouldShowAll: Bool = false, shouldIncludeTrash: Bool = false ) {
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, shouldShowAll: Bool = false, shouldIncludeTrashOnCurrent: Bool = false,
+         shouldIncludeTrashOverall: Bool = false) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _showingSearchView = showingSearchView
         // initialize state value
         _searchTypeEnum = State(initialValue: shouldShowAll ? .all : .current)
-        self.shouldIncludeTrash = shouldIncludeTrash
+        self.shouldIncludeTrashOnCurrent = shouldIncludeTrashOnCurrent
+        self.shouldIncludeTrashOverall = shouldIncludeTrashOverall
     }
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
@@ -244,7 +249,10 @@ struct CustomSearchView: View {
                                     Spacer()
                                     Text(LocalizedStringStorage.emptySearchResult)
                                         .frame(maxWidth: .infinity, alignment: .center)
+                                    
+                                    
                                 }
+                                
                             }// searchTypeEnum == .current
                             else {
                                 if foundMemos!.count != 0 {
@@ -295,5 +303,10 @@ struct CustomSearchView: View {
 
             .navigationBarHidden(true)
         }
+        .onAppear {
+            print("CustomSearchView has appeared!!!!!")
+        }
+           
+        
     }
 }

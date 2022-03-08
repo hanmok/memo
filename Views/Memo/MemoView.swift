@@ -43,19 +43,19 @@ struct MemoView: View {
         }
     }
     
-    var hasSafeBottom: Bool {
-        
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        if (window?.safeAreaInsets.bottom)! > 0 {
-            print("has safeArea!")
-            return true
-        } else {
-            print("does not have safeArea!")
-            return false
-        }
-    }
+//    var hasSafeBottom: Bool {
+//
+//        let scenes = UIApplication.shared.connectedScenes
+//        let windowScene = scenes.first as? UIWindowScene
+//        let window = windowScene?.windows.first
+//        if (window?.safeAreaInsets.bottom)! > 0 {
+//            print("has safeArea!")
+//            return true
+//        } else {
+//            print("does not have safeArea!")
+//            return false
+//        }
+//    }
     
     init(memo: Memo, parent: Folder, presentingView: Binding<Bool>) {
         self.memo = memo
@@ -107,19 +107,19 @@ struct MemoView: View {
     }
     
     func removeMemo() {
-        
+//        memo.modificationDate = Date()
             Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
         context.saveCoreData()
         presentationMode.wrappedValue.dismiss()
     }
     
     var body: some View {
-        print("has Safebottom ? \(hasSafeBottom)")
+        print("has Safebottom ? \(UIScreen.hasSafeBottom)")
         
         return ZStack(alignment: .topLeading) {
             VStack {
                 Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
-                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 90 : 70)
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }

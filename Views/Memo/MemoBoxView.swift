@@ -16,9 +16,10 @@ struct MemoBoxView: View {
     
     @ObservedObject var memo: Memo
     
+    
     var body: some View {
-        
-        VStack(alignment: .leading, spacing: 5) {
+    
+        return VStack(alignment: .leading, spacing: 5) {
             if memo.titleToShow != "" {
                 Text(memo.titleToShow)
                 .font(.headline)
@@ -29,15 +30,6 @@ struct MemoBoxView: View {
                 .padding(.leading, Sizes.smallSpacing)
             }
             if memo.contentsToShow != "" {
-//                Text("\n")
-//                    .font(UIFont(name: "", size: 1))
-//                    .frame(height: 2)
-//                if memo.titleToShow != "" {
-////                    Spacer(minLength: 3)
-//                    EmptyView()
-//                        .frame(height: 10)
-//                }
-                
                 Text(memo.contentsToShow)
                     .font(.caption)
                     .foregroundColor(Color.blackAndWhite)
@@ -45,6 +37,13 @@ struct MemoBoxView: View {
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, Sizes.smallSpacing)
+            }
+            // 2022. 05. 14,
+            HStack {
+                Spacer()
+                Text("\(memo.modificationDate.formatted(date: .abbreviated, time: .omitted))")
+                    .font(.caption2)
+                    .foregroundColor(Color.blackAndWhite)
             }
         }
         .padding(.horizontal, Sizes.smallSpacing)

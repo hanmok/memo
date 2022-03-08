@@ -24,10 +24,10 @@ struct BookmarkedFolderView: View {
     @State var isPresentingMemoView = false
     @State var isPresentingNewMemoView = false
     
-    var hasSafeBottom: Bool
+//    var hasSafeBottom: Bool
     
     var body: some View {
-        print("hasSafeBottom: \(hasSafeBottom)")
+        print("hasSafeBottom: \(UIScreen.hasSafeBottom)")
         return ZStack {
             NavigationView {
                 ZStack(alignment: .topLeading) {
@@ -54,7 +54,7 @@ struct BookmarkedFolderView: View {
                                 .padding(.horizontal, Sizes.properSpacing)
                             }
                         } // end of ScrollView
-                        .frame(height: hasSafeBottom ? 150 : 125)
+                        .frame(height: UIScreen.hasSafeBottom ? 150 : 125)
                         .padding(.top, 10)
                         
                         Spacer()
@@ -80,7 +80,7 @@ struct BookmarkedFolderView: View {
                             .frame(width: UIScreen.screenWidth, height: 30)
                             .background(Color.bookmarkBarColor)
                             .foregroundColor(Color.bookmarkBarColor)
-                            .offset(y: hasSafeBottom ? -20 : -15)
+                            .offset(y: UIScreen.hasSafeBottom ? -20 : -15)
                         
                         HStack {
                             HStack {
@@ -89,7 +89,7 @@ struct BookmarkedFolderView: View {
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundColor(Color.blackAndWhite)
-                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : hasSafeBottom ? -20 : -15)
+                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : UIScreen.hasSafeBottom ? -20 : -15)
                             .animation(.spring(response: 0.2), value: isPresentingMemoView || isPresentingNewMemoView)
                             
                             Spacer()
@@ -102,7 +102,7 @@ struct BookmarkedFolderView: View {
                                 PlusImage() // plus Image with subColor
                             }
 
-                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : hasSafeBottom ? -35: -30 ) // priv : -25
+                            .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : UIScreen.hasSafeBottom ? -35: -30 ) // priv : -25
                             .animation(.spring(response: 0.2), value: isPresentingMemoView || isPresentingNewMemoView)
                         }
                         .padding(.horizontal, Sizes.overallPadding)
@@ -113,7 +113,7 @@ struct BookmarkedFolderView: View {
                 Spacer()
             }
         } // end of ZStack
-        .offset(y: (isPresentingMemoView || isPresentingNewMemoView) ? 0 : (hasSafeBottom ? UIScreen.screenHeight - 250 : UIScreen.screenHeight - 170  ))
+        .offset(y: (isPresentingMemoView || isPresentingNewMemoView) ? 0 : (UIScreen.hasSafeBottom ? UIScreen.screenHeight - 250 : UIScreen.screenHeight - 170  ))
         .animation(.spring(response: 0.1), value: isPresentingMemoView || isPresentingNewMemoView)
     }
 }

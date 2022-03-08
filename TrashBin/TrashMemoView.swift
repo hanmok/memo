@@ -37,18 +37,18 @@ struct TrashMemoView: View {
         }
     }
     
-    var hasSafeBottom: Bool {
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        if (window?.safeAreaInsets.bottom)! > 0 {
-            print("has safeArea!")
-            return true
-        } else {
-            print("does not have safeArea!")
-            return false
-        }
-    }
+//    var hasSafeBottom: Bool {
+//        let scenes = UIApplication.shared.connectedScenes
+//        let windowScene = scenes.first as? UIWindowScene
+//        let window = windowScene?.windows.first
+//        if (window?.safeAreaInsets.bottom)! > 0 {
+//            print("has safeArea!")
+//            return true
+//        } else {
+//            print("does not have safeArea!")
+//            return false
+//        }
+//    }
     
     init(memo: Memo, parent: Folder) {
         self.memo = memo
@@ -85,7 +85,7 @@ struct TrashMemoView: View {
         return ZStack(alignment: .topLeading) {
             VStack {
                 Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
-                    .frame(width: UIScreen.screenWidth, height: hasSafeBottom ? 90 : 70)
+                    .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 
                 Spacer()

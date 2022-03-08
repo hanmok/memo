@@ -40,18 +40,18 @@ struct MindMapView: View {
     @State var isShowingSearchView = false
     @State var isLoading = false
     
-    var hasSafeBottom: Bool {
-        let scenes = UIApplication.shared.connectedScenes
-        let windowScene = scenes.first as? UIWindowScene
-        let window = windowScene?.windows.first
-        if (window?.safeAreaInsets.bottom)! > 0 {
-            print("has safeArea!")
-            return true
-        } else {
-            print("does not have safeArea!")
-            return false
-        }
-    }
+//    var hasSafeBottom: Bool {
+//        let scenes = UIApplication.shared.connectedScenes
+//        let windowScene = scenes.first as? UIWindowScene
+//        let window = windowScene?.windows.first
+//        if (window?.safeAreaInsets.bottom)! > 0 {
+//            print("has safeArea!")
+//            return true
+//        } else {
+//            print("does not have safeArea!")
+//            return false
+//        }
+//    }
     
     func deleteFolder() {
         DispatchQueue.main.async {
@@ -321,13 +321,17 @@ struct MindMapView: View {
             } // end of VStack , Inside ZStack.
             
             if isLoading {
+                Color(.clear)
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
                     .scaleEffect(2)
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
-            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder, hasSafeBottom: hasSafeBottom)
+            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder
+//                                 ,
+//                                 hasSafeBottom: hasSafeBottom
+            )
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoOrder)
@@ -339,7 +343,8 @@ struct MindMapView: View {
                 fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, // 애매하네..
                 showingSearchView: $isShowingSearchView,
             shouldShowAll: true,
-                shouldIncludeTrash: selectionEnum == .archive)
+                shouldIncludeTrashOnCurrent: selectionEnum == .archive,
+            shouldIncludeTrashOverall: true)
             
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
@@ -413,6 +418,18 @@ struct MindMapView: View {
                                     isFullScreen: true)
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
+            }
+        })
+        .onAppear(perform: {
+            print("MindMapView has Appeared!")
+            let allMemosReq = Memo.fetch(.all)
+            
+            if let allMemos = try? context.fetch(allMemosReq) {
+                _ = allMemos.map {
+                    if $0.folder == nil {
+                        $0.folder = trashBinVM.trashBinFolder
+                    }
+                }
             }
         })
         .navigationBarHidden(true)

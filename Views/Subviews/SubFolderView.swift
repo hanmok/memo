@@ -63,6 +63,7 @@ struct SubFolderView: View {
                             .environmentObject(folderEditVM)
                             .environmentObject(memoEditVM)
                             .environmentObject(memoOrder)
+                            .environmentObject(trashBinVM)
                     } label: {
                         Text(subFolder.title)
                             .frame(alignment: .leading)

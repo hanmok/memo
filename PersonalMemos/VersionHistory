@@ -1,0 +1,25 @@
+
+1.0.4 ->
+Modify New Folder initial Text
+Fix navigation through SubFolderView Bug (trashBin not provided)
+
+해결됨.
+solution:
+TopFolder 를 업데이트 하면서 뒤로 가는 현상임. 먼저 memo.folder = nil,
+MindMapView 에서 folder 없는 memo 를 trash 로 옮김.
+폴더 내에서는 휴지통을 볼 수 없도록 바꿈.
+
+prob:
+어떤 Folder -> SubFolder 로 이동 후
+1. 어떤 메모 삭제하면 어떤 Folder 로 튕김. SubFolder 로 가야하는애가 더 뒤로감. 왜이러지?
+
+
+해결됨.
+solution:
+엉뚱한 곳에 environmentObject 를 전해주고 있었음. 수정함.
+
+prob:
+2. 여기에서, 메모를 생성 후 텍스트 입력, 바로 다시 제거했을 경우
+NewMemoView 157 번째 줄
+TrashBinViewModel 을 받지 못했다고 나옴.
+
