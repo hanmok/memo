@@ -13,19 +13,24 @@ class MemoEditViewModel: ObservableObject {
     
     var someBool: Bool = false
     
-    public var count: Int {
-        get { selectedMemos.count }
-        set { if newValue == 0 {
-            self.parentFolder = nil
-        }}
-    }
+    // 이거 없애니까 잘 보이긴 하네 .. ? 아님. 여전히 안보임.
+//    public var count: Int {
+//        get { selectedMemos.count }
+//        set { if newValue == 0 {
+//            self.parentFolder = nil
+//        }}
+//    }
+    
+    // 왜 뒤로가?
     
     func add(memo: Memo) {
+        print("memo has added!")
         self.selectedMemos.update(with: memo)
         self.parentFolder = memo.folder
     }
     
     func add(memos: [Memo]) {
+        print("memo has added!")
         _ = memos.map { self.selectedMemos.update(with: $0)}
         
         if memos.count != 0 {
@@ -34,12 +39,14 @@ class MemoEditViewModel: ObservableObject {
     }
     
     func erase(memo: Memo) {
+        print("memo has erased!")
         self.selectedMemos.remove(memo)
         if selectedMemos.isEmpty {
             self.isSelectionMode = false
         }
     }
     
+    // not effective.
     func initSelectedMemos() {
         self.selectedMemos.removeAll()
         isSelectionMode = false

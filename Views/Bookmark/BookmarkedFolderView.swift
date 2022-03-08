@@ -41,7 +41,7 @@ struct BookmarkedFolderView: View {
                                     ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
                                         
                                         NavigationLink(destination:
-                                                        MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $isPresentingMemoView )
+                                                        MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $isPresentingMemoView, calledFromMainView: true )
                                                        
                                                         .environmentObject(memoEditVM)
                                                         .environmentObject(folderEditVM)

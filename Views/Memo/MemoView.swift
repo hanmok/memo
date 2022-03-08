@@ -32,7 +32,7 @@ struct MemoView: View {
     @State var isBookMarkedTemp: Bool?
     
     @Binding var isPresentingView: Bool
-    
+    var calledFromMainView: Bool
     var backBtn : some View {
         Button(action: {
             self.isPresentingView = false
@@ -57,10 +57,12 @@ struct MemoView: View {
 //        }
 //    }
     
-    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>) {
+    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>, calledFromMainView: Bool = false) {
         self.memo = memo
         self.parent = parent
         self._isPresentingView = presentingView
+        self.calledFromMainView = calledFromMainView
+        
     }
     
     
@@ -190,9 +192,12 @@ struct MemoView: View {
             print("memoView has disappeared!")
             saveChanges()
             // Update BookmarkFolder memoList after deselecting bookmark
-            Folder.updateTopFolders(context: context)
+            // but.. it makes folder to go back for subFolder.
+            // it need to be separate case.
+            if calledFromMainView {
+                Folder.updateTopFolders(context: context) // maybe... this one ?
+            }
             print("data saved!")
-
         })
         
         .sheet(isPresented: $isShowingSelectingFolderView) {
