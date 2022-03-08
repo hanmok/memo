@@ -27,7 +27,11 @@ TrashBinViewModel 을 받지 못했다고 나옴.
 버그 !
 뭐지..?
 메모를 선택한 후 아무 행동도 안하고 선택 취소, 메모를 다시 열면 contents 가 아무것도 안보임.
-;;;
+이거,,, 그냥 생긴 버그는 아닐까 혹시 ??
+simulator 에서는 정상임; 그렇다면, 코드에서 생긴 버그는 아님.
+일단 출시 ..
+
+
 
 prob: subfolder 내에서 같은 행동을 하면 위 folder 로 이동함.
 solution: memoView 에 있는 Folder.updateTOpFolders 를 folderView 내에서는 호출하지 않도록 함.
