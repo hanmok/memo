@@ -51,11 +51,12 @@ extension UIScreen {
         let windowScenes = scenes.first as? UIWindowScene
         let window = windowScenes?.windows.first
         if (window?.safeAreaInsets.bottom)! > 0 {
-            print("has safeArea!")
+//            print("has safeArea!")
             return true
         } else {
-            print("does not have safeArea!")
+//            print("does not have safeArea!")
             return false
         }
     }
 }
+
