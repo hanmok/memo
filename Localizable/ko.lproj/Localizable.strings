@@ -53,3 +53,20 @@
 "Decending Order" = "최근 항목부터";
 
 "Search Placeholder" = "검색";
+
+// MARK: - MESSAGES
+
+"hasAddedToFolder" = "메모가 폴더에 저장되었습니다.";
+
+"memosHasDeleted" = "개의 메모가 삭제되었습니다.";
+
+"folderHasDeleted" = "폴더가 삭제되었습니다.";
+"memosHasMovedToTrash" = "개의 메모가 휴지통으로 이동하였습니다.";
+
+
+"memosHasPinned" = "개의 메모가 고정되었습니다";
+"memosHasUnpinned" = "개 메모의 고정이 해제되었습니다.";
+"memosHasBookmarked" = "개의 메모가 북마크 되었습니다.";
+"memosHasUnbookmarked" = "개 메모의 북마크가 해제되었습니다.";
+
+
