@@ -43,4 +43,4 @@ parameter: calledFromMainView
 1.0.5 ->
 
 git commit -m "Remove PlaceHolder Folders"
-
+Change app name to This Memo
