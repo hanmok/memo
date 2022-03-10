@@ -113,7 +113,7 @@ struct MemosToolBarView: View {
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-                _ = memoEditVM.selectedMemos.map { Memo.moveToTrashBin($0, trashBinVM.trashBinFolder)}
+                _ = memoEditVM.selectedMemos.map { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
                 memoEditVM.initSelectedMemos()
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)

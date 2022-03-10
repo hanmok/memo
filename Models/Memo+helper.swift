@@ -101,7 +101,7 @@ extension Memo {
         // 1. trashBin 이 Folder 가 아니면 됨.
     // 2.
     // this function makes bug.. why??
-    static func moveToTrashBin(_ memo: Memo, _ trash: Folder) {
+    static func makeNotBelongToFolder(_ memo: Memo, _ trash: Folder) {
         if let context = memo.managedObjectContext {
             memo.modificationDate = Date() // it's not the problem..
             memo.folder = nil
@@ -111,6 +111,19 @@ extension Memo {
             context.saveCoreData()
         }
     }
+    
+    static func moveToTrashBin(_ memo: Memo, _ trash: Folder) {
+        if let context = memo.managedObjectContext {
+            memo.modificationDate = Date() // it's not the problem..
+//            memo.folder = nil
+            // make topFolder update, which navigate to prev Folder for subFolder
+            memo.folder = trash
+
+            context.saveCoreData()
+        }
+    }
+    
+    
 }
 
 
