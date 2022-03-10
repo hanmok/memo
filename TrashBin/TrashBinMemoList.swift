@@ -19,7 +19,9 @@ struct TrashBinMemoList: View {
     var body: some View {
         return VStack {
             
-            TrashBinSubMemoList(folder: trashBinVM.trashBinFolder)
+//            TrashBinSubMemoList(folder: trashBinVM.trashBinFolder)
+//            MemoList()
+            FilteredMemoList(folder: trashBinVM.trashBinFolder, listType: .all)
         } // end of VStack
         .environmentObject(memoEditVM)
         .environmentObject(folderEditVM)

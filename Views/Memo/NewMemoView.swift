@@ -59,6 +59,12 @@ struct NewMemoView: View {
         }
     }
     
+    // need better code..
+//    func belongToTrashFolder() -> Bool {
+//        guard memo.folder != nil else { return false}
+//        return memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)
+//    }
+    
     
     init(parent: Folder, presentingNewMemo: Binding<Bool> ) {
         self.parent = parent
@@ -160,6 +166,8 @@ struct NewMemoView: View {
             }
         }
         presentationMode.wrappedValue.dismiss()
+        Folder.updateTopFolders(context: context)
+        // how to.. rerender a MainView ? not updated immediately.
     }
     
     var body: some View {

@@ -32,6 +32,8 @@ struct MemoView: View {
     @State var isBookMarkedTemp: Bool?
     
     @Binding var isPresentingView: Bool
+    
+    
     var calledFromMainView: Bool
     var backBtn : some View {
         Button(action: {
@@ -43,19 +45,24 @@ struct MemoView: View {
         }
     }
     
-//    var hasSafeBottom: Bool {
-//
-//        let scenes = UIApplication.shared.connectedScenes
-//        let windowScene = scenes.first as? UIWindowScene
-//        let window = windowScene?.windows.first
-//        if (window?.safeAreaInsets.bottom)! > 0 {
-//            print("has safeArea!")
-//            return true
-//        } else {
-//            print("does not have safeArea!")
-//            return false
-//        }
-//    }
+    func belongToTrashFolder() -> Bool {
+        guard memo.folder != nil else { return false}
+        return memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)
+    }
+    
+    //    var hasSafeBottom: Bool {
+    //
+    //        let scenes = UIApplication.shared.connectedScenes
+    //        let windowScene = scenes.first as? UIWindowScene
+    //        let window = windowScene?.windows.first
+    //        if (window?.safeAreaInsets.bottom)! > 0 {
+    //            print("has safeArea!")
+    //            return true
+    //        } else {
+    //            print("does not have safeArea!")
+    //            return false
+    //        }
+    //    }
     
     init(memo: Memo, parent: Folder, presentingView: Binding<Bool>, calledFromMainView: Bool = false) {
         self.memo = memo
@@ -109,9 +116,26 @@ struct MemoView: View {
     }
     
     func removeMemo() {
-//        memo.modificationDate = Date()
-            Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
+        // why is this line commented ? I D K...
+        
+        //        memo.modificationDate = Date()
+        memo.contents = contents
+        
+        // for valid contents,
+        if memo.contents != "" {
+            // if it is contained in trashBin -> delete forever.
+//            if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
+            if belongToTrashFolder() {
+                Memo.delete(memo)
+            } else { // else, not in trashBin -> move to trashBin
+                Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
+            }
+        } else { // for empty Contents,
+            Memo.delete(memo)
+        }
+        
         context.saveCoreData()
+        
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -131,17 +155,22 @@ struct MemoView: View {
                 HStack {
                     backBtn
                     Spacer()
+                    
                     HStack(spacing: 16) {
-                        Button(action: toggleBookMark) {
-
-                            SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
-                                .tint(Color.navBtnColor)
-                        }
-                        
-                        // PIN Button
-                        Button(action: togglePin) {
-                            SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
-                                .tint(Color.navBtnColor)
+                        // if it is not trashBin -> show bookmark and pin icon with the other two.
+//                        if !(memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)) {
+                        if !belongToTrashFolder() {
+                            Button(action: toggleBookMark) {
+                                
+                                SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
+                                    .tint(Color.navBtnColor)
+                            }
+                            
+                            // PIN Button
+                            Button(action: togglePin) {
+                                SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
+                                    .tint(Color.navBtnColor)
+                            }
                         }
                         
                         // RELOCATE
@@ -163,10 +192,12 @@ struct MemoView: View {
                 .padding(.bottom)
                 .padding(.trailing, Sizes.overallPadding)
                 .padding(.leading, Sizes.navBtnLeadingSpacing)
-
+                
                 
                 MemoTextView(text: $contents)
-//                PlainTextView(text: $contents)
+                // if it is in trash Folder -> disable!
+                    .disabled(belongToTrashFolder())
+                //                PlainTextView(text: $contents)
                     .padding(.top)
                     .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
