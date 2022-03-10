@@ -39,7 +39,7 @@ struct MindMapView: View {
     
     @State var isShowingSearchView = false
     @State var isLoading = false
-    
+    @State var isShowingSecondView = false
 //    var hasSafeBottom: Bool {
 //        let scenes = UIApplication.shared.connectedScenes
 //        let windowScene = scenes.first as? UIWindowScene
@@ -74,6 +74,16 @@ struct MindMapView: View {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
+                    Button {
+                        isShowingSecondView = true
+                    } label: {
+                        SystemImage("house", size: 24)
+                            .foregroundColor(colorScheme == .dark ? .cream : .black)
+                        
+                    }
+                    .padding(.trailing, 10)
+                    .padding(.leading, Sizes.overallPadding)
+                    
                     Spacer()
                     HStack(spacing: 0) {
                         // MARK: - Button 1: SEARCH
@@ -115,7 +125,7 @@ struct MindMapView: View {
                     .padding(.top, 8)
                 }
                 .padding(.trailing, Sizes.overallPadding)
-                
+                .padding(.leading, Sizes.overallPadding)
                 
                 Picker("", selection: $selectionEnum) {
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
@@ -419,6 +429,13 @@ struct MindMapView: View {
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
             }
+        })
+        .fullScreenCover(isPresented: $isShowingSecondView, content: {
+            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder)
+                .environmentObject(trashBinVM)
+                .environmentObject(memoOrder)
+                .environmentObject(folderEditVM)
+                
         })
         .onAppear(perform: {
             print("MindMapView has Appeared!")
