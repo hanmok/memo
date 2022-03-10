@@ -147,6 +147,7 @@ struct NewMemoView: View {
                 memo!.modificationDate = Date()
                 
                 memo!.saveTitleWithContentsToShow(context: context)
+//                Memo.makeNotBelongToFolder(memo!, trashBinVM.trashBinFolder)
                 Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
                 
@@ -160,6 +161,7 @@ struct NewMemoView: View {
                 memo!.modificationDate = Date()
                 
                 memo!.saveTitleWithContentsToShow(context: context)
+//                Memo.makeNotBelongToFolder(memo!, trashBinVM.trashBinFolder)
                 Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
 //                parent.title += ""
