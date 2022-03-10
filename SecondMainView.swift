@@ -20,10 +20,10 @@ struct SecondMainView: View {
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     @EnvironmentObject var memoOrder: MemoOrder
-    
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     
-    @StateObject var memoEditVM = MemoEditViewModel()
+//    @StateObject var memoEditVM = MemoEditViewModel()
 
     @GestureState var isScrolled = false
     
@@ -34,6 +34,13 @@ struct SecondMainView: View {
     @State var searchTypeEnum: SearchType
     @State var isAddingMemo = false
 
+    @State var oneOffset: CGFloat = 0
+    
+    @GestureState var isDragging = false
+    /// dragging flag end a little later than isDragging, to complete onEnd Action (for Better UX)
+    @State var isOnDraggingAction = false
+
+    @State var draggingMemo: Memo? = nil
     
     func addMemo() {
         if !memoEditVM.isSelectionMode {
@@ -57,7 +64,7 @@ struct SecondMainView: View {
         }
         return folders
     }
-    // 여기다..
+
     
     var currentFolders: [Folder] {
         var folders: [Folder] = []
@@ -134,6 +141,66 @@ struct SecondMainView: View {
         print("folder name of first element in nestedMemos: ")
         return nestedMemos
     }
+    
+    func onChanged(value: DragGesture.Value, memo: Memo) {
+        DispatchQueue.main.async {
+            draggingMemo = memo
+            
+        }
+            print("onChanged triggered")
+            
+            if isDragging && value.translation.width < -5 {
+
+                DispatchQueue.main.async {
+                    isOnDraggingAction = true
+                }
+            }
+            
+            
+            if isDragging && value.translation.width < 0 {
+                
+                print("dragged value: \(value.translation.width)")
+                switch value.translation.width {
+                case let width where width <= -65:
+                    DispatchQueue.main.async {
+
+                        oneOffset = -65
+                    }
+                default:
+                    DispatchQueue.main.async {
+                        oneOffset = value.translation.width
+                    }
+                }
+            }
+        print("isDraggingAction: \(isOnDraggingAction)")
+        }
+    
+    func onEnd(value: DragGesture.Value, memo: Memo) {
+        withAnimation {
+            print("onEnd triggered")
+            if value.translation.width <= -65 {
+                
+                DispatchQueue.main.async {
+                    memoEditVM.isSelectionMode = true
+                    memoEditVM.dealWhenMemoSelected(memo)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        
+                    oneOffset = 0
+                    
+                    isOnDraggingAction = false
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    oneOffset = 0
+                    isOnDraggingAction = false
+                }
+            }
+        }
+        draggingMemo = nil
+    }
+    
     
     var body: some View {
         
@@ -225,7 +292,6 @@ struct SecondMainView: View {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
                                                 Spacer()
-                                                
                                             } // end of HStack
                                             .padding(.top, 5)
                                             .offset(y: 5)
@@ -233,17 +299,79 @@ struct SecondMainView: View {
                                         }) // end of NavigationLink
                                                 
                                         ) {
-                                            ForEach(memoArray.memos, id: \.self) { eachMemo in
-                                                NavigationLink {
-                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
-                                                        .environmentObject(trashBinVM)
+                                            
+                                            
+//                                            ForEach(memoArray.memos, id: \.self) { eachMemo in
+//                                                NavigationLink {
+//                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
+//                                                        .environmentObject(trashBinVM)
+//                                                        .environmentObject(memoEditVM)
+//                                                } label: {
+//                                                    MemoBoxView(memo: eachMemo)
+//                                                        .environmentObject(memoEditVM)
+//                                                }
+//                                                .padding(.bottom, Sizes.spacingBetweenMemoBox)
+//                                            }
+                                            
+                                            ForEach(memoArray.memos, id: \.self) { memo in
+                                                NavigationLink(destination:
+                                                               MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
+                                                                .environmentObject(memoEditVM)
+                                                                .environmentObject(folderEditVM)
+                                                                .environmentObject(trashBinVM)
+                                                ) {
+                                                    MemoBoxView(memo: memo)
                                                         .environmentObject(memoEditVM)
-                                                } label: {
-                                                    MemoBoxView(memo: eachMemo)
-                                                        .environmentObject(memoEditVM)
-                                                }
+                                                        .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+                                                        .offset(x: draggingMemo == memo ? oneOffset : 0)
+                                                        .background {
+                                                            ZStack {
+                                                                Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
+                                                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
+                                                                    .cornerRadius(10)
+                                                                HStack {
+                                                                    Spacer()
+                                                                    SystemImage("checkmark")
+                                                                        .frame(width: 65)
+                                                                        .foregroundColor(.basicColors)
+                                                                        .opacity(isOnDraggingAction ? 1 : 0)
+                                                                }
+                                                            }
+                                                            .padding(.horizontal, Sizes.smallSpacing)
+                                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
+                                                        }
+
+                                                        .gesture(DragGesture()
+                                                                    .updating($isDragging, body: { value, state, _ in
+                                                            state = true
+                                                            onChanged(value: value, memo: memo)
+                                                        }).onEnded({ value in
+                                                            onEnd(value: value, memo: memo)
+                                                        }))
+                                                } // end of ZStack
+
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
-                                            }
+                                                    .disabled(memoEditVM.isSelectionMode)
+
+                                                    .gesture(DragGesture()
+                                                                .updating($isDragging, body: { value, state, _ in
+                                                        state = true
+                                                        onChanged(value: value, memo: memo)
+                                                    }).onEnded({ value in
+                                                        onEnd(value: value, memo: memo)
+                                                    }))
+                                                
+                                                .simultaneousGesture(TapGesture().onEnded{
+                                                    print("Tap pressed!")
+
+                                                    if memoEditVM.isSelectionMode {
+                                                        print("Tap gesture triggered!")
+                                                        memoEditVM.dealWhenMemoSelected(memo)
+                                                    }
+                                                })
+                                            } // end of ForEach
+                                            
+                                            
                                         }
                                     }
                                 } else { // no  searchResult
@@ -259,6 +387,7 @@ struct SecondMainView: View {
                 .gesture(scroll)
                 } // another element of ZStack begin
                 
+                // Plus Button, and MemoToolBarView
                 VStack {
                     Spacer()
                     ZStack {
@@ -317,6 +446,11 @@ struct SecondMainView: View {
 
             .navigationBarHidden(true)
         }
+        .environmentObject(trashBinVM)
+        .environmentObject(memoOrder)
+        .environmentObject(memoEditVM)
+        .environmentObject(folderEditVM)
+        
         .navigationBarHidden(true)
         .onAppear {
             print("CustomSearchView has appeared!!!!!")

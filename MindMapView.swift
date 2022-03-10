@@ -435,6 +435,7 @@ struct MindMapView: View {
                 .environmentObject(trashBinVM)
                 .environmentObject(memoOrder)
                 .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
                 
         })
         .onAppear(perform: {
