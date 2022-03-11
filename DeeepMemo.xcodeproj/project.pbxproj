@@ -96,6 +96,7 @@
 		9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */; };
 		9ACC0C6D27DB4B7F00D18690 /* SwipeableMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C6C27DB4B7F00D18690 /* SwipeableMemoBoxView.swift */; };
 		9ACC0C7127DB581800D18690 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7027DB581800D18690 /* SecondView.swift */; };
+		9ACC0C7327DB8CE600D18690 /* ScreenShotInfo in Resources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */; };
 		9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
 		9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC9277C3E3E00866456 /* Extensions.swift */; };
 		9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF10277D9DF100866456 /* MemoList.swift */; };
@@ -228,6 +229,7 @@
 		9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldTestview.swift; sourceTree = "<group>"; };
 		9ACC0C6C27DB4B7F00D18690 /* SwipeableMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableMemoBoxView.swift; sourceTree = "<group>"; };
 		9ACC0C7027DB581800D18690 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScreenShotInfo; sourceTree = "<group>"; };
 		9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarView.swift; sourceTree = "<group>"; };
 		9AD6EEC9277C3E3E00866456 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9AD6EF10277D9DF100866456 /* MemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				9A89582527717EAC00E7B773 /* Utils */,
 				9A04749727715D1300571D66 /* Assets.xcassets */,
 				9AB724FF27D00DE4006A825C /* Localizable */,
+				9ACC0C7427DBAE7400D18690 /* VersionHistory */,
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
 				9AC5D1F727854387007EAA28 /* DeeepMemo--iOS--Info.plist */,
 				9AC5D1D827854159007EAA28 /* DeeepMemo (iOS).entitlements */,
@@ -495,7 +498,7 @@
 				9AC5D13C2785247D007EAA28 /* Terms */,
 				9AC5D22D278BD8C6007EAA28 /* CurrentTodoLists */,
 				9AA65B3427D6A29A00C1F383 /* Testing.playground */,
-				9AA65B3527D6BA8F00C1F383 /* VersionHistory */,
+				9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */,
 			);
 			path = PersonalMemos;
 			sourceTree = "<group>";
@@ -518,6 +521,14 @@
 				9A337803279576CC00805138 /* testView.swift */,
 			);
 			path = Tester;
+			sourceTree = "<group>";
+		};
+		9ACC0C7427DBAE7400D18690 /* VersionHistory */ = {
+			isa = PBXGroup;
+			children = (
+				9AA65B3527D6BA8F00C1F383 /* VersionHistory */,
+			);
+			path = VersionHistory;
 			sourceTree = "<group>";
 		};
 		9AD6EF13277D9EE200866456 /* Memo */ = {
@@ -692,6 +703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ACC0C7327DB8CE600D18690 /* ScreenShotInfo in Resources */,
 				9AC5D13D2785247D007EAA28 /* Terms in Resources */,
 				9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */,
 				9AC5D13A278521F9007EAA28 /* Memo For Tips and Tricks in Resources */,
@@ -972,7 +984,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -990,7 +1002,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -1007,7 +1019,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1025,7 +1037,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;

@@ -358,6 +358,8 @@ struct MindMapView: View {
             shouldShowAll: true,
                 shouldIncludeTrashOnCurrent: selectionEnum == .archive,
             shouldIncludeTrashOverall: true)
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
             
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
@@ -423,14 +425,13 @@ struct MindMapView: View {
                 }
             
             if isShowingSecondView {
-//            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+
                 SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
                 .environmentObject(trashBinVM)
                 .environmentObject(memoOrder)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
             }
-            
         } // end of ZStack
         
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {

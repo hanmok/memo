@@ -33,6 +33,17 @@ struct NewMemoView: View {
     
     @Binding var isPresentingNewMemo: Bool
     
+    func updateViewInHalfSecond() {
+        var increasedSeconds = 0.0
+        for _ in 0 ... 5 {
+            increasedSeconds += 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + increasedSeconds) {
+                self.editorFocusState = true
+            }
+        }
+    }
+    
+    
 //    var hasSafeBottom: Bool {
 //        
 //        let scenes = UIApplication.shared.connectedScenes
@@ -263,10 +274,11 @@ struct NewMemoView: View {
         .padding(.bottom)
         .navigationBarHidden(true)
         .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
-                /// Anything over 0.5 seems to work
-                self.editorFocusState = true
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+//                /// Anything over 0.5 seems to work
+//                self.editorFocusState = true
+//            }
+            updateViewInHalfSecond()
         })
         .onDisappear(perform: {
             print("memoView has disappeared!")

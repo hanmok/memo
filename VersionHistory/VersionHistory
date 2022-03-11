@@ -46,6 +46,7 @@ git commit -m "Remove PlaceHolder Folders"
 Change app name to This Memo
 
 
+1.06 -> 
 현재 하고 있는 것.
 새로운 화면 만드는 중.
 도중에, Swipe 기능이 필요함.
@@ -128,4 +129,20 @@ Bookmark, lines 이거,, 없애야 할걸 ? 해결.
 Search 의 Identity.. 어떻게 해야할까?
 너무 SecondView 와 비슷함.
 이거.. 메인화면에서는 없애?
-첫 화면을 저거로 설정 할 수 있어야 하나 ? 
+첫 화면을 저거로 설정 할 수 있어야 하나 ?
+
+
+// 업데이트가 왜 안돼...!!
+// 음.. MemosToolbarView 통해서 할 때는 되는데,
+// 직접 View 로 가서 업데이트 하면 반영이 안된다. 왜 ?
+
+아니야. 한번 스크롤 시켜주면 바로 됨..
+음.. 어떻게 업데이트시키지?
+
+searchKeyword += " "
+searchKeyword.removeLast()
+
+onAppear 에서
+로 해줌.
+
+

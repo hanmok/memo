@@ -54,16 +54,27 @@ struct SecondView: View {
     
     @State var bookmarkState = true // need to be user Default.
     
-    var shouldIncludeTrashOnCurrent: Bool
-    var shouldIncludeTrashOverall: Bool
+    func updateViewInHalfSecond() {
+        var increasedSeconds = 0.0
+        for _ in 0 ... 5 {
+            increasedSeconds += 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + increasedSeconds) {
+                searchKeyword += " "
+                searchKeyword.removeLast()
+            }
+        }
+    }
+    
+//    var shouldIncludeTrashOnCurrent: Bool
+//    var shouldIncludeTrashOverall: Bool
     
     var allFolders: [Folder] {
         var folders: [Folder] = []
         _ = fastFolderWithLevelGroup.folders.map { folders.append($0.folder)}
         _ = fastFolderWithLevelGroup.archives.map { folders.append($0.folder)}
-        if shouldIncludeTrashOverall {
-            folders.append(trashBinVM.trashBinFolder)
-        }
+//        if shouldIncludeTrashOverall {
+//            folders.append(trashBinVM.trashBinFolder)
+//        }
         return folders
     }
     
@@ -71,9 +82,9 @@ struct SecondView: View {
     var currentFolders: [Folder] {
         var folders: [Folder] = []
         _ = Folder.getHierarchicalFolders(topFolder: currentFolder).map { folders.append($0.folder)}
-        if shouldIncludeTrashOnCurrent {
-            folders.append(trashBinVM.trashBinFolder)
-        }
+//        if shouldIncludeTrashOnCurrent {
+//            folders.append(trashBinVM.trashBinFolder)
+//        }
         print("appended Folders in currnetFolders: \(folders)")
         
         _ = folders.map { print($0.title)}
@@ -124,15 +135,15 @@ struct SecondView: View {
     init(fastFolderWithLevelGroup: FastFolderWithLevelGroup,
          currentFolder: Folder,
          //         shouldShowAll: Bool = false,
-         shouldIncludeTrashOnCurrent: Bool = false,
-         shouldIncludeTrashOverall: Bool = false,
+//         shouldIncludeTrashOnCurrent: Bool = false,
+//         shouldIncludeTrashOverall: Bool = false,
          isShowingSecondView: Binding<Bool>
     ) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         //        _searchTypeEnum = State(initialValue: shouldShowAll ? .all : .current)
-        self.shouldIncludeTrashOnCurrent = shouldIncludeTrashOnCurrent
-        self.shouldIncludeTrashOverall = shouldIncludeTrashOverall
+//        self.shouldIncludeTrashOnCurrent = shouldIncludeTrashOnCurrent
+//        self.shouldIncludeTrashOverall = shouldIncludeTrashOverall
         _isShowingSecondView = isShowingSecondView
     }
     
@@ -322,9 +333,13 @@ struct SecondView: View {
                         Spacer()
                         
                         Button {
+                            
                             bookmarkState.toggle()
+                            
+                            print("bookmarkState: \(bookmarkState)")
+                            print("button has pressed!!")
                         } label: {
-                            bookmarkState ? SystemImage("bookmark").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
+                            bookmarkState ? SystemImage("bookmark.fill").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
                         }
                         MemoOrderingMenu(memoOrder: memoOrder, parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
@@ -401,13 +416,14 @@ struct SecondView: View {
                                             Rectangle()
                                                     .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
                                                     .foregroundColor(Color.mainColor)
-                                                    .padding(.top, 3)
+                                                    .padding(.vertical, 4)
                                             
                                             }
                                             
                                             // MARK: - Show Unbookmarked Memos Next
                                             if foundMemosWithoutBookmark.count != 0 {
-                                                ForEach( foundMemosWithoutBookmark, id: \.self) { memoArray in
+                                                
+                                                    ForEach( foundMemosWithoutBookmark, id: \.self) { memoArray in
                                                         Section(header:
                                                                     NavigationLink(destination: {
                                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
@@ -462,6 +478,9 @@ struct SecondView: View {
                                             // MARK: - BookMark State Off -> Show Bookmark & pinned Memos First, and then normal Memos
                                         } else {
                                             if foundMemos.count != 0 {
+                                                HStack {
+                                                Text("").padding(.vertical, 1)
+                                                }
                                                 ForEach( foundMemos, id: \.self) { memoArray in
                                                         Section(header:
                                                                     NavigationLink(destination: {
@@ -523,6 +542,9 @@ struct SecondView: View {
                                         }
                                     }
                             }
+                            Rectangle()
+                                .frame(height: 100)
+                                .foregroundColor(.clear)
                         } // end of ScrollView
                         .gesture(scroll)
                         // another element of ZStack begin // end of ZStack
@@ -585,6 +607,19 @@ struct SecondView: View {
                     .environmentObject(memoEditVM)
             })
             .navigationBarHidden(true)
+            .onAppear {
+                print("SecondView has appeared!")
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                    searchKeyword += " "
+//                    searchKeyword.removeLast()
+////                DispatchQueue.main.asyncAfter
+//
+//            }
+                updateViewInHalfSecond()
+            }
+            .onDisappear {
+                print("SecondView has disappeared!")
+            }
         }
         .environmentObject(trashBinVM)
         .environmentObject(memoOrder)
