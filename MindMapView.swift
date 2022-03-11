@@ -23,7 +23,7 @@ struct MindMapView: View {
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-    
+//    @State var isShowingSecondView: Bool
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
@@ -78,11 +78,12 @@ struct MindMapView: View {
                         isShowingSecondView = true
                     } label: {
                         SystemImage("house", size: 24)
+//                        SystemImage("magnifyingglass")
                             .foregroundColor(colorScheme == .dark ? .cream : .black)
-                        
                     }
                     .padding(.trailing, 10)
                     .padding(.leading, Sizes.overallPadding)
+                    .padding(.top, 8)
                     
                     Spacer()
                     HStack(spacing: 0) {
@@ -418,6 +419,15 @@ struct MindMapView: View {
                     textFieldType = nil
                     isShowingTextField = false
                 }
+            
+            if isShowingSecondView {
+            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+                .environmentObject(trashBinVM)
+                .environmentObject(memoOrder)
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
+            }
+            
         } // end of ZStack
         
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
@@ -430,14 +440,15 @@ struct MindMapView: View {
                     .environmentObject(memoEditVM)
             }
         })
-        .fullScreenCover(isPresented: $isShowingSecondView, content: {
-            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder)
-                .environmentObject(trashBinVM)
-                .environmentObject(memoOrder)
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
-                
-        })
+        
+//        .fullScreenCover(isPresented: $isShowingSecondView, content: {
+//            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+//                .environmentObject(trashBinVM)
+//                .environmentObject(memoOrder)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
+//        })
+        
         .onAppear(perform: {
             print("MindMapView has Appeared!")
             let allMemosReq = Memo.fetch(.all)

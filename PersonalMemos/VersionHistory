@@ -66,3 +66,16 @@ MemoEditViewModel, SelectingFolderView 도 바꾸어야함.
 우선, 모든 파일들을 대상으로 하자.. 북마크 고려하지 않고..
 할게 좀 많아...
 
+
+// 정해야할게 있음.
+
+1. Animation
+일단, ZStack 으로 만드는게 좋을 것 같음.
+
+2. Bookmark
+좀더 생각...
+Search 와는 많이 다르니까, Hierarchy, Padding 등을 수정하고,
+북마크는 맨 위로 올리자.
+
+
+폴더는 너무 기본적인 폴더니까, Hierarchy Label 에서는 생략하는게 좋을 것 같아.

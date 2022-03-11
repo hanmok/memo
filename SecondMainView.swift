@@ -16,7 +16,7 @@ struct SecondMainView: View {
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
     @ObservedObject var currentFolder: Folder
-    
+    @Binding var isShowingSecondView: Bool
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     @EnvironmentObject var memoOrder: MemoOrder
@@ -93,13 +93,15 @@ struct SecondMainView: View {
          currentFolder: Folder,
          shouldShowAll: Bool = false,
          shouldIncludeTrashOnCurrent: Bool = false,
-         shouldIncludeTrashOverall: Bool = false
+         shouldIncludeTrashOverall: Bool = false,
+         isShowingSecondView: Binding<Bool>
     ) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _searchTypeEnum = State(initialValue: shouldShowAll ? .all : .current)
         self.shouldIncludeTrashOnCurrent = shouldIncludeTrashOnCurrent
         self.shouldIncludeTrashOverall = shouldIncludeTrashOverall
+        _isShowingSecondView = isShowingSecondView
     }
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
@@ -219,12 +221,17 @@ struct SecondMainView: View {
                             // make it fullScreen temporary.
                             // navigate to MainMapView.
                             presentationMode.wrappedValue.dismiss()
+                            isShowingSecondView = false
                         } label: {
-                            SystemImage("house", size: 24)
+                                                        SystemImage("house", size: 24)
+//                            SystemImage("magnifyingglass")
                                 .foregroundColor(colorScheme == .dark ? .cream : .black)
                             
                         }
-                        .padding(.trailing, 10)
+                        // temp
+//                        .padding(.leading, 16)
+//                        .padding(.trailing, 10)
+                        
                         // TextField HStack
                         HStack(spacing: 0) {
                             
@@ -261,20 +268,24 @@ struct SecondMainView: View {
                             }
                         }
                         .frame(height: 32)
-                        .frame(width: UIScreen.screenWidth - 5.1 * Sizes.overallPadding)
+//                        .frame(width: UIScreen.screenWidth - 5.1 * Sizes.overallPadding )
                         .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                         .cornerRadius(10)
                         
                         Spacer()
                         
                         MemoOrderingMenu(memoOrder: memoOrder, parentFolder: fastFolderWithLevelGroup.homeFolder)
+//                            .padding(.trailing, 20)
+                        // temp
                         
                     }
-                    .padding(.horizontal, Sizes.overallPadding)
+                    .padding(.horizontal, 10)
                     
                     ZStack {
                         ScrollView {
-                            VStack {
+                            // spacing: // make tight
+                            VStack(spacing: 0) {
+//                            VStack {
                                 // ALL FOLDERS
                                 if foundMemos != nil {
                                     //                            if searchTypeEnum == .all {
@@ -290,30 +301,21 @@ struct SecondMainView: View {
                                                     .environmentObject(trashBinVM)
                                             }, label: {
                                                 HStack {
-                                                    HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
+//                                                    HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
+                                                     // make tight
+                                                    HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
                                                     Spacer()
                                                 } // end of HStack
-                                                .padding(.top, 5)
-                                                .offset(y: 5)
+                                                // make tight
+//                                                .padding(.top, 5)
+//                                                .offset(y: 5)
                                                 .padding(.leading, Sizes.overallPadding + 5)
                                             }) // end of NavigationLink
                                                     
+                                                    // sort. 에, 먼저 pin 된 것들 올려주는게 좋을 것 같ㅇ아.
                                             ) {
-                                                
-                                                
-                                                //                                            ForEach(memoArray.memos, id: \.self) { eachMemo in
-                                                //                                                NavigationLink {
-                                                //                                                    MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
-                                                //                                                        .environmentObject(trashBinVM)
-                                                //                                                        .environmentObject(memoEditVM)
-                                                //                                                } label: {
-                                                //                                                    MemoBoxView(memo: eachMemo)
-                                                //                                                        .environmentObject(memoEditVM)
-                                                //                                                }
-                                                //                                                .padding(.bottom, Sizes.spacingBetweenMemoBox)
-                                                //                                            }
-                                                
-                                                ForEach(memoArray.memos, id: \.self) { memo in
+                                                //                                                ForEach(memoArray.memos, id: \.self) { memo in
+                                                ForEach(Memo.sortMemosWithPin(memos: memoArray.memos), id: \.self) { memo in
                                                     NavigationLink(destination:
                                                                     MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
                                                                     .environmentObject(memoEditVM)
@@ -350,7 +352,9 @@ struct SecondMainView: View {
                                                             }))
                                                     } // end of ZStack
                                                     
-                                                    .padding(.bottom, Sizes.spacingBetweenMemoBox)
+//                                                    .padding(.bottom, Sizes.spacingBetweenMemoBox)
+                                                    .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
+                                                    
                                                     .disabled(memoEditVM.isSelectionMode)
                                                     
                                                     .gesture(DragGesture()
@@ -371,7 +375,7 @@ struct SecondMainView: View {
                                                     })
                                                 } // end of ForEach
                                                 
-                                                
+                                
                                             }
                                         }
                                     } else { // no  searchResult
@@ -385,41 +389,42 @@ struct SecondMainView: View {
                             }
                         } // end of ScrollView
                         .gesture(scroll)
-                     // another element of ZStack begin // end of ZStack
-                    
-                    // Plus Button, and MemoToolBarView
-                    VStack {
-                        Spacer()
-                        ZStack {
-                            HStack {
-                                Spacer()
-                                VStack(spacing: Sizes.minimalSpacing) {
-                                    
-                                    Button(action: addMemo) {
-                                        PlusImage()
-                                            .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
-                                            .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
-                                            .animation(.spring(), value: memoEditVM.isSelectionMode)
+                        // another element of ZStack begin // end of ZStack
+                        
+                        // Plus Button, and MemoToolBarView
+                        VStack {
+                            Spacer()
+                            ZStack {
+                                HStack {
+                                    Spacer()
+                                    VStack(spacing: Sizes.minimalSpacing) {
+                                        
+                                        Button(action: addMemo) {
+                                            PlusImage()
+                                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+                                                .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
+                                                .animation(.spring(), value: memoEditVM.isSelectionMode)
+                                        }
                                     }
                                 }
+                                HStack {
+                                    Spacer()
+                                    MemosToolBarView(
+                                        currentFolder: currentFolder,
+                                        showSelectingFolderView: $isShowingSelectingFolderView
+                                    )
+                                        .padding([.trailing], Sizes.overallPadding)
+                                        .padding(.bottom,Sizes.overallPadding )
+                                        .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
+                                        .animation(.spring(), value: memoEditVM.isSelectionMode)
+                                }
                             }
-                            HStack {
-                                Spacer()
-                                MemosToolBarView(
-                                    currentFolder: currentFolder,
-                                    showSelectingFolderView: $isShowingSelectingFolderView
-                                )
-                                    .padding([.trailing], Sizes.overallPadding)
-                                    .padding(.bottom,Sizes.overallPadding )
-                                    .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
-                                    .animation(.spring(), value: memoEditVM.isSelectionMode)
-                            }
-                        }
-                    } // end of Memo Realated View
+                        } // end of Memo Realated View
                     }
                 } // end of Main VStack
                 .navigationBarHidden(true)
-                .padding(.top)
+                .padding(.horizontal, Sizes.overallPadding)
+                .padding(.top, 6)
                 .gesture(scroll)
                 
                 
@@ -443,14 +448,13 @@ struct SecondMainView: View {
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
             })
-            
-            
             .navigationBarHidden(true)
         }
         .environmentObject(trashBinVM)
         .environmentObject(memoOrder)
         .environmentObject(memoEditVM)
         .environmentObject(folderEditVM)
+        .padding(.horizontal, Sizes.overallPadding)
         
         .navigationBarHidden(true)
         .onAppear {

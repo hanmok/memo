@@ -336,8 +336,27 @@ extension Memo {
         
         return memos.sorted(by: sortingMethod)
     }
+    
+    static func sortMemosWithPin(memos: [Memo]) -> [Memo] {
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        
+        let pinnedMemos = memos.filter { $0.isPinned }
+        let unpinnedMemos = memos.filter { !$0.isPinned }
+        
+        var allMemos = pinnedMemos.sorted(by: sortingMethod)
+        
+        _ = unpinnedMemos.sorted(by: sortingMethod).map { allMemos.append($0) }
+        
+        return allMemos
+    }
+
+//    static func
 }
 
+// 북마크를 어떻게 처리하지..??
 
 
 struct MemoProperties {
