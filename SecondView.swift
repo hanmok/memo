@@ -268,7 +268,9 @@ struct SecondView: View {
         return NavigationView {
             
             ZStack {
+
                 VStack(alignment: .leading) {
+                    // MARK: - Nav Location
                     HStack {
                         Button {
                             presentationMode.wrappedValue.dismiss()
@@ -290,6 +292,8 @@ struct SecondView: View {
                                 .frame(alignment: .leading)
                                 .frame(height: 30)
                                 .foregroundColor(Color.blackAndWhite)
+                                .submitLabel(.search)
+
                             
                             Spacer()
                             
@@ -324,7 +328,9 @@ struct SecondView: View {
                         }
                         MemoOrderingMenu(memoOrder: memoOrder, parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
-                    .padding(.horizontal, 10)
+                    
+                    // solve UI Padding bug For search result is none
+                    .padding(.horizontal, foundMemos.count == 0 ? 0 : 10)
                     // 정리 지금 안하면 안됨..
                     ZStack {
                         ScrollView {
@@ -333,10 +339,12 @@ struct SecondView: View {
                                 
                                 
                                 // ALL FOLDERS
-//                                if foundMemos != nil {
-//                                    if foundMemos!.count != 0 {
-                                if foundMemos.count != 0 {
+                                
+                                // MARK: - Bookmark State is On
+                                if foundMemos.count != 0 { // wraps all Memos
                                         if bookmarkState {
+                                            // MARK: - Show Bookmarked Memos First
+                                            if allBookMarkedFoundMemos.count != 0 {
                                             Section {
                                                 ForEach(allBookMarkedFoundMemos, id: \.self) { markedMemo in
                                                     NavigationLink(destination:
@@ -394,9 +402,11 @@ struct SecondView: View {
                                                     .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
                                                     .foregroundColor(Color.mainColor)
                                                     .padding(.top, 3)
-
+                                            
+                                            }
+                                            
+                                            // MARK: - Show Unbookmarked Memos Next
                                             if foundMemosWithoutBookmark.count != 0 {
-//                                                    ForEach( foundMemos!, id: \.self) { memoArray in
                                                 ForEach( foundMemosWithoutBookmark, id: \.self) { memoArray in
                                                         Section(header:
                                                                     NavigationLink(destination: {
@@ -449,6 +459,7 @@ struct SecondView: View {
                                                         }
                                                     } // end of ForEach
                                                 }
+                                            // MARK: - BookMark State Off -> Show Bookmark & pinned Memos First, and then normal Memos
                                         } else {
                                             if foundMemos.count != 0 {
                                                 ForEach( foundMemos, id: \.self) { memoArray in
@@ -526,7 +537,6 @@ struct SecondView: View {
                                         
                                         Button(action: addMemo) {
                                             PlusImage()
-                                            //                                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
                                                 .padding(.trailing, 10)
                                                 .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                                 .animation(.spring(), value: memoEditVM.isSelectionMode)
