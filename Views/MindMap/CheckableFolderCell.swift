@@ -16,7 +16,8 @@ struct CheckableFolderCell: View {
     
     var level: Int
     
-    var shouldCheck = false
+    var markCheck = false
+    var markInvalid = false
     
     var body: some View {
         HStack {
@@ -33,11 +34,19 @@ struct CheckableFolderCell: View {
             }
             
             Spacer()
-            if shouldCheck {
+            if markCheck {
                 Button {
                 } label: {
                     SystemImage( "checkmark")
                     
+                }
+                .tint(.swipeBtnColor2)
+            }
+            if markInvalid {
+                Button {
+                    
+                } label: {
+                    SystemImage("multiply")
                 }
                 .tint(.swipeBtnColor2)
             }

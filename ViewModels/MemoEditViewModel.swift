@@ -5,7 +5,9 @@ class MemoEditViewModel: ObservableObject {
     @Published var isSelectionMode = false
     @Published var selectedMemos = Set<Memo>()
     
-    var parentFolder: Folder? = nil
+    // empty ? or optional empty ? empty would be better.. with Set.
+//    var parentFolder: Folder? = nil
+    var folderRelated = Set<Folder>()
     
     var hasNotLongSelected = true
     
@@ -26,7 +28,8 @@ class MemoEditViewModel: ObservableObject {
     func add(memo: Memo) {
         print("memo has added!")
         self.selectedMemos.update(with: memo)
-        self.parentFolder = memo.folder
+//        self.parentFolder = memo.folder
+        self.folderRelated.update(with: memo.folder!)
     }
     
     func add(memos: [Memo]) {
@@ -34,7 +37,8 @@ class MemoEditViewModel: ObservableObject {
         _ = memos.map { self.selectedMemos.update(with: $0)}
         
         if memos.count != 0 {
-            self.parentFolder = memos.first!.folder
+//            self.parentFolder = memos.first!.folder
+            self.folderRelated.update(with: memos.first!.folder!)
         }
     }
     
@@ -50,7 +54,8 @@ class MemoEditViewModel: ObservableObject {
     func initSelectedMemos() {
         self.selectedMemos.removeAll()
         isSelectionMode = false
-        self.parentFolder = nil
+//        self.parentFolder = nil
+        self.folderRelated.removeAll()
     }
     
     func dealWhenMemoSelected(_ memo: Memo) {
