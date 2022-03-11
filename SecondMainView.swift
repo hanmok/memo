@@ -31,7 +31,7 @@ struct SecondMainView: View {
     
     @State var searchKeyword = ""
     @State var isShowingSelectingFolderView = false
-    @State var searchTypeEnum: SearchType
+//    @State var searchTypeEnum: SearchType
     @State var isAddingMemo = false
     
     @State var oneOffset: CGFloat = 0
@@ -51,6 +51,8 @@ struct SecondMainView: View {
     
     @State var isShowingSubFolderView = false
     @State var isAddingFolder = false
+    
+    @State var bookmarkState = true // need to be user Default.
     
     var shouldIncludeTrashOnCurrent: Bool
     var shouldIncludeTrashOverall: Bool
@@ -79,26 +81,29 @@ struct SecondMainView: View {
         return folders
     }
     
+    // determind whether it shows Archive
     var foundMemos: [NestedMemo]? {
-        if searchTypeEnum == .all {
+//        if searchTypeEnum == .all {
+        // shows both folder and archive
             return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
-        } else {
-            return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
-        }
+//        } else {
+        // shows folder
+//            return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
+//        }
     }
     
-    
+
     
     init(fastFolderWithLevelGroup: FastFolderWithLevelGroup,
          currentFolder: Folder,
-         shouldShowAll: Bool = false,
+//         shouldShowAll: Bool = false,
          shouldIncludeTrashOnCurrent: Bool = false,
          shouldIncludeTrashOverall: Bool = false,
          isShowingSecondView: Binding<Bool>
     ) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
-        _searchTypeEnum = State(initialValue: shouldShowAll ? .all : .current)
+//        _searchTypeEnum = State(initialValue: shouldShowAll ? .all : .current)
         self.shouldIncludeTrashOnCurrent = shouldIncludeTrashOnCurrent
         self.shouldIncludeTrashOverall = shouldIncludeTrashOverall
         _isShowingSecondView = isShowingSecondView
@@ -243,7 +248,8 @@ struct SecondMainView: View {
                                 .accentColor(Color.textViewTintColor)
                             
                                 .focused($focusState)
-                                .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
+//                                .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
+                                .frame(alignment: .leading)
                                 .frame(height: 30)
                                 .foregroundColor(Color.blackAndWhite)
                             
@@ -274,13 +280,18 @@ struct SecondMainView: View {
                         
                         Spacer()
                         
+                        Button {
+                            bookmarkState.toggle()
+                        } label: {
+                            bookmarkState ? SystemImage("bookmark").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
+                        }
                         MemoOrderingMenu(memoOrder: memoOrder, parentFolder: fastFolderWithLevelGroup.homeFolder)
 //                            .padding(.trailing, 20)
                         // temp
                         
                     }
                     .padding(.horizontal, 10)
-                    
+                    // 정리 지금 안하면 안됨..
                     ZStack {
                         ScrollView {
                             // spacing: // make tight
@@ -296,26 +307,19 @@ struct SecondMainView: View {
                                                         NavigationLink(destination: {
                                                 FolderView(currentFolder: memoArray.memos.first!.folder!)
                                                     .environmentObject(memoEditVM)
-                                                    .environmentObject(FolderEditViewModel())
-                                                    .environmentObject(MemoOrder()) // 왜.. 새로운 object 를 여기서 만들었지 ?
+                                                    .environmentObject(folderEditVM)
+                                                    .environmentObject(memoOrder)
                                                     .environmentObject(trashBinVM)
                                             }, label: {
                                                 HStack {
-//                                                    HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
                                                      // make tight
                                                     HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
                                                     Spacer()
                                                 } // end of HStack
-                                                // make tight
-//                                                .padding(.top, 5)
-//                                                .offset(y: 5)
                                                 .padding(.leading, Sizes.overallPadding + 5)
                                             }) // end of NavigationLink
-                                                    
-                                                    // sort. 에, 먼저 pin 된 것들 올려주는게 좋을 것 같ㅇ아.
                                             ) {
-                                                //                                                ForEach(memoArray.memos, id: \.self) { memo in
-                                                ForEach(Memo.sortMemosWithPin(memos: memoArray.memos), id: \.self) { memo in
+                                                ForEach(Memo.sortMemosWithPinAndBookmark(memos: memoArray.memos), id: \.self) { memo in
                                                     NavigationLink(destination:
                                                                     MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
                                                                     .environmentObject(memoEditVM)
@@ -351,12 +355,9 @@ struct SecondMainView: View {
                                                                 onEnd(value: value, memo: memo)
                                                             }))
                                                     } // end of ZStack
-                                                    
-//                                                    .padding(.bottom, Sizes.spacingBetweenMemoBox)
+                        
                                                     .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
-                                                    
                                                     .disabled(memoEditVM.isSelectionMode)
-                                                    
                                                     .gesture(DragGesture()
                                                                 .updating($isDragging, body: { value, state, _ in
                                                         state = true
@@ -374,8 +375,6 @@ struct SecondMainView: View {
                                                         }
                                                     })
                                                 } // end of ForEach
-                                                
-                                
                                             }
                                         }
                                     } else { // no  searchResult
@@ -401,7 +400,8 @@ struct SecondMainView: View {
                                         
                                         Button(action: addMemo) {
                                             PlusImage()
-                                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+//                                                .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+                                                .padding(.trailing, 10)
                                                 .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                                 .animation(.spring(), value: memoEditVM.isSelectionMode)
                                         }
@@ -413,7 +413,7 @@ struct SecondMainView: View {
                                         currentFolder: currentFolder,
                                         showSelectingFolderView: $isShowingSelectingFolderView
                                     )
-                                        .padding([.trailing], Sizes.overallPadding)
+                                        .padding(.trailing, 10)
                                         .padding(.bottom,Sizes.overallPadding )
                                         .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)

@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// used in SecondMainView,
+// CustomSearchView,
+// FolderView
 struct HierarchyLabelView: View {
     
     @Environment(\.colorScheme) var colorScheme
@@ -15,23 +18,35 @@ struct HierarchyLabelView: View {
     var isNavigationLink: Bool = false
     
     func getRoot(child: Folder) -> String {
-        let hierarchy = getAllParents(child: child)
+        let parentFoldersInOrder = getAllParents(child: child)
         
         // compare hierarchy's title with topFolder title for both languages
         
-        if hierarchy.count == 1 {
-            if FolderType.compareName(hierarchy.first!.title, with: .folder) {
-                return "\(LocalizedStringStorage.folder)"
-            } else if FolderType.compareName(hierarchy.first!.title, with: .archive){
+        if parentFoldersInOrder.count == 1 {
+            if FolderType.compareName(parentFoldersInOrder.first!.title, with: .folder) {
+//                return "\(LocalizedStringStorage.folder)"
+                // print no folderName for basic Folder
+                 return ""
+            } else if FolderType.compareName(parentFoldersInOrder.first!.title, with: .archive){
                 return "\(LocalizedStringStorage.archive)"
-            } else if FolderType.compareName(hierarchy.first!.title, with: .trashbin) {
+            } else if FolderType.compareName(parentFoldersInOrder.first!.title, with: .trashbin) {
                 return "\(LocalizedStringStorage.trashbin)"
             }
         }
         
         var root = ""
         
-        _ = hierarchy.map { root = "\($0.title)" + " > " + root}
+        // 여기서, 처음이 Folder 인 경우 없애줘야해.
+        
+//        _ = parentFoldersInOrder.map { root = "\($0.title)" + " > " + root}
+        
+        for each in parentFoldersInOrder {
+            if FolderType.compareName(each.title, with: .folder) && each.parent == nil {
+                
+            } else {
+                root = "\(each.title)" + " > " + root
+            }
+        }
         
         let lastIndex = root.lastIndex(of: ">")!
         root.remove(at: lastIndex)

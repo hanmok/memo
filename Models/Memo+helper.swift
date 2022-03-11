@@ -337,18 +337,18 @@ extension Memo {
         return memos.sorted(by: sortingMethod)
     }
     
-    static func sortMemosWithPin(memos: [Memo]) -> [Memo] {
+    static func sortMemosWithPinAndBookmark(memos: [Memo]) -> [Memo] {
         @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
         @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
         
         let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
         
-        let pinnedMemos = memos.filter { $0.isPinned }
-        let unpinnedMemos = memos.filter { !$0.isPinned }
+        let importantMemos = memos.filter { $0.isPinned || $0.isBookMarked}
+        let normalMemos = memos.filter { !$0.isPinned && !$0.isBookMarked}
         
-        var allMemos = pinnedMemos.sorted(by: sortingMethod)
+        var allMemos = importantMemos.sorted(by: sortingMethod)
         
-        _ = unpinnedMemos.sorted(by: sortingMethod).map { allMemos.append($0) }
+        _ = normalMemos.sorted(by: sortingMethod).map { allMemos.append($0) }
         
         return allMemos
     }

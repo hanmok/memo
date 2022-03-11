@@ -79,3 +79,29 @@ Search 와는 많이 다르니까, Hierarchy, Padding 등을 수정하고,
 
 
 폴더는 너무 기본적인 폴더니까, Hierarchy Label 에서는 생략하는게 좋을 것 같아.
+
+북마크. 북마크!!
+사용자 선택;;
+
+Case 1. bookMark active
+1. 위로 올린다.
+맨 위로 북마크 올린다.
+아래 Folder 에서는 pin 만 올린다.
+북마크 된 것들은 이미 위에 가있음.
+
+Case 2. bookMark inactive
+2. 아래로 내린다.
+위로 올리는건, 북마크 || 핀
+
+북마크 를 슬래시 처리. 이미 있네?
+bookmark.slash.fill
+bookmark.fill
+
+
+Archive 에 있는건 안나오네. 정상 ? ㅇㅇ..
+그럼, MindMapView 에서도 Archive 에 있을 때에는 나오지 않게 하자.
+그럼 HIG 에 어긋남.. 
+Refactoring.
+
+이거.. 어떻게 하지 ??
+

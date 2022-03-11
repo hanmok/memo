@@ -74,6 +74,7 @@ struct MindMapView: View {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
+//                    if selectionEnum == .folder {
                     Button {
                         isShowingSecondView = true
                     } label: {
@@ -84,6 +85,7 @@ struct MindMapView: View {
                     .padding(.trailing, 10)
                     .padding(.leading, Sizes.overallPadding)
                     .padding(.top, 8)
+//                    }
                     
                     Spacer()
                     HStack(spacing: 0) {
