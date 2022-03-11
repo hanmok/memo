@@ -423,7 +423,8 @@ struct MindMapView: View {
                 }
             
             if isShowingSecondView {
-            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+//            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+                SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
                 .environmentObject(trashBinVM)
                 .environmentObject(memoOrder)
                 .environmentObject(folderEditVM)

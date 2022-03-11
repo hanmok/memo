@@ -352,6 +352,23 @@ extension Memo {
         
         return allMemos
     }
+    
+    static func sortMemosWithPinNoBookmark(memos: [Memo]) -> [Memo] {
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        let allMemos = memos.filter { !$0.isBookMarked }
+        var importantMemos = allMemos.filter { $0.isPinned}.sorted(by: sortingMethod)
+        let normalMemos = allMemos.filter { !$0.isPinned }
+        
+//        var addedMemos = importantMemos.sorted(by: sortingMethod)
+        
+        _ = normalMemos.sorted(by: sortingMethod).map { importantMemos.append($0) }
+        
+        return allMemos
+        
+    }
 
 //    static func
 }

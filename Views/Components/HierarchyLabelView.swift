@@ -67,16 +67,18 @@ struct HierarchyLabelView: View {
     }
     
     var body: some View {
-        ScrollView(.horizontal) {
+//        ScrollView(.horizontal) {
             
             if isNavigationLink {
                 if FolderType.compareName(currentFolder.title, with: .trashbin) {
                     Text(getRoot(child:currentFolder))
                         .font(.caption)
                         .foregroundColor(.red)
+                        .background(colorScheme == .dark ? .black : .white)
                 } else {
                     Text(getRoot(child:currentFolder))
                         .font(.caption)
+                        .background(colorScheme == .dark ? .black : .white)
                 }
 
                 
@@ -85,8 +87,9 @@ struct HierarchyLabelView: View {
                     .foregroundColor(Color.blackAndWhite)
                 .font(.caption)
                 .opacity(0.5)
+                .background(colorScheme == .dark ? .black : .white)
             }
-        }
-        .background(colorScheme == .dark ? .black : .white)
+//        }
+//        .background(colorScheme == .dark ? .black : .white)
     }
 }
