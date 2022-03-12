@@ -115,6 +115,7 @@ struct MemosToolBarView: View {
             Button(action: {
                 _ = memoEditVM.selectedMemos.map { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
                 memoEditVM.initSelectedMemos()
+//                Folder.updateTopFolders(context: context)
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }

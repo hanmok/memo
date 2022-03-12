@@ -23,7 +23,7 @@ struct MindMapView: View {
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-    
+//    @State var isShowingSecondView: Bool
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
@@ -39,7 +39,7 @@ struct MindMapView: View {
     
     @State var isShowingSearchView = false
     @State var isLoading = false
-    
+    @State var isShowingSecondView = false
 //    var hasSafeBottom: Bool {
 //        let scenes = UIApplication.shared.connectedScenes
 //        let windowScene = scenes.first as? UIWindowScene
@@ -74,6 +74,19 @@ struct MindMapView: View {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
+//                    if selectionEnum == .folder {
+                    Button {
+                        isShowingSecondView = true
+                    } label: {
+                        SystemImage("house", size: 24)
+//                        SystemImage("magnifyingglass")
+                            .foregroundColor(colorScheme == .dark ? .cream : .black)
+                    }
+                    .padding(.trailing, 10)
+                    .padding(.leading, Sizes.overallPadding)
+                    .padding(.top, 8)
+//                    }
+                    
                     Spacer()
                     HStack(spacing: 0) {
                         // MARK: - Button 1: SEARCH
@@ -115,7 +128,7 @@ struct MindMapView: View {
                     .padding(.top, 8)
                 }
                 .padding(.trailing, Sizes.overallPadding)
-                
+                .padding(.leading, Sizes.overallPadding)
                 
                 Picker("", selection: $selectionEnum) {
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
@@ -345,6 +358,8 @@ struct MindMapView: View {
             shouldShowAll: true,
                 shouldIncludeTrashOnCurrent: selectionEnum == .archive,
             shouldIncludeTrashOverall: true)
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
             
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
@@ -408,6 +423,15 @@ struct MindMapView: View {
                     textFieldType = nil
                     isShowingTextField = false
                 }
+            
+            if isShowingSecondView {
+
+                SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+                .environmentObject(trashBinVM)
+                .environmentObject(memoOrder)
+                .environmentObject(folderEditVM)
+                .environmentObject(memoEditVM)
+            }
         } // end of ZStack
         
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
@@ -420,6 +444,15 @@ struct MindMapView: View {
                     .environmentObject(memoEditVM)
             }
         })
+        
+//        .fullScreenCover(isPresented: $isShowingSecondView, content: {
+//            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+//                .environmentObject(trashBinVM)
+//                .environmentObject(memoOrder)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
+//        })
+        
         .onAppear(perform: {
             print("MindMapView has Appeared!")
             let allMemosReq = Memo.fetch(.all)

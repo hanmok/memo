@@ -51,6 +51,19 @@ struct PrettyTextFieldAlert: View {
     @Binding var text: String
     
     @FocusState var focusState: Bool
+    func some() {
+        focusState = true
+    }
+    
+    func showKeyboardInHalfSecond() {
+        var increasedSeconds = 0.0
+        for _ in 0 ... 5 {
+            increasedSeconds += 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + increasedSeconds) {
+                focusState = true
+            }
+        }
+    }
     
     var submitAction: (String) -> Void = { _ in }
     var cancelAction: () -> Void = { }
@@ -77,9 +90,21 @@ struct PrettyTextFieldAlert: View {
                     .padding(.bottom, 15)
                     .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
                         if let textField = obj.object as? UITextField {
+                            // better not using. cursor located in empty area when this applied.
+                            
+//                            var increasedSeconds = 0.0
+//                            for _ in 0 ... 5 {
+//                                increasedSeconds += 0.1
+//                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + increasedSeconds) {
+//                                    textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+//                                }
+//                            }
+                            
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.52) {  /// Anything over 0.5 seems to work
                                 textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
                             }
+                            
+                            
                         }
                     }
                     .onSubmit {
@@ -91,10 +116,7 @@ struct PrettyTextFieldAlert: View {
                 
                     .onChange(of: isPresented) { newValue in
                         if newValue == true {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {  /// Anything over 0.5 seems to work
-                                print("newValue is turned to true")
-                                self.focusState = true
-                            }
+                            showKeyboardInHalfSecond()
                         }
                     }
                     .onAppear {

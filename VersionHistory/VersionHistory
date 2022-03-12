@@ -1,0 +1,148 @@
+
+1.0.4 ->
+Modify New Folder initial Text
+Fix navigation through SubFolderView Bug (trashBin not provided)
+
+해결됨.
+solution:
+TopFolder 를 업데이트 하면서 뒤로 가는 현상임. 먼저 memo.folder = nil,
+MindMapView 에서 folder 없는 memo 를 trash 로 옮김.
+폴더 내에서는 휴지통을 볼 수 없도록 바꿈.
+
+prob:
+어떤 Folder -> SubFolder 로 이동 후
+1. 어떤 메모 삭제하면 어떤 Folder 로 튕김. SubFolder 로 가야하는애가 더 뒤로감. 왜이러지?
+
+
+해결됨.
+solution:
+엉뚱한 곳에 environmentObject 를 전해주고 있었음. 수정함.
+
+prob:
+2. 여기에서, 메모를 생성 후 텍스트 입력, 바로 다시 제거했을 경우
+NewMemoView 157 번째 줄
+TrashBinViewModel 을 받지 못했다고 나옴.
+
+
+버그 !
+뭐지..?
+메모를 선택한 후 아무 행동도 안하고 선택 취소, 메모를 다시 열면 contents 가 아무것도 안보임.
+이거,,, 그냥 생긴 버그는 아닐까 혹시 ??
+simulator 에서는 정상임; 그렇다면, 코드에서 생긴 버그는 아님.
+일단 출시 ..
+
+
+
+prob: subfolder 내에서 같은 행동을 하면 위 folder 로 이동함.
+solution: memoView 에 있는 Folder.updateTOpFolders 를 folderView 내에서는 호출하지 않도록 함.
+parameter: calledFromMainView
+
+
+
+
+1.0.5 ->
+
+git commit -m "Remove PlaceHolder Folders"
+Change app name to This Memo
+
+
+1.06 -> 
+현재 하고 있는 것.
+새로운 화면 만드는 중.
+도중에, Swipe 기능이 필요함.
+어떻게 하지?
+FilteredMemoList 에 있는 것을 적용해서 사용해야함.
+이걸 그대로 SecondMainView 에 적용하게되면, 중복되는 코드가 많아져서 시간이 얼마나 더 오래 걸릴 지 가늠이 안됨.
+또한, LazyVStack 으로 만들어야함.
+
+FilteredMemoList 의 일부를 떼어와서 변형시켜야함.
+
+먼저, 북마크 된 것들은 최상단에 노출.
+그 다음 폴더, 그리고 나머지 폴더들 순서
+이때, 폴더들에서 이미 북마크된 것들은 이미 올라가서 보이지 않아야 하고,
+대신 Pin 한 것들은 폴더 내에서 위로 이동함.
+
+MemoEditViewModel, SelectingFolderView 도 바꾸어야함.
+현재는 선택된 메모의 folder 가 하나일 경우이므로, 이것을 여러 폴더도 가능하게끔.
+우선, 모든 파일들을 대상으로 하자.. 북마크 고려하지 않고..
+할게 좀 많아...
+
+
+// 정해야할게 있음.
+
+1. Animation
+일단, ZStack 으로 만드는게 좋을 것 같음.
+
+2. Bookmark
+좀더 생각...
+Search 와는 많이 다르니까, Hierarchy, Padding 등을 수정하고,
+북마크는 맨 위로 올리자.
+
+
+폴더는 너무 기본적인 폴더니까, Hierarchy Label 에서는 생략하는게 좋을 것 같아.
+
+북마크. 북마크!!
+사용자 선택;;
+
+Case 1. bookMark active
+1. 위로 올린다.
+맨 위로 북마크 올린다.
+아래 Folder 에서는 pin 만 올린다.
+북마크 된 것들은 이미 위에 가있음.
+
+Case 2. bookMark inactive
+2. 아래로 내린다.
+위로 올리는건, 북마크 || 핀
+
+북마크 를 슬래시 처리. 이미 있네?
+bookmark.slash.fill
+bookmark.fill
+
+
+Archive 에 있는건 안나오네. 정상 ? ㅇㅇ..
+그럼, MindMapView 에서도 Archive 에 있을 때에는 나오지 않게 하자.
+그럼 HIG 에 어긋남.. 
+Refactoring.
+
+이거.. 어떻게 하지 ??
+
+
+현재, Sorting 이 잘 안되고,
+Sorting 해결.
+
+결과가 없는 경우 화면이 뒤틀린다. how....
+
+
+으음... 전체에 Padding 을 줄 경우 Seach 할 때 화면이 이상해지고 NavLink 는 정상
+일부분에 Padding 을 줄 경우 Search 할 때 화면은 정상이지만 NavLink 가 망가짐.
+
+어떡하지 ? navLink 에 맞추는게 맞을 것 같긴 해.
+으음.... 결과에 따른 조건만으로 padding 을 줘야하나?
+하.....어떡하지..
+
+원인이 뭐야 근데 ?
+모름.
+어쨌든 해결함..
+
+Bookmark, lines 이거,, 없애야 할걸 ? 해결.
+
+Search 의 Identity.. 어떻게 해야할까?
+너무 SecondView 와 비슷함.
+이거.. 메인화면에서는 없애?
+첫 화면을 저거로 설정 할 수 있어야 하나 ?
+
+
+// 업데이트가 왜 안돼...!!
+// 음.. MemosToolbarView 통해서 할 때는 되는데,
+// 직접 View 로 가서 업데이트 하면 반영이 안된다. 왜 ?
+
+아니야. 한번 스크롤 시켜주면 바로 됨..
+음.. 어떻게 업데이트시키지?
+
+searchKeyword += " "
+searchKeyword.removeLast()
+
+onAppear 에서
+로 해줌.
+
+

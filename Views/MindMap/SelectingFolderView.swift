@@ -27,6 +27,7 @@ struct SelectingFolderView: View {
     var dismissAction: () -> Void = { }
     var isFullScreen: Bool = false
     
+
     
     var body: some View {
         
@@ -105,10 +106,11 @@ struct SelectingFolderView: View {
                     } label: {
                         
                         if invalidFolderWithLevels.contains(folderWithLevel) {
-                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, markInvalid: true)
                             
-                        } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
-                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, shouldCheck: true)
+//                        } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
+                        } else if folderWithLevel.folder == folderEditVM.folderToCut || memoEditVM.folderRelated.contains(folderWithLevel.folder){
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, markCheck: true)
                         } else {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }
@@ -150,11 +152,12 @@ struct SelectingFolderView: View {
                     } label: {
                         
                         if invalidFolderWithLevels.contains(folderWithLevel) {
-                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, markInvalid: true)
                                 .background(.red)
                             
-                        } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
-                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, shouldCheck: true)
+//                        } else if folderWithLevel.folder == folderEditVM.folderToCut || folderWithLevel.folder == memoEditVM.parentFolder{
+                        } else if folderWithLevel.folder == folderEditVM.folderToCut || memoEditVM.folderRelated.contains(folderWithLevel.folder){
+                            CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level, markCheck: true)
                         } else {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }

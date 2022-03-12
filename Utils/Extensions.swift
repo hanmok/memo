@@ -76,6 +76,8 @@ struct HiddenNavigationBar: ViewModifier {
 }
 
 
+
+
 extension UIApplication {
     
     var keyWindow: UIWindow? {

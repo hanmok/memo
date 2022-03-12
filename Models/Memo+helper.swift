@@ -336,8 +336,44 @@ extension Memo {
         
         return memos.sorted(by: sortingMethod)
     }
+    
+    static func sortMemosWithPinAndBookmark(memos: [Memo]) -> [Memo] {
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        
+        let importantMemos = memos.filter { $0.isPinned || $0.isBookMarked}
+        let normalMemos = memos.filter { !$0.isPinned && !$0.isBookMarked}
+        
+        var allMemos = importantMemos.sorted(by: sortingMethod)
+        
+        _ = normalMemos.sorted(by: sortingMethod).map { allMemos.append($0) }
+        
+        return allMemos
+    }
+    
+    static func sortMemosWithPinNoBookmark(memos: [Memo]) -> [Memo] {
+        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+        
+        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        let allMemos = memos.filter { !$0.isBookMarked }
+        var importantMemos = allMemos.filter { $0.isPinned}.sorted(by: sortingMethod)
+        let normalMemos = allMemos.filter { !$0.isPinned }
+        
+//        var addedMemos = importantMemos.sorted(by: sortingMethod)
+        
+        _ = normalMemos.sorted(by: sortingMethod).map { importantMemos.append($0) }
+        
+        return allMemos
+        
+    }
+
+//    static func
 }
 
+// 북마크를 어떻게 처리하지..??
 
 
 struct MemoProperties {

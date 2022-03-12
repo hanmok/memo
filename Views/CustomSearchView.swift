@@ -16,6 +16,15 @@ struct NestedMemo: Hashable {
 enum SearchType: String {
     case all = "All"
     case current = "Current"
+    
+    mutating func toggleSelf() {
+        switch self {
+        case .all:
+            self = .current
+        case .current:
+            self = .all
+        }
+    }
 }
 
 struct CustomSearchView: View {
@@ -24,11 +33,14 @@ struct CustomSearchView: View {
 
     @EnvironmentObject var trashBinVM: TrashBinViewModel
 
-    @StateObject var memoEditVM = MemoEditViewModel()
-
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     
+
     @ObservedObject var currentFolder: Folder
+
+//    @StateObject var memoEditVM = MemoEditViewModel()
+    @EnvironmentObject var memoEditVM: MemoEditViewModel
     
     @GestureState var isScrolled = false
     
@@ -39,6 +51,19 @@ struct CustomSearchView: View {
     @State var searchTypeEnum: SearchType
     
     @Binding var showingSearchView: Bool
+    
+    func updateViewInHalfSecond() {
+        var increasedSeconds = 0.0
+        for _ in 0 ... 5 {
+            increasedSeconds += 0.1
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + increasedSeconds) {
+                
+                searchKeyword += " "
+                searchKeyword.removeLast()
+                
+            }
+        }
+    }
     
     var shouldIncludeTrashOnCurrent: Bool
     var shouldIncludeTrashOverall: Bool
@@ -147,7 +172,7 @@ struct CustomSearchView: View {
 
                         TextField(LocalizedStringStorage.searchPlaceholder, text: $searchKeyword)
                             .accentColor(Color.textViewTintColor)
-                            
+                            .submitLabel(.done)
                             .focused($focusState)
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
@@ -232,6 +257,7 @@ struct CustomSearchView: View {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
                                                         .environmentObject(trashBinVM)
                                                         .environmentObject(memoEditVM)
+                                                        .environmentObject(folderEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
                                                         .environmentObject(memoEditVM)
@@ -298,6 +324,10 @@ struct CustomSearchView: View {
                 }
                 .gesture(scroll)
             }
+            .onAppear(perform: {
+                print(" CustomSearchView has appeared!")
+                updateViewInHalfSecond()
+            })
             .padding(.top)
             .gesture(scroll)
 
@@ -305,8 +335,7 @@ struct CustomSearchView: View {
         }
         .onAppear {
             print("CustomSearchView has appeared!!!!!")
+            updateViewInHalfSecond()
         }
-           
-        
     }
 }
