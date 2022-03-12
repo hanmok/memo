@@ -23,6 +23,7 @@ struct NewMemoView: View {
 
     @FocusState var editorFocusState: Bool
     
+    @State var hasRelocated = false
     @State var contents: String = ""
     
     @State var isBookMarkedTemp: Bool = false
@@ -86,7 +87,11 @@ struct NewMemoView: View {
         print("save changes has triggered")
         
         if contents == ""  {
-        // none is typed -> Do nothing. Cause memo is not created yet.
+            // none is typed -> Do nothing. Cause memo is not created yet.
+            if hasRelocated {
+                Memo.delete(memo!)
+            }
+
         } else {
             if memo != nil {
                 
@@ -95,23 +100,21 @@ struct NewMemoView: View {
                 
                 if memo!.contentsToShow == "" && memo!.titleToShow == "" {
                     Memo.delete(memo!)
+                    
                 } else {
                     if memo!.folder == parent {
                         parent.modificationDate = Date()
                     }
-                    
-                    
                     memo!.isBookMarked = isBookMarkedTemp
                     memo!.isPinned = isPinned
                     memo!.creationDate = Date()
                     memo!.modificationDate = Date()
                     
-                    
                     context.saveCoreData()
                 }
-                // memo is not created yet.
+                // memo is not created yet. memo is nil.
             } else { // and contents is not empty.
-
+                
                 memo = Memo(contents: contents, context: context)
                 memo!.saveTitleWithContentsToShow(context: context)
                 if memo!.titleToShow == "" && memo!.contentsToShow == "" {
@@ -216,27 +219,22 @@ struct NewMemoView: View {
                                 .tint(Color.navBtnColor)
                         }
                         
+                        // RELOCATE MEMO
                         Button {
-                            // RELOCATE MEMO
-                            if contents == "" {
-                                print("flag1")
-                            } else {
+                            if !hasRelocated {
                                 memo = Memo(contents: contents, context: context)
-                                memo!.isBookMarked = isBookMarkedTemp
-                                memo!.isPinned = isPinned
-                                memo!.creationDate = Date()
-                                memo!.modificationDate = Date()
+
                                 parent.add(memo: memo!)
-                                memo!.folder = parent
                                 context.saveCoreData()
                                 parent.title += ""
-
+                                
                                 memoEditVM.dealWhenMemoSelected(memo!)
-                                print("flag2")
+                                hasRelocated = true
+                            } else {
+                                // already been relocated.
+                                memoEditVM.dealWhenMemoSelected(memo!)
                             }
-                            print("flag3")
                             isShowingSelectingFolderView = true
-
                         } label: {
                             SystemImage(
                                 "folder",
@@ -254,7 +252,6 @@ struct NewMemoView: View {
                     }
                 }
                 .padding(.bottom)
-//                .padding(.horizontal, Sizes.overallPadding)
                 .padding(.trailing, Sizes.overallPadding)
                 .padding(.leading, Sizes.navBtnLeadingSpacing)
                 
