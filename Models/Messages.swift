@@ -27,7 +27,7 @@ struct Messages {
     static func showMemoMovedToTrash(_ n: Int) -> String {
 //        return "\(n) memos has moved to trash bin "
 //        return "\(n) \(LocalizedStringStorage.memosHasMovedToTrash)"
-        return n == 1 ? LocalizedStringStorage.oneMemoHasPinned : "\(n)\(LocalizedStringStorage.memosHasMovedToTrash)"
+        return n == 1 ? LocalizedStringStorage.oneMemoHasMovedToTrash : "\(n)\(LocalizedStringStorage.memosHasMovedToTrash)"
     }
     
     
