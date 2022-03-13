@@ -1,0 +1,58 @@
+Msg 입력중
+
+폴더에서 메모로 이동 후, 메모를 제거한 경우에 메시지 전달을 어떻게 어디서 함? .. 메모의 경우 memolist, filteredMemoList 안으로 쑥 들어감. ObservableObject..
+or NotificationCenter.
+일단 보류하자..
+
+전달 경로.;;;;; 너무 많은데 ?
+
+1. MindMapView -> MemoView, NewMemoView
+2. CustomSearchView -> MemoView
+3. FolderView -> MemoView, NewMemoView
+4. SecondView -> MemoView, NewMemoView
+
+기존에 있는것도 다 바꿔야 하나 ? 보기가 더 좋을 것 같기는 한데 .. 일단 만들자.
+음.. 이러면.. msgToShow 에 조건적으로 뭘 보내줘야 할 것 같은데 ?
+
+SecondView 에서, 전체 선택 막아놓음.
+
+
+
+
+
+
+Bug 발견.
+
+problem:
+
+FolderView 에서 메모로 이동, 메모에서 본인을 다른 폴더에 넣을 때, 혹은 취소 시 FolderView 로 튕겨나감.
+이거, SelectingFolderView 내에 Folder.updateTopFolders 때문에 그런거 아냐 ? 맞네.
+그런데, 용도가 있었을거야..
+solution:
+Folder.updateTopFolders 에 조건을 달아주고,
+memoView, newMemoView 에서 호출할 때는 업데이트 하지 않도록 설정.
+
+
+command + option + <-    : 접기 !
+
+1.1.1 -> 1.1.2
+Change Msg Color
+
+
+Messages has added To inform what you've done.
+
+Bug fix:
+you're not going back to FolderView From Memo by bug when selecting relocation Button
+
+
+
+New: 버튼을 눌렀을 때 잘 되고 있는지 알려드릴 수 있는 메시지를 추가하였습니다!
+
+Bug Fix: 메모를 수정하다가 폴더 위치를 바꿀 때 폴더로 튕기는 버그를 수정하였습니다!
+
+1.1.2 -> 1.1.3
+
+has changed message for changing 'one' memo
+has changed message color
+
+

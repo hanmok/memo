@@ -20,7 +20,9 @@ struct MemosToolBarView: View {
     
     @Binding var showSelectingFolderView: Bool
     
+    @Binding var msgToShow: String?
     
+    var calledFromSecondView = false
     var body: some View {
         HStack(spacing: Sizes.spacingBetweenButtons) {
             
@@ -31,14 +33,17 @@ struct MemosToolBarView: View {
 //                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
                 UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
             }
-
+            
+            
+            if !calledFromSecondView {
             Button {
                 // select All
                 memoEditVM.add(memos: currentFolder.memos.sorted())
-                
+                // secondView 에서는, 모든 memo 를 선택해야함. how ?
             } label: {
                 Text("All")
                     .font(.headline)
+            }
             }
             
             
@@ -57,9 +62,10 @@ struct MemosToolBarView: View {
 
                 if !allBookmarked {
                     _ = memoEditVM.selectedMemos.map { $0.isBookMarked = true}
-                    
+                    msgToShow = Messages.showBookmarkedMsg(memoEditVM.count)
                 } else {
                     _ = memoEditVM.selectedMemos.map { $0.isBookMarked = false}
+                    msgToShow = Messages.showUnbookmarkedMsg(memoEditVM.count)
                 }
                 
                 context.saveCoreData()
@@ -88,9 +94,10 @@ struct MemosToolBarView: View {
 
                 if !allPinned {
                     _ = memoEditVM.selectedMemos.map { $0.isPinned = true}
-                    
+                    msgToShow = Messages.showPinnedMsg(memoEditVM.count)
                 } else {
                     _ = memoEditVM.selectedMemos.map { $0.isPinned = false}
+                    msgToShow = Messages.showUnpinnedMsg(memoEditVM.count)
                 }
                 
                 context.saveCoreData()
@@ -114,6 +121,7 @@ struct MemosToolBarView: View {
             // REMOVE ACTION, WORKS FINE
             Button(action: {
                 _ = memoEditVM.selectedMemos.map { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
+                msgToShow = Messages.showMemoMovedToTrash(memoEditVM.count)
                 memoEditVM.initSelectedMemos()
 //                Folder.updateTopFolders(context: context)
             }) {

@@ -27,7 +27,9 @@ struct SelectingFolderView: View {
     var dismissAction: () -> Void = { }
     var isFullScreen: Bool = false
     
-
+    @Binding var msgToShow: String?
+    
+    var shouldUpdateTopFolder = true
     
     var body: some View {
         
@@ -79,6 +81,7 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
+                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 isValidAction = true
                             }
@@ -86,7 +89,9 @@ struct SelectingFolderView: View {
                         } else {
                             _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
+                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
+                            
                             isValidAction = true
                             
                             memoEditVM.initSelectedMemos()
@@ -126,12 +131,16 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
+                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
+                                
                                 isValidAction = true
                             }
                         } else {
                             _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
+                                
                                 $0.modificationDate = Date()
+                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             isValidAction = true
                             
@@ -171,7 +180,9 @@ struct SelectingFolderView: View {
         
         .onDisappear {
             UIView.setAnimationsEnabled(true)
+            if shouldUpdateTopFolder {
             Folder.updateTopFolders(context: context)
+            }
         }
         .navigationBarHidden(true)
     }

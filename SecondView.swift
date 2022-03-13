@@ -54,6 +54,8 @@ struct SecondView: View {
     
     @State var bookmarkState = true // need to be user Default.
     
+    @State var msgToShow: String?
+    
     func updateViewInHalfSecond() {
         var increasedSeconds = 0.0
         for _ in 0 ... 5 {
@@ -291,6 +293,10 @@ struct SecondView: View {
                                 .foregroundColor(colorScheme == .dark ? .cream : .black)
                             
                         }
+                        
+//                        Spacer()
+//                            .padding(.horizontal)
+                        // Search TextField
                         HStack(spacing: 0) {
                             
                             ChangeableImage(imageSystemName: "magnifyingglass", height: 16)
@@ -306,7 +312,7 @@ struct SecondView: View {
                                 .submitLabel(.search)
 
                             
-                            Spacer()
+//                            Spacer()
                             
                             Button{
                                 searchKeyword = ""
@@ -329,9 +335,10 @@ struct SecondView: View {
                         .frame(height: 32)
                         .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                         .cornerRadius(10)
-                        
+                        .padding(.horizontal, 10)
+                        // End of Search TextField
                         Spacer()
-                        
+//                            .padding(.horizontal)
                         Button {
                             
                             bookmarkState.toggle()
@@ -410,12 +417,14 @@ struct SecondView: View {
                                             
                                         Rectangle()
                                                 .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
-                                                .foregroundColor(Color.mainColor)
+//                                                .foregroundColor(Color.mainColor)
+                                                .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .cream )
                                                 .padding(.top, 4)
                                             
                                             Rectangle()
                                                     .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
-                                                    .foregroundColor(Color.mainColor)
+//                                                    .foregroundColor(Color.mainColor)
+                                                    .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .cream )
                                                     .padding(.vertical, 4)
                                             
                                             }
@@ -430,6 +439,7 @@ struct SecondView: View {
                                                         }, label: {
                                                             HStack {
                                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
+                                                                    
                                                                 Spacer()
                                                             } // end of HStack
                                                             .padding(.leading, Sizes.overallPadding + 5)
@@ -488,6 +498,7 @@ struct SecondView: View {
                                                         }, label: {
                                                             HStack {
                                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
+                                                                   
                                                                 Spacer()
                                                             } // end of HStack
                                                             .padding(.leading, Sizes.overallPadding + 5)
@@ -569,7 +580,8 @@ struct SecondView: View {
                                     Spacer()
                                     MemosToolBarView(
                                         currentFolder: currentFolder,
-                                        showSelectingFolderView: $isShowingSelectingFolderView
+                                        showSelectingFolderView: $isShowingSelectingFolderView,
+                                        msgToShow: $msgToShow, calledFromSecondView: true
                                     )
                                         .padding(.trailing, 10)
                                         .padding(.bottom,Sizes.overallPadding )
@@ -592,7 +604,11 @@ struct SecondView: View {
                                 .environmentObject(memoEditVM)
                                 .environmentObject(trashBinVM),
                                isActive: $isAddingMemo) {}
-            } // end of NavigationView
+                
+                MsgView(msgToShow: $msgToShow)
+                    .padding(.top, UIScreen.screenHeight / 1.5)
+                
+            } // end of ZStack
             .sheet(isPresented: $isShowingSelectingFolderView,
                    content: {
                 SelectingFolderView(
@@ -601,7 +617,7 @@ struct SecondView: View {
                             homeFolder: Folder.fetchHomeFolder(context: context)!,
                             archiveFolder: Folder.fetchHomeFolder(context: context,
                                                                   fetchingHome: false)!
-                        ), invalidFolderWithLevels: []
+                        ), invalidFolderWithLevels: [], msgToShow: $msgToShow
                 )
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
@@ -619,6 +635,8 @@ struct SecondView: View {
             }
             .onDisappear {
                 print("SecondView has disappeared!")
+//                memoEditVM.selectedMemos.removeAll()
+                memoEditVM.initSelectedMemos()
             }
         }
         .environmentObject(trashBinVM)

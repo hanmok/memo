@@ -59,6 +59,33 @@ struct LocalizedStringStorage {
     static let newFolderPlaceHolder = NSLocalizedString(LocalizedStringKeys.newFolderPlaceHolder, comment: "a")
     static let newArchivePlaceHolder = NSLocalizedString(LocalizedStringKeys.newArchivePlaceHolder, comment: "a")
     
+    
+    
+    static let hasAddedToFolder = NSLocalizedString(LocalizedStringKeys.hasAddedToFolder, comment: "")
+    
+    static let memosHasDeleted = NSLocalizedString(LocalizedStringKeys.memosHasDeleted, comment: "")
+    
+    static let folderHasDeleted = NSLocalizedString(LocalizedStringKeys.folderHasDeleted, comment: "")
+    
+    static let memosHasMovedToTrash = NSLocalizedString(LocalizedStringKeys.memosHasMovedToTrash, comment: "")
+    
+    static let memosHasPinned = NSLocalizedString(LocalizedStringKeys.memosHasPinned, comment: "")
+    
+    static let memosHasUnpinned = NSLocalizedString(LocalizedStringKeys.memosHasUnpinned, comment: "")
+    
+    static let memosHasBookmarked = NSLocalizedString(LocalizedStringKeys.memosHasBookmarked, comment: "")
+    
+    static let memosHasUnbookmarked = NSLocalizedString(LocalizedStringKeys.memosHasUnbookmarked, comment: "")
+    
+    static let oneMemoHasDeleted = NSLocalizedString(LocalizedStringKeys.oneMemoHasDeleted, comment: "")
+    static let oneMemoHasMovedToTrash = NSLocalizedString(LocalizedStringKeys.oneMemoHasMovedToTrash, comment: "")
+    static let oneMemoHasPinned = NSLocalizedString(LocalizedStringKeys.oneMemoHasPinned, comment: "")
+    static let oneMemoHasUnpinned = NSLocalizedString(LocalizedStringKeys.oneMemoHasUnpinned, comment: "")
+    static let oneMemoHasBookmarked = NSLocalizedString(LocalizedStringKeys.oneMemoHasBookmarked, comment: "")
+    static let oneMemoHasUnbookmarked = NSLocalizedString(LocalizedStringKeys.oneMemoHasUnbookmarked, comment: "")
+    
+    
+    
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
         case .newSubFolder: return LocalizedStringStorage.newSubFolder
@@ -145,5 +172,30 @@ struct LocalizedStringKeys {
     static let newFolderPlaceHolder = "New Folder PlaceHolder"
     static let newArchivePlaceHolder = "New Archive PlaceHolder"
     
+    
+    
+    // MARK: - MESSAGES
+    
+    static let hasAddedToFolder = "hasAddedToFolder"
+    
+    static let memosHasDeleted = "memosHasDeleted"
+    static let oneMemoHasDeleted = "oneMemoHasDeleted"
+    
+    static let folderHasDeleted = "folderHasDeleted"
+    
+    static let memosHasMovedToTrash = "memosHasMovedToTrash"
+    static let oneMemoHasMovedToTrash = "oneMemoHasMovedToTrash"
+    
+    static let memosHasPinned = "memosHasPinned"
+    static let oneMemoHasPinned = "oneMemoHasPinned"
+    
+    static let memosHasUnpinned = "memosHasUnpinned"
+    static let oneMemoHasUnpinned = "oneMemoHasUnpinned"
+    
+    static let memosHasBookmarked = "memosHasBookmarked"
+    static let oneMemoHasBookmarked = "oneMemoHasBookmarked"
+    
+    static let memosHasUnbookmarked = "memosHasUnbookmarked"
+    static let oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
     
 }

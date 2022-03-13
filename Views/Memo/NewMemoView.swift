@@ -34,6 +34,8 @@ struct NewMemoView: View {
     
     @Binding var isPresentingNewMemo: Bool
     
+    @State var msgToShow: String?
+    
     func updateViewInHalfSecond() {
         var increasedSeconds = 0.0
         for _ in 0 ... 5 {
@@ -289,7 +291,7 @@ struct NewMemoView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: []
+                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: [], msgToShow: $msgToShow, shouldUpdateTopFolder: false
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
