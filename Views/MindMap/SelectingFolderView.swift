@@ -87,7 +87,7 @@ struct SelectingFolderView: View {
                             }
                             // 메모 이동.
                         } else {
-                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
+                            memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
                                 msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
@@ -137,11 +137,11 @@ struct SelectingFolderView: View {
                                 isValidAction = true
                             }
                         } else {
-                            _ = memoEditVM.selectedMemos.map { folderEditVM.folderToPaste!.add(memo: $0)
-                                
+                             memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
                                 msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
+                            
                             isValidAction = true
                             
                             memoEditVM.initSelectedMemos()

@@ -267,7 +267,12 @@ struct NewMemoView: View {
                     .foregroundColor(Color.memoTextColor)
                     .padding(.leading, Sizes.overallPadding)
             }
+            .overlay(
+                MsgView(msgToShow: $msgToShow)
+                        .padding(.top, UIScreen.screenHeight / 1.5 ))
             .padding(.top, 10)
+            
+            
         }
 //        .padding(.vertical)
         .padding(.bottom)

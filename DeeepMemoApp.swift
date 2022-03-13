@@ -52,7 +52,7 @@ struct DeeepMemoApp: App {
                     persistenceController.container.viewContext.saveCoreData()
                     print("newFolders: \(newFolders.count)")
                 } else if folders.count < 3 {
-                    _ = folders.map { Folder.delete($0)}
+                     folders.forEach { Folder.delete($0)}
                     let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
                     persistenceController.container.viewContext.saveCoreData()
                     print("newFolders: \(newFolders.count)")

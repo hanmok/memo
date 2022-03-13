@@ -72,8 +72,8 @@ struct SecondView: View {
     
     var allFolders: [Folder] {
         var folders: [Folder] = []
-        _ = fastFolderWithLevelGroup.folders.map { folders.append($0.folder)}
-        _ = fastFolderWithLevelGroup.archives.map { folders.append($0.folder)}
+         fastFolderWithLevelGroup.folders.forEach { folders.append($0.folder)}
+         fastFolderWithLevelGroup.archives.forEach { folders.append($0.folder)}
 //        if shouldIncludeTrashOverall {
 //            folders.append(trashBinVM.trashBinFolder)
 //        }
@@ -83,13 +83,12 @@ struct SecondView: View {
     
     var currentFolders: [Folder] {
         var folders: [Folder] = []
-        _ = Folder.getHierarchicalFolders(topFolder: currentFolder).map { folders.append($0.folder)}
+        Folder.getHierarchicalFolders(topFolder: currentFolder).forEach { folders.append($0.folder)}
 //        if shouldIncludeTrashOnCurrent {
 //            folders.append(trashBinVM.trashBinFolder)
 //        }
         print("appended Folders in currnetFolders: \(folders)")
         
-        _ = folders.map { print($0.title)}
         
         return folders
     }
@@ -271,7 +270,7 @@ struct SecondView: View {
         
 
         for each in foundMemos {
-                _ = each.memos.filter { $0.isBookMarked }.map { allBookMarkedFoundMemos.append( $0) }
+                 each.memos.filter { $0.isBookMarked }.forEach { allBookMarkedFoundMemos.append( $0) }
             }
         
         allBookMarkedFoundMemos = Memo.sortMemos(memos: allBookMarkedFoundMemos)

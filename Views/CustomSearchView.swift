@@ -69,8 +69,8 @@ struct CustomSearchView: View {
     var shouldIncludeTrashOverall: Bool
     var allFolders: [Folder] {
         var folders: [Folder] = []
-        _ = fastFolderWithLevelGroup.folders.map { folders.append($0.folder)}
-        _ = fastFolderWithLevelGroup.archives.map { folders.append($0.folder)}
+        fastFolderWithLevelGroup.folders.forEach { folders.append($0.folder)}
+        fastFolderWithLevelGroup.archives.forEach { folders.append($0.folder)}
         if shouldIncludeTrashOverall {
         folders.append(trashBinVM.trashBinFolder)
         }
@@ -79,13 +79,11 @@ struct CustomSearchView: View {
     // 여기다..
     var currentFolders: [Folder] {
         var folders: [Folder] = []
-        _ = Folder.getHierarchicalFolders(topFolder: currentFolder).map { folders.append($0.folder)}
+         Folder.getHierarchicalFolders(topFolder: currentFolder).forEach { folders.append($0.folder)}
         if shouldIncludeTrashOnCurrent {
             folders.append(trashBinVM.trashBinFolder)
         }
         print("appended Folders in currnetFolders: \(folders)")
-        
-        _ = folders.map { print($0.title)}
         
         return folders
     }

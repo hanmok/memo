@@ -34,7 +34,7 @@ class MemoEditViewModel: ObservableObject {
     
     func add(memos: [Memo]) {
         print("memo has added!")
-        _ = memos.map { self.selectedMemos.update(with: $0)}
+        memos.forEach { self.selectedMemos.update(with: $0)}
         
         if memos.count != 0 {
 //            self.parentFolder = memos.first!.folder

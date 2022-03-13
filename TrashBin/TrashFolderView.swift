@@ -168,7 +168,7 @@ struct TrashFolderView: View {
         .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $isShowingDeleteAlert, actions: {
             // DELETE
             Button(role: .destructive) {
-                _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
+                 memoEditVM.selectedMemos.forEach { Memo.delete($0)}
                 msgToShow = Messages.showMemosDeletedMsg(memoEditVM.count)
                 context.saveCoreData()
                 memoEditVM.initSelectedMemos()

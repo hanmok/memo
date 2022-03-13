@@ -102,10 +102,6 @@ struct MindMapView: View {
                     HStack(spacing: 0) {
                         // MARK: - Button 1: SEARCH
                         Button {
-                            _ = fastFolderWithLevelGroup.folders.map {
-                                print("title: \($0.folder.title)")
-                                print("level: \($0.level)")
-                            }
                             // show SearchView !
                             isShowingSearchView = true
                         } label: {
@@ -477,7 +473,7 @@ struct MindMapView: View {
             let allMemosReq = Memo.fetch(.all)
             
             if let allMemos = try? context.fetch(allMemosReq) {
-                _ = allMemos.map {
+                 allMemos.forEach {
                     if $0.folder == nil {
                         $0.folder = trashBinVM.trashBinFolder
                     }
