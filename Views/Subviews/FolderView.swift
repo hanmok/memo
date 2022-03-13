@@ -39,6 +39,8 @@ struct FolderView: View {
         
     @State var isShowingSearchView = false
     
+    @State var msgToShow: String?
+    
     var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -227,7 +229,8 @@ struct FolderView: View {
                         Spacer()
                         MemosToolBarView(
                             currentFolder: currentFolder,
-                            showSelectingFolderView: $isShowingSelectingFolderView
+                            showSelectingFolderView: $isShowingSelectingFolderView,
+                            msgToShow: $msgToShow
                         )
                             .padding([.trailing], Sizes.overallPadding)
                             .padding(.bottom,Sizes.overallPadding )
@@ -274,6 +277,9 @@ struct FolderView: View {
                             .environmentObject(trashBinVM),
                            isActive: $isAddingMemo) {}
                             
+            MsgView(msgToShow: $msgToShow)
+                .padding(.top, UIScreen.screenHeight / 1.5)
+            
         } // end of ZStack
         .frame(maxHeight: .infinity)
         

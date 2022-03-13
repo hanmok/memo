@@ -20,6 +20,7 @@ struct MemosToolBarView: View {
     
     @Binding var showSelectingFolderView: Bool
     
+    @Binding var msgToShow: String?
     
     var body: some View {
         HStack(spacing: Sizes.spacingBetweenButtons) {
@@ -57,9 +58,10 @@ struct MemosToolBarView: View {
 
                 if !allBookmarked {
                     _ = memoEditVM.selectedMemos.map { $0.isBookMarked = true}
-                    
+                    msgToShow = Messages.showBookmarkedMsg(memoEditVM.count)
                 } else {
                     _ = memoEditVM.selectedMemos.map { $0.isBookMarked = false}
+                    msgToShow = Messages.showUnbookmarkedMsg(memoEditVM.count)
                 }
                 
                 context.saveCoreData()
@@ -88,9 +90,10 @@ struct MemosToolBarView: View {
 
                 if !allPinned {
                     _ = memoEditVM.selectedMemos.map { $0.isPinned = true}
-                    
+                    msgToShow = Messages.showPinnedMsg(memoEditVM.count)
                 } else {
                     _ = memoEditVM.selectedMemos.map { $0.isPinned = false}
+                    msgToShow = Messages.showUnpinnedMsg(memoEditVM.count)
                 }
                 
                 context.saveCoreData()
@@ -114,6 +117,7 @@ struct MemosToolBarView: View {
             // REMOVE ACTION, WORKS FINE
             Button(action: {
                 _ = memoEditVM.selectedMemos.map { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
+                msgToShow = Messages.showMemoMovedToTrash(memoEditVM.count)
                 memoEditVM.initSelectedMemos()
 //                Folder.updateTopFolders(context: context)
             }) {

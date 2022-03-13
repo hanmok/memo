@@ -16,12 +16,12 @@ class MemoEditViewModel: ObservableObject {
     var someBool: Bool = false
     
     // 이거 없애니까 잘 보이긴 하네 .. ? 아님. 여전히 안보임.
-//    public var count: Int {
-//        get { selectedMemos.count }
-//        set { if newValue == 0 {
+    public var count: Int {
+        get { selectedMemos.count }
+        set { if newValue == 0 {
 //            self.parentFolder = nil
-//        }}
-//    }
+        }}
+    }
     
     // 왜 뒤로가?
     

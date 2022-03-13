@@ -54,6 +54,8 @@ struct SecondView: View {
     
     @State var bookmarkState = true // need to be user Default.
     
+    @State var msgToShow: String?
+    
     func updateViewInHalfSecond() {
         var increasedSeconds = 0.0
         for _ in 0 ... 5 {
@@ -569,7 +571,8 @@ struct SecondView: View {
                                     Spacer()
                                     MemosToolBarView(
                                         currentFolder: currentFolder,
-                                        showSelectingFolderView: $isShowingSelectingFolderView
+                                        showSelectingFolderView: $isShowingSelectingFolderView,
+                                        msgToShow: $msgToShow
                                     )
                                         .padding(.trailing, 10)
                                         .padding(.bottom,Sizes.overallPadding )

@@ -97,6 +97,8 @@
 		9ACC0C6D27DB4B7F00D18690 /* SwipeableMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C6C27DB4B7F00D18690 /* SwipeableMemoBoxView.swift */; };
 		9ACC0C7127DB581800D18690 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7027DB581800D18690 /* SecondView.swift */; };
 		9ACC0C7327DB8CE600D18690 /* ScreenShotInfo in Resources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */; };
+		9ACC0C7C27DDCBAD00D18690 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7B27DDCBAD00D18690 /* Messages.swift */; };
+		9ACC0C7E27DDCC1500D18690 /* MsgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7D27DDCC1500D18690 /* MsgView.swift */; };
 		9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */; };
 		9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EEC9277C3E3E00866456 /* Extensions.swift */; };
 		9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF10277D9DF100866456 /* MemoList.swift */; };
@@ -230,6 +232,8 @@
 		9ACC0C6C27DB4B7F00D18690 /* SwipeableMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableMemoBoxView.swift; sourceTree = "<group>"; };
 		9ACC0C7027DB581800D18690 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScreenShotInfo; sourceTree = "<group>"; };
+		9ACC0C7B27DDCBAD00D18690 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
+		9ACC0C7D27DDCC1500D18690 /* MsgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgView.swift; sourceTree = "<group>"; };
 		9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarView.swift; sourceTree = "<group>"; };
 		9AD6EEC9277C3E3E00866456 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9AD6EF10277D9DF100866456 /* MemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList.swift; sourceTree = "<group>"; };
@@ -281,6 +285,7 @@
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
+				9ACC0C7D27DDCC1500D18690 /* MsgView.swift */,
 				9AB7250027D00E16006A825C /* TrashBin */,
 				9AB724FD27D00D9A006A825C /* Prev */,
 				9A0474B927716DBC00571D66 /* Views */,
@@ -331,6 +336,7 @@
 				9AC5D12B27840939007EAA28 /* Memo+helper.swift */,
 				9AC5D1FE278558AC007EAA28 /* NSPredicate+helper.swift */,
 				9AE538F727C38E4300452999 /* AppStorageKeys.swift */,
+				9ACC0C7B27DDCBAD00D18690 /* Messages.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -739,6 +745,7 @@
 				E54FE18727C945DF000FFA81 /* Note.swift in Sources */,
 				9AB724D727CD2D17006A825C /* LocalizedStringStorage.swift in Sources */,
 				9A1D856B27A3E98D00B00156 /* SelectingFolderView.swift in Sources */,
+				9ACC0C7E27DDCC1500D18690 /* MsgView.swift in Sources */,
 				9A337804279576CC00805138 /* testView.swift in Sources */,
 				9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */,
 				9A3377B52790039200805138 /* FolderViewTest.swift in Sources */,
@@ -757,6 +764,7 @@
 				9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */,
 				9A1D8539279FF32400B00156 /* DynamicFolderCell.swift in Sources */,
 				9AB7253F27D3B3E3006A825C /* MemoTextViewTest1.swift in Sources */,
+				9ACC0C7C27DDCBAD00D18690 /* Messages.swift in Sources */,
 				9A046D1B27B67508003169C7 /* OrderingAppStorage.swift in Sources */,
 				9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */,
 				9AC5D22227883475007EAA28 /* SubFolderPageView3.swift in Sources */,
