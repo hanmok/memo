@@ -77,6 +77,14 @@ struct LocalizedStringStorage {
     
     static let memosHasUnbookmarked = NSLocalizedString(LocalizedStringKeys.memosHasUnbookmarked, comment: "")
     
+    static let oneMemoHasDeleted = NSLocalizedString(LocalizedStringKeys.oneMemoHasDeleted, comment: "")
+    static let oneMemoHasMovedToTrash = NSLocalizedString(LocalizedStringKeys.oneMemoHasMovedToTrash, comment: "")
+    static let oneMemoHasPinned = NSLocalizedString(LocalizedStringKeys.oneMemoHasPinned, comment: "")
+    static let oneMemoHasUnpinned = NSLocalizedString(LocalizedStringKeys.oneMemoHasUnpinned, comment: "")
+    static let oneMemoHasBookmarked = NSLocalizedString(LocalizedStringKeys.oneMemoHasBookmarked, comment: "")
+    static let oneMemoHasUnbookmarked = NSLocalizedString(LocalizedStringKeys.oneMemoHasUnbookmarked, comment: "")
+    
+    
     
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
@@ -169,12 +177,25 @@ struct LocalizedStringKeys {
     // MARK: - MESSAGES
     
     static let hasAddedToFolder = "hasAddedToFolder"
+    
     static let memosHasDeleted = "memosHasDeleted"
+    static let oneMemoHasDeleted = "oneMemoHasDeleted"
+    
     static let folderHasDeleted = "folderHasDeleted"
+    
     static let memosHasMovedToTrash = "memosHasMovedToTrash"
+    static let oneMemoHasMovedToTrash = "oneMemoHasMovedToTrash"
+    
     static let memosHasPinned = "memosHasPinned"
+    static let oneMemoHasPinned = "oneMemoHasPinned"
+    
     static let memosHasUnpinned = "memosHasUnpinned"
+    static let oneMemoHasUnpinned = "oneMemoHasUnpinned"
+    
     static let memosHasBookmarked = "memosHasBookmarked"
+    static let oneMemoHasBookmarked = "oneMemoHasBookmarked"
+    
     static let memosHasUnbookmarked = "memosHasUnbookmarked"
+    static let oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
     
 }

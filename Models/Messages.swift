@@ -15,7 +15,8 @@ struct Messages {
     /// memo deleted
     static func showMemosDeletedMsg(_ n: Int) -> String {
 //        return "\(n) memos has deleted"
-        return "\(n) \(LocalizedStringStorage.memosHasDeleted)"
+//        return "\(n) \(LocalizedStringStorage.memosHasDeleted)"
+        return n == 1 ? LocalizedStringStorage.oneMemoHasDeleted : "\(n)\(LocalizedStringStorage.memosHasDeleted)"
     }
     /// folder deleted
     static func showFolderDeleted(targetFolder: Folder) -> String {
@@ -25,35 +26,50 @@ struct Messages {
     
     static func showMemoMovedToTrash(_ n: Int) -> String {
 //        return "\(n) memos has moved to trash bin "
-        return "\(n) \(LocalizedStringStorage.memosHasMovedToTrash)"
+//        return "\(n) \(LocalizedStringStorage.memosHasMovedToTrash)"
+        return n == 1 ? LocalizedStringStorage.oneMemoHasPinned : "\(n)\(LocalizedStringStorage.memosHasMovedToTrash)"
     }
     
     
     /// pinned
     static func showPinnedMsg(_ n: Int) -> String {
-        return "\(n) \(LocalizedStringStorage.memosHasPinned)"
+//        if n == 1 {
+//            return LocalizedStringStorage.oneMemoHasPinned
+//        } else {
+//            return "\(n) \(LocalizedStringStorage.memosHasPinned)"
+//        }
+        return n == 1 ? LocalizedStringStorage.oneMemoHasPinned : "\(n)\(LocalizedStringStorage.memosHasPinned)"
+       
     }
     
     /// unpinned
     static func showUnpinnedMsg(_ n: Int) -> String {
-        return "\(n) \(LocalizedStringStorage.memosHasUnpinned)"
+//        return "\(n) \(LocalizedStringStorage.memosHasUnpinned)"
+        return n == 1 ? LocalizedStringStorage.oneMemoHasUnpinned : "\(n)\(LocalizedStringStorage.memosHasUnpinned)"
     }
     
     /// bookmarked
     static func showBookmarkedMsg(_ n: Int) -> String {
-        return "\(n) \(LocalizedStringStorage.memosHasBookmarked)"
+//        return "\(n) \(LocalizedStringStorage.memosHasBookmarked)"
+        return n == 1 ? LocalizedStringStorage.oneMemoHasBookmarked : "\(n)\(LocalizedStringStorage.memosHasBookmarked)"
     }
     
     /// unbookmarked
     static func showUnbookmarkedMsg(_ n: Int) -> String {
-        return "\(n) \(LocalizedStringStorage.memosHasUnbookmarked)"
+//        return "\(n) \(LocalizedStringStorage.memosHasUnbookmarked)"
+        return n == 1 ? LocalizedStringStorage.oneMemoHasUnbookmarked : "\(n)\(LocalizedStringStorage.memosHasUnbookmarked)"
     }
     
     /// memo moved
     static func showMemoMovedMsg(_ n: Int, to folder: Folder) -> String {
-        let msgForKor = "\(n) 개의 메모가 \(folder.title) 로 이동하였습니다."
+        let msgForKor1 = "메모가 \(folder.title) 로 이동하였습니다."
+        let msgForOther1 = "memo has moved to \(folder.title)"
+        
+        let msgForKor = "\(n)개의 메모가 \(folder.title) 로 이동하였습니다."
         let msgForOther = "\(n) memos has moved to \(folder.title)"
-        return Locale.showMsgTo(kor: msgForKor, other: msgForOther)
+        
+        return n == 1 ? Locale.showMsgTo(kor: msgForKor1, other: msgForOther1) : Locale.showMsgTo(kor: msgForKor, other: msgForOther)
+//        return Locale.showMsgTo(kor: msgForKor, other: msgForOther)
     }
     
     

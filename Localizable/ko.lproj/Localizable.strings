@@ -72,3 +72,9 @@
 "memosHasUnbookmarked" = "개 메모의 북마크가 해제되었습니다.";
 
 
+"oneMemoHasDeleted" = "삭제되었습니다.";
+"oneMemoHasMovedToTrash" = "휴지통으로 이동하였습니다.";
+"oneMemoHasPinned" = "고정되었습니다.";
+"oneMemoHasUnpinned" = "고정이 해제되었습니다.";
+"oneMemoHasBookmarked" = "북마크되었습니다.";
+"oneMemoHasUnbookmarked" = "북마크가 해제되었습니다.";
