@@ -17,7 +17,7 @@ struct BookmarkedFolderView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-    
+//    @EnvironmentObject var msgVM: MessageViewModel
     @ObservedObject var folder: Folder
     
 //    @State var newMemoPressed = false
@@ -46,6 +46,7 @@ struct BookmarkedFolderView: View {
                                                         .environmentObject(memoEditVM)
                                                         .environmentObject(folderEditVM)
                                                         .environmentObject(trashBinVM)
+//                                                        .environmentObject(msgVM)
                                         ) {
                                             BookmarkedMemoBoxView(memo: bookMarkedMemo)
                                         }

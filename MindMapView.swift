@@ -19,6 +19,7 @@ struct MindMapView: View {
     @StateObject var folderEditVM = FolderEditViewModel()
     @StateObject var folderOrder = FolderOrder()
     @StateObject var memoOrder = MemoOrder()
+//    @StateObject var msgVM = MessageViewModel()
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
@@ -40,6 +41,8 @@ struct MindMapView: View {
     @State var isShowingSearchView = false
     @State var isLoading = false
     @State var isShowingSecondView = false
+    
+    @State var msgToShow: String?
 //    var hasSafeBottom: Bool {
 //        let scenes = UIApplication.shared.connectedScenes
 //        let windowScene = scenes.first as? UIWindowScene
@@ -60,6 +63,7 @@ struct MindMapView: View {
         if let validFolderToRemoved = folderEditVM.folderToRemove {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 isLoading = false
+                msgToShow = Messages.showFolderDeleted(targetFolder: validFolderToRemoved)
             }
             Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
             
@@ -69,6 +73,13 @@ struct MindMapView: View {
     }
     
     var body: some View {
+        
+//        if msgVM.hasMemoRemovedForever != nil {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                msgToShow = msgVM.hasMemoRemovedForever! ? Messages.showMemosDeletedMsg(1) : Messages.showMemoMovedToTrash(1)
+//                print("msgToShow: \(msgToShow!)")
+//            }
+//        }
         
         return ZStack {
             VStack(spacing: 0) {
@@ -333,6 +344,11 @@ struct MindMapView: View {
                 
             } // end of VStack , Inside ZStack.
             
+            MsgView(msgToShow: $msgToShow)
+                .padding(.top, UIScreen.screenHeight / 1.5)
+                
+            
+            
             if isLoading {
                 Color(.clear)
                 ProgressView()
@@ -348,6 +364,7 @@ struct MindMapView: View {
                 .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
                 .environmentObject(memoOrder)
+//                .environmentObject(msgVM)
             
             // animation 은 같지만 이건 ZStack 이기 때문에, 뭔가 차이가 생김.
             // 얘를 fullscreen 으로 만들거나, ..
@@ -433,13 +450,15 @@ struct MindMapView: View {
                 .environmentObject(memoEditVM)
             }
         } // end of ZStack
-        
+//        .onReceive(msgVM.hasMemoRemovedForever, perform: { myoutput in
+//            print("output: \(myoutput)")
+//        })
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
                                     selectionEnum: selectionEnum, invalidFolderWithLevels:
                                         Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
-                                    isFullScreen: true)
+                                    isFullScreen: true, msgToShow: $msgToShow)
                     .environmentObject(folderEditVM)
                     .environmentObject(memoEditVM)
             }

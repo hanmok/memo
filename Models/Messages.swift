@@ -51,21 +51,32 @@ struct Messages {
     
     /// memo moved
     static func showMemoMovedMsg(_ n: Int, to folder: Folder) -> String {
-        if Locale.current.identifier == "kr" {
-            return "\(n) 개의 메모가 \(folder.title) 로 이동하였습니다."
-        } else {
-            return "\(n) memos has moved to \(folder.title)"
-        }
+        let msgForKor = "\(n) 개의 메모가 \(folder.title) 로 이동하였습니다."
+        let msgForOther = "\(n) memos has moved to \(folder.title)"
+        return Locale.showMsgTo(kor: msgForKor, other: msgForOther)
     }
     
-
+    
     /// folder moved
     static func showFolderMovedMsg(targetFolder: Folder, to desFolder : Folder) -> String {
         
-        if Locale.current.identifier == "kr" {
-            return "\(targetFolder.title) 폴더가 \(desFolder.title) 로 이동하였습니다. "
+        let msgForKor = "\(targetFolder.title) 폴더가 \(desFolder.title) 로 이동하였습니다. "
+        let msgForOther = "\(targetFolder.title) has moved to \(desFolder.title) "
+        
+        return Locale.showMsgTo(kor: msgForKor, other: msgForOther)
+    }
+}
+
+extension Locale {
+    static func showMsgTo(kor: String, other: String) -> String{
+        if let lanCode = self.current.languageCode {
+            if lanCode.contains("ko") {
+                return kor
+            } else {
+                return other
+            }
         } else {
-            return "\(targetFolder.title) has moved to \(desFolder.title) "
+            return other
         }
     }
 }

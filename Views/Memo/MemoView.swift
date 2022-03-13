@@ -19,7 +19,7 @@ struct MemoView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-    
+//    @EnvironmentObject var msgVM: MessageViewModel
     @ObservedObject var memo: Memo
     
     let parent: Folder
@@ -35,6 +35,9 @@ struct MemoView: View {
     
     
     var calledFromMainView: Bool
+    
+    @State var msgToShow: String?
+    
     var backBtn : some View {
         Button(action: {
             self.isPresentingView = false
@@ -64,12 +67,17 @@ struct MemoView: View {
     //        }
     //    }
     
+//    let myNotification = Notification.Name("sentToTrashBin")
+//    let publisher: NotificationCenter.Publisher
+//    let publ = NotificationCenter.default.publi
+    
     init(memo: Memo, parent: Folder, presentingView: Binding<Bool>, calledFromMainView: Bool = false) {
         self.memo = memo
         self.parent = parent
         self._isPresentingView = presentingView
         self.calledFromMainView = calledFromMainView
-        
+
+//        self.publisher = NotificationCenter.default.publisher(for: myNotification, object: nil)
     }
     
     
@@ -88,11 +96,13 @@ struct MemoView: View {
         // two step confirmatio for empty contents.
         if memo.contents == "" {
             Memo.delete(memo)
+//            msgVM.hasMemoRemovedForever = true
             // save titleToShow and contentsToShow. to work with memoboxView
         } else {
             memo.saveTitleWithContentsToShow(context: context)
             if memo.contentsToShow == "" && memo.titleToShow == "" {
                 Memo.delete(memo)
+//                msgVM.hasMemoRemovedForever = true
             }
         }
         
@@ -127,6 +137,7 @@ struct MemoView: View {
 //            if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
             if belongToTrashFolder() {
                 Memo.delete(memo)
+//                NotificationCenter.default.post(name: myNotification, object: nil)
             } else { // else, not in trashBin -> move to trashBin
                 Memo.makeNotBelongToFolder(memo, trashBinVM.trashBinFolder)
             }
@@ -143,6 +154,7 @@ struct MemoView: View {
         print("has Safebottom ? \(UIScreen.hasSafeBottom)")
         
         return ZStack(alignment: .topLeading) {
+            
             VStack {
                 Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
                     .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
@@ -204,8 +216,11 @@ struct MemoView: View {
                     .padding(.leading, Sizes.overallPadding)
             }
             .padding(.top, 10)
-            
+
         }
+        .overlay(
+            MsgView(msgToShow: $msgToShow)
+                    .padding(.top, UIScreen.screenHeight / 1.5 ))
         .padding(.bottom)
         
         .navigationBarHidden(true)
@@ -240,7 +255,7 @@ struct MemoView: View {
                             context: context,
                             fetchingHome: false)!
                     ),
-                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: []
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: [], msgToShow: $msgToShow, shouldUpdateTopFolder: false
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)

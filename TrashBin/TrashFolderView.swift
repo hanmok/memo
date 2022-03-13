@@ -35,6 +35,8 @@ struct TrashFolderView: View {
     @State var isShowingSelectingFolderView = false
     @State var isShowingSearchView = false
     
+    @State var msgToShow: String?
+    
     var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -132,6 +134,10 @@ struct TrashFolderView: View {
                         .animation(.spring(), value: memoEditVM.isSelectionMode)
                 }
             }
+            
+            MsgView(msgToShow: $msgToShow)
+                .padding(.top, UIScreen.screenHeight / 1.5 )
+            
             CustomSearchView(
                 fastFolderWithLevelGroup: FastFolderWithLevelGroup(
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
@@ -153,7 +159,7 @@ struct TrashFolderView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), invalidFolderWithLevels: []
+                    ), invalidFolderWithLevels: [], msgToShow: $msgToShow
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
@@ -163,9 +169,10 @@ struct TrashFolderView: View {
             // DELETE
             Button(role: .destructive) {
                 _ = memoEditVM.selectedMemos.map { Memo.delete($0)}
-                
+                msgToShow = Messages.showMemosDeletedMsg(memoEditVM.count)
                 context.saveCoreData()
                 memoEditVM.initSelectedMemos()
+
             } label: {
                 Text(LocalizedStringStorage.delete)
             }

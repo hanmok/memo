@@ -28,13 +28,13 @@ struct MsgView: View {
                 .background(RoundedRectangle(cornerRadius: 10)
                                 .foregroundColor(.gray))
                 .opacity(isShowingMsg ? 1 : 0)
-                .animation(.easeInOut(duration: duration), value: isShowingMsg)
+                .animation(.easeInOut(duration: duration).speed(2.0), value: isShowingMsg)
                 .onAppear {
                     isShowingMsg = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         isShowingMsg = false
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         msgToShow = nil
                     }
                 }

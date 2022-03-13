@@ -22,6 +22,7 @@ struct MemosToolBarView: View {
     
     @Binding var msgToShow: String?
     
+    var calledFromSecondView = false
     var body: some View {
         HStack(spacing: Sizes.spacingBetweenButtons) {
             
@@ -32,14 +33,17 @@ struct MemosToolBarView: View {
 //                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
                 UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
             }
-
+            
+            
+            if !calledFromSecondView {
             Button {
                 // select All
                 memoEditVM.add(memos: currentFolder.memos.sorted())
-                
+                // secondView 에서는, 모든 memo 를 선택해야함. how ?
             } label: {
                 Text("All")
                     .font(.headline)
+            }
             }
             
             

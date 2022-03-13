@@ -41,6 +41,8 @@ struct FolderView: View {
     
     @State var msgToShow: String?
     
+    
+    
     var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -285,6 +287,9 @@ struct FolderView: View {
         
         // fetch both home Folder and Archive Folder Separately.
         .sheet(isPresented: $isShowingSelectingFolderView,
+               onDismiss: {
+            
+        },
                content: {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
@@ -292,15 +297,21 @@ struct FolderView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), invalidFolderWithLevels: []
+                    ), invalidFolderWithLevels: [],
+                msgToShow: $msgToShow
             )
                 .environmentObject(folderEditVM)
                 .environmentObject(memoEditVM)
         })
         
+
+        .onAppear(perform: {
+            print("folderView has Appeared!")
+        })
         .onDisappear(perform: {
+            print("folderView has disappeared!")
             newSubFolderName = ""
-            memoEditVM.selectedMemos.removeAll()
+//            memoEditVM.selectedMemos.removeAll()
             memoEditVM.initSelectedMemos()
         })
         .navigationBarHidden(true)

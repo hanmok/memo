@@ -85,8 +85,9 @@ struct HierarchyLabelView: View {
             } else {
             Text(getRoot(child:currentFolder))
                     .foregroundColor(Color.blackAndWhite)
+//                    .foregroundColor(.green)
                 .font(.caption)
-                .opacity(0.5)
+                .opacity(0.7)
                 .background(colorScheme == .dark ? .black : .white)
             }
 //        }
