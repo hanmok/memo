@@ -12,6 +12,7 @@ import SwiftUI
 // position: determined from parent View
 
 struct MsgView: View {
+    @Environment(\.colorScheme) var colorScheme
     
     @Binding var msgToShow: String?
     let duration: Double = 1.0
@@ -25,8 +26,11 @@ struct MsgView: View {
 //                .foregroundColor(.green)
                 .frame(alignment: .center)
                 .padding(Sizes.smallSpacing)
-                .background(RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(.gray))
+//                .background(RoundedRectangle(cornerRadius: 10)
+//                                .foregroundColor(.gray))
+                .background(Color.memoBoxColor)
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                            .stroke(colorScheme == .dark ? Color.cream : Color(white: 0.8)))
                 .opacity(isShowingMsg ? 1 : 0)
                 .animation(.easeInOut(duration: duration).speed(2.0), value: isShowingMsg)
                 .onAppear {
