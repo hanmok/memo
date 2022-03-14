@@ -1,0 +1,5 @@
+Is needed. Especially For Environment Objects.
+
+
+strongly recommended sending all the environmentObjects from DeeepMemoApp,
+which not disappears before app terminates. 
