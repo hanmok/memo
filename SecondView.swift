@@ -18,10 +18,10 @@ struct SecondView: View {
     @ObservedObject var currentFolder: Folder
     @Binding var isShowingSecondView: Bool
     
-    @EnvironmentObject var trashBinVM: TrashBinViewModel
-    @EnvironmentObject var memoOrder: MemoOrder
+//    @EnvironmentObject var trashBinVM: TrashBinViewModel
+//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     
     //    @StateObject var memoEditVM = MemoEditViewModel()
     
@@ -347,7 +347,8 @@ struct SecondView: View {
                         } label: {
                             bookmarkState ? SystemImage("bookmark.fill").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
                         }
-                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: fastFolderWithLevelGroup.homeFolder)
+//                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: fastFolderWithLevelGroup.homeFolder)
+                        MemoOrderingMenu(parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
                     
                     // solve UI Padding bug For search result is none
@@ -599,9 +600,10 @@ struct SecondView: View {
                 
                 NavigationLink(destination:
                                 NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false))
-                                .environmentObject(folderEditVM)
-                                .environmentObject(memoEditVM)
-                                .environmentObject(trashBinVM),
+//                                .environmentObject(folderEditVM)
+//                                .environmentObject(memoEditVM)
+//                                .environmentObject(trashBinVM)
+                               ,
                                isActive: $isAddingMemo) {}
                 
                 MsgView(msgToShow: $msgToShow)
@@ -618,8 +620,8 @@ struct SecondView: View {
                                                                   fetchingHome: false)!
                         ), invalidFolderWithLevels: [], msgToShow: $msgToShow
                 )
-                    .environmentObject(folderEditVM)
-                    .environmentObject(memoEditVM)
+//                    .environmentObject(folderEditVM)
+//                    .environmentObject(memoEditVM)
             })
             .navigationBarHidden(true)
             .onAppear {
@@ -638,10 +640,10 @@ struct SecondView: View {
                 memoEditVM.initSelectedMemos()
             }
         }
-        .environmentObject(trashBinVM)
-        .environmentObject(memoOrder)
-        .environmentObject(memoEditVM)
-        .environmentObject(folderEditVM)
+//        .environmentObject(trashBinVM)
+//        .environmentObject(memoOrder)
+//        .environmentObject(memoEditVM)
+//        .environmentObject(folderEditVM)
         .padding(.horizontal, Sizes.overallPadding)
         
         .navigationBarHidden(true)

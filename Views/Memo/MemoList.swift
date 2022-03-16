@@ -11,7 +11,7 @@ struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     var hasPinnedOrBookmarkedMemo: Bool {
@@ -36,8 +36,8 @@ struct MemoList: View {
             
             FilteredMemoList(folder: folder, listType: .plain)
         } // end of VStack
-        .environmentObject(memoEditVM)
-        .environmentObject(folderEditVM)
+//        .environmentObject(memoEditVM)
+//        .environmentObject(folderEditVM)
         .environmentObject(trashBinVM)
     }
 }

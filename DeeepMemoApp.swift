@@ -15,6 +15,10 @@ struct DeeepMemoApp: App {
     @Environment(\.scenePhase) var scenePhase
     
     @AppStorage("isFirstLaunch") var isFirstLaunch = true
+    let memoEditVM = MemoEditViewModel()
+    let folderEditVM = FolderEditViewModel()
+    let folderOrder = FolderOrder()
+    let memoOrder = MemoOrder()
     
     var body: some Scene {
         print("isFirstLaunch: \(isFirstLaunch)")
@@ -46,6 +50,7 @@ struct DeeepMemoApp: App {
         
         if isFirstLaunch {
             let folderReq = Folder.fetch(.all)
+
             if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
                 if folders.count == 0 {
                     let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
@@ -59,9 +64,6 @@ struct DeeepMemoApp: App {
                 }
             }
 
-            //                print("newFolders: \(newFolders)")
-            //                print("newFolders.count: \(newFolders.count)")
-            //                _ = newFolders.map { print($0.title)}
             isFirstLaunch = false
         } else {
             print("no newFolders. it's not first launch! ")
@@ -72,6 +74,10 @@ struct DeeepMemoApp: App {
         return WindowGroup {
             HomeView()
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .environmentObject(memoEditVM)
+            .environmentObject(folderEditVM)
+            .environmentObject(folderOrder)
+            .environmentObject(memoOrder)
         }
         
         

@@ -11,16 +11,16 @@ struct TrashBinCell: View {
     
     @Environment(\.managedObjectContext) var context
     
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM : FolderEditViewModel
-    @EnvironmentObject var memoOrder: MemoOrder
+//    @EnvironmentObject var memoEditVM: MemoEditViewModel
+//    @EnvironmentObject var folderEditVM : FolderEditViewModel
+//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     var body: some View {
         NavigationLink(destination: TrashFolderView()
-                        .environmentObject(folderEditVM)
-                        .environmentObject(memoOrder)
-                        .environmentObject(memoEditVM)
+//                        .environmentObject(folderEditVM)
+//                        .environmentObject(memoOrder)
+//                        .environmentObject(memoEditVM)
                         .environmentObject(trashBinVM)
         ) {
             HStack {

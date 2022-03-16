@@ -12,9 +12,9 @@ struct DynamicFolderCell: View {
     
     @Environment(\.managedObjectContext) var context
     
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
-    @EnvironmentObject var memoOrder: MemoOrder
+//    @EnvironmentObject var memoEditVM: MemoEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var folder: Folder
@@ -25,9 +25,9 @@ struct DynamicFolderCell: View {
     
     var body: some View {
         NavigationLink(destination: FolderView(currentFolder: folder)
-                        .environmentObject(memoEditVM)
-                        .environmentObject(folderEditVM)
-                        .environmentObject(memoOrder)
+//                        .environmentObject(memoEditVM)
+//                        .environmentObject(folderEditVM)
+//                        .environmentObject(memoOrder)
                         .environmentObject(trashBinVM)
         ) {
             TitleWithLevelView(folder: folder, level: level)

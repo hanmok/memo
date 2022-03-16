@@ -19,8 +19,8 @@ struct FolderView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-    @EnvironmentObject var folderEditVM : FolderEditViewModel
-    @EnvironmentObject var memoOrder: MemoOrder
+//    @EnvironmentObject var folderEditVM : FolderEditViewModel
+//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     // TrashBinViewModel
     @ObservedObject var currentFolder: Folder
@@ -105,7 +105,8 @@ struct FolderView: View {
                                     .tint(Color.navBtnColor)
                             })
                             
-                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+//                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
+                            MemoOrderingMenu(parentFolder: currentFolder)
                             // favorite Button
                             Button(action: {
                                 toggleFavorite()
@@ -172,9 +173,9 @@ struct FolderView: View {
                         }
                     } // end of main VStack
                     .environmentObject(currentFolder)
-                    .environmentObject(folderEditVM)
-                    .environmentObject(memoEditVM)
-                    .environmentObject(memoOrder)
+//                    .environmentObject(folderEditVM)
+//                    .environmentObject(memoEditVM)
+//                    .environmentObject(memoOrder)
                     .environmentObject(trashBinVM)
                 } // end of scrollView
             } // end of VStack
@@ -198,9 +199,9 @@ struct FolderView: View {
                             folder: currentFolder,
                             isShowingSubFolderView: $isShowingSubFolderView,
                             isAddingFolder: $isAddingFolder)
-                            .environmentObject(folderEditVM)
-                            .environmentObject(memoEditVM)
-                            .environmentObject(memoOrder)
+//                            .environmentObject(folderEditVM)
+//                            .environmentObject(memoEditVM)
+//                            .environmentObject(memoOrder)
                             .environmentObject(trashBinVM)
                         
                         // offset x : trailingPadding
@@ -274,8 +275,8 @@ struct FolderView: View {
             
             NavigationLink(destination:
                             NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false))
-                            .environmentObject(folderEditVM)
-                            .environmentObject(memoEditVM)
+//                            .environmentObject(folderEditVM)
+//                            .environmentObject(memoEditVM)
                             .environmentObject(trashBinVM),
                            isActive: $isAddingMemo) {}
                             
@@ -300,8 +301,8 @@ struct FolderView: View {
                     ), invalidFolderWithLevels: [],
                 msgToShow: $msgToShow
             )
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
         })
         
 
