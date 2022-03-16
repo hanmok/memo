@@ -9,7 +9,8 @@ import SwiftUI
 
 
 struct FolderOrderingMenu: View {
-    @ObservedObject var folderOrder: FolderOrder
+//    @ObservedObject var folderOrder: FolderOrder
+    @EnvironmentObject var folderOrder: FolderOrder
   
     var body: some View {
         Menu {

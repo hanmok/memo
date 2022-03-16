@@ -9,9 +9,9 @@ import SwiftUI
 
 struct TrashBinMemoList: View {
     
-    @EnvironmentObject var folder: Folder
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var folder: Folder
+//    @EnvironmentObject var memoEditVM: MemoEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     
@@ -23,8 +23,8 @@ struct TrashBinMemoList: View {
 //            MemoList()
             FilteredMemoList(folder: trashBinVM.trashBinFolder, listType: .all)
         } // end of VStack
-        .environmentObject(memoEditVM)
-        .environmentObject(folderEditVM)
+//        .environmentObject(memoEditVM)
+//        .environmentObject(folderEditVM)
         .environmentObject(trashBinVM)
     }
 }

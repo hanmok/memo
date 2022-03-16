@@ -16,7 +16,7 @@ struct NewMemoView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
 
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
@@ -267,7 +267,12 @@ struct NewMemoView: View {
                     .foregroundColor(Color.memoTextColor)
                     .padding(.leading, Sizes.overallPadding)
             }
+            .overlay(
+                MsgView(msgToShow: $msgToShow)
+                        .padding(.top, UIScreen.screenHeight / 1.5 ))
             .padding(.top, 10)
+            
+            
         }
 //        .padding(.vertical)
         .padding(.bottom)
@@ -293,8 +298,8 @@ struct NewMemoView: View {
                                                               fetchingHome: false)!
                     ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: [], msgToShow: $msgToShow, shouldUpdateTopFolder: false
             )
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
         }
     }
 }

@@ -24,6 +24,7 @@
 		9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D853E27A16BE800B00156 /* SubMemoList.swift */; };
 		9A1D854527A24F9400B00156 /* SubFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D854427A24F9400B00156 /* SubFolderView.swift */; };
 		9A1D856B27A3E98D00B00156 /* SelectingFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1D856A27A3E98D00B00156 /* SelectingFolderView.swift */; };
+		9A3328C627DFCA54009E8380 /* Refactoring in Resources */ = {isa = PBXBuildFile; fileRef = 9A3328C527DFCA54009E8380 /* Refactoring */; };
 		9A3377B3278FFF2D00805138 /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B2278FFF2D00805138 /* TextViewWrapper.swift */; };
 		9A3377B52790039200805138 /* FolderViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B42790039200805138 /* FolderViewTest.swift */; };
 		9A3377B72790060100805138 /* MemosToolBarViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3377B62790060100805138 /* MemosToolBarViewTest.swift */; };
@@ -55,8 +56,6 @@
 		9AB724D727CD2D17006A825C /* LocalizedStringStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */; };
 		9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D927CE79EC006A825C /* TrashFolderView.swift */; };
 		9AB724DC27CE7B18006A825C /* MemosToolBarViewForTrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724DB27CE7B18006A825C /* MemosToolBarViewForTrash.swift */; };
-		9AB724E027CF9FEA006A825C /* TrashBinSubMemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724DF27CF9FEA006A825C /* TrashBinSubMemoList.swift */; };
-		9AB724E227CFA181006A825C /* TrashMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724E127CFA181006A825C /* TrashMemoView.swift */; };
 		9AB724FE27D00DA9006A825C /* SwipeTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE17E27C7C896000FFA81 /* SwipeTestView.swift */; };
 		9AB7250327D00EC3006A825C /* FolderOrderingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7250227D00EC3006A825C /* FolderOrderingButton.swift */; };
 		9AB7250527D00F03006A825C /* FolderAscDecButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7250427D00F03006A825C /* FolderAscDecButton.swift */; };
@@ -94,7 +93,6 @@
 		9AC5D231278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D230278BE711007EAA28 /* ChangeFolderTitleTestView.swift */; };
 		9AC5D234278C3145007EAA28 /* MemoList2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D233278C3145007EAA28 /* MemoList2.swift */; };
 		9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */; };
-		9ACC0C6D27DB4B7F00D18690 /* SwipeableMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C6C27DB4B7F00D18690 /* SwipeableMemoBoxView.swift */; };
 		9ACC0C7127DB581800D18690 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7027DB581800D18690 /* SecondView.swift */; };
 		9ACC0C7327DB8CE600D18690 /* ScreenShotInfo in Resources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */; };
 		9ACC0C7C27DDCBAD00D18690 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7B27DDCBAD00D18690 /* Messages.swift */; };
@@ -112,7 +110,6 @@
 		9AD8333727BE148A00506AE8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* MemoView.swift */; };
 		9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE538F727C38E4300452999 /* AppStorageKeys.swift */; };
 		9AE5391B27C6374F00452999 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5391A27C6374F00452999 /* PlainTextView.swift */; };
-		E515A9E627D9E5D10083562B /* SecondMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E515A9E527D9E5D10083562B /* SecondMainView.swift */; };
 		E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
 		E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */; };
 		E523DB5227C0073900D8D78B /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB5127C0073900D8D78B /* NewMemoView.swift */; };
@@ -152,6 +149,7 @@
 		9A1D853E27A16BE800B00156 /* SubMemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubMemoList.swift; sourceTree = "<group>"; };
 		9A1D854427A24F9400B00156 /* SubFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderView.swift; sourceTree = "<group>"; };
 		9A1D856A27A3E98D00B00156 /* SelectingFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectingFolderView.swift; sourceTree = "<group>"; };
+		9A3328C527DFCA54009E8380 /* Refactoring */ = {isa = PBXFileReference; lastKnownFileType = text; path = Refactoring; sourceTree = "<group>"; };
 		9A3377AF278EC6F000805138 /* SubFolderElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFolderElementView.swift; sourceTree = "<group>"; };
 		9A3377B2278FFF2D00805138 /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
 		9A3377B42790039200805138 /* FolderViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewTest.swift; sourceTree = "<group>"; };
@@ -186,8 +184,6 @@
 		9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringStorage.swift; sourceTree = "<group>"; };
 		9AB724D927CE79EC006A825C /* TrashFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashFolderView.swift; sourceTree = "<group>"; };
 		9AB724DB27CE7B18006A825C /* MemosToolBarViewForTrash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemosToolBarViewForTrash.swift; sourceTree = "<group>"; };
-		9AB724DF27CF9FEA006A825C /* TrashBinSubMemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinSubMemoList.swift; sourceTree = "<group>"; };
-		9AB724E127CFA181006A825C /* TrashMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashMemoView.swift; sourceTree = "<group>"; };
 		9AB7250227D00EC3006A825C /* FolderOrderingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderOrderingButton.swift; sourceTree = "<group>"; };
 		9AB7250427D00F03006A825C /* FolderAscDecButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAscDecButton.swift; sourceTree = "<group>"; };
 		9AB7250627D00F24006A825C /* MemoOrderingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoOrderingButton.swift; sourceTree = "<group>"; };
@@ -231,7 +227,6 @@
 		9AC5D230278BE711007EAA28 /* ChangeFolderTitleTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFolderTitleTestView.swift; sourceTree = "<group>"; };
 		9AC5D233278C3145007EAA28 /* MemoList2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList2.swift; sourceTree = "<group>"; };
 		9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldTestview.swift; sourceTree = "<group>"; };
-		9ACC0C6C27DB4B7F00D18690 /* SwipeableMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableMemoBoxView.swift; sourceTree = "<group>"; };
 		9ACC0C7027DB581800D18690 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScreenShotInfo; sourceTree = "<group>"; };
 		9ACC0C7B27DDCBAD00D18690 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
@@ -249,7 +244,6 @@
 		9AD8333627BE148A00506AE8 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		9AE538F727C38E4300452999 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
 		9AE5391A27C6374F00452999 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
-		E515A9E527D9E5D10083562B /* SecondMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMainView.swift; sourceTree = "<group>"; };
 		E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedFolderView.swift; sourceTree = "<group>"; };
 		E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
 		E523DB5127C0073900D8D78B /* NewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
@@ -283,9 +277,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
-				9ACC0C6C27DB4B7F00D18690 /* SwipeableMemoBoxView.swift */,
 				9ACC0C7027DB581800D18690 /* SecondView.swift */,
-				E515A9E527D9E5D10083562B /* SecondMainView.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
@@ -458,8 +450,6 @@
 				9AB7251027D01023006A825C /* TrashBinCell.swift */,
 				9AB724D927CE79EC006A825C /* TrashFolderView.swift */,
 				9AB7251227D0107E006A825C /* TrashBinMemoList.swift */,
-				9AB724DF27CF9FEA006A825C /* TrashBinSubMemoList.swift */,
-				9AB724E127CFA181006A825C /* TrashMemoView.swift */,
 				9AB724DB27CE7B18006A825C /* MemosToolBarViewForTrash.swift */,
 			);
 			path = TrashBin;
@@ -539,6 +529,7 @@
 			children = (
 				9AA65B3527D6BA8F00C1F383 /* VersionHistory */,
 				9ACC0C7F27DDF4D800D18690 /* V1.1.0->1.1.1 */,
+				9A3328C527DFCA54009E8380 /* Refactoring */,
 			);
 			path = VersionHistory;
 			sourceTree = "<group>";
@@ -719,6 +710,7 @@
 				9AC5D13D2785247D007EAA28 /* Terms in Resources */,
 				9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */,
 				9AC5D13A278521F9007EAA28 /* Memo For Tips and Tricks in Resources */,
+				9A3328C627DFCA54009E8380 /* Refactoring in Resources */,
 				9A3378272796DECA00805138 /* ProblemsAndSolutions in Resources */,
 				9A0474C02771709D00571D66 /* OverallMemo in Resources */,
 				9A0474A927715D1400571D66 /* Assets.xcassets in Resources */,
@@ -781,14 +773,11 @@
 				9A04BF2027C8CD2000F3972D /* CustomTextView.swift in Sources */,
 				9A1D854527A24F9400B00156 /* SubFolderView.swift in Sources */,
 				9AC5D234278C3145007EAA28 /* MemoList2.swift in Sources */,
-				9AB724E227CFA181006A825C /* TrashMemoView.swift in Sources */,
 				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
 				9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */,
 				9AB7250927D00F36006A825C /* MemoAscDecButton.swift in Sources */,
-				9AB724E027CF9FEA006A825C /* TrashBinSubMemoList.swift in Sources */,
 				9AC5D2192786F773007EAA28 /* HomeViewPrev.swift in Sources */,
 				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
-				E515A9E627D9E5D10083562B /* SecondMainView.swift in Sources */,
 				9ACC0C8227DE05C000D18690 /* MessageViewModel.swift in Sources */,
 				9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */,
 				9A3378012795736200805138 /* ColorExt.swift in Sources */,
@@ -805,7 +794,6 @@
 				9AC5D225278834EC007EAA28 /* FolderLabelView3.swift in Sources */,
 				9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */,
 				9A1D853F27A16BE800B00156 /* SubMemoList.swift in Sources */,
-				9ACC0C6D27DB4B7F00D18690 /* SwipeableMemoBoxView.swift in Sources */,
 				E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */,
 				9AB7251927D02045006A825C /* SystemImage.swift in Sources */,
 				9AB7250B27D00F53006A825C /* FolderOrderingMenu.swift in Sources */,

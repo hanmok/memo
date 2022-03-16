@@ -7,82 +7,78 @@
 
 import Foundation
 
-struct LocalizedStringStorage {
+
+enum LocalizedStringStorage {
     
-    static let removeAlertMsgMain = NSLocalizedString(LocalizedStringKeys.removeAlertMsgMain, comment: "Remove Main Message")
+    static let removeAlertMsgMain = StringEnum.removeAlertMsgMain.convertIntoStr()
+    static let removeAlertMsgSub = StringEnum.removeAlertMsgSub.convertIntoStr()
+
+    static let cancelInSearch = StringEnum.cancelInSearch.convertIntoStr()
     
-    static let removeAlertMsgSub = NSLocalizedString(LocalizedStringKeys.removeAlertMsgSub, comment: "remove sub message")
-    static let cancelInSearch = NSLocalizedString(LocalizedStringKeys.cancelInSearch, comment: "Cancel")
-    static let cancel = NSLocalizedString(LocalizedStringKeys.cancel, comment: "a")
-    static let delete = NSLocalizedString(LocalizedStringKeys.delete, comment: "a")
-    
-    static let newFolder = NSLocalizedString(LocalizedStringKeys.newFolder, comment: "a")
-    static let renameFolder = NSLocalizedString(LocalizedStringKeys.renameFolder, comment: "a")
-    static let newSubFolder = NSLocalizedString(LocalizedStringKeys.newSubFolder, comment: "a")
-    
-    static let folder = NSLocalizedString(LocalizedStringKeys.folder, comment: "a")
-    static let archive = NSLocalizedString(LocalizedStringKeys.archive, comment: "a")
-    static let trashbin = NSLocalizedString(LocalizedStringKeys.trashbin, comment: "a")
-    
-    static let selectFolder = NSLocalizedString(LocalizedStringKeys.selectFolder, comment: "a")
-    static let newArchive = NSLocalizedString(LocalizedStringKeys.newArchive, comment: "A")
-    
-//    static let category1 = NSLocalizedString(LocalizedStringKeys.category1, comment: "a")
-//    static let category2 = NSLocalizedString(LocalizedStringKeys.category2, comment: "a")
-//    static let category3 = NSLocalizedString(LocalizedStringKeys.category3, comment: "a")
-    
-    //    static let subCategory1 = NSLocalizedString(LocalizedStringKeys.subCategory1, comment: "a")
-    
-    static let done = NSLocalizedString(LocalizedStringKeys.done, comment: "done")
-    static let keyboardDone = NSLocalizedString(LocalizedStringKeys.keyboardDone, comment: "done For keyBoard")
-    
-//    static let nth = NSLocalizedString(LocalizedStringKeys.nth, comment: "nth")
-//    static let possessive = NSLocalizedString(LocalizedStringKeys.possessive, comment: "possessive")
-    
-    static let emptySearchResult = NSLocalizedString(LocalizedStringKeys.emptySearchResult, comment: "a")
-    
-    static let all = NSLocalizedString(LocalizedStringKeys.all, comment: "a")
-    static let current = NSLocalizedString(LocalizedStringKeys.current, comment: "a")
-    
-    static let folderOrdering = NSLocalizedString(LocalizedStringKeys.folderOrdering, comment: "a")
-    static let memoOrdering = NSLocalizedString(LocalizedStringKeys.memoOrdering, comment: "a")
-    
-    static let modificationDate = NSLocalizedString(LocalizedStringKeys.modificationDate, comment: "a")
-    static let CreationDate = NSLocalizedString(LocalizedStringKeys.CreationDate, comment: "A")
-    static let Alphabetical = NSLocalizedString(LocalizedStringKeys.Alphabetical, comment: "a")
-    
-    static let AscendingOrder = NSLocalizedString(LocalizedStringKeys.AscendingOrder, comment: "a")
-    static let DecendingOrder = NSLocalizedString(LocalizedStringKeys.DecendingOrder, comment: "a")
-    
-    static let searchPlaceholder = NSLocalizedString(LocalizedStringKeys.searchPlaceholder, comment: "a")
-    
-    static let newFolderPlaceHolder = NSLocalizedString(LocalizedStringKeys.newFolderPlaceHolder, comment: "a")
-    static let newArchivePlaceHolder = NSLocalizedString(LocalizedStringKeys.newArchivePlaceHolder, comment: "a")
+    static let cancel = StringEnum.cancel.convertIntoStr()
+    static let delete = StringEnum.delete.convertIntoStr()
     
     
     
-    static let hasAddedToFolder = NSLocalizedString(LocalizedStringKeys.hasAddedToFolder, comment: "")
+    static let newFolder = StringEnum.newFolder.convertIntoStr()
+    static let renameFolder = StringEnum.renameFolder.convertIntoStr()
+    static let newSubFolder = StringEnum.newSubFolder.convertIntoStr()
+
+    static let folder = StringEnum.folder.convertIntoStr()
+    static let archive = StringEnum.archive.convertIntoStr()
+    static let trashbin = StringEnum.trashbin.convertIntoStr()
     
-    static let memosHasDeleted = NSLocalizedString(LocalizedStringKeys.memosHasDeleted, comment: "")
+    static let selectFolder = StringEnum.selectFolder.convertIntoStr()
+    static let newArchive = StringEnum.newArchive.convertIntoStr()
     
-    static let folderHasDeleted = NSLocalizedString(LocalizedStringKeys.folderHasDeleted, comment: "")
+    static let done = StringEnum.done.convertIntoStr()
+    static let keyboardDone = StringEnum.keyboardDone.convertIntoStr()
     
-    static let memosHasMovedToTrash = NSLocalizedString(LocalizedStringKeys.memosHasMovedToTrash, comment: "")
     
-    static let memosHasPinned = NSLocalizedString(LocalizedStringKeys.memosHasPinned, comment: "")
+    static let emptySearchResult = StringEnum.emptySearchResult.convertIntoStr()
     
-    static let memosHasUnpinned = NSLocalizedString(LocalizedStringKeys.memosHasUnpinned, comment: "")
+    static let all = StringEnum.all.convertIntoStr()
+    static let current = StringEnum.current.convertIntoStr()
     
-    static let memosHasBookmarked = NSLocalizedString(LocalizedStringKeys.memosHasBookmarked, comment: "")
+    static let folderOrdering = StringEnum.folderOrdering.convertIntoStr()
+    static let memoOrdering = StringEnum.memoOrdering.convertIntoStr()
     
-    static let memosHasUnbookmarked = NSLocalizedString(LocalizedStringKeys.memosHasUnbookmarked, comment: "")
+    static let modificationDate = StringEnum.modificationDate.convertIntoStr()
+    static let CreationDate = StringEnum.CreationDate.convertIntoStr()
+    static let Alphabetical = StringEnum.Alphabetical.convertIntoStr()
     
-    static let oneMemoHasDeleted = NSLocalizedString(LocalizedStringKeys.oneMemoHasDeleted, comment: "")
-    static let oneMemoHasMovedToTrash = NSLocalizedString(LocalizedStringKeys.oneMemoHasMovedToTrash, comment: "")
-    static let oneMemoHasPinned = NSLocalizedString(LocalizedStringKeys.oneMemoHasPinned, comment: "")
-    static let oneMemoHasUnpinned = NSLocalizedString(LocalizedStringKeys.oneMemoHasUnpinned, comment: "")
-    static let oneMemoHasBookmarked = NSLocalizedString(LocalizedStringKeys.oneMemoHasBookmarked, comment: "")
-    static let oneMemoHasUnbookmarked = NSLocalizedString(LocalizedStringKeys.oneMemoHasUnbookmarked, comment: "")
+    static let AscendingOrder = StringEnum.AscendingOrder.convertIntoStr()
+    static let DecendingOrder = StringEnum.DecendingOrder.convertIntoStr()
+    
+    static let searchPlaceholder = StringEnum.searchPlaceholder.convertIntoStr()
+    
+    static let newFolderPlaceHolder = StringEnum.newFolderPlaceHolder.convertIntoStr()
+    static let newArchivePlaceHolder = StringEnum.newArchivePlaceHolder.convertIntoStr()
+    
+    
+    
+    static let hasAddedToFolder = StringEnum.hasAddedToFolder.convertIntoStr()
+    
+    static let memosHasDeleted = StringEnum.memosHasDeleted.convertIntoStr()
+    
+    static let folderHasDeleted = StringEnum.folderHasDeleted.convertIntoStr()
+    
+    static let memosHasMovedToTrash = StringEnum.memosHasMovedToTrash.convertIntoStr()
+    
+    static let memosHasPinned = StringEnum.memosHasPinned.convertIntoStr()
+    
+    static let memosHasUnpinned = StringEnum.memosHasUnpinned.convertIntoStr()
+    
+    static let memosHasBookmarked = StringEnum.memosHasBookmarked.convertIntoStr()
+    
+    static let memosHasUnbookmarked = StringEnum.memosHasUnbookmarked.convertIntoStr()
+    
+    static let oneMemoHasDeleted = StringEnum.oneMemoHasDeleted.convertIntoStr()
+    static let oneMemoHasMovedToTrash = StringEnum.oneMemoHasMovedToTrash.convertIntoStr()
+    static let oneMemoHasPinned = StringEnum.oneMemoHasPinned.convertIntoStr()
+    static let oneMemoHasUnpinned = StringEnum.oneMemoHasUnpinned.convertIntoStr()
+    static let oneMemoHasBookmarked = StringEnum.oneMemoHasBookmarked.convertIntoStr()
+    static let oneMemoHasUnbookmarked = StringEnum.oneMemoHasUnbookmarked.convertIntoStr()
     
     
     
@@ -118,84 +114,150 @@ struct LocalizedStringStorage {
 
 
 
-
-//LocalizedStringStorage.
-struct LocalizedStringKeys {
+enum StringEnum: String {
     
-    static let done = "done"
-    static let keyboardDone = "keyboardDone"
+    func convertIntoStr() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
     
-    static let removeAlertMsgMain = "removeAlertMsgMain"
-    static let removeAlertMsgSub = "removeAlertMsgSub"
+    case done = "done"
+    case keyboardDone = "keyboardDone"
     
-    static let cancelInSearch = "CancelInSearch"
-    static let cancel = "Cancel"
-    static let delete = "Delete"
+    case removeAlertMsgMain = "removeAlertMsgMain"
+    case removeAlertMsgSub = "removeAlertMsgSub"
     
-    static let newFolder = "New Folder"
-    static let renameFolder = "Rename Folder"
-    static let newSubFolder = "New Sub Folder"
-    static let newArchive = "New Archive"
+    case cancelInSearch = "CancelInSearch"
+    case cancel = "Cancel"
+    case delete = "Delete"
     
-    static let folder = "Folder"
-    static let archive = "Archive"
-    static let trashbin = "Trash Bin"
+    case newFolder = "New Folder"
+    case renameFolder = "Rename Folder"
+    case newSubFolder = "New Sub Folder"
+    case newArchive = "New Archive"
     
-    static let selectFolder = "Select Folder"
+    case folder = "Folder"
+    case archive = "Archive"
+    case trashbin = "Trash Bin"
     
-//    static let category1 = "category1"
-//    static let category2 = "category2"
-//    static let category3 = "category3"
+    case selectFolder = "Select Folder"
     
-    //    static let subCategory1 = "Sub Category 1"
+    case emptySearchResult = "Empty Search Result"
     
-//    static let nth = "th"
-//    static let possessive = "'s"
+    case all = "All location"
+    case current = "Current location"
     
-    static let emptySearchResult = "Empty Search Result"
+    case folderOrdering = "Folder Ordering"
+    case memoOrdering = "Memo Ordering"
     
-    static let all = "All location"
-    static let current = "Current location"
+    case modificationDate = "Modification Date"
+    case CreationDate = "Creation Date"
+    case Alphabetical = "Alphabetical"
     
-    static let folderOrdering = "Folder Ordering"
-    static let memoOrdering = "Memo Ordering"
-    
-    static let modificationDate = "Modification Date"
-    static let CreationDate = "Creation Date"
-    static let Alphabetical = "Alphabetical"
-    
-    static let AscendingOrder = "Ascending Order"
-    static let DecendingOrder = "Decending Order"
+    case AscendingOrder = "Ascending Order"
+    case DecendingOrder = "Decending Order"
  
-    static let searchPlaceholder = "Search Placeholder"
+    case searchPlaceholder = "Search Placeholder"
     
-    static let newFolderPlaceHolder = "New Folder PlaceHolder"
-    static let newArchivePlaceHolder = "New Archive PlaceHolder"
+    case newFolderPlaceHolder = "New Folder PlaceHolder"
+    case newArchivePlaceHolder = "New Archive PlaceHolder"
     
     
     
     // MARK: - MESSAGES
     
-    static let hasAddedToFolder = "hasAddedToFolder"
+    case hasAddedToFolder = "hasAddedToFolder"
     
-    static let memosHasDeleted = "memosHasDeleted"
-    static let oneMemoHasDeleted = "oneMemoHasDeleted"
+    case memosHasDeleted = "memosHasDeleted"
+    case oneMemoHasDeleted = "oneMemoHasDeleted"
     
-    static let folderHasDeleted = "folderHasDeleted"
+    case folderHasDeleted = "folderHasDeleted"
     
-    static let memosHasMovedToTrash = "memosHasMovedToTrash"
-    static let oneMemoHasMovedToTrash = "oneMemoHasMovedToTrash"
+    case memosHasMovedToTrash = "memosHasMovedToTrash"
+    case oneMemoHasMovedToTrash = "oneMemoHasMovedToTrash"
     
-    static let memosHasPinned = "memosHasPinned"
-    static let oneMemoHasPinned = "oneMemoHasPinned"
+    case memosHasPinned = "memosHasPinned"
+    case oneMemoHasPinned = "oneMemoHasPinned"
     
-    static let memosHasUnpinned = "memosHasUnpinned"
-    static let oneMemoHasUnpinned = "oneMemoHasUnpinned"
+    case memosHasUnpinned = "memosHasUnpinned"
+    case oneMemoHasUnpinned = "oneMemoHasUnpinned"
     
-    static let memosHasBookmarked = "memosHasBookmarked"
-    static let oneMemoHasBookmarked = "oneMemoHasBookmarked"
+    case memosHasBookmarked = "memosHasBookmarked"
+    case oneMemoHasBookmarked = "oneMemoHasBookmarked"
     
-    static let memosHasUnbookmarked = "memosHasUnbookmarked"
-    static let oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
+    case memosHasUnbookmarked = "memosHasUnbookmarked"
+    case oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
     
 }
+
+
+
+//LocalizedStringStorage.
+//struct LocalizedStringKeys {
+//
+//    static let done = "done"
+//    static let keyboardDone = "keyboardDone"
+//
+//    static let removeAlertMsgMain = "removeAlertMsgMain"
+//    static let removeAlertMsgSub = "removeAlertMsgSub"
+//
+//    static let cancelInSearch = "CancelInSearch"
+//    static let cancel = "Cancel"
+//    static let delete = "Delete"
+//
+//    static let newFolder = "New Folder"
+//    static let renameFolder = "Rename Folder"
+//    static let newSubFolder = "New Sub Folder"
+//    static let newArchive = "New Archive"
+//
+//    static let folder = "Folder"
+//    static let archive = "Archive"
+//    static let trashbin = "Trash Bin"
+//
+//    static let selectFolder = "Select Folder"
+//
+//    static let emptySearchResult = "Empty Search Result"
+//
+//    static let all = "All location"
+//    static let current = "Current location"
+//
+//    static let folderOrdering = "Folder Ordering"
+//    static let memoOrdering = "Memo Ordering"
+//
+//    static let modificationDate = "Modification Date"
+//    static let CreationDate = "Creation Date"
+//    static let Alphabetical = "Alphabetical"
+//
+//    static let AscendingOrder = "Ascending Order"
+//    static let DecendingOrder = "Decending Order"
+//
+//    static let searchPlaceholder = "Search Placeholder"
+//
+//    static let newFolderPlaceHolder = "New Folder PlaceHolder"
+//    static let newArchivePlaceHolder = "New Archive PlaceHolder"
+//
+//
+//
+//    // MARK: - MESSAGES
+//
+//    static let hasAddedToFolder = "hasAddedToFolder"
+//
+//    static let memosHasDeleted = "memosHasDeleted"
+//    static let oneMemoHasDeleted = "oneMemoHasDeleted"
+//
+//    static let folderHasDeleted = "folderHasDeleted"
+//
+//    static let memosHasMovedToTrash = "memosHasMovedToTrash"
+//    static let oneMemoHasMovedToTrash = "oneMemoHasMovedToTrash"
+//
+//    static let memosHasPinned = "memosHasPinned"
+//    static let oneMemoHasPinned = "oneMemoHasPinned"
+//
+//    static let memosHasUnpinned = "memosHasUnpinned"
+//    static let oneMemoHasUnpinned = "oneMemoHasUnpinned"
+//
+//    static let memosHasBookmarked = "memosHasBookmarked"
+//    static let oneMemoHasBookmarked = "oneMemoHasBookmarked"
+//
+//    static let memosHasUnbookmarked = "memosHasUnbookmarked"
+//    static let oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
+//}

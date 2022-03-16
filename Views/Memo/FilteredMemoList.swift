@@ -17,7 +17,7 @@ enum MemoListType: String {
 struct FilteredMemoList: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var folder: Folder
@@ -56,8 +56,8 @@ struct FilteredMemoList: View {
                         
                         NavigationLink(destination:
                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
-                                        .environmentObject(memoEditVM)
-                                        .environmentObject(folderEditVM)
+//                                        .environmentObject(memoEditVM)
+//                                        .environmentObject(folderEditVM)
                                         .environmentObject(trashBinVM)
                         ) {
                             MemoBoxView(memo: memo)

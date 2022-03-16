@@ -61,10 +61,10 @@ struct MemosToolBarView: View {
                 }
 
                 if !allBookmarked {
-                    _ = memoEditVM.selectedMemos.map { $0.isBookMarked = true}
+                    memoEditVM.selectedMemos.forEach { $0.isBookMarked = true}
                     msgToShow = Messages.showBookmarkedMsg(memoEditVM.count)
                 } else {
-                    _ = memoEditVM.selectedMemos.map { $0.isBookMarked = false}
+                    memoEditVM.selectedMemos.forEach { $0.isBookMarked = false}
                     msgToShow = Messages.showUnbookmarkedMsg(memoEditVM.count)
                 }
                 
@@ -93,10 +93,10 @@ struct MemosToolBarView: View {
                 }
 
                 if !allPinned {
-                    _ = memoEditVM.selectedMemos.map { $0.isPinned = true}
+                    memoEditVM.selectedMemos.forEach { $0.isPinned = true}
                     msgToShow = Messages.showPinnedMsg(memoEditVM.count)
                 } else {
-                    _ = memoEditVM.selectedMemos.map { $0.isPinned = false}
+                   memoEditVM.selectedMemos.forEach { $0.isPinned = false}
                     msgToShow = Messages.showUnpinnedMsg(memoEditVM.count)
                 }
                 
@@ -120,10 +120,10 @@ struct MemosToolBarView: View {
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-                _ = memoEditVM.selectedMemos.map { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
+
+                 memoEditVM.selectedMemos.forEach { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
                 msgToShow = Messages.showMemoMovedToTrash(memoEditVM.count)
                 memoEditVM.initSelectedMemos()
-//                Folder.updateTopFolders(context: context)
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
             }

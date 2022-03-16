@@ -13,9 +13,9 @@ struct SubFolderView: View {
     
     @ObservedObject var folder: Folder
     
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-    @EnvironmentObject var memoOrder: MemoOrder
+//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @Binding var isShowingSubFolderView: Bool
@@ -60,9 +60,9 @@ struct SubFolderView: View {
                     
                     NavigationLink {
                         FolderView(currentFolder: subFolder)
-                            .environmentObject(folderEditVM)
-                            .environmentObject(memoEditVM)
-                            .environmentObject(memoOrder)
+//                            .environmentObject(folderEditVM)
+//                            .environmentObject(memoEditVM)
+//                            .environmentObject(memoOrder)
                             .environmentObject(trashBinVM)
                     } label: {
                         Text(subFolder.title)

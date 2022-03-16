@@ -253,7 +253,7 @@ extension Folder {
     }
     
     static func moveMemosToTrashAndDelete(from folder: Folder, to trash: Folder) {
-        _ = folder.memos.map { $0.folder = trash }
+        folder.memos.forEach { $0.folder = trash }
         if let context = folder.managedObjectContext {
             context.delete(folder)
             context.saveCoreData()
@@ -265,7 +265,7 @@ extension Folder {
                 let request = Folder.topFolderFetchReq()
         DispatchQueue.main.async {
             let result = try? context.fetch(request)
-            _ = result!.map { $0.title += "" }
+             result!.forEach { $0.title += "" }
         }
         
         context.saveCoreData()
@@ -477,7 +477,7 @@ extension Folder {
             let tempFolders = folder.subfolders
             
             if !tempFolders.isEmpty {
-                _ = tempFolders.map {
+                 tempFolders.forEach {
                     foldersContainer.append($0)
                     getAllFolders(folder: $0)
                 }
@@ -485,14 +485,14 @@ extension Folder {
         }
         
         func appendMemos(folder: Folder) {
-            _ = folder.memos.map { memosContainer.append($0)}
+            folder.memos.forEach { memosContainer.append($0)}
         }
         
         appendMemos(folder: folder)
         
         getAllFolders(folder: folder)
         
-        _ = foldersContainer.map { appendMemos(folder: $0)}
+        foldersContainer.forEach { appendMemos(folder: $0)}
         
         if onlyMarked {
             return memosContainer.filter { $0.isBookMarked == true}.sorted(by: sortingMethod)
@@ -504,7 +504,7 @@ extension Folder {
     static func convertLevelIntoFolder(_ withLevels: [FolderWithLevel]) -> [Folder] {
         var folders: [Folder] = []
         
-        _ = withLevels.map { folders.append($0.folder)}
+        withLevels.forEach { folders.append($0.folder)}
         return folders
     }
 }
@@ -614,13 +614,13 @@ extension Folder {
         print("Folder.title: \(self.title)")
         print("Folder.creationDate: \(self.creationDate)")
         
-        _ = self.subfolders.map { print($0.title)}
+         self.subfolders.forEach { print($0.title)}
         print("number of subfolders: \(self.subfolders.count)")
         print("parent: \(String(describing: self.parent?.title))")
         
         print("number of memos: \(self.memos.count)")
         
-        _ = self.memos.map { $0.getMemoInfo()}
+         self.memos.forEach { $0.getMemoInfo()}
     }
     
     static func isBelongToArchive(currentfolder: Folder) -> Bool {

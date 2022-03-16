@@ -1,0 +1,20 @@
+Is needed. Especially For Environment Objects.
+
+
+strongly recommended sending all the environmentObjects from DeeepMemoApp,
+which not disappears before app terminates. 
+
+
+왜.. 북마크를 하면 안보이게 되지? 뭐가 문제야? sorting?
+이거, FolderView 랑 MemoList 에 각각 변수 선언만 했는데 작동 잘 함.
+전달해줄 필요는 없지만.. 선언은 해줘야 뭔가를 인식하나 ??
+
+MemoList 에서, memoEditVM 을 없애면 북마크 업데이트가 정상적으로 이루어지지 않음.
+
+현재 문제가 뭐야?
+1. 메모를 이동시킨 후에, NavigationLink 가 작동하지 않아.
+2. 메모를 이동시킨 바로 다음 메모 화면이 아니라 폴더 화면이 나와.
+3. 응 ? 이제 삭제된 메모 화면에서도 이러네 ??? 왜지 ?
+4. 휴지통에서 All 선택 안됨.
+5. MemoTool 이 선택이 안됨. 왜지???
+6.

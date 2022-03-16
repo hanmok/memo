@@ -31,23 +31,17 @@ struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
 
+    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
+    @ObservedObject var currentFolder: Folder
+    
     @EnvironmentObject var trashBinVM: TrashBinViewModel
 
-    @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
-    
-
-    @ObservedObject var currentFolder: Folder
-
-//    @StateObject var memoEditVM = MemoEditViewModel()
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
-    
     @GestureState var isScrolled = false
     
     @FocusState var focusState: Bool
     
     @State var searchKeyword = ""
-//    @State var searchTypeEnum: SearchType = .all
+
     @State var searchTypeEnum: SearchType
     
     @Binding var showingSearchView: Bool
@@ -69,8 +63,8 @@ struct CustomSearchView: View {
     var shouldIncludeTrashOverall: Bool
     var allFolders: [Folder] {
         var folders: [Folder] = []
-        _ = fastFolderWithLevelGroup.folders.map { folders.append($0.folder)}
-        _ = fastFolderWithLevelGroup.archives.map { folders.append($0.folder)}
+        fastFolderWithLevelGroup.folders.forEach { folders.append($0.folder)}
+        fastFolderWithLevelGroup.archives.forEach { folders.append($0.folder)}
         if shouldIncludeTrashOverall {
         folders.append(trashBinVM.trashBinFolder)
         }
@@ -79,13 +73,11 @@ struct CustomSearchView: View {
     // 여기다..
     var currentFolders: [Folder] {
         var folders: [Folder] = []
-        _ = Folder.getHierarchicalFolders(topFolder: currentFolder).map { folders.append($0.folder)}
+         Folder.getHierarchicalFolders(topFolder: currentFolder).forEach { folders.append($0.folder)}
         if shouldIncludeTrashOnCurrent {
             folders.append(trashBinVM.trashBinFolder)
         }
         print("appended Folders in currnetFolders: \(folders)")
-        
-        _ = folders.map { print($0.title)}
         
         return folders
     }
@@ -236,9 +228,9 @@ struct CustomSearchView: View {
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-                                                .environmentObject(memoEditVM)
-                                                .environmentObject(FolderEditViewModel())
-                                                .environmentObject(MemoOrder()) // 왜.. 새로운 object 를 여기서 만들었지 ?
+//                                                .environmentObject(memoEditVM)
+//                                                .environmentObject(FolderEditViewModel())
+//                                                .environmentObject(MemoOrder()) // 왜.. 새로운 object 를 여기서 만들었지 ?
                                                 .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
@@ -256,11 +248,11 @@ struct CustomSearchView: View {
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
                                                         .environmentObject(trashBinVM)
-                                                        .environmentObject(memoEditVM)
-                                                        .environmentObject(folderEditVM)
+//                                                        .environmentObject(memoEditVM)
+//                                                        .environmentObject(folderEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
-                                                        .environmentObject(memoEditVM)
+//                                                        .environmentObject(memoEditVM)
                                                     // 애초에 force unwrap 을 시킬 경우를 만들지 말아야하나 ?
 //                                                        .onAppear {
 //                                                            print("memo's parent: \(eachMemo.folder!.title)")
@@ -286,9 +278,9 @@ struct CustomSearchView: View {
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-                                                .environmentObject(memoEditVM)
-                                                .environmentObject(FolderEditViewModel())
-                                                .environmentObject(MemoOrder())
+//                                                .environmentObject(memoEditVM)
+//                                                .environmentObject(FolderEditViewModel())
+//                                                .environmentObject(MemoOrder())
                                                 .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
@@ -304,10 +296,10 @@ struct CustomSearchView: View {
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
                                                         .environmentObject(trashBinVM)
-                                                        .environmentObject(memoEditVM)
+//                                                        .environmentObject(memoEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
-                                                        .environmentObject(memoEditVM)
+//                                                        .environmentObject(memoEditVM)
                                                 }
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
                                             }

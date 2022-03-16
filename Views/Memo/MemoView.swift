@@ -16,7 +16,7 @@ struct MemoView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
 //    @EnvironmentObject var msgVM: MessageViewModel
@@ -257,8 +257,8 @@ struct MemoView: View {
                     ),
                 selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: [], msgToShow: $msgToShow, shouldUpdateTopFolder: false
             )
-                .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
         }
     }
 }

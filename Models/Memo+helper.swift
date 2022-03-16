@@ -348,7 +348,7 @@ extension Memo {
         
         var allMemos = importantMemos.sorted(by: sortingMethod)
         
-        _ = normalMemos.sorted(by: sortingMethod).map { allMemos.append($0) }
+        normalMemos.sorted(by: sortingMethod).forEach { allMemos.append($0) }
         
         return allMemos
     }
@@ -364,7 +364,7 @@ extension Memo {
         
 //        var addedMemos = importantMemos.sorted(by: sortingMethod)
         
-        _ = normalMemos.sorted(by: sortingMethod).map { importantMemos.append($0) }
+         normalMemos.sorted(by: sortingMethod).forEach { importantMemos.append($0) }
         
         return allMemos
         

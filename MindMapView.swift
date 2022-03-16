@@ -15,10 +15,11 @@ struct MindMapView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
-    @StateObject var memoEditVM = MemoEditViewModel()
-    @StateObject var folderEditVM = FolderEditViewModel()
-    @StateObject var folderOrder = FolderOrder()
-    @StateObject var memoOrder = MemoOrder()
+//    @StateObject var memoEditVM = MemoEditViewModel()
+//    @StateObject var folderEditVM = FolderEditViewModel()
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
+//    @StateObject var folderOrder = FolderOrder()
+//    @StateObject var memoOrder = MemoOrder()
 //    @StateObject var msgVM = MessageViewModel()
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
@@ -102,10 +103,6 @@ struct MindMapView: View {
                     HStack(spacing: 0) {
                         // MARK: - Button 1: SEARCH
                         Button {
-                            _ = fastFolderWithLevelGroup.folders.map {
-                                print("title: \($0.folder.title)")
-                                print("level: \($0.level)")
-                            }
                             // show SearchView !
                             isShowingSearchView = true
                         } label: {
@@ -114,7 +111,8 @@ struct MindMapView: View {
                         }
                         
                         // MARK: - Button 2: Folder Ordering
-                        FolderOrderingMenu(folderOrder: folderOrder)
+//                        FolderOrderingMenu(folderOrder: folderOrder)
+                        FolderOrderingMenu()
                             .padding(.leading, 16)
                         
                         // MARK: - Button 3: Add new Folder to the top Folder
@@ -166,9 +164,9 @@ struct MindMapView: View {
                                     DynamicTopFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-                                        .environmentObject(memoEditVM)
+//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-                                        .environmentObject(memoOrder)
+//                                        .environmentObject(memoOrder)
                                         .environmentObject(trashBinVM)
                                     // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
@@ -187,9 +185,9 @@ struct MindMapView: View {
                                     DynamicFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-                                        .environmentObject(memoEditVM)
+//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-                                        .environmentObject(memoOrder)
+//                                        .environmentObject(memoOrder)
                                         .environmentObject(trashBinVM)
                                     
                                     // ADD Sub Folder
@@ -255,9 +253,9 @@ struct MindMapView: View {
                                     DynamicTopFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-                                        .environmentObject(memoEditVM)
+//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-                                        .environmentObject(memoOrder)
+//                                        .environmentObject(memoOrder)
                                     // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
@@ -274,9 +272,9 @@ struct MindMapView: View {
                                     DynamicFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-                                        .environmentObject(memoEditVM)
+//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-                                        .environmentObject(memoOrder)
+//                                        .environmentObject(memoOrder)
                                     
                                     // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
@@ -327,9 +325,9 @@ struct MindMapView: View {
                                 } // end of Else Case
                             } // end of ForEach
                             TrashBinCell()
-                                .environmentObject(memoEditVM)
+//                                .environmentObject(memoEditVM)
                                 .environmentObject(folderEditVM)
-                                .environmentObject(memoOrder)
+//                                .environmentObject(memoOrder)
                         }// end of List
                         .listStyle(InsetGroupedListStyle())
                         
@@ -361,9 +359,9 @@ struct MindMapView: View {
 //                                 ,
 //                                 hasSafeBottom: hasSafeBottom
             )
-                .environmentObject(memoEditVM)
+//                .environmentObject(memoEditVM)
                 .environmentObject(folderEditVM)
-                .environmentObject(memoOrder)
+//                .environmentObject(memoOrder)
 //                .environmentObject(msgVM)
             
             // animation 은 같지만 이건 ZStack 이기 때문에, 뭔가 차이가 생김.
@@ -376,7 +374,7 @@ struct MindMapView: View {
                 shouldIncludeTrashOnCurrent: selectionEnum == .archive,
             shouldIncludeTrashOverall: true)
                 .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
+//                .environmentObject(memoEditVM)
             
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
@@ -445,9 +443,9 @@ struct MindMapView: View {
 
                 SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
                 .environmentObject(trashBinVM)
-                .environmentObject(memoOrder)
+//                .environmentObject(memoOrder)
                 .environmentObject(folderEditVM)
-                .environmentObject(memoEditVM)
+//                .environmentObject(memoEditVM)
             }
         } // end of ZStack
 //        .onReceive(msgVM.hasMemoRemovedForever, perform: { myoutput in
@@ -460,7 +458,7 @@ struct MindMapView: View {
                                         Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
                                     isFullScreen: true, msgToShow: $msgToShow)
                     .environmentObject(folderEditVM)
-                    .environmentObject(memoEditVM)
+//                    .environmentObject(memoEditVM)
             }
         })
         
@@ -477,7 +475,7 @@ struct MindMapView: View {
             let allMemosReq = Memo.fetch(.all)
             
             if let allMemos = try? context.fetch(allMemosReq) {
-                _ = allMemos.map {
+                 allMemos.forEach {
                     if $0.folder == nil {
                         $0.folder = trashBinVM.trashBinFolder
                     }
