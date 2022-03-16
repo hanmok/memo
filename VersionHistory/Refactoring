@@ -11,3 +11,10 @@ which not disappears before app terminates.
 
 MemoList 에서, memoEditVM 을 없애면 북마크 업데이트가 정상적으로 이루어지지 않음.
 
+현재 문제가 뭐야?
+1. 메모를 이동시킨 후에, NavigationLink 가 작동하지 않아.
+2. 메모를 이동시킨 바로 다음 메모 화면이 아니라 폴더 화면이 나와.
+3. 응 ? 이제 삭제된 메모 화면에서도 이러네 ??? 왜지 ?
+4. 휴지통에서 All 선택 안됨.
+5. MemoTool 이 선택이 안됨. 왜지???
+6.

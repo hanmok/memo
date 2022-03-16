@@ -46,6 +46,15 @@ struct FolderView: View {
     var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
+            print("back btn has pressed!")
+//            if var topController = UIApplication.shared.windows.first!.rootViewController {
+//            if var topController = UIApplication.first!.rootViewController {
+//                while let presentedViewController = topController.presentedViewController {
+//                    topController = presentedViewController
+//                }
+//                topController.dismiss(animated: true)
+//            }
+            
         }) {
             SystemImage("chevron.left", size: 18)
                 .tint(Color.navBtnColor)
