@@ -50,6 +50,9 @@ enum LocalizedStringStorage {
     static let AscendingOrder = StringEnum.AscendingOrder.convertIntoStr()
     static let DecendingOrder = StringEnum.DecendingOrder.convertIntoStr()
     
+    static let AlphabeticalOrder = StringEnum.AlphabeticalOrder.convertIntoStr()
+    static let InverseOrder = StringEnum.InverseOrder.convertIntoStr()
+    
     static let searchPlaceholder = StringEnum.searchPlaceholder.convertIntoStr()
     
     static let newFolderPlaceHolder = StringEnum.newFolderPlaceHolder.convertIntoStr()
@@ -156,6 +159,9 @@ enum StringEnum: String {
     case AscendingOrder = "Ascending Order"
     case DecendingOrder = "Decending Order"
  
+    case AlphabeticalOrder = "Alphabetical Order"
+    case InverseOrder = "Inverse Order"
+    
     case searchPlaceholder = "Search Placeholder"
     
     case newFolderPlaceHolder = "New Folder PlaceHolder"

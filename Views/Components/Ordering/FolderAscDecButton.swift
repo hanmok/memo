@@ -12,6 +12,7 @@ struct FolderAscDecButton: View {
     var isAscending: Bool
     
     @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
+    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
     
     @Environment(\.managedObjectContext) var context
     
@@ -25,7 +26,12 @@ struct FolderAscDecButton: View {
                 if folderOrderAsc == isAscending {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
-                Text(isAscending ? LocalizedStringStorage.AscendingOrder : LocalizedStringStorage.DecendingOrder)
+//                Text(isAscending ? LocalizedStringStorage.AscendingOrder : LocalizedStringStorage.DecendingOrder)
+                if folderOrderType != .alphabetical {
+                    Text(isAscending ? LocalizedStringStorage.AscendingOrder : LocalizedStringStorage.DecendingOrder)
+                } else {
+                    Text(isAscending ? LocalizedStringStorage.AlphabeticalOrder : LocalizedStringStorage.InverseOrder)
+                }
             }
         }
     }

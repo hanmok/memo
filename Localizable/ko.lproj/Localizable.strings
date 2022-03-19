@@ -52,6 +52,9 @@
 "Ascending Order" = "오래된 항목부터";
 "Decending Order" = "최근 항목부터";
 
+"Alphabetical Order" = "가나다순";
+"Inverse Order" = "가나다 역순";
+
 "Search Placeholder" = "검색";
 
 

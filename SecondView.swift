@@ -577,7 +577,7 @@ struct SecondView: View {
                                     }
                             }
                             Rectangle()
-                                .frame(height: 100)
+                                .frame(height: 50)
                                 .foregroundColor(.clear)
                         } // end of ScrollView
                         .gesture(scroll)
