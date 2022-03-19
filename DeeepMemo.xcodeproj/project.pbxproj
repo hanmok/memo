@@ -43,6 +43,7 @@
 		9A337890279A56C500805138 /* FolderEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33788F279A56C500805138 /* FolderEditViewModel.swift */; };
 		9A337893279A5C9600805138 /* HierarchyLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337892279A5C9600805138 /* HierarchyLabelView.swift */; };
 		9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337895279A6F3C00805138 /* MemoEditViewModel.swift */; };
+		9A87D30127E67C1B00A0C5CD /* FixingError3.20 in Resources */ = {isa = PBXBuildFile; fileRef = 9A87D30027E67C1B00A0C5CD /* FixingError3.20 */; };
 		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
 		9A8F179327E25EB3001FD2E9 /* FixingErrors3.17 in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F179227E25EB3001FD2E9 /* FixingErrors3.17 */; };
@@ -171,6 +172,7 @@
 		9A33788F279A56C500805138 /* FolderEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEditViewModel.swift; sourceTree = "<group>"; };
 		9A337892279A5C9600805138 /* HierarchyLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HierarchyLabelView.swift; sourceTree = "<group>"; };
 		9A337895279A6F3C00805138 /* MemoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewModel.swift; sourceTree = "<group>"; };
+		9A87D30027E67C1B00A0C5CD /* FixingError3.20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = FixingError3.20; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		9A8F179227E25EB3001FD2E9 /* FixingErrors3.17 */ = {isa = PBXFileReference; lastKnownFileType = text; path = FixingErrors3.17; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				9A3328C527DFCA54009E8380 /* Refactoring */,
 				9A8F179227E25EB3001FD2E9 /* FixingErrors3.17 */,
 				9A8F17A027E64479001FD2E9 /* ModifyUI3.20 */,
+				9A87D30027E67C1B00A0C5CD /* FixingError3.20 */,
 			);
 			path = VersionHistory;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				9A0474C02771709D00571D66 /* OverallMemo in Resources */,
 				9A0474A927715D1400571D66 /* Assets.xcassets in Resources */,
 				9AA65B3627D6BA8F00C1F383 /* VersionHistory in Resources */,
+				9A87D30127E67C1B00A0C5CD /* FixingError3.20 in Resources */,
 				9AC5D22E278BD8C6007EAA28 /* CurrentTodoLists in Resources */,
 				9ACC0C8027DDF4D800D18690 /* V1.1.0->1.1.1 in Resources */,
 			);
@@ -996,7 +1000,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1014,7 +1018,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -1031,7 +1035,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1049,7 +1053,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.5;
+				MARKETING_VERSION = 1.1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;

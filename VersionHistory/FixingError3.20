@@ -1,0 +1,22 @@
+
+
+1.1.5 -> 1.1.6
+
+
+It's Navigation Link problem ..
+
+Um... what can i do..?
+
+
+It's navigation Bug
+
+solved by adding
+        .navigationViewStyle(StackNavigationViewStyle())
+        to the end of NavigationView
+        
+        
+        
+NavigationView {
+...
+}
+.navigationViewStyle(StackNavigationViewStyle())

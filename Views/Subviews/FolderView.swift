@@ -291,6 +291,16 @@ struct FolderView: View {
 //                            .environmentObject(memoEditVM)
                             .environmentObject(trashBinVM),
                            isActive: $isAddingMemo) {}
+            NavigationLink(destination: EmptyView()) {
+                EmptyView()
+            }
+//                .navigationViewStyle(StackNavigationViewStyle())
+//                .background(NavigationLink(destination: EmptyView()) {
+//                    EmptyView()
+//                })
+            
+//            NavigationLink(destination: EmptyView(),
+//            isActive: $isAddingMemo){ EmptyView() }
                             
             MsgView(msgToShow: $msgToShow)
                 .padding(.top, UIScreen.screenHeight / 1.5)

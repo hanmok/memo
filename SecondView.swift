@@ -676,6 +676,7 @@ struct SecondView: View {
                 memoEditVM.initSelectedMemos()
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
 //        .environmentObject(trashBinVM)
 //        .environmentObject(memoOrder)
 //        .environmentObject(memoEditVM)

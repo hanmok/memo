@@ -28,6 +28,7 @@ struct HomeView: View { // top folder fetch
                 .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter {
                     FolderType.compareName($0.title, with: .trashbin)}.first!))
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 } 
 

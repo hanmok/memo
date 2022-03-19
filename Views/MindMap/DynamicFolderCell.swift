@@ -24,6 +24,9 @@ struct DynamicFolderCell: View {
     var level: Int
     
     var body: some View {
+        ZStack {
+            
+            
         NavigationLink(destination: FolderView(currentFolder: folder)
 //                        .environmentObject(memoEditVM)
 //                        .environmentObject(folderEditVM)
@@ -32,6 +35,16 @@ struct DynamicFolderCell: View {
         ) {
             TitleWithLevelView(folder: folder, level: level)
         } // end of NavigationLink
+//        .navigationViewStyle(StackNavigationViewStyle())
+//        .overlay(NavigationLink(destination: EmptyView()) {
+//            EmptyView()
+//        })
+//            NavigationLink(destination: EmptyView()) {
+//                EmptyView()
+//            }
+        
+            
+        }
     }
 }
 

@@ -88,7 +88,9 @@ struct FilteredMemoList: View {
                                     onEnd(value: value, memo: memo)
                                 }))
                         } // end of ZStack
-
+//                        NavigationLink(destination: EmptyView()) {
+//                            EmptyView()
+//                        }
                         .padding(.bottom, Sizes.spacingBetweenMemoBox)
                             .disabled(memoEditVM.isSelectionMode)
 
