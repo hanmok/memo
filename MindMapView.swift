@@ -381,6 +381,20 @@ struct MindMapView: View {
                 .padding(.horizontal, Sizes.overallPadding)
             
             
+//            if isShowingSecondView {
+
+                SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+                .environmentObject(trashBinVM)
+//                .offset(x: isShowingSecondView ? 0 : -UIScreen.screenWidth)
+                .offset(x: -UIScreen.screenWidth)
+//                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
+            //                .animation(.spring(), value: isShowingSecondView)
+//                .environmentObject(memoOrder)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
+//            }
+            
+            
             if isShowingTextField {
                 Color(.sRGB, white: colorScheme == .dark ? 0.2 : 0.8 , opacity: 0.5)
                     .ignoresSafeArea()
@@ -439,15 +453,12 @@ struct MindMapView: View {
                     isShowingTextField = false
                 }
             
-            if isShowingSecondView {
 
-                SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
-                .environmentObject(trashBinVM)
-//                .environmentObject(memoOrder)
-                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
-            }
         } // end of ZStack
+        .offset(x: isShowingSecondView ? UIScreen.screenWidth : 0)
+//        .animation(.spring(), value: isShowingSecondView)
+        .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
+        
 //        .onReceive(msgVM.hasMemoRemovedForever, perform: { myoutput in
 //            print("output: \(myoutput)")
 //        })

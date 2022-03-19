@@ -19,7 +19,7 @@ struct FolderView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-//    @EnvironmentObject var folderEditVM : FolderEditViewModel
+    @EnvironmentObject var folderEditVM : FolderEditViewModel
 //    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     // TrashBinViewModel
@@ -61,14 +61,14 @@ struct FolderView: View {
         }
     }
     
-    func toggleFavorite() {
-        currentFolder.isFavorite.toggle()
-        currentFolder.modificationDate = Date()
-        // 업데이트가 바로 안됨. 이럴땐 어떻게 해 ?
-        // this line make folder to go back.
-//        Folder.updateTopFolders(context: context) // .. topFolder 가 업데이트 되서 그런거야 ?
-        context.saveCoreData()
-    }
+//    func toggleFavorite() {
+//        currentFolder.isFavorite.toggle()
+//        currentFolder.modificationDate = Date()
+//        // 업데이트가 바로 안됨. 이럴땐 어떻게 해 ?
+//        // this line make folder to go back.
+////        Folder.updateTopFolders(context: context) // .. topFolder 가 업데이트 되서 그런거야 ?
+//        context.saveCoreData()
+//    }
 
     func showSubFolderView() {
         isShowingSubFolderView = true
@@ -103,9 +103,9 @@ struct FolderView: View {
                     HStack {
                         backBtn
                         Spacer()
-                        
+
                         HStack(spacing: 16) {
-                            
+
                             // search Button
                             Button(action: {
                                 isShowingSearchView = true
@@ -113,23 +113,24 @@ struct FolderView: View {
                                 SystemImage("magnifyingglass")
                                     .tint(Color.navBtnColor)
                             })
-                            
+
 //                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
                             MemoOrderingMenu(parentFolder: currentFolder)
-                            // favorite Button
-                            Button(action: {
-                                toggleFavorite()
-                            }, label: {
-                                if currentFolder.isFavorite {
-                                    SystemImage( "star.fill")
-                                        .tint(Color.navBtnColor)
-                                } else {
-                                    
-                                    SystemImage("star")
-                                        .tint(Color.navBtnColor)
-                                }
-                            })
                             
+                            // favorite Button
+//                            Button(action: {
+//                                toggleFavorite()
+//                            }, label: {
+//                                if currentFolder.isFavorite {
+//                                    SystemImage( "star.fill")
+//                                        .tint(Color.navBtnColor)
+//                                } else {
+//
+//                                    SystemImage("star")
+//                                        .tint(Color.navBtnColor)
+//                                }
+//                            })
+
                         }
                     }
                     .padding(.trailing, 10 + Sizes.overallPadding)
@@ -324,6 +325,7 @@ struct FolderView: View {
 //            memoEditVM.selectedMemos.removeAll()
             memoEditVM.initSelectedMemos()
         })
+//        .navigationBarHidden(false)
         .navigationBarHidden(true)
     }
 }

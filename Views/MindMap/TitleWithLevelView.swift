@@ -26,9 +26,9 @@ struct TitleWithLevelView: View {
             Text(folder.title)
                 .foregroundColor(Color.blackAndWhite)
             
-            if folder.isFavorite {
-                Text(Image(systemName: "star.fill"))
-            }
+//            if folder.isFavorite {
+//                Text(Image(systemName: "star.fill"))
+//            }
             
             Spacer()
             Text("\(folder.memos.count)")
