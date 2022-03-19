@@ -90,7 +90,10 @@ struct MindMapView: View {
                     Button {
                         isShowingSecondView = true
                     } label: {
-                        SystemImage("house", size: 24)
+//                        SystemImage("house", size: 24)
+//                        SystemImage("arrowshape.turn.up.left.fill", size: 24)
+//                        SystemImage("arrowshape.turn.up.left.fill", size: 24)
+                        SystemImage("rectangle.righthalf.inset.fill", size: 24)
 //                        SystemImage("magnifyingglass")
                             .foregroundColor(colorScheme == .dark ? .cream : .black)
                     }

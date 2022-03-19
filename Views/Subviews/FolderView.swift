@@ -252,6 +252,8 @@ struct FolderView: View {
                     }
                 }
             } // end of VStack
+            .offset(y: isAddingFolder ? UIScreen.screenHeight : 0)
+            .animation(.spring(), value: isAddingFolder)
             
             CustomSearchView(
                 fastFolderWithLevelGroup: FastFolderWithLevelGroup(

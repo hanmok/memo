@@ -288,7 +288,8 @@ struct SecondView: View {
                             presentationMode.wrappedValue.dismiss()
                             isShowingSecondView = false
                         } label: {
-                            SystemImage("house", size: 24)
+//                            SystemImage("house", size: 24)
+                            SystemImage("rectangle.lefthalf.inset.fill", size: 24)
                                 .foregroundColor(colorScheme == .dark ? .cream : .black)
                             
                         }
