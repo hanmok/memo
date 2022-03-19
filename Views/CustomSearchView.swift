@@ -327,6 +327,7 @@ struct CustomSearchView: View {
 
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             print("CustomSearchView has appeared!!!!!")
             updateViewInHalfSecond()
