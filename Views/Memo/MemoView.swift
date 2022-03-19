@@ -24,7 +24,7 @@ struct MemoView: View {
     
     let parent: Folder
     
-    @FocusState var editorFocusState: Bool
+//    @FocusState var editorFocusState: Bool
     
     @State var isShowingSelectingFolderView = false
     
@@ -211,7 +211,7 @@ struct MemoView: View {
                     .disabled(belongToTrashFolder())
                 //                PlainTextView(text: $contents)
                     .padding(.top)
-                    .focused($editorFocusState)
+//                    .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
                     .padding(.leading, Sizes.overallPadding)
             }

@@ -56,6 +56,7 @@ struct SecondView: View {
     
     @State var msgToShow: String?
     
+    @State var isLoading = false
     func updateViewInHalfSecond() {
         var increasedSeconds = 0.0
         for _ in 0 ... 5 {
@@ -294,8 +295,7 @@ struct SecondView: View {
                             
                         }
                         
-//                        Spacer()
-//                            .padding(.horizontal)
+
                         // Search TextField
                         HStack(spacing: 0) {
                             
@@ -335,13 +335,25 @@ struct SecondView: View {
                         .frame(height: 32)
                         .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                         .cornerRadius(10)
+                        .overlay(RoundedRectangle(cornerRadius: 10)
+//                                    .stroke(colorScheme == .dark ? Color.cream : Color(white: 0.8)))
+                            .stroke(colorScheme == .dark ? Color.cream : Color.clear))
                         .padding(.horizontal, 10)
+
                         // End of Search TextField
                         Spacer()
 //                            .padding(.horizontal)
                         Button {
+                            DispatchQueue.main.async {
+                            isLoading = true
+                                bookmarkState.toggle()
+                            }
                             
-                            bookmarkState.toggle()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                isLoading = false
+                            }
+                            
+
                             
                             print("bookmarkState: \(bookmarkState)")
                             print("button has pressed!!")
@@ -351,6 +363,7 @@ struct SecondView: View {
 //                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: fastFolderWithLevelGroup.homeFolder)
                         MemoOrderingMenu(parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
+                    .padding(.horizontal, 10)
                     
                     // solve UI Padding bug For search result is none
                     .padding(.horizontal, foundMemos.count == 0 ? 0 : 10)
@@ -405,10 +418,11 @@ struct SecondView: View {
                                                         }
                                                     })
                                                 }
+//                                                .padding(.horizontal, Sizes.overallPadding)
                                             } header: {
                                                 HStack {
                                                     SystemImage("bookmark.fill")
-                                                    
+                                                        .padding(.horizontal, 10)
                                                     Spacer()
                                                 }
                                                 .padding(.leading, Sizes.overallPadding)
@@ -416,17 +430,23 @@ struct SecondView: View {
                                             }
                                             
                                             
-                                        Rectangle()
-                                                .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
-//                                                .foregroundColor(Color.mainColor)
-                                                .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .cream )
-                                                .padding(.top, 4)
-                                            
-                                            Rectangle()
-                                                    .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
-//                                                    .foregroundColor(Color.mainColor)
-                                                    .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .cream )
-                                                    .padding(.vertical, 4)
+//                                        Rectangle()
+//                                                .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
+////                                                .foregroundColor(Color.mainColor)
+//                                                .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .cream )
+//                                                .padding(.top, 4)
+//
+//                                            Rectangle()
+//                                                    .frame(width: UIScreen.screenWidth - 2 * Sizes.overallPadding, height: 3, alignment: .center)
+////                                                    .foregroundColor(Color.mainColor)
+//                                                    .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .cream )
+//                                                    .padding(.vertical, 4)
+                                                
+                                                Rectangle()
+                                                    .frame(height: 1)
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+                                                    .padding(.top, 5)
                                             
                                             }
                                             
@@ -483,6 +503,7 @@ struct SecondView: View {
                                                                     }
                                                                 })
                                                             } // end of ForEach
+//                                                            .padding(.horizontal, Sizes.overallPadding)
                                                         }
                                                     } // end of ForEach
                                                 }
@@ -542,6 +563,7 @@ struct SecondView: View {
                                                                     }
                                                                 })
                                                             } // end of ForEach
+//                                                            .padding(.horizontal, Sizes.overallPadding)
                                                         }
                                                     } // end of ForEach
                                                 }
@@ -571,7 +593,7 @@ struct SecondView: View {
                                         
                                         Button(action: addMemo) {
                                             PlusImage()
-                                                .padding(.trailing, 10)
+//                                                .padding(.trailing, 10)
                                                 .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                                 .animation(.spring(), value: memoEditVM.isSelectionMode)
                                         }
@@ -584,20 +606,33 @@ struct SecondView: View {
                                         showSelectingFolderView: $isShowingSelectingFolderView,
                                         msgToShow: $msgToShow, calledFromSecondView: true
                                     )
-                                        .padding(.trailing, 10)
-                                        .padding(.bottom,Sizes.overallPadding )
+//                                        .padding(.trailing, 10)
+                                        .padding(.bottom, Sizes.overallPadding )
                                         .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)
                                 }
                             }
                         } // end of Memo Realated View
+                        .padding(.horizontal, Sizes.overallPadding)
+                        
+//                        if isLoading {
+//                            Color(.clear)
+//                            ProgressView()
+//                                .progressViewStyle(CircularProgressViewStyle(tint: .black))
+//    //                            .progressViewStyle(.Circula)
+//    //                            .scaleEffect(1)
+//                                .tint(colorScheme == .dark ? .cream : .black)
+//                        }
                     }
+                    
+                    
+                    
                 } // end of Main VStack
                 .navigationBarHidden(true)
-                .padding(.horizontal, Sizes.overallPadding)
+//                .padding(.horizontal, Sizes.overallPadding)
                 .padding(.top, 6)
                 .gesture(scroll)
-                
+                // start moving scrollbar to the right !
                 
                 NavigationLink(destination:
                                 NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false))

@@ -354,7 +354,7 @@ struct MindMapView: View {
                 Color(.clear)
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
-                    .scaleEffect(2)
+//                    .scaleEffect(2)
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
