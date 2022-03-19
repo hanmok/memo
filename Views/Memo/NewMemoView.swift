@@ -16,7 +16,7 @@ struct NewMemoView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
 
-//    @EnvironmentObject var folderEditVM: FolderEditViewModel
+    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     

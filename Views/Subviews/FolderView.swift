@@ -19,7 +19,7 @@ struct FolderView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-//    @EnvironmentObject var folderEditVM : FolderEditViewModel
+    @EnvironmentObject var folderEditVM : FolderEditViewModel
 //    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     // TrashBinViewModel
@@ -103,9 +103,9 @@ struct FolderView: View {
                     HStack {
                         backBtn
                         Spacer()
-                        
+
                         HStack(spacing: 16) {
-                            
+
                             // search Button
                             Button(action: {
                                 isShowingSearchView = true
@@ -113,7 +113,7 @@ struct FolderView: View {
                                 SystemImage("magnifyingglass")
                                     .tint(Color.navBtnColor)
                             })
-                            
+
 //                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
                             MemoOrderingMenu(parentFolder: currentFolder)
                             // favorite Button
@@ -124,12 +124,12 @@ struct FolderView: View {
                                     SystemImage( "star.fill")
                                         .tint(Color.navBtnColor)
                                 } else {
-                                    
+
                                     SystemImage("star")
                                         .tint(Color.navBtnColor)
                                 }
                             })
-                            
+
                         }
                     }
                     .padding(.trailing, 10 + Sizes.overallPadding)
@@ -324,6 +324,7 @@ struct FolderView: View {
 //            memoEditVM.selectedMemos.removeAll()
             memoEditVM.initSelectedMemos()
         })
+//        .navigationBarHidden(false)
         .navigationBarHidden(true)
     }
 }

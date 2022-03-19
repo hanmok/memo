@@ -21,10 +21,10 @@ struct SelectingFolderView: View {
 
     @State var selectionEnum = FolderTypeEnum.folder // default value
 
-    @State var isValidAction = false
+//    @State var isValidAction = false
     
     var invalidFolderWithLevels: [FolderWithLevel]
-    var dismissAction: () -> Void = { }
+//    var dismissAction: () -> Void = { }
     var isFullScreen: Bool = false
     
     @Binding var msgToShow: String?
@@ -83,28 +83,28 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                                 msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
-                                isValidAction = true
+//                                isValidAction = true
                             }
                             // 메모 이동.
                         } else {
                             memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
-                                $0.modificationDate = Date()
-                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
+//                                $0.modificationDate = Date()
+//                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             
-                            isValidAction = true
+//                            isValidAction = true
                             
-                            memoEditVM.initSelectedMemos()
+//                            memoEditVM.initSelectedMemos()
                         }
                         
                         folderEditVM.folderToPaste = nil
                         
                         context.saveCoreData()
                         
-                        folderEditVM.folderToPaste = nil
-                        if isValidAction {
-                            dismissAction()
-                        }
+//                        folderEditVM.folderToPaste = nil
+//                        if isValidAction {
+//                            dismissAction()
+//                        }
 
                         presentationMode.wrappedValue.dismiss()
                         
@@ -134,15 +134,15 @@ struct SelectingFolderView: View {
                                 msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 
-                                isValidAction = true
+//                                isValidAction = true
                             }
                         } else {
                              memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
-                                $0.modificationDate = Date()
-                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
+//                                $0.modificationDate = Date()
+//                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             
-                            isValidAction = true
+//                            isValidAction = true
                             
                             memoEditVM.initSelectedMemos()
                         }
@@ -153,9 +153,9 @@ struct SelectingFolderView: View {
                         
                         folderEditVM.folderToPaste = nil
                         
-                        if isValidAction {
-                            dismissAction()
-                        }
+//                        if isValidAction {
+//                            dismissAction()
+//                        }
                         presentationMode.wrappedValue.dismiss()
                         
                     } label: {
@@ -181,10 +181,10 @@ struct SelectingFolderView: View {
         .onDisappear {
             UIView.setAnimationsEnabled(true)
             if shouldUpdateTopFolder {
+                //
             Folder.updateTopFolders(context: context)
             }
         }
         .navigationBarHidden(true)
     }
 }
-
