@@ -194,6 +194,8 @@ struct CustomSearchView: View {
                     .frame(width: UIScreen.screenWidth - 5.1 * Sizes.overallPadding)
                     .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                     .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(colorScheme == .dark ? Color.cream : Color.clear))
                     
                     Spacer()
                     

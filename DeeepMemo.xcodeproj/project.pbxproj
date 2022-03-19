@@ -45,6 +45,8 @@
 		9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337895279A6F3C00805138 /* MemoEditViewModel.swift */; };
 		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
+		9A8F179327E25EB3001FD2E9 /* FixingErrors3.17 in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F179227E25EB3001FD2E9 /* FixingErrors3.17 */; };
+		9A8F17A127E64479001FD2E9 /* ModifyUI3.20 in Resources */ = {isa = PBXBuildFile; fileRef = 9A8F17A027E64479001FD2E9 /* ModifyUI3.20 */; };
 		9A98E7552772D28C00057A84 /* ChangeableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7542772D28C00057A84 /* ChangeableImage.swift */; };
 		9A98E7582773021200057A84 /* ModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A98E7572773021200057A84 /* ModelTest.swift */; };
 		9AA266E127BE347C00AC75DB /* MemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA266E027BE347C00AC75DB /* MemoBoxView.swift */; };
@@ -171,6 +173,8 @@
 		9A337895279A6F3C00805138 /* MemoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewModel.swift; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
+		9A8F179227E25EB3001FD2E9 /* FixingErrors3.17 */ = {isa = PBXFileReference; lastKnownFileType = text; path = FixingErrors3.17; sourceTree = "<group>"; };
+		9A8F17A027E64479001FD2E9 /* ModifyUI3.20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = ModifyUI3.20; sourceTree = "<group>"; };
 		9A98E7542772D28C00057A84 /* ChangeableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeableImage.swift; sourceTree = "<group>"; };
 		9A98E7572773021200057A84 /* ModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTest.swift; sourceTree = "<group>"; };
 		9AA266E027BE347C00AC75DB /* MemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoBoxView.swift; sourceTree = "<group>"; };
@@ -530,6 +534,8 @@
 				9AA65B3527D6BA8F00C1F383 /* VersionHistory */,
 				9ACC0C7F27DDF4D800D18690 /* V1.1.0->1.1.1 */,
 				9A3328C527DFCA54009E8380 /* Refactoring */,
+				9A8F179227E25EB3001FD2E9 /* FixingErrors3.17 */,
+				9A8F17A027E64479001FD2E9 /* ModifyUI3.20 */,
 			);
 			path = VersionHistory;
 			sourceTree = "<group>";
@@ -708,6 +714,8 @@
 			files = (
 				9ACC0C7327DB8CE600D18690 /* ScreenShotInfo in Resources */,
 				9AC5D13D2785247D007EAA28 /* Terms in Resources */,
+				9A8F17A127E64479001FD2E9 /* ModifyUI3.20 in Resources */,
+				9A8F179327E25EB3001FD2E9 /* FixingErrors3.17 in Resources */,
 				9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */,
 				9AC5D13A278521F9007EAA28 /* Memo For Tips and Tricks in Resources */,
 				9A3328C627DFCA54009E8380 /* Refactoring in Resources */,
@@ -988,7 +996,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1006,7 +1014,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -1023,7 +1031,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1041,7 +1049,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;

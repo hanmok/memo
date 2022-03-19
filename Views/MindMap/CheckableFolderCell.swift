@@ -28,10 +28,10 @@ struct CheckableFolderCell: View {
             Text(folder.title)
                 .foregroundColor(Color.blackAndWhite)
             
-            if folder.isFavorite {
-                Text(Image(systemName: "star.fill"))
-                    .foregroundColor(Color.blackAndWhite)
-            }
+//            if folder.isFavorite {
+//                Text(Image(systemName: "star.fill"))
+//                    .foregroundColor(Color.blackAndWhite)
+//            }
             
             Spacer()
             if markCheck {

@@ -90,7 +90,10 @@ struct MindMapView: View {
                     Button {
                         isShowingSecondView = true
                     } label: {
-                        SystemImage("house", size: 24)
+//                        SystemImage("house", size: 24)
+//                        SystemImage("arrowshape.turn.up.left.fill", size: 24)
+//                        SystemImage("arrowshape.turn.up.left.fill", size: 24)
+                        SystemImage("rectangle.righthalf.inset.fill", size: 24)
 //                        SystemImage("magnifyingglass")
                             .foregroundColor(colorScheme == .dark ? .cream : .black)
                     }
@@ -351,7 +354,7 @@ struct MindMapView: View {
                 Color(.clear)
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
-                    .scaleEffect(2)
+//                    .scaleEffect(2)
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
@@ -379,6 +382,20 @@ struct MindMapView: View {
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
                 .padding(.horizontal, Sizes.overallPadding)
+            
+            
+//            if isShowingSecondView {
+
+                SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+                .environmentObject(trashBinVM)
+//                .offset(x: isShowingSecondView ? 0 : -UIScreen.screenWidth)
+                .offset(x: -UIScreen.screenWidth)
+//                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
+            //                .animation(.spring(), value: isShowingSecondView)
+//                .environmentObject(memoOrder)
+//                .environmentObject(folderEditVM)
+//                .environmentObject(memoEditVM)
+//            }
             
             
             if isShowingTextField {
@@ -439,15 +456,12 @@ struct MindMapView: View {
                     isShowingTextField = false
                 }
             
-            if isShowingSecondView {
 
-                SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
-                .environmentObject(trashBinVM)
-//                .environmentObject(memoOrder)
-                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
-            }
         } // end of ZStack
+        .offset(x: isShowingSecondView ? UIScreen.screenWidth : 0)
+//        .animation(.spring(), value: isShowingSecondView)
+        .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
+        
 //        .onReceive(msgVM.hasMemoRemovedForever, perform: { myoutput in
 //            print("output: \(myoutput)")
 //        })

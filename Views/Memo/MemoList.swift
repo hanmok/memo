@@ -10,7 +10,7 @@ import SwiftUI
 struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
-    @EnvironmentObject var memoEditVM: MemoEditViewModel
+//    @EnvironmentObject var memoEditVM: MemoEditViewModel
 //    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
