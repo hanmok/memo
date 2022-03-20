@@ -66,9 +66,11 @@ struct CustomSearchView: View {
         var folders: [Folder] = []
         fastFolderWithLevelGroup.folders.forEach { folders.append($0.folder)}
         fastFolderWithLevelGroup.archives.forEach { folders.append($0.folder)}
+        
         if shouldIncludeTrashOverall {
-        folders.append(trashBinVM.trashBinFolder)
+            folders.append(trashBinVM.trashBinFolder)
         }
+        
         return folders
     }
 
@@ -83,6 +85,7 @@ struct CustomSearchView: View {
         return folders
     }
     
+    /*
     var foundMemos: [NestedMemo]? {
         if searchTypeEnum == .all {
             return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
@@ -90,11 +93,15 @@ struct CustomSearchView: View {
             return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
         }
     }
+     */
     
 
     
-    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, shouldShowAll: Bool = false, shouldIncludeTrashOnCurrent: Bool = false,
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup,
+         currentFolder: Folder,
+         showingSearchView: Binding<Bool>, shouldShowAll: Bool = false, shouldIncludeTrashOnCurrent: Bool = false,
          shouldIncludeTrashOverall: Bool = false) {
+        
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _showingSearchView = showingSearchView
@@ -111,7 +118,6 @@ struct CustomSearchView: View {
         
         let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
         
-        print("returnMatchedMemos has triggered")
         var nestedMemos = [NestedMemo]()
         
         if keyword != "" {
@@ -150,6 +156,14 @@ struct CustomSearchView: View {
                 print("is Scrolling : \(isScrolled)")
                 focusState = false
             }
+        
+        var foundMemos: [NestedMemo] {
+            if searchTypeEnum == .all {
+                return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
+            } else {
+                return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
+            }
+        }
         
         return NavigationView {
             
@@ -221,11 +235,13 @@ struct CustomSearchView: View {
                 ScrollView {
                     VStack {
                         // ALL FOLDERS
-                        if foundMemos != nil {
+//                        if foundMemos != nil {
                             if searchTypeEnum == .all {
-                                if foundMemos!.count != 0 {
+//                                if foundMemos!.count != 0 {
+                                if foundMemos.count != 0 {
                                     
-                                    ForEach( foundMemos!, id: \.self) { memoArray in
+//                                    ForEach( foundMemos!, id: \.self) { memoArray in
+                                    ForEach( foundMemos, id: \.self) { memoArray in
                                         
                                         Section(header:
                                                     NavigationLink(destination: {
@@ -261,8 +277,10 @@ struct CustomSearchView: View {
                                 }
                             }// searchTypeEnum == .current
                             else {
-                                if foundMemos!.count != 0 {
-                                    ForEach( foundMemos!, id: \.self) { memoArray in
+//                                if foundMemos!.count != 0 {
+                                if foundMemos.count != 0 {
+//                                    ForEach( foundMemos!, id: \.self) { memoArray in
+                                    ForEach( foundMemos, id: \.self) { memoArray in
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
@@ -294,7 +312,7 @@ struct CustomSearchView: View {
                                         .frame(maxWidth: .infinity, alignment: .center)
                                 }
                             } // searchTypeEnum == .current
-                        } // nil
+//                        } // nil
                     }
                 }
                 .gesture(scroll)

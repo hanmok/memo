@@ -339,7 +339,9 @@ struct MindMapView: View {
             
             
             
-            SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+            SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
+                       currentFolder: fastFolderWithLevelGroup.homeFolder,
+                       isShowingSecondView: $isShowingSecondView)
                 .environmentObject(trashBinVM)
                 .offset(x: -UIScreen.screenWidth)
             

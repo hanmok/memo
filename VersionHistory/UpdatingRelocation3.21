@@ -1,0 +1,47 @@
+
+1.1.6 -> 1.1.7
+
+Relocation
+음.. 원하는 방식은 ?
+중간에 수정 가능하도록..
+
+1. SecondView 북마크 화면에서는 정상작동
+
+allBookMarkedFoundMemos
+body 내에서 선언
+
+2. SecondView 북마크 Off 일 때는 바로 꺼짐
+foundMemos
+body 전에 선언
+
+이 차이네..?
+
+이제 정상 작동함 .. ;;
+
+
+3. FolderView 에서 바로 꺼짐
+
+왜지 ?
+뭐가 문제지 ?
+
+4. Bookmarked MemoView 에서는. 정상작동
+5. 첫 화면에서 새로 만들 때 정상작동
+
+6. Search 에서 정상작동 아닌데 ?? 왔다갔다 함
+
+
+
+
+
+검색할 때, SecondView 가 흔들림...
+왜 흔들리냐  ?
+해결 됨.
+
+검색 중 다른 화면으로 넘어갈 때, 키보드 사라지도록 하기.
+수정 완료.
+
+검색할 때 메모 더하는거 숨기기.
+SecondView, line 558
+수정 완료.
+
+

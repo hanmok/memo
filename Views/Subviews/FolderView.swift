@@ -30,8 +30,6 @@ struct FolderView: View {
     
     @State var isShowingSelectingFolderView = false
     
-    @State var allMemos: [Memo] = []
-    
     @State var isShowingSearchView = false
     
     @State var msgToShow: String?
@@ -62,6 +60,10 @@ struct FolderView: View {
             DispatchQueue.main.async {
                 newSubFolderName = ""
             }
+        }
+        
+        var memosToShow: [Memo] {
+            return Memo.sortMemos(memos: currentFolder.memos.sorted())
         }
         
         return ZStack {
@@ -132,9 +134,23 @@ struct FolderView: View {
                         
                         ZStack {
                             if !currentFolder.memos.isEmpty {
-                                MemoList()
-                                    .padding(.top, 20)
-                                    .ignoresSafeArea(edges: .trailing)
+                                //                                MemoList()
+                                //                                    .padding(.top, 20)
+                                //                                    .ignoresSafeArea(edges: .trailing)
+                                VStack {
+                                    ForEach(memosToShow, id: \.self) { memo in
+                                        NavigationLink(destination:
+                                                        MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
+                                            .environmentObject(trashBinVM)
+                                        ) {
+                                            MemoBoxView(memo: memo)
+                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+                                        }
+                                    }
+                                }
+                                .padding(.top, 20)
+                                .ignoresSafeArea( edges: .trailing)
+                                
                             }
                         }
                     } // end of main VStack
