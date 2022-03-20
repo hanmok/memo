@@ -1,0 +1,126 @@
+
+1.1.6 -> 1.1.7
+
+Relocation
+음.. 원하는 방식은 ?
+중간에 수정 가능하도록..
+
+1. SecondView 북마크 화면에서는 정상작동
+
+allBookMarkedFoundMemos
+body 내에서 선언
+
+2. SecondView 북마크 Off 일 때는 바로 꺼짐
+foundMemos
+body 전에 선언
+
+이 차이네..?
+
+이제 정상 작동함 .. ;;
+
+
+3. FolderView 에서 바로 꺼짐
+
+왜지 ?
+뭐가 문제지 ?
+여기서는 적용이 안됨. 왜지 ?
+
+FolderView 에서 메모를 새로 만들 때는 괜찮..
+
+차이가 뭘까 ?
+Hierarchy 의 문제는 아닐까? 아님. 없애고 나서 해봄. ㅇ
+
+어디의 문제일까 ?????? 글쎄다... 
+
+onAppear, onDisappear 차이는 아님
+차이가 어디에 있을까....??
+
+
+
+4. Bookmarked MemoView. 에서는. 정상작동
+5. 첫 화면에서 새로 만들 때 정상작동
+
+6. Search 에서 정상작동 아닌데 ?? 왔다갔다 함
+여기부터 수정하기.
+
+SearchView 에서, 폴더로 이동 후 메모 타고 폴더 relocation 하면
+SearchView 로 튕김.
+흐음...
+튕기는 문제네 결국..
+
+업데이트와 관련 있을 것 같은데 ...
+
+차이가 뭐지 ? 차이는 어디에 있을까 ??
+SecondView, BookMarkState on 상태에서
+Bookmark 된 것들은 정상인데
+안된 것들은 닫힘.
+
+
+
+
+
+SecondView ~ SearchView
+
+차이가 뭐야 ?
+가장 큰 차이는, 어떤 폴더에 속해있는 상태인 것을 여는 것.
+
+이거 같은데 ??
+그럼.. 구조를 다르게 해야한다는 뜻이겠네
+어다서 선언하는지의 문제가 아니고..
+알겠다. ;;; ㅇㅋ...
+
+이거, .. 차라리 기본 값을 화면을 닫는 거로 하자.
+그래야 로직이 꼬이지 않아.
+로딩 시간도 엄청 더 쓰일거야 .... 하아.....
+is this .. the best way ? up to users
+
+MemoView, NewMemoView 를 수정해야겠네
+
+
+Search 에서, 폴더를 타고 메모로 들어간 후 relocation 했을 때 Search 까지 튕기는건 어쩌지 ?
+일단 보류
+
+
+
+
+검색할 때, SecondView 가 흔들림...
+왜 흔들리냐  ?
+해결 됨.
+
+검색 중 다른 화면으로 넘어갈 때, 키보드 사라지도록 하기.
+수정 완료.
+
+검색할 때 메모 더하는거 숨기기.
+SecondView, line 558
+수정 완료.
+
+
+
+SubmitLabel in searchView
+changed to .search ( == secondView.submit type )
+
+
+음.. search 색상을 파란색 말고 아무것도 없는 색상으로 할 수 없을까?
+SecondView, Search View 에서.
+
+SecondView 에서, presentationMode 제거.
+(현재 MindMapView 에 속함. )
+
+
+relocation 시 focusState 바꾸기.
+수정 완료!
+
+
+
+0. Messages
+
+1.
+또 수정해야 하는 것 ? pin !
+: 다음 업데이트!
+
+2. bookmark 를 열 때, animation 이 조금 바뀌면 좋겠다.
+이거 구조를 꽤 많이 바꿔야 할 수 있어..
+
+3. 원하는 순서로 정렬..
+
+

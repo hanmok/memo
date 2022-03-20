@@ -80,6 +80,8 @@ struct DeeepMemoApp: App {
             .environmentObject(folderOrder)
             .environmentObject(memoOrder)
             .environmentObject(messageVM)
+            
+            
         }
         
         .onChange(of: scenePhase) { newScenePhase in

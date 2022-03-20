@@ -12,7 +12,6 @@
 		9A046CCC27B3A72E003169C7 /* CollapsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */; };
 		9A046D1B27B67508003169C7 /* OrderingAppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */; };
 		9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
-		9A0474A727715D1400571D66 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749627715D1200571D66 /* MainView.swift */; };
 		9A0474A927715D1400571D66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A04749727715D1300571D66 /* Assets.xcassets */; };
 		9A0474BD27716E0000571D66 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0474BC27716E0000571D66 /* FolderView.swift */; };
 		9A0474C02771709D00571D66 /* OverallMemo in Resources */ = {isa = PBXBuildFile; fileRef = 9A0474BF2771709D00571D66 /* OverallMemo */; };
@@ -57,6 +56,7 @@
 		9AA65B3627D6BA8F00C1F383 /* VersionHistory in Resources */ = {isa = PBXBuildFile; fileRef = 9AA65B3527D6BA8F00C1F383 /* VersionHistory */; };
 		9AAA249B27E73551009923C7 /* CleanUp3.20 in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA249A27E73551009923C7 /* CleanUp3.20 */; };
 		9AAA24A227E748AE009923C7 /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA24A127E748AE009923C7 /* MemoEditView.swift */; };
+		9AAA24A427E7B01D009923C7 /* UpdatingRelocation3.21 in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA24A327E7B01D009923C7 /* UpdatingRelocation3.21 */; };
 		9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AB724D427CD2C6B006A825C /* Localizable.strings */; };
 		9AB724D727CD2D17006A825C /* LocalizedStringStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */; };
 		9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D927CE79EC006A825C /* TrashFolderView.swift */; };
@@ -141,7 +141,6 @@
 		9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingTest.swift; sourceTree = "<group>"; };
 		9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAppStorage.swift; sourceTree = "<group>"; };
 		9A04749527715D1200571D66 /* DeeepMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeepMemoApp.swift; sourceTree = "<group>"; };
-		9A04749627715D1200571D66 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9A04749727715D1300571D66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A04749C27715D1300571D66 /* DeeepMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeeepMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A0474BC27716E0000571D66 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
@@ -189,6 +188,7 @@
 		9AA65B3527D6BA8F00C1F383 /* VersionHistory */ = {isa = PBXFileReference; lastKnownFileType = text; path = VersionHistory; sourceTree = "<group>"; };
 		9AAA249A27E73551009923C7 /* CleanUp3.20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = CleanUp3.20; sourceTree = "<group>"; };
 		9AAA24A127E748AE009923C7 /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
+		9AAA24A327E7B01D009923C7 /* UpdatingRelocation3.21 */ = {isa = PBXFileReference; lastKnownFileType = text; path = UpdatingRelocation3.21; sourceTree = "<group>"; };
 		9AB724D327CD2C6B006A825C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D527CD2C9B006A825C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringStorage.swift; sourceTree = "<group>"; };
@@ -397,7 +397,6 @@
 				9A3377AF278EC6F000805138 /* SubFolderElementView.swift */,
 				9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */,
 				9AC5D0F02782BBEB007EAA28 /* HorCollapsibleMind3.swift */,
-				9A04749627715D1200571D66 /* MainView.swift */,
 				9AC5D2182786F773007EAA28 /* HomeViewPrev.swift */,
 				9A33785C279817B700805138 /* FolderView2.swift */,
 				9A3377B42790039200805138 /* FolderViewTest.swift */,
@@ -545,6 +544,7 @@
 				9A8F17A027E64479001FD2E9 /* ModifyUI3.20 */,
 				9A87D30027E67C1B00A0C5CD /* FixingError3.20 */,
 				9AAA249A27E73551009923C7 /* CleanUp3.20 */,
+				9AAA24A327E7B01D009923C7 /* UpdatingRelocation3.21 */,
 			);
 			path = VersionHistory;
 			sourceTree = "<group>";
@@ -727,6 +727,7 @@
 				9A8F179327E25EB3001FD2E9 /* FixingErrors3.17 in Resources */,
 				9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */,
 				9AC5D13A278521F9007EAA28 /* Memo For Tips and Tricks in Resources */,
+				9AAA24A427E7B01D009923C7 /* UpdatingRelocation3.21 in Resources */,
 				9A3328C627DFCA54009E8380 /* Refactoring in Resources */,
 				9AAA249B27E73551009923C7 /* CleanUp3.20 in Resources */,
 				9A3378272796DECA00805138 /* ProblemsAndSolutions in Resources */,
@@ -797,7 +798,6 @@
 				9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */,
 				9AB7250927D00F36006A825C /* MemoAscDecButton.swift in Sources */,
 				9AC5D2192786F773007EAA28 /* HomeViewPrev.swift in Sources */,
-				9A0474A727715D1400571D66 /* MainView.swift in Sources */,
 				9ACC0C8227DE05C000D18690 /* MessageViewModel.swift in Sources */,
 				9AC5D21327857993007EAA28 /* CoreDataTestView.swift in Sources */,
 				9A3378012795736200805138 /* ColorExt.swift in Sources */,
@@ -1008,7 +1008,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1026,7 +1026,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.6;
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -1043,7 +1043,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1061,7 +1061,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.6;
+				MARKETING_VERSION = 1.1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;

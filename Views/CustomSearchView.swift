@@ -13,6 +13,7 @@ struct NestedMemo: Hashable {
     var memos: [Memo]
 }
 
+
 enum SearchType: String {
     case all = "All"
     case current = "Current"
@@ -26,6 +27,7 @@ enum SearchType: String {
         }
     }
 }
+
 
 struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -66,9 +68,11 @@ struct CustomSearchView: View {
         var folders: [Folder] = []
         fastFolderWithLevelGroup.folders.forEach { folders.append($0.folder)}
         fastFolderWithLevelGroup.archives.forEach { folders.append($0.folder)}
+        
         if shouldIncludeTrashOverall {
-        folders.append(trashBinVM.trashBinFolder)
+            folders.append(trashBinVM.trashBinFolder)
         }
+        
         return folders
     }
 
@@ -83,6 +87,7 @@ struct CustomSearchView: View {
         return folders
     }
     
+    /*
     var foundMemos: [NestedMemo]? {
         if searchTypeEnum == .all {
             return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
@@ -90,11 +95,15 @@ struct CustomSearchView: View {
             return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
         }
     }
+     */
     
 
     
-    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup, currentFolder: Folder, showingSearchView: Binding<Bool>, shouldShowAll: Bool = false, shouldIncludeTrashOnCurrent: Bool = false,
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup,
+         currentFolder: Folder,
+         showingSearchView: Binding<Bool>, shouldShowAll: Bool = false, shouldIncludeTrashOnCurrent: Bool = false,
          shouldIncludeTrashOverall: Bool = false) {
+        
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
         _showingSearchView = showingSearchView
@@ -111,7 +120,6 @@ struct CustomSearchView: View {
         
         let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
         
-        print("returnMatchedMemos has triggered")
         var nestedMemos = [NestedMemo]()
         
         if keyword != "" {
@@ -151,6 +159,14 @@ struct CustomSearchView: View {
                 focusState = false
             }
         
+        var foundMemos: [NestedMemo] {
+            if searchTypeEnum == .all {
+                return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
+            } else {
+                return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
+            }
+        }
+        
         return NavigationView {
             
             VStack(alignment: .leading) {
@@ -163,7 +179,7 @@ struct CustomSearchView: View {
 
                         TextField(LocalizedStringStorage.searchPlaceholder, text: $searchKeyword)
                             .accentColor(Color.textViewTintColor)
-                            .submitLabel(.done)
+                            .submitLabel(.search)
                             .focused($focusState)
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
@@ -212,7 +228,6 @@ struct CustomSearchView: View {
             
                 Picker("", selection: $searchTypeEnum) {
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .all)).tag(SearchType.all)
-
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .current)).tag(SearchType.current)
                 }
                 .padding(.horizontal, Sizes.overallPadding)
@@ -221,16 +236,18 @@ struct CustomSearchView: View {
                 ScrollView {
                     VStack {
                         // ALL FOLDERS
-                        if foundMemos != nil {
+//                        if foundMemos != nil {
                             if searchTypeEnum == .all {
-                                if foundMemos!.count != 0 {
+//                                if foundMemos!.count != 0 {
+                                if foundMemos.count != 0 {
                                     
-                                    ForEach( foundMemos!, id: \.self) { memoArray in
+//                                    ForEach( foundMemos!, id: \.self) { memoArray in
+                                    ForEach( foundMemos, id: \.self) { memoArray in
                                         
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-                                                .environmentObject(trashBinVM)
+//                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
@@ -246,7 +263,7 @@ struct CustomSearchView: View {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
-                                                        .environmentObject(trashBinVM)
+//                                                        .environmentObject(trashBinVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
                                                 }
@@ -261,12 +278,14 @@ struct CustomSearchView: View {
                                 }
                             }// searchTypeEnum == .current
                             else {
-                                if foundMemos!.count != 0 {
-                                    ForEach( foundMemos!, id: \.self) { memoArray in
+//                                if foundMemos!.count != 0 {
+                                if foundMemos.count != 0 {
+//                                    ForEach( foundMemos!, id: \.self) { memoArray in
+                                    ForEach( foundMemos, id: \.self) { memoArray in
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-                                                .environmentObject(trashBinVM)
+//                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
@@ -280,7 +299,7 @@ struct CustomSearchView: View {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
-                                                        .environmentObject(trashBinVM)
+//                                                        .environmentObject(trashBinVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
                                                 }
@@ -294,7 +313,7 @@ struct CustomSearchView: View {
                                         .frame(maxWidth: .infinity, alignment: .center)
                                 }
                             } // searchTypeEnum == .current
-                        } // nil
+//                        } // nil
                     }
                 }
                 .gesture(scroll)

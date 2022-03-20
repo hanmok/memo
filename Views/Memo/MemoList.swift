@@ -17,6 +17,11 @@ struct MemoList: View {
     
     // need to be modified to have plus button when there's no memo
     var body: some View {
+        
+//        var hasPinnedOrBookmarkedMemo: Bool {
+//            return folder.memos.contains { $0.isPinned == true || $0.isBookMarked == true}
+//        }
+        
         return VStack {
             
             if hasPinnedOrBookmarkedMemo {

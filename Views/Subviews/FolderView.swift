@@ -30,8 +30,6 @@ struct FolderView: View {
     
     @State var isShowingSelectingFolderView = false
     
-    @State var allMemos: [Memo] = []
-    
     @State var isShowingSearchView = false
     
     @State var msgToShow: String?
@@ -62,6 +60,10 @@ struct FolderView: View {
             DispatchQueue.main.async {
                 newSubFolderName = ""
             }
+        }
+        
+        var memosToShow: [Memo] {
+            return Memo.sortMemos(memos: currentFolder.memos.sorted())
         }
         
         return ZStack {
@@ -132,9 +134,25 @@ struct FolderView: View {
                         
                         ZStack {
                             if !currentFolder.memos.isEmpty {
-                                MemoList()
-                                    .padding(.top, 20)
-                                    .ignoresSafeArea(edges: .trailing)
+//                                MemoList()
+//                                    .padding(.top, 20)
+//                                    .ignoresSafeArea(edges: .trailing)
+                                VStack {
+                                    ForEach(memosToShow, id: \.self) { memo in
+                                        NavigationLink(destination:
+                                                        // parent 가 문제인건 아니야?
+                                                       // SecondView 에서도 같은데, 여기에서만 그러진 않지 않을까 ?
+                                                       MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
+                                            .environmentObject(trashBinVM)
+                                        ) {
+                                            MemoBoxView(memo: memo)
+                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+                                        }
+                                    }
+                                }
+                                .padding(.top, 20)
+                                .ignoresSafeArea( edges: .trailing)
+                                
                             }
                         }
                     } // end of main VStack
@@ -170,7 +188,8 @@ struct FolderView: View {
             MemoEditView(
                 plusView: Button(action: addMemo) {
                     PlusImage()
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+//                        .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+                        .padding([.trailing, .bottom], Sizes.overallPadding)
                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                         .animation(.spring(), value: memoEditVM.isSelectionMode)
                 },
@@ -179,8 +198,7 @@ struct FolderView: View {
                     showSelectingFolderView: $isShowingSelectingFolderView,
                     msgToShow: $msgToShow
                 )
-                .padding(.trailing, Sizes.overallPadding)
-                .padding(.bottom,Sizes.overallPadding )
+                .padding([.trailing, .bottom], Sizes.overallPadding)
                 .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
                 .animation(.spring(), value: memoEditVM.isSelectionMode)
             )
@@ -228,10 +246,11 @@ struct FolderView: View {
         .frame(maxHeight: .infinity)
         
         // fetch both home Folder and Archive Folder Separately.
+        
         .sheet(
             isPresented: $isShowingSelectingFolderView,
             onDismiss: {
-                
+
             },
             content: {
                 SelectingFolderView(
@@ -243,10 +262,13 @@ struct FolderView: View {
                         ), msgToShow: $msgToShow, invalidFolderWithLevels: []
                 )
             })
+        
         .onDisappear(perform: {
             newSubFolderName = ""
             memoEditVM.initSelectedMemos()
+            print("FolderView onDisappear triggered!")
         })
+        
         .navigationBarHidden(true)
     }
 }

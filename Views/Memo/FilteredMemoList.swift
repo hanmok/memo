@@ -35,7 +35,6 @@ struct FilteredMemoList: View {
         
         var memosToShow = [Memo]()
         
-        
         switch listType {
         case .pinnedOrBookmarked:
             memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.isPinned || $0.isBookMarked })
@@ -49,6 +48,7 @@ struct FilteredMemoList: View {
             
             VStack { // without this, views stack on other memos
                 Section {
+                    
                     ForEach(memosToShow, id: \.self) { memo in
                         NavigationLink(destination:
                                         MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
