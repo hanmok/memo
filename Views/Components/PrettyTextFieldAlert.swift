@@ -123,6 +123,7 @@ struct PrettyTextFieldAlert: View {
                     .foregroundColor(colorScheme == .dark ? Color(white: 80 / 255) : Color(white: 205 / 255))
                 
                 HStack(alignment: .center, spacing: 0){
+//            HStack(alignment: .center) {
                     
                     // CANCEL
                     Button {

@@ -177,7 +177,7 @@ struct NewMemoView: View {
             }
             .ignoresSafeArea(edges: .top)
             
-            VStack(spacing:0) {
+            VStack {
                 HStack {
                     backBtn
                     Spacer()

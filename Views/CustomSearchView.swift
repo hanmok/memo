@@ -61,6 +61,7 @@ struct CustomSearchView: View {
     
     var shouldIncludeTrashOnCurrent: Bool
     var shouldIncludeTrashOverall: Bool
+    
     var allFolders: [Folder] {
         var folders: [Folder] = []
         fastFolderWithLevelGroup.folders.forEach { folders.append($0.folder)}
@@ -70,7 +71,7 @@ struct CustomSearchView: View {
         }
         return folders
     }
-    // 여기다..
+
     var currentFolders: [Folder] {
         var folders: [Folder] = []
          Folder.getHierarchicalFolders(topFolder: currentFolder).forEach { folders.append($0.folder)}
@@ -152,7 +153,6 @@ struct CustomSearchView: View {
         
         return NavigationView {
             
-            
             VStack(alignment: .leading) {
                 HStack {
                     HStack(spacing: 0) {
@@ -224,6 +224,7 @@ struct CustomSearchView: View {
                         if foundMemos != nil {
                             if searchTypeEnum == .all {
                                 if foundMemos!.count != 0 {
+                                    
                                     ForEach( foundMemos!, id: \.self) { memoArray in
                                         
                                         Section(header:

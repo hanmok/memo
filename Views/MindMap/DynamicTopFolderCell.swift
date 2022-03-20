@@ -26,7 +26,6 @@ struct DynamicTopFolderCell: View {
         } // end of NavigationLink
         
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-            
             Button {
                 // DO NOTHING
             } label: {

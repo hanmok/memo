@@ -1,13 +1,3 @@
-//
-//  TrashFolderView.swift
-//  DeeepMemo (iOS)
-//
-//  Created by Mac mini on 2022/03/02.
-//
-
-import SwiftUI
-
-
 
 //
 //  FolderView.swift
@@ -79,7 +69,6 @@ struct TrashFolderView: View {
                 
                 ScrollView(.vertical) {
                     VStack(spacing: 0) {
-                        
                         HStack {
                             // NavigationTitle
                             ZStack(alignment: .topLeading) {
@@ -98,10 +87,8 @@ struct TrashFolderView: View {
                         
                         ZStack {
                             if !trashBinVM.trashBinFolder.memos.isEmpty {
-//                                TrashBinMemoList()
                                 FilteredMemoList(folder: trashBinVM.trashBinFolder, listType: .all)
                                     .environmentObject(trashBinVM)
-                                    
                                     .padding(.top, 20)
                                     .ignoresSafeArea(edges: .trailing)
                             }

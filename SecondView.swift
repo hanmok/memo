@@ -335,7 +335,6 @@ struct SecondView: View {
                             // spacing: // make tight
                             VStack(spacing: 0) {
                                 
-                                
                                 // ALL FOLDERS
                                 
                                 // MARK: - Bookmark State is On
@@ -529,33 +528,24 @@ struct SecondView: View {
                         // another element of ZStack begin // end of ZStack
                         
                         // Plus Button, and MemoToolBarView
-                        VStack {
-                            Spacer()
-                            ZStack {
-                                HStack {
-                                    Spacer()
-                                    VStack(spacing: Sizes.minimalSpacing) {
-                                        
-                                        Button(action: addMemo) {
-                                            PlusImage()
-                                                .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
-                                                .animation(.spring(), value: memoEditVM.isSelectionMode)
-                                        }
-                                    }
-                                }
-                                HStack {
-                                    Spacer()
-                                    MemosToolBarView(
-                                        currentFolder: currentFolder,
-                                        showSelectingFolderView: $isShowingSelectingFolderView,
-                                        msgToShow: $msgToShow, calledFromSecondView: true
-                                    )
-                                        .padding(.bottom, Sizes.overallPadding )
-                                        .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
+                     
+                        MemoEditView(
+                            plusView:
+                                Button(action: addMemo, label: {
+                                    PlusImage()
+                                        .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)
-                                }
-                            }
-                        } // end of Memo Realated View
+                                }),
+                            toolbarView:
+                                MemosToolBarView(
+                                    currentFolder: currentFolder,
+                                    showSelectingFolderView: $isShowingSelectingFolderView,
+                                    msgToShow: $msgToShow, calledFromSecondView: true
+                                )
+                                .padding(.bottom, Sizes.overallPadding )
+                                .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
+                                .animation(.spring(), value: memoEditVM.isSelectionMode)
+                        )
                         .padding(.horizontal, Sizes.overallPadding)
                     }
                 } // end of Main VStack
@@ -601,3 +591,5 @@ struct SecondView: View {
         }
     }
 }
+
+

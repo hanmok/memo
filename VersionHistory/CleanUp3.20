@@ -3,3 +3,27 @@ Cleaning up,
 
 need to update : bookmark state should be user default, which means it needto 'save' the last setup
 
+
+
+add Message to the bottom of Home View.
+it's the simplest Way to show message
+
+        return WindowGroup {
+            HomeView()
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .environmentObject(memoEditVM)
+            .environmentObject(folderEditVM)
+            .environmentObject(folderOrder)
+            .environmentObject(memoOrder)
+            .environmentObject(messageVM)
+            
+            .overlay {
+                VStack {
+                    Spacer()
+                    Rectangle()
+                        .frame(height: 30)
+                        .foregroundColor(.green)
+                        .background(.green)
+                }
+            }
+            

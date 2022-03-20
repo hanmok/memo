@@ -10,8 +10,6 @@
 import SwiftUI
 import CoreData
 
-// Now.. it's Fine.
-
 struct FolderView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
@@ -33,7 +31,7 @@ struct FolderView: View {
     @State var isShowingSelectingFolderView = false
     
     @State var allMemos: [Memo] = []
-        
+    
     @State var isShowingSearchView = false
     
     @State var msgToShow: String?
@@ -46,7 +44,8 @@ struct FolderView: View {
                 .tint(Color.navBtnColor)
         }
     }
-
+    
+    
     func showSubFolderView() {
         isShowingSubFolderView = true
     }
@@ -67,34 +66,35 @@ struct FolderView: View {
         
         return ZStack {
             VStack {
-                    Rectangle()
-                        .frame(width: UIScreen.screenWidth, height: 90)
-                        .foregroundColor(colorScheme == .dark ? .black : .white)
+                Rectangle()
+                    .frame(width: UIScreen.screenWidth, height: 90)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                 
-                    Spacer()
+                Spacer()
                 
             }.ignoresSafeArea(edges: .top)
-                    
+            
             VStack {
-                    HStack {
-                        backBtn
-                        Spacer()
-
-                        HStack(spacing: 16) {
-
-                            // search Button
-                            Button(action: {
-                                isShowingSearchView = true
-                            }, label: {
-                                SystemImage("magnifyingglass")
-                                    .tint(Color.navBtnColor)
-                            })
-                            MemoOrderingMenu(parentFolder: currentFolder)
-                        }
+                HStack {
+                    backBtn
+                    Spacer()
+                    
+                    HStack(spacing: 16) {
+                        
+                        // search Button
+                        Button(action: {
+                            isShowingSearchView = true
+                        }, label: {
+                            SystemImage("magnifyingglass")
+                                .tint(Color.navBtnColor)
+                        })
+                        
+                        MemoOrderingMenu(parentFolder: currentFolder)
                     }
-                    .padding(.trailing, 10 + Sizes.overallPadding)
-                    .padding(.leading, Sizes.navBtnLeadingSpacing)
-                    .padding(.bottom, 7.5)
+                }
+                .padding(.trailing, 10 + Sizes.overallPadding)
+                .padding(.leading, Sizes.navBtnLeadingSpacing)
+                .padding(.bottom, 7.5)
                 
                 
                 ScrollView(.vertical) {
@@ -145,63 +145,45 @@ struct FolderView: View {
             .padding(.top, 12)
             
             // ANOTHER ELEMENT IN ZSTACK
-            VStack {
-                HStack {
-                    Spacer()
-                    ZStack(alignment: .topTrailing) {
-                        Button(action: {
-                            isShowingSubFolderView = true
-                        }, label: {
-                            SubFolderButtonImage()
-                                .offset(x: isShowingSubFolderView ? UIScreen.screenWidth : 0)
-                                .animation(.spring(), value: isShowingSubFolderView)
-                        })
-                            .padding(.trailing, Sizes.overallPadding )
-                        
-                        SubFolderView(
-                            folder: currentFolder,
-                            isShowingSubFolderView: $isShowingSubFolderView,
-                            isAddingFolder: $isAddingFolder)
-                            .environmentObject(trashBinVM)
-                        
-                        // offset x : trailingPadding
-                            .offset(x: isShowingSubFolderView ? -Sizes.overallPadding : UIScreen.screenWidth)
-                            .animation(.spring(), value: isShowingSubFolderView)
-                    } // end of ZStack
-                }
-                Spacer()
-            }
+            
+            SubFolderEditView(
+                subButton: Button(action: {
+                    isShowingSubFolderView = true
+                }, label: {
+                    SubFolderButtonImage()
+                        .offset(x: isShowingSubFolderView ? UIScreen.screenWidth : 0)
+                        .animation(.spring(), value: isShowingSubFolderView)
+                }),
+                subFolderView: SubFolderView(
+                    folder: currentFolder,
+                    isShowingSubFolderView: $isShowingSubFolderView,
+                    isAddingFolder: $isAddingFolder)
+                .environmentObject(trashBinVM)
+                
+                // offset x : trailingPadding
+                    .offset(x: isShowingSubFolderView ? -Sizes.overallPadding : UIScreen.screenWidth)
+                    .animation(.spring(), value: isShowingSubFolderView)
+            )
+            
             .padding(.top, 55)
-
-            VStack {
-                Spacer()
-                ZStack {
-                    HStack {
-                        Spacer()
-                        VStack(spacing: Sizes.minimalSpacing) {
-                            
-                            Button(action: addMemo) {
-                                PlusImage()
-                                    .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
-                                    .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
-                                    .animation(.spring(), value: memoEditVM.isSelectionMode)
-                            }
-                        }
-                    }
-                    HStack {
-                        Spacer()
-                        MemosToolBarView(
-                            currentFolder: currentFolder,
-                            showSelectingFolderView: $isShowingSelectingFolderView,
-                            msgToShow: $msgToShow
-                        )
-                            .padding(.trailing, Sizes.overallPadding)
-                            .padding(.bottom,Sizes.overallPadding )
-                            .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
-                            .animation(.spring(), value: memoEditVM.isSelectionMode)
-                    }
-                }
-            } // end of VStack
+            
+            MemoEditView(
+                plusView: Button(action: addMemo) {
+                    PlusImage()
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
+                        .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
+                        .animation(.spring(), value: memoEditVM.isSelectionMode)
+                },
+                toolbarView: MemosToolBarView(
+                    currentFolder: currentFolder,
+                    showSelectingFolderView: $isShowingSelectingFolderView,
+                    msgToShow: $msgToShow
+                )
+                .padding(.trailing, Sizes.overallPadding)
+                .padding(.bottom,Sizes.overallPadding )
+                .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
+                .animation(.spring(), value: memoEditVM.isSelectionMode)
+            )
             .offset(y: isAddingFolder ? UIScreen.screenHeight : 0)
             .animation(.spring().speed(0.5), value: isAddingFolder)
             
@@ -212,8 +194,8 @@ struct FolderView: View {
                                                           fetchingHome: false)!),
                 currentFolder: currentFolder, showingSearchView: $isShowingSearchView)
             
-                .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
-                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
+            .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
+            .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
             
             //  Present TextFieldAlert when add folder pressed
             PrettyTextFieldAlert(
@@ -236,9 +218,9 @@ struct FolderView: View {
             
             NavigationLink(destination:
                             NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false))
-                            .environmentObject(trashBinVM),
+                .environmentObject(trashBinVM),
                            isActive: $isAddingMemo) {}
-                            
+            
             MsgView(msgToShow: $msgToShow)
                 .padding(.top, UIScreen.screenHeight / 1.5)
             
@@ -246,25 +228,22 @@ struct FolderView: View {
         .frame(maxHeight: .infinity)
         
         // fetch both home Folder and Archive Folder Separately.
-        .sheet(isPresented: $isShowingSelectingFolderView,
-               onDismiss: {
-            
-        },
-               content: {
-            SelectingFolderView(
-                fastFolderWithLevelGroup:
-                    FastFolderWithLevelGroup(
-                        homeFolder: Folder.fetchHomeFolder(context: context)!,
-                        archiveFolder: Folder.fetchHomeFolder(context: context,
-                                                              fetchingHome: false)!
-                    ), msgToShow: $msgToShow, invalidFolderWithLevels: []
-            )
-        })
-        .onAppear(perform: {
-            print("folderView has Appeared!")
-        })
+        .sheet(
+            isPresented: $isShowingSelectingFolderView,
+            onDismiss: {
+                
+            },
+            content: {
+                SelectingFolderView(
+                    fastFolderWithLevelGroup:
+                        FastFolderWithLevelGroup(
+                            homeFolder: Folder.fetchHomeFolder(context: context)!,
+                            archiveFolder: Folder.fetchHomeFolder(context: context,
+                                                                  fetchingHome: false)!
+                        ), msgToShow: $msgToShow, invalidFolderWithLevels: []
+                )
+            })
         .onDisappear(perform: {
-            print("folderView has disappeared!")
             newSubFolderName = ""
             memoEditVM.initSelectedMemos()
         })
@@ -273,6 +252,24 @@ struct FolderView: View {
 }
 
 
+//struct CustomNavBar<backBtn: View, rightNav: View>: View {
+//
+//    let backBtnView: backBtn
+//    let rightNavView: rightNav
+//
+//    var body: some View {
+////        return EmptyView()
+//        return HStack {
+//            backBtnView
+//            Spacer()
+//
+//            HStack(spacing: 16) {
+//
+//                // search Button
+//                rightNavView
+//            }
+//        }
+//    }
+//}
 
-
-
+//protocol myViews:

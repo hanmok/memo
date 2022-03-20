@@ -56,6 +56,7 @@
 		9AA2673227BE4E2900AC75DB /* FavColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AA2673127BE4E2900AC75DB /* FavColors.swift */; };
 		9AA65B3627D6BA8F00C1F383 /* VersionHistory in Resources */ = {isa = PBXBuildFile; fileRef = 9AA65B3527D6BA8F00C1F383 /* VersionHistory */; };
 		9AAA249B27E73551009923C7 /* CleanUp3.20 in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA249A27E73551009923C7 /* CleanUp3.20 */; };
+		9AAA24A227E748AE009923C7 /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA24A127E748AE009923C7 /* MemoEditView.swift */; };
 		9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AB724D427CD2C6B006A825C /* Localizable.strings */; };
 		9AB724D727CD2D17006A825C /* LocalizedStringStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */; };
 		9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D927CE79EC006A825C /* TrashFolderView.swift */; };
@@ -187,6 +188,7 @@
 		9AA65B3427D6A29A00C1F383 /* Testing.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Testing.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9AA65B3527D6BA8F00C1F383 /* VersionHistory */ = {isa = PBXFileReference; lastKnownFileType = text; path = VersionHistory; sourceTree = "<group>"; };
 		9AAA249A27E73551009923C7 /* CleanUp3.20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = CleanUp3.20; sourceTree = "<group>"; };
+		9AAA24A127E748AE009923C7 /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
 		9AB724D327CD2C6B006A825C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D527CD2C9B006A825C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringStorage.swift; sourceTree = "<group>"; };
@@ -291,7 +293,6 @@
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
 				9ACC0C7D27DDCC1500D18690 /* MsgView.swift */,
 				9AB7250027D00E16006A825C /* TrashBin */,
-				9AB724FD27D00D9A006A825C /* Prev */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
 				9AC5D0F32782C59C007EAA28 /* ViewModels */,
@@ -302,6 +303,7 @@
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
 				9AC5D1F727854387007EAA28 /* DeeepMemo--iOS--Info.plist */,
 				9AC5D1D827854159007EAA28 /* DeeepMemo (iOS).entitlements */,
+				9AB724FD27D00D9A006A825C /* Prev */,
 				9A04749D27715D1300571D66 /* Products */,
 				9AC5D1D92785415F007EAA28 /* Frameworks */,
 				9AC5D20727856E7D007EAA28 /* DeeepMemoTests-Bridging-Header.h */,
@@ -361,6 +363,7 @@
 		9A3377DA2790313200805138 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9AAA24A127E748AE009923C7 /* MemoEditView.swift */,
 				9A895822277179E100E7B773 /* PlusImage.swift */,
 				9A98E7542772D28C00057A84 /* ChangeableImage.swift */,
 				9AB7251827D02045006A825C /* SystemImage.swift */,
@@ -764,6 +767,7 @@
 				9A337804279576CC00805138 /* testView.swift in Sources */,
 				9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */,
 				9A3377B52790039200805138 /* FolderViewTest.swift in Sources */,
+				9AAA24A227E748AE009923C7 /* MemoEditView.swift in Sources */,
 				9A046CC927B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */,
 				9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */,
 				9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */,

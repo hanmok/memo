@@ -22,8 +22,6 @@ struct DynamicFolderCell: View {
     
     var body: some View {
         ZStack {
-            
-            
             NavigationLink(destination: FolderView(currentFolder: folder)
                 .environmentObject(trashBinVM)
             ) {
@@ -32,6 +30,3 @@ struct DynamicFolderCell: View {
         }
     }
 }
-
-
-

@@ -32,7 +32,7 @@ struct CheckableFolderCell: View {
             if markCheck {
                 Button {
                 } label: {
-                    SystemImage( "checkmark")
+                    SystemImage("checkmark")
                     
                 }
                 .tint(.swipeBtnColor2)
@@ -46,4 +46,3 @@ struct CheckableFolderCell: View {
         }
     }
 }
-

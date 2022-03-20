@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+
 struct SubFolderView: View {
     
     @Environment(\.colorScheme) var colorScheme
