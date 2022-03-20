@@ -69,6 +69,17 @@ SecondView ~ SearchView
 어다서 선언하는지의 문제가 아니고..
 알겠다. ;;; ㅇㅋ...
 
+이거, .. 차라리 기본 값을 화면을 닫는 거로 하자.
+그래야 로직이 꼬이지 않아.
+로딩 시간도 엄청 더 쓰일거야 .... 하아.....
+is this .. the best way ? up to users
+
+MemoView, NewMemoView 를 수정해야겠네
+
+
+Search 에서, 폴더를 타고 메모로 들어간 후 relocation 했을 때 Search 까지 튕기는건 어쩌지 ?
+일단 보류
+
 
 
 
@@ -101,5 +112,15 @@ relocation 시 focusState 바꾸기.
 
 
 
+0. Messages
 
+1.
 또 수정해야 하는 것 ? pin !
+: 다음 업데이트!
+
+2. bookmark 를 열 때, animation 이 조금 바뀌면 좋겠다.
+이거 구조를 꽤 많이 바꿔야 할 수 있어..
+
+3. 원하는 순서로 정렬..
+
+

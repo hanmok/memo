@@ -266,9 +266,12 @@ struct NewMemoView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, msgToShow: $msgToShow, invalidFolderWithLevels: [], shouldUpdateTopFolder: false
+                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, msgToShow: $msgToShow, invalidFolderWithLevels: [], shouldUpdateTopFolder: false,
+                dismissAction: {
+                    saveChanges()
+                    presentationMode.wrappedValue.dismiss()
+                }
             )
         }
     }
 }
-

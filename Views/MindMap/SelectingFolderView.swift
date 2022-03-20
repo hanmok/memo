@@ -23,15 +23,15 @@ struct SelectingFolderView: View {
 
     @Binding var msgToShow: String?
     
-    //    @State var isValidAction = false
+    @State var isValidAction = false
     
-    //    var dismissAction: () -> Void = { }
-
     var invalidFolderWithLevels: [FolderWithLevel]
     
     var isFullScreen: Bool = false
     
     var shouldUpdateTopFolder = true
+
+    var dismissAction: () -> Void = { }
     
     var body: some View {
         
@@ -85,7 +85,7 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
                                 msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
-//                                isValidAction = true
+                                isValidAction = true
                             }
                             // 메모 이동.
                         } else {
@@ -94,7 +94,7 @@ struct SelectingFolderView: View {
                                 msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             
-//                            isValidAction = true
+                            isValidAction = true
                             
                             memoEditVM.initSelectedMemos()
                         }
@@ -136,7 +136,7 @@ struct SelectingFolderView: View {
                                 msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 
-//                                isValidAction = true
+                                isValidAction = true
                             }
                         } else {
                              memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
@@ -144,7 +144,7 @@ struct SelectingFolderView: View {
                                 msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             
-//                            isValidAction = true
+                            isValidAction = true
                             
                             memoEditVM.initSelectedMemos()
                         }
@@ -181,6 +181,11 @@ struct SelectingFolderView: View {
         }
         
         .onDisappear {
+            
+            if isValidAction {
+                dismissAction()
+            }
+            
             UIView.setAnimationsEnabled(true)
             if shouldUpdateTopFolder {
                 Folder.updateTopFolders(context: context)

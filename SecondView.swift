@@ -336,7 +336,8 @@ struct SecondView: View {
                         
                         MemoOrderingMenu(parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
-                    .padding(.horizontal, 10)
+//                    .padding(.horizontal, 10)
+                    .padding(.horizontal, 20)
                     
 
                     // 정리 지금 안하면 안됨..
