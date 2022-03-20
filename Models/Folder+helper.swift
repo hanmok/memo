@@ -23,7 +23,6 @@ enum FolderTypeEnum {
 struct FolderNames {
     var korName: String
     var engName: String
-//    var type: FolderType
     
     init(type: FolderTypeEnum) {
         switch type {
@@ -66,7 +65,6 @@ struct FolderType {
         }
     }
     
-//    enum
     
     static func compareName(_ target: String, with type: FolderTypeEnum) -> Bool {
         switch type {
@@ -98,9 +96,6 @@ struct FolderType {
 
 extension Folder {
     
-//    static var order:  = OrderType
-//    static var orderType = OrderType.creationDate
-    
     convenience init(title: String, context: NSManagedObjectContext) {
         self.init(context: context)
         self.title = title
@@ -108,7 +103,6 @@ extension Folder {
         
         self.modificationDate = Date()
         
-//        self.isFavorite = false
         DispatchQueue.global().async {
             context.saveCoreData()
         }

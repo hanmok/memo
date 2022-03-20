@@ -55,7 +55,7 @@ struct Messages {
         let msgForKor = "\(n)개의 메모가 \(folder.title) 로 이동하였습니다."
         let msgForOther = "\(n) memos has moved to \(folder.title)"
         
-        return n == 1 ? Locale.showMsgTo(kor: msgForKor1, other: msgForOther1) : Locale.showMsgTo(kor: msgForKor, other: msgForOther)
+        return n == 1 ? self.showMsgTo(kor: msgForKor1, other: msgForOther1) : self.showMsgTo(kor: msgForKor, other: msgForOther)
     }
     
     
@@ -65,13 +65,11 @@ struct Messages {
         let msgForKor = "\(targetFolder.title) 폴더가 \(desFolder.title) 로 이동하였습니다. "
         let msgForOther = "\(targetFolder.title) has moved to \(desFolder.title) "
         
-        return Locale.showMsgTo(kor: msgForKor, other: msgForOther)
+        return self.showMsgTo(kor: msgForKor, other: msgForOther)
     }
-}
-
-extension Locale {
+    
     static func showMsgTo(kor: String, other: String) -> String{
-        if let lanCode = self.current.languageCode {
+        if let lanCode = Locale.current.languageCode {
             if lanCode.contains("ko") {
                 return kor
             } else {
@@ -82,4 +80,19 @@ extension Locale {
         }
     }
 }
+
+
+//extension Locale {
+//    static func showMsgTo(kor: String, other: String) -> String{
+//        if let lanCode = self.current.languageCode {
+//            if lanCode.contains("ko") {
+//                return kor
+//            } else {
+//                return other
+//            }
+//        } else {
+//            return other
+//        }
+//    }
+//}
 

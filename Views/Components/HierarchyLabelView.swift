@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-// used in SecondMainView,
-// CustomSearchView,
-// FolderView
 struct HierarchyLabelView: View {
     
     @Environment(\.colorScheme) var colorScheme
@@ -24,9 +21,8 @@ struct HierarchyLabelView: View {
         
         if parentFoldersInOrder.count == 1 {
             if FolderType.compareName(parentFoldersInOrder.first!.title, with: .folder) {
-//                return "\(LocalizedStringStorage.folder)"
                 // print no folderName for basic Folder
-                 return ""
+                return ""
             } else if FolderType.compareName(parentFoldersInOrder.first!.title, with: .archive){
                 return "\(LocalizedStringStorage.archive)"
             } else if FolderType.compareName(parentFoldersInOrder.first!.title, with: .trashbin) {
@@ -37,8 +33,6 @@ struct HierarchyLabelView: View {
         var root = ""
         
         // 여기서, 처음이 Folder 인 경우 없애줘야해.
-        
-//        _ = parentFoldersInOrder.map { root = "\($0.title)" + " > " + root}
         
         for each in parentFoldersInOrder {
             if FolderType.compareName(each.title, with: .folder) && each.parent == nil {
@@ -62,35 +56,27 @@ struct HierarchyLabelView: View {
             newChild = newChild.parent!
             emptyFolder.append(newChild)
         }
-        
         return emptyFolder
     }
     
     var body: some View {
-//        ScrollView(.horizontal) {
-            
-            if isNavigationLink {
-                if FolderType.compareName(currentFolder.title, with: .trashbin) {
-                    Text(getRoot(child:currentFolder))
-                        .font(.caption)
-                        .foregroundColor(.red)
-                        .background(colorScheme == .dark ? .black : .white)
-                } else {
-                    Text(getRoot(child:currentFolder))
-                        .font(.caption)
-                        .background(colorScheme == .dark ? .black : .white)
-                }
-
-                
+        if isNavigationLink {
+            if FolderType.compareName(currentFolder.title, with: .trashbin) {
+                Text(getRoot(child:currentFolder))
+                    .font(.caption)
+                    .foregroundColor(.red)
+                    .background(colorScheme == .dark ? .black : .white)
             } else {
+                Text(getRoot(child:currentFolder))
+                    .font(.caption)
+                    .background(colorScheme == .dark ? .black : .white)
+            }
+        } else {
             Text(getRoot(child:currentFolder))
-                    .foregroundColor(Color.blackAndWhite)
-//                    .foregroundColor(.green)
+                .foregroundColor(Color.blackAndWhite)
                 .font(.caption)
                 .opacity(0.7)
                 .background(colorScheme == .dark ? .black : .white)
-            }
-//        }
-//        .background(colorScheme == .dark ? .black : .white)
+        }
     }
 }

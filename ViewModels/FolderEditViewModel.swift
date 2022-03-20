@@ -17,4 +17,3 @@ class FolderEditViewModel: ObservableObject {
     @Published var folderToPaste: Folder? = nil
     @Published var folderToCut: Folder? = nil
 }
-

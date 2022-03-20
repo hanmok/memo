@@ -36,7 +36,7 @@ struct NewMemoView: View {
     
     @State var msgToShow: String?
     
-    func updateViewInHalfSecond() {
+    func showKeyboardInHalfSec() {
         var increasedSeconds = 0.0
         for _ in 0 ... 5 {
             increasedSeconds += 0.1
@@ -45,21 +45,6 @@ struct NewMemoView: View {
             }
         }
     }
-    
-    
-//    var hasSafeBottom: Bool {
-//        
-//        let scenes = UIApplication.shared.connectedScenes
-//        let windowScene = scenes.first as? UIWindowScene
-//        let window = windowScene?.windows.first
-//        if (window?.safeAreaInsets.bottom)! > 0 {
-//            print("has safeArea!")
-//            return true
-//        } else {
-//            print("does not have safeArea!")
-//            return false
-//        }
-//    }
     
     let parent: Folder
 
@@ -72,13 +57,6 @@ struct NewMemoView: View {
                 .tint(Color.navBtnColor)
         }
     }
-    
-    // need better code..
-//    func belongToTrashFolder() -> Bool {
-//        guard memo.folder != nil else { return false}
-//        return memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)
-//    }
-    
     
     init(parent: Folder, presentingNewMemo: Binding<Bool> ) {
         self.parent = parent
@@ -193,21 +171,18 @@ struct NewMemoView: View {
         return ZStack(alignment: .topLeading) {
             VStack {
                 Rectangle()
-//                    .frame(width: UIScreen.screenWidth, height: 90)
                     .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
             
-            VStack(spacing:0) {
+            VStack {
                 HStack {
                     backBtn
                     Spacer()
                     
                     HStack(spacing: 16) {
-                        
-                        
                         Button(action: toggleBookMark) {
                             SystemImage(isBookMarkedTemp ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
                                 .tint(Color.navBtnColor)
@@ -274,20 +249,13 @@ struct NewMemoView: View {
             
             
         }
-//        .padding(.vertical)
         .padding(.bottom)
         .navigationBarHidden(true)
         .onAppear(perform: {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
-//                /// Anything over 0.5 seems to work
-//                self.editorFocusState = true
-//            }
-            updateViewInHalfSecond()
+            showKeyboardInHalfSec()
         })
         .onDisappear(perform: {
-            print("memoView has disappeared!")
             saveChanges()
-            print("data saved!")
         })
         .sheet(isPresented: $isShowingSelectingFolderView) {
             SelectingFolderView(
@@ -296,10 +264,8 @@ struct NewMemoView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: [], msgToShow: $msgToShow, shouldUpdateTopFolder: false
+                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, msgToShow: $msgToShow, invalidFolderWithLevels: [], shouldUpdateTopFolder: false
             )
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
         }
     }
 }

@@ -7,15 +7,14 @@
 
 import SwiftUI
 import CoreData
+
 struct SubFolderView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
     @ObservedObject var folder: Folder
     
-//    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @Binding var isShowingSubFolderView: Bool
@@ -60,9 +59,6 @@ struct SubFolderView: View {
                     
                     NavigationLink {
                         FolderView(currentFolder: subFolder)
-//                            .environmentObject(folderEditVM)
-//                            .environmentObject(memoEditVM)
-//                            .environmentObject(memoOrder)
                             .environmentObject(trashBinVM)
                     } label: {
                         Text(subFolder.title)
@@ -103,4 +99,3 @@ struct SubFolderView: View {
         )
     }
 }
-

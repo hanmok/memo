@@ -32,4 +32,3 @@ struct FolderWithLevel: Hashable {
     var isCollapsed: Bool = false
     var isShowing: Bool = true
 }
-

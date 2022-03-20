@@ -13,22 +13,18 @@ struct TitleWithLevelView: View {
     
     @ObservedObject var folder: Folder
     
-    var level: Int
+    let level: Int
     
     var shouldHideArrow = false
     
     var body: some View {
         HStack {
-            ForEach( 0 ..< level) { _ in
+            ForEach(0 ..< level, id: \.self) { _ in
                 Text("  ") // double Space for each level
             }
             
             Text(folder.title)
                 .foregroundColor(Color.blackAndWhite)
-            
-//            if folder.isFavorite {
-//                Text(Image(systemName: "star.fill"))
-//            }
             
             Spacer()
             Text("\(folder.memos.count)")

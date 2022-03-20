@@ -13,18 +13,12 @@ struct BookmarkedFolderView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
-//    @EnvironmentObject var memoEditVM: MemoEditViewModel
-//    @EnvironmentObject var folderEditVM: FolderEditViewModel
-//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-//    @EnvironmentObject var msgVM: MessageViewModel
+    
     @ObservedObject var folder: Folder
     
-//    @State var newMemoPressed = false
     @State var isPresentingMemoView = false
     @State var isPresentingNewMemoView = false
-    
-//    var hasSafeBottom: Bool
     
     var body: some View {
         print("hasSafeBottom: \(UIScreen.hasSafeBottom)")
@@ -42,11 +36,7 @@ struct BookmarkedFolderView: View {
                                         
                                         NavigationLink(destination:
                                                         MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $isPresentingMemoView, calledFromMainView: true )
-                                                       
-//                                                        .environmentObject(memoEditVM)
-//                                                        .environmentObject(folderEditVM)
                                                         .environmentObject(trashBinVM)
-//                                                        .environmentObject(msgVM)
                                         ) {
                                             BookmarkedMemoBoxView(memo: bookMarkedMemo)
                                         }
@@ -66,8 +56,6 @@ struct BookmarkedFolderView: View {
                     NavigationLink(destination:
                                     NewMemoView(parent: folder, presentingNewMemo: $isPresentingNewMemoView)
                                     .environmentObject(trashBinVM)
-//                                    .environmentObject(memoEditVM)
-//                                    .environmentObject(folderEditVM)
                                    ,isActive: $isPresentingNewMemoView) {}
                 }
                 .navigationBarHidden(true)

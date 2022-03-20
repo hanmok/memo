@@ -16,7 +16,6 @@ struct MemoBoxView: View {
     
     @ObservedObject var memo: Memo
     
-    
     var body: some View {
     
         return VStack(alignment: .leading, spacing: 5) {
@@ -38,7 +37,7 @@ struct MemoBoxView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, Sizes.smallSpacing)
             }
-            // 2022. 05. 14,
+            
             HStack {
                 Spacer()
                 Text("\(memo.modificationDate.formatted(date: .abbreviated, time: .omitted))")
@@ -74,9 +73,5 @@ struct MemoBoxView: View {
             }
             .padding(.top, Sizes.smallSpacing)
         )
-        .onAppear {
-            print("title : \(memo.titleToShow)")
-            print("contents: \(memo.contentsToShow)")
-        }
     }
 }

@@ -1,13 +1,3 @@
-//
-//  TrashFolderView.swift
-//  DeeepMemo (iOS)
-//
-//  Created by Mac mini on 2022/03/02.
-//
-
-import SwiftUI
-
-
 
 //
 //  FolderView.swift
@@ -27,8 +17,6 @@ struct TrashFolderView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-//    @EnvironmentObject var folderEditVM : FolderEditViewModel
-//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @State var isShowingDeleteAlert = false
@@ -72,7 +60,6 @@ struct TrashFolderView: View {
                                 .tint(Color.navBtnColor)
                         })
                         
-//                        MemoOrderingMenu(memoOrder: memoOrder, parentFolder: trashBinVM.trashBinFolder)
                         MemoOrderingMenu(parentFolder: trashBinVM.trashBinFolder)
                     }
                 }
@@ -82,9 +69,6 @@ struct TrashFolderView: View {
                 
                 ScrollView(.vertical) {
                     VStack(spacing: 0) {
-                        
-                        // navigationTitle
-                        
                         HStack {
                             // NavigationTitle
                             ZStack(alignment: .topLeading) {
@@ -103,17 +87,14 @@ struct TrashFolderView: View {
                         
                         ZStack {
                             if !trashBinVM.trashBinFolder.memos.isEmpty {
-                                TrashBinMemoList()
-                                    
+                                FilteredMemoList(folder: trashBinVM.trashBinFolder, listType: .all)
+                                    .environmentObject(trashBinVM)
                                     .padding(.top, 20)
                                     .ignoresSafeArea(edges: .trailing)
                             }
                         }
                     } // end of main VStack
                     .environmentObject(trashBinVM)
-//                    .environmentObject(folderEditVM)
-//                    .environmentObject(memoEditVM)
-//                    .environmentObject(memoOrder)
                     
                     
                 } // end of scrollView
@@ -160,10 +141,8 @@ struct TrashFolderView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), invalidFolderWithLevels: [], msgToShow: $msgToShow
+                    ), msgToShow: $msgToShow, invalidFolderWithLevels: []
             )
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
         })
         
         .alert(LocalizedStringStorage.removeAlertMsgMain, isPresented: $isShowingDeleteAlert, actions: {
@@ -195,8 +174,3 @@ struct TrashFolderView: View {
         .navigationBarHidden(true)
     }
 }
-
-
-
-
-

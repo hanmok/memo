@@ -15,17 +15,12 @@ struct MindMapView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
-//    @StateObject var memoEditVM = MemoEditViewModel()
-//    @StateObject var folderEditVM = FolderEditViewModel()
     @EnvironmentObject var folderEditVM: FolderEditViewModel
-//    @StateObject var folderOrder = FolderOrder()
-//    @StateObject var memoOrder = MemoOrder()
-//    @StateObject var msgVM = MessageViewModel()
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
-//    @State var isShowingSecondView: Bool
+    
     @FocusState var textFieldFocus: Bool
     
     @State var newFolderName = ""
@@ -44,18 +39,6 @@ struct MindMapView: View {
     @State var isShowingSecondView = false
     
     @State var msgToShow: String?
-//    var hasSafeBottom: Bool {
-//        let scenes = UIApplication.shared.connectedScenes
-//        let windowScene = scenes.first as? UIWindowScene
-//        let window = windowScene?.windows.first
-//        if (window?.safeAreaInsets.bottom)! > 0 {
-//            print("has safeArea!")
-//            return true
-//        } else {
-//            print("does not have safeArea!")
-//            return false
-//        }
-//    }
     
     func deleteFolder() {
         DispatchQueue.main.async {
@@ -86,21 +69,15 @@ struct MindMapView: View {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
-//                    if selectionEnum == .folder {
                     Button {
                         isShowingSecondView = true
                     } label: {
-//                        SystemImage("house", size: 24)
-//                        SystemImage("arrowshape.turn.up.left.fill", size: 24)
-//                        SystemImage("arrowshape.turn.up.left.fill", size: 24)
                         SystemImage("rectangle.righthalf.inset.fill", size: 24)
-//                        SystemImage("magnifyingglass")
                             .foregroundColor(colorScheme == .dark ? .cream : .black)
                     }
                     .padding(.trailing, 10)
                     .padding(.leading, Sizes.overallPadding)
                     .padding(.top, 8)
-//                    }
                     
                     Spacer()
                     HStack(spacing: 0) {
@@ -114,7 +91,6 @@ struct MindMapView: View {
                         }
                         
                         // MARK: - Button 2: Folder Ordering
-//                        FolderOrderingMenu(folderOrder: folderOrder)
                         FolderOrderingMenu()
                             .padding(.leading, 16)
                         
@@ -167,9 +143,7 @@ struct MindMapView: View {
                                     DynamicTopFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-//                                        .environmentObject(memoOrder)
                                         .environmentObject(trashBinVM)
                                     // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
@@ -188,9 +162,7 @@ struct MindMapView: View {
                                     DynamicFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-//                                        .environmentObject(memoOrder)
                                         .environmentObject(trashBinVM)
                                     
                                     // ADD Sub Folder
@@ -256,9 +228,7 @@ struct MindMapView: View {
                                     DynamicTopFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-//                                        .environmentObject(memoOrder)
                                     // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
@@ -275,9 +245,7 @@ struct MindMapView: View {
                                     DynamicFolderCell(
                                         folder: folderWithLevel.folder,
                                         level: folderWithLevel.level)
-//                                        .environmentObject(memoEditVM)
                                         .environmentObject(folderEditVM)
-//                                        .environmentObject(memoOrder)
                                     
                                     // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
@@ -328,9 +296,7 @@ struct MindMapView: View {
                                 } // end of Else Case
                             } // end of ForEach
                             TrashBinCell()
-//                                .environmentObject(memoEditVM)
-                                .environmentObject(folderEditVM)
-//                                .environmentObject(memoOrder)
+                                .environmentObject(trashBinVM)
                         }// end of List
                         .listStyle(InsetGroupedListStyle())
                         
@@ -341,7 +307,6 @@ struct MindMapView: View {
                 } // end of ZStack
                 .padding(.horizontal, Sizes.overallPadding)
                 
-                // END
                 
             } // end of VStack , Inside ZStack.
             
@@ -354,21 +319,12 @@ struct MindMapView: View {
                 Color(.clear)
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
-//                    .scaleEffect(2)
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
-            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder
-//                                 ,
-//                                 hasSafeBottom: hasSafeBottom
-            )
-//                .environmentObject(memoEditVM)
+            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
                 .environmentObject(folderEditVM)
-//                .environmentObject(memoOrder)
-//                .environmentObject(msgVM)
             
-            // animation 은 같지만 이건 ZStack 이기 때문에, 뭔가 차이가 생김.
-            // 얘를 fullscreen 으로 만들거나, ..
             
             CustomSearchView(
                 fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, // 애매하네..
@@ -377,25 +333,15 @@ struct MindMapView: View {
                 shouldIncludeTrashOnCurrent: selectionEnum == .archive,
             shouldIncludeTrashOverall: true)
                 .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
-            
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
                 .padding(.horizontal, Sizes.overallPadding)
             
             
-//            if isShowingSecondView {
-
-                SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
+            
+            SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
                 .environmentObject(trashBinVM)
-//                .offset(x: isShowingSecondView ? 0 : -UIScreen.screenWidth)
                 .offset(x: -UIScreen.screenWidth)
-//                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
-            //                .animation(.spring(), value: isShowingSecondView)
-//                .environmentObject(memoOrder)
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
-//            }
             
             
             if isShowingTextField {
@@ -468,21 +414,12 @@ struct MindMapView: View {
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-                                    selectionEnum: selectionEnum, invalidFolderWithLevels:
+                                    selectionEnum: selectionEnum, msgToShow: $msgToShow, invalidFolderWithLevels:
                                         Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
-                                    isFullScreen: true, msgToShow: $msgToShow)
+                                    isFullScreen: true)
                     .environmentObject(folderEditVM)
-//                    .environmentObject(memoEditVM)
             }
         })
-        
-//        .fullScreenCover(isPresented: $isShowingSecondView, content: {
-//            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: fastFolderWithLevelGroup.homeFolder, isShowingSecondView: $isShowingSecondView)
-//                .environmentObject(trashBinVM)
-//                .environmentObject(memoOrder)
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
-//        })
         
         .onAppear(perform: {
             print("MindMapView has Appeared!")

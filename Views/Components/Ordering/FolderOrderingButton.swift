@@ -21,7 +21,6 @@ struct FolderOrderingButton: View {
                 if folderOrderType == type {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
-//                Text(type.rawValue)
                 Text(LocalizedStringStorage.convertOrderTypeToStorage(type: type))
             }
         }

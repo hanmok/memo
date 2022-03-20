@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum ButtonType {
+    case cancel
+    case done
+}
 
 enum TextFieldAlertType: String {
     case rename = "Rename Folder"
@@ -33,10 +37,7 @@ struct TextFieldStruct {
     }
 }
 
-enum ButtonType {
-    case cancel
-    case done
-}
+
 
 struct PrettyTextFieldAlert: View {
     
@@ -51,6 +52,10 @@ struct PrettyTextFieldAlert: View {
     @Binding var text: String
     
     @FocusState var focusState: Bool
+    
+    var submitAction: (String) -> Void = { _ in }
+    var cancelAction: () -> Void = { }
+    
     func some() {
         focusState = true
     }
@@ -65,8 +70,7 @@ struct PrettyTextFieldAlert: View {
         }
     }
     
-    var submitAction: (String) -> Void = { _ in }
-    var cancelAction: () -> Void = { }
+    
     
     var body: some View {
 
@@ -90,23 +94,13 @@ struct PrettyTextFieldAlert: View {
                     .padding(.bottom, 15)
                     .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
                         if let textField = obj.object as? UITextField {
-                            // better not using. cursor located in empty area when this applied.
-                            
-//                            var increasedSeconds = 0.0
-//                            for _ in 0 ... 5 {
-//                                increasedSeconds += 0.1
-//                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + increasedSeconds) {
-//                                    textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
-//                                }
-//                            }
                             
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.52) {  /// Anything over 0.5 seems to work
                                 textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
                             }
-                            
-                            
                         }
                     }
+            
                     .onSubmit {
                         submitAction(text)
                         isPresented = false
@@ -128,8 +122,8 @@ struct PrettyTextFieldAlert: View {
                     .frame(height: 1)
                     .foregroundColor(colorScheme == .dark ? Color(white: 80 / 255) : Color(white: 205 / 255))
                 
-//                HStack(alignment: .center) {
                 HStack(alignment: .center, spacing: 0){
+//            HStack(alignment: .center) {
                     
                     // CANCEL
                     Button {
@@ -165,7 +159,6 @@ struct PrettyTextFieldAlert: View {
                     }
                     .frame(width: screenSize.width * 0.32, alignment: .center)
                     .frame(height: 50)
-//                    .background(selectedButton == .done ? Color.white : Color.clear)
                 } // end of HStack
                 
                 .frame(height: 50)

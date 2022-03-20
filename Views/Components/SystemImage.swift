@@ -10,8 +10,6 @@ import SwiftUI
 
 struct SystemImage: View {
     
-    @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
     var imageSystemName: String
     var size: CGFloat
     

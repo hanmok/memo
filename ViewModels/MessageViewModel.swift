@@ -12,3 +12,10 @@ import SwiftUI
 //    // if true, it removed permanently.
 //    // if false, it moved to trashBin
 //}
+
+
+class MessageViewModel: ObservableObject {
+    @Published var message: String? = nil
+    @Published var shouldShow = false
+    
+}

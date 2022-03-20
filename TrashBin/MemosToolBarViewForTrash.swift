@@ -22,10 +22,8 @@ struct MemosToolBarViewForTrash: View {
 
     let spacingBetweenButtons: CGFloat = 16
     
-    
     var body: some View {
         HStack(spacing: spacingBetweenButtons) {
-            
             
             Button {
                 memoEditVM.initSelectedMemos()
@@ -42,7 +40,6 @@ struct MemosToolBarViewForTrash: View {
                     .font(.headline)
             }
 
-         
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {
                 isShowingSelectingFolderView = true
