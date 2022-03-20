@@ -13,6 +13,7 @@ struct NestedMemo: Hashable {
     var memos: [Memo]
 }
 
+
 enum SearchType: String {
     case all = "All"
     case current = "Current"
@@ -26,6 +27,7 @@ enum SearchType: String {
         }
     }
 }
+
 
 struct CustomSearchView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -177,7 +179,7 @@ struct CustomSearchView: View {
 
                         TextField(LocalizedStringStorage.searchPlaceholder, text: $searchKeyword)
                             .accentColor(Color.textViewTintColor)
-                            .submitLabel(.done)
+                            .submitLabel(.search)
                             .focused($focusState)
                             .frame(width: UIScreen.screenWidth - 9 * Sizes.overallPadding, alignment: .leading)
                             .frame(height: 30)
@@ -226,7 +228,6 @@ struct CustomSearchView: View {
             
                 Picker("", selection: $searchTypeEnum) {
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .all)).tag(SearchType.all)
-
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .current)).tag(SearchType.current)
                 }
                 .padding(.horizontal, Sizes.overallPadding)
@@ -246,7 +247,7 @@ struct CustomSearchView: View {
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-                                                .environmentObject(trashBinVM)
+//                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
@@ -262,7 +263,7 @@ struct CustomSearchView: View {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
-                                                        .environmentObject(trashBinVM)
+//                                                        .environmentObject(trashBinVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
                                                 }
@@ -284,7 +285,7 @@ struct CustomSearchView: View {
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-                                                .environmentObject(trashBinVM)
+//                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
                                                 HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
@@ -298,7 +299,7 @@ struct CustomSearchView: View {
                                             ForEach(memoArray.memos, id: \.self) { eachMemo in
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
-                                                        .environmentObject(trashBinVM)
+//                                                        .environmentObject(trashBinVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
                                                 }

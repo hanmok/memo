@@ -212,6 +212,8 @@ struct NewMemoView: View {
                                 memoEditVM.dealWhenMemoSelected(memo!)
                             }
                             isShowingSelectingFolderView = true
+                            editorFocusState = false
+                            
                         } label: {
                             SystemImage(
                                 "folder",

@@ -12,7 +12,7 @@ struct SecondView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var currentFolder: Folder
@@ -234,14 +234,21 @@ struct SecondView: View {
         }
         
         
-        
+        // working good
         var allBookMarkedFoundMemos: [Memo] = []
         
-        var foundMemosWithoutBookmark = foundMemos.map {
-            return NestedMemo(memos: $0.memos.filter { !$0.isBookMarked})
-        }
+//        var foundMemosWithoutBookmark = foundMemos.map {
+//            return NestedMemo(memos: $0.memos.filter { !$0.isBookMarked})
+//        }
         
-        foundMemosWithoutBookmark = foundMemosWithoutBookmark.filter { !$0.memos.isEmpty }
+        var foundMemosWithoutBookmark: [NestedMemo] = []
+        
+        
+        // working bad
+//        foundMemosWithoutBookmark = foundMemosWithoutBookmark.filter { !$0.memos.isEmpty }
+        
+        // 이것도 안되네 .. ?
+        foundMemosWithoutBookmark = foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isBookMarked}) }.filter { !$0.memos.isEmpty}
         
         
         //        for each in foundMemos {
@@ -265,7 +272,7 @@ struct SecondView: View {
                     // MARK: - Nav Location
                     HStack {
                         Button {
-                            presentationMode.wrappedValue.dismiss()
+//                            presentationMode.wrappedValue.dismiss()
                             isShowingSecondView = false
                             focusState = false
                         } label: {
@@ -323,7 +330,6 @@ struct SecondView: View {
                                 bookmarkState.toggle()
                             }
                             
-                            
                         } label: {
                             bookmarkState ? SystemImage("bookmark.fill").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
                         }
@@ -343,10 +349,12 @@ struct SecondView: View {
                                 
                                 // MARK: - Bookmark State is On
                                 if foundMemos.count != 0 { // wraps all Memos
-                                    if bookmarkState { // working fine
+                                    if bookmarkState {
+                                        
                                         // MARK: - Show Bookmarked Memos First
                                         if allBookMarkedFoundMemos.count != 0 {
                                             Section {
+                                                // working fine 3.21
                                                 ForEach(allBookMarkedFoundMemos, id: \.self) { markedMemo in
                                                     NavigationLink(destination:
                                                                     MemoView(memo: markedMemo, parent: markedMemo.folder!, presentingView:.constant(false))
@@ -401,6 +409,7 @@ struct SecondView: View {
                                         }
                                         
                                         // MARK: - Show Unbookmarked Memos Next
+                                        // working bad.
                                         if foundMemosWithoutBookmark.count != 0 {
                                             
                                             ForEach( foundMemosWithoutBookmark, id: \.self) { memoArray in

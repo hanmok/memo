@@ -409,6 +409,7 @@ struct MindMapView: View {
         .offset(x: isShowingSecondView ? UIScreen.screenWidth : 0)
 //        .animation(.spring(), value: isShowingSecondView)
         .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
+//        .animation(.spring(response: 0.15, dampingFraction: 1, blendDuration: 0.15), value: isShowingSecondView)
         
 //        .onReceive(msgVM.hasMemoRemovedForever, perform: { myoutput in
 //            print("output: \(myoutput)")
