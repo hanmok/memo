@@ -16,15 +16,10 @@ struct MemoView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     
-    @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-//    @EnvironmentObject var msgVM: MessageViewModel
+    
     @ObservedObject var memo: Memo
-    
-    let parent: Folder
-    
-//    @FocusState var editorFocusState: Bool
     
     @State var isShowingSelectingFolderView = false
     
@@ -33,10 +28,11 @@ struct MemoView: View {
     
     @Binding var isPresentingView: Bool
     
+    @State var msgToShow: String?
+    
+    let parent: Folder
     
     var calledFromMainView: Bool
-    
-    @State var msgToShow: String?
     
     var backBtn : some View {
         Button(action: {
@@ -53,32 +49,7 @@ struct MemoView: View {
         return memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)
     }
     
-    //    var hasSafeBottom: Bool {
-    //
-    //        let scenes = UIApplication.shared.connectedScenes
-    //        let windowScene = scenes.first as? UIWindowScene
-    //        let window = windowScene?.windows.first
-    //        if (window?.safeAreaInsets.bottom)! > 0 {
-    //            print("has safeArea!")
-    //            return true
-    //        } else {
-    //            print("does not have safeArea!")
-    //            return false
-    //        }
-    //    }
     
-//    let myNotification = Notification.Name("sentToTrashBin")
-//    let publisher: NotificationCenter.Publisher
-//    let publ = NotificationCenter.default.publi
-    
-    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>, calledFromMainView: Bool = false) {
-        self.memo = memo
-        self.parent = parent
-        self._isPresentingView = presentingView
-        self.calledFromMainView = calledFromMainView
-
-//        self.publisher = NotificationCenter.default.publisher(for: myNotification, object: nil)
-    }
     
     
     func saveChanges() {
@@ -93,28 +64,27 @@ struct MemoView: View {
         memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if contents are empty, delete memo
         
-        // two step confirmatio for empty contents.
+        // two step confirmation for empty contents.  is it necessary ?
+        
         if memo.contents == "" {
             Memo.delete(memo)
-//            msgVM.hasMemoRemovedForever = true
-            // save titleToShow and contentsToShow. to work with memoboxView
+            // if it has any contents, save contentsToShow and titleToShow proper String
         } else {
             memo.saveTitleWithContentsToShow(context: context)
             if memo.contentsToShow == "" && memo.titleToShow == "" {
                 Memo.delete(memo)
-//                msgVM.hasMemoRemovedForever = true
             }
         }
         
         parent.title += "" //
         
-        print("savedContents: \(memo.contents)")
         context.saveCoreData()
     }
     
     func togglePin() {
         memo.isPinned.toggle()
     }
+    
     
     func toggleBookMark() {
         
@@ -125,10 +95,9 @@ struct MemoView: View {
         }
     }
     
+    
     func removeMemo() {
-        // why is this line commented ? I D K...
         
-        //        memo.modificationDate = Date()
         memo.contents = contents
         
         // for valid contents,
@@ -137,7 +106,6 @@ struct MemoView: View {
 //            if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
             if belongToTrashFolder() {
                 Memo.delete(memo)
-//                NotificationCenter.default.post(name: myNotification, object: nil)
             } else { // else, not in trashBin -> move to trashBin
                 Memo.makeNotBelongToFolder(memo, trashBinVM.trashBinFolder)
             }
@@ -150,13 +118,21 @@ struct MemoView: View {
         presentationMode.wrappedValue.dismiss()
     }
     
+    
+    init(memo: Memo, parent: Folder, presentingView: Binding<Bool>, calledFromMainView: Bool = false) {
+        self.memo = memo
+        self.parent = parent
+        self._isPresentingView = presentingView
+        self.calledFromMainView = calledFromMainView
+    }
+    
     var body: some View {
         print("has Safebottom ? \(UIScreen.hasSafeBottom)")
         
         return ZStack(alignment: .topLeading) {
             
             VStack {
-                Rectangle() // 왜 좌측 끝에 약간 삐져나왔지 ?...
+                Rectangle()
                     .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
                     .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
                 Spacer()
@@ -211,7 +187,6 @@ struct MemoView: View {
                     .disabled(belongToTrashFolder())
                 //                PlainTextView(text: $contents)
                     .padding(.top)
-//                    .focused($editorFocusState)
                     .foregroundColor(Color.memoTextColor)
                     .padding(.leading, Sizes.overallPadding)
             }
@@ -255,10 +230,8 @@ struct MemoView: View {
                             context: context,
                             fetchingHome: false)!
                     ),
-                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, invalidFolderWithLevels: [], msgToShow: $msgToShow, shouldUpdateTopFolder: false
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, msgToShow: $msgToShow, invalidFolderWithLevels: [], shouldUpdateTopFolder: false
             )
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
         }
     }
 }

@@ -9,8 +9,6 @@ import SwiftUI
 
 
 struct MemoOrderingMenu: View {
-//    @ObservedObject var memoOrder: MemoOrder
-//    @EnvironmentObject var memoOrder: MemoOrder
     @ObservedObject var parentFolder: Folder
     
     var body: some View {

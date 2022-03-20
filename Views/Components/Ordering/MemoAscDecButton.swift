@@ -14,12 +14,12 @@ struct MemoAscDecButton: View {
     
     @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
     @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+    
     @ObservedObject var parentFolder: Folder
     
     var isAscending: Bool
     
     @State var text = ""
-    
     
     func determineText() -> String{
         if mOrderAsc == true {
@@ -57,4 +57,3 @@ struct MemoAscDecButton: View {
         }
     }
 }
-

@@ -15,8 +15,6 @@ struct MemoOrderingButton: View {
     
     var type: OrderType
     
-
-    
     var body: some View {
         
         Button {

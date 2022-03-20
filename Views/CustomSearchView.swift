@@ -139,7 +139,6 @@ struct CustomSearchView: View {
                 }
             }
         }
-        print("folder name of first element in nestedMemos: ")
         return nestedMemos
     }
     
@@ -230,9 +229,6 @@ struct CustomSearchView: View {
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-//                                                .environmentObject(memoEditVM)
-//                                                .environmentObject(FolderEditViewModel())
-//                                                .environmentObject(MemoOrder()) // 왜.. 새로운 object 를 여기서 만들었지 ?
                                                 .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
@@ -250,29 +246,18 @@ struct CustomSearchView: View {
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
                                                         .environmentObject(trashBinVM)
-//                                                        .environmentObject(memoEditVM)
-//                                                        .environmentObject(folderEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
-//                                                        .environmentObject(memoEditVM)
-                                                    // 애초에 force unwrap 을 시킬 경우를 만들지 말아야하나 ?
-//                                                        .onAppear {
-//                                                            print("memo's parent: \(eachMemo.folder!.title)")
-//                                                        }
                                                 }
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
                                             }
                                         }
                                     }
                                 } else { // no  searchResult
-//                                    Text("No Memo contains \"\(searchKeyword)\"")
                                     Spacer()
                                     Text(LocalizedStringStorage.emptySearchResult)
                                         .frame(maxWidth: .infinity, alignment: .center)
-                                    
-                                    
                                 }
-                                
                             }// searchTypeEnum == .current
                             else {
                                 if foundMemos!.count != 0 {
@@ -280,9 +265,6 @@ struct CustomSearchView: View {
                                         Section(header:
                                                     NavigationLink(destination: {
                                             FolderView(currentFolder: memoArray.memos.first!.folder!)
-//                                                .environmentObject(memoEditVM)
-//                                                .environmentObject(FolderEditViewModel())
-//                                                .environmentObject(MemoOrder())
                                                 .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
@@ -298,10 +280,8 @@ struct CustomSearchView: View {
                                                 NavigationLink {
                                                     MemoView(memo: eachMemo, parent: eachMemo.folder!, presentingView: .constant(false))
                                                         .environmentObject(trashBinVM)
-//                                                        .environmentObject(memoEditVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
-//                                                        .environmentObject(memoEditVM)
                                                 }
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
                                             }
@@ -328,8 +308,8 @@ struct CustomSearchView: View {
             .navigationBarHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        
         .onAppear {
-            print("CustomSearchView has appeared!!!!!")
             updateViewInHalfSecond()
         }
     }

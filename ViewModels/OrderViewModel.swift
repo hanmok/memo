@@ -15,12 +15,14 @@ enum OrderType: String, CaseIterable, Codable {
     case alphabetical = "Alphabetical"
 }
 
+
 class FolderOrder: ObservableObject {
     
     @Published var isAscending = true
     
     @Published var orderType: OrderType = .creationDate
 }
+
 
 class MemoOrder: ObservableObject {
     

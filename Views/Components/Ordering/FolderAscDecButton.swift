@@ -26,7 +26,7 @@ struct FolderAscDecButton: View {
                 if folderOrderAsc == isAscending {
                     ChangeableImage(imageSystemName: "checkmark")
                 }
-//                Text(isAscending ? LocalizedStringStorage.AscendingOrder : LocalizedStringStorage.DecendingOrder)
+                
                 if folderOrderType != .alphabetical {
                     Text(isAscending ? LocalizedStringStorage.AscendingOrder : LocalizedStringStorage.DecendingOrder)
                 } else {

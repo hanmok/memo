@@ -19,6 +19,7 @@ struct DeeepMemoApp: App {
     let folderEditVM = FolderEditViewModel()
     let folderOrder = FolderOrder()
     let memoOrder = MemoOrder()
+    let messageVM = MessageViewModel()
     
     var body: some Scene {
         print("isFirstLaunch: \(isFirstLaunch)")
@@ -78,9 +79,8 @@ struct DeeepMemoApp: App {
             .environmentObject(folderEditVM)
             .environmentObject(folderOrder)
             .environmentObject(memoOrder)
+            .environmentObject(messageVM)
         }
-        
-        
         
         .onChange(of: scenePhase) { newScenePhase in
             switch newScenePhase {

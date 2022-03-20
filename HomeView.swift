@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct HomeView: View { // top folder fetch
+struct HomeView: View { 
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     

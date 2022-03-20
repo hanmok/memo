@@ -10,9 +10,6 @@ import SwiftUI
 struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
-//    @EnvironmentObject var memoEditVM: MemoEditViewModel
-//    @EnvironmentObject var folderEditVM: FolderEditViewModel
-    @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     var hasPinnedOrBookmarkedMemo: Bool {
         return folder.memos.contains { $0.isPinned == true || $0.isBookMarked == true}
@@ -36,23 +33,9 @@ struct MemoList: View {
             
             FilteredMemoList(folder: folder, listType: .plain)
         } // end of VStack
-//        .environmentObject(memoEditVM)
-//        .environmentObject(folderEditVM)
-        .environmentObject(trashBinVM)
     }
 }
 
 
 
 
-
-
-
-//
-//  MemoList.swift
-//  DeeepMemo
-//
-//  Created by Mac mini on 2021/12/30.
-//
-
-// 테두리..

@@ -21,17 +21,12 @@ struct CheckableFolderCell: View {
     
     var body: some View {
         HStack {
-            ForEach( 0 ..< level) { _ in
+            ForEach( 0 ..< level, id: \.self) { _ in
                 Text("  ") // double Space for each level
             }
             
             Text(folder.title)
                 .foregroundColor(Color.blackAndWhite)
-            
-//            if folder.isFavorite {
-//                Text(Image(systemName: "star.fill"))
-//                    .foregroundColor(Color.blackAndWhite)
-//            }
             
             Spacer()
             if markCheck {
@@ -43,9 +38,7 @@ struct CheckableFolderCell: View {
                 .tint(.swipeBtnColor2)
             }
             if markInvalid {
-                Button {
-                    
-                } label: {
+                Button { } label: {
                     SystemImage("multiply")
                 }
                 .tint(.swipeBtnColor2)

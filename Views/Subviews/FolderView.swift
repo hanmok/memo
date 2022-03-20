@@ -19,10 +19,7 @@ struct FolderView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
-    @EnvironmentObject var folderEditVM : FolderEditViewModel
-//    @EnvironmentObject var memoOrder: MemoOrder
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-    // TrashBinViewModel
     @ObservedObject var currentFolder: Folder
     
     @FocusState var addFolderFocus: Bool
@@ -41,34 +38,14 @@ struct FolderView: View {
     
     @State var msgToShow: String?
     
-    
-    
     var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
-            print("back btn has pressed!")
-//            if var topController = UIApplication.shared.windows.first!.rootViewController {
-//            if var topController = UIApplication.first!.rootViewController {
-//                while let presentedViewController = topController.presentedViewController {
-//                    topController = presentedViewController
-//                }
-//                topController.dismiss(animated: true)
-//            }
-            
         }) {
             SystemImage("chevron.left", size: 18)
                 .tint(Color.navBtnColor)
         }
     }
-    
-//    func toggleFavorite() {
-//        currentFolder.isFavorite.toggle()
-//        currentFolder.modificationDate = Date()
-//        // 업데이트가 바로 안됨. 이럴땐 어떻게 해 ?
-//        // this line make folder to go back.
-////        Folder.updateTopFolders(context: context) // .. topFolder 가 업데이트 되서 그런거야 ?
-//        context.saveCoreData()
-//    }
 
     func showSubFolderView() {
         isShowingSubFolderView = true
@@ -84,7 +61,6 @@ struct FolderView: View {
         
         if isAddingFolder {
             DispatchQueue.main.async {
-//                newSubFolderName = "\(currentFolder.title)'s \(currentFolder.subfolders.count + 1) th \(LocalizedStringStorage.folder)"
                 newSubFolderName = ""
             }
         }
@@ -113,24 +89,7 @@ struct FolderView: View {
                                 SystemImage("magnifyingglass")
                                     .tint(Color.navBtnColor)
                             })
-
-//                            MemoOrderingMenu(memoOrder: memoOrder, parentFolder: currentFolder)
                             MemoOrderingMenu(parentFolder: currentFolder)
-                            
-                            // favorite Button
-//                            Button(action: {
-//                                toggleFavorite()
-//                            }, label: {
-//                                if currentFolder.isFavorite {
-//                                    SystemImage( "star.fill")
-//                                        .tint(Color.navBtnColor)
-//                                } else {
-//
-//                                    SystemImage("star")
-//                                        .tint(Color.navBtnColor)
-//                                }
-//                            })
-
                         }
                     }
                     .padding(.trailing, 10 + Sizes.overallPadding)
@@ -140,9 +99,6 @@ struct FolderView: View {
                 
                 ScrollView(.vertical) {
                     VStack(spacing: 0) {
-                        
-                        // navigationTitle
-                        
                         HStack {
                             // NavigationTitle
                             ZStack(alignment: .topLeading) {
@@ -183,9 +139,6 @@ struct FolderView: View {
                         }
                     } // end of main VStack
                     .environmentObject(currentFolder)
-//                    .environmentObject(folderEditVM)
-//                    .environmentObject(memoEditVM)
-//                    .environmentObject(memoOrder)
                     .environmentObject(trashBinVM)
                 } // end of scrollView
             } // end of VStack
@@ -209,9 +162,6 @@ struct FolderView: View {
                             folder: currentFolder,
                             isShowingSubFolderView: $isShowingSubFolderView,
                             isAddingFolder: $isAddingFolder)
-//                            .environmentObject(folderEditVM)
-//                            .environmentObject(memoEditVM)
-//                            .environmentObject(memoOrder)
                             .environmentObject(trashBinVM)
                         
                         // offset x : trailingPadding
@@ -245,7 +195,7 @@ struct FolderView: View {
                             showSelectingFolderView: $isShowingSelectingFolderView,
                             msgToShow: $msgToShow
                         )
-                            .padding([.trailing], Sizes.overallPadding)
+                            .padding(.trailing, Sizes.overallPadding)
                             .padding(.bottom,Sizes.overallPadding )
                             .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
                             .animation(.spring(), value: memoEditVM.isSelectionMode)
@@ -272,8 +222,7 @@ struct FolderView: View {
                 text: $newSubFolderName,
                 focusState: _addFolderFocus,
                 submitAction: { subfolderName in
-                    // when adding new subfolder, navigate to mindmapView. why.. ?'
-                    // because of updateTopFolder .
+                    
                     currentFolder.add(
                         subfolder: Folder(title: newSubFolderName, context: context)
                     )
@@ -287,20 +236,8 @@ struct FolderView: View {
             
             NavigationLink(destination:
                             NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false))
-//                            .environmentObject(folderEditVM)
-//                            .environmentObject(memoEditVM)
                             .environmentObject(trashBinVM),
                            isActive: $isAddingMemo) {}
-            NavigationLink(destination: EmptyView()) {
-                EmptyView()
-            }
-//                .navigationViewStyle(StackNavigationViewStyle())
-//                .background(NavigationLink(destination: EmptyView()) {
-//                    EmptyView()
-//                })
-            
-//            NavigationLink(destination: EmptyView(),
-//            isActive: $isAddingMemo){ EmptyView() }
                             
             MsgView(msgToShow: $msgToShow)
                 .padding(.top, UIScreen.screenHeight / 1.5)
@@ -320,24 +257,17 @@ struct FolderView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), invalidFolderWithLevels: [],
-                msgToShow: $msgToShow
+                    ), msgToShow: $msgToShow, invalidFolderWithLevels: []
             )
-//                .environmentObject(folderEditVM)
-//                .environmentObject(memoEditVM)
         })
-        
-
         .onAppear(perform: {
             print("folderView has Appeared!")
         })
         .onDisappear(perform: {
             print("folderView has disappeared!")
             newSubFolderName = ""
-//            memoEditVM.selectedMemos.removeAll()
             memoEditVM.initSelectedMemos()
         })
-//        .navigationBarHidden(false)
         .navigationBarHidden(true)
     }
 }

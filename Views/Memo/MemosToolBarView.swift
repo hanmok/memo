@@ -23,14 +23,13 @@ struct MemosToolBarView: View {
     @Binding var msgToShow: String?
     
     var calledFromSecondView = false
+    
     var body: some View {
         HStack(spacing: Sizes.spacingBetweenButtons) {
-            
             
             Button {
                 memoEditVM.initSelectedMemos()
             } label: {
-//                UnchangeableImage(imageSystemName: "arrow.clockwise", width: 20, height: 20)
                 UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
             }
             
@@ -69,7 +68,6 @@ struct MemosToolBarView: View {
                 }
                 
                 context.saveCoreData()
-                print("pinned button pressed")
                 
                 memoEditVM.initSelectedMemos()
                 
@@ -77,7 +75,6 @@ struct MemosToolBarView: View {
                 UnchangeableImage(imageSystemName: "bookmark", width: 20, height: 20)
             }
             .cornerRadius(5)
-            
             
             // PIN BUTTON, WORKS FINE
             Button(action: {
@@ -108,8 +105,6 @@ struct MemosToolBarView: View {
                 UnchangeableImage(imageSystemName: "pin", width: 20, height: 20)
             }
             .cornerRadius(5)
-            
-            
             
             // RELOCATE MEMOS, LOOKING FINE
             Button(action: {

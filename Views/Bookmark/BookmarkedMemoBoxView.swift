@@ -10,6 +10,7 @@ import SwiftUI
 struct BookmarkedMemoBoxView: View {
     
     @ObservedObject var memo: Memo
+    
     @Environment(\.colorScheme) var colorScheme
     
     var frameSize = ( UIScreen.screenWidth - 6 * Sizes.properSpacing ) / 2

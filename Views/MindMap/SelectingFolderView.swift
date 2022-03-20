@@ -21,13 +21,15 @@ struct SelectingFolderView: View {
 
     @State var selectionEnum = FolderTypeEnum.folder // default value
 
-//    @State var isValidAction = false
-    
-    var invalidFolderWithLevels: [FolderWithLevel]
-//    var dismissAction: () -> Void = { }
-    var isFullScreen: Bool = false
-    
     @Binding var msgToShow: String?
+    
+    //    @State var isValidAction = false
+    
+    //    var dismissAction: () -> Void = { }
+
+    var invalidFolderWithLevels: [FolderWithLevel]
+    
+    var isFullScreen: Bool = false
     
     var shouldUpdateTopFolder = true
     
@@ -47,7 +49,7 @@ struct SelectingFolderView: View {
                             Button {
                                 presentationMode.wrappedValue.dismiss()
                                 folderEditVM.folderToCut = nil
-                                memoEditVM.initSelectedMemos() // ?? should it be ?  yes.
+                                memoEditVM.initSelectedMemos()
                             } label: {
                                 SystemImage( "multiply")
                                     .foregroundColor(Color.blackAndWhite)
@@ -181,8 +183,8 @@ struct SelectingFolderView: View {
         .onDisappear {
             UIView.setAnimationsEnabled(true)
             if shouldUpdateTopFolder {
-                //
-            Folder.updateTopFolders(context: context)
+                Folder.updateTopFolders(context: context)
+                // 이거 없어도 폴더로 되돌아감. 왜지 ?
             }
         }
         .navigationBarHidden(true)
