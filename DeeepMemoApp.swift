@@ -80,7 +80,21 @@ struct DeeepMemoApp: App {
             .environmentObject(folderOrder)
             .environmentObject(memoOrder)
             .environmentObject(messageVM)
-            
+//            .overlay {
+//                VStack {
+//                    Spacer()
+//                    ZStack {
+//                    Rectangle()
+//                        .foregroundColor(.green)
+//                        .background(.green)
+////                        Text(Messages.hasAddedToFolder)
+//                        Text(messageVM.message + "hihi")
+//                    }
+//                    .frame(height: 30)
+//                }
+////                .offset(y: messageVM.shouldShow ? 0 : UIScreen.screenHeight)
+////                .animation(.spring(), value: messageVM.shouldShow)
+//            }
             
         }
         

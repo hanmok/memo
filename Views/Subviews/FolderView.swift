@@ -32,7 +32,7 @@ struct FolderView: View {
     
     @State var isShowingSearchView = false
     
-    @State var msgToShow: String?
+//    @State var msgToShow: String?
     
     var backBtn : some View {
         Button(action: {
@@ -134,24 +134,24 @@ struct FolderView: View {
                         
                         ZStack {
                             if !currentFolder.memos.isEmpty {
-//                                MemoList()
-//                                    .padding(.top, 20)
-//                                    .ignoresSafeArea(edges: .trailing)
-                                VStack {
-                                    ForEach(memosToShow, id: \.self) { memo in
-                                        NavigationLink(destination:
-                                                        // parent 가 문제인건 아니야?
-                                                       // SecondView 에서도 같은데, 여기에서만 그러진 않지 않을까 ?
-                                                       MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
-                                            .environmentObject(trashBinVM)
-                                        ) {
-                                            MemoBoxView(memo: memo)
-                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                        }
-                                    }
-                                }
-                                .padding(.top, 20)
-                                .ignoresSafeArea( edges: .trailing)
+                                MemoList()
+                                    .padding(.top, 20)
+                                    .ignoresSafeArea(edges: .trailing)
+//                                VStack {
+//                                    ForEach(memosToShow, id: \.self) { memo in
+//                                        NavigationLink(destination:
+//                                                        // parent 가 문제인건 아니야?
+//                                                       // SecondView 에서도 같은데, 여기에서만 그러진 않지 않을까 ?
+//                                                       MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
+//                                            .environmentObject(trashBinVM)
+//                                        ) {
+//                                            MemoBoxView(memo: memo)
+//                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+//                                        }
+//                                    }
+//                                }
+//                                .padding(.top, 20)
+//                                .ignoresSafeArea( edges: .trailing)
                                 
                             }
                         }
@@ -195,8 +195,9 @@ struct FolderView: View {
                 },
                 toolbarView: MemosToolBarView(
                     currentFolder: currentFolder,
-                    showSelectingFolderView: $isShowingSelectingFolderView,
-                    msgToShow: $msgToShow
+                    showSelectingFolderView: $isShowingSelectingFolderView
+//                    ,
+//                    msgToShow: $msgToShow
                 )
                 .padding([.trailing, .bottom], Sizes.overallPadding)
                 .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
@@ -239,8 +240,8 @@ struct FolderView: View {
                 .environmentObject(trashBinVM),
                            isActive: $isAddingMemo) {}
             
-            MsgView(msgToShow: $msgToShow)
-                .padding(.top, UIScreen.screenHeight / 1.5)
+//            MsgView(msgToShow: $msgToShow)
+//                .padding(.top, UIScreen.screenHeight / 1.5)
             
         } // end of ZStack
         .frame(maxHeight: .infinity)
@@ -259,7 +260,9 @@ struct FolderView: View {
                             homeFolder: Folder.fetchHomeFolder(context: context)!,
                             archiveFolder: Folder.fetchHomeFolder(context: context,
                                                                   fetchingHome: false)!
-                        ), msgToShow: $msgToShow, invalidFolderWithLevels: []
+                        ),
+//                    msgToShow: $msgToShow,
+                    invalidFolderWithLevels: []
                 )
             })
         

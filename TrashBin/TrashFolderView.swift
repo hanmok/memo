@@ -18,12 +18,13 @@ struct TrashFolderView: View {
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+    @EnvironmentObject var messageVM: MessageViewModel
     
     @State var isShowingDeleteAlert = false
     @State var isShowingSelectingFolderView = false
     @State var isShowingSearchView = false
     
-    @State var msgToShow: String?
+//    @State var msgToShow: String?
     
     var backBtn : some View {
         Button(action: {
@@ -117,8 +118,8 @@ struct TrashFolderView: View {
                 }
             }
             
-            MsgView(msgToShow: $msgToShow)
-                .padding(.top, UIScreen.screenHeight / 1.5 )
+//            MsgView(msgToShow: $msgToShow)
+//                .padding(.top, UIScreen.screenHeight / 1.5 )
             
             CustomSearchView(
                 fastFolderWithLevelGroup: FastFolderWithLevelGroup(
@@ -141,7 +142,9 @@ struct TrashFolderView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), msgToShow: $msgToShow, invalidFolderWithLevels: []
+                    ),
+//                msgToShow: $msgToShow,
+                invalidFolderWithLevels: []
             )
         })
         
@@ -149,7 +152,8 @@ struct TrashFolderView: View {
             // DELETE
             Button(role: .destructive) {
                  memoEditVM.selectedMemos.forEach { Memo.delete($0)}
-                msgToShow = Messages.showMemosDeletedMsg(memoEditVM.count)
+                messageVM.message = Messages.showMemosDeletedMsg(memoEditVM.count)
+//                msgToShow = Messages.showMemosDeletedMsg(memoEditVM.count)
                 context.saveCoreData()
                 memoEditVM.initSelectedMemos()
 
@@ -158,9 +162,13 @@ struct TrashFolderView: View {
             }
             
             Button(role: .cancel) {
+//            Button(role: .none) {
+//            Button(
+//            Button {
                 // DO NOTHING
             } label: {
                 Text(LocalizedStringStorage.cancel)
+                    .foregroundColor(colorScheme == .dark ? Color.cream : .black) // not applied.. TT..
             }
         }, message: {
             Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)

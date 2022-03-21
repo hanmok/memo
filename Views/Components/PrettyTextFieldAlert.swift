@@ -78,8 +78,10 @@ struct PrettyTextFieldAlert: View {
 
                 Text(LocalizedStringStorage.convertTypeToStorage(type: type))
                     .font(.headline)
+//                    .padding(.vertical, 15)
                     .padding(.vertical, 15)
-                Spacer()
+//                    .padding(.bottom, 30)
+//                Spacer()
 
                 
                 TextField(TextFieldStruct(textEnum: type).placeHolder, text: $text)
@@ -133,7 +135,8 @@ struct PrettyTextFieldAlert: View {
                         selectedButton = .cancel
                     } label: {
                         Text(LocalizedStringStorage.cancel)
-                            .foregroundColor(.red)
+//                            .foregroundColor(.red)
+                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .frame(width: screenSize.width * 0.32, alignment: .center)
                             .frame(height: 50)
                     }

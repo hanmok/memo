@@ -13,6 +13,7 @@ struct SecondView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
 //    @Environment(\.presentationMode) var presentationMode
+    @AppStorage(AppStorageKeys.bookMarkState) var bookmarkState = true
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var currentFolder: Folder
@@ -42,9 +43,9 @@ struct SecondView: View {
     
     @State var isAddingFolder = false
     
-    @State var bookmarkState = true // need to be user Default.
+//    @State var bookmarkState = true // need to be user Default.
     
-    @State var msgToShow: String?
+//    @State var msgToShow: String?
     
     //    @State var isLoading = false
     
@@ -336,7 +337,6 @@ struct SecondView: View {
                         
                         MemoOrderingMenu(parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
-//                    .padding(.horizontal, 10)
                     .padding(.horizontal, 20)
                     
 
@@ -405,7 +405,7 @@ struct SecondView: View {
                                                 .frame(height: 1)
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
-                                                .padding(.top, 5)
+                                                .padding(.vertical, 5)
                                             
                                         }
                                         
@@ -554,7 +554,8 @@ struct SecondView: View {
                                 MemosToolBarView(
                                     currentFolder: currentFolder,
                                     showSelectingFolderView: $isShowingSelectingFolderView,
-                                    msgToShow: $msgToShow, calledFromSecondView: true
+//                                    msgToShow: $msgToShow,
+                                    calledFromSecondView: true
                                 )
                                 .padding(.bottom, Sizes.overallPadding )
                                 .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)
@@ -574,8 +575,8 @@ struct SecondView: View {
                                 NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)),
                                isActive: $isAddingMemo) {}
                 
-                MsgView(msgToShow: $msgToShow)
-                    .padding(.top, UIScreen.screenHeight / 1.5)
+//                MsgView(msgToShow: $msgToShow)
+//                    .padding(.top, UIScreen.screenHeight / 1.5)
                 
             } // end of ZStack
             .sheet(isPresented: $isShowingSelectingFolderView,
@@ -586,7 +587,9 @@ struct SecondView: View {
                             homeFolder: Folder.fetchHomeFolder(context: context)!,
                             archiveFolder: Folder.fetchHomeFolder(context: context,
                                                                   fetchingHome: false)!
-                        ), msgToShow: $msgToShow, invalidFolderWithLevels: []
+                        ),
+//                    msgToShow: $msgToShow,
+                    invalidFolderWithLevels: []
                 )
             })
             .navigationBarHidden(true)
