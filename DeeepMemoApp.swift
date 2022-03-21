@@ -14,7 +14,9 @@ struct DeeepMemoApp: App {
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
     
-    @AppStorage("isFirstLaunch") var isFirstLaunch = true
+//    @AppStorage("isFirstLaunch") var isFirstLaunch = true
+    @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
+    
     let memoEditVM = MemoEditViewModel()
     let folderEditVM = FolderEditViewModel()
     let folderOrder = FolderOrder()

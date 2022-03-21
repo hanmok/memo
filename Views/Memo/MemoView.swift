@@ -27,7 +27,7 @@ struct MemoView: View {
     @State var isShowingSelectingFolderView = false
     
     @State var contents: String = ""
-    @State var isBookMarkedTemp: Bool?
+//    @State var isBookMarkedTemp: Bool?
     
     @Binding var isPresentingView: Bool
     
@@ -64,7 +64,7 @@ struct MemoView: View {
         
         memo.contents = contents
         
-        memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
+//        memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if contents are empty, delete memo
         
         // two step confirmation for empty contents.  is it necessary ?
@@ -91,14 +91,14 @@ struct MemoView: View {
     }
     
     
-    func toggleBookMark() {
-        
-        if isBookMarkedTemp == nil {
-            isBookMarkedTemp = memo.isBookMarked ? false : true
-        } else {
-            isBookMarkedTemp!.toggle()
-        }
-    }
+//    func toggleBookMark() {
+//
+//        if isBookMarkedTemp == nil {
+//            isBookMarkedTemp = memo.isBookMarked ? false : true
+//        } else {
+//            isBookMarkedTemp!.toggle()
+//        }
+//    }
     
     
     func removeMemo() {
@@ -157,11 +157,11 @@ struct MemoView: View {
                         // if it is not trashBin -> show bookmark and pin icon with the other two.
 //                        if !(memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)) {
                         if !belongToTrashFolder() {
-                            Button(action: toggleBookMark) {
-                                
-                                SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
-                                    .tint(Color.navBtnColor)
-                            }
+//                            Button(action: toggleBookMark) {
+//
+//                                SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
+//                                    .tint(Color.navBtnColor)
+//                            }
                             
                             // PIN Button
                             Button(action: togglePin) {

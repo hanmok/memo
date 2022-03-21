@@ -12,6 +12,9 @@ struct MindMapView: View {
 //    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
 //    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
     
+    @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
+    @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     
@@ -65,6 +68,10 @@ struct MindMapView: View {
 //                msgToShow = msgVM.hasMemoRemovedForever! ? Messages.showMemosDeletedMsg(1) : Messages.showMemoMovedToTrash(1)
 //                print("msgToShow: \(msgToShow!)")
 //            }
+//        }
+        
+//        var updateState: Bool {
+//            return !isFirstLaunch && isFirstAfterBookmarkUpdate
 //        }
         
         return ZStack {
@@ -324,7 +331,7 @@ struct MindMapView: View {
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
-            BookmarkedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
+            PinnedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
                 .environmentObject(folderEditVM)
             
             
@@ -332,7 +339,7 @@ struct MindMapView: View {
                 fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, // 애매하네..
                 showingSearchView: $isShowingSearchView,
             shouldShowAll: true,
-                shouldIncludeTrashOnCurrent: selectionEnum == .archive,
+            shouldIncludeTrashOnCurrent: selectionEnum == .archive,
             shouldIncludeTrashOverall: true)
                 .environmentObject(folderEditVM)
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
@@ -427,6 +434,39 @@ struct MindMapView: View {
                     .environmentObject(folderEditVM)
             }
         })
+        .alert(LocalizedStringStorage.bookmarkRemovingUpdateAlert, isPresented:
+                Binding<Bool>(get: {return !isFirstLaunch && isFirstAfterBookmarkUpdate},
+                              set: { _ in } ),
+               actions: {
+            
+            Button(role: .none) {
+                
+                // Make All bookmarked pinned
+                let allMemos = Memo.fetchAllmemos(context: context)
+                allMemos.filter { $0.isBookMarked }.forEach{ $0.isPinned = true}
+                
+                
+                DispatchQueue.main.async {
+                    isLoading = true
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    isLoading = false
+                    messageVM.message = LocalizedStringStorage.completed
+                }
+                
+                isFirstAfterBookmarkUpdate = false
+                
+            } label: {
+                Text(LocalizedStringStorage.done)
+            }
+        
+            Button(role: .cancel ) {
+                isFirstAfterBookmarkUpdate = false
+            } label: {
+                Text(LocalizedStringStorage.cancel)
+            }
+        })
+        
         
         .onAppear(perform: {
             print("MindMapView has Appeared!")

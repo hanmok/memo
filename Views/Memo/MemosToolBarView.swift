@@ -47,34 +47,34 @@ struct MemosToolBarView: View {
             
             
             // BOOKMARK BUTTON, WORKS FINE
-            Button(action: {
-                // default: pin all.
-                // 만약 모든게 pin 되어있는 경우에만 모두 bookmark
-                var allBookmarked = true
-                
-                for each in memoEditVM.selectedMemos {
-                    if each.isBookMarked == false {
-                        allBookmarked = false
-                        break
-                    }
-                }
-
-                if !allBookmarked {
-                    memoEditVM.selectedMemos.forEach { $0.isBookMarked = true}
-                    messageVM.message = Messages.showBookmarkedMsg(memoEditVM.count)
-                } else {
-                    memoEditVM.selectedMemos.forEach { $0.isBookMarked = false}
-                    messageVM.message = Messages.showUnbookmarkedMsg(memoEditVM.count)
-                }
-                
-                context.saveCoreData()
-                
-                memoEditVM.initSelectedMemos()
-                
-            }) {
-                UnchangeableImage(imageSystemName: "bookmark", width: 20, height: 20)
-            }
-            .cornerRadius(5)
+//            Button(action: {
+//                // default: pin all.
+//                // 만약 모든게 pin 되어있는 경우에만 모두 bookmark
+//                var allBookmarked = true
+//
+//                for each in memoEditVM.selectedMemos {
+//                    if each.isBookMarked == false {
+//                        allBookmarked = false
+//                        break
+//                    }
+//                }
+//
+//                if !allBookmarked {
+//                    memoEditVM.selectedMemos.forEach { $0.isBookMarked = true}
+//                    messageVM.message = Messages.showBookmarkedMsg(memoEditVM.count)
+//                } else {
+//                    memoEditVM.selectedMemos.forEach { $0.isBookMarked = false}
+//                    messageVM.message = Messages.showUnbookmarkedMsg(memoEditVM.count)
+//                }
+//
+//                context.saveCoreData()
+//
+//                memoEditVM.initSelectedMemos()
+//
+//            }) {
+//                UnchangeableImage(imageSystemName: "bookmark", width: 20, height: 20)
+//            }
+//            .cornerRadius(5)
             
             // PIN BUTTON, WORKS FINE
             Button(action: {

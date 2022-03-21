@@ -58,10 +58,10 @@ struct MemoBoxView: View {
             VStack {
                 HStack(spacing: 6) {
                     Spacer()
-                    if memo.isBookMarked == true {
-                        SystemImage("bookmark.fill", size: 14)
-                            .tint(colorScheme == .dark ? Color.cream : .black)
-                    }
+//                    if memo.isBookMarked == true {
+//                        SystemImage("bookmark.fill", size: 14)
+//                            .tint(colorScheme == .dark ? Color.cream : .black)
+//                    }
                     if memo.isPinned == true {
                         SystemImage("pin.fill", size: 14)
                             .rotationEffect(.degrees(45))
@@ -75,3 +75,9 @@ struct MemoBoxView: View {
         )
     }
 }
+
+//struct RotatedPin: View {
+//    var body: some View {
+//        return Text(Image(systemName: "pin.fill").rotationEffect(.degrees(45)))
+//    }
+//}

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct BookmarkedMemoBoxView: View {
+struct PinnedMemoBoxView: View {
     
     @ObservedObject var memo: Memo
     

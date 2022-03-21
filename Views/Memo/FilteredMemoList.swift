@@ -9,7 +9,7 @@ import SwiftUI
 
 
 enum MemoListType: String {
-    case pinnedOrBookmarked
+    case pinned
     case plain
     case all
 }
@@ -36,10 +36,12 @@ struct FilteredMemoList: View {
         var memosToShow = [Memo]()
         
         switch listType {
-        case .pinnedOrBookmarked:
-            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.isPinned || $0.isBookMarked })
+        case .pinned:
+//            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.isPinned || $0.isBookMarked })
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter { $0.isPinned })
         case .plain:
-            memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.isPinned == false && $0.isBookMarked == false})
+//            memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.isPinned == false && $0.isBookMarked == false})
+            memosToShow = Memo.sortMemos(memos: folder.memos.filter {$0.isPinned == false })
         case .all:
             memosToShow = Memo.sortMemos(memos: folder.memos.sorted())
         }
@@ -105,18 +107,19 @@ struct FilteredMemoList: View {
                 } header: {
                     VStack {
                         HStack {
-                            if listType == .pinnedOrBookmarked {
-                                HStack {
-                                    SystemImage("bookmark.fill", size: 16)
-                                        .tint(Color.navBtnColor)
-                                        .frame(alignment: .topLeading)
-                                        .padding(.leading, Sizes.overallPadding + 4)
+                            if listType == .pinned {
+//                                HStack {
+//                                    SystemImage("bookmark.fill", size: 16)
+//                                        .tint(Color.navBtnColor)
+//                                        .frame(alignment: .topLeading)
+//                                        .padding(.leading, Sizes.overallPadding + 4)
                                     
                                     SystemImage("pin.fill", size: 16)
                                         .tint(Color.navBtnColor)
                                         .frame(alignment: .topLeading)
                                         .rotationEffect(.degrees(45))
-                                }
+                                        .padding(.leading, Sizes.overallPadding + 4)
+//                                }
                             }
                             Spacer()
                         }

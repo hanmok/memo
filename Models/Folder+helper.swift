@@ -457,7 +457,7 @@ extension Folder {
             return folderWithLevelContainer
         }
     
-    static func returnContainedMemos(folder: Folder, onlyMarked: Bool = false ) -> [Memo] {
+    static func returnContainedMemos(folder: Folder, onlyPinned: Bool = false ) -> [Memo] {
         
         @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
         @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
@@ -488,8 +488,9 @@ extension Folder {
         
         foldersContainer.forEach { appendMemos(folder: $0)}
         
-        if onlyMarked {
-            return memosContainer.filter { $0.isBookMarked == true}.sorted(by: sortingMethod)
+        if onlyPinned {
+//            return memosContainer.filter { $0.isBookMarked == true}.sorted(by: sortingMethod)
+            return memosContainer.filter { $0.isPinned == true}.sorted(by: sortingMethod)
         }
         
         return memosContainer

@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct BookmarkedFolderView: View {
+struct PinnedFolderView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
@@ -32,13 +32,13 @@ struct BookmarkedFolderView: View {
                             VStack {
                                 HStack(alignment: .top, spacing: Sizes.properSpacing) {
                                     
-                                    ForEach(Folder.returnContainedMemos(folder: folder, onlyMarked: true), id: \.self) {bookMarkedMemo in
+                                    ForEach(Folder.returnContainedMemos(folder: folder, onlyPinned: true), id: \.self) {pinnedMemo in
                                         
                                         NavigationLink(destination:
-                                                        MemoView(memo: bookMarkedMemo, parent: bookMarkedMemo.folder!, presentingView: $isPresentingMemoView, calledFromMainView: true )
+                                                        MemoView(memo: pinnedMemo, parent: pinnedMemo.folder!, presentingView: $isPresentingMemoView, calledFromMainView: true )
                                                         .environmentObject(trashBinVM)
                                         ) {
-                                            BookmarkedMemoBoxView(memo: bookMarkedMemo)
+                                            PinnedMemoBoxView(memo: pinnedMemo)
                                         }
                                     }
                                 } // end of HStack
@@ -67,13 +67,18 @@ struct BookmarkedFolderView: View {
                         // BookMarked memos Text.
                         Rectangle()
                             .frame(width: UIScreen.screenWidth, height: 30)
-                            .background(Color.bookmarkBarColor)
-                            .foregroundColor(Color.bookmarkBarColor)
+                            .background(Color.pinBarColor)
+                            .foregroundColor(Color.pinBarColor)
                             .offset(y: UIScreen.hasSafeBottom ? -20 : -15)
                         
                         HStack {
                             HStack {
-                                Text(Image(systemName: "bookmark.fill")) + Text(" BookMarked Memos")
+//                                Text(Image(systemName: "bookmark.fill")) + Text(" BookMarked Memos")
+//                                Text(Image(systemName: "pin.fill").rotationEffect(.degrees(45))) + Text(" Pinned Memos")
+                                SystemImage("pin.fill").rotationEffect(.degrees(45))
+                                    .padding(.trailing, 5)
+                                Text("Pinned Memos")
+                                Spacer()
                             }
                             .font(.headline)
                             .frame(maxWidth: .infinity, alignment: .leading)

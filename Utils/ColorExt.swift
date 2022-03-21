@@ -110,7 +110,7 @@ extension Color {
     static let swipeBtnColor2 = Color(UIColor.swipeBtnColor2) // 212 207 179, 182 177 149
     static let swipeBtnColor3 = Color(UIColor.swipeBtnColor3) // 192 187 159, 162 157 129
     
-    static let bookmarkBarColor = Color(UIColor.bookmarkBarColor) //212 207 179, 182 177 149 (== 3, 2)
+    static let pinBarColor = Color(UIColor.pinBarColor) //212 207 179, 182 177 149 (== 3, 2)
     
     static let memoBoxColor = Color(UIColor.memoBoxColor)
 
@@ -138,7 +138,7 @@ extension UIColor {
     static let swipeBtnColor2 = UIColor(named: ColorKeys.swipeBtnColor2)!
     static let swipeBtnColor3 = UIColor(named: ColorKeys.swipeBtnColor3)!
     
-    static let bookmarkBarColor = UIColor(named: ColorKeys.bookmarkBarColor)!
+    static let pinBarColor = UIColor(named: ColorKeys.pinBarColor)!
     
     static let memoBoxColor = UIColor(named: ColorKeys.memoBoxColor)!
     // dark -> white(0.8, 0.8, 0.8), light -> .black
@@ -167,7 +167,7 @@ struct ColorKeys {
     
     static let swipeBtnImageColor = "swipeBtnImageColor"
     
-    static let bookmarkBarColor = "bookmarkBarColor"
+    static let pinBarColor = "pinBarColor"
     
     static let memoBoxColor = "memoBoxColor"
     static let navBtnColor = "navBtnColor"

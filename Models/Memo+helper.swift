@@ -337,14 +337,16 @@ extension Memo {
         return memos.sorted(by: sortingMethod)
     }
     
-    static func sortMemosWithPinAndBookmark(memos: [Memo]) -> [Memo] {
+    static func sortPinnedFirst(memos: [Memo]) -> [Memo] {
         @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
         @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
         
         let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
         
-        let importantMemos = memos.filter { $0.isPinned || $0.isBookMarked}
-        let normalMemos = memos.filter { !$0.isPinned && !$0.isBookMarked}
+//        let importantMemos = memos.filter { $0.isPinned || $0.isBookMarked}
+//        let normalMemos = memos.filter { !$0.isPinned && !$0.isBookMarked}
+        let importantMemos = memos.filter { $0.isPinned }
+        let normalMemos = memos.filter { !$0.isPinned }
         
         var allMemos = importantMemos.sorted(by: sortingMethod)
         
@@ -353,22 +355,25 @@ extension Memo {
         return allMemos
     }
     
-    static func sortMemosWithPinNoBookmark(memos: [Memo]) -> [Memo] {
+    /*
+    static func sortUnpinnedMemos(memos: [Memo]) -> [Memo] {
         @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
         @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
         
         let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
-        let allMemos = memos.filter { !$0.isBookMarked }
-        var importantMemos = allMemos.filter { $0.isPinned}.sorted(by: sortingMethod)
-        let normalMemos = allMemos.filter { !$0.isPinned }
-        
+//        let allMemos = memos.filter { !$0.isBookMarked }
+//        var importantMemos = allMemos.filter { $0.isPinned}.sorted(by: sortingMethod)
+//        let normalMemos = allMemos.filter { !$0.isPinned }
+        let unpinnedMemos = memos.filter { !$0.isPinned }.sorted(by: sortingMethod)
 //        var addedMemos = importantMemos.sorted(by: sortingMethod)
         
-         normalMemos.sorted(by: sortingMethod).forEach { importantMemos.append($0) }
+//         normalMemos.sorted(by: sortingMethod).forEach { importantMemos.append($0) }
         
-        return allMemos
+        return unpinnedMemos
+//        return allMemos
         
     }
+     */
 
 //    static func
 }

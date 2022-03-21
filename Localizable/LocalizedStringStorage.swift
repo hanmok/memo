@@ -72,18 +72,20 @@ enum LocalizedStringStorage {
     
     static let memosHasUnpinned = StringEnum.memosHasUnpinned.convertIntoStr()
     
-    static let memosHasBookmarked = StringEnum.memosHasBookmarked.convertIntoStr()
+//    static let memosHasBookmarked = StringEnum.memosHasBookmarked.convertIntoStr()
     
-    static let memosHasUnbookmarked = StringEnum.memosHasUnbookmarked.convertIntoStr()
+//    static let memosHasUnbookmarked = StringEnum.memosHasUnbookmarked.convertIntoStr()
     
     static let oneMemoHasDeleted = StringEnum.oneMemoHasDeleted.convertIntoStr()
     static let oneMemoHasMovedToTrash = StringEnum.oneMemoHasMovedToTrash.convertIntoStr()
     static let oneMemoHasPinned = StringEnum.oneMemoHasPinned.convertIntoStr()
     static let oneMemoHasUnpinned = StringEnum.oneMemoHasUnpinned.convertIntoStr()
-    static let oneMemoHasBookmarked = StringEnum.oneMemoHasBookmarked.convertIntoStr()
-    static let oneMemoHasUnbookmarked = StringEnum.oneMemoHasUnbookmarked.convertIntoStr()
+//    static let oneMemoHasBookmarked = StringEnum.oneMemoHasBookmarked.convertIntoStr()
+//    static let oneMemoHasUnbookmarked = StringEnum.oneMemoHasUnbookmarked.convertIntoStr()
     
+    static let bookmarkRemovingUpdateAlert = StringEnum.bookmarkRemovingUpdateAlert.convertIntoStr()
     
+    static let completed = StringEnum.completed.convertIntoStr()
     
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
@@ -187,11 +189,16 @@ enum StringEnum: String {
     case memosHasUnpinned = "memosHasUnpinned"
     case oneMemoHasUnpinned = "oneMemoHasUnpinned"
     
-    case memosHasBookmarked = "memosHasBookmarked"
-    case oneMemoHasBookmarked = "oneMemoHasBookmarked"
+//    bookmarkRemovingUpdateAlert
+    case bookmarkRemovingUpdateAlert = "bookmarkRemovingUpdateAlert"
     
-    case memosHasUnbookmarked = "memosHasUnbookmarked"
-    case oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
+//    "completed" = "Completed!";
+    case completed = "completed"
+//    case memosHasBookmarked = "memosHasBookmarked"
+//    case oneMemoHasBookmarked = "oneMemoHasBookmarked"
+    
+//    case memosHasUnbookmarked = "memosHasUnbookmarked"
+//    case oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
     
 }
 

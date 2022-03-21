@@ -11,8 +11,8 @@ struct MemoList: View {
     
     @EnvironmentObject var folder: Folder
     
-    var hasPinnedOrBookmarkedMemo: Bool {
-        return folder.memos.contains { $0.isPinned == true || $0.isBookMarked == true}
+    var hasPinnedMemo: Bool {
+        return folder.memos.contains { $0.isPinned == true }
     }
     
     // need to be modified to have plus button when there's no memo
@@ -24,9 +24,9 @@ struct MemoList: View {
         
         return VStack {
             
-            if hasPinnedOrBookmarkedMemo {
+            if hasPinnedMemo {
                 
-                FilteredMemoList(folder: folder, listType: .pinnedOrBookmarked)
+                FilteredMemoList(folder: folder, listType: .pinned)
                 
                 // line between pinned / unpinned memos
                 Rectangle()
