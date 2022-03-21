@@ -18,6 +18,7 @@ struct MindMapView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+    @EnvironmentObject var messageVM: MessageViewModel
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     
@@ -38,7 +39,7 @@ struct MindMapView: View {
     @State var isLoading = false
     @State var isShowingSecondView = false
     
-    @State var msgToShow: String?
+//    @State var msgToShow: String?
     
     func deleteFolder() {
         DispatchQueue.main.async {
@@ -47,7 +48,8 @@ struct MindMapView: View {
         if let validFolderToRemoved = folderEditVM.folderToRemove {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 isLoading = false
-                msgToShow = Messages.showFolderDeleted(targetFolder: validFolderToRemoved)
+//                msgToShow = Messages.showFolderDeleted(targetFolder: validFolderToRemoved)
+                messageVM.message = Messages.showFolderDeleted(targetFolder: validFolderToRemoved)
             }
             Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
             
@@ -310,8 +312,8 @@ struct MindMapView: View {
                 
             } // end of VStack , Inside ZStack.
             
-            MsgView(msgToShow: $msgToShow)
-                .padding(.top, UIScreen.screenHeight / 1.5)
+//            MsgView(msgToShow: $msgToShow)
+//                .padding(.top, UIScreen.screenHeight / 1.5)
                 
             
             
@@ -417,7 +419,9 @@ struct MindMapView: View {
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-                                    selectionEnum: selectionEnum, msgToShow: $msgToShow, invalidFolderWithLevels:
+                                    selectionEnum: selectionEnum,
+//                                    msgToShow: $msgToShow,
+                                    invalidFolderWithLevels:
                                         Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
                                     isFullScreen: true)
                     .environmentObject(folderEditVM)

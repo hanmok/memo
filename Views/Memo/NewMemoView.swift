@@ -19,7 +19,7 @@ struct NewMemoView: View {
     @EnvironmentObject var folderEditVM: FolderEditViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
-    
+    @EnvironmentObject var messageVM: MessageViewModel
 
     @FocusState var editorFocusState: Bool
     
@@ -34,7 +34,7 @@ struct NewMemoView: View {
     
     @Binding var isPresentingNewMemo: Bool
     
-    @State var msgToShow: String?
+//    @State var msgToShow: String?
     
     func showKeyboardInHalfSec() {
         var increasedSeconds = 0.0
@@ -79,7 +79,9 @@ struct NewMemoView: View {
                 memo!.saveTitleWithContentsToShow(context: context)
                 
                 if memo!.contentsToShow == "" && memo!.titleToShow == "" {
+                    messageVM.message = Messages.showMemosDeletedMsg(1)
                     Memo.delete(memo!)
+                    
                     
                 } else {
                     if memo!.folder == parent {
@@ -98,6 +100,7 @@ struct NewMemoView: View {
                 memo = Memo(contents: contents, context: context)
                 memo!.saveTitleWithContentsToShow(context: context)
                 if memo!.titleToShow == "" && memo!.contentsToShow == "" {
+                    messageVM.message = Messages.showMemosDeletedMsg(1)
                     Memo.delete(memo!)
                 } else {
                 memo!.isBookMarked = isBookMarkedTemp
@@ -142,6 +145,7 @@ struct NewMemoView: View {
                 
                 memo!.saveTitleWithContentsToShow(context: context)
 //                Memo.makeNotBelongToFolder(memo!, trashBinVM.trashBinFolder)
+                messageVM.message = Messages.showMemoMovedToTrash(1)
                 Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
                 
@@ -156,6 +160,7 @@ struct NewMemoView: View {
                 
                 memo!.saveTitleWithContentsToShow(context: context)
 //                Memo.makeNotBelongToFolder(memo!, trashBinVM.trashBinFolder)
+                messageVM.message = Messages.showMemoMovedToTrash(1)
                 Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
 //                parent.title += ""
@@ -244,10 +249,10 @@ struct NewMemoView: View {
                     .foregroundColor(Color.memoTextColor)
                     .padding(.leading, Sizes.overallPadding)
             }
-            .overlay(
-                MsgView(msgToShow: $msgToShow)
-                        .padding(.top, UIScreen.screenHeight / 1.5 ))
-            .padding(.top, 10)
+//            .overlay(
+//                MsgView(msgToShow: $msgToShow)
+//                        .padding(.top, UIScreen.screenHeight / 1.5 ))
+//            .padding(.top, 10)
             
             
         }
@@ -266,7 +271,9 @@ struct NewMemoView: View {
                         homeFolder: Folder.fetchHomeFolder(context: context)!,
                         archiveFolder: Folder.fetchHomeFolder(context: context,
                                                               fetchingHome: false)!
-                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, msgToShow: $msgToShow, invalidFolderWithLevels: [], shouldUpdateTopFolder: false,
+                    ), selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder,
+//                msgToShow: $msgToShow,
+                invalidFolderWithLevels: [], shouldUpdateTopFolder: false,
                 dismissAction: {
                     saveChanges()
                     presentationMode.wrappedValue.dismiss()

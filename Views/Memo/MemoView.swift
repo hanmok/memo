@@ -18,6 +18,7 @@ struct MemoView: View {
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+    @EnvironmentObject var messageVM: MessageViewModel
     
     @ObservedObject var memo: Memo
     
@@ -30,7 +31,7 @@ struct MemoView: View {
     
     @Binding var isPresentingView: Bool
     
-    @State var msgToShow: String?
+//    @State var msgToShow: String?
     
     let parent: Folder
     
@@ -69,11 +70,13 @@ struct MemoView: View {
         // two step confirmation for empty contents.  is it necessary ?
         
         if memo.contents == "" {
+            messageVM.message = Messages.showMemosDeletedMsg(1)
             Memo.delete(memo)
             // if it has any contents, save contentsToShow and titleToShow proper String
         } else {
             memo.saveTitleWithContentsToShow(context: context)
             if memo.contentsToShow == "" && memo.titleToShow == "" {
+                messageVM.message = Messages.showMemosDeletedMsg(1)
                 Memo.delete(memo)
             }
         }
@@ -99,7 +102,7 @@ struct MemoView: View {
     
     
     func removeMemo() {
-        
+//        messagevm
         memo.contents = contents
         
         // for valid contents,
@@ -107,16 +110,20 @@ struct MemoView: View {
             // if it is contained in trashBin -> delete forever.
 //            if memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin) {
             if belongToTrashFolder() {
+                messageVM.message = Messages.showMemosDeletedMsg(1)
                 Memo.delete(memo)
             } else { // else, not in trashBin -> move to trashBin
+                messageVM.message = Messages.showMemoMovedToTrash(1)
                 Memo.makeNotBelongToFolder(memo, trashBinVM.trashBinFolder)
             }
         } else { // for empty Contents,
+            messageVM.message = Messages.showMemosDeletedMsg(1)
             Memo.delete(memo)
         }
         
         context.saveCoreData()
-        
+//        messageVM.message = Messages.showMemoMovedToTrash(1)
+//        messageVM.message = Messages.showMemosDeletedMsg(1)
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -198,10 +205,10 @@ struct MemoView: View {
             .padding(.top, 10)
 
         }
-        .overlay(
-            MsgView(msgToShow: $msgToShow)
-                    .padding(.top, UIScreen.screenHeight / 1.5 ))
-        .padding(.bottom)
+//        .overlay(
+//            MsgView(msgToShow: $msgToShow)
+//                    .padding(.top, UIScreen.screenHeight / 1.5 ))
+//        .padding(.bottom)
         
         .navigationBarHidden(true)
         .onAppear(perform: {
@@ -235,7 +242,9 @@ struct MemoView: View {
                             context: context,
                             fetchingHome: false)!
                     ),
-                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder, msgToShow: $msgToShow, invalidFolderWithLevels: [], shouldUpdateTopFolder: false,
+                selectionEnum: Folder.isBelongToArchive(currentfolder: parent) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder,
+//                msgToShow: $msgToShow,
+                invalidFolderWithLevels: [], shouldUpdateTopFolder: false,
                 dismissAction: {
                     saveChanges()
                     presentationMode.wrappedValue.dismiss()

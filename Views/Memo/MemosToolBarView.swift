@@ -16,12 +16,12 @@ struct MemosToolBarView: View {
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
+    @EnvironmentObject var messageVM: MessageViewModel
+    
     @ObservedObject var currentFolder: Folder
     
     @Binding var showSelectingFolderView: Bool
-    
-    @Binding var msgToShow: String?
-    
+        
     var calledFromSecondView = false
     
     var body: some View {
@@ -61,10 +61,10 @@ struct MemosToolBarView: View {
 
                 if !allBookmarked {
                     memoEditVM.selectedMemos.forEach { $0.isBookMarked = true}
-                    msgToShow = Messages.showBookmarkedMsg(memoEditVM.count)
+                    messageVM.message = Messages.showBookmarkedMsg(memoEditVM.count)
                 } else {
                     memoEditVM.selectedMemos.forEach { $0.isBookMarked = false}
-                    msgToShow = Messages.showUnbookmarkedMsg(memoEditVM.count)
+                    messageVM.message = Messages.showUnbookmarkedMsg(memoEditVM.count)
                 }
                 
                 context.saveCoreData()
@@ -91,10 +91,10 @@ struct MemosToolBarView: View {
 
                 if !allPinned {
                     memoEditVM.selectedMemos.forEach { $0.isPinned = true}
-                    msgToShow = Messages.showPinnedMsg(memoEditVM.count)
+                    messageVM.message = Messages.showPinnedMsg(memoEditVM.count)
                 } else {
                    memoEditVM.selectedMemos.forEach { $0.isPinned = false}
-                    msgToShow = Messages.showUnpinnedMsg(memoEditVM.count)
+                    messageVM.message = Messages.showUnpinnedMsg(memoEditVM.count)
                 }
                 
                 context.saveCoreData()
@@ -115,9 +115,11 @@ struct MemosToolBarView: View {
             
             // REMOVE ACTION, WORKS FINE
             Button(action: {
-
-                 memoEditVM.selectedMemos.forEach { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
-                msgToShow = Messages.showMemoMovedToTrash(memoEditVM.count)
+                
+                memoEditVM.selectedMemos.forEach { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
+                
+                messageVM.message = Messages.showMemoMovedToTrash(memoEditVM.count)
+                
                 memoEditVM.initSelectedMemos()
             }) {
                 UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)

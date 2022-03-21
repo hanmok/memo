@@ -13,12 +13,12 @@ import SwiftUI
 
 struct MsgView: View {
     @Environment(\.colorScheme) var colorScheme
-    
+
     @Binding var msgToShow: String?
     let duration: Double = 1.0
     @State var isShowingMsg = false
-    
-    
+
+
     var body: some View {
         if msgToShow != nil {
             Text(msgToShow!)

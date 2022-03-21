@@ -18,10 +18,10 @@ struct SelectingFolderView: View {
 
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var folderEditVM: FolderEditViewModel
-
+    @EnvironmentObject var messageVM: MessageViewModel
     @State var selectionEnum = FolderTypeEnum.folder // default value
 
-    @Binding var msgToShow: String?
+//    @Binding var msgToShow: String?
     
     @State var isValidAction = false
     
@@ -83,7 +83,8 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
-                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
+//                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
+                                messageVM.message = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 isValidAction = true
                             }
@@ -91,7 +92,8 @@ struct SelectingFolderView: View {
                         } else {
                             memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
-                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
+//                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
+                                messageVM.message = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             
                             isValidAction = true
@@ -133,7 +135,8 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
-                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
+//                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
+                                messageVM.message = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 
                                 isValidAction = true
@@ -141,7 +144,8 @@ struct SelectingFolderView: View {
                         } else {
                              memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
-                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
+//                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
+                                 messageVM.message = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             
                             isValidAction = true
