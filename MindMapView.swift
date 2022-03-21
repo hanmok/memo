@@ -9,8 +9,8 @@ import SwiftUI
 
 struct MindMapView: View {
     
-    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
-    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
+//    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
+//    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme

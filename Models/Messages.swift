@@ -49,10 +49,10 @@ struct Messages {
     
     /// memo moved
     static func showMemoMovedMsg(_ n: Int, to folder: Folder) -> String {
-        let msgForKor1 = "메모가 \(folder.title) 로 이동하였습니다."
+        let msgForKor1 = "메모가 \(folder.title) 폴더로 이동하였습니다."
         let msgForOther1 = "memo has moved to \(folder.title)"
         
-        let msgForKor = "\(n)개의 메모가 \(folder.title) 로 이동하였습니다."
+        let msgForKor = "\(n)개의 메모가 \(folder.title) 폴더로 이동하였습니다."
         let msgForOther = "\(n) memos has moved to \(folder.title)"
         
         return n == 1 ? self.showMsgTo(kor: msgForKor1, other: msgForOther1) : self.showMsgTo(kor: msgForKor, other: msgForOther)
@@ -62,7 +62,7 @@ struct Messages {
     /// folder moved
     static func showFolderMovedMsg(targetFolder: Folder, to desFolder : Folder) -> String {
         
-        let msgForKor = "\(targetFolder.title) 폴더가 \(desFolder.title) 로 이동하였습니다. "
+        let msgForKor = "\(targetFolder.title) 폴더가 \(desFolder.title) 폴더로 이동하였습니다. "
         let msgForOther = "\(targetFolder.title) has moved to \(desFolder.title) "
         
         return self.showMsgTo(kor: msgForKor, other: msgForOther)

@@ -46,16 +46,16 @@ struct HomeView: View {
                         .padding(.top, 10)
                     Spacer()
                     }
-
                 }
                 .frame(height: UIScreen.hasSafeBottom ? 60 : 40)
+                .offset(y: messageVM.shouldShow ? 0 : 100)
                 .overlay(
                     VStack(spacing: 0) {
                         Rectangle().frame(width: UIScreen.screenWidth, height: 1, alignment: .top).foregroundColor(colorScheme == .dark ? .navBtnColor : .clear)
                     Spacer()
                     }
                 )
-                .offset(y: messageVM.shouldShow ? 0 : UIScreen.screenHeight)
+                .offset(y: messageVM.shouldShow ? 0 : 100)
             }
         }
         .ignoresSafeArea(edges: .bottom)

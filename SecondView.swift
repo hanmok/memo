@@ -13,6 +13,7 @@ struct SecondView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
 //    @Environment(\.presentationMode) var presentationMode
+    @AppStorage(AppStorageKeys.bookMarkState) var bookmarkState = true
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var currentFolder: Folder
@@ -42,7 +43,7 @@ struct SecondView: View {
     
     @State var isAddingFolder = false
     
-    @State var bookmarkState = true // need to be user Default.
+//    @State var bookmarkState = true // need to be user Default.
     
 //    @State var msgToShow: String?
     
@@ -336,7 +337,6 @@ struct SecondView: View {
                         
                         MemoOrderingMenu(parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
-//                    .padding(.horizontal, 10)
                     .padding(.horizontal, 20)
                     
 
@@ -405,7 +405,7 @@ struct SecondView: View {
                                                 .frame(height: 1)
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
-                                                .padding(.top, 5)
+                                                .padding(.vertical, 5)
                                             
                                         }
                                         

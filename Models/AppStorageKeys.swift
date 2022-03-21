@@ -13,4 +13,7 @@ struct AppStorageKeys {
     
     static let mOrderType = "mOrderType"
     static let mOrderAsc = "mOrderAsc"
+    
+    static let bookMarkState = "bookmarkState"
+    
 }
