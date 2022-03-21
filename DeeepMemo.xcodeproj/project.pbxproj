@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A013F6A27BA535400C612ED /* DynamicTopFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */; };
-		9A046CC927B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */; };
+		9A046CC927B3A042003169C7 /* PinnedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* PinnedMemoBoxView.swift */; };
 		9A046CCC27B3A72E003169C7 /* CollapsingTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */; };
 		9A046D1B27B67508003169C7 /* OrderingAppStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */; };
 		9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
@@ -58,6 +58,7 @@
 		9AAA24A227E748AE009923C7 /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAA24A127E748AE009923C7 /* MemoEditView.swift */; };
 		9AAA24A427E7B01D009923C7 /* UpdatingRelocation3.21 in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA24A327E7B01D009923C7 /* UpdatingRelocation3.21 */; };
 		9AAA24A627E8011E009923C7 /* AddMessage in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA24A527E8011E009923C7 /* AddMessage */; };
+		9AAA24A827E89586009923C7 /* RemovingBookmark in Resources */ = {isa = PBXBuildFile; fileRef = 9AAA24A727E89586009923C7 /* RemovingBookmark */; };
 		9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9AB724D427CD2C6B006A825C /* Localizable.strings */; };
 		9AB724D727CD2D17006A825C /* LocalizedStringStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */; };
 		9AB724DA27CE79EC006A825C /* TrashFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB724D927CE79EC006A825C /* TrashFolderView.swift */; };
@@ -116,7 +117,7 @@
 		9AD8333727BE148A00506AE8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* MemoView.swift */; };
 		9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE538F727C38E4300452999 /* AppStorageKeys.swift */; };
 		9AE5391B27C6374F00452999 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5391A27C6374F00452999 /* PlainTextView.swift */; };
-		E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */; };
+		E523DB3C27B8472C00D8D78B /* PinnedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* PinnedFolderView.swift */; };
 		E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */; };
 		E523DB5227C0073900D8D78B /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB5127C0073900D8D78B /* NewMemoView.swift */; };
 		E545D1D6278C04CD00363BE3 /* ChangeMemoVarsTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */; };
@@ -138,7 +139,7 @@
 
 /* Begin PBXFileReference section */
 		9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTopFolderCell.swift; sourceTree = "<group>"; };
-		9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedMemoBoxView.swift; sourceTree = "<group>"; };
+		9A046CC827B3A042003169C7 /* PinnedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedMemoBoxView.swift; sourceTree = "<group>"; };
 		9A046CCB27B3A72E003169C7 /* CollapsingTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsingTest.swift; sourceTree = "<group>"; };
 		9A046D1A27B67508003169C7 /* OrderingAppStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderingAppStorage.swift; sourceTree = "<group>"; };
 		9A04749527715D1200571D66 /* DeeepMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeepMemoApp.swift; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 		9AAA24A127E748AE009923C7 /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
 		9AAA24A327E7B01D009923C7 /* UpdatingRelocation3.21 */ = {isa = PBXFileReference; lastKnownFileType = text; path = UpdatingRelocation3.21; sourceTree = "<group>"; };
 		9AAA24A527E8011E009923C7 /* AddMessage */ = {isa = PBXFileReference; lastKnownFileType = text; path = AddMessage; sourceTree = "<group>"; };
+		9AAA24A727E89586009923C7 /* RemovingBookmark */ = {isa = PBXFileReference; lastKnownFileType = text; path = RemovingBookmark; sourceTree = "<group>"; };
 		9AB724D327CD2C6B006A825C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D527CD2C9B006A825C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9AB724D627CD2D17006A825C /* LocalizedStringStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStringStorage.swift; sourceTree = "<group>"; };
@@ -256,7 +258,7 @@
 		9AD8333627BE148A00506AE8 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
 		9AE538F727C38E4300452999 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
 		9AE5391A27C6374F00452999 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
-		E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkedFolderView.swift; sourceTree = "<group>"; };
+		E523DB3B27B8472C00D8D78B /* PinnedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedFolderView.swift; sourceTree = "<group>"; };
 		E523DB4E27BE9A3000D8D78B /* ColorPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPaletteView.swift; sourceTree = "<group>"; };
 		E523DB5127C0073900D8D78B /* NewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
 		E545D1D5278C04CD00363BE3 /* ChangeMemoVarsTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMemoVarsTestView.swift; sourceTree = "<group>"; };
@@ -548,6 +550,7 @@
 				9AAA249A27E73551009923C7 /* CleanUp3.20 */,
 				9AAA24A327E7B01D009923C7 /* UpdatingRelocation3.21 */,
 				9AAA24A527E8011E009923C7 /* AddMessage */,
+				9AAA24A727E89586009923C7 /* RemovingBookmark */,
 			);
 			path = VersionHistory;
 			sourceTree = "<group>";
@@ -611,8 +614,8 @@
 		E523DB4727B9C73700D8D78B /* Bookmark */ = {
 			isa = PBXGroup;
 			children = (
-				E523DB3B27B8472C00D8D78B /* BookmarkedFolderView.swift */,
-				9A046CC827B3A042003169C7 /* BookmarkedMemoBoxView.swift */,
+				E523DB3B27B8472C00D8D78B /* PinnedFolderView.swift */,
+				9A046CC827B3A042003169C7 /* PinnedMemoBoxView.swift */,
 			);
 			path = Bookmark;
 			sourceTree = "<group>";
@@ -739,6 +742,7 @@
 				9A0474A927715D1400571D66 /* Assets.xcassets in Resources */,
 				9AA65B3627D6BA8F00C1F383 /* VersionHistory in Resources */,
 				9A87D30127E67C1B00A0C5CD /* FixingError3.20 in Resources */,
+				9AAA24A827E89586009923C7 /* RemovingBookmark in Resources */,
 				9AC5D22E278BD8C6007EAA28 /* CurrentTodoLists in Resources */,
 				9ACC0C8027DDF4D800D18690 /* V1.1.0->1.1.1 in Resources */,
 			);
@@ -773,12 +777,12 @@
 				9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */,
 				9A3377B52790039200805138 /* FolderViewTest.swift in Sources */,
 				9AAA24A227E748AE009923C7 /* MemoEditView.swift in Sources */,
-				9A046CC927B3A042003169C7 /* BookmarkedMemoBoxView.swift in Sources */,
+				9A046CC927B3A042003169C7 /* PinnedMemoBoxView.swift in Sources */,
 				9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */,
 				9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */,
 				9AD8333727BE148A00506AE8 /* MemoView.swift in Sources */,
 				9AC5D1FD278557D8007EAA28 /* UnitTestHelper.swift in Sources */,
-				E523DB3C27B8472C00D8D78B /* BookmarkedFolderView.swift in Sources */,
+				E523DB3C27B8472C00D8D78B /* PinnedFolderView.swift in Sources */,
 				9A337890279A56C500805138 /* FolderEditViewModel.swift in Sources */,
 				9A3377B3278FFF2D00805138 /* TextViewWrapper.swift in Sources */,
 				9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */,
@@ -1012,7 +1016,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1030,7 +1034,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -1047,7 +1051,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1065,7 +1069,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.7;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;

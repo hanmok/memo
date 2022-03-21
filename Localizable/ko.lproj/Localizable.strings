@@ -71,13 +71,18 @@
 
 "memosHasPinned" = "개의 메모가 고정되었습니다";
 "memosHasUnpinned" = "개 메모의 고정이 해제되었습니다.";
-"memosHasBookmarked" = "개의 메모가 북마크 되었습니다.";
-"memosHasUnbookmarked" = "개 메모의 북마크가 해제되었습니다.";
+//"memosHasBookmarked" = "개의 메모가 북마크 되었습니다.";
+//"memosHasUnbookmarked" = "개 메모의 북마크가 해제되었습니다.";
 
 
 "oneMemoHasDeleted" = "삭제되었습니다.";
 "oneMemoHasMovedToTrash" = "휴지통으로 이동하였습니다.";
 "oneMemoHasPinned" = "고정되었습니다.";
 "oneMemoHasUnpinned" = "고정이 해제되었습니다.";
-"oneMemoHasBookmarked" = "북마크되었습니다.";
-"oneMemoHasUnbookmarked" = "북마크가 해제되었습니다.";
+//"oneMemoHasBookmarked" = "북마크되었습니다.";
+//"oneMemoHasUnbookmarked" = "북마크가 해제되었습니다.";
+
+
+"bookmarkRemovingUpdateAlert" = "업데이트:\n북마크, 핀 기능이 합쳐졌습니다. \n\n 기존 북마크된 메모들을 핀 시키시겠습니까 ?";
+
+"completed" = "완료되었습니다!";

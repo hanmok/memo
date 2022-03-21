@@ -250,7 +250,8 @@ struct CustomSearchView: View {
 //                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
-                                                HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
+//                                                HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
+                                                HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
                                                 Spacer()
                                                 
                                             } // end of HStack
@@ -288,7 +289,8 @@ struct CustomSearchView: View {
 //                                                .environmentObject(trashBinVM)
                                         }, label: {
                                             HStack {
-                                                HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
+//                                                HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!, isNavigationLink: true)
+                                                HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
                                                 Spacer()
                                             } // end of HStack
                                             .padding(.top, 5)

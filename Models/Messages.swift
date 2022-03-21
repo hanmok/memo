@@ -38,14 +38,14 @@ struct Messages {
     }
     
     /// bookmarked
-    static func showBookmarkedMsg(_ n: Int) -> String {
-        return n == 1 ? LocalizedStringStorage.oneMemoHasBookmarked : "\(n)\(LocalizedStringStorage.memosHasBookmarked)"
-    }
+//    static func showBookmarkedMsg(_ n: Int) -> String {
+//        return n == 1 ? LocalizedStringStorage.oneMemoHasBookmarked : "\(n)\(LocalizedStringStorage.memosHasBookmarked)"
+//    }
     
     /// unbookmarked
-    static func showUnbookmarkedMsg(_ n: Int) -> String {
-        return n == 1 ? LocalizedStringStorage.oneMemoHasUnbookmarked : "\(n)\(LocalizedStringStorage.memosHasUnbookmarked)"
-    }
+//    static func showUnbookmarkedMsg(_ n: Int) -> String {
+//        return n == 1 ? LocalizedStringStorage.oneMemoHasUnbookmarked : "\(n)\(LocalizedStringStorage.memosHasUnbookmarked)"
+//    }
     
     /// memo moved
     static func showMemoMovedMsg(_ n: Int, to folder: Folder) -> String {

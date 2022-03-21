@@ -211,8 +211,8 @@ struct FolderView: View {
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
                     archiveFolder: Folder.fetchHomeFolder(context: context,
                                                           fetchingHome: false)!),
-                currentFolder: currentFolder, showingSearchView: $isShowingSearchView)
-            
+                currentFolder: currentFolder, showingSearchView: $isShowingSearchView
+            )
             .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
             .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
             

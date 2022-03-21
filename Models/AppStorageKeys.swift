@@ -8,12 +8,17 @@
 import Foundation
 
 struct AppStorageKeys {
+    
+    static let isFirstLaunch = "isFirstLaunch"
+    
     static let fOrderType = "fOrderType"
     static let fOrderAsc = "fOrderAsc"
     
     static let mOrderType = "mOrderType"
     static let mOrderAsc = "mOrderAsc"
     
-    static let bookMarkState = "bookmarkState"
+    static let pinState = "pinState"
+    
+    static let isFirstLaunchAfterBookmarkUpdate = "isFirstAfterBookmarkUpdate"
     
 }

@@ -26,7 +26,7 @@ struct NewMemoView: View {
     @State var hasRelocated = false
     @State var contents: String = ""
     
-    @State var isBookMarkedTemp: Bool = false
+//    @State var isBookMarkedTemp: Bool = false
     @State var isPinned: Bool = false
     @State var isShowingSelectingFolderView = false
     
@@ -87,7 +87,7 @@ struct NewMemoView: View {
                     if memo!.folder == parent {
                         parent.modificationDate = Date()
                     }
-                    memo!.isBookMarked = isBookMarkedTemp
+//                    memo!.isBookMarked = isBookMarkedTemp
                     memo!.isPinned = isPinned
                     memo!.creationDate = Date()
                     memo!.modificationDate = Date()
@@ -103,7 +103,7 @@ struct NewMemoView: View {
                     messageVM.message = Messages.showMemosDeletedMsg(1)
                     Memo.delete(memo!)
                 } else {
-                memo!.isBookMarked = isBookMarkedTemp
+//                memo!.isBookMarked = isBookMarkedTemp
                 memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
@@ -122,9 +122,9 @@ struct NewMemoView: View {
         isPinned.toggle()
     }
 
-    func toggleBookMark() {
-        isBookMarkedTemp.toggle()
-    }
+//    func toggleBookMark() {
+//        isBookMarkedTemp.toggle()
+//    }
     
     func removeMemo() {
         // nothing has been saved yet.
@@ -138,7 +138,7 @@ struct NewMemoView: View {
                 }
 
                 memo!.contents = contents
-                memo!.isBookMarked = isBookMarkedTemp
+//                memo!.isBookMarked = isBookMarkedTemp
                 memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
@@ -153,7 +153,7 @@ struct NewMemoView: View {
             } else {
 
                 memo = Memo(contents: contents, context: context)
-                memo!.isBookMarked = isBookMarkedTemp
+//                memo!.isBookMarked = isBookMarkedTemp
                 memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
@@ -188,10 +188,10 @@ struct NewMemoView: View {
                     Spacer()
                     
                     HStack(spacing: 16) {
-                        Button(action: toggleBookMark) {
-                            SystemImage(isBookMarkedTemp ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
-                                .tint(Color.navBtnColor)
-                        }
+//                        Button(action: toggleBookMark) {
+//                            SystemImage(isBookMarkedTemp ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
+//                                .tint(Color.navBtnColor)
+//                        }
                         
                         // PIN Button
                         Button(action: togglePin) {

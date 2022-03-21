@@ -13,7 +13,7 @@ struct SecondView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
 //    @Environment(\.presentationMode) var presentationMode
-    @AppStorage(AppStorageKeys.bookMarkState) var bookmarkState = true
+    @AppStorage(AppStorageKeys.pinState) var pinState = true
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var currentFolder: Folder
@@ -235,35 +235,32 @@ struct SecondView: View {
         }
         
         
-        // working good
-        var allBookMarkedFoundMemos: [Memo] = []
+
+        var foundPinnedMemos: [Memo] = []
         
-//        var foundMemosWithoutBookmark = foundMemos.map {
-//            return NestedMemo(memos: $0.memos.filter { !$0.isBookMarked})
-//        }
-        
-        var foundMemosWithoutBookmark: [NestedMemo] = []
+        var foundUnpinnedMemos: [NestedMemo] = []
         
         
-        // working bad
-//        foundMemosWithoutBookmark = foundMemosWithoutBookmark.filter { !$0.memos.isEmpty }
         
         // 이것도 안되네 .. ?
-        foundMemosWithoutBookmark = foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isBookMarked}) }.filter { !$0.memos.isEmpty}
+//        foundUnpinnedMemos = foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isBookMarked}) }.filter { !$0.memos.isEmpty}
+        foundUnpinnedMemos = foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isPinned}) }.filter { !$0.memos.isEmpty}
         
         
-        //        for each in foundMemos {
-        //                 each.memos.filter { $0.isBookMarked }.forEach { allBookMarkedFoundMemos.append( $0) }
-        //        }
+
         
         foundMemos.forEach { nestedMemo in
-            nestedMemo.memos.filter { $0.isBookMarked}.forEach { allBookMarkedFoundMemos.append($0) }
+//            nestedMemo.memos.filter { $0.isBookMarked}.forEach { allBookMarkedFoundMemos.append($0) }
+            nestedMemo.memos.filter { $0.isPinned}.forEach { foundPinnedMemos.append($0) }
         }
         
         
-        allBookMarkedFoundMemos = Memo.sortMemos(memos: allBookMarkedFoundMemos)
+        foundPinnedMemos = Memo.sortMemos(memos: foundPinnedMemos)
         
-        print("nestedMemos form: \(foundMemos)")
+        
+        
+        
+        
         
         return NavigationView {
             
@@ -274,8 +271,10 @@ struct SecondView: View {
                     HStack {
                         Button {
 //                            presentationMode.wrappedValue.dismiss()
+                            memoEditVM.initSelectedMemos()
                             isShowingSecondView = false
                             focusState = false
+                            searchKeyword = ""
                         } label: {
                             SystemImage("rectangle.lefthalf.inset.fill", size: 24)
                                 .foregroundColor(colorScheme == .dark ? .cream : .black)
@@ -328,11 +327,12 @@ struct SecondView: View {
                         
                         Button {
                             DispatchQueue.main.async {
-                                bookmarkState.toggle()
+                                pinState.toggle()
                             }
                             
                         } label: {
-                            bookmarkState ? SystemImage("bookmark.fill").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
+//                            pinState ? SystemImage("bookmark.fill").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
+                            pinState ? SystemImage("pin.fill").tint(.navBtnColor) : SystemImage("pin").tint(.navBtnColor)
                         }
                         
                         MemoOrderingMenu(parentFolder: fastFolderWithLevelGroup.homeFolder)
@@ -350,28 +350,28 @@ struct SecondView: View {
                                 
                                 // MARK: - Bookmark State is On
                                 if foundMemos.count != 0 { // wraps all Memos
-                                    if bookmarkState {
+                                    if pinState {
                                         
                                         // MARK: - Show Bookmarked Memos First
-                                        if allBookMarkedFoundMemos.count != 0 {
+                                        if foundPinnedMemos.count != 0 {
                                             Section {
                                                 // working fine 3.21
-                                                ForEach(allBookMarkedFoundMemos, id: \.self) { markedMemo in
+                                                ForEach(foundPinnedMemos, id: \.self) { pinnedMemo in
                                                     NavigationLink(destination:
-                                                                    MemoView(memo: markedMemo, parent: markedMemo.folder!, presentingView:.constant(false))
+                                                                    MemoView(memo: pinnedMemo, parent: pinnedMemo.folder!, presentingView:.constant(false))
                                                     ) {
-                                                        MemoBoxView(memo: markedMemo)
+                                                        MemoBoxView(memo: pinnedMemo)
                                                             .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                                            .offset(x: draggingMemo == markedMemo ? oneOffset : 0)
+                                                            .offset(x: draggingMemo == pinnedMemo ? oneOffset : 0)
                                                             .background {
                                                                 BackgroundImage
                                                             }
                                                             .gesture(DragGesture()
                                                                 .updating($isDragging, body: { value, state, _ in
                                                                     state = true
-                                                                    onChanged(value: value, memo: markedMemo)
+                                                                    onChanged(value: value, memo: pinnedMemo)
                                                                 }).onEnded({ value in
-                                                                    onEnd(value: value, memo: markedMemo)
+                                                                    onEnd(value: value, memo: pinnedMemo)
                                                                 }))
                                                     }
                                                     .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
@@ -379,22 +379,23 @@ struct SecondView: View {
                                                     .gesture(DragGesture()
                                                         .updating($isDragging, body: { value, state, _ in
                                                             state = true
-                                                            onChanged(value: value, memo: markedMemo)
+                                                            onChanged(value: value, memo: pinnedMemo)
                                                         }).onEnded({ value in
-                                                            onEnd(value: value, memo: markedMemo)
+                                                            onEnd(value: value, memo: pinnedMemo)
                                                         }))
                                                     .simultaneousGesture(TapGesture().onEnded{
                                                         print("Tap pressed!")
                                                         
                                                         if memoEditVM.isSelectionMode {
                                                             print("Tap gesture triggered!")
-                                                            memoEditVM.dealWhenMemoSelected(markedMemo)
+                                                            memoEditVM.dealWhenMemoSelected(pinnedMemo)
                                                         }
                                                     })
                                                 }
                                             } header: {
                                                 HStack {
-                                                    SystemImage("bookmark.fill")
+//                                                    SystemImage("bookmark.fill")
+                                                    SystemImage("pin.fill").rotationEffect(.degrees(45))
                                                         .padding(.horizontal, 10)
                                                     Spacer()
                                                 }
@@ -410,23 +411,24 @@ struct SecondView: View {
                                         }
                                         
                                         // MARK: - Show Unbookmarked Memos Next
-                                        // working bad.
-                                        if foundMemosWithoutBookmark.count != 0 {
+                                       
+                                        if foundUnpinnedMemos.count != 0 {
                                             
-                                            ForEach( foundMemosWithoutBookmark, id: \.self) { memoArray in
+                                            ForEach( foundUnpinnedMemos, id: \.self) { unpinnedMemoArray in
                                                 Section(header:
                                                             NavigationLink(destination: {
-                                                    FolderView(currentFolder: memoArray.memos.first!.folder!)
+                                                    FolderView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
                                                 }, label: {
                                                     HStack {
-                                                        HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
+                                                        HierarchyLabelView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
                                                         
                                                         Spacer()
                                                     } // end of HStack
                                                     .padding(.leading, Sizes.overallPadding + 5)
                                                 }) // end of NavigationLink
                                                 ) {
-                                                    ForEach(Memo.sortMemosWithPinNoBookmark(memos: memoArray.memos), id: \.self) { memo in
+//                                                    ForEach(Memo.sortUnpinnedMemos(memos: unpinnedMemoArray.memos), id: \.self) { memo in
+                                                    ForEach(Memo.sortMemos(memos: unpinnedMemoArray.memos), id: \.self) { memo in
                                                         
                                                         NavigationLink(destination:
                                                                         MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
@@ -485,7 +487,7 @@ struct SecondView: View {
                                                     .padding(.leading, Sizes.overallPadding + 5)
                                                 }) // end of NavigationLink
                                                 ) {
-                                                    ForEach(Memo.sortMemosWithPinAndBookmark(memos: memoArray.memos), id: \.self) { memo in
+                                                    ForEach(Memo.sortPinnedFirst(memos: memoArray.memos), id: \.self) { memo in
                                                         
                                                         NavigationLink(destination:
                                                                         MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))

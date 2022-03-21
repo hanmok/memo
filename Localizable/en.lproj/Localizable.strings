@@ -78,9 +78,9 @@
 //"memosHasUnpinned" = "개 메모의 고정이 해제되었습니다.";
 "memosHasUnpinned" = " memos has unpinned";
 //"memosHasBookmarked" = "개의 메모가 북마크 되었습니다.";
-"memosHasBookmarked" = " memos has bookmarked";
+//"memosHasBookmarked" = " memos has bookmarked";
 //"memosHasUnbookmarked" = "개 메모의 북마크가 해제되었습니다.";
-"memosHasUnbookmarked" = " memos has unbookmarked";
+//"memosHasUnbookmarked" = " memos has unbookmarked";
 
 
 
@@ -88,7 +88,10 @@
 "oneMemoHasMovedToTrash" = "Memo has moved to trash bin";
 "oneMemoHasPinned" = "Memo has pinned";
 "oneMemoHasUnpinned" = "Memo has Unpinned";
-"oneMemoHasBookmarked" = "Memo has Bookmarked";
-"oneMemoHasUnbookmarked" = "Memo has Unbookmarked";
+//"oneMemoHasBookmarked" = "Memo has Bookmarked";
+//"oneMemoHasUnbookmarked" = "Memo has Unbookmarked";
 
 
+"bookmarkRemovingUpdateAlert" = "Update\n Bookmark and Pin has combined. \n\n Do you want to change all Bookmarked memos to be Pinned memos ?";
+
+"completed" = "Completed!";
