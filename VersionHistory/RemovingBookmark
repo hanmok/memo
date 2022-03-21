@@ -11,6 +11,18 @@ Already Updated
 : 다음 업데이트!
 업데이트 함.
 
+
+
+그리고,, CustomSearchView 에서 폴더 이름 색상 바꿈.
+
+
+1.2.0 -> 1.2.1
+
+Message 지속시간 + 0.5 s
+
+initialize searchKeyword
+initialize memoEdit status
+
 여기까지 업데이트 !!!!
 
 
@@ -24,3 +36,6 @@ to be updated.
 이거 구조를 꽤 많이 바꿔야 할 수도 있어..
 
 3. 원하는 순서로 정렬..
+
+
+

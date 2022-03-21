@@ -16,6 +16,7 @@ struct DeeepMemoApp: App {
     
 //    @AppStorage("isFirstLaunch") var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
+    @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
     
     let memoEditVM = MemoEditViewModel()
     let folderEditVM = FolderEditViewModel()
@@ -68,6 +69,7 @@ struct DeeepMemoApp: App {
             }
 
             isFirstLaunch = false
+            isFirstAfterBookmarkUpdate = false
         } else {
             print("no newFolders. it's not first launch! ")
         }
@@ -82,21 +84,6 @@ struct DeeepMemoApp: App {
             .environmentObject(folderOrder)
             .environmentObject(memoOrder)
             .environmentObject(messageVM)
-//            .overlay {
-//                VStack {
-//                    Spacer()
-//                    ZStack {
-//                    Rectangle()
-//                        .foregroundColor(.green)
-//                        .background(.green)
-////                        Text(Messages.hasAddedToFolder)
-//                        Text(messageVM.message + "hihi")
-//                    }
-//                    .frame(height: 30)
-//                }
-////                .offset(y: messageVM.shouldShow ? 0 : UIScreen.screenHeight)
-////                .animation(.spring(), value: messageVM.shouldShow)
-//            }
             
         }
         

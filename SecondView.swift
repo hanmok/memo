@@ -271,8 +271,10 @@ struct SecondView: View {
                     HStack {
                         Button {
 //                            presentationMode.wrappedValue.dismiss()
+                            memoEditVM.initSelectedMemos()
                             isShowingSecondView = false
                             focusState = false
+                            searchKeyword = ""
                         } label: {
                             SystemImage("rectangle.lefthalf.inset.fill", size: 24)
                                 .foregroundColor(colorScheme == .dark ? .cream : .black)

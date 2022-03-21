@@ -26,7 +26,7 @@ class MessageViewModel: ObservableObject {
 
                 print("shouldShow: \(self.shouldShow)")
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.spring()) {
                     
                     self.shouldShow = false

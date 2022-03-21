@@ -63,17 +63,6 @@ struct MindMapView: View {
     
     var body: some View {
         
-//        if msgVM.hasMemoRemovedForever != nil {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                msgToShow = msgVM.hasMemoRemovedForever! ? Messages.showMemosDeletedMsg(1) : Messages.showMemoMovedToTrash(1)
-//                print("msgToShow: \(msgToShow!)")
-//            }
-//        }
-        
-//        var updateState: Bool {
-//            return !isFirstLaunch && isFirstAfterBookmarkUpdate
-//        }
-        
         return ZStack {
             VStack(spacing: 0) {
                 // MARK: - TOP Views
