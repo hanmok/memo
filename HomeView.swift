@@ -15,7 +15,7 @@ struct HomeView: View {
     @FetchRequest(fetchRequest: Folder.topFolderFetchReq()) var topFolders: FetchedResults<Folder>
     
     @EnvironmentObject var messageVM: MessageViewModel
-    
+    @AppStorage(AppStorageKeys.isFirstScreenSecondView) var isFirstScreenSecondView = false
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -27,6 +27,7 @@ struct HomeView: View {
                         homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!,
                         archiveFolder: topFolders.filter{FolderType.compareName($0.title, with: .archive)}.first!
                     )
+                ,isShowingSecondView: isFirstScreenSecondView
             )
                 .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter {
                     FolderType.compareName($0.title, with: .trashbin)}.first!))

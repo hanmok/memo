@@ -14,6 +14,8 @@ struct MindMapView: View {
     
     @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
+    @AppStorage(AppStorageKeys.isFirstScreenSecondView) var isFirstScreenSecondView = false
+    @Environment(\.scenePhase) var scenePhase
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
@@ -40,9 +42,18 @@ struct MindMapView: View {
     
     @State var isShowingSearchView = false
     @State var isLoading = false
-    @State var isShowingSecondView = false
+//    @State var isShowingSecondView = false
+    
+    @State var isShowingSecondView: Bool
     
 //    @State var msgToShow: String?
+    
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup
+         ,isShowingSecondView: Bool
+    ) {
+        self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
+        _isShowingSecondView = State(initialValue: isShowingSecondView)
+    }
     
     func deleteFolder() {
         DispatchQueue.main.async {
@@ -407,11 +418,7 @@ struct MindMapView: View {
         .offset(x: isShowingSecondView ? UIScreen.screenWidth : 0)
 //        .animation(.spring(), value: isShowingSecondView)
         .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
-//        .animation(.spring(response: 0.15, dampingFraction: 1, blendDuration: 0.15), value: isShowingSecondView)
-        
-//        .onReceive(msgVM.hasMemoRemovedForever, perform: { myoutput in
-//            print("output: \(myoutput)")
-//        })
+
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
@@ -469,6 +476,11 @@ struct MindMapView: View {
                 }
             }
         })
+        .onChange(of: scenePhase) { newScenePhase in
+            if newScenePhase == .background {
+                isFirstScreenSecondView = isShowingSecondView
+            }
+        }
         .navigationBarHidden(true)
     }
 }

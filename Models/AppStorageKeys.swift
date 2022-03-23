@@ -20,5 +20,6 @@ struct AppStorageKeys {
     static let pinState = "pinState"
     
     static let isFirstLaunchAfterBookmarkUpdate = "isFirstAfterBookmarkUpdate"
+    static let isFirstScreenSecondView = "isFirstScreenSecondView"
     
 }
