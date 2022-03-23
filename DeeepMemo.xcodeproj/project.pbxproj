@@ -42,6 +42,8 @@
 		9A337890279A56C500805138 /* FolderEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A33788F279A56C500805138 /* FolderEditViewModel.swift */; };
 		9A337893279A5C9600805138 /* HierarchyLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337892279A5C9600805138 /* HierarchyLabelView.swift */; };
 		9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337895279A6F3C00805138 /* MemoEditViewModel.swift */; };
+		9A365A2927EBA841003D4C77 /* DraggableMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */; };
+		9A365A2B27EBAD48003D4C77 /* DragRefactoring3.24 in Resources */ = {isa = PBXBuildFile; fileRef = 9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */; };
 		9A87D30127E67C1B00A0C5CD /* FixingError3.20 in Resources */ = {isa = PBXBuildFile; fileRef = 9A87D30027E67C1B00A0C5CD /* FixingError3.20 */; };
 		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
@@ -175,6 +177,8 @@
 		9A33788F279A56C500805138 /* FolderEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderEditViewModel.swift; sourceTree = "<group>"; };
 		9A337892279A5C9600805138 /* HierarchyLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HierarchyLabelView.swift; sourceTree = "<group>"; };
 		9A337895279A6F3C00805138 /* MemoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewModel.swift; sourceTree = "<group>"; };
+		9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableMemoBoxView.swift; sourceTree = "<group>"; };
+		9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */ = {isa = PBXFileReference; lastKnownFileType = text; path = DragRefactoring3.24; sourceTree = "<group>"; };
 		9A87D30027E67C1B00A0C5CD /* FixingError3.20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = FixingError3.20; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
@@ -291,6 +295,7 @@
 		9A04748F27715D1100571D66 = {
 			isa = PBXGroup;
 			children = (
+				9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */,
 				9ACC0C7027DB581800D18690 /* SecondView.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
@@ -551,6 +556,7 @@
 				9AAA24A327E7B01D009923C7 /* UpdatingRelocation3.21 */,
 				9AAA24A527E8011E009923C7 /* AddMessage */,
 				9AAA24A727E89586009923C7 /* RemovingBookmark */,
+				9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */,
 			);
 			path = VersionHistory;
 			sourceTree = "<group>";
@@ -727,6 +733,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A365A2B27EBAD48003D4C77 /* DragRefactoring3.24 in Resources */,
 				9ACC0C7327DB8CE600D18690 /* ScreenShotInfo in Resources */,
 				9AC5D13D2785247D007EAA28 /* Terms in Resources */,
 				9A8F17A127E64479001FD2E9 /* ModifyUI3.20 in Resources */,
@@ -804,6 +811,7 @@
 				9AC5D234278C3145007EAA28 /* MemoList2.swift in Sources */,
 				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
 				9AA2672F27BE4D3700AC75DB /* ColorPickerView.swift in Sources */,
+				9A365A2927EBA841003D4C77 /* DraggableMemoBoxView.swift in Sources */,
 				9AB7250927D00F36006A825C /* MemoAscDecButton.swift in Sources */,
 				9AC5D2192786F773007EAA28 /* HomeViewPrev.swift in Sources */,
 				9ACC0C8227DE05C000D18690 /* MessageViewModel.swift in Sources */,

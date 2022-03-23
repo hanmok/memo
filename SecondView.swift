@@ -24,6 +24,7 @@ struct SecondView: View {
     
     @FocusState var focusState: Bool
     
+    @StateObject var dragVM = DraggableViewModel()
     @Binding var isShowingSecondView: Bool
     
     
@@ -357,40 +358,48 @@ struct SecondView: View {
                                             Section {
                                                 // working fine 3.21
                                                 ForEach(foundPinnedMemos, id: \.self) { pinnedMemo in
-                                                    NavigationLink(destination:
-                                                                    MemoView(memo: pinnedMemo, parent: pinnedMemo.folder!, presentingView:.constant(false))
-                                                    ) {
-                                                        MemoBoxView(memo: pinnedMemo)
-                                                            .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                                            .offset(x: draggingMemo == pinnedMemo ? oneOffset : 0)
-                                                            .background {
-                                                                BackgroundImage
-                                                            }
-                                                            .gesture(DragGesture()
-                                                                .updating($isDragging, body: { value, state, _ in
-                                                                    state = true
-                                                                    onChanged(value: value, memo: pinnedMemo)
-                                                                }).onEnded({ value in
-                                                                    onEnd(value: value, memo: pinnedMemo)
-                                                                }))
-                                                    }
-                                                    .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
-                                                    .disabled(memoEditVM.isSelectionMode)
-                                                    .gesture(DragGesture()
-                                                        .updating($isDragging, body: { value, state, _ in
-                                                            state = true
-                                                            onChanged(value: value, memo: pinnedMemo)
-                                                        }).onEnded({ value in
-                                                            onEnd(value: value, memo: pinnedMemo)
-                                                        }))
-                                                    .simultaneousGesture(TapGesture().onEnded{
-                                                        print("Tap pressed!")
-                                                        
-                                                        if memoEditVM.isSelectionMode {
-                                                            print("Tap gesture triggered!")
-                                                            memoEditVM.dealWhenMemoSelected(pinnedMemo)
-                                                        }
-                                                    })
+                                                    
+                                                    
+//                                                    NavigationLink(destination:
+//                                                                    MemoView(memo: pinnedMemo, parent: pinnedMemo.folder!, presentingView:.constant(false))
+//                                                    ) {
+//                                                        MemoBoxView(memo: pinnedMemo)
+//                                                            .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+//                                                            .offset(x: draggingMemo == pinnedMemo ? oneOffset : 0)
+//                                                            .background {
+//                                                                BackgroundImage
+//                                                            }
+//                                                            .gesture(DragGesture()
+//                                                                .updating($isDragging, body: { value, state, _ in
+//                                                                    state = true
+//                                                                    onChanged(value: value, memo: pinnedMemo)
+//                                                                }).onEnded({ value in
+//                                                                    onEnd(value: value, memo: pinnedMemo)
+//                                                                }))
+//                                                    }
+//                                                    .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
+//                                                    .disabled(memoEditVM.isSelectionMode)
+//                                                    .gesture(DragGesture()
+//                                                        .updating($isDragging, body: { value, state, _ in
+//                                                            state = true
+//                                                            onChanged(value: value, memo: pinnedMemo)
+//                                                        }).onEnded({ value in
+//                                                            onEnd(value: value, memo: pinnedMemo)
+//                                                        }))
+//                                                    .simultaneousGesture(TapGesture().onEnded{
+//                                                        print("Tap pressed!")
+//
+//                                                        if memoEditVM.isSelectionMode {
+//                                                            print("Tap gesture triggered!")
+//                                                            memoEditVM.dealWhenMemoSelected(pinnedMemo)
+//                                                        }
+//                                                    })
+                                                    DraggableMemoBoxView(memo: pinnedMemo)
+                                                        .environmentObject(memoEditVM)
+                                                        .environmentObject(dragVM)
+                                                    
+                                                    
+                                                    
                                                 }
                                             } header: {
                                                 HStack {
@@ -430,40 +439,48 @@ struct SecondView: View {
 //                                                    ForEach(Memo.sortUnpinnedMemos(memos: unpinnedMemoArray.memos), id: \.self) { memo in
                                                     ForEach(Memo.sortMemos(memos: unpinnedMemoArray.memos), id: \.self) { memo in
                                                         
-                                                        NavigationLink(destination:
-                                                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
-                                                        ) {
-                                                            MemoBoxView(memo: memo)
-                                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                                                .offset(x: draggingMemo == memo ? oneOffset : 0)
-                                                                .background {
-                                                                    BackgroundImage
-                                                                }
-                                                                .gesture(DragGesture()
-                                                                    .updating($isDragging, body: { value, state, _ in
-                                                                        state = true
-                                                                        onChanged(value: value, memo: memo)
-                                                                    }).onEnded({ value in
-                                                                        onEnd(value: value, memo: memo)
-                                                                    }))
-                                                        }
-                                                        .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
-                                                        .disabled(memoEditVM.isSelectionMode)
-                                                        .gesture(DragGesture()
-                                                            .updating($isDragging, body: { value, state, _ in
-                                                                state = true
-                                                                onChanged(value: value, memo: memo)
-                                                            }).onEnded({ value in
-                                                                onEnd(value: value, memo: memo)
-                                                            }))
-                                                        .simultaneousGesture(TapGesture().onEnded{
-                                                            print("Tap pressed!")
-                                                            
-                                                            if memoEditVM.isSelectionMode {
-                                                                print("Tap gesture triggered!")
-                                                                memoEditVM.dealWhenMemoSelected(memo)
-                                                            }
-                                                        })
+                                                        
+                                                        
+//                                                        NavigationLink(destination:
+//                                                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
+//                                                        ) {
+//                                                            MemoBoxView(memo: memo)
+//                                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+//                                                                .offset(x: draggingMemo == memo ? oneOffset : 0)
+//                                                                .background {
+//                                                                    BackgroundImage
+//                                                                }
+//                                                                .gesture(DragGesture()
+//                                                                    .updating($isDragging, body: { value, state, _ in
+//                                                                        state = true
+//                                                                        onChanged(value: value, memo: memo)
+//                                                                    }).onEnded({ value in
+//                                                                        onEnd(value: value, memo: memo)
+//                                                                    }))
+//                                                        }
+//                                                        .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
+//                                                        .disabled(memoEditVM.isSelectionMode)
+//                                                        .gesture(DragGesture()
+//                                                            .updating($isDragging, body: { value, state, _ in
+//                                                                state = true
+//                                                                onChanged(value: value, memo: memo)
+//                                                            }).onEnded({ value in
+//                                                                onEnd(value: value, memo: memo)
+//                                                            }))
+//                                                        .simultaneousGesture(TapGesture().onEnded{
+//                                                            print("Tap pressed!")
+//
+//                                                            if memoEditVM.isSelectionMode {
+//                                                                print("Tap gesture triggered!")
+//                                                                memoEditVM.dealWhenMemoSelected(memo)
+//                                                            }
+//                                                        })
+                                                        DraggableMemoBoxView(memo: memo)
+                                                            .environmentObject(memoEditVM)
+                                                            .environmentObject(dragVM)
+                                                        
+                                                        
+                                                        
                                                     } // end of ForEach
                                                 }
                                             } // end of ForEach
@@ -489,40 +506,48 @@ struct SecondView: View {
                                                 ) {
                                                     ForEach(Memo.sortPinnedFirst(memos: memoArray.memos), id: \.self) { memo in
                                                         
-                                                        NavigationLink(destination:
-                                                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
-                                                        ) {
-                                                            MemoBoxView(memo: memo)
-                                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                                                .offset(x: draggingMemo == memo ? oneOffset : 0)
-                                                                .background {
-                                                                    BackgroundImage
-                                                                }
-                                                                .gesture(DragGesture()
-                                                                    .updating($isDragging, body: { value, state, _ in
-                                                                        state = true
-                                                                        onChanged(value: value, memo: memo)
-                                                                    }).onEnded({ value in
-                                                                        onEnd(value: value, memo: memo)
-                                                                    }))
-                                                        }
-                                                        .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
-                                                        .disabled(memoEditVM.isSelectionMode)
-                                                        .gesture(DragGesture()
-                                                            .updating($isDragging, body: { value, state, _ in
-                                                                state = true
-                                                                onChanged(value: value, memo: memo)
-                                                            }).onEnded({ value in
-                                                                onEnd(value: value, memo: memo)
-                                                            }))
-                                                        .simultaneousGesture(TapGesture().onEnded{
-                                                            print("Tap pressed!")
-                                                            
-                                                            if memoEditVM.isSelectionMode {
-                                                                print("Tap gesture triggered!")
-                                                                memoEditVM.dealWhenMemoSelected(memo)
-                                                            }
-                                                        })
+                                                        
+                                                        
+//                                                        NavigationLink(destination:
+//                                                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
+//                                                        ) {
+//                                                            MemoBoxView(memo: memo)
+//                                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+//                                                                .offset(x: draggingMemo == memo ? oneOffset : 0)
+//                                                                .background {
+//                                                                    BackgroundImage
+//                                                                }
+//                                                                .gesture(DragGesture()
+//                                                                    .updating($isDragging, body: { value, state, _ in
+//                                                                        state = true
+//                                                                        onChanged(value: value, memo: memo)
+//                                                                    }).onEnded({ value in
+//                                                                        onEnd(value: value, memo: memo)
+//                                                                    }))
+//                                                        }
+//                                                        .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
+//                                                        .disabled(memoEditVM.isSelectionMode)
+//                                                        .gesture(DragGesture()
+//                                                            .updating($isDragging, body: { value, state, _ in
+//                                                                state = true
+//                                                                onChanged(value: value, memo: memo)
+//                                                            }).onEnded({ value in
+//                                                                onEnd(value: value, memo: memo)
+//                                                            }))
+//                                                        .simultaneousGesture(TapGesture().onEnded{
+//                                                            print("Tap pressed!")
+//
+//                                                            if memoEditVM.isSelectionMode {
+//                                                                print("Tap gesture triggered!")
+//                                                                memoEditVM.dealWhenMemoSelected(memo)
+//                                                            }
+//                                                        })
+                                                        DraggableMemoBoxView(memo: memo)
+                                                            .environmentObject(memoEditVM)
+                                                            .environmentObject(dragVM)
+                                                        
+                                                        
+                                                        
                                                     } // end of ForEach
                                                 }
                                             } // end of ForEach
