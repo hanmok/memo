@@ -21,7 +21,7 @@ struct FilteredMemoList: View {
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     
     @ObservedObject var folder: Folder
-    
+    @StateObject var dragVM = DraggableViewModel()
     var listType: MemoListType
     @GestureState var isDragging = false
     /// dragging flag end a little later than isDragging, to complete onEnd Action (for Better UX)
@@ -52,57 +52,59 @@ struct FilteredMemoList: View {
                 Section {
                     
                     ForEach(memosToShow, id: \.self) { memo in
-                        NavigationLink(destination:
-                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
-                            .environmentObject(trashBinVM)
-                        ) {
-                            MemoBoxView(memo: memo)
-                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-                                .offset(x: draggingMemo == memo ? oneOffset : 0)
-                                .background {
-                                    ZStack {
-                                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
-                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
-                                            .cornerRadius(10)
-                                        HStack {
-                                            Spacer()
-                                            SystemImage("checkmark")
-                                                .frame(width: 65)
-                                                .foregroundColor(.basicColors)
-                                                .opacity(isOnDraggingAction ? 1 : 0)
-                                        }
-                                    }
-                                    .padding(.horizontal, Sizes.smallSpacing)
-                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
-                                }
-                            
-                                .gesture(DragGesture()
-                                    .updating($isDragging, body: { value, state, _ in
-                                        state = true
-                                        onChanged(value: value, memo: memo)
-                                    }).onEnded({ value in
-                                        onEnd(value: value, memo: memo)
-                                    }))
-                        } // end of ZStack
-                        .padding(.bottom, Sizes.spacingBetweenMemoBox)
-                        .disabled(memoEditVM.isSelectionMode)
                         
-                        .gesture(DragGesture()
-                            .updating($isDragging, body: { value, state, _ in
-                                state = true
-                                onChanged(value: value, memo: memo)
-                            }).onEnded({ value in
-                                onEnd(value: value, memo: memo)
-                            }))
                         
-                        .simultaneousGesture(TapGesture().onEnded{
-                            print("Tap pressed!")
-                            
-                            if memoEditVM.isSelectionMode {
-                                print("Tap gesture triggered!")
-                                memoEditVM.dealWhenMemoSelected(memo)
-                            }
-                        })
+                        
+//                        NavigationLink(destination:
+//                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
+//                        ) {
+//                            MemoBoxView(memo: memo)
+//                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+//                                .offset(x: draggingMemo == memo ? oneOffset : 0)
+//                                .background {
+//                                    ZStack {
+//                                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
+//                                            .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
+//                                            .cornerRadius(10)
+//                                        HStack {
+//                                            Spacer()
+//                                            SystemImage("checkmark")
+//                                                .frame(width: 65)
+//                                                .foregroundColor(.basicColors)
+//                                                .opacity(isOnDraggingAction ? 1 : 0)
+//                                        }
+//                                    }
+//                                    .padding(.horizontal, Sizes.smallSpacing)
+//                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
+//                                }
+//                                .gesture(DragGesture()
+//                                    .updating($isDragging, body: { value, state, _ in
+//                                        state = true
+//                                        onChanged(value: value, memo: memo)
+//                                    }).onEnded({ value in
+//                                        onEnd(value: value, memo: memo)
+//                                    }))
+//                        } // end of ZStack
+//                        .padding(.bottom, Sizes.spacingBetweenMemoBox)
+//                        .disabled(memoEditVM.isSelectionMode)
+//                        .gesture(DragGesture()
+//                            .updating($isDragging, body: { value, state, _ in
+//                                state = true
+//                                onChanged(value: value, memo: memo)
+//                            }).onEnded({ value in
+//                                onEnd(value: value, memo: memo)
+//                            }))
+//                        .simultaneousGesture(TapGesture().onEnded{
+//                            print("Tap pressed!")
+//                            if memoEditVM.isSelectionMode {
+//                                print("Tap gesture triggered!")
+//                                memoEditVM.dealWhenMemoSelected(memo)
+//                            }
+//                        })
+                        DraggableMemoBoxView(memo: memo)
+                            .environmentObject(memoEditVM)
+                            .environmentObject(dragVM)
+                        
                     } // end of ForEach
                 } header: {
                     VStack {
