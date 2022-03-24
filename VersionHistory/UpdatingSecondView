@@ -1,0 +1,35 @@
+1.2.1 -> 1.2.2
+
+default value for first screen 설정
+
+SecondView Sorting
+
+
+고정메모 위로
+폴더 순서대로
+보관함 숨기기
+
+추가,
+
+Memo, Folder Sorting 추가
+
+이거,, 분리할 수 있으면 더 좋을 것 같음.. 현재 마땅한 아이콘을 못찾음.
+
+
+
+
+
+
+to be updated.
+
+
+
+3. 원하는 순서로 정렬.. 이거 완료함.
+
+
+2. pinned memo 를 첫번째 메인화면에서 열 때, animation 이 조금 바뀌면 좋겠다.
+이거 구조를 꽤 많이 바꿔야 할 수도 있어..
+이거 할 때, pinned 바를 숨길 수 있으면 좋겠음.
+아래로 내리고 올리는 식으로
+
+애니메이션도 그에 맞게 수정.

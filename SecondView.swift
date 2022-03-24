@@ -146,6 +146,7 @@ struct SecondView: View {
         .padding(.vertical, 5)
     }
     
+    
     var dividerBetweenPin: some View {
         Rectangle()
             .frame(height: 1)
