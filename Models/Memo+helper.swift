@@ -101,16 +101,17 @@ extension Memo {
         // 1. trashBin 이 Folder 가 아니면 됨.
     // 2.
     // this function makes bug.. why??
-    static func makeNotBelongToFolder(_ memo: Memo, _ trash: Folder) {
-        if let context = memo.managedObjectContext {
-            memo.modificationDate = Date() // it's not the problem..
-            memo.folder = nil
-            // make topFolder update, which navigate to prev Folder for subFolder
-//            memo.folder = trash
-
-            context.saveCoreData()
-        }
-    }
+    
+//    static func makeNotBelongToFolder(_ memo: Memo, _ trash: Folder) {
+//        if let context = memo.managedObjectContext {
+//            memo.modificationDate = Date() // it's not the problem..
+//            memo.folder = nil
+//            // make topFolder update, which navigate to prev Folder for subFolder
+////            memo.folder = trash
+//
+//            context.saveCoreData()
+//        }
+//    }
     
     static func moveToTrashBin(_ memo: Memo, _ trash: Folder) {
         if let context = memo.managedObjectContext {
@@ -122,8 +123,6 @@ extension Memo {
             context.saveCoreData()
         }
     }
-    
-    
 }
 
 
@@ -355,17 +354,21 @@ extension Memo {
     }
     
     static func sortPinnedFirst(memos: [Memo]) -> [Memo] {
-        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
-        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+//        @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+//        @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+//
+//        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        let sortingMethod = Memo.getSortingMethod2()
+        var pinnedMemos = [Memo]()
+        var unpinnedMemos = [Memo]()
         
-        let sortingMethod = Memo.getSortingMethod(type: mOrderType, isAsc: mOrderAsc)
+        for eachMemo in memos {
+            eachMemo.isPinned ? pinnedMemos.append(eachMemo) : unpinnedMemos.append(eachMemo)
+        }
         
-        let importantMemos = memos.filter { $0.isPinned }
-        let normalMemos = memos.filter { !$0.isPinned }
+        var allMemos = pinnedMemos.sorted(by: sortingMethod)
         
-        var allMemos = importantMemos.sorted(by: sortingMethod)
-        
-        normalMemos.sorted(by: sortingMethod).forEach { allMemos.append($0) }
+        unpinnedMemos.sorted(by: sortingMethod).forEach { allMemos.append($0) }
         
         return allMemos
     }
@@ -394,7 +397,7 @@ extension Memo {
         return false
     }
     
-    static func getPinnedOnly(from nested: [NestedMemo], inFolderOrder: Bool) -> [Memo] {
+    static func getPinnedOnly(from nested: [NestedMemo]) -> [Memo] {
         var memos = [Memo]()
         
         for eachNested in nested {
@@ -405,17 +408,17 @@ extension Memo {
             }
         }
         
-        if inFolderOrder {
-            return memos
-        } else {
+//        if inFolderOrder {
+//            return memos
+//        } else {
             let sortingMethod = Memo.getSortingMethod2()
             return memos.sorted(by: sortingMethod)
-        }
+//        }
     }
     
     
     
-    static func getUnpinnedMemos(from nested: [NestedMemo], inFolderOrder: Bool) -> [Memo] {
+    static func getUnpinnedMemos(from nested: [NestedMemo] ) -> [Memo] {
         var memos = [Memo]()
         
         for eachNested in nested {
@@ -426,31 +429,30 @@ extension Memo {
             }
         }
         
-        if inFolderOrder {
-            return memos
-        } else {
+//        if inFolderOrder {
+//            return memos
+//        } else {
             let sortingMethod = Memo.getSortingMethod2()
             return memos.sorted(by: sortingMethod)
-        }
+//        }
     }
     
     static func getAllMemos(from nested: [NestedMemo]) -> [Memo] {
         var memos = [Memo]()
         
         for eachNested in nested {
-            for eachMemo in eachNested.memos { // which sorting method ?
+            for eachMemo in eachNested.memos {
                     memos.append(eachMemo)
             }
         }
-        print("memos from getAllMemos  : \(memos)")
-        memos.forEach { print($0.titleToShow)}
         
         let sortingMethod = Memo.getSortingMethod2()
         return memos.sorted(by: sortingMethod)
     }
     
     static func getUnpinnedNestedMemos(from foundMemos: [NestedMemo]) -> [NestedMemo] {
-        return foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isPinned}) }.filter { !$0.memos.isEmpty}
+        let sortingMethod = Memo.getSortingMethod2()
+        return foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isPinned}.sorted(by: sortingMethod)) }.filter { !$0.memos.isEmpty}
     }
 
     

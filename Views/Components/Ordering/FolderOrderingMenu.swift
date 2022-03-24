@@ -32,13 +32,9 @@ struct FolderOrderingMenu: View {
 
 struct FolderOrderingMenuInSecondView: View {
     
-    // not updating correctly..
     
     var body: some View {
         Menu {
-//            Text(LocalizedStringStorage.folderOrdering)
-//                .font(.title3)
-            
             FolderOrderingButton(type: .creationDate)
             FolderOrderingButton(type: .alphabetical)
             
@@ -48,8 +44,6 @@ struct FolderOrderingMenuInSecondView: View {
             FolderAscDecButton(isAscending: false)
             
         } label: {
-//            SystemImage("arrow.up.arrow.down")
-//                .tint(Color.navBtnColor)
             Text(LocalizedStringStorage.folderOrdering)
         }
     }

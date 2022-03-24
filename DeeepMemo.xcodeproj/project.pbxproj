@@ -300,7 +300,6 @@
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
-				9ACC0C7D27DDCC1500D18690 /* MsgView.swift */,
 				9AB7250027D00E16006A825C /* TrashBin */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
@@ -440,6 +439,7 @@
 		9AB724FD27D00D9A006A825C /* Prev */ = {
 			isa = PBXGroup;
 			children = (
+				9ACC0C7D27DDCC1500D18690 /* MsgView.swift */,
 				9AB7251227D0107E006A825C /* TrashBinMemoList.swift */,
 				9AD8332527BD0B5F00506AE8 /* Practices */,
 				9AA2673127BE4E2900AC75DB /* FavColors.swift */,

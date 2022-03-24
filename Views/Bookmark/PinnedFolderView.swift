@@ -73,8 +73,6 @@ struct PinnedFolderView: View {
                         
                         HStack {
                             HStack {
-//                                Text(Image(systemName: "bookmark.fill")) + Text(" BookMarked Memos")
-//                                Text(Image(systemName: "pin.fill").rotationEffect(.degrees(45))) + Text(" Pinned Memos")
                                 SystemImage("pin.fill").rotationEffect(.degrees(45))
                                     .padding(.trailing, 5)
                                 Text("Pinned Memos")

@@ -3,7 +3,7 @@
   DeeepMemo
 
   Created by Mac mini on 2022/03/01.
-  
+ 
 */
 
 "done" = "확 인";
@@ -58,7 +58,7 @@
 "memosHasDeleted" = "개의 메모가 삭제되었습니다.";
 
 "folderHasDeleted" = "폴더가 삭제되었습니다.";
-"memosHasMovedToTrash" = "개의 메모가 휴지통으로 이동하였습니다.";
+"memosHasMovedToTrash" = "개의 메모가 삭제되었습니다.";
 
 
 "memosHasPinned" = "개의 메모가 고정되었습니다";
@@ -66,7 +66,7 @@
 
 
 "oneMemoHasDeleted" = "삭제되었습니다.";
-"oneMemoHasMovedToTrash" = "휴지통으로 이동하였습니다.";
+"oneMemoHasMovedToTrash" = "메모가 삭제되었습니다.";
 "oneMemoHasPinned" = "고정되었습니다.";
 "oneMemoHasUnpinned" = "고정이 해제되었습니다.";
 
@@ -75,6 +75,6 @@
 
 "completed" = "완료되었습니다!";
 
-"pinOnTheTop" = "중요한 메모는 위로";
+"pinOnTheTop" = "고정메모 위로";
 "inFolderOrder" = "폴더 순서대로";
 "hideArchive" = "보관함 숨기기";

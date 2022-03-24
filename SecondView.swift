@@ -136,6 +136,26 @@ struct SecondView: View {
     }
     
     
+    var rotatedPinWithPadding: some View {
+        HStack {
+            SystemImage("pin.fill").rotationEffect(.degrees(45))
+                .padding(.horizontal, 10)
+            Spacer()
+        }
+        .padding(.leading, Sizes.overallPadding)
+        .padding(.vertical, 5)
+    }
+    
+    var dividerBetweenPin: some View {
+        Rectangle()
+            .frame(height: 1)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+            .padding(.vertical, 5)
+    }
+
+    
+    
     var body: some View {
         
         let scroll = DragGesture(minimumDistance: 10, coordinateSpace: .local)
@@ -229,25 +249,22 @@ struct SecondView: View {
                                         // MARK: - Show Pinned Memos First
                                         if Memo.checkIfHasPinned(from: foundNestedMemos){
                                             Section {
-                                                ForEach(Memo.getPinnedOnly(from: foundNestedMemos, inFolderOrder: true ), id: \.self) { pinnedMemo in
+                                                ForEach(Memo.getPinnedOnly(from: foundNestedMemos ), id: \.self) { pinnedMemo in
                                                     DraggableMemoBoxView(memo: pinnedMemo)
                                                         .environmentObject(dragVM)
                                                 }
                                             } header: {
-                                                RotatedPinWithPadding()
+                                                rotatedPinWithPadding
                                             }
                                             
-                                            DividerBetweenPin()
+                                            dividerBetweenPin
                                         
                                         }
                                         
                                         // MARK: - Show UnPinned Memos Next
-                                        
-//                                        if foundUnpinnedNestedMemos.count != 0 {
                                         if Memo.checkIfHasUnpinned(from: foundNestedMemos) {
                                             if inFolderOrder {
-                                                //                                                ForEach( foundUnpinnedNestedMemos, id: \.self) { unpinnedMemoArray in
-                                                // Memos With Folder
+                                                // MARK: - Pin State & inFolderOrder. spread unpinnedMemos with containing folders
                                                 ForEach( Memo.getUnpinnedNestedMemos(from: foundNestedMemos), id: \.self) { unpinnedMemoArray in
                                                     Section(header:
                                                                 NavigationLink(destination: {
@@ -266,21 +283,23 @@ struct SecondView: View {
                                                         }
                                                     }
                                                 }
-                                                // Not in Folder Order
+                                                // MARK: - Pin State & !inFolderOrder. spread all unpinned memos without folders
                                             } else {
-                                                ForEach(Memo.getUnpinnedMemos(from: foundNestedMemos, inFolderOrder: false), id: \.self) { unpinnedMemo in
+                                                Text(" ").font(.caption2)
+                                                ForEach(Memo.getUnpinnedMemos(from: foundNestedMemos), id: \.self) { unpinnedMemo in
                                                     DraggableMemoBoxView(memo: unpinnedMemo)
                                                         .environmentObject(dragVM)
                                                 }
                                             }
                                         }
-                                        // MARK: - Pin State Off -> Show Pin & pinned Memos First, and then normal Memos
+                                        // MARK: - Pin State Off
                                     } else {
                                         if foundNestedMemos.count != 0 {
                                             HStack {
                                                 Text("").padding(.vertical, 1)
                                             }
                                             if inFolderOrder {
+                                                // MARK: - Pin: Off, in FolderOrder -> spread memos with folders, pinned placed to the top
                                                 ForEach( foundNestedMemos, id: \.self) { memoArray in
                                                     Section(header:
                                                                 NavigationLink(destination: {
@@ -299,7 +318,7 @@ struct SecondView: View {
                                                         } // end of ForEach
                                                     }
                                                 } // end of ForEach
-                                            } else { // not in Folder Order
+                                            } else { // MARK: - Pin Off, not in Folder Order -> follow memo sorting only
                                                 ForEach(Memo.getAllMemos(from: foundNestedMemos), id: \.self) { memo in
                                                     DraggableMemoBoxView(memo: memo)
                                                         .environmentObject(dragVM)
@@ -321,8 +340,6 @@ struct SecondView: View {
                         } // end of ScrollView
                         .gesture(scroll)
                         // another element of ZStack begin // end of ZStack
-                        
-                        // Plus Button, and MemoToolBarView
                         
                         MemoEditView(
                             plusView:
@@ -383,64 +400,58 @@ struct SecondView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .padding(.horizontal, Sizes.overallPadding)
-        .onAppear {
-            print("CustomSearchView has appeared!!!!!")
-        }
     }
 }
 
 
-struct DividerBetweenPin: View {
-    var body: some View{
-        Rectangle()
-            .frame(height: 1)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
-            .padding(.vertical, 5)
-    }
-}
+//struct DividerBetweenPin: View {
+//    var body: some View{
+//        Rectangle()
+//            .frame(height: 1)
+//            .frame(maxWidth: .infinity, alignment: .leading)
+//            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+//            .padding(.vertical, 5)
+//    }
+//}
 
-struct RotatedPinWithPadding: View {
-    var body: some View {
-        HStack {
-            SystemImage("pin.fill").rotationEffect(.degrees(45))
-                .padding(.horizontal, 10)
-            Spacer()
-        }
-        .padding(.leading, Sizes.overallPadding)
-        .padding(.vertical, 5)
-    }
-}
+//struct RotatedPinWithPadding: View {
+//    var body: some View {
+//        HStack {
+//            SystemImage("pin.fill").rotationEffect(.degrees(45))
+//                .padding(.horizontal, 10)
+//            Spacer()
+//        }
+//        .padding(.leading, Sizes.overallPadding)
+//        .padding(.vertical, 5)
+//    }
+//}
 
 struct OrderingMenuInSecondView: View {
-    
+
     @Binding var pinState: Bool
     @Binding var inFolderOrder: Bool
     @Binding var isHidingArchive: Bool
-    
+
     var body: some View {
-        
+
         Menu {
             Toggle(isOn: $pinState) {
-//                Text("Pin on the Top")
                 Text(LocalizedStringStorage.pinOnTheTop)
             }
             Toggle(isOn: $inFolderOrder) {
-//                Text("In Folder Order")
                 Text(LocalizedStringStorage.inFolderOrder)
             }
             Toggle(isOn: $isHidingArchive) {
-//                Text("Hide Archive")
                 Text(LocalizedStringStorage.hideArchive)
             }
-            
+
             Divider()
-            
-            // this view does not update order immediately ..
+            Divider()
+
             MemoOrderingMenuInSecondView()
-            
+
             FolderOrderingMenuInSecondView()
-            
+
         } label: {
             SystemImage("arrow.up.arrow.down")
                 .tint(Color.navBtnColor)

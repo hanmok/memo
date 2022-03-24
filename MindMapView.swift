@@ -9,12 +9,10 @@ import SwiftUI
 
 struct MindMapView: View {
     
-//    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
-//    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
-    
     @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
     @AppStorage(AppStorageKeys.isFirstScreenSecondView) var isFirstScreenSecondView = false
+    
     @Environment(\.scenePhase) var scenePhase
     
     @Environment(\.managedObjectContext) var context
@@ -456,20 +454,22 @@ struct MindMapView: View {
         })
         
         
-        .onAppear(perform: {
-            print("MindMapView has Appeared!")
-            let allMemosReq = Memo.fetch(.all)
-            
-            if let allMemos = try? context.fetch(allMemosReq) {
-                 allMemos.forEach {
-                    if $0.folder == nil {
-                        $0.folder = trashBinVM.trashBinFolder
-                    }
-                }
-            }
-        })
+//        .onAppear(perform: {
+//            print("MindMapView has Appeared!")
+//            let allMemosReq = Memo.fetch(.all)
+//
+//            if let allMemos = try? context.fetch(allMemosReq) {
+//                 allMemos.forEach {
+//                    if $0.folder == nil {
+//                        $0.folder = trashBinVM.trashBinFolder
+//                    }
+//                }
+//            }
+//        })
+        
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .background {
+                print("isFirstScreenSecondView has updated to \(isShowingSecondView)")
                 isFirstScreenSecondView = isShowingSecondView
             }
         }
