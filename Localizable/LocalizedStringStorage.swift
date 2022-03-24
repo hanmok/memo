@@ -87,6 +87,16 @@ enum LocalizedStringStorage {
     
     static let completed = StringEnum.completed.convertIntoStr()
     
+//    case pinOnTheTop = "pinOnTheTop"
+//    case inFolderOrder = "inFolderOrder"
+//    case hideArchive = "hideArchive"
+    
+    static let pinOnTheTop = StringEnum.pinOnTheTop.convertIntoStr()
+    static let inFolderOrder = StringEnum.inFolderOrder.convertIntoStr()
+    static let hideArchive = StringEnum.hideArchive.convertIntoStr()
+    
+    
+    
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
         case .newSubFolder: return LocalizedStringStorage.newSubFolder
@@ -199,6 +209,16 @@ enum StringEnum: String {
     
 //    case memosHasUnbookmarked = "memosHasUnbookmarked"
 //    case oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
+    
+//    "pinOnTheTop" = "Pin on the Top";
+//    "inFolderOrder" = "In Folder Order";
+//    "hideArchive" = "Hide Archive";
+    
+    case pinOnTheTop = "pinOnTheTop"
+    case inFolderOrder = "inFolderOrder"
+    case hideArchive = "hideArchive"
+    
+    
     
 }
 

@@ -716,7 +716,6 @@
 			);
 			mainGroup = 9A04748F27715D1100571D66;
 			packageReferences = (
-				9A04BF2227C8CF4E00F3972D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 9A04749D27715D1300571D66 /* Products */;
 			projectDirPath = "";
@@ -1175,17 +1174,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9A04BF2227C8CF4E00F3972D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */ = {

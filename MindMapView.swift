@@ -115,7 +115,6 @@ struct MindMapView: View {
                             }
                             
                         } label: { // original : 28
-                            
                             SystemImage( "folder.badge.plus", size: 28)
                                 .foregroundColor(Color.navBtnColor)
                         }
@@ -124,8 +123,7 @@ struct MindMapView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
                 }
-                .padding(.trailing, Sizes.overallPadding)
-                .padding(.leading, Sizes.overallPadding)
+                .padding(.horizontal, Sizes.overallPadding)
                 
                 Picker("", selection: $selectionEnum) {
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
@@ -134,8 +132,7 @@ struct MindMapView: View {
                 }
                 .id(selectionEnum)
                 .pickerStyle(SegmentedPickerStyle())
-                .padding(.top, Sizes.overallPadding)
-                .padding(.horizontal, Sizes.overallPadding)
+                .padding([.top, .horizontal], Sizes.overallPadding)
                 
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack
@@ -319,11 +316,6 @@ struct MindMapView: View {
                 
             } // end of VStack , Inside ZStack.
             
-//            MsgView(msgToShow: $msgToShow)
-//                .padding(.top, UIScreen.screenHeight / 1.5)
-                
-            
-            
             if isLoading {
                 Color(.clear)
                 ProgressView()
@@ -484,3 +476,6 @@ struct MindMapView: View {
         .navigationBarHidden(true)
     }
 }
+
+
+

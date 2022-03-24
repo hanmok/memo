@@ -18,6 +18,8 @@ struct AppStorageKeys {
     static let mOrderAsc = "mOrderAsc"
     
     static let pinState = "pinState"
+    static let inFolderOrder = "inFolderOrder"
+    static let isHidingArchive = "isHidingArchive"
     
     static let isFirstLaunchAfterBookmarkUpdate = "isFirstAfterBookmarkUpdate"
     static let isFirstScreenSecondView = "isFirstScreenSecondView"

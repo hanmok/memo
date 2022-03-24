@@ -31,3 +31,28 @@ struct MemoOrderingButton: View {
         }
     }
 }
+
+struct MemoOrderingButton2: View {
+
+    @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+    
+//    @ObservedObject var parentFolder: Folder
+    
+    var type: OrderType
+    
+    var body: some View {
+        
+        Button {
+            mOrderType = type
+            
+//            parentFolder.title += "" // update parent
+        } label: {
+            HStack {
+                if mOrderType == type {
+                    ChangeableImage(imageSystemName: "checkmark")
+                }
+                Text(LocalizedStringStorage.convertOrderTypeToStorage(type: type))
+            }
+        }
+    }
+}
