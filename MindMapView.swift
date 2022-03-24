@@ -9,11 +9,11 @@ import SwiftUI
 
 struct MindMapView: View {
     
-//    @AppStorage(AppStorageKeys.fOrderAsc) var folderOrderAsc = false
-//    @AppStorage(AppStorageKeys.fOrderType) var folderOrderType = OrderType.creationDate
-    
     @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
+    @AppStorage(AppStorageKeys.isFirstScreenSecondView) var isFirstScreenSecondView = false
+    
+    @Environment(\.scenePhase) var scenePhase
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
@@ -40,9 +40,18 @@ struct MindMapView: View {
     
     @State var isShowingSearchView = false
     @State var isLoading = false
-    @State var isShowingSecondView = false
+//    @State var isShowingSecondView = false
+    
+    @State var isShowingSecondView: Bool
     
 //    @State var msgToShow: String?
+    
+    init(fastFolderWithLevelGroup: FastFolderWithLevelGroup
+         ,isShowingSecondView: Bool
+    ) {
+        self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
+        _isShowingSecondView = State(initialValue: isShowingSecondView)
+    }
     
     func deleteFolder() {
         DispatchQueue.main.async {
@@ -104,7 +113,6 @@ struct MindMapView: View {
                             }
                             
                         } label: { // original : 28
-                            
                             SystemImage( "folder.badge.plus", size: 28)
                                 .foregroundColor(Color.navBtnColor)
                         }
@@ -113,8 +121,7 @@ struct MindMapView: View {
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
                 }
-                .padding(.trailing, Sizes.overallPadding)
-                .padding(.leading, Sizes.overallPadding)
+                .padding(.horizontal, Sizes.overallPadding)
                 
                 Picker("", selection: $selectionEnum) {
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
@@ -123,8 +130,7 @@ struct MindMapView: View {
                 }
                 .id(selectionEnum)
                 .pickerStyle(SegmentedPickerStyle())
-                .padding(.top, Sizes.overallPadding)
-                .padding(.horizontal, Sizes.overallPadding)
+                .padding([.top, .horizontal], Sizes.overallPadding)
                 
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack
@@ -308,11 +314,6 @@ struct MindMapView: View {
                 
             } // end of VStack , Inside ZStack.
             
-//            MsgView(msgToShow: $msgToShow)
-//                .padding(.top, UIScreen.screenHeight / 1.5)
-                
-            
-            
             if isLoading {
                 Color(.clear)
                 ProgressView()
@@ -407,11 +408,7 @@ struct MindMapView: View {
         .offset(x: isShowingSecondView ? UIScreen.screenWidth : 0)
 //        .animation(.spring(), value: isShowingSecondView)
         .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
-//        .animation(.spring(response: 0.15, dampingFraction: 1, blendDuration: 0.15), value: isShowingSecondView)
-        
-//        .onReceive(msgVM.hasMemoRemovedForever, perform: { myoutput in
-//            print("output: \(myoutput)")
-//        })
+
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
@@ -457,18 +454,28 @@ struct MindMapView: View {
         })
         
         
-        .onAppear(perform: {
-            print("MindMapView has Appeared!")
-            let allMemosReq = Memo.fetch(.all)
-            
-            if let allMemos = try? context.fetch(allMemosReq) {
-                 allMemos.forEach {
-                    if $0.folder == nil {
-                        $0.folder = trashBinVM.trashBinFolder
-                    }
-                }
+//        .onAppear(perform: {
+//            print("MindMapView has Appeared!")
+//            let allMemosReq = Memo.fetch(.all)
+//
+//            if let allMemos = try? context.fetch(allMemosReq) {
+//                 allMemos.forEach {
+//                    if $0.folder == nil {
+//                        $0.folder = trashBinVM.trashBinFolder
+//                    }
+//                }
+//            }
+//        })
+        
+        .onChange(of: scenePhase) { newScenePhase in
+            if newScenePhase == .background {
+                print("isFirstScreenSecondView has updated to \(isShowingSecondView)")
+                isFirstScreenSecondView = isShowingSecondView
             }
-        })
+        }
         .navigationBarHidden(true)
     }
 }
+
+
+

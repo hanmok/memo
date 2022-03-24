@@ -101,9 +101,12 @@ struct FilteredMemoList: View {
 //                                memoEditVM.dealWhenMemoSelected(memo)
 //                            }
 //                        })
+                        if memo.folder != nil {
                         DraggableMemoBoxView(memo: memo)
                             .environmentObject(memoEditVM)
                             .environmentObject(dragVM)
+                            .environmentObject(trashBinVM)
+                        }
                         
                     } // end of ForEach
                 } header: {

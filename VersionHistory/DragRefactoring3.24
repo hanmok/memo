@@ -4,3 +4,8 @@
 Drag Refactoring,
 DraggableMemoBoxView 로 라인 줄임.
 
+
+setting first view
+
+isFirstScreenSecondView 사용,
+MindmapView 에서  onChange 이용해서 만듦.

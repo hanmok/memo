@@ -29,3 +29,22 @@ struct FolderOrderingMenu: View {
         }
     }
 }
+
+struct FolderOrderingMenuInSecondView: View {
+    
+    
+    var body: some View {
+        Menu {
+            FolderOrderingButton(type: .creationDate)
+            FolderOrderingButton(type: .alphabetical)
+            
+            Divider()
+            
+            FolderAscDecButton(isAscending: true)
+            FolderAscDecButton(isAscending: false)
+            
+        } label: {
+            Text(LocalizedStringStorage.folderOrdering)
+        }
+    }
+}

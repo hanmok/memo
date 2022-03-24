@@ -44,6 +44,7 @@
 		9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A337895279A6F3C00805138 /* MemoEditViewModel.swift */; };
 		9A365A2927EBA841003D4C77 /* DraggableMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */; };
 		9A365A2B27EBAD48003D4C77 /* DragRefactoring3.24 in Resources */ = {isa = PBXBuildFile; fileRef = 9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */; };
+		9A365A2D27EC0C83003D4C77 /* UpdatingSecondView in Resources */ = {isa = PBXBuildFile; fileRef = 9A365A2C27EC0C83003D4C77 /* UpdatingSecondView */; };
 		9A87D30127E67C1B00A0C5CD /* FixingError3.20 in Resources */ = {isa = PBXBuildFile; fileRef = 9A87D30027E67C1B00A0C5CD /* FixingError3.20 */; };
 		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
@@ -179,6 +180,7 @@
 		9A337895279A6F3C00805138 /* MemoEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewModel.swift; sourceTree = "<group>"; };
 		9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableMemoBoxView.swift; sourceTree = "<group>"; };
 		9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */ = {isa = PBXFileReference; lastKnownFileType = text; path = DragRefactoring3.24; sourceTree = "<group>"; };
+		9A365A2C27EC0C83003D4C77 /* UpdatingSecondView */ = {isa = PBXFileReference; lastKnownFileType = text; path = UpdatingSecondView; sourceTree = "<group>"; };
 		9A87D30027E67C1B00A0C5CD /* FixingError3.20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = FixingError3.20; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
@@ -300,7 +302,6 @@
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
 				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
-				9ACC0C7D27DDCC1500D18690 /* MsgView.swift */,
 				9AB7250027D00E16006A825C /* TrashBin */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
@@ -440,6 +441,7 @@
 		9AB724FD27D00D9A006A825C /* Prev */ = {
 			isa = PBXGroup;
 			children = (
+				9ACC0C7D27DDCC1500D18690 /* MsgView.swift */,
 				9AB7251227D0107E006A825C /* TrashBinMemoList.swift */,
 				9AD8332527BD0B5F00506AE8 /* Practices */,
 				9AA2673127BE4E2900AC75DB /* FavColors.swift */,
@@ -557,6 +559,7 @@
 				9AAA24A527E8011E009923C7 /* AddMessage */,
 				9AAA24A727E89586009923C7 /* RemovingBookmark */,
 				9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */,
+				9A365A2C27EC0C83003D4C77 /* UpdatingSecondView */,
 			);
 			path = VersionHistory;
 			sourceTree = "<group>";
@@ -716,7 +719,6 @@
 			);
 			mainGroup = 9A04748F27715D1100571D66;
 			packageReferences = (
-				9A04BF2227C8CF4E00F3972D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 9A04749D27715D1300571D66 /* Products */;
 			projectDirPath = "";
@@ -746,6 +748,7 @@
 				9A3378272796DECA00805138 /* ProblemsAndSolutions in Resources */,
 				9A0474C02771709D00571D66 /* OverallMemo in Resources */,
 				9AAA24A627E8011E009923C7 /* AddMessage in Resources */,
+				9A365A2D27EC0C83003D4C77 /* UpdatingSecondView in Resources */,
 				9A0474A927715D1400571D66 /* Assets.xcassets in Resources */,
 				9AA65B3627D6BA8F00C1F383 /* VersionHistory in Resources */,
 				9A87D30127E67C1B00A0C5CD /* FixingError3.20 in Resources */,
@@ -1024,7 +1027,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1042,7 +1045,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -1059,7 +1062,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "DeeepMemo (iOS).entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = F23GD77ZRK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1077,7 +1080,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -1175,17 +1178,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9A04BF2227C8CF4E00F3972D /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */ = {

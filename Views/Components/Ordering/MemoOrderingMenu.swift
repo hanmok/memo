@@ -30,3 +30,23 @@ struct MemoOrderingMenu: View {
     }
 }
 
+
+struct MemoOrderingMenuInSecondView: View {
+
+    var body: some View {
+        Menu {
+            
+            MemoOrderingButton2( type: .modificationDate)
+            MemoOrderingButton2( type: .creationDate)
+            MemoOrderingButton2( type: .alphabetical)
+            
+            Divider()
+            
+            MemoAscDecButton2(isAscending: true)
+            MemoAscDecButton2(isAscending: false)
+            
+        } label: {
+            Text(LocalizedStringStorage.memoOrdering)
+        }
+    }
+}

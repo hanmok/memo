@@ -12,8 +12,14 @@ struct SecondView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
-//    @Environment(\.presentationMode) var presentationMode
+    //    @Environment(\.presentationMode) var presentationMode
     @AppStorage(AppStorageKeys.pinState) var pinState = true
+    @AppStorage(AppStorageKeys.inFolderOrder) var inFolderOrder = true
+    @AppStorage(AppStorageKeys.isHidingArchive) var isHidingArchive = true
+    
+    @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
+    @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
+//    @Environment()
     
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var currentFolder: Folder
@@ -36,6 +42,7 @@ struct SecondView: View {
     
     @GestureState var isDragging = false
     /// dragging flag end a little later than isDragging, to complete onEnd Action (for Better UX)
+    ///
     @State var isOnDraggingAction = false
     
     @State var draggingMemo: Memo? = nil
@@ -44,11 +51,6 @@ struct SecondView: View {
     
     @State var isAddingFolder = false
     
-//    @State var bookmarkState = true // need to be user Default.
-    
-//    @State var msgToShow: String?
-    
-    //    @State var isLoading = false
     
     func addMemo() {
         if !memoEditVM.isSelectionMode {
@@ -83,37 +85,6 @@ struct SecondView: View {
         Folder.getHierarchicalFolders(topFolder: currentFolder).forEach { folders.append($0.folder)}
         
         return folders
-    }
-    
-    /*
-     // determind whether it shows Archive
-     var foundMemos: [NestedMemo] {
-     //        if searchTypeEnum == .all {
-     // shows both folder and archive
-     //        print("nestedMemos form: \(returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword))")
-     return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
-     //        } else {
-     // shows folder
-     //            return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
-     //        }
-     }
-     */
-    
-    var BackgroundImage: some View {
-        ZStack {
-            Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
-                .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
-                .cornerRadius(10)
-            HStack {
-                Spacer()
-                SystemImage("checkmark")
-                    .frame(width: 65)
-                    .foregroundColor(.basicColors)
-                    .opacity(isOnDraggingAction ? 1 : 0)
-            }
-        }
-        .padding(.horizontal, Sizes.smallSpacing)
-        .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
     }
     
     
@@ -164,63 +135,26 @@ struct SecondView: View {
         return nestedMemos
     }
     
-    func onChanged(value: DragGesture.Value, memo: Memo) {
-        DispatchQueue.main.async {
-            draggingMemo = memo
-            
+    
+    var rotatedPinWithPadding: some View {
+        HStack {
+            SystemImage("pin.fill").rotationEffect(.degrees(45))
+                .padding(.horizontal, 10)
+            Spacer()
         }
-        print("onChanged triggered")
-        
-        if isDragging && value.translation.width < -5 {
-            
-            DispatchQueue.main.async {
-                isOnDraggingAction = true
-            }
-        }
-        
-        
-        if isDragging && value.translation.width < 0 {
-            
-            print("dragged value: \(value.translation.width)")
-            switch value.translation.width {
-            case let width where width <= -65:
-                DispatchQueue.main.async {
-                    
-                    oneOffset = -65
-                }
-            default:
-                DispatchQueue.main.async {
-                    oneOffset = value.translation.width
-                }
-            }
-        }
+        .padding(.leading, Sizes.overallPadding)
+        .padding(.vertical, 5)
     }
     
-    func onEnd(value: DragGesture.Value, memo: Memo) {
-        withAnimation {
-            if value.translation.width <= -65 {
-                
-                DispatchQueue.main.async {
-                    memoEditVM.isSelectionMode = true
-                    memoEditVM.dealWhenMemoSelected(memo)
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    
-                    oneOffset = 0
-                    
-                    isOnDraggingAction = false
-                }
-                
-            } else {
-                DispatchQueue.main.async {
-                    oneOffset = 0
-                    isOnDraggingAction = false
-                }
-            }
-        }
-        draggingMemo = nil
-    }
     
+    var dividerBetweenPin: some View {
+        Rectangle()
+            .frame(height: 1)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+            .padding(.vertical, 5)
+    }
+
     
     
     var body: some View {
@@ -231,47 +165,21 @@ struct SecondView: View {
                 focusState = false
             }
         
-        var foundMemos: [NestedMemo] {
-            return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
+        var foundNestedMemos: [NestedMemo] {
+            if isHidingArchive {
+                return returnMatchedMemos(targetFolders: currentFolders, keyword: searchKeyword)
+            } else {
+                return returnMatchedMemos(targetFolders: allFolders, keyword: searchKeyword)
+            }
         }
-        
-        
-
-        var foundPinnedMemos: [Memo] = []
-        
-        var foundUnpinnedMemos: [NestedMemo] = []
-        
-        
-        
-        // 이것도 안되네 .. ?
-//        foundUnpinnedMemos = foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isBookMarked}) }.filter { !$0.memos.isEmpty}
-        foundUnpinnedMemos = foundMemos.map { return NestedMemo(memos: $0.memos.filter { !$0.isPinned}) }.filter { !$0.memos.isEmpty}
-        
-        
-
-        
-        foundMemos.forEach { nestedMemo in
-//            nestedMemo.memos.filter { $0.isBookMarked}.forEach { allBookMarkedFoundMemos.append($0) }
-            nestedMemo.memos.filter { $0.isPinned}.forEach { foundPinnedMemos.append($0) }
-        }
-        
-        
-        foundPinnedMemos = Memo.sortMemos(memos: foundPinnedMemos)
-        
-        
-        
-        
-        
         
         return NavigationView {
             
             ZStack {
-                
                 VStack(alignment: .leading) {
                     // MARK: - Nav Location
                     HStack {
                         Button {
-//                            presentationMode.wrappedValue.dismiss()
                             memoEditVM.initSelectedMemos()
                             isShowingSecondView = false
                             focusState = false
@@ -279,9 +187,7 @@ struct SecondView: View {
                         } label: {
                             SystemImage("rectangle.lefthalf.inset.fill", size: 24)
                                 .foregroundColor(colorScheme == .dark ? .cream : .black)
-                            
                         }
-                        
                         
                         // Search TextField
                         HStack(spacing: 0) {
@@ -326,233 +232,101 @@ struct SecondView: View {
                         // End of Search TextField
                         Spacer()
                         
-                        Button {
-                            DispatchQueue.main.async {
-                                pinState.toggle()
-                            }
-                            
-                        } label: {
-//                            pinState ? SystemImage("bookmark.fill").tint(.navBtnColor) : SystemImage("bookmark.slash").tint(.navBtnColor)
-                            pinState ? SystemImage("pin.fill").tint(.navBtnColor) : SystemImage("pin").tint(.navBtnColor)
-                        }
+                        OrderingMenuInSecondView(pinState: $pinState,
+                                                 inFolderOrder: $inFolderOrder,
+                                                 isHidingArchive: $isHidingArchive)
                         
-                        MemoOrderingMenu(parentFolder: fastFolderWithLevelGroup.homeFolder)
                     }
                     .padding(.horizontal, 20)
                     
-
-                    // 정리 지금 안하면 안됨..
+                    
                     ZStack {
                         ScrollView {
-                            // spacing: // make tight
                             VStack(spacing: 0) {
-                                
-                                // ALL FOLDERS
-                                
-                                // MARK: - Bookmark State is On
-                                if foundMemos.count != 0 { // wraps all Memos
+
+                                if foundNestedMemos.count != 0 { // wraps all Memos
+                                    // MARK: - Pin State is On
                                     if pinState {
-                                        
-                                        // MARK: - Show Bookmarked Memos First
-                                        if foundPinnedMemos.count != 0 {
+                                        // MARK: - Show Pinned Memos First
+                                        if Memo.checkIfHasPinned(from: foundNestedMemos){
                                             Section {
-                                                // working fine 3.21
-                                                ForEach(foundPinnedMemos, id: \.self) { pinnedMemo in
-                                                    
-                                                    
-//                                                    NavigationLink(destination:
-//                                                                    MemoView(memo: pinnedMemo, parent: pinnedMemo.folder!, presentingView:.constant(false))
-//                                                    ) {
-//                                                        MemoBoxView(memo: pinnedMemo)
-//                                                            .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-//                                                            .offset(x: draggingMemo == pinnedMemo ? oneOffset : 0)
-//                                                            .background {
-//                                                                BackgroundImage
-//                                                            }
-//                                                            .gesture(DragGesture()
-//                                                                .updating($isDragging, body: { value, state, _ in
-//                                                                    state = true
-//                                                                    onChanged(value: value, memo: pinnedMemo)
-//                                                                }).onEnded({ value in
-//                                                                    onEnd(value: value, memo: pinnedMemo)
-//                                                                }))
-//                                                    }
-//                                                    .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
-//                                                    .disabled(memoEditVM.isSelectionMode)
-//                                                    .gesture(DragGesture()
-//                                                        .updating($isDragging, body: { value, state, _ in
-//                                                            state = true
-//                                                            onChanged(value: value, memo: pinnedMemo)
-//                                                        }).onEnded({ value in
-//                                                            onEnd(value: value, memo: pinnedMemo)
-//                                                        }))
-//                                                    .simultaneousGesture(TapGesture().onEnded{
-//                                                        print("Tap pressed!")
-//
-//                                                        if memoEditVM.isSelectionMode {
-//                                                            print("Tap gesture triggered!")
-//                                                            memoEditVM.dealWhenMemoSelected(pinnedMemo)
-//                                                        }
-//                                                    })
+                                                ForEach(Memo.getPinnedOnly(from: foundNestedMemos ), id: \.self) { pinnedMemo in
                                                     DraggableMemoBoxView(memo: pinnedMemo)
-                                                        .environmentObject(memoEditVM)
                                                         .environmentObject(dragVM)
-                                                    
-                                                    
-                                                    
                                                 }
                                             } header: {
-                                                HStack {
-//                                                    SystemImage("bookmark.fill")
-                                                    SystemImage("pin.fill").rotationEffect(.degrees(45))
-                                                        .padding(.horizontal, 10)
-                                                    Spacer()
-                                                }
-                                                .padding(.leading, Sizes.overallPadding)
-                                                .padding(.vertical, 5)
+                                                rotatedPinWithPadding
                                             }
-                                            Rectangle()
-                                                .frame(height: 1)
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                                .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
-                                                .padding(.vertical, 5)
                                             
+                                            dividerBetweenPin
+                                        
                                         }
                                         
-                                        // MARK: - Show Unbookmarked Memos Next
-                                       
-                                        if foundUnpinnedMemos.count != 0 {
-                                            
-                                            ForEach( foundUnpinnedMemos, id: \.self) { unpinnedMemoArray in
-                                                Section(header:
-                                                            NavigationLink(destination: {
-                                                    FolderView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
-                                                }, label: {
-                                                    HStack {
-                                                        HierarchyLabelView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
-                                                        
-                                                        Spacer()
-                                                    } // end of HStack
-                                                    .padding(.leading, Sizes.overallPadding + 5)
-                                                }) // end of NavigationLink
-                                                ) {
-//                                                    ForEach(Memo.sortUnpinnedMemos(memos: unpinnedMemoArray.memos), id: \.self) { memo in
-                                                    ForEach(Memo.sortMemos(memos: unpinnedMemoArray.memos), id: \.self) { memo in
-                                                        
-                                                        
-                                                        
-//                                                        NavigationLink(destination:
-//                                                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
-//                                                        ) {
-//                                                            MemoBoxView(memo: memo)
-//                                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-//                                                                .offset(x: draggingMemo == memo ? oneOffset : 0)
-//                                                                .background {
-//                                                                    BackgroundImage
-//                                                                }
-//                                                                .gesture(DragGesture()
-//                                                                    .updating($isDragging, body: { value, state, _ in
-//                                                                        state = true
-//                                                                        onChanged(value: value, memo: memo)
-//                                                                    }).onEnded({ value in
-//                                                                        onEnd(value: value, memo: memo)
-//                                                                    }))
-//                                                        }
-//                                                        .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
-//                                                        .disabled(memoEditVM.isSelectionMode)
-//                                                        .gesture(DragGesture()
-//                                                            .updating($isDragging, body: { value, state, _ in
-//                                                                state = true
-//                                                                onChanged(value: value, memo: memo)
-//                                                            }).onEnded({ value in
-//                                                                onEnd(value: value, memo: memo)
-//                                                            }))
-//                                                        .simultaneousGesture(TapGesture().onEnded{
-//                                                            print("Tap pressed!")
-//
-//                                                            if memoEditVM.isSelectionMode {
-//                                                                print("Tap gesture triggered!")
-//                                                                memoEditVM.dealWhenMemoSelected(memo)
-//                                                            }
-//                                                        })
-                                                        DraggableMemoBoxView(memo: memo)
-                                                            .environmentObject(memoEditVM)
-                                                            .environmentObject(dragVM)
-                                                        
-                                                        
-                                                        
-                                                    } // end of ForEach
+                                        // MARK: - Show UnPinned Memos Next
+                                        if Memo.checkIfHasUnpinned(from: foundNestedMemos) {
+                                            if inFolderOrder {
+                                                // MARK: - Pin State & inFolderOrder. spread unpinnedMemos with containing folders
+                                                ForEach( Memo.getUnpinnedNestedMemos(from: foundNestedMemos), id: \.self) { unpinnedMemoArray in
+                                                    Section(header:
+                                                                NavigationLink(destination: {
+                                                        FolderView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
+                                                    }, label: {
+                                                        HStack {
+                                                            HierarchyLabelView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
+                                                            Spacer()
+                                                        }
+                                                        .padding(.leading, Sizes.overallPadding + 5)
+                                                    })
+                                                    ) {
+                                                        ForEach(Memo.sortMemos(memos: unpinnedMemoArray.memos), id: \.self) { memo in
+                                                            DraggableMemoBoxView(memo: memo)
+                                                                .environmentObject(dragVM)
+                                                        }
+                                                    }
                                                 }
-                                            } // end of ForEach
+                                                // MARK: - Pin State & !inFolderOrder. spread all unpinned memos without folders
+                                            } else {
+                                                Text(" ").font(.caption2)
+                                                ForEach(Memo.getUnpinnedMemos(from: foundNestedMemos), id: \.self) { unpinnedMemo in
+                                                    DraggableMemoBoxView(memo: unpinnedMemo)
+                                                        .environmentObject(dragVM)
+                                                }
+                                            }
                                         }
-                                        // MARK: - BookMark State Off -> Show Bookmark & pinned Memos First, and then normal Memos
-                                    } else { // working weird
-                                        if foundMemos.count != 0 {
+                                        // MARK: - Pin State Off
+                                    } else {
+                                        if foundNestedMemos.count != 0 {
                                             HStack {
                                                 Text("").padding(.vertical, 1)
                                             }
-                                            ForEach( foundMemos, id: \.self) { memoArray in
-                                                Section(header:
-                                                            NavigationLink(destination: {
-                                                    FolderView(currentFolder: memoArray.memos.first!.folder!)
-                                                }, label: {
-                                                    HStack {
-                                                        HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
-                                                        
-                                                        Spacer()
-                                                    } // end of HStack
-                                                    .padding(.leading, Sizes.overallPadding + 5)
-                                                }) // end of NavigationLink
-                                                ) {
-                                                    ForEach(Memo.sortPinnedFirst(memos: memoArray.memos), id: \.self) { memo in
-                                                        
-                                                        
-                                                        
-//                                                        NavigationLink(destination:
-//                                                                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
-//                                                        ) {
-//                                                            MemoBoxView(memo: memo)
-//                                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-//                                                                .offset(x: draggingMemo == memo ? oneOffset : 0)
-//                                                                .background {
-//                                                                    BackgroundImage
-//                                                                }
-//                                                                .gesture(DragGesture()
-//                                                                    .updating($isDragging, body: { value, state, _ in
-//                                                                        state = true
-//                                                                        onChanged(value: value, memo: memo)
-//                                                                    }).onEnded({ value in
-//                                                                        onEnd(value: value, memo: memo)
-//                                                                    }))
-//                                                        }
-//                                                        .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
-//                                                        .disabled(memoEditVM.isSelectionMode)
-//                                                        .gesture(DragGesture()
-//                                                            .updating($isDragging, body: { value, state, _ in
-//                                                                state = true
-//                                                                onChanged(value: value, memo: memo)
-//                                                            }).onEnded({ value in
-//                                                                onEnd(value: value, memo: memo)
-//                                                            }))
-//                                                        .simultaneousGesture(TapGesture().onEnded{
-//                                                            print("Tap pressed!")
-//
-//                                                            if memoEditVM.isSelectionMode {
-//                                                                print("Tap gesture triggered!")
-//                                                                memoEditVM.dealWhenMemoSelected(memo)
-//                                                            }
-//                                                        })
-                                                        DraggableMemoBoxView(memo: memo)
-                                                            .environmentObject(memoEditVM)
-                                                            .environmentObject(dragVM)
-                                                        
-                                                        
-                                                        
-                                                    } // end of ForEach
+                                            if inFolderOrder {
+                                                // MARK: - Pin: Off, in FolderOrder -> spread memos with folders, pinned placed to the top
+                                                ForEach( foundNestedMemos, id: \.self) { memoArray in
+                                                    Section(header:
+                                                                NavigationLink(destination: {
+                                                        FolderView(currentFolder: memoArray.memos.first!.folder!)
+                                                    }, label: {
+                                                        HStack {
+                                                            HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
+                                                            Spacer()
+                                                        } // end of HStack
+                                                        .padding(.leading, Sizes.overallPadding + 5)
+                                                    }) // end of NavigationLink
+                                                    ) {
+                                                        ForEach(Memo.sortPinnedFirst(memos: memoArray.memos), id: \.self) { memo in
+                                                            DraggableMemoBoxView(memo: memo)
+                                                                .environmentObject(dragVM)
+                                                        } // end of ForEach
+                                                    }
+                                                } // end of ForEach
+                                            } else { // MARK: - Pin Off, not in Folder Order -> follow memo sorting only
+                                                ForEach(Memo.getAllMemos(from: foundNestedMemos), id: \.self) { memo in
+                                                    DraggableMemoBoxView(memo: memo)
+                                                        .environmentObject(dragVM)
                                                 }
-                                            } // end of ForEach
+                                            }
                                         }
-                                    }
+                                    } // end of else pin state
                                 } else { // no  searchResult
                                     Spacer()
                                     if searchKeyword != "" {
@@ -568,8 +342,6 @@ struct SecondView: View {
                         .gesture(scroll)
                         // another element of ZStack begin // end of ZStack
                         
-                        // Plus Button, and MemoToolBarView
-                        
                         MemoEditView(
                             plusView:
                                 Button(action: addMemo, label: {
@@ -581,7 +353,6 @@ struct SecondView: View {
                                 MemosToolBarView(
                                     currentFolder: currentFolder,
                                     showSelectingFolderView: $isShowingSelectingFolderView,
-//                                    msgToShow: $msgToShow,
                                     calledFromSecondView: true
                                 )
                                 .padding(.bottom, Sizes.overallPadding )
@@ -602,9 +373,6 @@ struct SecondView: View {
                                 NewMemoView(parent: currentFolder, presentingNewMemo: .constant(false)),
                                isActive: $isAddingMemo) {}
                 
-//                MsgView(msgToShow: $msgToShow)
-//                    .padding(.top, UIScreen.screenHeight / 1.5)
-                
             } // end of ZStack
             .sheet(isPresented: $isShowingSelectingFolderView,
                    content: {
@@ -615,11 +383,11 @@ struct SecondView: View {
                             archiveFolder: Folder.fetchHomeFolder(context: context,
                                                                   fetchingHome: false)!
                         ),
-//                    msgToShow: $msgToShow,
                     invalidFolderWithLevels: []
                 )
             })
             .navigationBarHidden(true)
+                        
             .onAppear {
                 print("SecondView has appeared!")
                 updateViewInHalfSecond()
@@ -633,8 +401,61 @@ struct SecondView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .padding(.horizontal, Sizes.overallPadding)
-        .onAppear {
-            print("CustomSearchView has appeared!!!!!")
+    }
+}
+
+
+//struct DividerBetweenPin: View {
+//    var body: some View{
+//        Rectangle()
+//            .frame(height: 1)
+//            .frame(maxWidth: .infinity, alignment: .leading)
+//            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+//            .padding(.vertical, 5)
+//    }
+//}
+
+//struct RotatedPinWithPadding: View {
+//    var body: some View {
+//        HStack {
+//            SystemImage("pin.fill").rotationEffect(.degrees(45))
+//                .padding(.horizontal, 10)
+//            Spacer()
+//        }
+//        .padding(.leading, Sizes.overallPadding)
+//        .padding(.vertical, 5)
+//    }
+//}
+
+struct OrderingMenuInSecondView: View {
+
+    @Binding var pinState: Bool
+    @Binding var inFolderOrder: Bool
+    @Binding var isHidingArchive: Bool
+
+    var body: some View {
+
+        Menu {
+            Toggle(isOn: $pinState) {
+                Text(LocalizedStringStorage.pinOnTheTop)
+            }
+            Toggle(isOn: $inFolderOrder) {
+                Text(LocalizedStringStorage.inFolderOrder)
+            }
+            Toggle(isOn: $isHidingArchive) {
+                Text(LocalizedStringStorage.hideArchive)
+            }
+
+            Divider()
+            Divider()
+
+            MemoOrderingMenuInSecondView()
+
+            FolderOrderingMenuInSecondView()
+
+        } label: {
+            SystemImage("arrow.up.arrow.down")
+                .tint(Color.navBtnColor)
         }
     }
 }

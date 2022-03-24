@@ -116,7 +116,10 @@ struct MemosToolBarView: View {
             // REMOVE ACTION, WORKS FINE
             Button(action: {
                 
-                memoEditVM.selectedMemos.forEach { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
+//                memoEditVM.selectedMemos.forEach { Memo.makeNotBelongToFolder($0, trashBinVM.trashBinFolder)}
+                memoEditVM.selectedMemos.forEach { memo in
+                    Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
+                }
                 
                 messageVM.message = Messages.showMemoMovedToTrash(memoEditVM.count)
                 

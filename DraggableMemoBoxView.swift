@@ -18,7 +18,7 @@ struct DraggableMemoBoxView: View {
     
     @EnvironmentObject var dragVM: DraggableViewModel
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    
+    @EnvironmentObject var trashbinVM: TrashBinViewModel
     @GestureState var isDragging = false
     
     @State var isOnDraggingAction = false
@@ -26,6 +26,7 @@ struct DraggableMemoBoxView: View {
     var body: some View {
         NavigationLink(destination:
                         MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
+            .environmentObject(trashbinVM)
         ) {
             MemoBoxView(memo: memo)
                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)

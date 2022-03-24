@@ -137,24 +137,11 @@ struct FolderView: View {
                                 MemoList()
                                     .padding(.top, 20)
                                     .ignoresSafeArea(edges: .trailing)
-//                                VStack {
-//                                    ForEach(memosToShow, id: \.self) { memo in
-//                                        NavigationLink(destination:
-//                                                        // parent 가 문제인건 아니야?
-//                                                       // SecondView 에서도 같은데, 여기에서만 그러진 않지 않을까 ?
-//                                                       MemoView(memo: memo, parent: memo.folder!, presentingView: .constant(false))
-//                                            .environmentObject(trashBinVM)
-//                                        ) {
-//                                            MemoBoxView(memo: memo)
-//                                                .frame(width: UIScreen.screenWidth - 20, alignment: .center)
-//                                        }
-//                                    }
-//                                }
-//                                .padding(.top, 20)
-//                                .ignoresSafeArea( edges: .trailing)
-                                
                             }
                         }
+                        Rectangle()
+                            .frame(height: 70)
+                            .foregroundColor(.clear)
                     } // end of main VStack
                     .environmentObject(currentFolder)
                     .environmentObject(trashBinVM)

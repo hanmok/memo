@@ -114,7 +114,8 @@ struct MemoView: View {
                 Memo.delete(memo)
             } else { // else, not in trashBin -> move to trashBin
                 messageVM.message = Messages.showMemoMovedToTrash(1)
-                Memo.makeNotBelongToFolder(memo, trashBinVM.trashBinFolder)
+//                Memo.makeNotBelongToFolder(memo, trashBinVM.trashBinFolder)
+                Memo.moveToTrashBin(memo, trashBinVM.trashBinFolder)
             }
         } else { // for empty Contents,
             messageVM.message = Messages.showMemosDeletedMsg(1)
