@@ -32,8 +32,6 @@ struct FolderView: View {
     
     @State var isShowingSearchView = false
     
-//    @State var msgToShow: String?
-    
     var backBtn : some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -92,6 +90,8 @@ struct FolderView: View {
                         })
                         
                         MemoOrderingMenu(parentFolder: currentFolder)
+                        
+                        FolderMenu(isAddingFolder: $isAddingFolder, subFolders: Folder.getSortedSubFolders(folder: currentFolder))
                     }
                 }
                 .padding(.trailing, 10 + Sizes.overallPadding)
@@ -151,26 +151,25 @@ struct FolderView: View {
             
             // ANOTHER ELEMENT IN ZSTACK
             
-            SubFolderEditView(
-                subButton: Button(action: {
-                    isShowingSubFolderView = true
-                }, label: {
-                    SubFolderButtonImage()
-                        .offset(x: isShowingSubFolderView ? UIScreen.screenWidth : 0)
-                        .animation(.spring(), value: isShowingSubFolderView)
-                }),
-                subFolderView: SubFolderView(
-                    folder: currentFolder,
-                    isShowingSubFolderView: $isShowingSubFolderView,
-                    isAddingFolder: $isAddingFolder)
-                .environmentObject(trashBinVM)
-                
-                // offset x : trailingPadding
-                    .offset(x: isShowingSubFolderView ? -Sizes.overallPadding : UIScreen.screenWidth)
-                    .animation(.spring(), value: isShowingSubFolderView)
-            )
-            
-            .padding(.top, 55)
+//            SubFolderEditView(
+//                subButton: Button(action: {
+//                    isShowingSubFolderView = true
+//                }, label: {
+//                    SubFolderButtonImage()
+//                        .offset(x: isShowingSubFolderView ? UIScreen.screenWidth : 0)
+//                        .animation(.spring(), value: isShowingSubFolderView)
+//                }),
+//                subFolderView: SubFolderView(
+//                    folder: currentFolder,
+//                    isShowingSubFolderView: $isShowingSubFolderView,
+//                    isAddingFolder: $isAddingFolder)
+//                .environmentObject(trashBinVM)
+//
+//                // offset x : trailingPadding
+//                    .offset(x: isShowingSubFolderView ? -Sizes.overallPadding : UIScreen.screenWidth)
+//                    .animation(.spring(), value: isShowingSubFolderView)
+//            )
+//            .padding(.top, 55)
             
             MemoEditView(
                 plusView: Button(action: addMemo) {
@@ -183,8 +182,6 @@ struct FolderView: View {
                 toolbarView: MemosToolBarView(
                     currentFolder: currentFolder,
                     showSelectingFolderView: $isShowingSelectingFolderView
-//                    ,
-//                    msgToShow: $msgToShow
                 )
                 .padding([.trailing, .bottom], Sizes.overallPadding)
                 .offset(x: memoEditVM.isSelectionMode ? 0 : UIScreen.screenWidth)

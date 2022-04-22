@@ -69,47 +69,48 @@ struct NewMemoView: View {
         if contents == ""  {
             // none is typed -> Do nothing. Cause memo is not created yet.
             if hasRelocated {
-                Memo.delete(memo!)
+                if let emptyMemo = memo {
+                    Memo.delete(emptyMemo)
+                }
             }
-
         } else {
-            if memo != nil {
+            if let validMemo = memo {
+                validMemo.contents = contents
+                validMemo.saveTitleWithContentsToShow(context: context)
                 
-                memo!.contents = contents
-                memo!.saveTitleWithContentsToShow(context: context)
-                
-                if memo!.contentsToShow == "" && memo!.titleToShow == "" {
+                if validMemo.contentsToShow == "" && validMemo.titleToShow == "" {
                     messageVM.message = Messages.showMemosDeletedMsg(1)
-                    Memo.delete(memo!)
+                    Memo.delete(validMemo)
                     
                     
                 } else {
-                    if memo!.folder == parent {
+                    if validMemo.folder == parent {
                         parent.modificationDate = Date()
                     }
-//                    memo!.isBookMarked = isBookMarkedTemp
-                    memo!.isPinned = isPinned
-                    memo!.creationDate = Date()
-                    memo!.modificationDate = Date()
+                    validMemo.isPinned = isPinned
+                    validMemo.creationDate = Date()
+                    validMemo.modificationDate = Date()
                     
                     context.saveCoreData()
                 }
-                // memo is not created yet. memo is nil.
-            } else { // and contents is not empty.
+            } else { //  contents is not empty, memo is not created yet-> memo is nil
                 
                 memo = Memo(contents: contents, context: context)
-                memo!.saveTitleWithContentsToShow(context: context)
-                if memo!.titleToShow == "" && memo!.contentsToShow == "" {
+                 
+                 guard let memo = memo else { return }
+                 
+                 memo.saveTitleWithContentsToShow(context: context)
+                if memo.titleToShow == "" && memo.contentsToShow == "" {
                     messageVM.message = Messages.showMemosDeletedMsg(1)
-                    Memo.delete(memo!)
+                    Memo.delete(memo)
                 } else {
-//                memo!.isBookMarked = isBookMarkedTemp
-                memo!.isPinned = isPinned
-                memo!.creationDate = Date()
-                memo!.modificationDate = Date()
+                    messageVM.message = LocalizedStringStorage.memoSaved
+                memo.isPinned = isPinned
+                memo.creationDate = Date()
+                memo.modificationDate = Date()
                 
-                parent.add(memo: memo!)
-                memo!.folder = parent
+                parent.add(memo: memo)
+                memo.folder = parent
 
                 context.saveCoreData()
                 parent.title += ""

@@ -88,12 +88,15 @@ struct PrettyTextFieldAlert: View {
                     .disableAutocorrection(true)
                     .font(.callout)
                     .focused($focusState)
+                    .frame(height: 25)
                     .background(colorScheme == .dark ? .black : .white)
                     .accentColor(colorScheme == .dark ? Color.cream : Color.pinBarColor)
                     .foregroundColor(Color.blackAndWhite)
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)
                     .padding(.bottom, 15)
+//                    .padding(.vertical, 15)
+
                     .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
                         if let textField = obj.object as? UITextField {
                             

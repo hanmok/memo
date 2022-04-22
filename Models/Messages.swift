@@ -9,8 +9,9 @@ import Foundation
 
 struct Messages {
     
-    static let hasAddedToFolder = "memo has saved to Folder"
+    static let hasAddedToFolder = "memo has been added to Folder"
     
+    static let memoSaved = LocalizedStringStorage.memoSaved
     
     /// memo deleted
     static func showMemosDeletedMsg(_ n: Int) -> String {

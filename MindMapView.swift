@@ -321,8 +321,8 @@ struct MindMapView: View {
                     .tint(colorScheme == .dark ? .cream : .black)
             }
             
-            PinnedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
-                .environmentObject(folderEditVM)
+//            PinnedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
+//                .environmentObject(folderEditVM)
             
             
             CustomSearchView(
@@ -346,7 +346,9 @@ struct MindMapView: View {
             
             
             if isShowingTextField {
-                Color(.sRGB, white: colorScheme == .dark ? 0.2 : 0.8 , opacity: 0.5)
+//                Color(.sRGB, white: colorScheme == .dark ? 0.2 : 0.8 , opacity: 0.5)
+//                Color(.sRGB, white: colorScheme == .dark ? 0.5 : 0.5 , opacity: 0.5)
+                Color(.sRGB, white: 0.5, opacity: 0.5)
                     .ignoresSafeArea()
             }
             

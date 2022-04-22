@@ -95,7 +95,7 @@ enum LocalizedStringStorage {
     static let inFolderOrder = StringEnum.inFolderOrder.convertIntoStr()
     static let hideArchive = StringEnum.hideArchive.convertIntoStr()
     
-    
+    static let memoSaved = StringEnum.memoSaved.convertIntoStr()
     
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
@@ -204,6 +204,8 @@ enum StringEnum: String {
     
 //    "completed" = "Completed!";
     case completed = "completed"
+    
+    case memoSaved = "memoSaved"
 //    case memosHasBookmarked = "memosHasBookmarked"
 //    case oneMemoHasBookmarked = "oneMemoHasBookmarked"
     

@@ -69,7 +69,7 @@
 "oneMemoHasMovedToTrash" = "메모가 삭제되었습니다.";
 "oneMemoHasPinned" = "고정되었습니다.";
 "oneMemoHasUnpinned" = "고정이 해제되었습니다.";
-
+"memoSaved" = "메모가 저장되었습니다";
 
 "bookmarkRemovingUpdateAlert" = "업데이트:\n북마크, 핀 기능이 합쳐졌습니다. \n\n 기존 북마크된 메모들을 핀 시키시겠습니까 ?";
 
@@ -78,3 +78,4 @@
 "pinOnTheTop" = "고정메모 위로";
 "inFolderOrder" = "폴더 순서대로";
 "hideArchive" = "보관함 숨기기";
+

@@ -78,6 +78,8 @@ struct MemoView: View {
             if memo.contentsToShow == "" && memo.titleToShow == "" {
                 messageVM.message = Messages.showMemosDeletedMsg(1)
                 Memo.delete(memo)
+            } else {
+                messageVM.message = Messages.memoSaved
             }
         }
         
