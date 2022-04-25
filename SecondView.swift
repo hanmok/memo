@@ -405,7 +405,7 @@ struct SecondView: View {
             .navigationBarHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .padding(.horizontal, Sizes.overallPadding)
+//        .padding(.horizontal, Sizes.overallPadding)
     }
 }
 

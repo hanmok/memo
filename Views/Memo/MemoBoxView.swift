@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// used only to show.
+// used only to show, used in DraggableMemoBoxView
 struct MemoBoxView: View {
     
     @Environment(\.colorScheme) var colorScheme
