@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FolderMenu: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
     @Binding var isAddingFolder: Bool
@@ -50,13 +50,15 @@ struct FolderMenu: View {
             }
         } label: {
             SystemImage("folder", size: 24)
-                .tint(Color.navBtnColor)
+//                .tint(Color.navBtnColor)
+                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }
 }
 
 
 struct MemoOrderingMenu: View {
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var parentFolder: Folder
     
     var body: some View {
@@ -73,7 +75,8 @@ struct MemoOrderingMenu: View {
             
         } label: {
             SystemImage( "arrow.up.arrow.down")
-                .tint(Color.navBtnColor)
+//                .tint(Color.navBtnColor)
+                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }
 }

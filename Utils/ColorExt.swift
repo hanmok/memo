@@ -75,16 +75,50 @@ extension Color {
         Color(red: 246, green: 244, blue: 232)
     ]
     
+//    static let newMain = Color(red: 216, green: 128, blue: 128)
+//    static let newMain = Color(red: 224, green: 178, blue: 157)
+//    static let newMain = Color(rgba: 0xF87577)
+//    static let newMain = Color(red: 0.973, green: 0.459, blue: 0.467)
+    static let newMain = UIColor(rgbHex: 0xFDAEAC).convertToColor()
+    
+//    static let newNav = UIColor(rgbHex: 0xFFBFBC).convertToColor()
+//    static let newNav = UIColor(rgbHex: 0xFFD5D3).convertToColor()
+//    static let newNavForDark = UIColor(rgbHex: 0xFFDAD8).convertToColor()
+    static let newNavForDark = UIColor(rgbHex: 0x6666BB).convertToColor()
+//    static let newNavForLight = UIColor(rgbHex: 0xF87577).convertToColor().opacity(0.7)
+//    static let newNavForLight = UIColor(rgbHex: 0x161FA7).convertToColor().opacity(0.7) // 약간 애매..
+//    static let newNavForLight = UIColor(rgbHex: 0x0A1172).convertToColor().opacity(0.7) // 괜찮아 보이는데.. ?
+//    static let newNavForLight = UIColor(rgbHex: 0x002147).convertToColor().opacity(0.7) // OxFord blue
+//    static let newNavForLight = UIColor(rgbHex: 0x0055BB).convertToColor().opacity(0.7) //
+//    static let newNavForLight = UIColor(rgbHex: 0x0033CC).convertToColor().opacity(0.7) //
+    static let newNavForLight = UIColor(rgbHex: 0x000077).convertToColor().opacity(0.7)   // purple
+    
+    static let newMemoToolBoxColor = UIColor(rgbHex: 0x000077).convertToColor()   // purple
+//    static let newNavForLight = UIColor(rgbHex: 0x000077).convertToColor().opacity(0.7)   // purple
+    
+    
+//    static let newMain = Color(red: 248, green: 250, blue: 230)
+//    static let some = Color(
+//    (red: 0.973, green: 0.459, blue: 0.467, alpha: 1)
+    
 
     static let pastelUIColors = Color.convertToUIColors(colors: Color.pastelColors)
+    static let testColor = UIColor(rgbHex: 0xFAE5C5).convertToColor() // look fine
+    static let testColor2 = UIColor(rgbHex: 0xFAEACA).convertToColor()
+    static let testColor3 = UIColor(rgbHex: 0xFFE7E5).convertToColor() // looks good!
+    static let newMemoBoxColor = UIColor(rgbHex: 0xFFE9E7).convertToColor() // looks better!
+    
+    static let bgForDark = UIColor(rgbHex: 0x551308).convertToColor()
+
+    
 }
 
-extension UIColor {
-}
+
+
 
 extension Color {
-    init(red: Double, green: Double, blue: Double) {
-        self.init(.sRGB, red: Double(red / 255.0), green: Double(green / 255.0), blue: Double(blue / 255.0))
+    init(red: Int, green: Int, blue: Int) {
+        self.init(.sRGB, red: Double(Double(red) / 255.0), green: Double(Double(green) / 255.0), blue: Double(Double(blue) / 255.0))
     }
     
     func convertToUIColor() -> UIColor {
@@ -95,6 +129,35 @@ extension Color {
         return colors.map { $0.convertToUIColor()}
     }
 }
+
+
+extension UIColor {
+    
+    
+    
+    func convertToColor() -> Color {
+        return Color(self)
+    }
+    
+   convenience init(red: Int, green: Int, blue: Int) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+   }
+
+   convenience init(rgbHex: Int) {
+       self.init(
+           red: (rgbHex >> 16) & 0xFF,
+           green: (rgbHex >> 8) & 0xFF,
+           blue: rgbHex & 0xFF
+       )
+   }
+}
+
+
+
 
 
 extension Color {
@@ -114,7 +177,9 @@ extension Color {
     
     static let memoBoxColor = Color(UIColor.memoBoxColor)
 
-    static let navBtnColor = Color(UIColor.navBtnColor)
+//    static let navBtnColor = Color(UIColor.navBtnColor)
+    static let navBtnColor = Color.newNavForDark
+    
 //    static let memoBtnColor = Color(UIColor.memoBtnColor)
     static let selectedBoxStrokeColor = Color(UIColor.selectedBoxStrokeColor)
     // cream, White(0.65)

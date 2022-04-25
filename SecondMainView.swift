@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct SecondView: View {
+struct SecondMainView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
@@ -186,7 +186,8 @@ struct SecondView: View {
                             searchKeyword = ""
                         } label: {
                             SystemImage("rectangle.lefthalf.inset.fill", size: 24)
-                                .foregroundColor(colorScheme == .dark ? .cream : .black)
+//                                .foregroundColor(colorScheme == .dark ? .cream : .black)
+                                .foregroundColor(colorScheme == .dark ? Color.newNavForDark : Color.newNavForLight)
                         }
                         
                         // Search TextField
@@ -433,7 +434,8 @@ struct SecondView: View {
 //}
 
 struct OrderingMenuInSecondView: View {
-
+    @Environment(\.colorScheme) var colorScheme
+    
     @Binding var pinState: Bool
     @Binding var inFolderOrder: Bool
     @Binding var isHidingArchive: Bool
@@ -460,7 +462,8 @@ struct OrderingMenuInSecondView: View {
 
         } label: {
             SystemImage("arrow.up.arrow.down")
-                .tint(Color.navBtnColor)
+//                .tint(Color.navBtnColor)
+                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }
 }

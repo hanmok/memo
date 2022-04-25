@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MindMapView: View {
+struct FirstMainView: View {
     
     @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
@@ -44,6 +44,8 @@ struct MindMapView: View {
     
     @State var isShowingSecondView: Bool
     
+    @State var isAddingMemo = false
+    
 //    @State var msgToShow: String?
     
     init(fastFolderWithLevelGroup: FastFolderWithLevelGroup
@@ -51,6 +53,10 @@ struct MindMapView: View {
     ) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         _isShowingSecondView = State(initialValue: isShowingSecondView)
+    }
+    
+    func addMemo() {
+        isAddingMemo = true
     }
     
     func deleteFolder() {
@@ -80,7 +86,8 @@ struct MindMapView: View {
                         isShowingSecondView = true
                     } label: {
                         SystemImage("rectangle.righthalf.inset.fill", size: 24)
-                            .foregroundColor(colorScheme == .dark ? .cream : .black)
+//                            .foregroundColor(colorScheme == .dark ? .cream : .black)
+                            .foregroundColor(colorScheme == .dark ? .newNavForDark : .newNavForLight)
                     }
                     .padding(.trailing, 10)
                     .padding(.leading, Sizes.overallPadding)
@@ -94,7 +101,8 @@ struct MindMapView: View {
                             isShowingSearchView = true
                         } label: {
                             SystemImage( "magnifyingglass")
-                                .tint(Color.navBtnColor)
+//                                .tint(Color.navBtnColor)
+                                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
                         }
                         
                         // MARK: - Button 2: Folder Ordering
@@ -114,14 +122,15 @@ struct MindMapView: View {
                             
                         } label: { // original : 28
                             SystemImage( "folder.badge.plus", size: 28)
-                                .foregroundColor(Color.navBtnColor)
+//                                .foregroundColor(Color.navBtnColor)
+                                .foregroundColor(colorScheme == .dark ? .newNavForDark : .newNavForLight)
                         }
                         .padding(.leading, 12)
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
                 }
-                .padding(.horizontal, Sizes.overallPadding)
+//                .padding(.horizontal, Sizes.overallPadding)
                 
                 Picker("", selection: $selectionEnum) {
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
@@ -314,6 +323,23 @@ struct MindMapView: View {
                 
             } // end of VStack , Inside ZStack.
             
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: addMemo) {
+                        PlusImage()
+                    }
+                    .padding([ .trailing], Sizes.overallPadding)
+                    .padding(.bottom, 10)
+                }
+            }
+
+            
+            NavigationLink(destination:
+                            NewMemoView(parent: fastFolderWithLevelGroup.homeFolder, presentingNewMemo: .constant(false)),
+                           isActive: $isAddingMemo) {}
+            
             if isLoading {
                 Color(.clear)
                 ProgressView()
@@ -338,7 +364,7 @@ struct MindMapView: View {
             
             
             
-            SecondView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
+            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
                        currentFolder: fastFolderWithLevelGroup.homeFolder,
                        isShowingSecondView: $isShowingSecondView)
                 .environmentObject(trashBinVM)

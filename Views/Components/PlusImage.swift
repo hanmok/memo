@@ -15,15 +15,19 @@ struct PlusImage: View {
         
         ZStack {
             SystemImage("circle", size: UIScreen.hasSafeBottom ? 50 : 40)
-                .foregroundColor(colorScheme == .dark ? Color.black : Color.subColor)
-                .background(colorScheme == .dark ? Color.black : Color.subColor)
+//                .foregroundColor(colorScheme == .dark ? Color.black : Color.subColor)
+//                .background(colorScheme == .dark ? Color.black : Color.subColor)
+                .foregroundColor(Color.newMain)
+                .background(Color.newMain)
                 .clipShape(Circle())
-                .overlay(Circle()
-                            .stroke( Color.subColor, lineWidth: 3))
+//                .overlay(Circle()
+//                            .stroke( Color.subColor, lineWidth: 3))
+                    
             
             SystemImage("plus")
                 .frame(width: UIScreen.hasSafeBottom ? 25 : 18, height: UIScreen.hasSafeBottom ? 25 : 18)
-                .foregroundColor(colorScheme == .dark ? Color.subColor : Color.black)
+//                .foregroundColor(colorScheme == .dark ? Color.subColor : Color.black)
+                .foregroundColor(.black)
         }
     }
 }

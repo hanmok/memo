@@ -43,7 +43,8 @@ struct MemoView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage("chevron.left", size: 18)
-                .tint(Color.navBtnColor)
+//                .tint(Color.navBtnColor)
+                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }
     
@@ -146,7 +147,8 @@ struct MemoView: View {
             VStack {
                 Rectangle()
                     .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
-                    .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
+//                    .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
+                    .foregroundColor(colorScheme == .dark ? .black : Color.newMemoBoxColor)
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
@@ -169,7 +171,9 @@ struct MemoView: View {
                             // PIN Button
                             Button(action: togglePin) {
                                 SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
-                                    .tint(Color.navBtnColor)
+//                                    .tint(Color.navBtnColor)
+//                                    .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                                    .tint(colorScheme == .dark ? .newNavForDark : .black)
                             }
                         }
                         
@@ -181,7 +185,9 @@ struct MemoView: View {
                             editorFocusState = false
                         } label: {
                             SystemImage("folder", size: Sizes.regularButtonSize)
-                                .tint(Color.navBtnColor)
+//                                .tint(Color.navBtnColor)
+//                                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                                .tint(colorScheme == .dark ? .newNavForDark : .black)
                         }
                         
                         // REMOVE

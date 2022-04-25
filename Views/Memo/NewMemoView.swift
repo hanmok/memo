@@ -54,7 +54,9 @@ struct NewMemoView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage( "chevron.left", size: 18)
-                .tint(Color.navBtnColor)
+//                .tint(Color.navBtnColor)
+//                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                .tint(colorScheme == .dark ? .newNavForDark : .black)
         }
     }
     
@@ -199,7 +201,9 @@ struct NewMemoView: View {
                             SystemImage(
                                 isPinned ? "pin.fill" : "pin",
                                 size: Sizes.regularButtonSize)
-                                .tint(Color.navBtnColor)
+//                                .tint(Color.navBtnColor)
+//                            .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                            .tint(colorScheme == .dark ? .newNavForDark : .black)
                         }
                         
                         // RELOCATE MEMO
@@ -224,7 +228,8 @@ struct NewMemoView: View {
                             SystemImage(
                                 "folder",
                                 size: Sizes.regularButtonSize)
-                                .tint(Color.navBtnColor)
+//                                .tint(Color.navBtnColor)
+                            .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
                         }
                         
                         // REMOVE

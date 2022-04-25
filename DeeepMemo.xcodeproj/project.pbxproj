@@ -103,7 +103,7 @@
 		9AC5D231278BE711007EAA28 /* ChangeFolderTitleTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D230278BE711007EAA28 /* ChangeFolderTitleTestView.swift */; };
 		9AC5D234278C3145007EAA28 /* MemoList2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D233278C3145007EAA28 /* MemoList2.swift */; };
 		9AC5D23D278D8435007EAA28 /* textFieldTestview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */; };
-		9ACC0C7127DB581800D18690 /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7027DB581800D18690 /* SecondView.swift */; };
+		9ACC0C7127DB581800D18690 /* SecondMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7027DB581800D18690 /* SecondMainView.swift */; };
 		9ACC0C7327DB8CE600D18690 /* ScreenShotInfo in Resources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */; };
 		9ACC0C7C27DDCBAD00D18690 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7B27DDCBAD00D18690 /* Messages.swift */; };
 		9ACC0C7E27DDCC1500D18690 /* MsgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ACC0C7D27DDCC1500D18690 /* MsgView.swift */; };
@@ -114,7 +114,7 @@
 		9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF10277D9DF100866456 /* MemoList.swift */; };
 		9AD6EF16277DA78800866456 /* PopUpButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF15277DA78800866456 /* PopUpButtonView.swift */; };
 		9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */; };
-		9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF25277EC5CF00866456 /* MindMapView.swift */; };
+		9AD6EF26277EC5CF00866456 /* FirstMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6EF25277EC5CF00866456 /* FirstMainView.swift */; };
 		9AD8332327BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332227BD064A00506AE8 /* PhotoPickerPrac.swift */; };
 		9AD8332727BD0B7300506AE8 /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332627BD0B7300506AE8 /* MemoTextView.swift */; };
 		9AD8333727BE148A00506AE8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* MemoView.swift */; };
@@ -247,7 +247,7 @@
 		9AC5D230278BE711007EAA28 /* ChangeFolderTitleTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFolderTitleTestView.swift; sourceTree = "<group>"; };
 		9AC5D233278C3145007EAA28 /* MemoList2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList2.swift; sourceTree = "<group>"; };
 		9AC5D23C278D8435007EAA28 /* textFieldTestview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldTestview.swift; sourceTree = "<group>"; };
-		9ACC0C7027DB581800D18690 /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
+		9ACC0C7027DB581800D18690 /* SecondMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMainView.swift; sourceTree = "<group>"; };
 		9ACC0C7227DB8CE600D18690 /* ScreenShotInfo */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScreenShotInfo; sourceTree = "<group>"; };
 		9ACC0C7B27DDCBAD00D18690 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		9ACC0C7D27DDCC1500D18690 /* MsgView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgView.swift; sourceTree = "<group>"; };
@@ -258,7 +258,7 @@
 		9AD6EF10277D9DF100866456 /* MemoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoList.swift; sourceTree = "<group>"; };
 		9AD6EF15277DA78800866456 /* PopUpButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpButtonView.swift; sourceTree = "<group>"; };
 		9AD6EF1B277DBD9F00866456 /* CollapsibleFolderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsibleFolderList.swift; sourceTree = "<group>"; };
-		9AD6EF25277EC5CF00866456 /* MindMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMapView.swift; sourceTree = "<group>"; };
+		9AD6EF25277EC5CF00866456 /* FirstMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMainView.swift; sourceTree = "<group>"; };
 		9AD8332227BD064A00506AE8 /* PhotoPickerPrac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerPrac.swift; sourceTree = "<group>"; };
 		9AD8332627BD0B7300506AE8 /* MemoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView.swift; sourceTree = "<group>"; };
 		9AD8333627BE148A00506AE8 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
@@ -298,10 +298,10 @@
 			isa = PBXGroup;
 			children = (
 				9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */,
-				9ACC0C7027DB581800D18690 /* SecondView.swift */,
+				9ACC0C7027DB581800D18690 /* SecondMainView.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A3378092796B10E00805138 /* HomeView.swift */,
-				9AD6EF25277EC5CF00866456 /* MindMapView.swift */,
+				9AD6EF25277EC5CF00866456 /* FirstMainView.swift */,
 				9AB7250027D00E16006A825C /* TrashBin */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
@@ -772,7 +772,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9ACC0C7127DB581800D18690 /* SecondView.swift in Sources */,
+				9ACC0C7127DB581800D18690 /* SecondMainView.swift in Sources */,
 				E54FE18327C9455B000FFA81 /* SyntaxHighlightTextStorage.swift in Sources */,
 				E523DB4F27BE9A3000D8D78B /* ColorPaletteView.swift in Sources */,
 				9AB7250327D00EC3006A825C /* FolderOrderingButton.swift in Sources */,
@@ -854,7 +854,7 @@
 				9A1D535F27A93C51009294C1 /* PrettyTextFieldAlert.swift in Sources */,
 				9AD6EF1C277DBD9F00866456 /* CollapsibleFolderList.swift in Sources */,
 				9A337896279A6F3C00805138 /* MemoEditViewModel.swift in Sources */,
-				9AD6EF26277EC5CF00866456 /* MindMapView.swift in Sources */,
+				9AD6EF26277EC5CF00866456 /* FirstMainView.swift in Sources */,
 				9A33786D2799450100805138 /* HorCollapsibleMind.swift in Sources */,
 				9AB7251127D01023006A825C /* TrashBinCell.swift in Sources */,
 				9AA2672C27BE45BD00AC75DB /* UIColorExt.swift in Sources */,

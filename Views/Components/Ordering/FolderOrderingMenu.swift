@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct FolderOrderingMenu: View {
-      
+    @Environment(\.colorScheme) var colorScheme
     var body: some View {
         Menu {
             Text(LocalizedStringStorage.folderOrdering)
@@ -25,7 +25,8 @@ struct FolderOrderingMenu: View {
             
         } label: {
             SystemImage("arrow.up.arrow.down")
-                .tint(Color.navBtnColor)
+//                .tint(Color.navBtnColor)
+                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }
 }

@@ -30,7 +30,8 @@ struct MemosToolBarView: View {
             Button {
                 memoEditVM.initSelectedMemos()
             } label: {
-                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
+//                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
+                ImageWithColor(color: .white, imageSystemName: "multiply", width: 18, height: 18)
             }
             
             
@@ -102,7 +103,8 @@ struct MemosToolBarView: View {
                 
                 memoEditVM.initSelectedMemos()
             }) {
-                UnchangeableImage(imageSystemName: "pin", width: 20, height: 20)
+//                UnchangeableImage(imageSystemName: "pin", width: 20, height: 20)
+                ImageWithColor(color: .white, imageSystemName: "pin")
             }
             .cornerRadius(5)
             
@@ -110,7 +112,9 @@ struct MemosToolBarView: View {
             Button(action: {
                 showSelectingFolderView = true
             }) {
-                UnchangeableImage(imageSystemName: "folder")
+//                UnchangeableImage(imageSystemName: "folder")
+//                ChangeableImage(imageSystemName: "folder")
+                ImageWithColor(color: .white, imageSystemName: "folder")
             }
             
             // REMOVE ACTION, WORKS FINE
@@ -137,7 +141,8 @@ struct MemosToolBarView: View {
         .tint(.black)
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
-        .background(Color.subColor)
+//        .background(Color.subColor)
+        .background(Color.newMemoToolBoxColor)
         .cornerRadius(10)
     }
 }

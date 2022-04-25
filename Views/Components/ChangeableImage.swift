@@ -40,3 +40,21 @@ struct UnchangeableImage: View {
             .frame(width: width, height: height)
     }
 }
+
+struct ImageWithColor: View {
+    var color: Color
+    
+    var imageSystemName: String
+    
+    var width: CGFloat = 20
+    var height: CGFloat = 20
+    
+    var body: some View {
+
+        Image(systemName: imageSystemName)
+            .resizable()
+            .aspectRatio( contentMode: .fit)
+            .tint(color)
+            .frame(width: width, height: height)
+    }
+}

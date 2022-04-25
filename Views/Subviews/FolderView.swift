@@ -37,7 +37,8 @@ struct FolderView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage("chevron.left", size: 18)
-                .tint(Color.navBtnColor)
+//                .tint(Color.navBtnColor)
+                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }
     
@@ -86,7 +87,8 @@ struct FolderView: View {
                             isShowingSearchView = true
                         }, label: {
                             SystemImage("magnifyingglass")
-                                .tint(Color.navBtnColor)
+//                                .tint(Color.navBtnColor)
+                                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
                         })
                         
                         MemoOrderingMenu(parentFolder: currentFolder)
