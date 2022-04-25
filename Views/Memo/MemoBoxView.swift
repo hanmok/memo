@@ -30,7 +30,8 @@ struct MemoBoxView: View {
             }
             if memo.contentsToShow != "" {
                 Text(memo.contentsToShow)
-                    .font(.caption)
+//                    .font(.caption)
+                    .font(.footnote)
                     .foregroundColor(Color.blackAndWhite)
                     .lineLimit(4)
                     .multilineTextAlignment(.leading)
@@ -42,7 +43,8 @@ struct MemoBoxView: View {
                 Spacer()
                 Text("\(memo.modificationDate.formatted(date: .abbreviated, time: .omitted))")
                     .font(.caption2)
-                    .foregroundColor(Color.blackAndWhite)
+//                    .foregroundColor(Color.blackAndWhite)
+                    .foregroundColor(Color.gray).opacity(0.8)
             }
         }
         .padding(.horizontal, Sizes.smallSpacing)

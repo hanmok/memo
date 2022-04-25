@@ -275,6 +275,8 @@ struct SecondView: View {
                                                             HierarchyLabelView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
                                                             Spacer()
                                                         }
+                                                        .padding(.top, 10)
+                                                        .padding(.bottom, 4)
                                                         .padding(.leading, Sizes.overallPadding + 5)
                                                     })
                                                     ) {
@@ -310,7 +312,10 @@ struct SecondView: View {
                                                             HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
                                                             Spacer()
                                                         } // end of HStack
+                                                        .padding(.top, 10)
+                                                        .padding(.bottom, 4)
                                                         .padding(.leading, Sizes.overallPadding + 5)
+                                                        
                                                     }) // end of NavigationLink
                                                     ) {
                                                         ForEach(Memo.sortPinnedFirst(memos: memoArray.memos), id: \.self) { memo in
