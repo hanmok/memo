@@ -91,7 +91,8 @@ struct PinnedFolderView: View {
                                 isPresentingNewMemoView = true
                             } label:
                             {
-                                PlusImage() // plus Image with subColor
+//                                PlusImage() // plus Image with subColor
+                                RadialPlusImage()
                             }
 
                             .offset(y: isPresentingMemoView || isPresentingNewMemoView ? -100 : UIScreen.hasSafeBottom ? -35: -30 ) // priv : -25

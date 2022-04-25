@@ -75,10 +75,6 @@ extension Color {
         Color(red: 246, green: 244, blue: 232)
     ]
     
-//    static let newMain = Color(red: 216, green: 128, blue: 128)
-//    static let newMain = Color(red: 224, green: 178, blue: 157)
-//    static let newMain = Color(rgba: 0xF87577)
-//    static let newMain = Color(red: 0.973, green: 0.459, blue: 0.467)
     static let newMain = UIColor(rgbHex: 0xFDAEAC).convertToColor()
     
 //    static let newNav = UIColor(rgbHex: 0xFFBFBC).convertToColor()

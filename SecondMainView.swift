@@ -351,7 +351,8 @@ struct SecondMainView: View {
                         MemoEditView(
                             plusView:
                                 Button(action: addMemo, label: {
-                                    PlusImage()
+//                                    PlusImage()
+                                    RadialPlusImage()
                                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)
                                 }),

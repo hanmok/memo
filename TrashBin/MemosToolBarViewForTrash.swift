@@ -38,6 +38,7 @@ struct MemosToolBarViewForTrash: View {
             } label: {
                 Text("All")
                     .font(.headline)
+
             }
 
             // RELOCATE MEMOS, LOOKING FINE

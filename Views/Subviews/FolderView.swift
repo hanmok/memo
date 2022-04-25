@@ -175,7 +175,8 @@ struct FolderView: View {
             
             MemoEditView(
                 plusView: Button(action: addMemo) {
-                    PlusImage()
+//                    PlusImage()
+                    RadialPlusImage()
 //                        .padding(EdgeInsets(top: 0, leading: 0, bottom: Sizes.overallPadding, trailing: Sizes.overallPadding))
                         .padding([.trailing, .bottom], Sizes.overallPadding)
                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)

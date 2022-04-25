@@ -328,7 +328,8 @@ struct FirstMainView: View {
                 HStack {
                     Spacer()
                     Button(action: addMemo) {
-                        PlusImage()
+//                        PlusImage()
+                        RadialPlusImage()
                     }
                     .padding([ .trailing], Sizes.overallPadding)
                     .padding(.bottom, 10)

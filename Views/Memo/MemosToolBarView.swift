@@ -43,6 +43,7 @@ struct MemosToolBarView: View {
             } label: {
                 Text("All")
                     .font(.headline)
+                    .foregroundColor(.white)
             }
             }
             
