@@ -190,7 +190,7 @@ struct MindMapView: View {
                                                 isLoading = true
                                                 deleteFolder()
                                             } label: {
-                                                SystemImage( "trash")
+                                                SystemImage("trash")
                                             }
                                             .tint(.red)
                                             

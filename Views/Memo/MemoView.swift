@@ -187,7 +187,8 @@ struct MemoView: View {
                         // REMOVE
                         Button(action: removeMemo) {
                             SystemImage("trash", size: Sizes.regularButtonSize)
-                                .tint(Color.navBtnColor)
+//                                .tint(Color.navBtnColor)
+                                .tint(Color.red).opacity(0.9)
                         }
                     }
                 }

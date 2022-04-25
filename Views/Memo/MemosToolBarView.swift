@@ -125,7 +125,12 @@ struct MemosToolBarView: View {
                 
                 memoEditVM.initSelectedMemos()
             }) {
-                UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
+//                UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
+                Image(systemName: "trash")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .tint(Color.red).opacity(0.9)
+                    .frame(width: 20, height: 20)
             }
             .cornerRadius(5)
         } // end of HStack

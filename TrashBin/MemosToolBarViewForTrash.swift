@@ -51,7 +51,9 @@ struct MemosToolBarViewForTrash: View {
             Button(action: {
                 isShowingDeleteAlert = true
             }) {
-                UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
+//                UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
+                SystemImage("trash", size: Sizes.regularButtonSize)
+                    .tint(Color.red).opacity(0.9)
             }
             .cornerRadius(5)
         } // end of HStack
