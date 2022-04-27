@@ -233,9 +233,13 @@ struct SecondMainView: View {
                         // End of Search TextField
                         Spacer()
                         
-                        OrderingMenuInSecondView(pinState: $pinState,
-                                                 inFolderOrder: $inFolderOrder,
-                                                 isHidingArchive: $isHidingArchive)
+                        EllipseInSecondView(
+                            pinState: $pinState,
+                            inFolderOrder: $inFolderOrder,
+                            isHidingArchive: $isHidingArchive)
+                        .padding(.trailing, 5)
+                        
+                        OrderingMenuInSecondView()
                         
                     }
                     .padding(.horizontal, 20)
@@ -352,6 +356,7 @@ struct SecondMainView: View {
                             plusView:
                                 Button(action: addMemo, label: {
 //                                    PlusImage()
+//                                    NewPlusButton()
                                     RadialPlusImage()
                                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)
@@ -436,6 +441,26 @@ struct SecondMainView: View {
 
 struct OrderingMenuInSecondView: View {
     @Environment(\.colorScheme) var colorScheme
+
+    var body: some View {
+
+        Menu {
+           
+            MemoOrderingMenuInSecondView()
+
+            FolderOrderingMenuInSecondView()
+
+        } label: {
+            SystemImage("arrow.up.arrow.down")
+                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+        }
+    }
+}
+
+
+
+struct EllipseInSecondView: View {
+    @Environment(\.colorScheme) var colorScheme
     
     @Binding var pinState: Bool
     @Binding var inFolderOrder: Bool
@@ -454,16 +479,10 @@ struct OrderingMenuInSecondView: View {
                 Text(LocalizedStringStorage.hideArchive)
             }
 
-            Divider()
-            Divider()
-
-            MemoOrderingMenuInSecondView()
-
-            FolderOrderingMenuInSecondView()
+            
 
         } label: {
-            SystemImage("arrow.up.arrow.down")
-//                .tint(Color.navBtnColor)
+            SystemImage("ellipsis.circle")
                 .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }

@@ -31,7 +31,9 @@ struct MemosToolBarView: View {
                 memoEditVM.initSelectedMemos()
             } label: {
 //                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
-                ImageWithColor(color: .white, imageSystemName: "multiply", width: 18, height: 18)
+//                ImageWithColor(darkModeColor: .white, imageSystemName: "multiply", width: 18, height: 18)
+//                ImageWithColor(darkModeColor: .black, lightModeColor: .white, imageSystemName: <#T##String#>)
+                ChangeableImage2(imageSystemName: "multiply", width: 18, height: 18)
             }
             
             
@@ -43,7 +45,7 @@ struct MemosToolBarView: View {
             } label: {
                 Text("All")
                     .font(.headline)
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
             }
             }
             
@@ -105,7 +107,8 @@ struct MemosToolBarView: View {
                 memoEditVM.initSelectedMemos()
             }) {
 //                UnchangeableImage(imageSystemName: "pin", width: 20, height: 20)
-                ImageWithColor(color: .white, imageSystemName: "pin")
+//                ImageWithColor(darkModeColor: .white, imageSystemName: "pin")
+                ChangeableImage2(imageSystemName: "pin")
             }
             .cornerRadius(5)
             
@@ -115,7 +118,8 @@ struct MemosToolBarView: View {
             }) {
 //                UnchangeableImage(imageSystemName: "folder")
 //                ChangeableImage(imageSystemName: "folder")
-                ImageWithColor(color: .white, imageSystemName: "folder")
+//                ImageWithColor(darkModeColor: .white, imageSystemName: "folder")
+                ChangeableImage2(imageSystemName: "folder")
             }
             
             // REMOVE ACTION, WORKS FINE
@@ -143,7 +147,7 @@ struct MemosToolBarView: View {
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
 //        .background(Color.subColor)
-        .background(Color.newMemoToolBoxColor)
+        .background(colorScheme == .dark ? .newMain3 : Color.newMemoToolBoxColorForLight)
         .cornerRadius(10)
     }
 }

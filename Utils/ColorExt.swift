@@ -76,28 +76,33 @@ extension Color {
     ]
     
     static let newMain = UIColor(rgbHex: 0xFDAEAC).convertToColor()
-    
+    static let newMain2 = UIColor(rgbHex: 0xFFC0C0).convertToColor()
+    static let newMain3 = UIColor(rgbHex: 0xFFC8C8).convertToColor()
 //    static let newNav = UIColor(rgbHex: 0xFFBFBC).convertToColor()
 //    static let newNav = UIColor(rgbHex: 0xFFD5D3).convertToColor()
 //    static let newNavForDark = UIColor(rgbHex: 0xFFDAD8).convertToColor()
-    static let newNavForDark = UIColor(rgbHex: 0x6666BB).convertToColor()
+
 //    static let newNavForLight = UIColor(rgbHex: 0xF87577).convertToColor().opacity(0.7)
 //    static let newNavForLight = UIColor(rgbHex: 0x161FA7).convertToColor().opacity(0.7) // 약간 애매..
 //    static let newNavForLight = UIColor(rgbHex: 0x0A1172).convertToColor().opacity(0.7) // 괜찮아 보이는데.. ?
 //    static let newNavForLight = UIColor(rgbHex: 0x002147).convertToColor().opacity(0.7) // OxFord blue
 //    static let newNavForLight = UIColor(rgbHex: 0x0055BB).convertToColor().opacity(0.7) //
 //    static let newNavForLight = UIColor(rgbHex: 0x0033CC).convertToColor().opacity(0.7) //
-    static let newNavForLight = UIColor(rgbHex: 0x000077).convertToColor().opacity(0.7)   // purple
     
-    static let newMemoToolBoxColor = UIColor(rgbHex: 0x000077).convertToColor()   // purple
+
+    
+    
 //    static let newNavForLight = UIColor(rgbHex: 0x000077).convertToColor().opacity(0.7)   // purple
     
     
-//    static let newMain = Color(red: 248, green: 250, blue: 230)
-//    static let some = Color(
-//    (red: 0.973, green: 0.459, blue: 0.467, alpha: 1)
     
-
+    
+    static let newNavForDark = UIColor(rgbHex: 0xFFFFFF).convertToColor()
+    static let newNavForLight = UIColor(rgbHex: 0x000000).convertToColor().opacity(0.7)
+    static let newMemoToolBoxColorForLight = UIColor(rgbHex: 0x000000).convertToColor()   // purple, Memo Toolbar View
+//    static let newNavForDark = UIColor(rgbHex: 0x6666BB).convertToColor()
+//    static let newNavForLight = UIColor(rgbHex: 0x000077).convertToColor().opacity(0.7)   // purple
+    
     static let pastelUIColors = Color.convertToUIColors(colors: Color.pastelColors)
     static let testColor = UIColor(rgbHex: 0xFAE5C5).convertToColor() // look fine
     static let testColor2 = UIColor(rgbHex: 0xFAEACA).convertToColor()
@@ -105,8 +110,6 @@ extension Color {
     static let newMemoBoxColor = UIColor(rgbHex: 0xFFE9E7).convertToColor() // looks better!
     
     static let bgForDark = UIColor(rgbHex: 0x551308).convertToColor()
-
-    
 }
 
 
@@ -165,9 +168,14 @@ extension Color {
     
     static let blackAndWhite = Color(UIColor.blackAndWhite) // white(0), white(1)
     
-    static let swipeBtnColor1 = Color(UIColor.swipeBtnColor1) // 232 227 199, 202 197 169 ( == subColor)
-    static let swipeBtnColor2 = Color(UIColor.swipeBtnColor2) // 212 207 179, 182 177 149
-    static let swipeBtnColor3 = Color(UIColor.swipeBtnColor3) // 192 187 159, 162 157 129
+//    static let swipeBtnColor1 = UIColor(rgbHex: 0xFDAEAC).convertToColor() // not using
+    static let swipeBtnColor2 = UIColor(rgbHex: 0xFDAEAC).convertToColor()
+    
+    static let swipeBtnColor3 = UIColor(rgbHex: 0xFF7F7C).convertToColor()
+    
+//    static let swipeBtnColor1 = Color(UIColor.swipeBtnColor1) // 232 227 199, 202 197 169 ( == subColor)
+//    static let swipeBtnColor2 = Color(UIColor.swipeBtnColor2) // 212 207 179, 182 177 149
+//    static let swipeBtnColor3 = Color(UIColor.swipeBtnColor3) // 192 187 159, 162 157 129
     
     static let pinBarColor = Color(UIColor.pinBarColor) //212 207 179, 182 177 149 (== 3, 2)
     
@@ -185,6 +193,7 @@ extension Color {
 //    UIColor(named: ColorKeys.memoBoxSwipeBGColor)!
     
     static let basicColors = Color(UIColor.basicColors)
+//    static let basicColors =
     
     static let buttonTextColor = Color(UIColor.buttonTextColor)
 }

@@ -49,7 +49,8 @@ struct HomeView: View {
                     VStack {
                     Text(messageVM.message)
 //                        .foregroundColor(.navBtnColor)
-                            .foregroundColor(.black)
+//                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                         .padding(.top, 10)
                     Spacer()
                     }

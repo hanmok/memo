@@ -13,7 +13,7 @@ class DraggableViewModel: ObservableObject {
 }
 
 struct DraggableMemoBoxView: View {
-
+    @Environment(\.colorScheme) var colorScheme
     let memo: Memo
     
     @EnvironmentObject var dragVM: DraggableViewModel
@@ -33,7 +33,8 @@ struct DraggableMemoBoxView: View {
                 .offset(x: dragVM.draggingMemo == memo ? dragVM.oneOffset : 0)
                 .background {
                     ZStack {
-                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
+//                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
+                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain3) : .black) : .white)
                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                             .cornerRadius(10)
                         HStack {
@@ -41,6 +42,7 @@ struct DraggableMemoBoxView: View {
                             SystemImage("checkmark")
                                 .frame(width: 65)
                                 .foregroundColor(.basicColors)
+                                .foregroundColor(.newMain)
                                 .opacity(isOnDraggingAction ? 1 : 0)
                         }
                     }

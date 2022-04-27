@@ -23,6 +23,22 @@ struct ChangeableImage: View {
     }
 }
 
+struct ChangeableImage2: View {
+    @Environment(\.colorScheme) var colorScheme
+    var imageSystemName: String
+    
+    var width: CGFloat = 20
+    var height: CGFloat = 20
+    
+    var body: some View {
+        Image(systemName: imageSystemName)
+            .resizable()
+            .aspectRatio( contentMode: .fit)
+            .tint(colorScheme == .dark ? .black : .white) // dark -> white. light -> black
+            .frame(width: width, height: height)
+    }
+}
+
 /// black color size of 20
 struct UnchangeableImage: View {
         
@@ -42,7 +58,9 @@ struct UnchangeableImage: View {
 }
 
 struct ImageWithColor: View {
-    var color: Color
+    @Environment(\.colorScheme) var colorScheme
+    var darkModeColor: Color
+    var lightModeColor: Color
     
     var imageSystemName: String
     
@@ -54,7 +72,7 @@ struct ImageWithColor: View {
         Image(systemName: imageSystemName)
             .resizable()
             .aspectRatio( contentMode: .fit)
-            .tint(color)
+            .tint(colorScheme == .dark ? darkModeColor : lightModeColor)
             .frame(width: width, height: height)
     }
 }

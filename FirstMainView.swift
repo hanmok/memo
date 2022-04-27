@@ -329,6 +329,7 @@ struct FirstMainView: View {
                     Spacer()
                     Button(action: addMemo) {
 //                        PlusImage()
+//                        NewPlusButton()
                         RadialPlusImage()
                     }
                     .padding([ .trailing], Sizes.overallPadding)
