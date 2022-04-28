@@ -34,7 +34,8 @@ struct DraggableMemoBoxView: View {
                 .background {
                     ZStack {
 //                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
-                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain3) : .black) : .white)
+//                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain3) : .black) : .white)
+                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain4) : .black) : .white)
                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                             .cornerRadius(10)
                         HStack {
