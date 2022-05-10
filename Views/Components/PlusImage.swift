@@ -44,7 +44,7 @@ struct RadialPlusImage: View {
 //            SystemImage("circle", size: UIScreen.hasSafeBottom ? 50 : 40)
             Circle()
                 .fill(
-                    RadialGradient(colors: colorScheme == .dark ? [.white, Color.newMain3] : [.black, .black ], center: .center, startRadius: 0, endRadius: 25))
+                    RadialGradient(colors: colorScheme == .dark ? [.white, Color.newMain3] : [.black, .black ], center: .center, startRadius: 0, endRadius: 30))
                 .frame(width: 60, height: 60)
 
             SystemImage("plus")

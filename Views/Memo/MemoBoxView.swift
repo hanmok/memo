@@ -61,7 +61,8 @@ struct MemoBoxView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
 //                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : Color(white: 0.5)) : .clear, lineWidth: 1)
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.newMain3 : Color(white: 0.5)) : .clear, lineWidth: 1)
+//                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.newMain3 : Color(white: 0.5)) : .clear, lineWidth: 1)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.newMain4 : Color(white: 0.5)) : .clear, lineWidth: 1)
         )
         .overlay(
             VStack {

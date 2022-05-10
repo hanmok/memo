@@ -149,7 +149,8 @@ struct MemosToolBarView: View {
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
 //        .background(Color.subColor)
-        .background(colorScheme == .dark ? .newMain3 : Color.newMemoToolBoxColorForLight)
+//        .background(colorScheme == .dark ? .newMain3 : Color.newMemoToolBoxColorForLight)
+        .background(colorScheme == .dark ? .newMain4 : Color.newMemoToolBoxColorForLight)
         .cornerRadius(10)
     }
 }

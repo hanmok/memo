@@ -78,6 +78,8 @@ extension Color {
     static let newMain = UIColor(rgbHex: 0xFDAEAC).convertToColor()
     static let newMain2 = UIColor(rgbHex: 0xFFC0C0).convertToColor()
     static let newMain3 = UIColor(rgbHex: 0xFFC8C8).convertToColor()
+    static let newMain4 = UIColor(rgbHex: 0xFFD0D0).convertToColor()
+    
 //    static let newNav = UIColor(rgbHex: 0xFFBFBC).convertToColor()
 //    static let newNav = UIColor(rgbHex: 0xFFD5D3).convertToColor()
 //    static let newNavForDark = UIColor(rgbHex: 0xFFDAD8).convertToColor()
