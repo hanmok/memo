@@ -190,6 +190,7 @@ struct SecondMainView: View {
                                 .foregroundColor(colorScheme == .dark ? Color.newNavForDark : Color.newNavForLight)
                         }
                         
+                        
                         // Search TextField
                         HStack(spacing: 0) {
                             
@@ -226,20 +227,24 @@ struct SecondMainView: View {
                         .frame(height: 32)
                         .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                         .cornerRadius(10)
+//                        .overlay(RoundedRectangle(cornerRadius: 10)
+//                            .stroke(colorScheme == .dark ? Color.cream : Color.clear))
                         .overlay(RoundedRectangle(cornerRadius: 10)
-                            .stroke(colorScheme == .dark ? Color.cream : Color.clear))
+                            .stroke(colorScheme == .dark ? Color.white : Color.clear))
                         .padding(.horizontal, 10)
                         
                         // End of Search TextField
                         Spacer()
                         
+                        
+                        
+                        OrderingMenuInSecondView()
+                        
                         EllipseInSecondView(
                             pinState: $pinState,
                             inFolderOrder: $inFolderOrder,
                             isHidingArchive: $isHidingArchive)
-                        .padding(.trailing, 5)
-                        
-                        OrderingMenuInSecondView()
+                        .padding(.leading, 5)
                         
                     }
                     .padding(.horizontal, 20)
@@ -376,6 +381,9 @@ struct SecondMainView: View {
                         .animation(.spring().speed(0.5), value: focusState)
                     }
                 } // end of Main VStack
+//                .background(Color(.sRGB, red: 0.945, green: 0.945, blue: 0.945))
+//                .background(Color.newBG)
+                .background(colorScheme == .dark ? .black : .white)
                 .navigationBarHidden(true)
                 .padding(.top, 6)
                 .gesture(scroll)
@@ -482,7 +490,8 @@ struct EllipseInSecondView: View {
             
 
         } label: {
-            SystemImage("ellipsis.circle")
+//            SystemImage("ellipsis.circle")
+            SystemImage("ellipsis").rotationEffect(.degrees(90)).scaleEffect(1.15)
                 .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }

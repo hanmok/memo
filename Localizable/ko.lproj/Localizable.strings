@@ -6,14 +6,14 @@
  
 */
 
-"done" = "확 인";
+"done" = "확인";
 "keyboardDone" = "완료";
 
 "removeAlertMsgMain" = "정말 제거하시겠습니까?";
 "removeAlertMsgSub" = "삭제 후에는 복원이 불가능합니다";
-"CancelInSearch" = "취 소";
-"Cancel" = "취 소";
-"Delete" = "제 거";
+"CancelInSearch" = "취소";
+"Cancel" = "취소";
+"Delete" = "제거";
 
 "New Folder" = "새 폴더";
 "Rename Folder" = "폴더 이름 변경";

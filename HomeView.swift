@@ -24,7 +24,7 @@ struct HomeView: View {
             FirstMainView(
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
-                        homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!,
+                        homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!, // found nil here .. Why... ??
                         archiveFolder: topFolders.filter{FolderType.compareName($0.title, with: .archive)}.first!
                     )
                 ,isShowingSecondView: isFirstScreenSecondView
@@ -43,6 +43,8 @@ struct HomeView: View {
 //                        .cornerRadius(30, corners: .topRight)
 //                        .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : Color.subColor)
 //                        .background(colorScheme == .dark ? Color.init(white: 0.1) : Color.subColor)
+//                        .foregroundColor(Color.green) // frame Color
+//                        .background(Color.blue)
                         .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .white)
                         .background(colorScheme == .dark ? Color.init(white: 0.1) : .white)
 
@@ -70,11 +72,14 @@ struct HomeView: View {
 //                        .cornerRadius(30, corners: .topLeft)
 //                        .cornerRadius(30, corners: .topRight)
 //                        .foregroundColor(colorScheme == .dark ? .navBtnColor : .clear)
-                        .foregroundColor(colorScheme == .dark ? .navBtnColor : .gray)
+//                        .foregroundColor(colorScheme == .dark ? .navBtnColor : .gray)
+//                        .foregroundColor(.yellow)
+                        .foregroundColor(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.85))
                     Spacer()
                     }
                 )
                 .offset(y: messageVM.shouldShow ? 0 : 100)
+                
             }
 //            .cornerRadius(10)
         }

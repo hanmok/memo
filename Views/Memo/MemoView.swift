@@ -147,8 +147,9 @@ struct MemoView: View {
             VStack {
                 Rectangle()
                     .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
-//                    .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
-                    .foregroundColor(colorScheme == .dark ? .black : Color.newMemoBoxColor)
+                    .foregroundColor(colorScheme == .dark ? .black :.white)
+//                Rectangle().frame(width: UIScreen.screenWidth, height: 1, alignment: .center)
+//                    .foregroundColor(colorScheme == .dark ? Color(.sRGB, red: 0.2, green: 0.2, blue: 0.2, opacity: 1) : Color(.sRGB, red: 0.8, green: 0.8, blue: 0.8, opacity: 1))
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
@@ -185,22 +186,27 @@ struct MemoView: View {
                             editorFocusState = false
                         } label: {
                             SystemImage("folder", size: Sizes.regularButtonSize)
-//                                .tint(Color.navBtnColor)
-//                                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
-                                .tint(colorScheme == .dark ? .newNavForDark : .black)
+                                .tint(
+                                    contents == "" ?
+                                    (.gray) :
+                                        (colorScheme == .dark ? .newNavForDark : .newNavForLight))
+                            // 왜.. 위치까지 애니메이션이 들어가지 ??
+                                .animation(.spring(), value: contents == "")
                         }
+                        .disabled(contents == "")
+                        
                         
                         // REMOVE
                         Button(action: removeMemo) {
                             SystemImage("trash", size: Sizes.regularButtonSize)
-//                                .tint(Color.navBtnColor)
                                 .tint(Color.red).opacity(0.9)
                         }
                     }
                 }
                 .padding(.bottom)
                 .padding(.trailing, Sizes.overallPadding)
-                .padding(.leading, Sizes.navBtnLeadingSpacing)
+//                .padding(.leading, Sizes.navBtnLeadingSpacing)
+                .padding(.leading, Sizes.navBtnLeadingSpacing + 5.0)
                 
                 
                 MemoTextView(text: $contents)

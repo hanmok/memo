@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct DynamicTopFolderCell: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
@@ -24,6 +24,8 @@ struct DynamicTopFolderCell: View {
         ) {
             TitleWithLevelView(folder: folder, level: level)
         } // end of NavigationLink
+        
+        .listRowBackground(colorScheme == .dark ? Color(white: 0.1) : Color(white: 0.94))
         
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button {

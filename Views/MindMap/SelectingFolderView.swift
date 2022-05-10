@@ -83,7 +83,6 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
-//                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 messageVM.message = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 isValidAction = true
@@ -124,6 +123,7 @@ struct SelectingFolderView: View {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }
                     }
+                    .listRowBackground(colorScheme == .dark ? Color(white: 0.1 + Double(folderWithLevel.level) * 0.04) : Color(white: 0.94 - Double(folderWithLevel.level) * 0.03))
                 }// end of List
             } else {
                 List(fastFolderWithLevelGroup.archives, id: \.self)  { folderWithLevel in
@@ -135,7 +135,7 @@ struct SelectingFolderView: View {
                                 folderEditVM.folderToCut = nil
                             } else {
                                 folderEditVM.folderToPaste?.add(subfolder: folderEditVM.folderToCut!)
-//                                msgToShow = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
+
                                 messageVM.message = Messages.showFolderMovedMsg(targetFolder: folderEditVM.folderToCut!, to: folderEditVM.folderToPaste!)
                                 folderEditVM.folderToCut!.modificationDate = Date()
                                 
@@ -144,7 +144,7 @@ struct SelectingFolderView: View {
                         } else {
                              memoEditVM.selectedMemos.forEach { folderEditVM.folderToPaste!.add(memo: $0)
                                 $0.modificationDate = Date()
-//                                msgToShow = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
+
                                  messageVM.message = Messages.showMemoMovedMsg(memoEditVM.count, to: folderEditVM.folderToPaste!)
                             }
                             
@@ -177,6 +177,7 @@ struct SelectingFolderView: View {
                             CheckableFolderCell(folder: folderWithLevel.folder, level: folderWithLevel.level)
                         }
                     }
+                    .listRowBackground(colorScheme == .dark ? Color(white: 0.1 + Double(folderWithLevel.level) * 0.04) : Color(white: 0.94 - Double(folderWithLevel.level) * 0.03))
                 }// end of List
             }
         }

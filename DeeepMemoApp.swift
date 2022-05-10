@@ -34,11 +34,16 @@ struct DeeepMemoApp: App {
 //        let foldersReq = Folder.fetch(.all)
 //
 //       if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
-//           _ = folders.map {
-//               print("Folder name to be deleted: \($0.title)")
-//               Folder.delete($0)}
-//           persistenceController.container.viewContext.saveCoreData()
-//       }
+////           _ = folders.map {
+////               print("Folder name to be deleted: \($0.title)")
+////               Folder.delete($0)}
+////           persistenceController.container.viewContext.saveCoreData()
+//           folders.forEach { folder in
+//               print("Folder name to be deleted: \(folder.title)")
+//               Folder.delete(folder)}
+//           }
+//        persistenceController.container.viewContext.saveCoreData()
+//
 //
 //        if !isFirstLaunch {
 //            let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
@@ -51,6 +56,8 @@ struct DeeepMemoApp: App {
         // how do i.. know..?
         
         // two steps for not providing more folders than 3
+        
+        
         
         if isFirstLaunch {
             let folderReq = Folder.fetch(.all)
@@ -70,7 +77,16 @@ struct DeeepMemoApp: App {
 
             isFirstLaunch = false
             isFirstAfterBookmarkUpdate = false
+            
         } else {
+            let folderReq = Folder.fetch(.all)
+            if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
+                folders.forEach {
+                    print("folder Name: \($0.title)")
+                }
+            }
+//            let newFolder = Folder.provideInitialFolder(context: persistenceController.container.viewContext)
+//            persistenceController.container.viewContext.saveCoreData()
             print("no newFolders. it's not first launch! ")
         }
         

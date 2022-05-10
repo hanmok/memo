@@ -46,7 +46,8 @@ struct MemoBoxView: View {
                 Text("\(memo.modificationDate.formatted(date: .abbreviated, time: .omitted))")
                     .font(.caption2)
 //                    .foregroundColor(Color.blackAndWhite)
-                    .foregroundColor(Color.gray).opacity(0.8)
+//                    .foregroundColor(Color.gray).opacity(0.8)
+                    .foregroundColor(Color(white: 0.4))
             }
         }
         .padding(.horizontal, Sizes.smallSpacing)

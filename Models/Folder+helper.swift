@@ -515,7 +515,7 @@ struct FolderProperties {
     static let memos = "memos_"
     static let parent = "parent"
     static let subfolders = "subfolders_"
-    
+
 }
 
 extension Folder {
@@ -589,15 +589,20 @@ extension Folder {
 //        subFolder1.modificationDate = Date().advanced(by: 100)
 //        subFolder2.modificationDate = Date().advanced(by: 200)
 //        subFolder3.modificationDate = Date().advanced(by: 300)
-        
+
         let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
         archive.title += ""
        
-        
         let trashBin = Folder(title: FolderType.getFolderName(type: .trashbin), context: context)
         
         context.saveCoreData()
         return [homeFolder, archive, trashBin]
+    }
+    
+    static func provideInitialFolder(context: NSManagedObjectContext) -> Folder {
+        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
+        context.saveCoreData()
+        return homeFolder
     }
 }
 

@@ -34,6 +34,8 @@ struct NewMemoView: View {
     
     @Binding var isPresentingNewMemo: Bool
     
+   
+    
 //    @State var msgToShow: String?
     
     func showKeyboardInHalfSec() {
@@ -177,10 +179,13 @@ struct NewMemoView: View {
     var body: some View {
         
         return ZStack(alignment: .topLeading) {
+            
             VStack {
                 Rectangle()
                     .frame(width: UIScreen.screenWidth, height: UIScreen.hasSafeBottom ? 90 : 70)
-                    .foregroundColor(colorScheme == .dark ? .black : Color.mainColor)
+                    .foregroundColor(colorScheme == .dark ? .black :.white)
+//                Rectangle().frame(width: UIScreen.screenWidth, height: 1, alignment: .center)
+//                    .foregroundColor(colorScheme == .dark ? Color(.sRGB, red: 0.2, green: 0.2, blue: 0.2, opacity: 1) : Color(.sRGB, red: 0.8, green: 0.8, blue: 0.8, opacity: 1))
                 Spacer()
             }
             .ignoresSafeArea(edges: .top)
@@ -207,6 +212,7 @@ struct NewMemoView: View {
                         }
                         
                         // RELOCATE MEMO
+                        // 코드 달라져야함. (로직이 달라짐)
                         Button {
                             if !hasRelocated {
                                 memo = Memo(contents: contents, context: context)
@@ -228,9 +234,10 @@ struct NewMemoView: View {
                             SystemImage(
                                 "folder",
                                 size: Sizes.regularButtonSize)
-//                                .tint(Color.navBtnColor)
-                            .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                            .tint(contents == "" ? (.gray) : (colorScheme == .dark ? .newNavForDark : .newNavForLight))
+                            .animation(.spring(), value: contents == "")
                         }
+                        .disabled(contents == "")
                         
                         // REMOVE
                         Button(action: removeMemo) {
@@ -241,7 +248,8 @@ struct NewMemoView: View {
                 }
                 .padding(.bottom)
                 .padding(.trailing, Sizes.overallPadding)
-                .padding(.leading, Sizes.navBtnLeadingSpacing)
+//                .padding(.leading, Sizes.navBtnLeadingSpacing)
+                .padding(.leading, Sizes.navBtnLeadingSpacing + 5.0)
                 
 //                PlainTextView(text: $contents)
 //                CustomTextView1(text: $contents)

@@ -98,7 +98,8 @@ extension Color {
     
     
     static let newNavForDark = UIColor(rgbHex: 0xFFFFFF).convertToColor()
-    static let newNavForLight = UIColor(rgbHex: 0x000000).convertToColor().opacity(0.7)
+//    static let newNavForLight = UIColor(rgbHex: 0x000000).convertToColor().opacity(0.7)
+    static let newNavForLight = UIColor(rgbHex: 0x000000).convertToColor()
     static let newMemoToolBoxColorForLight = UIColor(rgbHex: 0x000000).convertToColor()   // purple, Memo Toolbar View
 //    static let newNavForDark = UIColor(rgbHex: 0x6666BB).convertToColor()
 //    static let newNavForLight = UIColor(rgbHex: 0x000077).convertToColor().opacity(0.7)   // purple
@@ -107,9 +108,14 @@ extension Color {
     static let testColor = UIColor(rgbHex: 0xFAE5C5).convertToColor() // look fine
     static let testColor2 = UIColor(rgbHex: 0xFAEACA).convertToColor()
     static let testColor3 = UIColor(rgbHex: 0xFFE7E5).convertToColor() // looks good!
-    static let newMemoBoxColor = UIColor(rgbHex: 0xFFE9E7).convertToColor() // looks better!
+    
+//    static let newMemoBoxColor = UIColor(rgbHex: 0xFFE9E7).convertToColor() // looks better!
+//    static let newMemoBoxColor = Color(.sRGB, red: 0.945, green: 0.945, blue: 0.945, opacity: 1)// looks better!
+    static let newMemoBoxColor = Color(.sRGB, red: 0.96, green: 0.96, blue: 0.96, opacity: 1)// looks better!
     
     static let bgForDark = UIColor(rgbHex: 0x551308).convertToColor()
+    
+    static let newBG = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
 }
 
 

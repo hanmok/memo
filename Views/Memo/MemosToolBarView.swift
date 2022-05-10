@@ -138,9 +138,11 @@ struct MemosToolBarView: View {
                 Image(systemName: "trash")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .tint(Color.red).opacity(0.9)
+                    .tint(Color.red)
                     .frame(width: 20, height: 20)
             }
+            
+            
             .cornerRadius(5)
         } // end of HStack
         .tint(.black)

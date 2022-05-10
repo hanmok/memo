@@ -177,7 +177,7 @@ struct FirstMainView: View {
                                         level: folderWithLevel.level)
                                         .environmentObject(folderEditVM)
                                         .environmentObject(trashBinVM)
-                                    
+//                                        .listRowBackground(Color.blue)
                                     // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
@@ -229,8 +229,14 @@ struct FirstMainView: View {
                                         }
                                 } // end of ForEach
                             }
+//                            .listRowBackground(Color.green)
                         }
                         .listStyle(InsetGroupedListStyle())
+                    } // end of VStack
+                    .offset(x: selectionEnum == .folder ? 0 : -UIScreen.screenWidth)
+                    .animation(.easeOut.speed(1.5), value: selectionEnum == .folder )
+                    .onAppear {
+                        UITableView.appearance().backgroundColor = .clear
                     }
                     
                     // Another ZStack Element
@@ -317,19 +323,22 @@ struct FirstMainView: View {
                             .frame(height: 250)
                     }
                     .offset(x: selectionEnum == .folder ? UIScreen.screenWidth : 0)
+                    .animation(.easeOut.speed(1.5), value: selectionEnum == .folder )
                 } // end of ZStack
-                .padding(.horizontal, Sizes.overallPadding)
+//                .padding(.horizontal, Sizes.overallPadding)
                 
                 
             } // end of VStack , Inside ZStack.
+            
+            .onAppear {
+                UITableView.appearance().backgroundColor = .clear
+            }
             
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
                     Button(action: addMemo) {
-//                        PlusImage()
-//                        NewPlusButton()
                         RadialPlusImage()
                     }
                     .padding([ .trailing], Sizes.overallPadding)
@@ -337,7 +346,7 @@ struct FirstMainView: View {
                 }
             }
 
-            
+
             NavigationLink(destination:
                             NewMemoView(parent: fastFolderWithLevelGroup.homeFolder, presentingNewMemo: .constant(false)),
                            isActive: $isAddingMemo) {}
@@ -374,9 +383,7 @@ struct FirstMainView: View {
             
             
             if isShowingTextField {
-//                Color(.sRGB, white: colorScheme == .dark ? 0.2 : 0.8 , opacity: 0.5)
-//                Color(.sRGB, white: colorScheme == .dark ? 0.5 : 0.5 , opacity: 0.5)
-                Color(.sRGB, white: 0.5, opacity: 0.5)
+                Color(.sRGB, white: colorScheme == .light ? 0.25 : 0.75, opacity: 0.8)
                     .ignoresSafeArea()
             }
             

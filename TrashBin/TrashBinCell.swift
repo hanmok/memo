@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TrashBinCell: View {
-    
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
     
     @EnvironmentObject var trashBinVM: TrashBinViewModel
@@ -26,6 +26,7 @@ struct TrashBinCell: View {
             }
             .frame(maxWidth: .infinity)
         }
+        .listRowBackground(colorScheme == .dark ? Color(white: 0.1) : Color(white: 0.94))
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             
             Button {

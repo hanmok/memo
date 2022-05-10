@@ -224,13 +224,13 @@ struct CustomSearchView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
-                .padding(.horizontal, Sizes.overallPadding)
+//                .padding(.horizontal, Sizes.overallPadding)
             
                 Picker("", selection: $searchTypeEnum) {
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .all)).tag(SearchType.all)
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .current)).tag(SearchType.current)
                 }
-                .padding(.horizontal, Sizes.overallPadding)
+//                .padding(.horizontal, Sizes.overallPadding)
                 .pickerStyle(SegmentedPickerStyle())
                 
                 ScrollView {
