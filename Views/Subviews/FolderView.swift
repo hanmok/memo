@@ -65,7 +65,7 @@ struct FolderView: View {
             return Memo.sortMemos(memos: currentFolder.memos.sorted())
         }
         
-        return ZStack(alignment: .topLeading) {
+        return ZStack {
             
 //            Color(.newBGForDark)
             Color(colorScheme == .dark ? .newBGForDark : .white)
@@ -219,7 +219,7 @@ struct FolderView: View {
 //            .background(colorScheme == .dark ? .black : .white)
             
             if isAddingFolder {
-                Color(.sRGB, white: colorScheme == .light ? 0.25 : 0.75, opacity: 0.8)
+                Color(.sRGB, white: colorScheme == .dark ? 0.25 : 0.8, opacity: 0.9)
                     .ignoresSafeArea()
             }
             
