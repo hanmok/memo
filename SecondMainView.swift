@@ -383,9 +383,13 @@ struct SecondMainView: View {
                 } // end of Main VStack
 //                .background(Color(.sRGB, red: 0.945, green: 0.945, blue: 0.945))
 //                .background(Color.newBG)
-                .background(colorScheme == .dark ? .black : .white)
+//                .background(colorScheme == .dark ? .black : .white)
+//                .ignoresSafeAreaEdges()
+//                .ignoresSafeArea(edges: .all)
+                
+                .background(colorScheme == .dark ? Color.newBGforDark : .white)
                 .navigationBarHidden(true)
-                .padding(.top, 6)
+//                .padding(.top, 6)
                 .gesture(scroll)
                 // start moving scrollbar to the right !
                 

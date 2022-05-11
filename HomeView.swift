@@ -39,19 +39,11 @@ struct HomeView: View {
                 ZStack {
                     Rectangle()
                         .cornerRadius(10)
-//                        .cornerRadius(30, corners: .topLeft)
-//                        .cornerRadius(30, corners: .topRight)
-//                        .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : Color.subColor)
-//                        .background(colorScheme == .dark ? Color.init(white: 0.1) : Color.subColor)
-//                        .foregroundColor(Color.green) // frame Color
-//                        .background(Color.blue)
                         .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .white)
                         .background(colorScheme == .dark ? Color.init(white: 0.1) : .white)
 
                     VStack {
                     Text(messageVM.message)
-//                        .foregroundColor(.navBtnColor)
-//                            .foregroundColor(.black)
                             .foregroundColor(colorScheme == .dark ? .white : .black)
                         .padding(.top, 10)
                     Spacer()
@@ -69,11 +61,6 @@ struct HomeView: View {
                             height: 1,
                             alignment: .top)
                         .cornerRadius(10)
-//                        .cornerRadius(30, corners: .topLeft)
-//                        .cornerRadius(30, corners: .topRight)
-//                        .foregroundColor(colorScheme == .dark ? .navBtnColor : .clear)
-//                        .foregroundColor(colorScheme == .dark ? .navBtnColor : .gray)
-//                        .foregroundColor(.yellow)
                         .foregroundColor(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.85))
                     Spacer()
                     }
@@ -81,7 +68,6 @@ struct HomeView: View {
                 .offset(y: messageVM.shouldShow ? 0 : 100)
                 
             }
-//            .cornerRadius(10)
         }
         .ignoresSafeArea(edges: .bottom)
         .navigationViewStyle(StackNavigationViewStyle())

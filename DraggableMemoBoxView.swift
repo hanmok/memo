@@ -20,6 +20,7 @@ struct DraggableMemoBoxView: View {
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashbinVM: TrashBinViewModel
     @GestureState var isDragging = false
+    let selectedOffset: CGFloat = -4
     
     @State var isOnDraggingAction = false
     
@@ -30,11 +31,13 @@ struct DraggableMemoBoxView: View {
         ) {
             MemoBoxView(memo: memo)
                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+                .shadow(color: memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color(white: 0.4) : .white) : .clear, radius: 3, x: -3, y: -3)
                 .offset(x: dragVM.draggingMemo == memo ? dragVM.oneOffset : 0)
+                .offset(x: memoEditVM.selectedMemos.contains(memo) ? selectedOffset : 0,
+                        y: memoEditVM.selectedMemos.contains(memo) ? selectedOffset : 0)
+                .animation(.easeOut, value: memoEditVM.selectedMemos.contains(memo))
                 .background {
                     ZStack {
-//                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
-//                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain3) : .black) : .white)
                         Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain4) : .black) : .white)
                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                             .cornerRadius(10)
@@ -47,8 +50,20 @@ struct DraggableMemoBoxView: View {
                                 .opacity(isOnDraggingAction ? 1 : 0)
                         }
                     }
+                    .offset(x: memoEditVM.selectedMemos.contains(memo) ? selectedOffset : 0,
+                            y: memoEditVM.selectedMemos.contains(memo) ? selectedOffset : 0)
+                    .animation(.easeOut, value: memoEditVM.selectedMemos.contains(memo))
                     .padding(.horizontal, Sizes.smallSpacing)
                     .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
+                    .shadow(
+                        color:  memoEditVM.selectedMemos.contains(memo) ?
+                        Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1 : 0.6) :
+                            Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
+                        radius: memoEditVM.selectedMemos.contains(memo) ? 12 : 4,
+                        x: memoEditVM.selectedMemos.contains(memo) ? 12 : 4,
+                        y: memoEditVM.selectedMemos.contains(memo) ? 12 : 4)
+
+                    .animation(.easeOut, value: memoEditVM.selectedMemos.contains(memo))
                 }
                 .gesture(DragGesture()
                     .updating($isDragging, body: { value, state, _ in
@@ -58,7 +73,7 @@ struct DraggableMemoBoxView: View {
                         onEnd(value: value, memo: memo)
                     }))
         }
-        .padding(.bottom, Sizes.spacingBetweenMemoBox * 2)
+        .padding(.bottom, Sizes.spacingBetweenMemoBox * 4)
         .disabled(memoEditVM.isSelectionMode)
         .gesture(DragGesture()
             .updating($isDragging, body: { value, state, _ in
@@ -74,8 +89,6 @@ struct DraggableMemoBoxView: View {
                 memoEditVM.dealWhenMemoSelected(memo)
             }
         })
-        
-        
     }
     
     func onEnd(value: DragGesture.Value, memo: Memo) {
@@ -140,6 +153,4 @@ struct DraggableMemoBoxView: View {
             }
         }
     }
-    
-    
 }

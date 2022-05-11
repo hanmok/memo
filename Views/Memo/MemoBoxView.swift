@@ -49,21 +49,29 @@ struct MemoBoxView: View {
 //                    .foregroundColor(Color.gray).opacity(0.8)
                     .foregroundColor(Color(white: 0.4))
             }
-        }
+        } // end of VStack
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-//        .background(Color.memoBoxColor)
-//        .background(Color.testColor2)
-//        .background(colorScheme == .dark ? Color.bgForDark : Color.testColor)
-        .background(colorScheme == .dark ? Color.memoBoxColor : .newMemoBoxColor)
-        .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-//                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.cream : Color(white: 0.5)) : .clear, lineWidth: 1)
-//                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.newMain3 : Color(white: 0.5)) : .clear, lineWidth: 1)
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.newMain4 : Color(white: 0.5)) : .clear, lineWidth: 1)
+        
+        .background(colorScheme == .dark ? .black : .newMemoBoxColor)
+        .background(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .foregroundColor(colorScheme == .dark ? .black : .newMemoBoxColor)
+//            memoEditVM.memo
         )
+//        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+//        .shadow(color: .black, radius: 6, x: 6, y: 6)
+        // memobox COlor !!
+//        .background(
+//            ZStack {
+////                Color(colorScheme == .dark ? Color.red : Color.green)
+////                Color(.red)
+//                RoundedRectangle(cornerRadius: 10, style: .continuous)
+//                    .shadow(color: .black, radius: 6, x: 6, y: 6)
+//            }
+//        )
+        .cornerRadius(10)
         .overlay(
             VStack {
                 HStack(spacing: 6) {

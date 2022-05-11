@@ -115,10 +115,14 @@ extension Color {
 //    static let newMemoBoxColor = Color(.sRGB, red: 0.945, green: 0.945, blue: 0.945, opacity: 1)// looks better!
     static let newMemoBoxColor = Color(.sRGB, red: 0.96, green: 0.96, blue: 0.96, opacity: 1)// looks better!
     
-    static let bgForDark = UIColor(rgbHex: 0x551308).convertToColor()
+//    static let bgForDark = UIColor(rgbHex: 0x551308).convertToColor()
     
-    static let newBG = Color(.sRGB, red: 1, green: 1, blue: 1, opacity: 1)
+    static let newBGforDark = Color(.sRGB, red: 0.15, green: 0.15, blue: 0.15, opacity: 1)
+    
+    
 }
+
+
 
 
 

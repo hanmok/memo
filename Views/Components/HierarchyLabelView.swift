@@ -12,7 +12,7 @@ struct HierarchyLabelView: View {
     @Environment(\.colorScheme) var colorScheme
     
     let currentFolder: Folder
-//    var isNavigationLink: Bool = false
+    //    var isNavigationLink: Bool = false
     
     func getRoot(child: Folder) -> String {
         let parentFoldersInOrder = getAllParents(child: child)
@@ -60,32 +60,16 @@ struct HierarchyLabelView: View {
     }
     
     var body: some View {
-//        if isNavigationLink {
-//            if FolderType.compareName(currentFolder.title, with: .trashbin) {
-//                Text(getRoot(child:currentFolder))
-//                    .font(.caption)
-//                    .foregroundColor(.red)
-//                    .background(colorScheme == .dark ? .black : .white)
-//            } else {
-//                Text(getRoot(child:currentFolder))
-//                    .font(.caption)
-//                    .background(colorScheme == .dark ? .black : .white)
-//            }
-//        }
-//        else {
-            if FolderType.compareName(currentFolder.title, with: .trashbin) {
-                Text(getRoot(child:currentFolder))
-                    .font(.caption)
-                    .foregroundColor(.red)
-                    .background(colorScheme == .dark ? .black : .white)
-            }
+        if FolderType.compareName(currentFolder.title, with: .trashbin) {
+            Text(getRoot(child:currentFolder))
+                .font(.caption)
+                .foregroundColor(.red)
+            //                    .background(colorScheme == .dark ? .black : .white)
+        }
         else {
             Text(getRoot(child:currentFolder))
                 .foregroundColor(Color.blackAndWhite)
                 .font(.caption)
-                .opacity(0.7)
-                .background(colorScheme == .dark ? .black : .white)
-            }
-//        }
+        }
     }
 }
