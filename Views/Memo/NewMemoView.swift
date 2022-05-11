@@ -264,7 +264,7 @@ struct NewMemoView: View {
 //            .overlay(
 //                MsgView(msgToShow: $msgToShow)
 //                        .padding(.top, UIScreen.screenHeight / 1.5 ))
-//            .padding(.top, 10)
+            .padding(.top, 10)
             
             
         }

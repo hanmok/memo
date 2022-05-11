@@ -28,7 +28,8 @@ struct MemoTextView: UIViewRepresentable {
         
         uiTextView.text += ""
         uiTextView.showsVerticalScrollIndicator = false
-        uiTextView.tintColor = UIColor.textViewTintColor
+//        uiTextView.tintColor = UIColor.textViewTintColor
+        uiTextView.tintColor = UIColor(red: 0.941, green: 0.659, blue: 0.722, alpha: 1)
         
         uiTextView.attributedText = NSAttributedString(string: uiTextView.text, attributes: [.font: UIFont.systemFont(ofSize: 28, weight: .bold)])
 

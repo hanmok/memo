@@ -44,13 +44,18 @@ struct RadialPlusImage: View {
 //            SystemImage("circle", size: UIScreen.hasSafeBottom ? 50 : 40)
             Circle()
                 .fill(
-                    RadialGradient(colors: colorScheme == .dark ? [.white, Color.newMain3] : [.black, .black ], center: .center, startRadius: 0, endRadius: 30))
+                    RadialGradient(colors: colorScheme == .dark ?
+                                   [.white, Color.newMain3] :
+//                                    [.black, .black ],
+                                   [.newColor, .newColor],
+                                   center: .center, startRadius: 0, endRadius: 30))
                 .frame(width: 60, height: 60)
 
             SystemImage("plus")
                 .frame(width: UIScreen.hasSafeBottom ? 30 : 25, height: UIScreen.hasSafeBottom ? 30 : 25)
+
 //                .foregroundColor(colorScheme == .dark ? .black : .white)
-                .foregroundColor(colorScheme == .dark ? .black : .white)
+                .foregroundColor(.black)
         }
     }
 }

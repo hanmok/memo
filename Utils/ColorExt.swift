@@ -78,8 +78,8 @@ extension Color {
     static let newMain = UIColor(rgbHex: 0xFDAEAC).convertToColor()
     static let newMain2 = UIColor(rgbHex: 0xFFC0C0).convertToColor()
     static let newMain3 = UIColor(rgbHex: 0xFFC8C8).convertToColor()
-    static let newMain4 = UIColor(rgbHex: 0xFFD0D0).convertToColor()
-    
+//    static let newMain4 = UIColor(rgbHex: 0xFFD0D0).convertToColor()
+    static let newMain4 = Color(#colorLiteral(red: 1, green: 0.8156862745, blue: 0.8156862745, alpha: 1))
 //    static let newNav = UIColor(rgbHex: 0xFFBFBC).convertToColor()
 //    static let newNav = UIColor(rgbHex: 0xFFD5D3).convertToColor()
 //    static let newNavForDark = UIColor(rgbHex: 0xFFDAD8).convertToColor()
@@ -105,7 +105,7 @@ extension Color {
     static let newMemoToolBoxColorForLight = UIColor(rgbHex: 0x000000).convertToColor()   // purple, Memo Toolbar View
 //    static let newNavForDark = UIColor(rgbHex: 0x6666BB).convertToColor()
 //    static let newNavForLight = UIColor(rgbHex: 0x000077).convertToColor().opacity(0.7)   // purple
-    
+    static let newColor = Color(#colorLiteral(red: 0.9411764706, green: 0.6589095294, blue: 0.7215686275, alpha: 1))
     static let pastelUIColors = Color.convertToUIColors(colors: Color.pastelColors)
     static let testColor = UIColor(rgbHex: 0xFAE5C5).convertToColor() // look fine
     static let testColor2 = UIColor(rgbHex: 0xFAEACA).convertToColor()
@@ -123,6 +123,9 @@ extension Color {
 }
 
 
+extension Color {
+    
+}
 
 
 
@@ -179,7 +182,8 @@ extension Color {
     static let memoTextColor = Color(UIColor.memoTextColor) // white(0), white(0.8)
     
     static let blackAndWhite = Color(UIColor.blackAndWhite) // white(0), white(1)
-    
+//    static let newBGforDark = Color(.sRGB, red: 0.15, green: 0.15, blue: 0.15, opacity: 1)
+    static let bgForDark = Color(uiColor: UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1))
 //    static let swipeBtnColor1 = UIColor(rgbHex: 0xFDAEAC).convertToColor() // not using
     static let swipeBtnColor2 = UIColor(rgbHex: 0xFDAEAC).convertToColor()
     
@@ -211,6 +215,8 @@ extension Color {
 }
 
 extension UIColor {
+    
+    static let newBGForDark = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
     static let mainColor = UIColor(named: ColorKeys.mainColor)!
     static let subColor = UIColor(named: ColorKeys.subColor)!
     static let memoTextColor = UIColor(named: ColorKeys.memoTextColor)!
@@ -238,6 +244,7 @@ extension UIColor {
 }
 
 struct ColorKeys {
+    static let newBGForDark = "newBGForDark"
     static let mainColor = "mainColor"
     static let subColor = "subColor"
     static let memoTextColor = "memoViewTextColor"

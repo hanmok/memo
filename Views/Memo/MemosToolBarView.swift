@@ -30,10 +30,11 @@ struct MemosToolBarView: View {
             Button {
                 memoEditVM.initSelectedMemos()
             } label: {
-//                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
+                UnchangeableImage(imageSystemName: "multiply", width: 18, height: 18)
 //                ImageWithColor(darkModeColor: .white, imageSystemName: "multiply", width: 18, height: 18)
 //                ImageWithColor(darkModeColor: .black, lightModeColor: .white, imageSystemName: <#T##String#>)
-                ChangeableImage2(imageSystemName: "multiply", width: 18, height: 18)
+//                ChangeableImage2(imageSystemName: "multiply", width: 18, height: 18)
+                
             }
             
             
@@ -45,7 +46,8 @@ struct MemosToolBarView: View {
             } label: {
                 Text("All")
                     .font(.headline)
-                    .foregroundColor(colorScheme == .dark ? .black : .white)
+//                    .foregroundColor(colorScheme == .dark ? .black : .white)
+                    .foregroundColor(.black)
             }
             }
             
@@ -106,9 +108,9 @@ struct MemosToolBarView: View {
                 
                 memoEditVM.initSelectedMemos()
             }) {
-//                UnchangeableImage(imageSystemName: "pin", width: 20, height: 20)
+                UnchangeableImage(imageSystemName: "pin", width: 20, height: 20)
 //                ImageWithColor(darkModeColor: .white, imageSystemName: "pin")
-                ChangeableImage2(imageSystemName: "pin")
+//                ChangeableImage2(imageSystemName: "pin")
             }
             .cornerRadius(5)
             
@@ -116,10 +118,10 @@ struct MemosToolBarView: View {
             Button(action: {
                 showSelectingFolderView = true
             }) {
-//                UnchangeableImage(imageSystemName: "folder")
+                UnchangeableImage(imageSystemName: "folder")
 //                ChangeableImage(imageSystemName: "folder")
 //                ImageWithColor(darkModeColor: .white, imageSystemName: "folder")
-                ChangeableImage2(imageSystemName: "folder")
+//                ChangeableImage2(imageSystemName: "folder")
             }
             
             // REMOVE ACTION, WORKS FINE
@@ -150,7 +152,8 @@ struct MemosToolBarView: View {
         .padding(.vertical, 10)
 //        .background(Color.subColor)
 //        .background(colorScheme == .dark ? .newMain3 : Color.newMemoToolBoxColorForLight)
-        .background(colorScheme == .dark ? .newMain4 : Color.newMemoToolBoxColorForLight)
+//        .background(colorScheme == .dark ? .newMain4 : Color.newMemoToolBoxColorForLight)
+        .background(colorScheme == .dark ? .newMain4 : Color.newColor)
         .cornerRadius(10)
     }
 }

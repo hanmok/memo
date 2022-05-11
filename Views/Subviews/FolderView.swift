@@ -65,20 +65,22 @@ struct FolderView: View {
             return Memo.sortMemos(memos: currentFolder.memos.sorted())
         }
         
-        return ZStack {
+        return ZStack(alignment: .topLeading) {
+            
+//            Color(.newBGForDark)
+            Color(colorScheme == .dark ? .newBGForDark : .white)
+                .ignoresSafeArea()
+            
             VStack {
                 Rectangle()
                     .frame(width: UIScreen.screenWidth, height: 90)
-                    .foregroundColor(colorScheme == .dark ? .black : .white)
-                
-//                Rectangle().frame(width: UIScreen.screenWidth, height: 1, alignment: .center)
-//                    .foregroundColor(colorScheme == .dark ? Color(.sRGB, red: 0.2, green: 0.2, blue: 0.2, opacity: 1) : Color(.sRGB, red: 0.8, green: 0.8, blue: 0.8, opacity: 1))
-                
+//                    .foregroundColor(colorScheme == .dark ? .black : .white)
+                    .foregroundColor(colorScheme == .dark ? .newBGforDark : .white)
                 Spacer()
                 
-            }.ignoresSafeArea(edges: .top)
+            }.ignoresSafeArea(edges: .all)
             
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     backBtn
                     Spacer()
@@ -199,6 +201,11 @@ struct FolderView: View {
             .offset(y: isAddingFolder ? UIScreen.screenHeight : 0)
             .animation(.spring().speed(0.5), value: isAddingFolder)
             
+            
+            if isShowingSearchView {
+                Color(colorScheme == .dark ? .black : .white)
+            }
+            
             CustomSearchView(
                 fastFolderWithLevelGroup: FastFolderWithLevelGroup(
                     homeFolder: Folder.fetchHomeFolder(context: context)!,
@@ -208,11 +215,14 @@ struct FolderView: View {
             )
             .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
             .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
+//            .padding(.horizontal, Sizes.overallPadding)
+//            .background(colorScheme == .dark ? .black : .white)
             
             if isAddingFolder {
                 Color(.sRGB, white: colorScheme == .light ? 0.25 : 0.75, opacity: 0.8)
                     .ignoresSafeArea()
             }
+            
             
             //  Present TextFieldAlert when add folder pressed
             PrettyTextFieldAlert(
@@ -256,8 +266,7 @@ struct FolderView: View {
                     fastFolderWithLevelGroup:
                         FastFolderWithLevelGroup(
                             homeFolder: Folder.fetchHomeFolder(context: context)!,
-                            archiveFolder: Folder.fetchHomeFolder(context: context,
-                                                                  fetchingHome: false)!
+                            archiveFolder: Folder.fetchHomeFolder(context: context,fetchingHome: false)!
                         ),
                     invalidFolderWithLevels: []
                 )

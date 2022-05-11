@@ -79,6 +79,10 @@ struct FirstMainView: View {
     var body: some View {
         
         return ZStack {
+            
+            Color(colorScheme == .dark ? .newBGForDark : .white)
+                .ignoresSafeArea()
+            
             VStack(spacing: 0) {
                 // MARK: - TOP Views
                 HStack {
@@ -371,7 +375,7 @@ struct FirstMainView: View {
                 .environmentObject(folderEditVM)
                 .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
-                .padding(.horizontal, Sizes.overallPadding)
+//                .padding(.horizontal, Sizes.overallPadding)
             
             
             
@@ -383,7 +387,7 @@ struct FirstMainView: View {
             
             
             if isShowingTextField {
-                Color(.sRGB, white: colorScheme == .light ? 0.25 : 0.75, opacity: 0.8)
+                Color(.sRGB, white: colorScheme == .dark ? 0.25 : 0.8, opacity: 0.9)
                     .ignoresSafeArea()
             }
             

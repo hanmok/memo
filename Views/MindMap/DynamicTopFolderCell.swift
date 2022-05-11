@@ -25,7 +25,7 @@ struct DynamicTopFolderCell: View {
             TitleWithLevelView(folder: folder, level: level)
         } // end of NavigationLink
         
-        .listRowBackground(colorScheme == .dark ? Color(white: 0.1) : Color(white: 0.94))
+        .listRowBackground(colorScheme == .dark ? Color(white: 0.2) : Color(white: 0.94))
         
         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
             Button {

@@ -28,6 +28,6 @@ struct DynamicFolderCell: View {
                 TitleWithLevelView(folder: folder, level: level)
             } // end of NavigationLink
         }
-        .listRowBackground(colorScheme == .dark ? Color(white: 0.1 + Double(level) * 0.04) : Color(white: 0.94 - Double(level) * 0.03))
+        .listRowBackground(colorScheme == .dark ? Color(white: 0.2 + Double(level) * 0.05) : Color(white: 0.94 - Double(level) * 0.05))
     }
 }

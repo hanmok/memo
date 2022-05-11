@@ -210,7 +210,8 @@ struct CustomSearchView: View {
                     .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                     .cornerRadius(10)
                     .overlay(RoundedRectangle(cornerRadius: 10)
-                        .stroke(colorScheme == .dark ? Color.cream : Color.clear))
+//                        .stroke(colorScheme == .dark ? Color.cream : Color.clear))
+                        .stroke(colorScheme == .dark ? Color.white : Color.clear))
                     
                     Spacer()
                     
@@ -220,17 +221,18 @@ struct CustomSearchView: View {
                         showingSearchView = false
                     } label: {
                         Text(LocalizedStringStorage.cancelInSearch)
-                            .foregroundColor(.buttonTextColor)
+//                            .foregroundColor(.buttonTextColor)
+                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
-//                .padding(.horizontal, Sizes.overallPadding)
+                .padding(.horizontal, Sizes.overallPadding)
             
                 Picker("", selection: $searchTypeEnum) {
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .all)).tag(SearchType.all)
                     Text(LocalizedStringStorage.convertSearchTypeToText(type: .current)).tag(SearchType.current)
                 }
-//                .padding(.horizontal, Sizes.overallPadding)
+                .padding(.horizontal, Sizes.overallPadding)
                 .pickerStyle(SegmentedPickerStyle())
                 
                 ScrollView {
@@ -267,6 +269,16 @@ struct CustomSearchView: View {
 //                                                        .environmentObject(trashBinVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
+                                                        .background {
+                                                            ZStack {
+                                                                Color(colorScheme == .dark ? .black : .white)
+                                                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
+                                                                    .cornerRadius(10)
+                                                            }
+                                                            .shadow(
+                                                                color: Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
+                                                                radius: 4, x: 4, y: 4)
+                                                        }
                                                 }
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
                                             }
@@ -304,6 +316,16 @@ struct CustomSearchView: View {
 //                                                        .environmentObject(trashBinVM)
                                                 } label: {
                                                     MemoBoxView(memo: eachMemo)
+                                                        .background {
+                                                            ZStack {
+                                                                Color(colorScheme == .dark ? .black : .white)
+                                                                    .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
+                                                                    .cornerRadius(10)
+                                                            }
+                                                            .shadow(
+                                                                color: Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
+                                                                radius: 4, x: 4, y: 4)
+                                                        }
                                                 }
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
                                             }
@@ -320,11 +342,14 @@ struct CustomSearchView: View {
                 }
                 .gesture(scroll)
             }
+        
+//            .background(colorScheme == .dark ? Color.newBGForDark : Color.white)
+            .background(colorScheme == .dark ? Color(white: 38 / 255) : Color(white: 239 / 255 ))
             .onAppear(perform: {
                 print(" CustomSearchView has appeared!")
                 updateViewInHalfSecond()
             })
-            .padding(.top)
+//            .padding(.top)
             .gesture(scroll)
 
             .navigationBarHidden(true)
