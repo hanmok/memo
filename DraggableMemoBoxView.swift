@@ -31,8 +31,10 @@ struct DraggableMemoBoxView: View {
         ) {
             MemoBoxView(memo: memo)
                 .frame(width: UIScreen.screenWidth - 20, alignment: .center)
+            // dragging
                 .shadow(color: dragVM.draggingMemo == memo ? (colorScheme == .dark ? Color(white: 0.4) : .white) : .clear, radius: -dragVM.oneOffset, x: dragVM.oneOffset, y: dragVM.oneOffset)
                 .animation(.easeOut, value: dragVM.draggingMemo == memo)
+            // memo selection
                 .shadow(color: memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color(white: 0.4) : .white) : .clear, radius: 3, x: -3, y: -3)
                 .animation(.easeOut, value: memoEditVM.selectedMemos.contains(memo))
             // dragging !!
@@ -66,13 +68,14 @@ struct DraggableMemoBoxView: View {
                     .animation(.easeOut, value: memoEditVM.selectedMemos.contains(memo))
                     .padding(.horizontal, Sizes.smallSpacing)
                     .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2 )
+                    // memo selection
                     .shadow(
                         color:  memoEditVM.selectedMemos.contains(memo) ?
-                        Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1 : 0.6) :
+                        Color(.sRGB, white: colorScheme == .dark ? 0.7 : 0, opacity: colorScheme == .dark ? 1 : 0.6) :
                             Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
-                        radius: memoEditVM.selectedMemos.contains(memo) ? 12 : 4,
-                        x: memoEditVM.selectedMemos.contains(memo) ? 12 : 4,
-                        y: memoEditVM.selectedMemos.contains(memo) ? 12 : 4)
+                        radius: memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? 6 : 12) : 4,
+                        x: memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? 6: 12) : 4,
+                        y: memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? 6: 12) : 4)
 
                     .animation(.easeOut, value: memoEditVM.selectedMemos.contains(memo))
                 }
