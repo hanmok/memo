@@ -149,7 +149,7 @@ struct DraggableMemoBoxView: View {
         print("onChanged triggered")
         
 //        if isDragging && value.translation.width < -5 {
-        if isDragging && value.translation.width < -5 {
+        if isDragging && value.translation.width < 0 {
             
             DispatchQueue.main.async {
                 isOnDraggingAction = true
@@ -162,7 +162,7 @@ struct DraggableMemoBoxView: View {
             print("dragged value: \(value.translation.width)")
             switch value.translation.width {
 //            case let width where width <= -65:
-            case let width where width <= -2:
+            case let width where width <= -5:
                 DispatchQueue.main.async {
                     
 //                    oneOffset = -65

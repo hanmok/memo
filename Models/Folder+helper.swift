@@ -205,7 +205,7 @@ extension Folder {
         request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.modificationDate, ascending: true)]
         // temp
 //        request.sortDescriptors = [NSSortDescriptor(key: FolderProperties.title, ascending: true)]
-        
+        // the same as     parent = nil
         let format = FolderProperties.parent + " = nil"
         request.predicate = NSPredicate(format: format)
         
