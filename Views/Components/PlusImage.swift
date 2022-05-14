@@ -45,8 +45,8 @@ struct RadialPlusImage: View {
             Circle()
                 .fill(
                     RadialGradient(colors: colorScheme == .dark ?
-                                   [.white, Color.newMain3] :
-//                                    [.black, .black ],
+//                                   [.white, Color.newMain3] :
+                                   [.newMain3, .newMain3] :
                                    [.newColor, .newColor],
                                    center: .center, startRadius: 0, endRadius: 30))
                 .frame(width: 60, height: 60)

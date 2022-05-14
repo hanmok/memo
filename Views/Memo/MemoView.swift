@@ -31,6 +31,8 @@ struct MemoView: View {
     
     @Binding var isPresentingView: Bool
     
+    @State var isRemovingMemo: Bool = false
+    
 //    @State var msgToShow: String?
     
     let parent: Folder
@@ -126,9 +128,10 @@ struct MemoView: View {
         }
         
         context.saveCoreData()
+        isRemovingMemo = true
 //        messageVM.message = Messages.showMemoMovedToTrash(1)
 //        messageVM.message = Messages.showMemosDeletedMsg(1)
-        presentationMode.wrappedValue.dismiss()
+        presentationMode.wrappedValue.dismiss() // on disappear, it calls savechanges, which says memo saved.
     }
     
     
@@ -186,12 +189,17 @@ struct MemoView: View {
                             editorFocusState = false
                         } label: {
                             SystemImage("folder", size: Sizes.regularButtonSize)
-                                .tint(
-                                    contents == "" ?
-                                    (.gray) :
-                                        (colorScheme == .dark ? .newNavForDark : .newNavForLight))
-                            // 왜.. 위치까지 애니메이션이 들어가지 ??
+                                .tint(contents == "" ?
+                                    (.gray) : (colorScheme == .dark ? .newNavForDark : .newNavForLight))
                                 .animation(.spring(), value: contents == "")
+                            
+//                                .tint(colorScheme == .dark ? : Color.newNavForDark : Color.newNavForLight)
+//                                                            .tint(Color.newNavForDark)
+//                                .tint(colorScheme == .dark ? Color.newNavForDark : Color.newNavForLight)
+//                                .tint(contents == "" ?
+//                                      (.gray) : (colorScheme == .dark ? .newNavForDark : .newNavForLight))
+//                            // 왜.. 위치까지 애니메이션이 들어가지 ?? // not working /....
+//                                .animation(.spring(), value: contents == "")
                         }
                         .disabled(contents == "")
                         
@@ -238,8 +246,10 @@ struct MemoView: View {
         
         .onDisappear(perform: {
             isPresentingView = false
+            if !isRemovingMemo {
             print("memoView has disappeared!")
             saveChanges()
+            }
             // Update BookmarkFolder memoList after deselecting bookmark
             // but.. it makes folder to go back for subFolder.
             // it need to be separate case.

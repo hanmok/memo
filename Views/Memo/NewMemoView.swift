@@ -33,7 +33,7 @@ struct NewMemoView: View {
     @State var memo: Memo? = nil
     
     @Binding var isPresentingNewMemo: Bool
-    
+    @State var isRemoving = false
    
     
 //    @State var msgToShow: String?
@@ -158,19 +158,18 @@ struct NewMemoView: View {
             } else {
 
                 memo = Memo(contents: contents, context: context)
-//                memo!.isBookMarked = isBookMarkedTemp
                 memo!.isPinned = isPinned
                 memo!.creationDate = Date()
                 memo!.modificationDate = Date()
                 
                 memo!.saveTitleWithContentsToShow(context: context)
-//                Memo.makeNotBelongToFolder(memo!, trashBinVM.trashBinFolder)
                 messageVM.message = Messages.showMemoMovedToTrash(1)
                 Memo.moveToTrashBin(memo!, trashBinVM.trashBinFolder)
                 context.saveCoreData()
 //                parent.title += ""
             }
         }
+        isRemoving = true
         presentationMode.wrappedValue.dismiss()
         Folder.updateTopFolders(context: context)
         // how to.. rerender a MainView ? not updated immediately.
@@ -274,7 +273,9 @@ struct NewMemoView: View {
             showKeyboardInHalfSec()
         })
         .onDisappear(perform: {
+            if !isRemoving {
             saveChanges()
+            }
         })
         .sheet(isPresented: $isShowingSelectingFolderView) {
             SelectingFolderView(
