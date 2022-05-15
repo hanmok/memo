@@ -18,6 +18,7 @@ struct FolderView: View {
     
     @EnvironmentObject var memoEditVM : MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
+    @EnvironmentObject var messageVM: MessageViewModel
     @ObservedObject var currentFolder: Folder
     
     @FocusState var addFolderFocus: Bool
@@ -238,6 +239,7 @@ struct FolderView: View {
                     
                     newSubFolderName = ""
                     isAddingFolder = false
+                    messageVM.message = Messages.folderHasMade
                 }, cancelAction: {
                     newSubFolderName = ""
                     isAddingFolder = false

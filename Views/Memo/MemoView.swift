@@ -10,11 +10,14 @@ import Combine
 import CoreData
 
 
+
 struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
+    
+    @StateObject var preventingAnimationViewModel = PreventingAnimationViewModel()
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
     @EnvironmentObject var trashBinVM: TrashBinViewModel
@@ -27,13 +30,15 @@ struct MemoView: View {
     @State var isShowingSelectingFolderView = false
     
     @State var contents: String = ""
-//    @State var isBookMarkedTemp: Bool?
+
+    @State var isRemovingMemo: Bool = false
     
     @Binding var isPresentingView: Bool
     
-    @State var isRemovingMemo: Bool = false
+    @State var isAnythingChanged = false
     
-//    @State var msgToShow: String?
+    let initialPinState: Bool
+
     
     let parent: Folder
     
@@ -45,7 +50,6 @@ struct MemoView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage("chevron.left", size: 18)
-//                .tint(Color.navBtnColor)
                 .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
         }
     }
@@ -59,13 +63,15 @@ struct MemoView: View {
     
     
     func saveChanges() {
-        print("save changes has triggered")
         
-        if memo.contents != contents {
+        print("saveChanges triggered")
+        
+        // if something has changed
+        if memo.contents != contents || initialPinState != memo.isPinned {
+            memo.contents = contents
+            isAnythingChanged = true
             memo.modificationDate = Date()
         }
-        
-        memo.contents = contents
         
 //        memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
         // if contents are empty, delete memo
@@ -82,7 +88,9 @@ struct MemoView: View {
                 messageVM.message = Messages.showMemosDeletedMsg(1)
                 Memo.delete(memo)
             } else {
+                if isAnythingChanged {
                 messageVM.message = Messages.memoSaved
+                }
             }
         }
         
@@ -92,6 +100,7 @@ struct MemoView: View {
     }
     
     func togglePin() {
+        print("togglePin triggered")
         memo.isPinned.toggle()
     }
     
@@ -140,6 +149,7 @@ struct MemoView: View {
         self.parent = parent
         self._isPresentingView = presentingView
         self.calledFromMainView = calledFromMainView
+        self.initialPinState = memo.isPinned
     }
     
     var body: some View {
@@ -171,8 +181,9 @@ struct MemoView: View {
 //                                SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
 //                                    .tint(Color.navBtnColor)
 //                            }
-                            
+                             /// 여기서 왜 버그가 나오지 ... ??
                             // PIN Button
+                            // ?? 왜 ... 이런 버그가 ... ??
                             Button(action: togglePin) {
                                 SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
 //                                    .tint(Color.navBtnColor)
@@ -189,10 +200,14 @@ struct MemoView: View {
                             editorFocusState = false
                         } label: {
                             SystemImage("folder", size: Sizes.regularButtonSize)
+//                            .transaction({ transaction in
+//                                transaction.animation = nil
+//                            })
                                 .tint(contents == "" ?
                                     (.gray) : (colorScheme == .dark ? .newNavForDark : .newNavForLight))
-                                .animation(.spring(), value: contents == "")
-                            
+//                                .animation(.spring(), value: contents == "")
+                                .animation(.spring(), value: preventingAnimationViewModel.viewAppear && contents == "")
+                                
 //                                .tint(colorScheme == .dark ? : Color.newNavForDark : Color.newNavForLight)
 //                                                            .tint(Color.newNavForDark)
 //                                .tint(colorScheme == .dark ? Color.newNavForDark : Color.newNavForLight)
@@ -202,8 +217,7 @@ struct MemoView: View {
 //                                .animation(.spring(), value: contents == "")
                         }
                         .disabled(contents == "")
-                        
-                        
+
                         // REMOVE
                         Button(action: removeMemo) {
                             SystemImage("trash", size: Sizes.regularButtonSize)
@@ -247,8 +261,8 @@ struct MemoView: View {
         .onDisappear(perform: {
             isPresentingView = false
             if !isRemovingMemo {
-            print("memoView has disappeared!")
-            saveChanges()
+                print("memoView has disappeared!")
+                saveChanges()
             }
             // Update BookmarkFolder memoList after deselecting bookmark
             // but.. it makes folder to go back for subFolder.
@@ -256,7 +270,8 @@ struct MemoView: View {
             if calledFromMainView {
                 Folder.updateTopFolders(context: context) // maybe... this one ?
             }
-            print("data saved!")
+            print("data saved!!!!!")
+            print("pinState: \(memo.isPinned)")
         })
         
         .sheet(isPresented: $isShowingSelectingFolderView) {

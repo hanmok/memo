@@ -10,7 +10,7 @@ import Foundation
 struct Messages {
     
     static let hasAddedToFolder = "memo has been added to Folder"
-    
+    static let folderHasMade = LocalizedStringStorage.folderCreated
     static let memoSaved = LocalizedStringStorage.memoSaved
     
     /// memo deleted

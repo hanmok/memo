@@ -118,6 +118,7 @@
 		9AD8332327BD064A00506AE8 /* PhotoPickerPrac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332227BD064A00506AE8 /* PhotoPickerPrac.swift */; };
 		9AD8332727BD0B7300506AE8 /* MemoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8332627BD0B7300506AE8 /* MemoTextView.swift */; };
 		9AD8333727BE148A00506AE8 /* MemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8333627BE148A00506AE8 /* MemoView.swift */; };
+		9AD8CC9F282FECFB00D776FE /* PreventingAnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD8CC9E282FECFB00D776FE /* PreventingAnimationViewModel.swift */; };
 		9AE538F827C38E4700452999 /* AppStorageKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE538F727C38E4300452999 /* AppStorageKeys.swift */; };
 		9AE5391B27C6374F00452999 /* PlainTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE5391A27C6374F00452999 /* PlainTextView.swift */; };
 		E523DB3C27B8472C00D8D78B /* PinnedFolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB3B27B8472C00D8D78B /* PinnedFolderView.swift */; };
@@ -262,6 +263,7 @@
 		9AD8332227BD064A00506AE8 /* PhotoPickerPrac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerPrac.swift; sourceTree = "<group>"; };
 		9AD8332627BD0B7300506AE8 /* MemoTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoTextView.swift; sourceTree = "<group>"; };
 		9AD8333627BE148A00506AE8 /* MemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoView.swift; sourceTree = "<group>"; };
+		9AD8CC9E282FECFB00D776FE /* PreventingAnimationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreventingAnimationViewModel.swift; sourceTree = "<group>"; };
 		9AE538F727C38E4300452999 /* AppStorageKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKeys.swift; sourceTree = "<group>"; };
 		9AE5391A27C6374F00452999 /* PlainTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainTextView.swift; sourceTree = "<group>"; };
 		E523DB3B27B8472C00D8D78B /* PinnedFolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedFolderView.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				E596A6C427AD8D5000076E95 /* OrderViewModel.swift */,
 				9AB7250E27D00FF8006A825C /* TrashBinViewModel.swift */,
 				9ACC0C8127DE05C000D18690 /* MessageViewModel.swift */,
+				9AD8CC9E282FECFB00D776FE /* PreventingAnimationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -827,6 +830,7 @@
 				9A046CCC27B3A72E003169C7 /* CollapsingTest.swift in Sources */,
 				9AC257D627C24AB200280DD2 /* CustomSearchView.swift in Sources */,
 				9AD6EEC1277AD3EA00866456 /* MemosToolBarView.swift in Sources */,
+				9AD8CC9F282FECFB00D776FE /* PreventingAnimationViewModel.swift in Sources */,
 				9A3377B927900BF200805138 /* MemoListTest.swift in Sources */,
 				E54FE18527C94595000FFA81 /* NoteEditorViewController.swift in Sources */,
 				9AB7250F27D00FF8006A825C /* TrashBinViewModel.swift in Sources */,

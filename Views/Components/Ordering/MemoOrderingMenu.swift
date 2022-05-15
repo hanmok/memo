@@ -45,7 +45,7 @@ struct FolderMenu: View {
 //                    }
                 } // end of VStack
             } label: {
-                Text("폴더 이동")
+                Text("폴더 이동") // TODO: Fix for foreigners
                     .foregroundColor(.black)
             }
         } label: {

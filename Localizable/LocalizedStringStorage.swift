@@ -18,8 +18,6 @@ enum LocalizedStringStorage {
     static let cancel = StringEnum.cancel.convertIntoStr()
     static let delete = StringEnum.delete.convertIntoStr()
     
-    
-    
     static let newFolder = StringEnum.newFolder.convertIntoStr()
     static let renameFolder = StringEnum.renameFolder.convertIntoStr()
     static let newSubFolder = StringEnum.newSubFolder.convertIntoStr()
@@ -73,29 +71,23 @@ enum LocalizedStringStorage {
     static let memosHasUnpinned = StringEnum.memosHasUnpinned.convertIntoStr()
     
 //    static let memosHasBookmarked = StringEnum.memosHasBookmarked.convertIntoStr()
-    
-//    static let memosHasUnbookmarked = StringEnum.memosHasUnbookmarked.convertIntoStr()
-    
     static let oneMemoHasDeleted = StringEnum.oneMemoHasDeleted.convertIntoStr()
     static let oneMemoHasMovedToTrash = StringEnum.oneMemoHasMovedToTrash.convertIntoStr()
     static let oneMemoHasPinned = StringEnum.oneMemoHasPinned.convertIntoStr()
     static let oneMemoHasUnpinned = StringEnum.oneMemoHasUnpinned.convertIntoStr()
-//    static let oneMemoHasBookmarked = StringEnum.oneMemoHasBookmarked.convertIntoStr()
-//    static let oneMemoHasUnbookmarked = StringEnum.oneMemoHasUnbookmarked.convertIntoStr()
     
     static let bookmarkRemovingUpdateAlert = StringEnum.bookmarkRemovingUpdateAlert.convertIntoStr()
     
     static let completed = StringEnum.completed.convertIntoStr()
     
-//    case pinOnTheTop = "pinOnTheTop"
-//    case inFolderOrder = "inFolderOrder"
-//    case hideArchive = "hideArchive"
     
     static let pinOnTheTop = StringEnum.pinOnTheTop.convertIntoStr()
     static let inFolderOrder = StringEnum.inFolderOrder.convertIntoStr()
     static let hideArchive = StringEnum.hideArchive.convertIntoStr()
     
     static let memoSaved = StringEnum.memoSaved.convertIntoStr()
+    
+    static let folderCreated = StringEnum.createFolder.convertIntoStr()
     
     static func convertTypeToStorage(type: TextFieldAlertType) -> String {
         switch type {
@@ -199,100 +191,15 @@ enum StringEnum: String {
     case memosHasUnpinned = "memosHasUnpinned"
     case oneMemoHasUnpinned = "oneMemoHasUnpinned"
     
-//    bookmarkRemovingUpdateAlert
     case bookmarkRemovingUpdateAlert = "bookmarkRemovingUpdateAlert"
     
-//    "completed" = "Completed!";
     case completed = "completed"
     
     case memoSaved = "memoSaved"
-//    case memosHasBookmarked = "memosHasBookmarked"
-//    case oneMemoHasBookmarked = "oneMemoHasBookmarked"
-    
-//    case memosHasUnbookmarked = "memosHasUnbookmarked"
-//    case oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
-    
-//    "pinOnTheTop" = "Pin on the Top";
-//    "inFolderOrder" = "In Folder Order";
-//    "hideArchive" = "Hide Archive";
     
     case pinOnTheTop = "pinOnTheTop"
     case inFolderOrder = "inFolderOrder"
     case hideArchive = "hideArchive"
     
-    
-    
+    case createFolder = "makeFolder"
 }
-
-
-
-//LocalizedStringStorage.
-//struct LocalizedStringKeys {
-//
-//    static let done = "done"
-//    static let keyboardDone = "keyboardDone"
-//
-//    static let removeAlertMsgMain = "removeAlertMsgMain"
-//    static let removeAlertMsgSub = "removeAlertMsgSub"
-//
-//    static let cancelInSearch = "CancelInSearch"
-//    static let cancel = "Cancel"
-//    static let delete = "Delete"
-//
-//    static let newFolder = "New Folder"
-//    static let renameFolder = "Rename Folder"
-//    static let newSubFolder = "New Sub Folder"
-//    static let newArchive = "New Archive"
-//
-//    static let folder = "Folder"
-//    static let archive = "Archive"
-//    static let trashbin = "Trash Bin"
-//
-//    static let selectFolder = "Select Folder"
-//
-//    static let emptySearchResult = "Empty Search Result"
-//
-//    static let all = "All location"
-//    static let current = "Current location"
-//
-//    static let folderOrdering = "Folder Ordering"
-//    static let memoOrdering = "Memo Ordering"
-//
-//    static let modificationDate = "Modification Date"
-//    static let CreationDate = "Creation Date"
-//    static let Alphabetical = "Alphabetical"
-//
-//    static let AscendingOrder = "Ascending Order"
-//    static let DecendingOrder = "Decending Order"
-//
-//    static let searchPlaceholder = "Search Placeholder"
-//
-//    static let newFolderPlaceHolder = "New Folder PlaceHolder"
-//    static let newArchivePlaceHolder = "New Archive PlaceHolder"
-//
-//
-//
-//    // MARK: - MESSAGES
-//
-//    static let hasAddedToFolder = "hasAddedToFolder"
-//
-//    static let memosHasDeleted = "memosHasDeleted"
-//    static let oneMemoHasDeleted = "oneMemoHasDeleted"
-//
-//    static let folderHasDeleted = "folderHasDeleted"
-//
-//    static let memosHasMovedToTrash = "memosHasMovedToTrash"
-//    static let oneMemoHasMovedToTrash = "oneMemoHasMovedToTrash"
-//
-//    static let memosHasPinned = "memosHasPinned"
-//    static let oneMemoHasPinned = "oneMemoHasPinned"
-//
-//    static let memosHasUnpinned = "memosHasUnpinned"
-//    static let oneMemoHasUnpinned = "oneMemoHasUnpinned"
-//
-//    static let memosHasBookmarked = "memosHasBookmarked"
-//    static let oneMemoHasBookmarked = "oneMemoHasBookmarked"
-//
-//    static let memosHasUnbookmarked = "memosHasUnbookmarked"
-//    static let oneMemoHasUnbookmarked = "oneMemoHasUnbookmarked"
-//}

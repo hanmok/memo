@@ -256,12 +256,12 @@ extension Folder {
     }
     
     static func updateTopFolders(context: NSManagedObjectContext) {
-                let request = Folder.topFolderFetchReq()
+        let request = Folder.topFolderFetchReq()
         DispatchQueue.main.async {
             let result = try? context.fetch(request)
-             result!.forEach { $0.title += "" }
+            result!.forEach { $0.title += "" }
         }
-        
+
         context.saveCoreData()
     }
     
