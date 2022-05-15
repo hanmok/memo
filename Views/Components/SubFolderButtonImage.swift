@@ -14,16 +14,27 @@ struct SubFolderButtonImage: View {
     var body: some View {
         ZStack {
             SystemImage("circle", size: UIScreen.hasSafeBottom ? 50 : 40)
-                .foregroundColor(colorScheme == .dark ? Color.black : Color.subColor)
-                .background(colorScheme == .dark ? Color.black : Color.subColor)
-            
-                .clipShape(Circle())
+
+//                .foregroundColor(colorScheme == .dark ? Color.black : Color.subColor)
+//                .background(colorScheme == .dark ? Color.black : Color.subColor)
+//                .foregroundColor(Color.swipeBtnColor2)
+//                .background(Color.swipeBtnColor2)
+//                .foregroundColor(colorScheme == .dark ? .white : .black)
+                .foregroundColor(.clear)
+
+//                .clipShape(Circle())
                 .overlay(Circle()
-                            .stroke( Color.subColor, lineWidth: 3))
-            
+                    .stroke(colorScheme == .dark ? .white : .black, lineWidth: 3))
+
             SystemImage("folder")
                 .frame(width: UIScreen.hasSafeBottom ? 25 : 18, height: UIScreen.hasSafeBottom ? 25 : 18)
-                .foregroundColor(colorScheme == .dark ? Color.subColor : Color.black)
+                .foregroundColor(colorScheme == .dark ? .white : .black)
+//                .foregroundColor(colorScheme == .dark ? Color.subColor : Color.black)
+//                .foregroundColor(Color.swipeBtnColor2)
         }
+        
+//        SystemImage("folder")
+//            .frame(width: UIScreen.hasSafeBottom ? 35 : 25, height: UIScreen.hasSafeBottom ? 35 : 25)
+//            .foregroundColor(colorScheme == .dark ? .white : .black)
     }
 }
