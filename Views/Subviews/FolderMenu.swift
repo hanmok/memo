@@ -33,7 +33,7 @@ struct FolderMenu: View {
     
     var body: some View {
         Menu {
-            Button("폴더 생성") { // TODO: Fix for foreigners
+            Button(LocalizedStringStorage.createFolder) { // TODO: Fix for foreigners
                 addMemo()
             }
             Menu {
@@ -73,7 +73,7 @@ struct FolderMenu: View {
 //                }
 
             } label: {
-                Text("폴더 이동") // TODO: Fix for foreigners
+                Text(LocalizedStringStorage.moveToSubfolder) // TODO: Fix for foreigners
                     .foregroundColor(.black)
             }
 //            .background(

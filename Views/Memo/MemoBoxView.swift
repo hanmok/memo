@@ -159,7 +159,8 @@ struct MemoBoxView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
 
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.darkMain : Color.lightSwipeBtn1) : .clear, lineWidth: 1)
+//                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.darkMain : Color.lightSwipeBtn1) : .clear, lineWidth: 1)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.darkMemoStroke : Color.lightMemoStroke) : .clear, lineWidth: 1)
         )
         .overlay(
             VStack {
@@ -173,6 +174,7 @@ struct MemoBoxView: View {
                         SystemImage("pin.fill", size: 14)
                             .rotationEffect(.degrees(45))
 //                            .tint(colorScheme == .dark ? Color.cream : .black)
+                            .tint(colorScheme == .dark ? Color.darkMain : Color.lightMain)
                     }
                 }
                 .padding(.trailing, Sizes.properSpacing)

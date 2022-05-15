@@ -497,12 +497,9 @@ struct EllipseInSecondView: View {
             Toggle(isOn: $isHidingArchive) {
                 Text(LocalizedStringStorage.hideArchive)
             }
-
-            
-
         } label: {
-//            SystemImage("ellipsis.circle")
-            SystemImage("ellipsis").rotationEffect(.degrees(90)).scaleEffect(1.15)
+            SystemImage("ellipsis").rotationEffect(.degrees(90))
+                .scaleEffect(CGSize(width: 1, height: 0.9))
                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }

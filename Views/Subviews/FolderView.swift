@@ -139,7 +139,7 @@ struct FolderView: View {
                                 }
                                 
                                 if currentFolder.parent != nil {
-                                    HierarchyLabelView(currentFolder: currentFolder)
+                                    HierarchyLabelView(currentFolder: currentFolder, inFolder: true)
                                         .font(.caption)
                                         .frame(maxWidth: .infinity, alignment: .topLeading)
                                         .offset(y: 40)

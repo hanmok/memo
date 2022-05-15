@@ -79,4 +79,6 @@
 "inFolderOrder" = "폴더 순서대로";
 "hideArchive" = "보관함 숨기기";
 
-"makeFolder" = "폴더가 생성되었습니다.";
+"folderCreated" = "폴더가 생성되었습니다.";
+"createFolder" = "폴더 생성";
+"moveToSubfolder" = "내부 폴더로 이동";

@@ -102,4 +102,6 @@
 "memoSaved" = "Memo has been saved";
 //"memoOrder" = "Memo Ordering"
 
-"makeFolder" = "New Folder has been created.";
+"folderCreated" = "New Folder has been created.";
+"createFolder" = "Create Folder";
+"moveToSubfolder" = "Move to Subfolder";

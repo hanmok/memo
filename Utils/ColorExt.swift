@@ -12,7 +12,7 @@ import UIKit
 extension Color {
     
     
-    init(rgba: Int) {
+    init(rgba: Int) { // this is wrong .. ;;
         self.init(
             .sRGB,
             red: Double((rgba & 0xFF000000) >> 24) / 255,
@@ -60,12 +60,21 @@ extension Color {
 //    static let swipeBtnColor3 = UIColor(rgbHex: 0xFF7F7C).convertToColor()
     static let lightSwipeBtn2 = UIColor(rgbHex: 0x51B0FF).convertToColor()
     
+    static let lightMemoStroke = Color(rgba: 0x3E77B6FF)
+    
+    static let darkMemoStroke = UIColor(rgbHex: 0xA3CEEF).convertToColor()
     
     /// dragging Dark Background, plusImage Color
     static let lightMain = Color(rgba: 0x009DCF)
-    
+    static let textColor = UIColor(rgbHex: 0x009DCF)
     /// MemoToolbar Background For Dark, stroke color when selected for DARK
-    static let darkMain = Color.yellow
+    static let darkMain = Color(rgba: 0x98D7FBFF)
+    
+//    static let darkSwipeBtn1 = Color(rgba: 0x4E97D1FF)
+//    static let darkSwipeBtn1 = Color(rgba: 0xA3CEEFFF) // same to darkMemoStroke
+    static let darkSwipeBtn1 = Color(rgba: 0x8AD1FAFF) // same to darkMemoStroke
+//    static let darkSwipeBtn1 = Color.red
+//    static let darkSwipeBtn2 = Color(rgba: <#T##Int#>)
     
 
     /// white

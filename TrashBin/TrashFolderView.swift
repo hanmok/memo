@@ -31,7 +31,7 @@ struct TrashFolderView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage("chevron.left", size: 18)
-                .tint(Color.navBtnColor)
+                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
     
@@ -53,7 +53,7 @@ struct TrashFolderView: View {
                     
                     HStack(spacing: 16) {
                         
-                        // search Button
+                        // search Button, not shown !!
                         Button(action: {
                             isShowingSearchView = true
                         }, label: {

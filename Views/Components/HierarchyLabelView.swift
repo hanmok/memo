@@ -12,8 +12,33 @@ struct HierarchyLabelView: View {
     @Environment(\.colorScheme) var colorScheme
     
     let currentFolder: Folder
-    //    var isNavigationLink: Bool = false
     
+    init(currentFolder: Folder, inFolder: Bool = false) {
+        self.currentFolder = currentFolder
+        self.inFolder = inFolder
+    }
+    
+    let inFolder: Bool
+    
+    
+    var body: some View {
+        if FolderType.compareName(currentFolder.title, with: .trashbin) {
+            Text(getRoot(child:currentFolder))
+                .font(.caption)
+                .foregroundColor(.red)
+            //                    .background(colorScheme == .dark ? .black : .white)
+        }
+        else {
+            Text(getRoot(child:currentFolder))
+                .foregroundColor(Color.blackAndWhite)
+                .font(.caption)
+        }
+    }
+    
+    
+    
+    
+    // MARK: - Functions
     func getRoot(child: Folder) -> String {
         let parentFoldersInOrder = getAllParents(child: child)
         
@@ -38,12 +63,22 @@ struct HierarchyLabelView: View {
             if FolderType.compareName(each.title, with: .folder) && each.parent == nil {
                 
             } else {
+                
+                if inFolder,
+                    let parent = each.parent,
+                   FolderType.compareName(parent.title, with: .folder)
+                {
+                    
+                } else {
                 root = "\(each.title)" + " > " + root
+                }
             }
         }
         
-        let lastIndex = root.lastIndex(of: ">")!
-        root.remove(at: lastIndex)
+        if let lastIndex = root.lastIndex(of: ">") {
+            root.remove(at: lastIndex)
+        }
+        
         return root
     }
     
@@ -57,19 +92,5 @@ struct HierarchyLabelView: View {
             emptyFolder.append(newChild)
         }
         return emptyFolder
-    }
-    
-    var body: some View {
-        if FolderType.compareName(currentFolder.title, with: .trashbin) {
-            Text(getRoot(child:currentFolder))
-                .font(.caption)
-                .foregroundColor(.red)
-            //                    .background(colorScheme == .dark ? .black : .white)
-        }
-        else {
-            Text(getRoot(child:currentFolder))
-                .foregroundColor(Color.blackAndWhite)
-                .font(.caption)
-        }
     }
 }

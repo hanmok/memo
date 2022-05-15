@@ -36,20 +36,34 @@ struct NewPlusImage: View {
 
         ZStack {
 //            SystemImage("circle", size: UIScreen.hasSafeBottom ? 50 : 40)
-//            Circle()
-//                .fill(
-//                    RadialGradient(colors: colorScheme == .dark ?
-////                                   [.white, Color.newMain3] :
-//                                   [.newMain3, .newMain3] :
-//                                   [.newColor, .newColor],
-//                                   center: .center, startRadius: 0, endRadius: 30))
+//            SystemImage("circle", size: 60)
+//            Image(systemName: "circle")
+//                .resizable()
+//                .aspectRatio(contentMode: .fit)
 //                .frame(width: 60, height: 60)
             
-            SystemImage("circle", size: UIScreen.hasSafeBottom ? 60 : 50)
-                .foregroundColor(colorScheme == .dark ? Color.darkMain : Color.lightMain)
-                .background(colorScheme == .dark ? Color.darkMain : Color.lightMain)
-                .clipShape(Circle())
+            Circle()
+                .fill(
+//                    RadialGradient(colors: colorScheme == .dark ?
+////                                   [.white, Color.newMain3] :
+//                                   [.darkMain, .darkMain] :
+//                                   [.lightMain, .lightMain],
+                    RadialGradient(colors:
+//                                   [.white, Color.newMain3] :
+                                   [.darkMain, .darkMain],
+                                  
+                                   center: .center, startRadius: 0, endRadius: 30))
                 .frame(width: 60, height: 60)
+                
+            
+//            SystemImage("circle", size: UIScreen.hasSafeBottom ? 60 : 50)
+//                .foregroundColor(colorScheme == .dark ? Color.darkMain : Color.lightMain)
+//                .background(colorScheme == .dark ? Color.darkMain : Color.lightMain)
+//
+//                .clipShape(Circle()
+//                    .background(.clear)
+//                )
+//                .frame(width: 60, height: 60)
 
             SystemImage("plus")
                 .frame(width: UIScreen.hasSafeBottom ? 30 : 25, height: UIScreen.hasSafeBottom ? 30 : 25)

@@ -208,7 +208,7 @@ struct FirstMainView: View {
                                                 SystemImage("folder.badge.plus")
                                                     .foregroundColor(.black)
                                             }
-                                            .tint(colorScheme == .dark ? Color(red: 255, green: 255, blue: 0) : Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
                                     // Change Folder Name
                                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -247,7 +247,7 @@ struct FirstMainView: View {
                                             } label: {
                                                 SystemImage("pencil")
                                             }
-                                            .tint(Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                             
                                         }
                                 } // end of ForEach
@@ -282,7 +282,8 @@ struct FirstMainView: View {
                                                 SystemImage("folder.badge.plus")
                                                     .foregroundColor(.black)
                                             }
-                                            .tint(Color.lightSwipeBtn1)
+//                                            .tint(Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
                                 } else {
                                     DynamicFolderCell(
@@ -301,7 +302,9 @@ struct FirstMainView: View {
                                                 SystemImage("folder.badge.plus")
                                                 
                                             }
-                                            .tint(Color.lightSwipeBtn1)
+//                                            .tint(Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
+                                            
                                         }
                                     // Change Folder Name
                                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -337,7 +340,8 @@ struct FirstMainView: View {
                                                 SystemImage("pencil")
                                             }
 //                                            .tint(Color.swipeBtnColor2)
-                                            .tint(Color.lightSwipeBtn1)
+//                                            .tint(Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
                                 } // end of Else Case
                             } // end of ForEach
@@ -364,7 +368,7 @@ struct FirstMainView: View {
             VStack {
                 Spacer()
                 HStack {
-                    BindedColorView(red: $red, green: $green, blue: $blue)
+//                    BindedColorView(red: $red, green: $green, blue: $blue)
                     Spacer()
                     Button(action: addMemo) {
                         NewPlusImage()

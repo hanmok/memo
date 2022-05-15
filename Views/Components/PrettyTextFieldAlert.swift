@@ -89,14 +89,15 @@ struct PrettyTextFieldAlert: View {
                     .font(.callout)
                     .focused($focusState)
                     .frame(height: 25)
+                    .padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
                     .background(colorScheme == .dark ? .black : .white)
-//                    .accentColor(colorScheme == .dark ? Color.cream : Color.pinBarColor)
                     .accentColor(colorScheme == .dark ? .darkMain : Color.newColor)
                     .foregroundColor(Color.blackAndWhite)
                     .cornerRadius(5)
+
                     .padding(.horizontal, Sizes.overallPadding)
                     .padding(.bottom, 15)
-//                    .padding(.vertical, 15)
+
 
                     .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
                         if let textField = obj.object as? UITextField {
@@ -141,6 +142,7 @@ struct PrettyTextFieldAlert: View {
                         Text(LocalizedStringStorage.cancel)
 //                            .foregroundColor(.red)
 //                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .frame(width: screenSize.width * 0.32, alignment: .center)
                             .frame(height: 50)
                     }
@@ -161,6 +163,7 @@ struct PrettyTextFieldAlert: View {
                     } label: {
                         Text(LocalizedStringStorage.done)
 //                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .frame(width: screenSize.width * 0.32, alignment: .center)
                             .frame(height: 50)
                     }
