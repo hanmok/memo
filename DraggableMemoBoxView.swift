@@ -183,7 +183,7 @@ struct DraggableMemoBoxView: View {
                 .offset(x: dragVM.draggingMemo == memo ? dragVM.oneOffset : 0)
                 .background {
                     ZStack {
-                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain3) : UIColor(Color.newColor)) : .white)
+                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.darkMain) : UIColor(Color.newColor)) : .white)
                         
                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                             .cornerRadius(10)

@@ -359,8 +359,15 @@ struct SecondMainView: View {
                         .gesture(scroll)
                         // another element of ZStack begin // end of ZStack
                         
-                        
-                        ColorView().padding([.leading, .bottom], 20)
+//                        VStack {
+//                            Spacer()
+//                            HStack {
+//                                ColorView()
+//                                    .padding([.leading, .bottom], 20)
+//                                Spacer()
+//                            }
+//                        }
+
                         
                         MemoEditView(
                             plusView:

@@ -92,12 +92,12 @@ struct SubFolderView: View {
         }
         .frame(width: UIScreen.screenWidth / 2.5)
 //        .background(Color.memoBoxColor)
-        .background(Color.swipeBtnColor2)
+        .background(Color.lightSwipeBtn1)
         .cornerRadius(10)
         .overlay(
             RoundedRectangle(cornerRadius: 10)
 //                .stroke(colorScheme == .dark ? Color.subColor : Color.init(white: 0.85) ,lineWidth: 1)
-                .stroke(Color.swipeBtnColor2)
+                .stroke(Color.lightSwipeBtn1)
         )
     }
 }

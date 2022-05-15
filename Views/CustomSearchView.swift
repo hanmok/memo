@@ -222,7 +222,8 @@ struct CustomSearchView: View {
                     } label: {
                         Text(LocalizedStringStorage.cancelInSearch)
 //                            .foregroundColor(.buttonTextColor)
-                            .foregroundColor(.white)
+//                            .foregroundColor(.white)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
@@ -275,9 +276,9 @@ struct CustomSearchView: View {
                                                                     .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                                                                     .cornerRadius(10)
                                                             }
-                                                            .shadow(
-                                                                color: Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
-                                                                radius: 4, x: 4, y: 4)
+//                                                            .shadow(
+//                                                                color: Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
+//                                                                radius: 4, x: 4, y: 4)
                                                         }
                                                 }
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
@@ -322,9 +323,9 @@ struct CustomSearchView: View {
                                                                     .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                                                                     .cornerRadius(10)
                                                             }
-                                                            .shadow(
-                                                                color: Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
-                                                                radius: 4, x: 4, y: 4)
+//                                                            .shadow(
+//                                                                color: Color(.sRGB, white: 0, opacity: colorScheme == .dark ? 1: 0.6),
+//                                                                radius: 4, x: 4, y: 4)
                                                         }
                                                 }
                                                 .padding(.bottom, Sizes.spacingBetweenMemoBox)
@@ -344,7 +345,8 @@ struct CustomSearchView: View {
             }
         
 //            .background(colorScheme == .dark ? Color.newBGForDark : Color.white)
-            .background(colorScheme == .dark ? Color(white: 38 / 255) : Color(white: 239 / 255 ))
+//            .background(colorScheme == .dark ? Color(white: 38 / 255) : Color(white: 239 / 255 ))
+            .background(colorScheme == .dark ? Color.newBGforDark : .white)
             .onAppear(perform: {
                 print(" CustomSearchView has appeared!")
                 updateViewInHalfSecond()

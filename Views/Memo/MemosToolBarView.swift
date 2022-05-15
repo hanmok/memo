@@ -147,7 +147,7 @@ struct MemosToolBarView: View {
         .tint(.black)
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
-        .background(colorScheme == .dark ? .newMain4 : Color.newColor)
+        .background(colorScheme == .dark ? .darkMain : Color.newColor)
         .cornerRadius(10)
     }
 }

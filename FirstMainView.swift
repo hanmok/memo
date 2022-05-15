@@ -46,6 +46,10 @@ struct FirstMainView: View {
     
     @State var isAddingMemo = false
     
+    @State var red = 0.0
+    @State var green = 0.0
+    @State var blue = 0.0
+    
 //    @State var msgToShow: String?
     
     init(fastFolderWithLevelGroup: FastFolderWithLevelGroup
@@ -167,9 +171,23 @@ struct FirstMainView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-                                                SystemImage("folder.badge.plus")
+//                                                SystemImage("folder.badge.plus")
+//                                                    .tint(.black)
+//                                                    .foregroundColor(.black)
+//                                                    .colorMultiply(.black)
+                                                Image(systemName: "folder.badge.plus")
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .tint(.red)
+                                                    .frame(width: 20, height: 20)
+//                                                    .symbolRenderingMode(.template)
+//                                                    .renderingMode(.template)
+                                                    .symbolRenderingMode(.palette)
+                                                    .foregroundStyle(.red, .brown)
+//                                                    .foregroundColor(.red)
                                             }
-                                            .tint(Color.swipeBtnColor2)
+//                                            .tint()
+//                                            .tint(colorScheme == .dark ? Color(red: 255, green: 255, blue: 0) : Color.lightSwipeBtn1)
                                         }
                                 }
                                 else {
@@ -190,7 +208,7 @@ struct FirstMainView: View {
                                                 SystemImage("folder.badge.plus")
                                                     .foregroundColor(.black)
                                             }
-                                            .tint(Color.swipeBtnColor2)
+                                            .tint(colorScheme == .dark ? Color(red: 255, green: 255, blue: 0) : Color.lightSwipeBtn1)
                                         }
                                     // Change Folder Name
                                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -213,7 +231,11 @@ struct FirstMainView: View {
                                             } label: {
                                                 SystemImage("folder")
                                             }
-                                            .tint(Color.swipeBtnColor3)
+//                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn2)
+//                                            .tint(Color(rgba: 0x14A7FA))
+//                                            .tint(Color(red: 100, green: 100, blue: 230))
+//                                            .tint(Color(red: 81, green: 176, blue: 255))
                                             
                                             Button {
                                                 if folderWithLevel.folder.parent != nil {
@@ -225,7 +247,7 @@ struct FirstMainView: View {
                                             } label: {
                                                 SystemImage("pencil")
                                             }
-                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn1)
                                             
                                         }
                                 } // end of ForEach
@@ -257,9 +279,10 @@ struct FirstMainView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-                                                SystemImage(  "folder.badge.plus")
+                                                SystemImage("folder.badge.plus")
+                                                    .foregroundColor(.black)
                                             }
-                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn1)
                                         }
                                 } else {
                                     DynamicFolderCell(
@@ -275,9 +298,10 @@ struct FirstMainView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-                                                SystemImage(  "folder.badge.plus")
+                                                SystemImage("folder.badge.plus")
+                                                
                                             }
-                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn1)
                                         }
                                     // Change Folder Name
                                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
@@ -297,9 +321,10 @@ struct FirstMainView: View {
                                                 folderEditVM.shouldShowSelectingView = true
                                                 folderEditVM.folderToCut = folderWithLevel.folder
                                             } label: {
-                                                SystemImage(  "folder")
+                                                SystemImage("folder")
                                             }
-                                            .tint(Color.swipeBtnColor3)
+//                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn2)
                                             
                                             Button {
                                                 if folderWithLevel.folder.parent != nil {
@@ -311,7 +336,8 @@ struct FirstMainView: View {
                                             } label: {
                                                 SystemImage("pencil")
                                             }
-                                            .tint(Color.swipeBtnColor2)
+//                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn1)
                                         }
                                 } // end of Else Case
                             } // end of ForEach
@@ -338,6 +364,7 @@ struct FirstMainView: View {
             VStack {
                 Spacer()
                 HStack {
+                    BindedColorView(red: $red, green: $green, blue: $blue)
                     Spacer()
                     Button(action: addMemo) {
                         NewPlusImage()

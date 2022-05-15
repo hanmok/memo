@@ -62,7 +62,7 @@ struct MemosToolBarViewForTrash: View {
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
 //        .background(Color.subColor)
-        .background(colorScheme == .dark ? .newMain4 : Color.newColor)
+        .background(colorScheme == .dark ? .darkMain : Color.newColor)
         .cornerRadius(10)
     }
 }

@@ -91,7 +91,7 @@ struct PrettyTextFieldAlert: View {
                     .frame(height: 25)
                     .background(colorScheme == .dark ? .black : .white)
 //                    .accentColor(colorScheme == .dark ? Color.cream : Color.pinBarColor)
-                    .accentColor(colorScheme == .dark ? .newMain4 : Color.newColor)
+                    .accentColor(colorScheme == .dark ? .darkMain : Color.newColor)
                     .foregroundColor(Color.blackAndWhite)
                     .cornerRadius(5)
                     .padding(.horizontal, Sizes.overallPadding)

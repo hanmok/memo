@@ -54,15 +54,18 @@ extension Color {
     static let newColor = Color(red: 181, green: 220, blue: 250)
 
     
-    /// Checkmark Color
-//    static let newMain1 = Color(rgba: 0xA3CEEF)
-//    static let newMain1 = Color.black
+//    static let swipeBtnColor2 = UIColor(rgbHex: 0xFDAEAC).convertToColor()
+    static let lightSwipeBtn1 = UIColor(rgbHex: 0xA3CEEF).convertToColor()
+    
+//    static let swipeBtnColor3 = UIColor(rgbHex: 0xFF7F7C).convertToColor()
+    static let lightSwipeBtn2 = UIColor(rgbHex: 0x51B0FF).convertToColor()
+    
     
     /// dragging Dark Background, plusImage Color
-    static let newMain3 = Color(rgba: 0x009DCF)
+    static let lightMain = Color(rgba: 0x009DCF)
     
-    /// MemoToolbar Background For Dark
-    static let newMain4 = Color.yellow
+    /// MemoToolbar Background For Dark, stroke color when selected for DARK
+    static let darkMain = Color.yellow
     
 
     /// white
@@ -92,10 +95,6 @@ extension Color {
     
     static let bgForDark = Color(uiColor: UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1))
     
-//    static let swipeBtnColor2 = UIColor(rgbHex: 0xFDAEAC).convertToColor()
-    static let swipeBtnColor2 = UIColor(rgbHex: 0xA3CEEF).convertToColor()
-    
-    static let swipeBtnColor3 = UIColor(rgbHex: 0xFF7F7C).convertToColor()
     
     static let memoBoxColor = Color(UIColor.memoBoxColor)
     
@@ -151,7 +150,7 @@ extension UIColor {
     static let memoTextColor = UIColor(named: ColorKeys.memoTextColor)!
     static let blackAndWhite = UIColor(named: ColorKeys.blackAndWhite)!
     
-    static let swipeBtnColor1 = UIColor(named: ColorKeys.swipeBtnColor1)!
+
     static let swipeBtnColor2 = UIColor(named: ColorKeys.swipeBtnColor2)!
     static let swipeBtnColor3 = UIColor(named: ColorKeys.swipeBtnColor3)!
     
@@ -178,7 +177,7 @@ struct ColorKeys {
     static let memoTextColor = "memoViewTextColor"
     static let blackAndWhite = "blackAndWhite"
     
-    static let swipeBtnColor1 = "swipeBtnColor1"
+
     static let swipeBtnColor2 = "swipeBtnColor2"
     static let swipeBtnColor3 = "swipeBtnColor3"
     

@@ -159,7 +159,7 @@ struct MemoBoxView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
 
-                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.newMain4 : Color.swipeBtnColor2) : .clear, lineWidth: 1)
+                .stroke(memoEditVM.selectedMemos.contains(memo) ? (colorScheme == .dark ? Color.darkMain : Color.lightSwipeBtn1) : .clear, lineWidth: 1)
         )
         .overlay(
             VStack {

@@ -35,13 +35,13 @@ struct CheckableFolderCell: View {
                     SystemImage("checkmark")
                     
                 }
-                .tint(.swipeBtnColor2)
+                .tint(.lightSwipeBtn1)
             }
             if markInvalid {
                 Button { } label: {
                     SystemImage("multiply")
                 }
-                .tint(.swipeBtnColor2)
+                .tint(.lightSwipeBtn1)
             }
         }
     }
