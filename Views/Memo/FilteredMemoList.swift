@@ -113,12 +113,6 @@ struct FilteredMemoList: View {
                     VStack {
                         HStack {
                             if listType == .pinned {
-//                                HStack {
-//                                    SystemImage("bookmark.fill", size: 16)
-//                                        .tint(Color.navBtnColor)
-//                                        .frame(alignment: .topLeading)
-//                                        .padding(.leading, Sizes.overallPadding + 4)
-                                    
                                     SystemImage("pin.fill", size: 16)
                                         .tint(Color.navBtnColor)
                                         .frame(alignment: .topLeading)

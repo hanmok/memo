@@ -168,7 +168,7 @@ struct TrashFolderView: View {
                 // DO NOTHING
             } label: {
                 Text(LocalizedStringStorage.cancel)
-                    .foregroundColor(colorScheme == .dark ? Color.cream : .black) // not applied.. TT..
+//                    .foregroundColor(colorScheme == .dark ? Color.cream : .black) // not applied.. TT..
             }
         }, message: {
             Text(LocalizedStringStorage.removeAlertMsgSub).foregroundColor(.red)

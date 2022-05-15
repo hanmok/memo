@@ -56,9 +56,7 @@ struct NewMemoView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage( "chevron.left", size: 18)
-//                .tint(Color.navBtnColor)
-//                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
-                .tint(colorScheme == .dark ? .newNavForDark : .black)
+                .tint(colorScheme == .dark ? .navColorForDark : .black)
         }
     }
     
@@ -195,19 +193,13 @@ struct NewMemoView: View {
                     Spacer()
                     
                     HStack(spacing: 16) {
-//                        Button(action: toggleBookMark) {
-//                            SystemImage(isBookMarkedTemp ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
-//                                .tint(Color.navBtnColor)
-//                        }
                         
                         // PIN Button
                         Button(action: togglePin) {
                             SystemImage(
                                 isPinned ? "pin.fill" : "pin",
                                 size: Sizes.regularButtonSize)
-//                                .tint(Color.navBtnColor)
-//                            .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
-                            .tint(colorScheme == .dark ? .newNavForDark : .black)
+                            .tint(colorScheme == .dark ? .navColorForDark : .black)
                         }
                         
                         // RELOCATE MEMO
@@ -233,7 +225,7 @@ struct NewMemoView: View {
                             SystemImage(
                                 "folder",
                                 size: Sizes.regularButtonSize)
-                            .tint(contents == "" ? (.gray) : (colorScheme == .dark ? .newNavForDark : .newNavForLight))
+                            .tint(contents == "" ? (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
                             .animation(.spring(), value: contents == "")
                         }
                         .disabled(contents == "")

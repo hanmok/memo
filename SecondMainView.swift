@@ -21,6 +21,11 @@ struct SecondMainView: View {
     @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
 //    @Environment()
     
+    @State var red = 0.0
+    @State var green = 0.0
+    @State var blue = 0.0
+    
+    
     @ObservedObject var fastFolderWithLevelGroup: FastFolderWithLevelGroup
     @ObservedObject var currentFolder: Folder
     
@@ -187,7 +192,7 @@ struct SecondMainView: View {
                         } label: {
                             SystemImage("rectangle.lefthalf.inset.fill", size: 24)
 //                                .foregroundColor(colorScheme == .dark ? .cream : .black)
-                                .foregroundColor(colorScheme == .dark ? Color.newNavForDark : Color.newNavForLight)
+                                .foregroundColor(colorScheme == .dark ? Color.navColorForDark : Color.navColorForLight)
                         }
                         
                         
@@ -227,8 +232,6 @@ struct SecondMainView: View {
                         .frame(height: 32)
                         .background(colorScheme == .dark ? Color(white: 16 / 255): Color(white: 239 / 255 ))
                         .cornerRadius(10)
-//                        .overlay(RoundedRectangle(cornerRadius: 10)
-//                            .stroke(colorScheme == .dark ? Color.cream : Color.clear))
                         .overlay(RoundedRectangle(cornerRadius: 10)
                             .stroke(colorScheme == .dark ? Color.white : Color.clear))
                         .padding(.horizontal, 10)
@@ -245,7 +248,6 @@ struct SecondMainView: View {
                             inFolderOrder: $inFolderOrder,
                             isHidingArchive: $isHidingArchive)
                         .padding(.leading, 5)
-                        
                     }
                     .padding(.horizontal, 20)
                     
@@ -357,12 +359,15 @@ struct SecondMainView: View {
                         .gesture(scroll)
                         // another element of ZStack begin // end of ZStack
                         
+                        
+                        ColorView().padding([.leading, .bottom], 20)
+                        
                         MemoEditView(
                             plusView:
                                 Button(action: addMemo, label: {
 //                                    PlusImage()
 //                                    NewPlusButton()
-                                    RadialPlusImage()
+                                    NewPlusImage()
                                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)
                                 }),
@@ -379,13 +384,8 @@ struct SecondMainView: View {
                         .padding(.horizontal, Sizes.overallPadding)
                         .offset(y: focusState ? UIScreen.screenHeight : 0)
                         .animation(.spring().speed(0.5), value: focusState)
-                    }
+                    } // End Of ZStack
                 } // end of Main VStack
-//                .background(Color(.sRGB, red: 0.945, green: 0.945, blue: 0.945))
-//                .background(Color.newBG)
-//                .background(colorScheme == .dark ? .black : .white)
-//                .ignoresSafeAreaEdges()
-//                .ignoresSafeArea(edges: .all)
                 
                 .background(colorScheme == .dark ? Color.newBGforDark : .white)
                 .navigationBarHidden(true)
@@ -457,14 +457,14 @@ struct OrderingMenuInSecondView: View {
     var body: some View {
 
         Menu {
-           
-            MemoOrderingMenuInSecondView()
 
             FolderOrderingMenuInSecondView()
+            
+            MemoOrderingMenuInSecondView()
 
         } label: {
             SystemImage("arrow.up.arrow.down")
-                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
 }
@@ -496,7 +496,7 @@ struct EllipseInSecondView: View {
         } label: {
 //            SystemImage("ellipsis.circle")
             SystemImage("ellipsis").rotationEffect(.degrees(90)).scaleEffect(1.15)
-                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
 }

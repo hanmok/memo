@@ -25,8 +25,7 @@ struct FolderOrderingMenu: View {
             
         } label: {
             SystemImage("arrow.up.arrow.down")
-//                .tint(Color.navBtnColor)
-                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
 }

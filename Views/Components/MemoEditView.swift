@@ -36,10 +36,10 @@ struct MemoEditView<PlusButton: View, Toolbar: View>: View {
 
 
 
-struct SubFolderEditView<SubButton: View, SubFolder: View>: View {
+struct SubFolderEditView<SubButton: View, SubFolderView: View>: View {
     
     let subButton: SubButton
-    let subFolderView: SubFolder
+    let subFolderView: SubFolderView
     
     var body: some View {
         

@@ -136,23 +136,17 @@ struct MemosToolBarView: View {
                 
                 memoEditVM.initSelectedMemos()
             }) {
-//                UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
                 Image(systemName: "trash")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .tint(Color.red)
                     .frame(width: 20, height: 20)
             }
-            
-            
             .cornerRadius(5)
         } // end of HStack
         .tint(.black)
         .padding(.horizontal, Sizes.overallPadding)
         .padding(.vertical, 10)
-//        .background(Color.subColor)
-//        .background(colorScheme == .dark ? .newMain3 : Color.newMemoToolBoxColorForLight)
-//        .background(colorScheme == .dark ? .newMain4 : Color.newMemoToolBoxColorForLight)
         .background(colorScheme == .dark ? .newMain4 : Color.newColor)
         .cornerRadius(10)
     }

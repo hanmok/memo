@@ -46,7 +46,7 @@ struct PrettyTextFieldAlert: View {
     @Environment(\.colorScheme) var colorScheme
     
     let screenSize = UIScreen.main.bounds
-    @State var selectedColor = Color.cream
+//    @State var selectedColor = Color.cream
     @State var selectedButton: ButtonType? = nil
     @Binding var isPresented: Bool
     @Binding var text: String
@@ -140,7 +140,7 @@ struct PrettyTextFieldAlert: View {
                     } label: {
                         Text(LocalizedStringStorage.cancel)
 //                            .foregroundColor(.red)
-                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
+//                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .frame(width: screenSize.width * 0.32, alignment: .center)
                             .frame(height: 50)
                     }
@@ -160,7 +160,7 @@ struct PrettyTextFieldAlert: View {
                         selectedButton = .done
                     } label: {
                         Text(LocalizedStringStorage.done)
-                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
+//                            .foregroundColor(colorScheme == .dark ? Color.cream : .black)
                             .frame(width: screenSize.width * 0.32, alignment: .center)
                             .frame(height: 50)
                     }

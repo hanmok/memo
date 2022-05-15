@@ -91,7 +91,7 @@ struct FirstMainView: View {
                     } label: {
                         SystemImage("rectangle.righthalf.inset.fill", size: 24)
 //                            .foregroundColor(colorScheme == .dark ? .cream : .black)
-                            .foregroundColor(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                            .foregroundColor(colorScheme == .dark ? .navColorForDark : .navColorForLight)
                     }
                     .padding(.trailing, 10)
                     .padding(.leading, Sizes.overallPadding)
@@ -105,8 +105,7 @@ struct FirstMainView: View {
                             isShowingSearchView = true
                         } label: {
                             SystemImage( "magnifyingglass")
-//                                .tint(Color.navBtnColor)
-                                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
                         }
                         
                         // MARK: - Button 2: Folder Ordering
@@ -126,15 +125,13 @@ struct FirstMainView: View {
                             
                         } label: { // original : 28
                             SystemImage( "folder.badge.plus", size: 28)
-//                                .foregroundColor(Color.navBtnColor)
-                                .foregroundColor(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                                .foregroundColor(colorScheme == .dark ? .navColorForDark : .navColorForLight)
                         }
                         .padding(.leading, 12)
                     }
                     .padding(.horizontal, 20)
                     .padding(.top, 8)
                 }
-//                .padding(.horizontal, Sizes.overallPadding)
                 
                 Picker("", selection: $selectionEnum) {
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
@@ -343,7 +340,7 @@ struct FirstMainView: View {
                 HStack {
                     Spacer()
                     Button(action: addMemo) {
-                        RadialPlusImage()
+                        NewPlusImage()
                     }
                     .padding([ .trailing], Sizes.overallPadding)
                     .padding(.bottom, 10)
@@ -359,7 +356,7 @@ struct FirstMainView: View {
                 Color(.clear)
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
-                    .tint(colorScheme == .dark ? .cream : .black)
+//                    .tint(colorScheme == .dark ? .cream : .black)
             }
             
 //            PinnedFolderView(folder: fastFolderWithLevelGroup.homeFolder)

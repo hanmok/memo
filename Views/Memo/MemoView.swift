@@ -50,7 +50,7 @@ struct MemoViewWithBug: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage("chevron.left", size: 18)
-                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
 
@@ -174,21 +174,10 @@ struct MemoViewWithBug: View {
 
                     HStack(spacing: 16) {
                         // if it is not trashBin -> show bookmark and pin icon with the other two.
-//                        if !(memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)) {
                         if !belongToTrashFolder() {
-//                            Button(action: toggleBookMark) {
-//
-//                                SystemImage( (isBookMarkedTemp ?? memo.isBookMarked) ? "bookmark.fill" : "bookmark", size: Sizes.regularButtonSize)
-//                                    .tint(Color.navBtnColor)
-//                            }
-                             /// 여기서 왜 버그가 나오지 ... ??
-                            // PIN Button
-                            // ?? 왜 ... 이런 버그가 ... ??
                             Button(action: togglePin) {
                                 SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
-//                                    .tint(Color.navBtnColor)
-//                                    .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
-                                    .tint(colorScheme == .dark ? .newNavForDark : .black)
+                                    .tint(colorScheme == .dark ? .navColorForDark : .black)
                             }
                         }
 
@@ -204,7 +193,7 @@ struct MemoViewWithBug: View {
 //                                transaction.animation = nil
 //                            })
                                 .tint(contents == "" ?
-                                    (.gray) : (colorScheme == .dark ? .newNavForDark : .newNavForLight))
+                                    (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
 //                                .animation(.spring(), value: contents == "")
                                 .animation(.spring(), value: preventingAnimationViewModel.viewAppear && contents == "")
 
@@ -348,8 +337,7 @@ struct MemoView: View {
             self.presentationMode.wrappedValue.dismiss()
         }) {
             SystemImage("chevron.left", size: 18)
-//                .tint(Color.navBtnColor)
-                .tint(colorScheme == .dark ? .newNavForDark : .newNavForLight)
+                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
     
@@ -467,8 +455,7 @@ struct MemoView: View {
                             // PIN Button
                             Button(action: togglePin) {
                                 SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
-//                                    .tint(Color.navBtnColor)
-                                    .tint(colorScheme == .dark ? .newNavForDark : .black)
+                                    .tint(colorScheme == .dark ? .navColorForDark : .black)
                             }
                         }
                         
@@ -480,9 +467,8 @@ struct MemoView: View {
                             editorFocusState = false
                         } label: {
                             SystemImage("folder", size: Sizes.regularButtonSize)
-//                                .tint(Color.navBtnColor)
                                 .tint(contents == "" ?
-                                    (.gray) : (colorScheme == .dark ? .newNavForDark : .newNavForLight))
+                                    (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
 //                                .animation(.spring(), value: contents == "")
                                 .animation(.spring(), value: preventingAnimationViewModel.viewAppear && contents == "")
                         }
@@ -490,7 +476,6 @@ struct MemoView: View {
                         // REMOVE
                         Button(action: removeMemo) {
                             SystemImage("trash", size: Sizes.regularButtonSize)
-//                                .tint(Color.navBtnColor)
                                 .tint(Color.red).opacity(0.9)
                         }
                     }

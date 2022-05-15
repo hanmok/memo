@@ -154,9 +154,6 @@ struct MemoBoxView: View {
         .padding(.horizontal, Sizes.smallSpacing)
         .padding(.vertical, Sizes.smallSpacing)
         .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding)
-//        .background(Color.memoBoxColor)
-//        .background(Color.testColor2)
-//        .background(colorScheme == .dark ? Color.bgForDark : Color.testColor)
         .background(colorScheme == .dark ? Color.memoBoxColor : .newMemoBoxColor)
         .cornerRadius(10)
         .overlay(
@@ -175,7 +172,7 @@ struct MemoBoxView: View {
                     if memo.isPinned == true {
                         SystemImage("pin.fill", size: 14)
                             .rotationEffect(.degrees(45))
-                            .tint(colorScheme == .dark ? Color.cream : .black)
+//                            .tint(colorScheme == .dark ? Color.cream : .black)
                     }
                 }
                 .padding(.trailing, Sizes.properSpacing)

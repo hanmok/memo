@@ -183,11 +183,6 @@ struct DraggableMemoBoxView: View {
                 .offset(x: dragVM.draggingMemo == memo ? dragVM.oneOffset : 0)
                 .background {
                     ZStack {
-//                        Color(isOnDraggingAction ? .memoBoxSwipeBGColor : .white)
-//                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain3) : .black) : .white)
-                        
-//                        Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain4) : .black) : .white)
-                        
                         Color(isOnDraggingAction ? (colorScheme == .dark ? UIColor(Color.newMain3) : UIColor(Color.newColor)) : .white)
                         
                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
@@ -196,8 +191,9 @@ struct DraggableMemoBoxView: View {
                             Spacer()
                             SystemImage("checkmark")
                                 .frame(width: 65)
-                                .foregroundColor(.basicColors)
-                                .foregroundColor(.newMain)
+//                                .foregroundColor(.newMain1)
+                                .foregroundColor(colorScheme == .dark ? .white : .black)
+//                                .foregroundColor(.gray)
                                 .opacity(isOnDraggingAction ? 1 : 0)
                         }
                     }
