@@ -66,14 +66,13 @@ struct HierarchyLabelView: View {
                 
             } else {
                     root = "\(each.title)" + " > " + root
-
             }
         }
         
         if let lastIndex = root.lastIndex(of: ">") {
             root.remove(at: lastIndex)
         }
-        // in folderView, it it has no `>`, means almost top Level, don't show any text for hierarchyLabel 
+        // in folderView, it it has no `>`, means almost top Level, don't show any text for hierarchyLabel
         if inFolder && !root.contains(">") {
             return ""
         }
