@@ -100,7 +100,7 @@ struct TrashFolderView: View {
                     
                 } // end of scrollView
             } // end of VStack
-            .padding(.top, 12)
+            .padding(.top, 7)
             
             VStack {
                 Spacer()
