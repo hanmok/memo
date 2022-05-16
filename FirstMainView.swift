@@ -171,21 +171,10 @@ struct FirstMainView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-//                                                SystemImage("folder.badge.plus")
-//                                                    .tint(.black)
-//                                                    .foregroundColor(.black)
-//                                                    .colorMultiply(.black)
-                                                Image(systemName: "folder.badge.plus")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .tint(.red)
-                                                    .frame(width: 20, height: 20)
-//                                                    .symbolRenderingMode(.template)
-//                                                    .renderingMode(.template)
-                                                    .symbolRenderingMode(.palette)
-                                                    .foregroundStyle(.red, .brown)
-//                                                    .foregroundColor(.red)
+                                                SystemImage("folder.badge.plus")
+                                                    .foregroundColor(.black)
                                             }
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
 //                                            .tint()
 //                                            .tint(colorScheme == .dark ? Color(red: 255, green: 255, blue: 0) : Color.lightSwipeBtn1)
                                         }
@@ -280,7 +269,7 @@ struct FirstMainView: View {
                                                 newFolderName = ""
                                             } label: {
                                                 SystemImage("folder.badge.plus")
-                                                    .foregroundColor(.black)
+//                                                    .foregroundColor(.black)
                                             }
 //                                            .tint(Color.lightSwipeBtn1)
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
