@@ -99,7 +99,7 @@ struct FirstMainView: View {
                     }
                     .padding(.trailing, 10)
                     .padding(.leading, Sizes.overallPadding)
-                    .padding(.top, 8)
+//                    .padding(.top, 5)
                     
                     Spacer()
                     HStack(spacing: 0) {
@@ -134,9 +134,9 @@ struct FirstMainView: View {
                         .padding(.leading, 12)
                     }
                     .padding(.horizontal, 20)
-                    .padding(.top, 8)
+//                    .padding(.top, 5)
                 }
-                
+                .padding(.top, 3)
                 Picker("", selection: $selectionEnum) {
                     Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
                         .tag(FolderTypeEnum.folder)

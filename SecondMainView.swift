@@ -181,7 +181,7 @@ struct SecondMainView: View {
         return NavigationView {
             
             ZStack {
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                     // MARK: - Nav Location
                     HStack {
                         Button {

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		227648D02832019000214EBF /* MemoViewFixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227648CF2832019000214EBF /* MemoViewFixed.swift */; };
 		9A013F6A27BA535400C612ED /* DynamicTopFolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */; };
 		9A046CC927B3A042003169C7 /* PinnedMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A046CC827B3A042003169C7 /* PinnedMemoBoxView.swift */; };
 		9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A04749527715D1200571D66 /* DeeepMemoApp.swift */; };
@@ -106,7 +105,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		227648CF2832019000214EBF /* MemoViewFixed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoViewFixed.swift; sourceTree = "<group>"; };
 		9A013F6927BA535400C612ED /* DynamicTopFolderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTopFolderCell.swift; sourceTree = "<group>"; };
 		9A046CC827B3A042003169C7 /* PinnedMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedMemoBoxView.swift; sourceTree = "<group>"; };
 		9A04749527715D1200571D66 /* DeeepMemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeepMemoApp.swift; sourceTree = "<group>"; };
@@ -418,7 +416,6 @@
 				9AD8333627BE148A00506AE8 /* MemoView.swift */,
 				E523DB5127C0073900D8D78B /* NewMemoView.swift */,
 				9AA266E027BE347C00AC75DB /* MemoBoxView.swift */,
-				227648CF2832019000214EBF /* MemoViewFixed.swift */,
 				9AD6EF10277D9DF100866456 /* MemoList.swift */,
 				9A3378062796A5CB00805138 /* FilteredMemoList.swift */,
 				9AD6EEC0277AD3EA00866456 /* MemosToolBarView.swift */,
@@ -638,7 +635,6 @@
 				9A89582727717EB500E7B773 /* Sizes.swift in Sources */,
 				9AC5D1FF278558AC007EAA28 /* NSPredicate+helper.swift in Sources */,
 				9AC5D1292784092F007EAA28 /* Folder+helper.swift in Sources */,
-				227648D02832019000214EBF /* MemoViewFixed.swift in Sources */,
 				E53B771A2830DBE4001C0CCE /* FolderMenu.swift in Sources */,
 				9AB7250727D00F24006A825C /* MemoOrderingButton.swift in Sources */,
 				E596A6C527AD8D5000076E95 /* OrderViewModel.swift in Sources */,

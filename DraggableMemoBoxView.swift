@@ -175,8 +175,8 @@ struct DraggableMemoBoxView: View {
     
     var body: some View {
         NavigationLink(destination:
-//                        MemoView(memo: memo, parent: memo.folder!, presentingView:.constant(false))
-                       MemoViewFixed(memo: memo, parent: memo.folder, presentingView: .constant(false))
+                        MemoView(memo: memo, parent: memo.folder, presentingView:.constant(false))
+//                       MemoViewFixed(memo: memo, parent: memo.folder, presentingView: .constant(false))
             .environmentObject(trashbinVM)
         ) {
             MemoBoxView(memo: memo)

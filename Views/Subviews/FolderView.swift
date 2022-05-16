@@ -164,7 +164,7 @@ struct FolderView: View {
                     .environmentObject(trashBinVM)
                 } // end of scrollView
             } // end of VStack
-            .padding(.top, 12)
+            .padding(.top, 5)
             
             // ANOTHER ELEMENT IN ZSTACK
             
