@@ -7,10 +7,47 @@
 
 import SwiftUI
 import CoreData
+import Firebase
 
-@main
+import FirebaseCore
+
+//import UIKit
+//import FirebaseCore
+//
+//
+//@UIApplicationMain
+//class AppDelegate: UIResponder, UIApplicationDelegate {
+//
+//  var window: UIWindow?
+//
+//  func application(_ application: UIApplication,
+//    didFinishLaunchingWithOptions launchOptions:
+//      [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//    FirebaseApp.configure()
+//content_copy
+//
+//    return true
+//  }
+//}
+
+@UIApplicationMain
+final class AppDelegate: NSObject, UIApplicationDelegate {
+    
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        
+//        let x: Int? = nil
+//        let y = x!
+        
+        return true
+    }
+}
+
 struct DeeepMemoApp: App {
 
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
     
@@ -26,7 +63,7 @@ struct DeeepMemoApp: App {
     
     var body: some Scene {
         print("isFirstLaunch: \(isFirstLaunch)")
-
+        
 
 ////         For testing
 //        // for Dev
@@ -79,6 +116,7 @@ struct DeeepMemoApp: App {
             isFirstAfterBookmarkUpdate = false
             
         } else {
+//            fatalError()
             let folderReq = Folder.fetch(.all)
             if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
                 folders.forEach {

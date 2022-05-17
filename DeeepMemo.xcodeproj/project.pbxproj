@@ -88,6 +88,9 @@
 		E523DB5227C0073900D8D78B /* NewMemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E523DB5127C0073900D8D78B /* NewMemoView.swift */; };
 		E53B771A2830DBE4001C0CCE /* FolderMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53B77192830DBE4001C0CCE /* FolderMenu.swift */; };
 		E53B771E28310944001C0CCE /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53B771D28310944001C0CCE /* ColorView.swift */; };
+		E53B773B2833D3F3001C0CCE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E53B773A2833D3F3001C0CCE /* FirebaseAnalytics */; };
+		E53B773D2833D3F3001C0CCE /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E53B773C2833D3F3001C0CCE /* FirebaseCrashlytics */; };
+		E53B773F2833D76F001C0CCE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E53B773E2833D76F001C0CCE /* GoogleService-Info.plist */; };
 		E54FE18327C9455B000FFA81 /* SyntaxHighlightTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18227C9455B000FFA81 /* SyntaxHighlightTextStorage.swift */; };
 		E54FE18527C94595000FFA81 /* NoteEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18427C94594000FFA81 /* NoteEditorViewController.swift */; };
 		E54FE18727C945DF000FFA81 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54FE18627C945DF000FFA81 /* Note.swift */; };
@@ -196,6 +199,7 @@
 		E523DB5127C0073900D8D78B /* NewMemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMemoView.swift; sourceTree = "<group>"; };
 		E53B77192830DBE4001C0CCE /* FolderMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderMenu.swift; sourceTree = "<group>"; };
 		E53B771D28310944001C0CCE /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
+		E53B773E2833D76F001C0CCE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E54FE18227C9455B000FFA81 /* SyntaxHighlightTextStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyntaxHighlightTextStorage.swift; sourceTree = "<group>"; };
 		E54FE18427C94594000FFA81 /* NoteEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorViewController.swift; sourceTree = "<group>"; };
 		E54FE18627C945DF000FFA81 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53B773D2833D3F3001C0CCE /* FirebaseCrashlytics in Frameworks */,
+				E53B773B2833D3F3001C0CCE /* FirebaseAnalytics in Frameworks */,
 				9AC5D1DB2785415F007EAA28 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +242,7 @@
 				9AC5D0F32782C59C007EAA28 /* ViewModels */,
 				9A89582527717EAC00E7B773 /* Utils */,
 				9A04749727715D1300571D66 /* Assets.xcassets */,
+				E53B773E2833D76F001C0CCE /* GoogleService-Info.plist */,
 				9AB724FF27D00DE4006A825C /* Localizable */,
 				9ACC0C7427DBAE7400D18690 /* VersionHistory */,
 				9AC5D13F278528FA007EAA28 /* PersonalMemos */,
@@ -476,6 +483,7 @@
 				9A04749827715D1300571D66 /* Sources */,
 				9A04749927715D1300571D66 /* Frameworks */,
 				9A04749A27715D1300571D66 /* Resources */,
+				E53B77402833DA73001C0CCE /* Crashlytics Run Script */,
 			);
 			buildRules = (
 			);
@@ -483,6 +491,8 @@
 			);
 			name = "DeeepMemo (iOS)";
 			packageProductDependencies = (
+				E53B773A2833D3F3001C0CCE /* FirebaseAnalytics */,
+				E53B773C2833D3F3001C0CCE /* FirebaseCrashlytics */,
 			);
 			productName = "DeeepMemo (iOS)";
 			productReference = 9A04749C27715D1300571D66 /* DeeepMemo.app */;
@@ -537,6 +547,7 @@
 			);
 			mainGroup = 9A04748F27715D1100571D66;
 			packageReferences = (
+				E53B77392833D3F3001C0CCE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 9A04749D27715D1300571D66 /* Products */;
 			projectDirPath = "";
@@ -573,6 +584,7 @@
 				9AAA24A827E89586009923C7 /* RemovingBookmark in Resources */,
 				9AC5D22E278BD8C6007EAA28 /* CurrentTodoLists in Resources */,
 				9ACC0C8027DDF4D800D18690 /* V1.1.0->1.1.1 in Resources */,
+				E53B773F2833D76F001C0CCE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +596,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E53B77402833DA73001C0CCE /* Crashlytics Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DERIVED_FILES_DIR}/${INPUT_FILE_PATH}.d",
+			);
+			name = "Crashlytics Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9A04749827715D1300571D66 /* Sources */ = {
@@ -722,7 +756,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -743,6 +777,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -797,6 +832,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -960,6 +996,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E53B77392833D3F3001C0CCE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E53B773A2833D3F3001C0CCE /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E53B77392833D3F3001C0CCE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		E53B773C2833D3F3001C0CCE /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E53B77392833D3F3001C0CCE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9AC5D10A27840554007EAA28 /* DeeepMemo.xcdatamodeld */ = {

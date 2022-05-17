@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>851301043154-jqc8i38bdl108riosqj40ib00l0h885p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.851301043154-jqc8i38bdl108riosqj40ib00l0h885p</string>
+	<key>API_KEY</key>
+	<string>AIzaSyArGhCvJxHJhJJLpTNtZ_R0o1IU-SN3Y-g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>851301043154</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>hanmok-main.MemoLee</string>
+	<key>PROJECT_ID</key>
+	<string>thismemo-31212</string>
+	<key>STORAGE_BUCKET</key>
+	<string>thismemo-31212.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:851301043154:ios:a926c35dd498d1c637960b</string>
+</dict>
+</plist>

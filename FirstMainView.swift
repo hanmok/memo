@@ -92,6 +92,7 @@ struct FirstMainView: View {
                 HStack {
                     Button {
                         isShowingSecondView = true
+                        fatalError()
                     } label: {
                         SystemImage("rectangle.righthalf.inset.fill", size: 24)
 //                            .foregroundColor(colorScheme == .dark ? .cream : .black)
