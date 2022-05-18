@@ -175,8 +175,6 @@ struct FirstMainView: View {
                                                     .foregroundColor(.black)
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
-//                                            .tint()
-//                                            .tint(colorScheme == .dark ? Color(red: 255, green: 255, blue: 0) : Color.lightSwipeBtn1)
                                         }
                                 }
                                 else {
@@ -269,10 +267,9 @@ struct FirstMainView: View {
                                                 newFolderName = ""
                                             } label: {
                                                 SystemImage("folder.badge.plus")
-//                                                    .foregroundColor(.black)
+                                                    .foregroundColor(.black)
                                             }
-//                                            .tint(Color.lightSwipeBtn1)
-                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
+                    .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
                                 } else {
                                     DynamicFolderCell(

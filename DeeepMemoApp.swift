@@ -14,7 +14,6 @@ struct DeeepMemoApp: App {
     let persistenceController = PersistenceController.shared
     @Environment(\.scenePhase) var scenePhase
     
-//    @AppStorage("isFirstLaunch") var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
     
@@ -24,40 +23,47 @@ struct DeeepMemoApp: App {
     let memoOrder = MemoOrder()
     let messageVM = MessageViewModel()
     
+    private func removeDuplicateFolder(of type: FolderTypeEnum, from folders: [Folder]) {
+        
+        var topMainFolders = folders.filter { $0.parent == nil && FolderType.compareName($0.title, with: type)}
+        
+        if topMainFolders.count > 1 {
+            print("numOfTopFolders: \(topMainFolders.count), type: \(type)")
+            topMainFolders = topMainFolders.sorted { $0.creationDate < $1.creationDate }
+            let target = topMainFolders.remove(at: 0)
+            
+            if type != .trashbin {
+                
+                for source in topMainFolders {
+                    Folder.relocateAll(from: source, to: target)
+                    Folder.deleteWithoutUpdate(source)
+                }
+            } else { // type is trashbin ..
+                for dummyTrashFolder in topMainFolders {
+                    Folder.deleteWithoutUpdate(dummyTrashFolder)
+                }
+            }
+        }
+    }
+    
+    
     var body: some Scene {
         print("isFirstLaunch: \(isFirstLaunch)")
-
-
-////         For testing
-//        // for Dev
+//        isFirstLaunch = true
         
-//        let foldersReq = Folder.fetch(.all)
-//
-//       if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
-////           _ = folders.map {
-////               print("Folder name to be deleted: \($0.title)")
-////               Folder.delete($0)}
-////           persistenceController.container.viewContext.saveCoreData()
-//           folders.forEach { folder in
-//               print("Folder name to be deleted: \(folder.title)")
-//               Folder.delete(folder)}
-//           }
-//        persistenceController.container.viewContext.saveCoreData()
-//
-//
-//        if !isFirstLaunch {
-//            let newFolders = Folder.provideInitialFolders(context: persistenceController.container.viewContext)
-//            persistenceController.container.viewContext.saveCoreData()
-//            print("newFolders: \(newFolders)")
-//            isFirstLaunch = false
-//        }
+        // Resolving Duplicate Folder Prob
+        let foldersReq = Folder.fetch(.all)
+        
+        if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
+            print("all Folders: ")
+            folders.forEach { print($0.title) }
+            print("all Folders printed !")
             
-        //            // For Product
-        // how do i.. know..?
-        
-        // two steps for not providing more folders than 3
-        
-        
+            for eachType in FolderTypeEnum.allCases {
+                removeDuplicateFolder(of: eachType, from: folders)
+            }
+            persistenceController.container.viewContext.saveCoreData()
+        }
         
         if isFirstLaunch {
             let folderReq = Folder.fetch(.all)
@@ -89,6 +95,7 @@ struct DeeepMemoApp: App {
 //            persistenceController.container.viewContext.saveCoreData()
             print("no newFolders. it's not first launch! ")
         }
+        
         
         
         

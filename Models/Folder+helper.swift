@@ -14,7 +14,7 @@ protocol Archive: Folder {
     var isArchive: Bool { get }
 }
 
-enum FolderTypeEnum {
+enum FolderTypeEnum: CaseIterable {
     case folder
     case archive
     case trashbin
@@ -90,7 +90,6 @@ struct FolderType {
         
         return false
     }
-    
 }
 
 
@@ -246,6 +245,17 @@ extension Folder {
         }
     }
     
+    static func deleteWithoutUpdate(_ folder: Folder) {
+        
+        if let context = folder.managedObjectContext {
+            context.delete(folder)
+            context.saveCoreData()
+        }
+    }
+    
+    
+    
+    
     static func moveMemosToTrashAndDelete(from folder: Folder, to trash: Folder) {
         folder.memos.forEach { $0.folder = trash }
         if let context = folder.managedObjectContext {
@@ -263,6 +273,15 @@ extension Folder {
         }
 
         context.saveCoreData()
+    }
+    
+    static func relocateAll(from source: Folder, to target: Folder ) {
+        source.subfolders.forEach {
+            $0.parent = target
+        }
+        source.memos.forEach {
+            $0.folder = target
+        }
     }
     
     
@@ -568,7 +587,7 @@ extension Folder : Comparable {
 extension Folder {
     
     static func provideInitialFolders(context: NSManagedObjectContext) -> [Folder] {
-        
+        print("provideInitialFolder triggered!!!!!!!!")
         let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
         
 //        context.saveCoreData()

@@ -96,8 +96,6 @@ struct TrashFolderView: View {
                         }
                     } // end of main VStack
                     .environmentObject(trashBinVM)
-                    
-                    
                 } // end of scrollView
             } // end of VStack
             .padding(.top, 7)
