@@ -84,17 +84,18 @@ struct DeeepMemoApp: App {
             isFirstLaunch = false
             isFirstAfterBookmarkUpdate = false
             
-        } else {
-            let folderReq = Folder.fetch(.all)
-            if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
-                folders.forEach {
-                    print("folder Name: \($0.title)")
-                }
-            }
-//            let newFolder = Folder.provideInitialFolder(context: persistenceController.container.viewContext)
-//            persistenceController.container.viewContext.saveCoreData()
-            print("no newFolders. it's not first launch! ")
         }
+//        else {
+//            let folderReq = Folder.fetch(.all)
+//            if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
+//                folders.forEach {
+//                    print("folder Name: \($0.title)")
+//                }
+//            }
+////            let newFolder = Folder.provideInitialFolder(context: persistenceController.container.viewContext)
+////            persistenceController.container.viewContext.saveCoreData()
+//            print("no newFolders. it's not first launch! ")
+//        }
         
         
         
