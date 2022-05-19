@@ -66,6 +66,7 @@ struct DeeepMemoApp: App {
         }
         
         if isFirstLaunch {
+            print("isFirstLaunch is true !! flaggggggggg !!!!")
             let folderReq = Folder.fetch(.all)
 
             if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
