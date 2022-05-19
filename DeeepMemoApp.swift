@@ -54,16 +54,7 @@ struct DeeepMemoApp: App {
         // Resolving Duplicate Folder Prob
         let foldersReq = Folder.fetch(.all)
         
-        if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
-            print("all Folders: ")
-            folders.forEach { print($0.title) }
-            print("all Folders printed !")
-            
-            for eachType in FolderTypeEnum.allCases {
-                removeDuplicateFolder(of: eachType, from: folders)
-            }
-            persistenceController.container.viewContext.saveCoreData()
-        }
+        
         
         if isFirstLaunch {
 //            print("isFirstLaunch is true !! flaggggggggg !!!!")
@@ -98,6 +89,16 @@ struct DeeepMemoApp: App {
 //            print("no newFolders. it's not first launch! ")
 //        }
         
+        if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
+            print("all Folders: ")
+            folders.forEach { print($0.title) }
+            print("all Folders printed !")
+            
+            for eachType in FolderTypeEnum.allCases {
+                removeDuplicateFolder(of: eachType, from: folders)
+            }
+            persistenceController.container.viewContext.saveCoreData()
+        }
         
         
         

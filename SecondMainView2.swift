@@ -12,14 +12,12 @@ struct SecondMainView2: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
-    //    @Environment(\.presentationMode) var presentationMode
     @AppStorage(AppStorageKeys.pinState) var pinState = true
     @AppStorage(AppStorageKeys.inFolderOrder) var inFolderOrder = true
     @AppStorage(AppStorageKeys.isHidingArchive) var isHidingArchive = true
     
     @AppStorage(AppStorageKeys.mOrderType) var mOrderType = OrderType.modificationDate
     @AppStorage(AppStorageKeys.mOrderAsc) var mOrderAsc = false
-//    @Environment()
     
     @State var red = 0.0
     @State var green = 0.0

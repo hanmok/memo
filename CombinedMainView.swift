@@ -99,25 +99,25 @@ struct CombinedMainView: View {
             VStack(spacing: 0) {
                 
                 
-//                // MARK: - TOP toggle Bar
-//                HStack {
-//
-//                    Button {
-//                        move(toMemoList: true)
-//                    } label: {
-//                        SystemImage("circle.fill")
-//                    }.frame(width: UIScreen.screenWidth / 2)
-//
-//                    Button {
-//                        move(toMemoList: false)
-//                    } label: {
-//                        SystemImage("folder")
-//                    }.frame(width: UIScreen.screenWidth / 2)
-//
-//                }
-//                .frame(height: 50)
-//                .background(Color.black)
-//                .padding(.bottom, 10)
+                //                // MARK: - TOP toggle Bar
+                //                HStack {
+                //
+                //                    Button {
+                //                        move(toMemoList: true)
+                //                    } label: {
+                //                        SystemImage("circle.fill")
+                //                    }.frame(width: UIScreen.screenWidth / 2)
+                //
+                //                    Button {
+                //                        move(toMemoList: false)
+                //                    } label: {
+                //                        SystemImage("folder")
+                //                    }.frame(width: UIScreen.screenWidth / 2)
+                //
+                //                }
+                //                .frame(height: 50)
+                //                .background(Color.black)
+                //                .padding(.bottom, 10)
                 
                 
                 
@@ -167,199 +167,186 @@ struct CombinedMainView: View {
                         .padding(.top, 3)
                         
                         
-//                        Form {
+                        //                        Form {
                         List {
                             Section(header: Text("Main Folder")) {
-                            ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
-                                
-                                if folderWithLevel.folder.parent == nil {
-                                    DynamicTopFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
-                                    .environmentObject(folderEditVM)
-                                    .environmentObject(trashBinVM)
-                                    // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            isShowingTextField = true
-                                            textFieldType = .newSubFolder
-                                            newFolderName = ""
-                                        } label: {
-                                            SystemImage("folder.badge.plus")
-                                                .foregroundColor(.black)
-                                        }
-                                        .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
-                                    }
-                                }
-                                else {
-                                    DynamicFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
-                                    .environmentObject(folderEditVM)
-                                    .environmentObject(trashBinVM)
-                                    //                                        .listRowBackground(Color.blue)
-                                    // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            isShowingTextField = true
-                                            textFieldType = .newSubFolder
-                                            newFolderName = ""
-                                        } label: {
-                                            SystemImage("folder.badge.plus")
-                                                .foregroundColor(.black)
-                                        }
-                                        .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
-                                    }
-                                    // Change Folder Name
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        
-                                        Button {
-                                            folderEditVM.folderToRemove = folderWithLevel.folder
-                                            isLoading = true
-                                            deleteFolder()
-                                        } label: {
-                                            SystemImage("trash")
-                                        }
-                                        .tint(.red)
-                                        
-                                        
-                                        // RELOCATE FOLDER
-                                        Button {
-                                            UIView.setAnimationsEnabled(false)
-                                            folderEditVM.shouldShowSelectingView = true
-                                            folderEditVM.folderToCut = folderWithLevel.folder
-                                        } label: {
-                                            SystemImage("folder")
-                                        }
-                                        //                                            .tint(Color.swipeBtnColor2)
-                                        .tint(Color.lightSwipeBtn2)
-                                        //                                            .tint(Color(rgba: 0x14A7FA))
-                                        //                                            .tint(Color(red: 100, green: 100, blue: 230))
-                                        //                                            .tint(Color(red: 81, green: 176, blue: 255))
-                                        
-                                        Button {
-                                            if folderWithLevel.folder.parent != nil {
-                                                isShowingTextField = true
-                                                textFieldType = .rename
-                                                folderToBeRenamed = folderWithLevel.folder
-                                                newFolderName = folderWithLevel.folder.title
-                                            }
-                                        } label: {
-                                            SystemImage("pencil")
-                                        }
-                                        .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
-                                        
-                                    }
-                                } // end of ForEach
-                            }
-                        }
-                        
-                        
-                        // MARK: - Archive, Trashbin
-                        // Another ZStack Element
-                        //                    VStack {
-//                        List {
-                        Section(header: Text("Archive, TrashBin")) {
-                            ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
-                                if folderWithLevel.folder.parent == nil {
-                                    DynamicTopFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
-                                    .environmentObject(folderEditVM)
-                                    // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            isShowingTextField = true
-                                            textFieldType = .newSubFolder
-                                            newFolderName = ""
-                                        } label: {
-                                            SystemImage("folder.badge.plus")
-                                                .foregroundColor(.black)
-                                        }
-                                        .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
-                                    }
-                                } else {
-                                    DynamicFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
-                                    .environmentObject(folderEditVM)
+                                ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
                                     
-                                    // ADD Sub Folder
-                                    .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                                        Button {
-                                            folderToAddSubFolder = folderWithLevel.folder
-                                            isShowingTextField = true
-                                            textFieldType = .newSubFolder
-                                            newFolderName = ""
-                                        } label: {
-                                            SystemImage("folder.badge.plus")
+                                    if folderWithLevel.folder.parent == nil {
+                                        DynamicTopFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
+                                        .environmentObject(folderEditVM)
+                                        .environmentObject(trashBinVM)
+                                        // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
+                                                isShowingTextField = true
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage("folder.badge.plus")
+                                                    .foregroundColor(.black)
+                                            }
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
+                                        }
+                                    }
+                                    else {
+                                        DynamicFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
+                                        .environmentObject(folderEditVM)
+                                        .environmentObject(trashBinVM)
+                                        //                                        .listRowBackground(Color.blue)
+                                        // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
+                                                isShowingTextField = true
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage("folder.badge.plus")
+                                                    .foregroundColor(.black)
+                                            }
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
+                                        }
+                                        // Change Folder Name
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                            
+                                            Button {
+                                                folderEditVM.folderToRemove = folderWithLevel.folder
+                                                isLoading = true
+                                                deleteFolder()
+                                            } label: {
+                                                SystemImage("trash")
+                                            }
+                                            .tint(.red)
+                                            
+                                            
+                                            // RELOCATE FOLDER
+                                            Button {
+                                                UIView.setAnimationsEnabled(false)
+                                                folderEditVM.shouldShowSelectingView = true
+                                                folderEditVM.folderToCut = folderWithLevel.folder
+                                            } label: {
+                                                SystemImage("folder")
+                                            }
+                                            //                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn2)
+                                            //                                            .tint(Color(rgba: 0x14A7FA))
+                                            //                                            .tint(Color(red: 100, green: 100, blue: 230))
+                                            //                                            .tint(Color(red: 81, green: 176, blue: 255))
+                                            
+                                            Button {
+                                                if folderWithLevel.folder.parent != nil {
+                                                    isShowingTextField = true
+                                                    textFieldType = .rename
+                                                    folderToBeRenamed = folderWithLevel.folder
+                                                    newFolderName = folderWithLevel.folder.title
+                                                }
+                                            } label: {
+                                                SystemImage("pencil")
+                                            }
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                             
                                         }
-                                        //                                            .tint(Color.lightSwipeBtn1)
-                                        .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
-                                        
-                                    }
-                                    // Change Folder Name
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        // DELETE FOLDER
-                                        Button {
-                                            folderEditVM.folderToRemove = folderWithLevel.folder
-                                            deleteFolder()
-                                        } label: {
-                                            SystemImage("trash")
-                                        }
-                                        .tint(.red)
-                                        
-                                        
-                                        // RELOCATE FOLDER
-                                        Button {
-                                            UIView.setAnimationsEnabled(false)
-                                            folderEditVM.shouldShowSelectingView = true
-                                            folderEditVM.folderToCut = folderWithLevel.folder
-                                        } label: {
-                                            SystemImage("folder")
-                                        }
-                                        //                                            .tint(Color.swipeBtnColor2)
-                                        .tint(Color.lightSwipeBtn2)
-                                        
-                                        Button {
-                                            if folderWithLevel.folder.parent != nil {
+                                    } // end of ForEach
+                                }
+                            }
+                            
+                            
+                            // MARK: - Archive, Trashbin
+                            // Another ZStack Element
+                            //                    VStack {
+                            //                        List {
+                            Section(header: Text("Archive, TrashBin")) {
+                                ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
+                                    if folderWithLevel.folder.parent == nil {
+                                        DynamicTopFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
+                                        .environmentObject(folderEditVM)
+                                        // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
                                                 isShowingTextField = true
-                                                textFieldType = .rename
-                                                folderToBeRenamed = folderWithLevel.folder
-                                                newFolderName = folderWithLevel.folder.title
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage("folder.badge.plus")
+                                                    .foregroundColor(.black)
                                             }
-                                        } label: {
-                                            SystemImage("pencil")
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
-                                        //                                            .tint(Color.swipeBtnColor2)
-                                        //                                            .tint(Color.lightSwipeBtn1)
-                                        .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
-                                    }
-                                } // end of Else Case
-                            } // end of ForEach
-                            TrashBinCell()
-                                .environmentObject(trashBinVM)
-//                        }// end of List
-                        }
+                                    } else {
+                                        DynamicFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
+                                        .environmentObject(folderEditVM)
+                                        
+                                        // ADD Sub Folder
+                                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                                            Button {
+                                                folderToAddSubFolder = folderWithLevel.folder
+                                                isShowingTextField = true
+                                                textFieldType = .newSubFolder
+                                                newFolderName = ""
+                                            } label: {
+                                                SystemImage("folder.badge.plus")
+                                                
+                                            }
+                                            //                                            .tint(Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
+                                            
+                                        }
+                                        // Change Folder Name
+                                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                            // DELETE FOLDER
+                                            Button {
+                                                folderEditVM.folderToRemove = folderWithLevel.folder
+                                                deleteFolder()
+                                            } label: {
+                                                SystemImage("trash")
+                                            }
+                                            .tint(.red)
+                                            
+                                            
+                                            // RELOCATE FOLDER
+                                            Button {
+                                                UIView.setAnimationsEnabled(false)
+                                                folderEditVM.shouldShowSelectingView = true
+                                                folderEditVM.folderToCut = folderWithLevel.folder
+                                            } label: {
+                                                SystemImage("folder")
+                                            }
+                                            //                                            .tint(Color.swipeBtnColor2)
+                                            .tint(Color.lightSwipeBtn2)
+                                            
+                                            Button {
+                                                if folderWithLevel.folder.parent != nil {
+                                                    isShowingTextField = true
+                                                    textFieldType = .rename
+                                                    folderToBeRenamed = folderWithLevel.folder
+                                                    newFolderName = folderWithLevel.folder.title
+                                                }
+                                            } label: {
+                                                SystemImage("pencil")
+                                            }
+                                            //                                            .tint(Color.swipeBtnColor2)
+                                            //                                            .tint(Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
+                                        }
+                                    } // end of Else Case
+                                } // end of ForEach
+                                TrashBinCell()
+                                    .environmentObject(trashBinVM)
+                                //                        }// end of List
+                            }
                         }
                         .listStyle(InsetGroupedListStyle())
-//                        }
-                        // to here
-//                        EmptyView()
-//                            .frame(height: 250)
-                        //                    } // end of VStack
-                        //                    .offset(x: selectionEnum == .folder ? UIScreen.screenWidth : 0)
-                        //                    .animation(.easeOut.speed(1.5), value: selectionEnum == .folder )
-                        // Archive, trashbin ended
-                        
-                        //                } // end of ZStack
-                        //                .padding(.horizontal, Sizes.overallPadding)
-                        
-                        
                     } // end of VStack , Inside ZStack.
                     .onAppear {
                         UITableView.appearance().backgroundColor = .clear
@@ -375,15 +362,15 @@ struct CombinedMainView: View {
                             }
                             .padding([ .trailing], Sizes.overallPadding)
                             .padding(.bottom, 20)
-//                            .padding(.bottom, )
+                            //                            .padding(.bottom, )
                         }
                     }
                     
                     // another element of ZStack
                     // umm... relocated left
                     SecondMainView2(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-                                   currentFolder: fastFolderWithLevelGroup.homeFolder,
-                                   isShowingSecondView: $isShowingSecondView)
+                                    currentFolder: fastFolderWithLevelGroup.homeFolder,
+                                    isShowingSecondView: $isShowingSecondView)
                     .environmentObject(trashBinVM)
                     .offset(x: -UIScreen.screenWidth)
                     
@@ -466,83 +453,84 @@ struct CombinedMainView: View {
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
                 
                 // another VStack Element ... ;;;
-               Spacer()
-                    // MARK: - TOP toggle Bar
-                  
-                       
-                        HStack {
-                            Button {
-                                move(toMemoList: true)
-                            } label: {
-                                SystemImage(isShowingSecondView ? "rectangle.split.3x1.fill" : "rectangle.split.3x1", size: 24)
-                                    .rotationEffect(.degrees(90))
-                                    .scaleEffect(CGSize(width: 1, height: 0.8))
-                            }.frame(width: UIScreen.screenWidth / 2)
-                            
-                            Button {
-                                move(toMemoList: false)
-                            } label: {
-                                SystemImage(isShowingSecondView ?  "folder" : "folder.fill", size: 24)
-                            }.frame(width: UIScreen.screenWidth / 2)
-                        }
-                        .frame(height: 70)
-                        .background(Color.black)
-                        .padding(.bottom, 10)
+                Spacer()
+                // MARK: - Main Tab Bar, 이거를 ... SecondView2 에도 넣어줘야 하겠는데 ..? 
+                
+                
+                HStack {
+                    Button {
+                        move(toMemoList: true)
+                    } label: {
+                        SystemImage(isShowingSecondView ? "rectangle.split.3x1.fill" : "rectangle.split.3x1", size: 24)
+                            .rotationEffect(.degrees(90))
+                            .scaleEffect(CGSize(width: 1, height: 0.8))
+                    }.frame(width: UIScreen.screenWidth / 2)
+                    
+                    Button {
+                        move(toMemoList: false)
+                    } label: {
+                        SystemImage(isShowingSecondView ?  "folder" : "folder.fill", size: 24)
+                    }.frame(width: UIScreen.screenWidth / 2)
+                }
+                .frame(height: 70)
+                .background(Color.black)
+                .padding(.bottom, 10)
+                //                        .offset(y: isAddingMemo ? 70 : 0)
+                //                        .animation(.spring(), value: isAddingMemo)
             }
             .ignoresSafeArea(edges: .bottom)
-
-                
-                .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
-                    NavigationView {
-                        SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-                                            selectionEnum: selectionEnum,
-                                            //                                    msgToShow: $msgToShow,
-                                            invalidFolderWithLevels:
-                                                Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
-                                            isFullScreen: true)
-                        .environmentObject(folderEditVM)
-                    }
-                })
-                .alert(LocalizedStringStorage.bookmarkRemovingUpdateAlert, isPresented:
-                        Binding<Bool>(get: {return !isFirstLaunch && isFirstAfterBookmarkUpdate},
-                                      set: { _ in } ),
-                       actions: {
-                    
-                    Button(role: .none) {
-                        
-                        // Make All bookmarked pinned
-                        let allMemos = Memo.fetchAllmemos(context: context)
-                        allMemos.filter { $0.isBookMarked }.forEach{ $0.isPinned = true}
-                        
-                        
-                        DispatchQueue.main.async {
-                            isLoading = true
-                        }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            isLoading = false
-                            messageVM.message = LocalizedStringStorage.completed
-                        }
-                        
-                        isFirstAfterBookmarkUpdate = false
-                        
-                    } label: {
-                        Text(LocalizedStringStorage.done)
-                    }
-                    
-                    Button(role: .cancel ) {
-                        isFirstAfterBookmarkUpdate = false
-                    } label: {
-                        Text(LocalizedStringStorage.cancel)
-                    }
-                })
-                .onChange(of: scenePhase) { newScenePhase in
-                    if newScenePhase == .background {
-                        print("isFirstScreenSecondView has updated to \(isShowingSecondView)")
-                        isFirstScreenSecondView = isShowingSecondView
-                    }
+            
+            
+            .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
+                NavigationView {
+                    SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
+                                        selectionEnum: selectionEnum,
+                                        //                                    msgToShow: $msgToShow,
+                                        invalidFolderWithLevels:
+                                            Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
+                                        isFullScreen: true)
+                    .environmentObject(folderEditVM)
                 }
-                .navigationBarHidden(true)
+            })
+            .alert(LocalizedStringStorage.bookmarkRemovingUpdateAlert, isPresented:
+                    Binding<Bool>(get: {return !isFirstLaunch && isFirstAfterBookmarkUpdate},
+                                  set: { _ in } ),
+                   actions: {
+                
+                Button(role: .none) {
+                    
+                    // Make All bookmarked pinned
+                    let allMemos = Memo.fetchAllmemos(context: context)
+                    allMemos.filter { $0.isBookMarked }.forEach{ $0.isPinned = true}
+                    
+                    
+                    DispatchQueue.main.async {
+                        isLoading = true
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        isLoading = false
+                        messageVM.message = LocalizedStringStorage.completed
+                    }
+                    
+                    isFirstAfterBookmarkUpdate = false
+                    
+                } label: {
+                    Text(LocalizedStringStorage.done)
+                }
+                
+                Button(role: .cancel ) {
+                    isFirstAfterBookmarkUpdate = false
+                } label: {
+                    Text(LocalizedStringStorage.cancel)
+                }
+            })
+            .onChange(of: scenePhase) { newScenePhase in
+                if newScenePhase == .background {
+                    print("isFirstScreenSecondView has updated to \(isShowingSecondView)")
+                    isFirstScreenSecondView = isShowingSecondView
+                }
             }
+            .navigationBarHidden(true)
         }
     }
-
+}
