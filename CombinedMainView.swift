@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct CombinedMainView: View {
-    //    typealias Body = <#type#>
-    
     
     @AppStorage(AppStorageKeys.isFirstLaunch) var isFirstLaunch = true
     @AppStorage(AppStorageKeys.isFirstLaunchAfterBookmarkUpdate) var isFirstAfterBookmarkUpdate = true
@@ -97,31 +95,6 @@ struct CombinedMainView: View {
                 .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                
-                
-                //                // MARK: - TOP toggle Bar
-                //                HStack {
-                //
-                //                    Button {
-                //                        move(toMemoList: true)
-                //                    } label: {
-                //                        SystemImage("circle.fill")
-                //                    }.frame(width: UIScreen.screenWidth / 2)
-                //
-                //                    Button {
-                //                        move(toMemoList: false)
-                //                    } label: {
-                //                        SystemImage("folder")
-                //                    }.frame(width: UIScreen.screenWidth / 2)
-                //
-                //                }
-                //                .frame(height: 50)
-                //                .background(Color.black)
-                //                .padding(.bottom, 10)
-                
-                
-                
-                
                 
                 // MARK: - Start
                 
@@ -453,8 +426,9 @@ struct CombinedMainView: View {
                 .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
                 
                 // another VStack Element ... ;;;
-                Spacer()
-                // MARK: - Main Tab Bar, 이거를 ... SecondView2 에도 넣어줘야 하겠는데 ..? 
+                // 굳이 필요 없나보네 ?
+//                Spacer()
+                // MARK: - Main Tab Bar, 이거를 ... SecondView2 에도 넣어줘야 하겠는데 ..?
                 
                 
                 HStack {
@@ -472,7 +446,7 @@ struct CombinedMainView: View {
                         SystemImage(isShowingSecondView ?  "folder" : "folder.fill", size: 24)
                     }.frame(width: UIScreen.screenWidth / 2)
                 }
-                .frame(height: 70)
+                .frame(height: 60)
                 .background(Color.black)
                 .padding(.bottom, 10)
                 //                        .offset(y: isAddingMemo ? 70 : 0)

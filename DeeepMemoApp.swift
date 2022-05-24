@@ -72,7 +72,7 @@ struct DeeepMemoApp: App {
                     print("newFolders: \(newFolders.count)")
                 }
             }
-
+    
             isFirstLaunch = false
             isFirstAfterBookmarkUpdate = false
             

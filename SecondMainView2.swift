@@ -153,8 +153,10 @@ struct SecondMainView2: View {
     var dividerBetweenPin: some View {
         Rectangle()
             .frame(height: 1)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+//            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(width: UIScreen.screenWidth, alignment: .leading)
+//            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
+            .foregroundColor(Color(.sRGB, white: 0.5, opacity: 0.5))
             .padding(.vertical, 5)
     }
 
@@ -249,6 +251,7 @@ struct SecondMainView2: View {
                         .padding(.leading, 5)
                     }
                     .padding(.horizontal, 20)
+                    .padding(.bottom, 10)
                     
                     
                     ZStack {
@@ -350,9 +353,9 @@ struct SecondMainView2: View {
                                             .frame(maxWidth: .infinity, alignment: .center)
                                     }
                                 }
-                            }
+                            } // end of VStack (inside ScrollView)
                             Rectangle()
-                                .frame(height: 50)
+                                .frame(height: 100)
                                 .foregroundColor(.clear)
                         } // end of ScrollView
                         .gesture(scroll)
