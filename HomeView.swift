@@ -23,6 +23,7 @@ struct HomeView: View {
         return NavigationView {
 //            FirstMainView(
             CombinedMainView(
+//            MainTabView()
                 fastFolderWithLevelGroup:
                     FastFolderWithLevelGroup(
                         homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!, // found nil here .. Why... ??

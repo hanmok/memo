@@ -1,0 +1,8 @@
+
+화면 움직이는게 이상해
+
+1. 처음 켰을 때는 MainTabBar 의 BG 색상이 나오지 않음.
+2. TabBar 를 눌렀을 때 위에 큰 빈공간이 생김. (Title 이 있는 Navigation Bar 크기 정도)
+3. Navigation 을 통해 어디로 다녀오면, 이상적인 모양으로 됨.
+4. ㅅㅂ
+

@@ -47,9 +47,6 @@ struct CombinedMainView: View {
     
     @State var isAddingMemo = false
     
-    @State var red = 0.0
-    @State var green = 0.0
-    @State var blue = 0.0
     
     //    @State var msgToShow: String?
     

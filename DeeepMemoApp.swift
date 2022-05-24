@@ -103,7 +103,8 @@ struct DeeepMemoApp: App {
         
         
         return WindowGroup {
-            HomeView()
+//            HomeView()
+            MainTabView()
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .environmentObject(memoEditVM)
             .environmentObject(folderEditVM)
