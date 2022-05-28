@@ -1,0 +1,33 @@
+
+화면 움직이는게 이상해
+
+1. 처음 켰을 때는 MainTabBar 의 BG 색상이 나오지 않음. 고침.
+2. TabBar 를 눌렀을 때 위에 큰 빈공간이 생김. (Title 이 있는 Navigation Bar 크기 정도)
+3. Navigation 을 통해 어디로 다녀오면, 이상적인 모양으로 됨. 고침.
+4. ㅅㅂ ㅠㅠ
+
+5. Plus Button 위치 다름 ;; 어디로 맞춰야하나 ?? 우선, SecondView 에 모두 맞춰보자. 대충 ㅇㅋ
+
+6. FolderView 내에서, Memo 추가시 튕겨버림.. (First, Second) View 모두. 이거 너무 Critical ㅋㅋㅋㅋㅋ 완료
+
+7. Message 안나옴. 매우 이상하게 나옴.. ;; 보류
+8. TabBar icon 수정. ??? 이거 어떻게 함.. 대충 일단 함.
+9. 폴더 옮길 때 화면 ;; ( SelectingFolderView ) 완료
+
+
+음... 그.. Second Tab View 내에서 Plus Button 과 List 사이의 Spacing 을 어떻게 주지 ?? 왜 안되지 ??  완료
+
+
+10. Navigation Button Alignment 완료
+
+
+First, Second Tab View 의 Nav 가 차지하는 공간이 다르다  완료.
+
+
+
+.. Light Mode 에서, Load 됐을 경우 MainTabBar Color 가 이상함..
+
+
+
+음.. 가장 처음에, 왜 ;; Color 가 제대로 안나올까 ? 
+7. Message 안나옴. 매우 이상하게 나옴.. ;; 보류

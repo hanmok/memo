@@ -97,3 +97,18 @@ struct SystemImage: View {
             .frame(width: size, height: size)
     }
 }
+
+
+struct CustomImage: View {
+    
+    var body: some View {
+    return Image(systemName: "rectangle.split.3x1")
+            .renderingMode(.template)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 20, height: 20)
+        .rotationEffect(.degrees(90))
+//        .symbolRenderingMode(.template)
+        
+    }
+}

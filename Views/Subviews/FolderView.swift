@@ -71,7 +71,9 @@ struct FolderView: View {
             return Memo.sortMemos(memos: currentFolder.memos.sorted())
         }
         
-        return ZStack {
+        return NavigationView {
+            ZStack {
+//        return ZStack {
             
 //            Color(.newBGForDark)
             Color(colorScheme == .dark ? .newBGForDark : .white)
@@ -251,6 +253,9 @@ struct FolderView: View {
 
             }
         } // end of ZStack
+            .navigationBarHidden(true)
+            .navigationBarTitle(Text(""))
+    } // end of NavigationView 
         .frame(maxHeight: .infinity)
         
 

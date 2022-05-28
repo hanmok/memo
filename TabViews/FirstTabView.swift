@@ -7,8 +7,8 @@
 
 import SwiftUI
 import CoreData
-
-struct SecondMainView: View {
+/// Memo List
+struct FirstTabView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
@@ -30,13 +30,13 @@ struct SecondMainView: View {
     @ObservedObject var currentFolder: Folder
     
     @EnvironmentObject var memoEditVM: MemoEditViewModel
-    
+    @EnvironmentObject var trashBinVM: TrashBinViewModel
     @GestureState var isScrolled = false
     
     @FocusState var focusState: Bool
     
     @StateObject var dragVM = DraggableViewModel()
-    @Binding var isShowingSecondView: Bool
+//    @Binding var isShowingSecondView: Bool
     
     
     @State var searchKeyword = ""
@@ -94,12 +94,13 @@ struct SecondMainView: View {
     
     
     init(fastFolderWithLevelGroup: FastFolderWithLevelGroup,
-         currentFolder: Folder,
-         isShowingSecondView: Binding<Bool>
+         currentFolder: Folder
+         
+//         ,isShowingSecondView: Binding<Bool>
     ) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
         self.currentFolder = currentFolder
-        _isShowingSecondView = isShowingSecondView
+//        _isShowingSecondView = isShowingSecondView
     }
     
     func returnMatchedMemos(targetFolders: [Folder], keyword: String) ->  [NestedMemo] {
@@ -178,23 +179,14 @@ struct SecondMainView: View {
             }
         }
         
-        return NavigationView {
+//        return NavigationView {
             
-            ZStack {
+//            return
+//        ZStack {
+        return ZStack {
                 VStack(alignment: .leading, spacing: 0) {
                     // MARK: - Nav Location
                     HStack {
-                        Button {
-                            memoEditVM.initSelectedMemos()
-                            isShowingSecondView = false
-                            focusState = false
-                            searchKeyword = ""
-                        } label: {
-                            SystemImage("rectangle.lefthalf.inset.fill", size: 24)
-//                                .foregroundColor(colorScheme == .dark ? .cream : .black)
-                                .foregroundColor(colorScheme == .dark ? Color.navColorForDark : Color.navColorForLight)
-                        }
-                        
                         
                         // Search TextField
                         HStack(spacing: 0) {
@@ -235,6 +227,7 @@ struct SecondMainView: View {
                         .overlay(RoundedRectangle(cornerRadius: 10)
                             .stroke(colorScheme == .dark ? Color.white : Color.clear))
                         .padding(.horizontal, 10)
+//                        .padding(.leading, 10)
                         
                         // End of Search TextField
                         Spacer()
@@ -242,14 +235,20 @@ struct SecondMainView: View {
                         
                         
                         OrderingMenuInSecondView()
+//                            .padding(.horizontal)
+                            .padding(.trailing, 8)
                         
                         EllipseInSecondView(
                             pinState: $pinState,
                             inFolderOrder: $inFolderOrder,
                             isHidingArchive: $isHidingArchive)
-                        .padding(.leading, 5)
+//                        .padding(.leading, 5)
+                        
                     }
+                    .padding(.bottom)
                     .padding(.horizontal, 20)
+//                    .padding(.leading, 20)
+//                    .padding(.trailing, 14)
                     
                     
                     ZStack {
@@ -271,7 +270,6 @@ struct SecondMainView: View {
                                             }
                                             
                                             dividerBetweenPin
-                                        
                                         }
                                         
                                         // MARK: - Show UnPinned Memos Next
@@ -282,6 +280,7 @@ struct SecondMainView: View {
                                                     Section(header:
                                                                 NavigationLink(destination: {
                                                         FolderView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
+                                                            .environmentObject(trashBinVM)
                                                     }, label: {
                                                         HStack {
                                                             HierarchyLabelView(currentFolder: unpinnedMemoArray.memos.first!.folder!)
@@ -319,6 +318,7 @@ struct SecondMainView: View {
                                                     Section(header:
                                                                 NavigationLink(destination: {
                                                         FolderView(currentFolder: memoArray.memos.first!.folder!)
+                                                            .environmentObject(trashBinVM)
                                                     }, label: {
                                                         HStack {
                                                             HierarchyLabelView(currentFolder: memoArray.memos.first!.folder!)
@@ -353,7 +353,7 @@ struct SecondMainView: View {
                                 }
                             }
                             Rectangle()
-                                .frame(height: 50)
+                                .frame(height: 100)
                                 .foregroundColor(.clear)
                         } // end of ScrollView
                         .gesture(scroll)
@@ -389,6 +389,7 @@ struct SecondMainView: View {
                                 .animation(.spring(), value: memoEditVM.isSelectionMode)
                         )
                         .padding(.horizontal, Sizes.overallPadding)
+                        .padding(.bottom, 15)
                         .offset(y: focusState ? UIScreen.screenHeight : 0)
                         .animation(.spring().speed(0.5), value: focusState)
                     } // End Of ZStack
@@ -429,8 +430,8 @@ struct SecondMainView: View {
                 focusState = false
             }
             .navigationBarHidden(true)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
+//        } // end of NavigationView
+//        .navigationViewStyle(StackNavigationViewStyle())
 //        .padding(.horizontal, Sizes.overallPadding)
     }
 }
@@ -458,49 +459,5 @@ struct SecondMainView: View {
 //    }
 //}
 
-struct OrderingMenuInSecondView: View {
-    @Environment(\.colorScheme) var colorScheme
-
-    var body: some View {
-
-        Menu {
-
-            FolderOrderingMenuInSecondView()
-            
-            MemoOrderingMenuInSecondView()
-
-        } label: {
-            SystemImage("arrow.up.arrow.down")
-                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
-        }
-    }
-}
 
 
-
-struct EllipseInSecondView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
-    @Binding var pinState: Bool
-    @Binding var inFolderOrder: Bool
-    @Binding var isHidingArchive: Bool
-
-    var body: some View {
-
-        Menu {
-            Toggle(isOn: $pinState) {
-                Text(LocalizedStringStorage.pinOnTheTop)
-            }
-            Toggle(isOn: $inFolderOrder) {
-                Text(LocalizedStringStorage.inFolderOrder)
-            }
-            Toggle(isOn: $isHidingArchive) {
-                Text(LocalizedStringStorage.hideArchive)
-            }
-        } label: {
-            SystemImage("ellipsis").rotationEffect(.degrees(90))
-                .scaleEffect(CGSize(width: 1, height: 0.9))
-                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
-        }
-    }
-}

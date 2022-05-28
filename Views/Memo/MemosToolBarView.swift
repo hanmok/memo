@@ -118,7 +118,8 @@ struct MemosToolBarView: View {
             Button(action: {
                 showSelectingFolderView = true
             }) {
-                UnchangeableImage(imageSystemName: "folder")
+//                UnchangeableImage(imageSystemName: "folder")
+                UnchangeableImage(imageSystemName: "arrowshape.turn.up.right")
 //                ChangeableImage(imageSystemName: "folder")
 //                ImageWithColor(darkModeColor: .white, imageSystemName: "folder")
 //                ChangeableImage2(imageSystemName: "folder")

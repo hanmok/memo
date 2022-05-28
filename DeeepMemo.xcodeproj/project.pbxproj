@@ -29,6 +29,12 @@
 		9A365A2927EBA841003D4C77 /* DraggableMemoBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */; };
 		9A365A2B27EBAD48003D4C77 /* DragRefactoring3.24 in Resources */ = {isa = PBXBuildFile; fileRef = 9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */; };
 		9A365A2D27EC0C83003D4C77 /* UpdatingSecondView in Resources */ = {isa = PBXBuildFile; fileRef = 9A365A2C27EC0C83003D4C77 /* UpdatingSecondView */; };
+		9A7545B52836897000558CA7 /* CombinedMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7545B42836897000558CA7 /* CombinedMainView.swift */; };
+		9A7545B72836996100558CA7 /* SecondMainView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7545B62836996100558CA7 /* SecondMainView2.swift */; };
+		9A7545DB283D48B500558CA7 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7545DA283D48B500558CA7 /* MainTabView.swift */; };
+		9A7545DD283D4B2400558CA7 /* SecondTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7545DC283D4B2400558CA7 /* SecondTabView.swift */; };
+		9A7545DF283D4B4800558CA7 /* FirstTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7545DE283D4B4800558CA7 /* FirstTabView.swift */; };
+		9A7545E2283D617B00558CA7 /* MainTabViewUpdate in Resources */ = {isa = PBXBuildFile; fileRef = 9A7545E1283D617B00558CA7 /* MainTabViewUpdate */; };
 		9A87D30127E67C1B00A0C5CD /* FixingError3.20 in Resources */ = {isa = PBXBuildFile; fileRef = 9A87D30027E67C1B00A0C5CD /* FixingError3.20 */; };
 		9A895823277179E100E7B773 /* PlusImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A895822277179E100E7B773 /* PlusImage.swift */; };
 		9A89582727717EB500E7B773 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A89582627717EB500E7B773 /* Sizes.swift */; };
@@ -128,6 +134,12 @@
 		9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableMemoBoxView.swift; sourceTree = "<group>"; };
 		9A365A2A27EBAD48003D4C77 /* DragRefactoring3.24 */ = {isa = PBXFileReference; lastKnownFileType = text; path = DragRefactoring3.24; sourceTree = "<group>"; };
 		9A365A2C27EC0C83003D4C77 /* UpdatingSecondView */ = {isa = PBXFileReference; lastKnownFileType = text; path = UpdatingSecondView; sourceTree = "<group>"; };
+		9A7545B42836897000558CA7 /* CombinedMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedMainView.swift; sourceTree = "<group>"; };
+		9A7545B62836996100558CA7 /* SecondMainView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMainView2.swift; sourceTree = "<group>"; };
+		9A7545DA283D48B500558CA7 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		9A7545DC283D4B2400558CA7 /* SecondTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTabView.swift; sourceTree = "<group>"; };
+		9A7545DE283D4B4800558CA7 /* FirstTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTabView.swift; sourceTree = "<group>"; };
+		9A7545E1283D617B00558CA7 /* MainTabViewUpdate */ = {isa = PBXFileReference; lastKnownFileType = text; path = MainTabViewUpdate; sourceTree = "<group>"; };
 		9A87D30027E67C1B00A0C5CD /* FixingError3.20 */ = {isa = PBXFileReference; lastKnownFileType = text; path = FixingError3.20; sourceTree = "<group>"; };
 		9A895822277179E100E7B773 /* PlusImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusImage.swift; sourceTree = "<group>"; };
 		9A89582627717EB500E7B773 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
@@ -226,10 +238,10 @@
 			children = (
 				9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */,
 				9AD8CCA02830ADD400D776FE /* History */,
-				9ACC0C7027DB581800D18690 /* SecondMainView.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
-				9A3378092796B10E00805138 /* HomeView.swift */,
-				9AD6EF25277EC5CF00866456 /* FirstMainView.swift */,
+				9A7545E1283D617B00558CA7 /* MainTabViewUpdate */,
+				9A7545E3284212C000558CA7 /* NotUsing */,
+				9A7545E0283D4B5300558CA7 /* TabViews */,
 				9AB7250027D00E16006A825C /* TrashBin */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
@@ -297,6 +309,28 @@
 				9AB7250127D00EB0006A825C /* Ordering */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		9A7545E0283D4B5300558CA7 /* TabViews */ = {
+			isa = PBXGroup;
+			children = (
+				9A7545DA283D48B500558CA7 /* MainTabView.swift */,
+				9A7545DE283D4B4800558CA7 /* FirstTabView.swift */,
+				9A7545DC283D4B2400558CA7 /* SecondTabView.swift */,
+			);
+			path = TabViews;
+			sourceTree = "<group>";
+		};
+		9A7545E3284212C000558CA7 /* NotUsing */ = {
+			isa = PBXGroup;
+			children = (
+				9A7545B42836897000558CA7 /* CombinedMainView.swift */,
+				9A7545B62836996100558CA7 /* SecondMainView2.swift */,
+				9AD6EF25277EC5CF00866456 /* FirstMainView.swift */,
+				9A3378092796B10E00805138 /* HomeView.swift */,
+				9ACC0C7027DB581800D18690 /* SecondMainView.swift */,
+			);
+			path = NotUsing;
 			sourceTree = "<group>";
 		};
 		9A89582527717EAC00E7B773 /* Utils */ = {
@@ -558,6 +592,7 @@
 				9AC5D13D2785247D007EAA28 /* Terms in Resources */,
 				9A8F17A127E64479001FD2E9 /* ModifyUI3.20 in Resources */,
 				9A8F179327E25EB3001FD2E9 /* FixingErrors3.17 in Resources */,
+				9A7545E2283D617B00558CA7 /* MainTabViewUpdate in Resources */,
 				9AB724D227CD2C6B006A825C /* Localizable.strings in Resources */,
 				9AC5D13A278521F9007EAA28 /* Memo For Tips and Tricks in Resources */,
 				9AAA24A427E7B01D009923C7 /* UpdatingRelocation3.21 in Resources */,
@@ -603,6 +638,9 @@
 				9AD6EF11277D9DF100866456 /* MemoList.swift in Sources */,
 				9AD8333727BE148A00506AE8 /* MemoView.swift in Sources */,
 				9AC5D1FD278557D8007EAA28 /* UnitTestHelper.swift in Sources */,
+				9A7545DF283D4B4800558CA7 /* FirstTabView.swift in Sources */,
+				9A7545B52836897000558CA7 /* CombinedMainView.swift in Sources */,
+				9A7545B72836996100558CA7 /* SecondMainView2.swift in Sources */,
 				E523DB3C27B8472C00D8D78B /* PinnedFolderView.swift in Sources */,
 				9A337890279A56C500805138 /* FolderEditViewModel.swift in Sources */,
 				9AD6EECA277C3E3E00866456 /* Extensions.swift in Sources */,
@@ -616,6 +654,7 @@
 				9AC5D20127855C0A007EAA28 /* Persistence.swift in Sources */,
 				9A1D854527A24F9400B00156 /* SubFolderView.swift in Sources */,
 				9A0474BD27716E0000571D66 /* FolderView.swift in Sources */,
+				9A7545DD283D4B2400558CA7 /* SecondTabView.swift in Sources */,
 				9A365A2927EBA841003D4C77 /* DraggableMemoBoxView.swift in Sources */,
 				9AB7250927D00F36006A825C /* MemoAscDecButton.swift in Sources */,
 				9ACC0C8227DE05C000D18690 /* MessageViewModel.swift in Sources */,
@@ -628,6 +667,7 @@
 				9AD8CC9F282FECFB00D776FE /* PreventingAnimationViewModel.swift in Sources */,
 				E54FE18527C94595000FFA81 /* NoteEditorViewController.swift in Sources */,
 				9AB7250F27D00FF8006A825C /* TrashBinViewModel.swift in Sources */,
+				9A7545DB283D48B500558CA7 /* MainTabView.swift in Sources */,
 				9AB7251927D02045006A825C /* SystemImage.swift in Sources */,
 				9AB7250B27D00F53006A825C /* FolderOrderingMenu.swift in Sources */,
 				9A0474A527715D1400571D66 /* DeeepMemoApp.swift in Sources */,
@@ -828,7 +868,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
@@ -864,7 +904,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "hanmok-main.MemoLee";
 				PRODUCT_NAME = DeeepMemo;
 				SDKROOT = iphoneos;
