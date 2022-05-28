@@ -202,7 +202,8 @@ struct SecondTabView: View {
                                                 folderEditVM.shouldShowSelectingView = true
                                                 folderEditVM.folderToCut = folderWithLevel.folder
                                             } label: {
-                                                SystemImage("folder")
+//                                                SystemImage("folder")
+                                                SystemImage("arrowshape.turn.up.right.fill")
                                             }
                                             //                                            .tint(Color.swipeBtnColor2)
                                             .tint(Color.lightSwipeBtn2)
@@ -286,7 +287,8 @@ struct SecondTabView: View {
                                                 folderEditVM.shouldShowSelectingView = true
                                                 folderEditVM.folderToCut = folderWithLevel.folder
                                             } label: {
-                                                SystemImage("folder")
+//                                                SystemImage("folder")
+                                                SystemImage("arrowshape.turn.up.right.fill")
                                             }
                                             //                                            .tint(Color.swipeBtnColor2)
                                             .tint(Color.lightSwipeBtn2)

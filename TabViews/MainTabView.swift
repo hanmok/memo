@@ -57,9 +57,9 @@ struct MainTabView: View {
 //                        .aspectRatio(contentMode: .fit)
 //                        .frame(width: 20, height: 20)
 //                        .rotationEffect(.degrees(90))
-                    CustomImage() // 왜 안됩니까 
-                    Text("Test")
-                    
+//                    CustomImage() // 왜 안됩니까
+                    Image(systemName: "note.text")
+                    Text("Memo")
                 }
                 .tag(Tabs.memoList)
                 SecondTabView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
@@ -69,15 +69,15 @@ struct MainTabView: View {
                     .navigationBarHidden(true)
                     .navigationBarTitle(Text(""))
                 .tabItem {
-//                    Label("Folder List", systemImage: "folder")
                     Image(systemName: "folder")
                     
-                    Text("Folder List2")
+                    Text("Folder")
                 }
                 .tag(Tabs.folderList)
             }
             // tabbed Label's Color
-            .accentColor(.red)
+//            .accentColor(.red)
+            .accentColor(.darkMain)
             .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter {
                 FolderType.compareName($0.title, with: .trashbin)}.first!))
             .navigationBarHidden(true)

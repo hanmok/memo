@@ -11,6 +11,16 @@ import Combine
 import CoreData
 
 
+//struct IconNames {
+//
+//}
+//extension String {
+    enum IconNames {
+        static let relocateFill = "arrowshape.turn.up.right.fill"
+        static let relocate = "arrowshape.turn.up.right"
+    }
+//}
+
 struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
@@ -177,10 +187,11 @@ struct MemoView: View {
 //                            focusState = false
                             editorFocusState = false
                         } label: {
-                            SystemImage("folder", size: Sizes.regularButtonSize)
+//                            SystemImage("folder", size: Sizes.regularButtonSize)
+//                            SystemImage("arrowshape.turn.up.right.fill", size: Sizes.regularButtonSize)
+                            SystemImage(IconNames.relocate, size: Sizes.regularButtonSize)
                                 .tint(contents == "" ?
                                     (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
-//                                .animation(.spring(), value: contents == "")
                                 .animation(.spring(), value: preventingAnimationViewModel.viewAppear && contents == "")
                         }
                         

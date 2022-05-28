@@ -26,7 +26,6 @@ struct NewMemoView: View {
     @State var hasRelocated = false
     @State var contents: String = ""
     
-//    @State var isBookMarkedTemp: Bool = false
     @State var isPinned: Bool = false
     @State var isShowingSelectingFolderView = false
     
@@ -223,7 +222,9 @@ struct NewMemoView: View {
                             
                         } label: {
                             SystemImage(
-                                "folder",
+//                                "folder",
+//                                "arrowshape.turn.up.right.fill",
+                                IconNames.relocate,
                                 size: Sizes.regularButtonSize)
                             .tint(contents == "" ? (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
                             .animation(.spring(), value: contents == "")
