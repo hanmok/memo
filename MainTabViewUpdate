@@ -7,9 +7,11 @@
 4. ㅅㅂ ㅠㅠ
 
 5. Plus Button 위치 다름 ;; 어디로 맞춰야하나 ?? 우선, SecondView 에 모두 맞춰보자. 대충 ㅇㅋ
+
 6. FolderView 내에서, Memo 추가시 튕겨버림.. (First, Second) View 모두. 이거 너무 Critical ㅋㅋㅋㅋㅋ 완료
+
 7. Message 안나옴. 매우 이상하게 나옴.. ;; 보류
-8. TabBar icon 수정. ??? 이거 어떻게 함..
+8. TabBar icon 수정. ??? 이거 어떻게 함.. 대충 일단 함.
 9. 폴더 옮길 때 화면 ;; ( SelectingFolderView ) 완료
 
 
@@ -23,3 +25,9 @@ First, Second Tab View 의 Nav 가 차지하는 공간이 다르다  완료.
 
 
 
+.. Light Mode 에서, Load 됐을 경우 MainTabBar Color 가 이상함..
+
+
+
+음.. 가장 처음에, 왜 ;; Color 가 제대로 안나올까 ? 
+7. Message 안나옴. 매우 이상하게 나옴.. ;; 보류

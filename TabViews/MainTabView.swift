@@ -23,7 +23,10 @@ struct MainTabView: View {
     
     init() {
         // MainTab Background Color
-            UITabBar.appearance().backgroundColor = UIColor.gray
+//            UITabBar.appearance().backgroundColor = UIColor.gray
+        UITabBar.appearance().backgroundColor = .systemBackground
+//        UITabBar.appearance().backgroundColor = .secondarySystemBackground
+//        UITabBar.appearance().backgroundColor = .tertiarySystemBackground
         }
     
     var customImage: Image {
@@ -39,25 +42,9 @@ struct MainTabView: View {
                     homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!, // found nil here .. Why... ??
                     archiveFolder: topFolders.filter{FolderType.compareName($0.title, with: .archive)}.first!
                 ), currentFolder: topFolders.filter { FolderType.compareName($0.title, with: .folder)}.first!)
-                
                     .navigationBarHidden(true)
                     .navigationBarTitle(Text(""))
                 .tabItem {
-//                    Label {
-//                        Text("Memo List")
-//                    } icon: {
-////                        Image(systemName: "rectangle.split.3x1")
-////                            .resizable()
-////                            .aspectRatio(contentMode: .fit)
-////                            .frame(width: 20, height: 20)
-////                            .rotationEffect(.degrees(90))
-//                    }
-//                    Image(systemName: "rectangle.split.3x1")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .frame(width: 20, height: 20)
-//                        .rotationEffect(.degrees(90))
-//                    CustomImage() // 왜 안됩니까
                     Image(systemName: "note.text")
                     Text("Memo")
                 }
@@ -76,14 +63,14 @@ struct MainTabView: View {
                 .tag(Tabs.folderList)
             }
             // tabbed Label's Color
-//            .accentColor(.red)
-            .accentColor(.darkMain)
+            .accentColor(colorScheme == .dark ? .darkMain : .lightMain)
             .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter {
                 FolderType.compareName($0.title, with: .trashbin)}.first!))
             .navigationBarHidden(true)
             .navigationBarTitle(Text(""))
             .edgesIgnoringSafeArea([.top, .bottom])
         }
+        // Message
         .overlay {
             VStack {
                 Spacer()
@@ -102,6 +89,7 @@ struct MainTabView: View {
                 }
                 .cornerRadius(10)
                 .frame(height: UIScreen.hasSafeBottom ? 70 : 50)
+//                .frame(height: 100)
                 .cornerRadius(10)
                 .offset(y: messageVM.shouldShow ? 0 : 100)
                 .overlay(
@@ -116,6 +104,7 @@ struct MainTabView: View {
                     }
                 )
                 .offset(y: messageVM.shouldShow ? 0 : 100)
+//                .offset(y: UITabBar.appearance().height)
             }
         }
     }
