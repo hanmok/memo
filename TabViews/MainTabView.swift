@@ -43,15 +43,23 @@ struct MainTabView: View {
                     .navigationBarHidden(true)
                     .navigationBarTitle(Text(""))
                 .tabItem {
-                    Label {
-                        Text("Memo List")
-                    } icon: {
-                        Image(systemName: "rectangle.split.3x1")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                            .rotationEffect(.degrees(90))
-                    }
+//                    Label {
+//                        Text("Memo List")
+//                    } icon: {
+////                        Image(systemName: "rectangle.split.3x1")
+////                            .resizable()
+////                            .aspectRatio(contentMode: .fit)
+////                            .frame(width: 20, height: 20)
+////                            .rotationEffect(.degrees(90))
+//                    }
+//                    Image(systemName: "rectangle.split.3x1")
+//                        .resizable()
+//                        .aspectRatio(contentMode: .fit)
+//                        .frame(width: 20, height: 20)
+//                        .rotationEffect(.degrees(90))
+                    CustomImage() // 왜 안됩니까 
+                    Text("Test")
+                    
                 }
                 .tag(Tabs.memoList)
                 SecondTabView(fastFolderWithLevelGroup: FastFolderWithLevelGroup(
@@ -61,7 +69,10 @@ struct MainTabView: View {
                     .navigationBarHidden(true)
                     .navigationBarTitle(Text(""))
                 .tabItem {
-                    Label("Folder List", systemImage: "folder")
+//                    Label("Folder List", systemImage: "folder")
+                    Image(systemName: "folder")
+                    
+                    Text("Folder List2")
                 }
                 .tag(Tabs.folderList)
             }
@@ -70,7 +81,7 @@ struct MainTabView: View {
             .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter {
                 FolderType.compareName($0.title, with: .trashbin)}.first!))
             .navigationBarHidden(true)
-            .navigationBarTitle(Text("Home"))
+            .navigationBarTitle(Text(""))
             .edgesIgnoringSafeArea([.top, .bottom])
         }
         .overlay {

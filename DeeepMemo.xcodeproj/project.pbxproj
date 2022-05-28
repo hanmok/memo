@@ -238,14 +238,10 @@
 			children = (
 				9A365A2827EBA841003D4C77 /* DraggableMemoBoxView.swift */,
 				9AD8CCA02830ADD400D776FE /* History */,
-				9ACC0C7027DB581800D18690 /* SecondMainView.swift */,
 				9A04749527715D1200571D66 /* DeeepMemoApp.swift */,
 				9A7545E1283D617B00558CA7 /* MainTabViewUpdate */,
+				9A7545E3284212C000558CA7 /* NotUsing */,
 				9A7545E0283D4B5300558CA7 /* TabViews */,
-				9A3378092796B10E00805138 /* HomeView.swift */,
-				9A7545B42836897000558CA7 /* CombinedMainView.swift */,
-				9AD6EF25277EC5CF00866456 /* FirstMainView.swift */,
-				9A7545B62836996100558CA7 /* SecondMainView2.swift */,
 				9AB7250027D00E16006A825C /* TrashBin */,
 				9A0474B927716DBC00571D66 /* Views */,
 				9A0474BA27716DCB00571D66 /* Models */,
@@ -323,6 +319,18 @@
 				9A7545DC283D4B2400558CA7 /* SecondTabView.swift */,
 			);
 			path = TabViews;
+			sourceTree = "<group>";
+		};
+		9A7545E3284212C000558CA7 /* NotUsing */ = {
+			isa = PBXGroup;
+			children = (
+				9A7545B42836897000558CA7 /* CombinedMainView.swift */,
+				9A7545B62836996100558CA7 /* SecondMainView2.swift */,
+				9AD6EF25277EC5CF00866456 /* FirstMainView.swift */,
+				9A3378092796B10E00805138 /* HomeView.swift */,
+				9ACC0C7027DB581800D18690 /* SecondMainView.swift */,
+			);
+			path = NotUsing;
 			sourceTree = "<group>";
 		};
 		9A89582527717EAC00E7B773 /* Utils */ = {

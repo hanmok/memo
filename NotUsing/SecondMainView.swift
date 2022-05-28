@@ -498,8 +498,11 @@ struct EllipseInSecondView: View {
                 Text(LocalizedStringStorage.hideArchive)
             }
         } label: {
-            SystemImage("ellipsis").rotationEffect(.degrees(90))
-                .scaleEffect(CGSize(width: 1, height: 0.9))
+//            SystemImage("ellipsis").rotationEffect(.degrees(90))
+//                .scaleEffect(CGSize(width: 1, height: 0.9))
+//                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
+            
+            SystemImage("ellipsis.circle", size: 24)
                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }

@@ -227,6 +227,7 @@ struct FirstTabView: View {
                         .overlay(RoundedRectangle(cornerRadius: 10)
                             .stroke(colorScheme == .dark ? Color.white : Color.clear))
                         .padding(.horizontal, 10)
+//                        .padding(.leading, 10)
                         
                         // End of Search TextField
                         Spacer()
@@ -234,15 +235,20 @@ struct FirstTabView: View {
                         
                         
                         OrderingMenuInSecondView()
+//                            .padding(.horizontal)
+                            .padding(.trailing, 8)
                         
                         EllipseInSecondView(
                             pinState: $pinState,
                             inFolderOrder: $inFolderOrder,
                             isHidingArchive: $isHidingArchive)
-                        .padding(.leading, 5)
+//                        .padding(.leading, 5)
+                        
                     }
                     .padding(.bottom)
                     .padding(.horizontal, 20)
+//                    .padding(.leading, 20)
+//                    .padding(.trailing, 14)
                     
                     
                     ZStack {

@@ -83,8 +83,8 @@ struct SecondTabView: View {
     var body: some View {
         
         return ZStack {
-//        NavigationView {
-//        ZStack {
+            //        NavigationView {
+            //        ZStack {
             
             Color(colorScheme == .dark ? .newBGForDark : .white)
                 .ignoresSafeArea()
@@ -96,13 +96,13 @@ struct SecondTabView: View {
                     Spacer()
                     HStack(spacing: 0) {
                         // MARK: - Button 1: SEARCH
-//                        Button {
-//                            // show SearchView !
-//                            isShowingSearchView = true
-//                        } label: {
-//                            SystemImage( "magnifyingglass")
-//                                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
-//                        }
+                        //                        Button {
+                        //                            // show SearchView !
+                        //                            isShowingSearchView = true
+                        //                        } label: {
+                        //                            SystemImage( "magnifyingglass")
+                        //                                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
+                        //                        }
                         
                         // MARK: - Button 2: Folder Ordering
                         FolderOrderingMenu()
@@ -128,16 +128,16 @@ struct SecondTabView: View {
                     .padding(.horizontal, 20)
                     //                    .padding(.top, 5)
                 }
-                .padding(.top, 3)
+                .padding(.bottom)
+//                .padding(.top, 3)
                 
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack
                 
                 
                 // MARK: - Start
-                
-//                ZStack {
-//                VStack {
+//                ScrollView(, showsIndicators: <#T##Bool#>, content: <#T##() -> _#>)
+//                ScrollView {
                     VStack(spacing: 0) {
                         List {
                             Section(header: Text("Main Folder")) {
@@ -310,26 +310,21 @@ struct SecondTabView: View {
                                 } // end of ForEach
                                 TrashBinCell()
                                     .environmentObject(trashBinVM)
-                               
+                                
                             }// end of section
+//                            EmptyView()
+                            Rectangle()
+                                .frame(height: 32)
+                                .foregroundColor(.clear)
+                                .background(.clear)
+                                .listRowBackground(Color.clear)
                         } // end of List
-                                                .listStyle(InsetGroupedListStyle())
-                        
-
-//                        Rectangle()
-//                            .frame(height: 100)
-//                            .foregroundColor(.clear)
-//                        EmptyView()
-//                            .frame(height: 200)
-//                    }
-                    } // end of Inner VStack
-                
-
-
-
+                    } // end of  vstack
+//                  .listStyle(InsetGroupedListStyle())
+                    
             } // end of Outer VStack , Inside ZStack.
             
-
+            
             // Anther Element of ZStack
             VStack {
                 Spacer()
@@ -343,7 +338,7 @@ struct SecondTabView: View {
                     .padding(.bottom, 15)
                 }
             }
-//            .background(.clear)
+            .background(.clear)
             
             
             NavigationLink(destination:
@@ -443,9 +438,9 @@ struct SecondTabView: View {
         .onAppear {
             UITableView.appearance().backgroundColor = .clear
         }
-//        .navigationBarHidden(true)
-//        .navigationBarTitle(Text(""))
-//        } // end of NavigationView
+        //        .navigationBarHidden(true)
+        //        .navigationBarTitle(Text(""))
+        //        } // end of NavigationView
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,

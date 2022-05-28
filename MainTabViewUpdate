@@ -7,10 +7,18 @@
 4. ㅅㅂ ㅠㅠ
 
 5. Plus Button 위치 다름 ;; 어디로 맞춰야하나 ?? 우선, SecondView 에 모두 맞춰보자. 대충 ㅇㅋ
-6. FolderView 내에서, Memo 추가시 튕겨버림.. (First, Second) View 모두. 이거 너무 Critical ㅋㅋㅋㅋㅋ
+6. FolderView 내에서, Memo 추가시 튕겨버림.. (First, Second) View 모두. 이거 너무 Critical ㅋㅋㅋㅋㅋ 완료
 7. Message 안나옴. 매우 이상하게 나옴.. ;; 보류
-8. TabBar icon 수정
+8. TabBar icon 수정. ??? 이거 어떻게 함.. 
 9. 폴더 옮길 때 화면 ;; ( SelectingFolderView ) 완료
 
 
-음... 그.. Second Tab View 내에서 Plus Button 과 List 사이의 Spacing 을 어떻게 주지 ?? 왜 안되지 ??
+음... 그.. Second Tab View 내에서 Plus Button 과 List 사이의 Spacing 을 어떻게 주지 ?? 왜 안되지 ??  완료
+
+
+10. Navigation Button Alignment 완료
+
+
+First, Second Tab View 의 Nav 가 차지하는 공간이 다르다  완료.
+
+
