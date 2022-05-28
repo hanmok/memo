@@ -240,7 +240,7 @@ struct MemoView: View {
                             context: context,
                             fetchingHome: false)!
                     ),
-                selectionEnum: Folder.isBelongToArchive(currentfolder: parent!) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder,
+//                selectionEnum: Folder.isBelongToArchive(currentfolder: parent!) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder,
 //                msgToShow: $msgToShow,
                 invalidFolderWithLevels: [], shouldUpdateTopFolder: false,
                 dismissAction: {

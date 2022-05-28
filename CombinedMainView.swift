@@ -455,7 +455,7 @@ struct CombinedMainView: View {
             .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
                 NavigationView {
                     SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-                                        selectionEnum: selectionEnum,
+//                                        selectionEnum: selectionEnum,
                                         //                                    msgToShow: $msgToShow,
                                         invalidFolderWithLevels:
                                             Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),

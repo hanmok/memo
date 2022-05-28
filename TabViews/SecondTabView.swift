@@ -40,9 +40,9 @@ struct SecondTabView: View {
     
     @State var isShowingSearchView = false
     @State var isLoading = false
-//    @State var isShowingSecondView = false
+    //    @State var isShowingSecondView = false
     
-//    @State var isShowingSecondView: Bool
+    //    @State var isShowingSecondView: Bool
     
     @State var isAddingMemo = false
     
@@ -50,13 +50,13 @@ struct SecondTabView: View {
     @State var green = 0.0
     @State var blue = 0.0
     
-//    @State var msgToShow: String?
+    //    @State var msgToShow: String?
     
     init(fastFolderWithLevelGroup: FastFolderWithLevelGroup
-//         ,isShowingSecondView: Bool
+         //         ,isShowingSecondView: Bool
     ) {
         self.fastFolderWithLevelGroup = fastFolderWithLevelGroup
-//        _isShowingSecondView = State(initialValue: isShowingSecondView)
+        //        _isShowingSecondView = State(initialValue: isShowingSecondView)
     }
     
     func addMemo() {
@@ -70,7 +70,7 @@ struct SecondTabView: View {
         if let validFolderToRemoved = folderEditVM.folderToRemove {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 isLoading = false
-//                msgToShow = Messages.showFolderDeleted(targetFolder: validFolderToRemoved)
+                //                msgToShow = Messages.showFolderDeleted(targetFolder: validFolderToRemoved)
                 messageVM.message = Messages.showFolderDeleted(targetFolder: validFolderToRemoved)
             }
             Folder.moveMemosToTrashAndDelete(from: validFolderToRemoved, to: trashBinVM.trashBinFolder)
@@ -83,6 +83,8 @@ struct SecondTabView: View {
     var body: some View {
         
         return ZStack {
+//        NavigationView {
+//        ZStack {
             
             Color(colorScheme == .dark ? .newBGForDark : .white)
                 .ignoresSafeArea()
@@ -94,13 +96,13 @@ struct SecondTabView: View {
                     Spacer()
                     HStack(spacing: 0) {
                         // MARK: - Button 1: SEARCH
-                        Button {
-                            // show SearchView !
-                            isShowingSearchView = true
-                        } label: {
-                            SystemImage( "magnifyingglass")
-                                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
-                        }
+//                        Button {
+//                            // show SearchView !
+//                            isShowingSearchView = true
+//                        } label: {
+//                            SystemImage( "magnifyingglass")
+//                                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
+//                        }
                         
                         // MARK: - Button 2: Folder Ordering
                         FolderOrderingMenu()
@@ -109,13 +111,13 @@ struct SecondTabView: View {
                         // MARK: - Button 3: Add new Folder to the top Folder
                         Button {
                             isShowingTextField = true
-                            if selectionEnum == .folder {
-                                textFieldType = .newTopFolder
-                                newFolderName = ""
-                            } else {
-                                textFieldType = .newTopArchive
-                                newFolderName = ""
-                            }
+                            //                            if selectionEnum == .folder {
+                            textFieldType = .newTopFolder
+                            //                                newFolderName = ""
+                            //                            } else {
+                            //                                textFieldType = .newTopArchive
+                            //                                newFolderName = ""
+                            //                            }
                             
                         } label: { // original : 28
                             SystemImage( "folder.badge.plus", size: 28)
@@ -124,17 +126,9 @@ struct SecondTabView: View {
                         .padding(.leading, 12)
                     }
                     .padding(.horizontal, 20)
-//                    .padding(.top, 5)
+                    //                    .padding(.top, 5)
                 }
                 .padding(.top, 3)
-                Picker("", selection: $selectionEnum) {
-                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.folder))
-                        .tag(FolderTypeEnum.folder)
-                    Image(systemName: FolderType.getfolderImageName(type: FolderTypeEnum.archive)).tag(FolderTypeEnum.archive)
-                }
-                .id(selectionEnum)
-                .pickerStyle(SegmentedPickerStyle())
-                .padding([.top, .horizontal], Sizes.overallPadding)
                 
                 // MARK: - List of all Folders (hierarchy)
                 // another VStack
@@ -142,18 +136,20 @@ struct SecondTabView: View {
                 
                 // MARK: - Start
                 
-                ZStack {
+//                ZStack {
+//                VStack {
                     VStack(spacing: 0) {
                         List {
-                            ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
-                                
-                                if folderWithLevel.folder.parent == nil {
-                                    DynamicTopFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
+                            Section(header: Text("Main Folder")) {
+                                ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
+                                    
+                                    if folderWithLevel.folder.parent == nil {
+                                        DynamicTopFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
                                         .environmentObject(folderEditVM)
                                         .environmentObject(trashBinVM)
-                                    // ADD Sub Folder
+                                        // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
@@ -166,15 +162,15 @@ struct SecondTabView: View {
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
-                                }
-                                else {
-                                    DynamicFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
+                                    }
+                                    else {
+                                        DynamicFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
                                         .environmentObject(folderEditVM)
                                         .environmentObject(trashBinVM)
-//                                        .listRowBackground(Color.blue)
-                                    // ADD Sub Folder
+                                        //                                        .listRowBackground(Color.blue)
+                                        // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
@@ -187,7 +183,7 @@ struct SecondTabView: View {
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
-                                    // Change Folder Name
+                                        // Change Folder Name
                                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                             
                                             Button {
@@ -208,11 +204,11 @@ struct SecondTabView: View {
                                             } label: {
                                                 SystemImage("folder")
                                             }
-//                                            .tint(Color.swipeBtnColor2)
+                                            //                                            .tint(Color.swipeBtnColor2)
                                             .tint(Color.lightSwipeBtn2)
-//                                            .tint(Color(rgba: 0x14A7FA))
-//                                            .tint(Color(red: 100, green: 100, blue: 230))
-//                                            .tint(Color(red: 81, green: 176, blue: 255))
+                                            //                                            .tint(Color(rgba: 0x14A7FA))
+                                            //                                            .tint(Color(red: 100, green: 100, blue: 230))
+                                            //                                            .tint(Color(red: 81, green: 176, blue: 255))
                                             
                                             Button {
                                                 if folderWithLevel.folder.parent != nil {
@@ -227,28 +223,18 @@ struct SecondTabView: View {
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                             
                                         }
+                                    } // end of ForEach
                                 } // end of ForEach
                             }
-//                            .listRowBackground(Color.green)
-                        }
-                        .listStyle(InsetGroupedListStyle())
-                    } // end of VStack
-                    .offset(x: selectionEnum == .folder ? 0 : -UIScreen.screenWidth)
-                    .animation(.easeOut.speed(1.5), value: selectionEnum == .folder )
-                    .onAppear {
-                        UITableView.appearance().backgroundColor = .clear
-                    }
-                    
-                    // Another ZStack Element
-                    VStack {
-                        List {
-                            ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
-                                if folderWithLevel.folder.parent == nil {
-                                    DynamicTopFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
+                            
+                            Section(header: Text("Archive, TrashBin")) {
+                                ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
+                                    if folderWithLevel.folder.parent == nil {
+                                        DynamicTopFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
                                         .environmentObject(folderEditVM)
-                                    // ADD Sub Folder
+                                        // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
@@ -259,15 +245,15 @@ struct SecondTabView: View {
                                                 SystemImage("folder.badge.plus")
                                                     .foregroundColor(.black)
                                             }
-                    .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
+                                            .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
-                                } else {
-                                    DynamicFolderCell(
-                                        folder: folderWithLevel.folder,
-                                        level: folderWithLevel.level)
+                                    } else {
+                                        DynamicFolderCell(
+                                            folder: folderWithLevel.folder,
+                                            level: folderWithLevel.level)
                                         .environmentObject(folderEditVM)
-                                    
-                                    // ADD Sub Folder
+                                        
+                                        // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
                                                 folderToAddSubFolder = folderWithLevel.folder
@@ -278,11 +264,11 @@ struct SecondTabView: View {
                                                 SystemImage("folder.badge.plus")
                                                 
                                             }
-//                                            .tint(Color.lightSwipeBtn1)
+                                            //                                            .tint(Color.lightSwipeBtn1)
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                             
                                         }
-                                    // Change Folder Name
+                                        // Change Folder Name
                                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                                             // DELETE FOLDER
                                             Button {
@@ -302,7 +288,7 @@ struct SecondTabView: View {
                                             } label: {
                                                 SystemImage("folder")
                                             }
-//                                            .tint(Color.swipeBtnColor2)
+                                            //                                            .tint(Color.swipeBtnColor2)
                                             .tint(Color.lightSwipeBtn2)
                                             
                                             Button {
@@ -315,46 +301,51 @@ struct SecondTabView: View {
                                             } label: {
                                                 SystemImage("pencil")
                                             }
-//                                            .tint(Color.swipeBtnColor2)
-//                                            .tint(Color.lightSwipeBtn1)
+                                            //                                            .tint(Color.swipeBtnColor2)
+                                            //                                            .tint(Color.lightSwipeBtn1)
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
-                                } // end of Else Case
-                            } // end of ForEach
-                            TrashBinCell()
-                                .environmentObject(trashBinVM)
-                        }// end of List
-                        .listStyle(InsetGroupedListStyle())
+                                    } // end of Else Case
+                                    
+                                } // end of ForEach
+                                TrashBinCell()
+                                    .environmentObject(trashBinVM)
+                               
+                            }// end of section
+                        } // end of List
+                                                .listStyle(InsetGroupedListStyle())
                         
-                        EmptyView()
-                            .frame(height: 250)
-                    }
-                    .offset(x: selectionEnum == .folder ? UIScreen.screenWidth : 0)
-                    .animation(.easeOut.speed(1.5), value: selectionEnum == .folder )
-                } // end of ZStack
-//                .padding(.horizontal, Sizes.overallPadding)
+
+//                        Rectangle()
+//                            .frame(height: 100)
+//                            .foregroundColor(.clear)
+//                        EmptyView()
+//                            .frame(height: 200)
+//                    }
+                    } // end of Inner VStack
                 
-                
-            } // end of VStack , Inside ZStack.
+
+
+
+            } // end of Outer VStack , Inside ZStack.
             
-            .onAppear {
-                UITableView.appearance().backgroundColor = .clear
-            }
-            
+
+            // Anther Element of ZStack
             VStack {
                 Spacer()
                 HStack {
-//                    BindedColorView(red: $red, green: $green, blue: $blue)
+                    //                    BindedColorView(red: $red, green: $green, blue: $blue)
                     Spacer()
                     Button(action: addMemo) {
                         NewPlusImage()
                     }
                     .padding([ .trailing], Sizes.overallPadding)
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 15)
                 }
             }
-
-
+//            .background(.clear)
+            
+            
             NavigationLink(destination:
                             NewMemoView(parent: fastFolderWithLevelGroup.homeFolder, presentingNewMemo: .constant(false)),
                            isActive: $isAddingMemo) {}
@@ -363,32 +354,30 @@ struct SecondTabView: View {
                 Color(.clear)
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
-//                    .tint(colorScheme == .dark ? .cream : .black)
+                //                    .tint(colorScheme == .dark ? .cream : .black)
             }
-            
-//            PinnedFolderView(folder: fastFolderWithLevelGroup.homeFolder)
-//                .environmentObject(folderEditVM)
             
             
             CustomSearchView(
                 fastFolderWithLevelGroup: fastFolderWithLevelGroup, currentFolder: selectionEnum == .folder ? fastFolderWithLevelGroup.homeFolder : fastFolderWithLevelGroup.archive, // 애매하네..
                 showingSearchView: $isShowingSearchView,
-            shouldShowAll: true,
-            shouldIncludeTrashOnCurrent: selectionEnum == .archive,
-            shouldIncludeTrashOverall: true)
-                .environmentObject(folderEditVM)
-                .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
-                .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
-//                .padding(.horizontal, Sizes.overallPadding)
+                shouldShowAll: true,
+                shouldIncludeTrashOnCurrent: selectionEnum == .archive,
+                shouldIncludeTrashOverall: true)
+            
+            .environmentObject(folderEditVM)
+            .offset(y: isShowingSearchView ? 0 : -UIScreen.screenHeight)
+            .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSearchView)
+            //                .padding(.horizontal, Sizes.overallPadding)
             
             
             
-//            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-//                       currentFolder: fastFolderWithLevelGroup.homeFolder,
-//                       isShowingSecondView: $isShowingSecondView)
+            //            SecondMainView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
+            //                       currentFolder: fastFolderWithLevelGroup.homeFolder,
+            //                       isShowingSecondView: $isShowingSecondView)
             
-                .environmentObject(trashBinVM)
-                .offset(x: -UIScreen.screenWidth)
+            .environmentObject(trashBinVM)
+            .offset(x: -UIScreen.screenWidth)
             
             
             if isShowingTextField {
@@ -449,21 +438,21 @@ struct SecondTabView: View {
                     isShowingTextField = false
                 }
             
-
+            
         } // end of ZStack
-//        .offset(x: isShowingSecondView ? UIScreen.screenWidth : 0)
-//        .animation(.spring(), value: isShowingSecondView)
-//        .animation(.spring(response: 0.3, dampingFraction: 1, blendDuration: 0.3), value: isShowingSecondView)
-
+        .onAppear {
+            UITableView.appearance().backgroundColor = .clear
+        }
+//        .navigationBarHidden(true)
+//        .navigationBarTitle(Text(""))
+//        } // end of NavigationView
         .fullScreenCover(isPresented: $folderEditVM.shouldShowSelectingView,  content: {
             NavigationView {
                 SelectingFolderView(fastFolderWithLevelGroup: fastFolderWithLevelGroup,
-                                    selectionEnum: selectionEnum,
-//                                    msgToShow: $msgToShow,
                                     invalidFolderWithLevels:
                                         Folder.getHierarchicalFolders(topFolder: folderEditVM.folderToCut),
                                     isFullScreen: true)
-                    .environmentObject(folderEditVM)
+                .environmentObject(folderEditVM)
             }
         })
         .alert(LocalizedStringStorage.bookmarkRemovingUpdateAlert, isPresented:
@@ -491,37 +480,19 @@ struct SecondTabView: View {
             } label: {
                 Text(LocalizedStringStorage.done)
             }
-        
+            
             Button(role: .cancel ) {
                 isFirstAfterBookmarkUpdate = false
             } label: {
                 Text(LocalizedStringStorage.cancel)
             }
         })
-        
-        
-//        .onAppear(perform: {
-//            print("MindMapView has Appeared!")
-//            let allMemosReq = Memo.fetch(.all)
-//
-//            if let allMemos = try? context.fetch(allMemosReq) {
-//                 allMemos.forEach {
-//                    if $0.folder == nil {
-//                        $0.folder = trashBinVM.trashBinFolder
-//                    }
-//                }
-//            }
-//        })
-        
         .onChange(of: scenePhase) { newScenePhase in
             if newScenePhase == .background {
-//                print("isFirstScreenSecondView has updated to \(isShowingSecondView)")
-//                isFirstScreenSecondView = isShowingSecondView
+                //                print("isFirstScreenSecondView has updated to \(isShowingSecondView)")
+                //                isFirstScreenSecondView = isShowingSecondView
             }
         }
         .navigationBarHidden(true)
     }
 }
-
-
-

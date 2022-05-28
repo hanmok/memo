@@ -264,7 +264,6 @@ struct FirstTabView: View {
                                             }
                                             
                                             dividerBetweenPin
-                                        
                                         }
                                         
                                         // MARK: - Show UnPinned Memos Next
@@ -348,7 +347,7 @@ struct FirstTabView: View {
                                 }
                             }
                             Rectangle()
-                                .frame(height: 50)
+                                .frame(height: 100)
                                 .foregroundColor(.clear)
                         } // end of ScrollView
                         .gesture(scroll)
@@ -384,6 +383,7 @@ struct FirstTabView: View {
                                 .animation(.spring(), value: memoEditVM.isSelectionMode)
                         )
                         .padding(.horizontal, Sizes.overallPadding)
+                        .padding(.bottom, 15)
                         .offset(y: focusState ? UIScreen.screenHeight : 0)
                         .animation(.spring().speed(0.5), value: focusState)
                     } // End Of ZStack

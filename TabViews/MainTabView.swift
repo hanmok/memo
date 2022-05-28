@@ -21,6 +21,11 @@ struct MainTabView: View {
     
     @State var tabSelection: Tabs = .memoList
     
+    init() {
+        // MainTab Background Color
+            UITabBar.appearance().backgroundColor = UIColor.gray
+        }
+    
     var customImage: Image {
         return SystemImage("rectangle.split.3x1")
             .rotationEffect(.degrees(90))
@@ -34,9 +39,9 @@ struct MainTabView: View {
                     homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!, // found nil here .. Why... ??
                     archiveFolder: topFolders.filter{FolderType.compareName($0.title, with: .archive)}.first!
                 ), currentFolder: topFolders.filter { FolderType.compareName($0.title, with: .folder)}.first!)
-                // Hide navigationBar
-//                .hiddenNavigationBarStyle()
-                .navigationBarHidden(true)
+                
+                    .navigationBarHidden(true)
+                    .navigationBarTitle(Text(""))
                 .tabItem {
                     Label {
                         Text("Memo List")
@@ -53,17 +58,21 @@ struct MainTabView: View {
                     homeFolder: topFolders.filter{ FolderType.compareName($0.title, with: .folder)}.first!, // found nil here .. Why... ??
                     archiveFolder: topFolders.filter{FolderType.compareName($0.title, with: .archive)}.first!
                 ))
-                .navigationBarHidden(true)
+                    .navigationBarHidden(true)
+                    .navigationBarTitle(Text(""))
                 .tabItem {
                     Label("Folder List", systemImage: "folder")
                 }
                 .tag(Tabs.folderList)
             }
+            // tabbed Label's Color
+            .accentColor(.red)
             .environmentObject(TrashBinViewModel(trashBinFolder: topFolders.filter {
                 FolderType.compareName($0.title, with: .trashbin)}.first!))
-            
+            .navigationBarHidden(true)
+            .navigationBarTitle(Text("Home"))
+            .edgesIgnoringSafeArea([.top, .bottom])
         }
-        .navigationBarHidden(true)
         .overlay {
             VStack {
                 Spacer()
@@ -72,7 +81,7 @@ struct MainTabView: View {
                         .cornerRadius(10)
                         .foregroundColor(colorScheme == .dark ? Color.init(white: 0.1) : .white)
                         .background(colorScheme == .dark ? Color.init(white: 0.1) : .white)
-                    
+
                     VStack {
                         Text(messageVM.message)
                             .foregroundColor(colorScheme == .dark ? .white : .black)
