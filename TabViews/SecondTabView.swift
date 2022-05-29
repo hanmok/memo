@@ -95,21 +95,13 @@ struct SecondTabView: View {
                     
                     Spacer()
                     HStack(spacing: 0) {
-                        // MARK: - Button 1: SEARCH
-                        //                        Button {
-                        //                            // show SearchView !
-                        //                            isShowingSearchView = true
-                        //                        } label: {
-                        //                            SystemImage( "magnifyingglass")
-                        //                                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
-                        //                        }
                         
-                        // MARK: - Button 2: Folder Ordering
+                        // MARK: - Button 1: Folder Ordering
                         FolderOrderingMenu()
-                            .padding(.top, 4)
-                            .padding(.leading, 16)
-                        
-                        // MARK: - Button 3: Add new Folder to the top Folder
+//                            .padding(.top, 4)
+//                            .padding(.leading, 16)
+                            
+                        // MARK: - Button 2: Add new Folder to the top Folder
                         Button {
                             isShowingTextField = true
                             //                            if selectionEnum == .folder {
@@ -121,16 +113,20 @@ struct SecondTabView: View {
                             //                            }
                             
                         } label: { // original : 28
-                            SystemImage( "folder.badge.plus", size: 28)
+//                            SystemImage( "folder.badge.plus", size: 28)
+                            SystemImage(.Icon.folderPlus, size: 26)
                                 .foregroundColor(colorScheme == .dark ? .navColorForDark : .navColorForLight)
                         }
-                        .padding(.leading, 12)
+                        .padding(.leading, 14)
+//                        .padding(.leading, 12)
                     }
+                    .padding(.top, 2)
                     .padding(.horizontal, 20)
                     //                    .padding(.top, 5)
                 }
 //                .padding(.bottom, 9)
-                .padding(.bottom)
+//                .padding(.bottom)
+                .padding(.bottom, 14)
 //                .padding(.top, 3)
                 
                 // MARK: - List of all Folders (hierarchy)
@@ -140,7 +136,7 @@ struct SecondTabView: View {
                 // MARK: - Start
                     VStack(spacing: 0) {
                         List { // Main Folder
-                            Section(header: Text("")) {
+//                            Section(header: Text("")) {
                                 ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
                                     
                                     if folderWithLevel.folder.parent == nil {
@@ -222,7 +218,7 @@ struct SecondTabView: View {
                                         }
                                     } // end of ForEach
                                 } // end of ForEach
-                            }
+//                            }
                             
                             Section(header: Text("")) {
                                 ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in

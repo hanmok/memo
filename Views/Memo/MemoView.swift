@@ -168,13 +168,17 @@ struct MemoView: View {
                     backBtn
                     Spacer()
                     
-                    HStack(spacing: 16) {
+                    HStack(spacing: 15) {
                         if !belongToTrashFolder() {
                             // PIN Button
                             Button(action: togglePin) {
-                                SystemImage( memo.isPinned ? "pin.fill" : "pin", size: Sizes.regularButtonSize)
+                                SystemImage( memo.isPinned ? "pin.fill" : "pin",
+//                                             size: Sizes.regularButtonSize)
+                                             size: 22)
+                                
                                     .tint(colorScheme == .dark ? .navColorForDark : .black)
                             }
+                            .padding(.trailing, 1)
                         }
                         
                         // RELOCATE
@@ -185,7 +189,9 @@ struct MemoView: View {
                             editorFocusState = false
                         } label: {
 
-                            SystemImage(.Icon.relocate, size: Sizes.regularButtonSize)
+                            SystemImage(.Icon.relocate
+//                                        , size: Sizes.regularButtonSize)
+                                        )
                                 .tint(contents == "" ?
                                     (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
                                 .animation(.spring(), value: preventingAnimationViewModel.viewAppear && contents == "")

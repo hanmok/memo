@@ -56,13 +56,15 @@ struct DeeepMemoApp: App {
         
         
 #if DEBUG
-        // TODO: Remove All Folders
+        #if targetEnvironment(simulator)
+        // TODO: Remove All Folders and provide sample datas
         let folderReqTest = Folder.fetch(.all)
         
         if let folders = try? persistenceController.container.viewContext.fetch(folderReqTest) {
             folders.forEach { Folder.delete($0) }
         }
-        let newFolders = Folder.provideTestingFolders(context: persistenceController.container.viewContext)
+        let newFolders = Folder.provideTestingFolders2(context: persistenceController.container.viewContext)
+        #endif
 #endif
         
         

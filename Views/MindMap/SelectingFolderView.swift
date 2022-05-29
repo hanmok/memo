@@ -75,7 +75,8 @@ struct SelectingFolderView: View {
             //            if selectionEnum == .folder {
             //                List(fastFolderWithLevelGroup.folders, id: \.self)  { folderWithLevel in
             List {
-                Section(header: Text("Main Folder")) {
+//                Section(header: Text("Main Folder")) {
+                Section(header: Text("")) {
                     ForEach(fastFolderWithLevelGroup.folders, id: \.self)  { folderWithLevel in
                         
                         Button {
@@ -132,7 +133,8 @@ struct SelectingFolderView: View {
                     }
                 }
                 //            } else {
-                Section(header: Text("Archive, Trashbin")) {
+//                Section(header: Text("Archive, Trashbin")) {
+                Section(header: Text("")) {
                     //                List(fastFolderWithLevelGroup.archives, id: \.self)  { folderWithLevel in
                     ForEach(fastFolderWithLevelGroup.archives, id: \.self)  { folderWithLevel in
                         Button {

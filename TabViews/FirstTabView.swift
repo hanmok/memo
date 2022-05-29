@@ -237,7 +237,8 @@ struct FirstTabView: View {
                         
                         OrderingMenuInSecondView()
 //                            .padding(.horizontal)
-                            .padding(.trailing, 8)
+//                            .padding(.trailing, 8)
+                            .padding(.trailing, 12)
                         
                         EllipseInSecondView(
                             pinState: $pinState,
@@ -248,8 +249,6 @@ struct FirstTabView: View {
                     }
                     .padding(.bottom)
                     .padding(.horizontal, 20)
-//                    .padding(.leading, 20)
-//                    .padding(.trailing, 14)
                     
                     
                     ZStack {

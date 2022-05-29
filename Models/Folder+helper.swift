@@ -713,5 +713,232 @@ extension Folder {
         context.saveCoreData()
         return [homeFolder, archive, trashBin]
     }
+    
+    static func provideTestingFolders2(context: NSManagedObjectContext) -> [Folder] {
+        
+        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
+
+        let cuisinePrac = Folder(title: "Cuisine Practice", context: context)
+        
+        let asian = Folder(title: "Asian", context: context)
+        let korean = Folder(title: "Korean", context: context)
+        let vietnamese = Folder(title: "Vietnamese", context: context)
+
+        
+        let western = Folder(title: "Western", context: context)
+        let american = Folder(title: "American", context: context)
+        let italian = Folder(title: "Italian", context: context)
+        
+        cuisinePrac.parent = homeFolder
+        [asian, western].forEach { $0.parent = cuisinePrac }
+        [korean, vietnamese].forEach { $0.parent = asian }
+        [american, italian].forEach { $0.parent = western }
+        
+        let koreanPork = Memo(titleToShow: "Pork bones soup", contentsToShow: .SampleDatas.koreanPork, context: context)
+        koreanPork.contents = "Pork bones soup" + "\n" + .SampleDatas.koreanPork
+        koreanPork.isPinned = true
+        let koreanChickenSoup = Memo(titleToShow: "Ginseng chicken soup", contentsToShow: .SampleDatas.koreanChicken, context: context)
+
+        let koreanGopchang = Memo(titleToShow: "Gopchang Jeongol", contentsToShow: .SampleDatas.koreanGopchange, context: context)
+        [koreanPork, koreanChickenSoup, koreanGopchang].forEach { $0.folder = korean }
+        
+        let vietBunCha = Memo(titleToShow: "Bun Cha", contentsToShow: .SampleDatas.vietBuncha, context: context)
+        let vietPho = Memo(titleToShow: "Pho", contentsToShow: .SampleDatas.vietPho, context: context)
+        [vietBunCha, vietPho].forEach { $0.folder = vietnamese }
+        
+//        let someItalian1 = Memo(contents: "some1", context: context)
+        let someItalian1 = Memo(titleToShow: "Risotto", contentsToShow: .SampleDatas.italianRisotto, context: context)
+        let someItalian2 = Memo(titleToShow: "Creamy Tomato Pasta", contentsToShow: .SampleDatas.italianPasta, context: context)
+//        let someItalian2 = Memo(contents: "some2", context: context)
+//        someItalian2.isPinned = true
+        [someItalian1, someItalian2].forEach { $0.folder = italian }
+        
+        let someAmerican = Memo(titleToShow: "Mac and Cheese", contentsToShow: .SampleDatas.americanMacCheese, context: context)
+        let someAmerican2 = Memo(titleToShow: "Buffalo Wings", contentsToShow: .SampleDatas.americanBuffalo, context: context)
+        let someAmerican3 = Memo(titleToShow: "Chicago Pizza", contentsToShow: .SampleDatas.americanChicagoPizza, context: context)
+//        someAmerican3.isPinned = true
+        someAmerican3.contents = "Chicago Pizza \n" + .SampleDatas.americanChicagoPizza
+        [someAmerican, someAmerican2, someAmerican3].forEach { $0.folder = american }
+        
+        let referenceLinks = Folder(title: "Reference Links", context: context)
+        let dummyMemo1 = Memo(context: context)
+            let dummyMemo2 = Memo(context: context)
+            let dummyMemo3 = Memo(context: context)
+            let dummyMemo4 = Memo(context: context)
+        [dummyMemo1, dummyMemo2, dummyMemo3, dummyMemo4].forEach { $0.folder = referenceLinks }
+        
+        let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
+   
+        archive.title += ""
+        
+        referenceLinks.parent = archive
+        
+        let trashBin = Folder(title: FolderType.getFolderName(type: .trashbin), context: context)
+   let inTrash = Memo(context: context)
+        inTrash.folder = trashBin
+        context.saveCoreData()
+        return [homeFolder, archive, trashBin]
+    }
 }
 
+extension String {
+    struct SampleDatas {
+        static let koreanPork = """
+Ingredients
+
+2½ to 3 pounds of pork neck bones (or spine bones)
+1 ounce ginger, sliced
+2 tablespoons doenjang (Korean fermented bean paste)
+2 dried Shiitake mushrooms
+1 medium onion, sliced
+1 large dried red chili pepper (or a few red chili peppers)
+1 pound of napa cabbage, cut off the core
+2 or 3 medium potatoes, peeled
+8 ounces soybean sprouts, washed and strained
+4 green onions, washed and cut into 2 inch long
+1 green onion, chopped for garnish
+8 to 12 perilla leaves, washed
+6 garlic cloves, minced
+3 tablespoons gochugaru (Korean hot pepper flakes)
+1 tablespoon gochujang (Korean hot pepper paste)
+3 tablespoons fish sauce
+¼ cup deulkkae-garu (perilla seeds powder)
+½ teaspoon ground black pepper
+½ cup water
+"""
+        static let koreanChicken = """
+            Ingredients
+            
+            2 cornish hens. Each hen weighs about 1½ pounds, a nice portion for 1 person.
+            ½ cup short grain rice (or glutinous rice), rinsed and soaked in cold water for 1 hour.
+            2 fresh ginseng roots, washed
+            2 large dried jujubes, washed
+            16 garlic cloves, washed and the tips are removed
+            2 to 3 green onions, chopped
+            kosher salt
+            ground black pepper
+            """
+        
+        static let koreanGopchange = """
+Ingredients
+
+300 grams of the large window
+1 potato
+1 king oyster mushroom
+1 bag of enoki mushrooms
+5 leaves of cabbage or 1 single cabbage
+Half-haired tofu optional
+3 large green onions more than I thought
+Spinach optional
+4 Cheongyang Peppers
+1000 mm beef bone broth
+3 tablespoons fine red pepper powder
+5 tablespoons of red pepper paste
+5 tablespoons soy sauce
+50 grams of chopped garlic
+2 tablespoons of mirin
+1 tablespoon sugar
+1 teaspoon ginger juice
+A little pepper
+100 grams of noodles soak then weigh
+1 frozen udon noodles
+Rice laver chives
+"""
+        
+        
+        static let vietBuncha = """
+Ingredients
+
+250 - 300 g/8 - 10 oz pork mince (ground pork)(Note 1) 1 tbsp fish sauce (Note 2) 2 tsp white sugar 1/3 cup finely chopped green onions / scallions 1 clove garlic , minced Pinch of white pepper and salt 2 tsp lemongrass paste or fresh finely chopped , optional (Note 4) 1 1/2 tbsp oil , for cooking
+
+
+ 3 tbsp white sugar 3 tbsp fish sauce (Note 2) 2 tbsp rice wine vinegar 2 tbsp lime juice 1/3 cup water 1 birds eye chilli , seeded and finely chopped (Note 3) 3 cloves garlic , finely chopped
+
+ 100 g / 3.5 oz vermicelli noodles , dried Big handful beansprouts Few lettuce leaves , folded or shredded Julienned carrot and white radish (daikon), optional quick pickle (Note 5) Handful of coriander/cilantro sprigs , mint Sliced red chilli , lime wedges (optional)
+"""
+        
+        static let vietPho = """
+Ingredients
+ 2 large onions , halved 150g / 5oz ginger , sliced down the centre
+ 10 star anise 4 cinnamon quills 4 cardamon pods 3 cloves (the spice cloves!) 1.5 tbsp coriander seeds
+
+BEEF BONES (NOTE 1):
+  1.5kg / 3lb beef brisket 1kg / 2lb meaty beef bones 1kg / 2lb marrow bones (leg, knuckle), cut to reveal marrow 3.5 litres / 3.75 quarts water (15 cups)
+
+
+SEASONING:
+  2 tbsp white sugar 1 tbsp salt 40 ml / 3 tbsp fish sauce (Note 2)
+
+
+NOODLE SOUP - PER BOWL:
+  50g / 1.5 oz dried rice sticks (or 120g/4oz fresh) (Note 3) 30g / 1 oz beef tenderloin, raw, very thinly sliced (Note 4) 3 - 5 brisket slices (used for broth)
+"""
+        
+        static let americanChicagoPizza = """
+Ingredients
+
+1 teaspoon granulated sugar
+1 packet (2 1/4 teaspoons) active dry yeast
+18 ounces all-purpose flour (about 3 1/2 cups)
+2 teaspoons fine sea salt
+1/8 teaspoon cream of tartar
+1/2 cup plus 3 tablespoons corn oil, plus additional for oiling the bowl
+1 tablespoon melted unsalted butter
+12 ounces deli sliced part skim mozzarella
+1 pound bulk Italian sausage
+8 ounces thinly sliced pepperoni
+One 28-ounce can whole San Marzano tomatoes, crushed by hand
+Grated Parmesan, for topping and garnish
+
+
+Directions
+
+Mix sugar, yeast and 11 ounces room temperature water (about 80 degrees) in a bowl and let bloom for 15 minutes. Combine flour, salt and cream of tartar in the bowl of a stand mixer.
+Once yeast has bloomed, add to dry ingredients along with corn oil. Gently combine with a rubber spatula until a rough ball is formed.
+
+Knead on low speed with the dough hook for 90 seconds. Transfer to a lightly oiled bowl and proof until doubled in size, about 6 hours. Punch down and let dough settle for 15 more minutes.
+
+Position an oven rack in the middle of the oven and preheat to 450 degrees F.
+Coat bottom and sides of a 12-inch cake pan or traditional Chicago style pizza pan with melted butter. Using your hands, spread out about three-quarters of the dough across the bottom and up the sides of the pan (save the remainder for another use). Cover entire bottom in mozzarella, all the way up to the edge.
+
+Cover half with a thin, even layer of raw sausage. Cover the other half with the pepperoni. Top with a couple handfuls of crushed tomatoes. Spread out with hands to the edge. Sprinkle top evenly with grated Parm.
+Bake, rotating halfway through, until golden around the edge, about 25 minutes. Let rest for about 5 minutes, then either gently lift pizza out of pan or just cut your slice out of the pan like a pie!
+"""
+        
+        static let americanBuffalo = """
+Ingredients
+ 4 lb / 2kg chicken wings, wingettes & drumettes (Note 1) 5 teaspoons baking powder (NOT baking soda / bi-carb soda) (Note 2) 3/4 teaspoons salt 4 tbsp (60g) unsalted butter, melted 1/2 cup Frank’s Original Red Hot Sauce (Note 3)  1 tbsp brown sugar 1/4 tsp salt 1/2 cup crumbled blue cheese, softened (I use gorgonzola) 1/2 cup sour cream 1/4 cup mayonnaise 1 clove small garlic, minced 1 - 3 tbsp milk 2 tbsp lemon juice 1/2 tsp salt Black pepper Celery sticks Lots of beer!
+"""
+        
+        static let americanMacCheese = """
+Ingredients
+
+1 (8 ounce) box elbow macaroni ¼ cup butter ¼ cup all-purpose flour ½ teaspoon salt ground black pepper to taste 2 cups milk 2 cups shredded Cheddar cheese
+"""
+        static let italianRisotto = """
+Ingredients
+
+6 cups low-sodium chicken stock, or vegetable stock
+2 tablespoons olive oil
+1 shallot, finely chopped
+1 lb shiitake mushroom(455 g), stemmed and thinly sliced
+2 tablespoons unsalted butter
+2 cloves garlic, minced
+1 teaspoon fresh thyme, finely chopped
+salt, to taste
+pepper, to taste
+1 ½ cups arborio rice(200 g)
+½ cup white wine(120 mL)
+1 cup grated parmesan cheese(110 g), plus more for serving
+¼ cup fresh parsley(10 g), for serving
+"""
+        
+        static let italianPasta = """
+Ingredients
+
+300g/10 oz spaghetti 2 tbsp / 30g unsalted butter 3 garlic cloves , minced ½ onion , finely chopped 1 cup / 250 ml tomato passata / tomato puree (Note 1) 3/4 cup / 185 ml heavy / thickened cream (Note 2 for subs) 1/2 cup / 125 ml milk , low fat 3/4 cup / 30g parmesan , finely freshly grated (Note 3) 1 tsp dried basil, or other herb of choice 1 tsp chicken or vegetable stock powder , or 1 bouillon cube, crumbled (Note 4) Finely ground pepper + salt
+"""
+    }
+    
+    
+}

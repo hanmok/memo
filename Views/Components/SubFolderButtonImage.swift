@@ -13,7 +13,8 @@ struct SubFolderButtonImage: View {
     
     var body: some View {
         ZStack {
-            SystemImage("circle", size: UIScreen.hasSafeBottom ? 50 : 40)
+//            SystemImage("circle", size: UIScreen.hasSafeBottom ? 50 : 40)
+            SystemImage(.Icon.circle, size: UIScreen.hasSafeBottom ? 50 : 40)
 
 //                .foregroundColor(colorScheme == .dark ? Color.black : Color.subColor)
 //                .background(colorScheme == .dark ? Color.black : Color.subColor)
@@ -26,7 +27,8 @@ struct SubFolderButtonImage: View {
                 .overlay(Circle()
                     .stroke(colorScheme == .dark ? .white : .black, lineWidth: 3))
 
-            SystemImage("folder")
+//            SystemImage("folder")
+            SystemImage(.Icon.folder)
                 .frame(width: UIScreen.hasSafeBottom ? 25 : 18, height: UIScreen.hasSafeBottom ? 25 : 18)
                 .foregroundColor(colorScheme == .dark ? .white : .black)
 

@@ -191,15 +191,18 @@ struct NewMemoView: View {
                     backBtn
                     Spacer()
                     
-                    HStack(spacing: 16) {
+                    HStack(spacing: 15) {
                         
                         // PIN Button
                         Button(action: togglePin) {
                             SystemImage(
-                                isPinned ? "pin.fill" : "pin",
-                                size: Sizes.regularButtonSize)
+                                isPinned ? "pin.fill" : "pin"
+//                                ,size: Sizes.regularButtonSize
+                                ,size: 22
+                            )
                             .tint(colorScheme == .dark ? .navColorForDark : .black)
                         }
+                        .padding(.trailing, 1)
                         
                         // RELOCATE MEMO
                         // 코드 달라져야함. (로직이 달라짐)
@@ -222,8 +225,10 @@ struct NewMemoView: View {
                             
                         } label: {
                             SystemImage(
-                                .Icon.relocate,
-                                size: Sizes.regularButtonSize)
+                                .Icon.relocate
+//                                ,size: Sizes.regularButtonSize
+//                                , size: 20
+                            )
                             .tint(contents == "" ? (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
                             .animation(.spring(), value: contents == "")
                         }
@@ -231,7 +236,10 @@ struct NewMemoView: View {
                         
                         // REMOVE
                         Button(action: removeMemo) {
-                            SystemImage(.Icon.trash, size: Sizes.regularButtonSize)
+//                            SystemImage(.Icon.trash, size: Sizes.regularButtonSize)
+                            SystemImage(.Icon.trash
+                                        , size: 24
+                            )
                                 .tint(Color.red).opacity(0.9)
                         }
                     }
