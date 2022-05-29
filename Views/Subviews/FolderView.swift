@@ -43,7 +43,7 @@ struct FolderView: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            SystemImage("chevron.left", size: 18)
+            SystemImage(.Icon.leftChevron, size: 18)
                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
@@ -99,7 +99,7 @@ struct FolderView: View {
                         Button(action: {
                             isShowingSearchView = true
                         }, label: {
-                            SystemImage("magnifyingglass")
+                            SystemImage(.Icon.magnifyingglass)
                                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
                         })
                         
@@ -175,7 +175,8 @@ struct FolderView: View {
             
             MemoEditView(
                 plusView: Button(action: addMemo) {
-                    NewPlusImage()
+//                    NewPlusImage()
+                    PlusImage()
                         .padding([.trailing, .bottom], Sizes.overallPadding)
                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                         .animation(.spring(), value: memoEditVM.isSelectionMode)

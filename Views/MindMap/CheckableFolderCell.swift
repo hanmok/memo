@@ -32,14 +32,14 @@ struct CheckableFolderCell: View {
             if markCheck {
                 Button {
                 } label: {
-                    SystemImage("checkmark")
+                    SystemImage(.Icon.checkmark)
                     
                 }
                 .tint(.lightSwipeBtn1)
             }
             if markInvalid {
                 Button { } label: {
-                    SystemImage("multiply")
+                    SystemImage(.Icon.multiply)
                 }
                 .tint(.lightSwipeBtn1)
             }

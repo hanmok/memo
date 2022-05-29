@@ -222,9 +222,7 @@ struct NewMemoView: View {
                             
                         } label: {
                             SystemImage(
-//                                "folder",
-//                                "arrowshape.turn.up.right.fill",
-                                IconNames.relocate,
+                                .Icon.relocate,
                                 size: Sizes.regularButtonSize)
                             .tint(contents == "" ? (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
                             .animation(.spring(), value: contents == "")
@@ -233,7 +231,7 @@ struct NewMemoView: View {
                         
                         // REMOVE
                         Button(action: removeMemo) {
-                            SystemImage("trash", size: Sizes.regularButtonSize)
+                            SystemImage(.Icon.trash, size: Sizes.regularButtonSize)
                                 .tint(Color.red).opacity(0.9)
                         }
                     }

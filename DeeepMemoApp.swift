@@ -55,6 +55,16 @@ struct DeeepMemoApp: App {
         let foldersReq = Folder.fetch(.all)
         
         
+#if DEBUG
+        // TODO: Remove All Folders
+        let folderReqTest = Folder.fetch(.all)
+        
+        if let folders = try? persistenceController.container.viewContext.fetch(folderReqTest) {
+            folders.forEach { Folder.delete($0) }
+        }
+        let newFolders = Folder.provideTestingFolders(context: persistenceController.container.viewContext)
+#endif
+        
         
         if isFirstLaunch {
 //            print("isFirstLaunch is true !! flaggggggggg !!!!")
@@ -77,17 +87,6 @@ struct DeeepMemoApp: App {
             isFirstAfterBookmarkUpdate = false
             
         }
-//        else {
-//            let folderReq = Folder.fetch(.all)
-//            if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
-//                folders.forEach {
-//                    print("folder Name: \($0.title)")
-//                }
-//            }
-////            let newFolder = Folder.provideInitialFolder(context: persistenceController.container.viewContext)
-////            persistenceController.container.viewContext.saveCoreData()
-//            print("no newFolders. it's not first launch! ")
-//        }
         
         if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
             print("all Folders: ")

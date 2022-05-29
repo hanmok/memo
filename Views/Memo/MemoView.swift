@@ -15,10 +15,7 @@ import CoreData
 //
 //}
 //extension String {
-    enum IconNames {
-        static let relocateFill = "arrowshape.turn.up.right.fill"
-        static let relocate = "arrowshape.turn.up.right"
-    }
+    
 //}
 
 struct MemoView: View {
@@ -55,7 +52,7 @@ struct MemoView: View {
             self.isPresentingView = false
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            SystemImage("chevron.left", size: 18)
+            SystemImage(.Icon.leftChevron, size: 18)
                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
@@ -187,9 +184,8 @@ struct MemoView: View {
 //                            focusState = false
                             editorFocusState = false
                         } label: {
-//                            SystemImage("folder", size: Sizes.regularButtonSize)
-//                            SystemImage("arrowshape.turn.up.right.fill", size: Sizes.regularButtonSize)
-                            SystemImage(IconNames.relocate, size: Sizes.regularButtonSize)
+
+                            SystemImage(.Icon.relocate, size: Sizes.regularButtonSize)
                                 .tint(contents == "" ?
                                     (.gray) : (colorScheme == .dark ? .navColorForDark : .navColorForLight))
                                 .animation(.spring(), value: preventingAnimationViewModel.viewAppear && contents == "")
@@ -197,7 +193,7 @@ struct MemoView: View {
                         
                         // REMOVE
                         Button(action: removeMemo) {
-                            SystemImage("trash", size: Sizes.regularButtonSize)
+                            SystemImage(.Icon.trash, size: Sizes.regularButtonSize)
                                 .tint(Color.red).opacity(0.9)
                         }
                     }

@@ -81,7 +81,7 @@ struct FolderMenu: View {
 //                    EmptyView()
 //                })
         } label: {
-            SystemImage("folder", size: 24)
+            SystemImage(.Icon.folder, size: 24)
                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }

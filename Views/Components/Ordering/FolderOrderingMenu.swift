@@ -24,7 +24,7 @@ struct FolderOrderingMenu: View {
             FolderAscDecButton(isAscending: false)
             
         } label: {
-            SystemImage("arrow.up.arrow.down")
+            SystemImage(.Icon.sorting)
                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }

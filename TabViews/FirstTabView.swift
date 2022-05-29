@@ -144,7 +144,8 @@ struct FirstTabView: View {
     
     var rotatedPinWithPadding: some View {
         HStack {
-            SystemImage("pin.fill").rotationEffect(.degrees(45))
+            SystemImage(.Icon.filledPin)
+                .rotationEffect(.degrees(45))
                 .padding(.horizontal, 10)
             Spacer()
         }
@@ -372,9 +373,8 @@ struct FirstTabView: View {
                         MemoEditView(
                             plusView:
                                 Button(action: addMemo, label: {
-//                                    PlusImage()
-//                                    NewPlusButton()
-                                    NewPlusImage()
+//                                    NewPlusImage()
+                                    PlusImage()
                                         .offset(x: memoEditVM.isSelectionMode ? UIScreen.screenWidth : 0)
                                         .animation(.spring(), value: memoEditVM.isSelectionMode)
                                 }),
@@ -430,34 +430,56 @@ struct FirstTabView: View {
                 focusState = false
             }
             .navigationBarHidden(true)
-//        } // end of NavigationView
-//        .navigationViewStyle(StackNavigationViewStyle())
-//        .padding(.horizontal, Sizes.overallPadding)
     }
 }
 
 
-//struct DividerBetweenPin: View {
-//    var body: some View{
-//        Rectangle()
-//            .frame(height: 1)
-//            .frame(maxWidth: .infinity, alignment: .leading)
-//            .foregroundColor(Color(.sRGB, white: 0.85, opacity: 0.5))
-//            .padding(.vertical, 5)
-//    }
-//}
-
-//struct RotatedPinWithPadding: View {
-//    var body: some View {
-//        HStack {
-//            SystemImage("pin.fill").rotationEffect(.degrees(45))
-//                .padding(.horizontal, 10)
-//            Spacer()
-//        }
-//        .padding(.leading, Sizes.overallPadding)
-//        .padding(.vertical, 5)
-//    }
-//}
 
 
 
+
+struct OrderingMenuInSecondView: View {
+    @Environment(\.colorScheme) var colorScheme
+
+    var body: some View {
+
+        Menu {
+
+            FolderOrderingMenuInSecondView()
+            
+            MemoOrderingMenuInSecondView()
+
+        } label: {
+            SystemImage(.Icon.sorting)
+                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
+        }
+    }
+}
+
+
+struct EllipseInSecondView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
+    @Binding var pinState: Bool
+    @Binding var inFolderOrder: Bool
+    @Binding var isHidingArchive: Bool
+
+    var body: some View {
+
+        Menu {
+            Toggle(isOn: $pinState) {
+                Text(LocalizedStringStorage.pinOnTheTop)
+            }
+            Toggle(isOn: $inFolderOrder) {
+                Text(LocalizedStringStorage.inFolderOrder)
+            }
+            Toggle(isOn: $isHidingArchive) {
+                Text(LocalizedStringStorage.hideArchive)
+            }
+        } label: {
+            SystemImage(.Icon.ellipsisCircle)
+
+            .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
+        }
+    }
+}

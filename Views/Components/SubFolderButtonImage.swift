@@ -29,12 +29,8 @@ struct SubFolderButtonImage: View {
             SystemImage("folder")
                 .frame(width: UIScreen.hasSafeBottom ? 25 : 18, height: UIScreen.hasSafeBottom ? 25 : 18)
                 .foregroundColor(colorScheme == .dark ? .white : .black)
-//                .foregroundColor(colorScheme == .dark ? Color.subColor : Color.black)
-//                .foregroundColor(Color.swipeBtnColor2)
+
         }
         
-//        SystemImage("folder")
-//            .frame(width: UIScreen.hasSafeBottom ? 35 : 25, height: UIScreen.hasSafeBottom ? 35 : 25)
-//            .foregroundColor(colorScheme == .dark ? .white : .black)
     }
 }

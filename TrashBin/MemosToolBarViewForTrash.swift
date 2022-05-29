@@ -54,7 +54,7 @@ struct MemosToolBarViewForTrash: View {
                 isShowingDeleteAlert = true
             }) {
 //                UnchangeableImage(imageSystemName: "trash", width: 20, height: 20)
-                SystemImage("trash", size: Sizes.regularButtonSize)
+                SystemImage(.Icon.trash, size: Sizes.regularButtonSize)
                     .tint(Color.red).opacity(0.9)
             }
             .cornerRadius(5)

@@ -189,8 +189,9 @@ struct DraggableMemoBoxView: View {
                             .frame(width: UIScreen.screenWidth  - 2 * Sizes.overallPadding - 2)
                             .cornerRadius(10)
                         HStack {
-                            Spacer()
-                            SystemImage("checkmark")
+                            Spacer() // iconNames -> .icon
+
+                            SystemImage(.Icon.checkmark)
                                 .frame(width: 65)
 //                                .foregroundColor(.newMain1)
                                 .foregroundColor(colorScheme == .dark ? .white : .black)

@@ -29,11 +29,7 @@ struct MainTabView: View {
 //        UITabBar.appearance().backgroundColor = .tertiarySystemBackground
         }
     
-    var customImage: Image {
-        return SystemImage("rectangle.split.3x1")
-            .rotationEffect(.degrees(90))
-            .scaleEffect(CGSize(width: 1, height: 0.8)) as! Image
-    }
+
     
     var body: some View {
         NavigationView {

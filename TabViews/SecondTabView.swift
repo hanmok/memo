@@ -157,7 +157,7 @@ struct SecondTabView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-                                                SystemImage("folder.badge.plus")
+                                                SystemImage(.Icon.folderPlus)
                                                     .foregroundColor(.black)
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
@@ -178,7 +178,7 @@ struct SecondTabView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-                                                SystemImage("folder.badge.plus")
+                                                SystemImage(.Icon.folderPlus)
                                                     .foregroundColor(.black)
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
@@ -191,7 +191,7 @@ struct SecondTabView: View {
                                                 isLoading = true
                                                 deleteFolder()
                                             } label: {
-                                                SystemImage("trash")
+                                                SystemImage(.Icon.trash)
                                             }
                                             .tint(.red)
                                             
@@ -202,7 +202,8 @@ struct SecondTabView: View {
                                                 folderEditVM.shouldShowSelectingView = true
                                                 folderEditVM.folderToCut = folderWithLevel.folder
                                             } label: {
-                                                SystemImage("arrowshape.turn.up.right.fill")
+
+                                                SystemImage(.Icon.relocateFill)
                                             }
                                             .tint(Color.lightSwipeBtn2)
                                             
@@ -214,7 +215,7 @@ struct SecondTabView: View {
                                                     newFolderName = folderWithLevel.folder.title
                                                 }
                                             } label: {
-                                                SystemImage("pencil")
+                                                SystemImage(.Icon.pencil)
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                             
@@ -240,7 +241,7 @@ struct SecondTabView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-                                                SystemImage("folder.badge.plus")
+                                                SystemImage(.Icon.folderPlus)
                                                     .foregroundColor(.black)
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
@@ -259,7 +260,7 @@ struct SecondTabView: View {
                                                 textFieldType = .newSubFolder
                                                 newFolderName = ""
                                             } label: {
-                                                SystemImage("folder.badge.plus")
+                                                SystemImage(.Icon.folderPlus)
                                                 
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
@@ -272,7 +273,7 @@ struct SecondTabView: View {
                                                 folderEditVM.folderToRemove = folderWithLevel.folder
                                                 deleteFolder()
                                             } label: {
-                                                SystemImage("trash")
+                                                SystemImage(.Icon.trash)
                                             }
                                             .tint(.red)
                                             
@@ -283,7 +284,7 @@ struct SecondTabView: View {
                                                 folderEditVM.shouldShowSelectingView = true
                                                 folderEditVM.folderToCut = folderWithLevel.folder
                                             } label: {
-                                                SystemImage("arrowshape.turn.up.right.fill")
+                                                SystemImage(.Icon.relocateFill)
                                             }
                                             .tint(Color.lightSwipeBtn2)
                                             
@@ -295,7 +296,7 @@ struct SecondTabView: View {
                                                     newFolderName = folderWithLevel.folder.title
                                                 }
                                             } label: {
-                                                SystemImage("pencil")
+                                                SystemImage(.Icon.pencil)
                                             }
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
@@ -329,7 +330,8 @@ struct SecondTabView: View {
                     //                    BindedColorView(red: $red, green: $green, blue: $blue)
                     Spacer()
                     Button(action: addMemo) {
-                        NewPlusImage()
+//                        NewPlusImage()
+                        PlusImage()
                     }
                     .padding([ .trailing], Sizes.overallPadding)
                     .padding(.bottom, 15)

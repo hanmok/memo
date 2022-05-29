@@ -33,7 +33,7 @@ struct SubFolderView: View {
                     // dismiss
                     isShowingSubFolderView = false
                 } label: {
-                    SystemImage("arrow.right")
+                    SystemImage(.Icon.rightArrow)
                         .foregroundColor(Color.blackAndWhite)
                 }
                 .padding(.leading, 12)
@@ -43,7 +43,7 @@ struct SubFolderView: View {
                 Button {
                     isAddingFolder = true
                 } label: {
-                    SystemImage("folder.badge.plus", size: 28)
+                    SystemImage(.Icon.folderPlus, size: 28)
                         .foregroundColor(Color.blackAndWhite)
                     
                 }

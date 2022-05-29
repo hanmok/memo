@@ -656,15 +656,62 @@ extension Folder {
     }
 }
 
-//extension Folder {
-//    static func lookForResult(of keyword: String, target: [Folder]) -> [Folder] {
-//        var resultFolders = [Folder]()
-//        for eachFolder in target {
-//            if eachFolder.title.lowercased().contains(keyword.lowercased()) {
-//                resultFolders.append(eachFolder)
-//            }
-//        }
-//        return resultFolders
-//    }
-//}
+
+
+extension Folder {
+    static func provideTestingFolders(context: NSManagedObjectContext) -> [Folder] {
+        
+        let homeFolder = Folder(title: FolderType.getFolderName(type: .folder), context: context)
+        
+        let dailyFolder = Folder(title: "Daily", context: context)
+        dailyFolder.parent = homeFolder
+        
+        let personalWork = Folder(title: "Personal Work", context: context)
+        personalWork.parent = dailyFolder
+        
+        let apps = Folder(title: "Apps", context: context)
+        apps.parent = personalWork
+        
+        let thisMemo = Folder(title: "This Memo", context: context)
+        let calie = Folder(title: "Calie", context: context)
+        [thisMemo, calie].forEach { $0.parent = apps }
+        
+        let plan = Folder(title: "Plan", context: context)
+        let Diary = Folder(title: "Diary", context: context)
+        
+        [plan, Diary].forEach { $0.parent = dailyFolder }
+        
+        let work = Folder(title: "Work", context: context)
+        work.parent = homeFolder
+        
+        let mainProject = Folder(title: "Main Project", context: context)
+        mainProject.parent = work
+        
+        let mainTodo = Folder(title: "Todo", context: context)
+        let mainDone = Folder(title: "Done", context: context)
+        [mainTodo, mainDone].forEach { $0.parent = mainProject }
+        
+
+        let asap = Folder(title: "ASAP", context: context)
+        asap.parent = mainTodo
+        
+        let subProject = Folder(title: "Sub Project", context: context)
+        subProject.parent = work
+        let subTodo = Folder(title: "Todo", context: context)
+        let subDone = Folder(title: "Done", context: context)
+        
+        [subTodo, subDone].forEach { $0.parent = subProject }
+        
+        
+        
+        let archive = Folder(title: FolderType.getFolderName(type: .archive), context: context)
+        archive.title += ""
+        
+        
+        let trashBin = Folder(title: FolderType.getFolderName(type: .trashbin), context: context)
+        
+        context.saveCoreData()
+        return [homeFolder, archive, trashBin]
+    }
+}
 
