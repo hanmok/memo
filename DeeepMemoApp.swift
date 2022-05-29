@@ -67,9 +67,8 @@ struct DeeepMemoApp: App {
         #endif
 #endif
         
-        
+        // First launch
         if isFirstLaunch {
-//            print("isFirstLaunch is true !! flaggggggggg !!!!")
             let folderReq = Folder.fetch(.all)
 
             if let folders = try? persistenceController.container.viewContext.fetch(folderReq) {
@@ -89,6 +88,7 @@ struct DeeepMemoApp: App {
             isFirstAfterBookmarkUpdate = false
             
         }
+        // Normal Case
         
         if let folders = try? persistenceController.container.viewContext.fetch(foldersReq) {
             print("all Folders: ")
@@ -104,7 +104,6 @@ struct DeeepMemoApp: App {
         
         
         return WindowGroup {
-//            HomeView()
             MainTabView()
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .environmentObject(memoEditVM)
