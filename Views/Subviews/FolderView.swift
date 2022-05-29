@@ -104,6 +104,7 @@ struct FolderView: View {
                         })
                         
                         MemoOrderingMenu(parentFolder: currentFolder)
+                            
                         
                         FolderMenu(
                             isAddingFolder: $isAddingFolder,

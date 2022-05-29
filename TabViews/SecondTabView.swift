@@ -106,6 +106,7 @@ struct SecondTabView: View {
                         
                         // MARK: - Button 2: Folder Ordering
                         FolderOrderingMenu()
+                            .padding(.top, 4)
                             .padding(.leading, 16)
                         
                         // MARK: - Button 3: Add new Folder to the top Folder
@@ -128,6 +129,7 @@ struct SecondTabView: View {
                     .padding(.horizontal, 20)
                     //                    .padding(.top, 5)
                 }
+//                .padding(.bottom, 9)
                 .padding(.bottom)
 //                .padding(.top, 3)
                 
@@ -136,11 +138,9 @@ struct SecondTabView: View {
                 
                 
                 // MARK: - Start
-//                ScrollView(, showsIndicators: <#T##Bool#>, content: <#T##() -> _#>)
-//                ScrollView {
                     VStack(spacing: 0) {
-                        List {
-                            Section(header: Text("Main Folder")) {
+                        List { // Main Folder
+                            Section(header: Text("")) {
                                 ForEach(fastFolderWithLevelGroup.folders, id: \.self) {folderWithLevel in
                                     
                                     if folderWithLevel.folder.parent == nil {
@@ -202,14 +202,9 @@ struct SecondTabView: View {
                                                 folderEditVM.shouldShowSelectingView = true
                                                 folderEditVM.folderToCut = folderWithLevel.folder
                                             } label: {
-//                                                SystemImage("folder")
                                                 SystemImage("arrowshape.turn.up.right.fill")
                                             }
-                                            //                                            .tint(Color.swipeBtnColor2)
                                             .tint(Color.lightSwipeBtn2)
-                                            //                                            .tint(Color(rgba: 0x14A7FA))
-                                            //                                            .tint(Color(red: 100, green: 100, blue: 230))
-                                            //                                            .tint(Color(red: 81, green: 176, blue: 255))
                                             
                                             Button {
                                                 if folderWithLevel.folder.parent != nil {
@@ -228,13 +223,15 @@ struct SecondTabView: View {
                                 } // end of ForEach
                             }
                             
-                            Section(header: Text("Archive, TrashBin")) {
+                            Section(header: Text("")) {
                                 ForEach(fastFolderWithLevelGroup.archives, id: \.self) {folderWithLevel in
+                                    
                                     if folderWithLevel.folder.parent == nil {
                                         DynamicTopFolderCell(
                                             folder: folderWithLevel.folder,
                                             level: folderWithLevel.level)
                                         .environmentObject(folderEditVM)
+                                        .environmentObject(trashBinVM)
                                         // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
@@ -253,7 +250,7 @@ struct SecondTabView: View {
                                             folder: folderWithLevel.folder,
                                             level: folderWithLevel.level)
                                         .environmentObject(folderEditVM)
-                                        
+                                        .environmentObject(trashBinVM)
                                         // ADD Sub Folder
                                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                                             Button {
@@ -265,7 +262,6 @@ struct SecondTabView: View {
                                                 SystemImage("folder.badge.plus")
                                                 
                                             }
-                                            //                                            .tint(Color.lightSwipeBtn1)
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                             
                                         }
@@ -287,10 +283,8 @@ struct SecondTabView: View {
                                                 folderEditVM.shouldShowSelectingView = true
                                                 folderEditVM.folderToCut = folderWithLevel.folder
                                             } label: {
-//                                                SystemImage("folder")
                                                 SystemImage("arrowshape.turn.up.right.fill")
                                             }
-                                            //                                            .tint(Color.swipeBtnColor2)
                                             .tint(Color.lightSwipeBtn2)
                                             
                                             Button {
@@ -303,17 +297,18 @@ struct SecondTabView: View {
                                             } label: {
                                                 SystemImage("pencil")
                                             }
-                                            //                                            .tint(Color.swipeBtnColor2)
-                                            //                                            .tint(Color.lightSwipeBtn1)
                                             .tint(colorScheme == .dark ? Color.darkSwipeBtn1 : Color.lightSwipeBtn1)
                                         }
                                     } // end of Else Case
-                                    
                                 } // end of ForEach
-                                TrashBinCell()
-                                    .environmentObject(trashBinVM)
+                            } // end of Section
+                                Section(header: Text("")) {
+                                    TrashBinCell()
+                                        .environmentObject(trashBinVM)
+
+                                } // end of section
                                 
-                            }// end of section
+//                            }// end of foreach
 //                            EmptyView()
                             Rectangle()
                                 .frame(height: 32)

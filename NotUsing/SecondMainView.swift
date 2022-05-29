@@ -502,7 +502,8 @@ struct EllipseInSecondView: View {
 //                .scaleEffect(CGSize(width: 1, height: 0.9))
 //                .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
             
-            SystemImage("ellipsis.circle", size: 24)
+//            SystemImage("ellipsis.circle", size: 24)
+            SystemImage("ellipsis.circle", size: 20)
                 .tint(colorScheme == .dark ? .navColorForDark : .navColorForLight)
         }
     }
