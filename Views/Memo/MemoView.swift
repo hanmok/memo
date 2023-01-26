@@ -10,14 +10,6 @@ import SwiftUI
 import Combine
 import CoreData
 
-
-//struct IconNames {
-//
-//}
-//extension String {
-    
-//}
-
 struct MemoView: View {
     
     @Environment(\.managedObjectContext) var context
@@ -35,13 +27,8 @@ struct MemoView: View {
     @FocusState var editorFocusState: Bool
     
     @State var isShowingSelectingFolderView = false
-    
     @State var contents: String = ""
-//    @State var isBookMarkedTemp: Bool?
-    
     @Binding var isPresentingView: Bool
-    
-//    @State var msgToShow: String?
     
     var parent: Folder?
     
@@ -62,22 +49,13 @@ struct MemoView: View {
         return memo.folder!.parent == nil && FolderType.compareName(memo.folder!.title, with: .trashbin)
     }
     
-    
-    
-    
     func saveChanges() {
         print("save changes has triggered")
         
         if memo.contents != contents {
             memo.modificationDate = Date()
         }
-        
         memo.contents = contents
-        
-//        memo.isBookMarked = isBookMarkedTemp ?? memo.isBookMarked
-        // if contents are empty, delete memo
-        
-        // two step confirmation for empty contents.  is it necessary ?
         
         if memo.contents == "" {
             messageVM.message = Messages.showMemosDeletedMsg(1)
@@ -90,11 +68,21 @@ struct MemoView: View {
                 Memo.delete(memo)
             }
         }
-        
         if parent != nil {
             parent!.title += "" //
         }
-        
+        context.saveCoreData()
+    }
+    
+    func autoSave() {
+        print("autoSave called")
+        if memo.contents != contents {
+            memo.modificationDate = Date()
+        }
+        memo.contents = contents
+        if memo.contents != "" {
+            memo.saveTitleWithContentsToShow(context: context)
+        }
         context.saveCoreData()
     }
     
@@ -102,19 +90,7 @@ struct MemoView: View {
         memo.isPinned.toggle()
     }
     
-    
-//    func toggleBookMark() {
-//
-//        if isBookMarkedTemp == nil {
-//            isBookMarkedTemp = memo.isBookMarked ? false : true
-//        } else {
-//            isBookMarkedTemp!.toggle()
-//        }
-//    }
-    
-    
     func removeMemo() {
-//        messagevm
         memo.contents = contents
         
         // for valid contents,
@@ -135,8 +111,6 @@ struct MemoView: View {
         }
         
         context.saveCoreData()
-//        messageVM.message = Messages.showMemoMovedToTrash(1)
-//        messageVM.message = Messages.showMemosDeletedMsg(1)
         presentationMode.wrappedValue.dismiss()
     }
     
@@ -146,10 +120,14 @@ struct MemoView: View {
         self.parent = parent
         self._isPresentingView = presentingView
         self.calledFromMainView = calledFromMainView
+        
+        
     }
     
     var body: some View {
         print("has Safebottom ? \(UIScreen.hasSafeBottom)")
+        
+        let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
         
         return ZStack(alignment: .topLeading) {
             
@@ -243,7 +221,9 @@ struct MemoView: View {
             }
             print("data saved!")
         })
-        
+        .onReceive(timer, perform: { input in
+            self.autoSave()
+        })
         .sheet(isPresented: $isShowingSelectingFolderView) {
             SelectingFolderView(
                 fastFolderWithLevelGroup:
@@ -253,8 +233,6 @@ struct MemoView: View {
                             context: context,
                             fetchingHome: false)!
                     ),
-//                selectionEnum: Folder.isBelongToArchive(currentfolder: parent!) == true ? FolderTypeEnum.archive : FolderTypeEnum.folder,
-//                msgToShow: $msgToShow,
                 invalidFolderWithLevels: [], shouldUpdateTopFolder: false,
                 dismissAction: {
                     saveChanges()

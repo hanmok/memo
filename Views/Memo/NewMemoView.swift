@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 import CoreData
-//import Introspect
+
 
 struct NewMemoView: View {
     
@@ -33,9 +33,46 @@ struct NewMemoView: View {
     
     @Binding var isPresentingNewMemo: Bool
     @State var isRemoving = false
-   
     
-//    @State var msgToShow: String?
+    func autoSave() {
+        print("autoSave called")
+        
+        if contents != "" {
+            if let validMemo = memo {
+                validMemo.contents = contents
+                validMemo.saveTitleWithContentsToShow(context: context)
+                
+                if validMemo.contentsToShow != "" || validMemo.titleToShow != "" {
+                    if validMemo.folder == parent {
+                        parent.modificationDate = Date()
+                    }
+                    validMemo.isPinned = isPinned
+                    validMemo.creationDate = Date()
+                    validMemo.modificationDate = Date()
+                    
+                    context.saveCoreData()
+                }
+            } else {
+                memo = Memo(contents: contents, context: context)
+                 guard let memo = memo else { return }
+                 memo.saveTitleWithContentsToShow(context: context)
+                if memo.titleToShow != "" || memo.contentsToShow != "" {
+                    memo.isPinned = isPinned
+                    memo.creationDate = Date()
+                    memo.modificationDate = Date()
+                    
+                    parent.add(memo: memo)
+                    memo.folder = parent
+
+                    context.saveCoreData()
+                    parent.title += ""
+                }
+            }
+        }
+        
+        
+        context.saveCoreData()
+    }
     
     func showKeyboardInHalfSec() {
         var increasedSeconds = 0.0
@@ -173,6 +210,7 @@ struct NewMemoView: View {
     }
     
     var body: some View {
+        let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
         
         return ZStack(alignment: .topLeading) {
             
@@ -272,6 +310,9 @@ struct NewMemoView: View {
             if !isRemoving {
             saveChanges()
             }
+        })
+        .onReceive(timer, perform: { input in
+            self.autoSave()
         })
         .sheet(isPresented: $isShowingSelectingFolderView) {
             SelectingFolderView(

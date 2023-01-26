@@ -296,9 +296,9 @@ extension Memo {
             } else if self.contentsToShow[self.contentsToShow.index(self.contentsToShow.startIndex, offsetBy: emptySpacesTillEnter)] == "\n" {
                 
                 if emptySpacesTillEnter != 0 {
-                for _ in 0 ..< emptySpacesTillEnter {
-                    self.contentsToShow.removeFirst()
-                }
+                    for _ in 0 ..< emptySpacesTillEnter {
+                        self.contentsToShow.removeFirst()
+                    }
                 } else {
                     self.contentsToShow.removeFirst()
                 }
@@ -308,17 +308,7 @@ extension Memo {
             } else {
                 break
             }
-            
         }
-            
-//            while(self.contentsToShow != "") {
-//                if self.contentsToShow.first! == " " || self.contentsToShow.first! == "\n"{
-//                    //            if self.contentsToShow.first! == "\n"{
-//                    self.contentsToShow.removeFirst()
-//                } else {
-//                    break
-//                }
-//            }
             context.saveCoreData()
         }
 }
